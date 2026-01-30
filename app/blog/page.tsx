@@ -85,19 +85,19 @@ export default function BlogPage() {
               >
                 <Link
                   href={`/blog/${featuredPost.slug}`}
-                  className="block bg-slate-900 rounded-3xl p-8 md:p-12 text-white hover:bg-slate-800 transition-colors group"
+                  className="block gradient-bg rounded-3xl p-8 md:p-12 text-white hover:opacity-90 transition-opacity group"
                 >
-                  <span className="inline-block px-3 py-1 bg-white/10 rounded-full text-sm mb-4">
+                  <span className="inline-block px-3 py-1 bg-white/20 rounded-full text-sm mb-4">
                     {featuredPost.category}
                   </span>
-                  <h2 className="text-2xl md:text-3xl font-bold mb-4 group-hover:text-slate-200 transition-colors">
+                  <h2 className="text-2xl md:text-3xl font-bold mb-4 group-hover:text-white/90 transition-colors">
                     {featuredPost.title}
                   </h2>
-                  <p className="text-slate-400 mb-6 max-w-2xl">
+                  <p className="text-white/70 mb-6 max-w-2xl">
                     {featuredPost.excerpt}
                   </p>
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-sm text-slate-400">
+                    <div className="flex items-center gap-2 text-sm text-white/60">
                       <Calendar className="w-4 h-4" />
                       {featuredPost.date}
                     </div>
@@ -146,21 +146,21 @@ export default function BlogPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mt-16 bg-slate-50 rounded-3xl p-8 md:p-12 text-center"
+              className="mt-16 gradient-bg rounded-3xl p-8 md:p-12 text-center text-white"
             >
               <h3 className="text-2xl font-bold mb-4">Stay updated</h3>
-              <p className="text-slate-600 mb-6 max-w-md mx-auto">
+              <p className="text-white/70 mb-6 max-w-md mx-auto">
                 Get the latest insights on reducing no-shows and improving business efficiency delivered to your inbox.
               </p>
               <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="flex-1 px-4 py-3 rounded-full border border-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent"
+                  className="flex-1 px-4 py-3 rounded-full border border-white/20 bg-white/10 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent"
                 />
                 <button
                   type="submit"
-                  className="px-6 py-3 bg-slate-900 text-white text-sm font-semibold rounded-full hover:bg-slate-800 transition-colors"
+                  className="px-6 py-3 bg-white text-primary text-sm font-semibold rounded-full hover:bg-white/90 transition-colors"
                 >
                   Subscribe
                 </button>

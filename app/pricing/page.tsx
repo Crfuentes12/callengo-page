@@ -156,7 +156,7 @@ export default function PricingPage() {
                   className={`relative ${plan.popular ? "lg:-mt-4 lg:mb-4" : ""}`}
                 >
                   {plan.popular && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-slate-900 text-white text-sm font-medium rounded-full">
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 gradient-bg text-white text-sm font-medium rounded-full">
                       Most Popular
                     </div>
                   )}
@@ -222,12 +222,12 @@ export default function PricingPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-slate-900 rounded-3xl p-8 md:p-12 text-white"
+              className="gradient-bg rounded-3xl p-8 md:p-12 text-white"
             >
               <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
                 <div>
                   <h3 className="text-2xl font-bold mb-2">Enterprise</h3>
-                  <p className="text-slate-400 max-w-md">
+                  <p className="text-white/70 max-w-md">
                     Custom solutions for large organizations. Dedicated support,
                     SLA guarantees, and advanced integrations.
                   </p>
@@ -236,7 +236,7 @@ export default function PricingPage() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold bg-white text-slate-900 rounded-full transition-all hover:bg-slate-100"
+                    className="inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold bg-white text-primary rounded-full transition-all hover:bg-white/90"
                   >
                     Contact Sales
                     <ArrowRight className="w-4 h-4" />
@@ -294,24 +294,46 @@ export default function PricingPage() {
           </div>
         </section>
 
-        {/* FAQ Preview */}
+        {/* CTA Section */}
         <section className="section">
-          <div className="max-w-7xl mx-auto px-6 text-center">
-            <h2 className="text-3xl font-bold mb-4">Have questions?</h2>
-            <p className="text-slate-600 mb-8">
-              Check out our FAQ or get in touch with our team.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/#faq" className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-slate-900 rounded-full transition-all hover:bg-slate-800">
-                View FAQ
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold bg-slate-100 text-slate-900 rounded-full transition-all hover:bg-slate-200"
-              >
-                Contact Us
-              </Link>
-            </div>
+          <div className="max-w-7xl mx-auto px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="relative overflow-hidden rounded-3xl gradient-bg p-12 md:p-20"
+            >
+              {/* Background Pattern */}
+              <div className="absolute inset-0 opacity-20">
+                <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+              </div>
+
+              {/* Content */}
+              <div className="relative z-10 max-w-3xl">
+                <h2 className="text-4xl md:text-5xl font-semibold text-white mb-6 leading-tight">
+                  Ready to see the ROI?
+                </h2>
+                <p className="text-xl text-white/70 mb-10 max-w-xl">
+                  Start with 15 free minutes. No credit card required. See how much revenue you can recover.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Link
+                    href="/signup"
+                    className="btn bg-white text-primary hover:bg-white/90 px-8 py-4 font-semibold"
+                  >
+                    Start free trial
+                    <ArrowRight className="w-5 h-5" />
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="btn border border-white/30 text-white hover:bg-white/10 px-8 py-4"
+                  >
+                    Talk to sales
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </section>
       </main>

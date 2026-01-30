@@ -130,7 +130,7 @@ export default function AppointmentConfirmationPage() {
         </section>
 
         {/* Stats Section */}
-        <section className="section bg-dark text-white">
+        <section className="section gradient-bg text-white">
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
               {stats.map((stat, index) => (
@@ -145,7 +145,7 @@ export default function AppointmentConfirmationPage() {
                   <div className="text-4xl md:text-5xl font-bold mb-2">
                     {stat.value}
                   </div>
-                  <div className="text-gray-400">{stat.label}</div>
+                  <div className="text-white/70">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
@@ -173,7 +173,6 @@ export default function AppointmentConfirmationPage() {
                 viewport={{ once: true }}
                 className="order-1 lg:order-2"
               >
-                <span className="badge badge-outline mb-4">How it works</span>
                 <h2 className="text-3xl md:text-4xl font-semibold mb-6">
                   Set it and forget it
                 </h2>
@@ -223,7 +222,6 @@ export default function AppointmentConfirmationPage() {
               viewport={{ once: true }}
               className="max-w-2xl mb-16"
             >
-              <span className="badge badge-outline mb-4">Features</span>
               <h2 className="text-3xl md:text-4xl font-semibold">
                 Everything you need to eliminate no-shows
               </h2>
@@ -256,7 +254,6 @@ export default function AppointmentConfirmationPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
               >
-                <span className="badge badge-outline mb-4">ROI Calculator</span>
                 <h2 className="text-3xl md:text-4xl font-semibold mb-6">
                   Calculate your savings
                 </h2>
@@ -324,7 +321,6 @@ export default function AppointmentConfirmationPage() {
               viewport={{ once: true }}
               className="max-w-2xl mb-16"
             >
-              <span className="badge badge-outline mb-4">Industries</span>
               <h2 className="text-3xl md:text-4xl font-semibold">
                 Built for appointment-based businesses
               </h2>
@@ -353,34 +349,43 @@ export default function AppointmentConfirmationPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="section bg-dark text-white">
+        <section className="section">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="max-w-2xl"
+              className="relative overflow-hidden rounded-3xl gradient-bg p-12 md:p-20"
             >
-              <h2 className="text-3xl md:text-4xl font-semibold mb-6">
-                Ready to fill your calendar?
-              </h2>
-              <p className="text-xl text-gray-400 mb-8">
-                Start with 15 free minutes and see how much revenue you can recover.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  href="/signup"
-                  className="btn bg-white text-dark hover:bg-gray-100 px-8 py-4"
-                >
-                  Start Free Trial
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link
-                  href="/contact"
-                  className="btn border border-white/20 text-white hover:bg-white/10 px-8 py-4"
-                >
-                  Talk to Sales
-                </Link>
+              {/* Background Pattern */}
+              <div className="absolute inset-0 opacity-20">
+                <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+              </div>
+
+              {/* Content */}
+              <div className="relative z-10 max-w-3xl">
+                <h2 className="text-4xl md:text-5xl font-semibold text-white mb-6 leading-tight">
+                  Ready to fill your calendar?
+                </h2>
+                <p className="text-xl text-white/70 mb-10 max-w-xl">
+                  Start with 15 free minutes and see how much revenue you can recover from no-shows.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Link
+                    href="/signup"
+                    className="btn bg-white text-primary hover:bg-white/90 px-8 py-4 font-semibold"
+                  >
+                    Start free trial
+                    <ArrowRight className="w-5 h-5" />
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="btn border border-white/30 text-white hover:bg-white/10 px-8 py-4"
+                  >
+                    Talk to sales
+                  </Link>
+                </div>
               </div>
             </motion.div>
           </div>

@@ -27,7 +27,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="section bg-dark text-white" id="how-it-works">
+    <section className="section-dark section" id="how-it-works">
       <div className="container mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left - Image Placeholder */}
@@ -37,15 +37,20 @@ export default function HowItWorks() {
             viewport={{ once: true }}
           >
             <div className="relative">
-              <div className="aspect-square rounded-2xl bg-gray-800 flex items-center justify-center">
-                <span className="text-gray-600 text-sm">Dashboard preview</span>
+              <div className="aspect-square rounded-2xl bg-slate-800/50 flex items-center justify-center border border-slate-700">
+                <span className="text-slate-600 text-sm">Dashboard preview</span>
               </div>
-              {/* Overlapping card */}
-              <div className="absolute -bottom-6 -right-6 w-48 h-32 bg-white rounded-xl shadow-xl p-4 hidden md:block">
-                <div className="text-xs text-gray-500 mb-1">Calls completed</div>
-                <div className="text-2xl font-bold text-dark">1,247</div>
-                <div className="text-xs text-success mt-1">+23% vs last week</div>
+              {/* Overlapping card with gradient border */}
+              <div className="absolute -bottom-6 -right-6 w-52 h-36 bg-white rounded-xl shadow-xl p-5 hidden md:block">
+                <div className="text-xs text-slate-500 mb-1">Calls completed</div>
+                <div className="text-3xl font-bold stat-number">1,247</div>
+                <div className="flex items-center gap-1 mt-2">
+                  <span className="w-2 h-2 rounded-full bg-green-500" />
+                  <span className="text-xs text-green-600">+23% vs last week</span>
+                </div>
               </div>
+              {/* Gradient decoration */}
+              <div className="absolute -z-10 -top-4 -left-4 w-full h-full gradient-bg opacity-30 rounded-2xl blur-xl" />
             </div>
           </motion.div>
 
@@ -55,11 +60,11 @@ export default function HowItWorks() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <span className="text-sm text-gray-400 uppercase tracking-wider">How it works</span>
+            <span className="badge badge-gradient mb-4">How it works</span>
             <h2 className="text-display-sm mt-4 mb-12">
               Setup in minutes.
               <br />
-              Results in hours.
+              <span className="gradient-text">Results in hours.</span>
             </h2>
 
             <div className="space-y-8">
@@ -72,12 +77,12 @@ export default function HowItWorks() {
                   transition={{ delay: index * 0.1 }}
                   className="flex gap-6"
                 >
-                  <div className="flex-shrink-0 w-12 h-12 rounded-full border border-gray-700 flex items-center justify-center text-sm font-medium text-gray-400">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full gradient-bg flex items-center justify-center text-sm font-semibold text-white">
                     {step.number}
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold mb-1">{step.title}</h3>
-                    <p className="text-gray-400">{step.description}</p>
+                    <p className="text-slate-400">{step.description}</p>
                   </div>
                 </motion.div>
               ))}

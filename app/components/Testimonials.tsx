@@ -43,15 +43,6 @@ const testimonials = [
   },
 ];
 
-const companyLogos = [
-  "TechScale",
-  "Smile Dental",
-  "GlobalReach",
-  "Velocity",
-  "ServicePro",
-  "Acme Corp",
-];
-
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -75,11 +66,10 @@ export default function Testimonials() {
           viewport={{ once: true }}
           className="max-w-2xl mb-20"
         >
-          <span className="badge badge-primary mb-4">Customer stories</span>
           <h2 className="text-display-sm mb-6">
             Results that speak
             <br />
-            <span className="gradient-text">for themselves</span>
+            for themselves
           </h2>
         </motion.div>
 
@@ -164,27 +154,6 @@ export default function Testimonials() {
           </div>
         </div>
 
-        {/* Company Logos */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="pt-12 border-t border-slate-200"
-        >
-          <p className="text-slate-400 text-sm text-center mb-8">
-            Trusted by innovative companies worldwide
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-16 gap-y-8">
-            {companyLogos.map((company) => (
-              <div
-                key={company}
-                className="text-xl font-semibold text-slate-300 hover:text-primary transition-colors"
-              >
-                {company}
-              </div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );

@@ -78,14 +78,14 @@ export default function Hero() {
           className="text-center max-w-4xl mx-auto mb-16"
         >
           <h1 className="text-display mb-6">
-            No more no-shows.
+            Stop losing revenue.
             <br />
-            No more bad data.
+            Start closing deals.
           </h1>
 
           <p className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Every missed appointment costs you money. Every bad lead wastes your team's time.
-            Stop the losses and let your team focus on closing deals.
+            No-shows, outdated contacts, and slow lead response are costing you money every day.
+            Automate the busywork and let your team focus on what matters.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

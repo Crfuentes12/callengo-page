@@ -321,6 +321,9 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply rounded;
-  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  @apply rounded bg-slate-300;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-400;
 }

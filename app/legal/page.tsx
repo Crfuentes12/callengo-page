@@ -70,16 +70,16 @@ export default function LegalPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="mt-12 p-6 bg-slate-50 rounded-2xl"
+              className="mt-12 p-6 gradient-bg rounded-2xl text-white"
             >
               <h3 className="font-semibold mb-2">Questions?</h3>
-              <p className="text-slate-600 mb-4">
+              <p className="text-white/70 mb-4">
                 If you have any questions about our legal policies or need assistance,
                 please contact our legal team.
               </p>
               <a
                 href="mailto:legal@callengo.com"
-                className="text-slate-900 font-medium hover:underline"
+                className="text-white font-medium hover:underline"
               >
                 legal@callengo.com
               </a>

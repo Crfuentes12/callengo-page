@@ -48,8 +48,11 @@ export default function Footer() {
         <div className="py-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
           {/* Brand Column */}
           <div className="col-span-2">
-            <Link href="/" className="text-2xl font-semibold mb-6 block">
-              Callengo
+            <Link href="/" className="flex items-center gap-2 mb-6">
+              <div className="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">C</span>
+              </div>
+              <span className="text-2xl font-semibold">Callengo</span>
             </Link>
 
             <p className="text-gray-400 mb-6 max-w-xs leading-relaxed">

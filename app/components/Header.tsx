@@ -48,11 +48,11 @@ export default function Header() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            {/* Logo placeholder */}
-            <div className="w-8 h-8 bg-dark rounded-lg flex items-center justify-center">
+            {/* Logo with gradient */}
+            <div className="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">C</span>
             </div>
-            <span className="text-xl font-semibold text-dark">Callengo</span>
+            <span className="text-xl font-semibold gradient-text">Callengo</span>
           </Link>
 
           {/* Desktop Navigation */}

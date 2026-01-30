@@ -75,11 +75,11 @@ export default function Testimonials() {
           viewport={{ once: true }}
           className="max-w-2xl mb-20"
         >
-          <span className="badge badge-outline mb-4">Customer stories</span>
+          <span className="badge badge-primary mb-4">Customer stories</span>
           <h2 className="text-display-sm mb-6">
             Results that speak
             <br />
-            for themselves
+            <span className="gradient-text">for themselves</span>
           </h2>
         </motion.div>
 
@@ -100,17 +100,17 @@ export default function Testimonials() {
                 </p>
 
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-semibold">
+                  <div className="w-14 h-14 rounded-full gradient-bg flex items-center justify-center text-white font-semibold">
                     {testimonials[currentIndex].author
                       .split(" ")
                       .map((n) => n[0])
                       .join("")}
                   </div>
                   <div>
-                    <div className="font-semibold text-dark">
+                    <div className="font-semibold">
                       {testimonials[currentIndex].author}
                     </div>
-                    <div className="text-gray-500 text-sm">
+                    <div className="text-slate-500 text-sm">
                       {testimonials[currentIndex].role},{" "}
                       {testimonials[currentIndex].company}
                     </div>
@@ -123,17 +123,17 @@ export default function Testimonials() {
             <div className="flex items-center gap-4 mt-10">
               <button
                 onClick={prevTestimonial}
-                className="w-12 h-12 rounded-full border border-gray-200 hover:border-gray-400 flex items-center justify-center transition-colors"
+                className="w-12 h-12 rounded-full border border-slate-200 hover:border-primary hover:text-primary flex items-center justify-center transition-colors"
               >
-                <ChevronLeft className="w-5 h-5 text-gray-600" />
+                <ChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={nextTestimonial}
-                className="w-12 h-12 rounded-full border border-gray-200 hover:border-gray-400 flex items-center justify-center transition-colors"
+                className="w-12 h-12 rounded-full border border-slate-200 hover:border-primary hover:text-primary flex items-center justify-center transition-colors"
               >
-                <ChevronRight className="w-5 h-5 text-gray-600" />
+                <ChevronRight className="w-5 h-5" />
               </button>
-              <span className="text-sm text-gray-400 ml-4">
+              <span className="text-sm text-slate-400 ml-4">
                 {currentIndex + 1} / {testimonials.length}
               </span>
             </div>
@@ -148,19 +148,19 @@ export default function Testimonials() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4 }}
-                className="bg-dark rounded-3xl p-12 text-white text-center"
+                className="gradient-bg rounded-3xl p-12 text-white text-center"
               >
                 <div className="text-7xl md:text-8xl font-bold mb-4">
                   {testimonials[currentIndex].metric.value}
                 </div>
-                <div className="text-xl text-gray-400">
+                <div className="text-xl text-white/70">
                   {testimonials[currentIndex].metric.label}
                 </div>
               </motion.div>
             </AnimatePresence>
 
             {/* Decorative */}
-            <div className="absolute -z-10 -bottom-4 -right-4 w-full h-full bg-gray-200 rounded-3xl" />
+            <div className="absolute -z-10 -bottom-4 -right-4 w-full h-full bg-slate-200 rounded-3xl" />
           </div>
         </div>
 
@@ -169,16 +169,16 @@ export default function Testimonials() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="pt-12 border-t border-gray-200"
+          className="pt-12 border-t border-slate-200"
         >
-          <p className="text-gray-400 text-sm text-center mb-8">
+          <p className="text-slate-400 text-sm text-center mb-8">
             Trusted by innovative companies worldwide
           </p>
           <div className="flex flex-wrap items-center justify-center gap-x-16 gap-y-8">
             {companyLogos.map((company) => (
               <div
                 key={company}
-                className="text-xl font-semibold text-gray-300 hover:text-gray-400 transition-colors"
+                className="text-xl font-semibold text-slate-300 hover:text-primary transition-colors"
               >
                 {company}
               </div>

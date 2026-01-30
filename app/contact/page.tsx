@@ -6,7 +6,6 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import {
   Mail,
-  Phone,
   MapPin,
   Clock,
   MessageSquare,
@@ -74,7 +73,6 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 1500));
     setIsSubmitting(false);
     setIsSubmitted(true);
@@ -104,18 +102,10 @@ export default function ContactPage() {
               transition={{ duration: 0.6 }}
               className="max-w-3xl mx-auto text-center"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
-                <span className="text-sm font-medium text-primary">
-                  Get in Touch
-                </span>
-              </div>
-
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                Let's talk about{" "}
-                <span className="gradient-text">your goals</span>
+              <h1 className="text-display-sm mb-6">
+                Let's talk about your goals
               </h1>
-
-              <p className="text-xl text-foreground-secondary">
+              <p className="text-xl text-slate-600">
                 Have questions? Want to see how much revenue you could recover?
                 We would love to hear from you.
               </p>
@@ -134,16 +124,16 @@ export default function ContactPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="card hover:translate-y-[-4px] cursor-pointer group"
+                  className="bg-white rounded-2xl border border-slate-200 p-6 hover:border-slate-300 hover:shadow-lg transition-all group"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <method.icon className="w-6 h-6 text-primary" />
+                  <div className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center mb-4 group-hover:bg-slate-200 transition-colors">
+                    <method.icon className="w-6 h-6 text-slate-600" />
                   </div>
                   <h3 className="font-semibold mb-1">{method.title}</h3>
-                  <p className="text-sm text-foreground-tertiary mb-2">
+                  <p className="text-sm text-slate-500 mb-2">
                     {method.description}
                   </p>
-                  <p className="text-sm font-medium text-primary">
+                  <p className="text-sm font-medium text-slate-900">
                     {method.contact}
                   </p>
                 </motion.a>
@@ -153,7 +143,7 @@ export default function ContactPage() {
         </section>
 
         {/* Contact Form Section */}
-        <section className="section bg-background-secondary">
+        <section className="section bg-slate-50">
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid lg:grid-cols-2 gap-12">
               {/* Form */}
@@ -163,8 +153,8 @@ export default function ContactPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                <h2 className="text-3xl font-bold mb-2">Send us a Message</h2>
-                <p className="text-foreground-secondary mb-8">
+                <h2 className="text-3xl font-bold mb-2">Send us a message</h2>
+                <p className="text-slate-600 mb-8">
                   Fill out the form below and we'll get back to you within one
                   business day.
                 </p>
@@ -173,15 +163,15 @@ export default function ContactPage() {
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="bg-background rounded-2xl border border-accent p-8 text-center"
+                    className="bg-white rounded-2xl border border-green-200 p-8 text-center"
                   >
-                    <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                      <CheckCircle className="w-8 h-8 text-accent-dark" />
+                    <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+                      <CheckCircle className="w-8 h-8 text-green-600" />
                     </div>
                     <h3 className="text-xl font-semibold mb-2">
                       Message Sent!
                     </h3>
-                    <p className="text-foreground-secondary">
+                    <p className="text-slate-600">
                       Thanks for reaching out. We'll get back to you within 24
                       hours.
                     </p>
@@ -203,7 +193,7 @@ export default function ContactPage() {
                           value={formState.name}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors outline-none"
+                          className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:border-slate-400 focus:ring-2 focus:ring-slate-200 transition-colors outline-none"
                           placeholder="John Smith"
                         />
                       </div>
@@ -221,7 +211,7 @@ export default function ContactPage() {
                           value={formState.email}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors outline-none"
+                          className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:border-slate-400 focus:ring-2 focus:ring-slate-200 transition-colors outline-none"
                           placeholder="john@company.com"
                         />
                       </div>
@@ -241,7 +231,7 @@ export default function ContactPage() {
                           name="company"
                           value={formState.company}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors outline-none"
+                          className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:border-slate-400 focus:ring-2 focus:ring-slate-200 transition-colors outline-none"
                           placeholder="Acme Inc"
                         />
                       </div>
@@ -258,7 +248,7 @@ export default function ContactPage() {
                           value={formState.subject}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors outline-none"
+                          className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:border-slate-400 focus:ring-2 focus:ring-slate-200 transition-colors outline-none"
                         >
                           <option value="">Select a topic</option>
                           <option value="sales">Sales Inquiry</option>
@@ -284,7 +274,7 @@ export default function ContactPage() {
                         onChange={handleChange}
                         required
                         rows={5}
-                        className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors outline-none resize-none"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:border-slate-400 focus:ring-2 focus:ring-slate-200 transition-colors outline-none resize-none"
                         placeholder="Tell us how we can help..."
                       />
                     </div>
@@ -292,7 +282,7 @@ export default function ContactPage() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="btn btn-primary w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-slate-900 rounded-full transition-all hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? (
                         <>
@@ -319,22 +309,22 @@ export default function ContactPage() {
                 className="space-y-8"
               >
                 {/* Office Locations */}
-                <div className="bg-background rounded-2xl border border-border p-6">
+                <div className="bg-white rounded-2xl border border-slate-200 p-6">
                   <h3 className="font-semibold mb-4 flex items-center gap-2">
-                    <MapPin className="w-5 h-5 text-primary" />
+                    <MapPin className="w-5 h-5 text-slate-600" />
                     Our Offices
                   </h3>
                   <div className="space-y-4">
                     {offices.map((office) => (
                       <div
                         key={office.city}
-                        className="pb-4 border-b border-border last:border-0 last:pb-0"
+                        className="pb-4 border-b border-slate-100 last:border-0 last:pb-0"
                       >
                         <div className="font-medium">{office.city}</div>
-                        <div className="text-sm text-foreground-secondary">
+                        <div className="text-sm text-slate-600">
                           {office.address}
                         </div>
-                        <div className="text-sm text-foreground-tertiary">
+                        <div className="text-sm text-slate-500">
                           {office.country}
                         </div>
                       </div>
@@ -343,63 +333,53 @@ export default function ContactPage() {
                 </div>
 
                 {/* Business Hours */}
-                <div className="bg-background rounded-2xl border border-border p-6">
+                <div className="bg-white rounded-2xl border border-slate-200 p-6">
                   <h3 className="font-semibold mb-4 flex items-center gap-2">
-                    <Clock className="w-5 h-5 text-primary" />
+                    <Clock className="w-5 h-5 text-slate-600" />
                     Business Hours
                   </h3>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
-                      <span className="text-foreground-secondary">
-                        Monday - Friday
-                      </span>
+                      <span className="text-slate-600">Monday - Friday</span>
                       <span className="font-medium">9:00 AM - 6:00 PM EST</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-foreground-secondary">Saturday</span>
+                      <span className="text-slate-600">Saturday</span>
                       <span className="font-medium">10:00 AM - 2:00 PM EST</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-foreground-secondary">Sunday</span>
+                      <span className="text-slate-600">Sunday</span>
                       <span className="font-medium">Closed</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Quick Links */}
-                <div className="bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-6 text-white">
+                <div className="bg-slate-900 rounded-2xl p-6 text-white">
                   <h3 className="font-semibold mb-4">Looking for something?</h3>
                   <ul className="space-y-3 text-sm">
                     <li>
                       <a
                         href="/docs"
-                        className="flex items-center gap-2 hover:underline"
+                        className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors"
                       >
-                        → Documentation & API Reference
+                        → Documentation
                       </a>
                     </li>
                     <li>
                       <a
                         href="/help"
-                        className="flex items-center gap-2 hover:underline"
+                        className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors"
                       >
-                        → Help Center & FAQs
+                        → Help Center
                       </a>
                     </li>
                     <li>
                       <a
-                        href="/status"
-                        className="flex items-center gap-2 hover:underline"
+                        href="/pricing"
+                        className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors"
                       >
-                        → System Status Page
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="/careers"
-                        className="flex items-center gap-2 hover:underline"
-                      >
-                        → Join Our Team
+                        → Pricing
                       </a>
                     </li>
                   </ul>

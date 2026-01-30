@@ -109,18 +109,18 @@ export default function PricingPage() {
               <h1 className="text-display-sm mb-6">
                 Invest in results, not promises
               </h1>
-              <p className="text-xl text-gray-600 mb-10">
+              <p className="text-xl text-slate-600 mb-10">
                 Start free, upgrade when you see the ROI. No hidden fees, no surprises.
               </p>
 
               {/* Billing Toggle */}
-              <div className="inline-flex items-center gap-4 p-1.5 bg-gray-100 rounded-full">
+              <div className="inline-flex items-center gap-4 p-1.5 bg-slate-100 rounded-full">
                 <button
                   onClick={() => setIsAnnual(false)}
                   className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all ${
                     !isAnnual
-                      ? "bg-dark text-white"
-                      : "text-gray-600 hover:text-gray-900"
+                      ? "bg-slate-900 text-white"
+                      : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
                   Monthly
@@ -129,8 +129,8 @@ export default function PricingPage() {
                   onClick={() => setIsAnnual(true)}
                   className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
                     isAnnual
-                      ? "bg-dark text-white"
-                      : "text-gray-600 hover:text-gray-900"
+                      ? "bg-slate-900 text-white"
+                      : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
                   Annual
@@ -156,7 +156,7 @@ export default function PricingPage() {
                   className={`relative ${plan.popular ? "lg:-mt-4 lg:mb-4" : ""}`}
                 >
                   {plan.popular && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-dark text-white text-sm font-medium rounded-full">
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-slate-900 text-white text-sm font-medium rounded-full">
                       Most Popular
                     </div>
                   )}
@@ -164,29 +164,29 @@ export default function PricingPage() {
                   <div
                     className={`h-full rounded-2xl p-6 ${
                       plan.popular
-                        ? "bg-white border-2 border-dark shadow-xl"
-                        : "bg-white border border-gray-200"
+                        ? "bg-white border-2 border-slate-900 shadow-xl"
+                        : "bg-white border border-slate-200"
                     }`}
                   >
                     {/* Plan Header */}
                     <div className="mb-6">
-                      <h3 className="text-xl font-semibold text-dark mb-1">
+                      <h3 className="text-xl font-semibold text-slate-900 mb-1">
                         {plan.name}
                       </h3>
-                      <p className="text-sm text-gray-500">{plan.description}</p>
+                      <p className="text-sm text-slate-500">{plan.description}</p>
                     </div>
 
                     {/* Price */}
                     <div className="mb-6">
                       <div className="flex items-baseline gap-1">
-                        <span className="text-4xl font-bold text-dark">
+                        <span className="text-4xl font-bold text-slate-900">
                           ${isAnnual ? plan.annualPrice : plan.monthlyPrice}
                         </span>
                         {plan.monthlyPrice > 0 && (
-                          <span className="text-gray-500">/month</span>
+                          <span className="text-slate-500">/month</span>
                         )}
                       </div>
-                      <div className="text-sm text-gray-400 mt-1">
+                      <div className="text-sm text-slate-400 mt-1">
                         {plan.minutes}
                       </div>
                     </div>
@@ -194,10 +194,10 @@ export default function PricingPage() {
                     {/* CTA */}
                     <Link
                       href="/signup"
-                      className={`btn w-full justify-center mb-6 ${
+                      className={`inline-flex items-center justify-center w-full py-3 text-sm font-semibold rounded-full transition-all mb-6 ${
                         plan.popular
-                          ? "btn-primary"
-                          : "bg-gray-100 text-dark hover:bg-gray-200"
+                          ? "bg-slate-900 text-white hover:bg-slate-800"
+                          : "bg-slate-100 text-slate-900 hover:bg-slate-200"
                       }`}
                     >
                       {plan.cta}
@@ -208,7 +208,7 @@ export default function PricingPage() {
                       {plan.features.map((feature) => (
                         <div key={feature} className="flex items-center gap-3 text-sm">
                           <Check className="w-4 h-4 text-green-600 flex-shrink-0" />
-                          <span className="text-gray-700">{feature}</span>
+                          <span className="text-slate-700">{feature}</span>
                         </div>
                       ))}
                     </div>
@@ -222,12 +222,12 @@ export default function PricingPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-dark rounded-3xl p-8 md:p-12 text-white"
+              className="bg-slate-900 rounded-3xl p-8 md:p-12 text-white"
             >
               <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
                 <div>
                   <h3 className="text-2xl font-bold mb-2">Enterprise</h3>
-                  <p className="text-gray-400 max-w-md">
+                  <p className="text-slate-400 max-w-md">
                     Custom solutions for large organizations. Dedicated support,
                     SLA guarantees, and advanced integrations.
                   </p>
@@ -236,7 +236,7 @@ export default function PricingPage() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link
                     href="/contact"
-                    className="btn bg-white text-dark hover:bg-gray-100 px-8 py-4"
+                    className="inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold bg-white text-slate-900 rounded-full transition-all hover:bg-slate-100"
                   >
                     Contact Sales
                     <ArrowRight className="w-4 h-4" />
@@ -248,7 +248,7 @@ export default function PricingPage() {
         </section>
 
         {/* Feature Comparison */}
-        <section className="section bg-gray-50">
+        <section className="section bg-slate-50">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -257,7 +257,7 @@ export default function PricingPage() {
               className="text-center mb-12"
             >
               <h2 className="text-3xl font-bold mb-4">Compare plans</h2>
-              <p className="text-gray-600">
+              <p className="text-slate-600">
                 See what's included in each plan at a glance.
               </p>
             </motion.div>
@@ -270,21 +270,21 @@ export default function PricingPage() {
             >
               <table className="w-full min-w-[640px]">
                 <thead>
-                  <tr className="border-b border-gray-200">
-                    <th className="text-left py-4 pr-4 font-medium text-gray-500">Feature</th>
+                  <tr className="border-b border-slate-200">
+                    <th className="text-left py-4 pr-4 font-medium text-slate-500">Feature</th>
                     <th className="text-center py-4 px-4 font-medium">Free</th>
                     <th className="text-center py-4 px-4 font-medium">Starter</th>
-                    <th className="text-center py-4 px-4 font-medium bg-gray-100 rounded-t-xl">Business</th>
+                    <th className="text-center py-4 px-4 font-medium bg-slate-100 rounded-t-xl">Business</th>
                     <th className="text-center py-4 px-4 font-medium">Teams</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {comparisonFeatures.map((feature, index) => (
-                    <tr key={feature.name} className="border-b border-gray-100">
-                      <td className="py-4 pr-4 text-sm text-gray-600">{feature.name}</td>
+                  {comparisonFeatures.map((feature) => (
+                    <tr key={feature.name} className="border-b border-slate-100">
+                      <td className="py-4 pr-4 text-sm text-slate-600">{feature.name}</td>
                       <td className="text-center py-4 px-4 text-sm">{feature.free}</td>
                       <td className="text-center py-4 px-4 text-sm">{feature.starter}</td>
-                      <td className="text-center py-4 px-4 text-sm bg-gray-50">{feature.business}</td>
+                      <td className="text-center py-4 px-4 text-sm bg-slate-50">{feature.business}</td>
                       <td className="text-center py-4 px-4 text-sm">{feature.teams}</td>
                     </tr>
                   ))}
@@ -298,16 +298,16 @@ export default function PricingPage() {
         <section className="section">
           <div className="max-w-7xl mx-auto px-6 text-center">
             <h2 className="text-3xl font-bold mb-4">Have questions?</h2>
-            <p className="text-gray-600 mb-8">
+            <p className="text-slate-600 mb-8">
               Check out our FAQ or get in touch with our team.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/#faq" className="btn btn-primary">
+              <Link href="/#faq" className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-slate-900 rounded-full transition-all hover:bg-slate-800">
                 View FAQ
               </Link>
               <Link
                 href="/contact"
-                className="btn bg-gray-100 text-dark hover:bg-gray-200"
+                className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold bg-slate-100 text-slate-900 rounded-full transition-all hover:bg-slate-200"
               >
                 Contact Us
               </Link>

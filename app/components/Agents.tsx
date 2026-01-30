@@ -39,11 +39,10 @@ export default function Agents() {
           viewport={{ once: true }}
           className="text-center max-w-2xl mx-auto mb-16"
         >
-          <span className="badge badge-primary mb-4">Three Problems Solved</span>
           <h2 className="text-display-sm mb-6">
             Stop the leaks.
             <br />
-            <span className="gradient-text">Keep the revenue.</span>
+            Keep the revenue.
           </h2>
           <p className="text-xl text-slate-600">
             Every missed appointment, bad contact, or slow response is money walking out the door.
@@ -62,30 +61,28 @@ export default function Agents() {
             >
               <Link
                 href={agent.href}
-                className="block h-full bg-white rounded-2xl border border-slate-200 p-8 card-hover group relative overflow-hidden"
+                className="block h-full bg-white rounded-2xl border border-slate-200 p-8 hover:border-slate-300 hover:shadow-lg transition-all group"
               >
-                {/* Gradient hover effect */}
-                <div className="absolute inset-0 gradient-bg opacity-0 group-hover:opacity-5 transition-opacity duration-300" />
 
                 {/* Image Placeholder */}
                 <div className="aspect-video rounded-xl img-placeholder mb-6 overflow-hidden relative">
                   <span className="text-xs">Agent preview</span>
                 </div>
 
-                <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors relative">
+                <h3 className="text-xl font-semibold mb-3 group-hover:text-slate-900 transition-colors">
                   {agent.name}
                 </h3>
 
-                <p className="text-slate-600 mb-6 leading-relaxed relative">
+                <p className="text-slate-600 mb-6 leading-relaxed">
                   {agent.description}
                 </p>
 
-                <div className="flex items-center justify-between pt-6 border-t border-slate-100 relative">
+                <div className="flex items-center justify-between pt-6 border-t border-slate-100">
                   <div>
                     <div className="text-2xl font-bold stat-number">{agent.metric.value}</div>
                     <div className="text-xs text-slate-500">{agent.metric.label}</div>
                   </div>
-                  <span className="flex items-center gap-1 text-sm font-medium text-slate-500 group-hover:text-primary group-hover:gap-2 transition-all">
+                  <span className="flex items-center gap-1 text-sm font-medium text-slate-500 group-hover:text-slate-900 group-hover:gap-2 transition-all">
                     Learn more
                     <ArrowRight className="w-4 h-4" />
                   </span>

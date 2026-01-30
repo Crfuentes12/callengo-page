@@ -77,12 +77,11 @@ export default function LeadQualificationPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <span className="badge badge-outline mb-4">AI Agent</span>
-                <h1 className="text-display-sm mb-6">Lead Qualification Agent</h1>
+                <h1 className="text-display-sm mb-6">Be first, win more deals</h1>
                 <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                  Respond to leads in under 60 seconds. AI qualifies using BANT
-                  criteria so your sales team only talks to prospects who are
-                  ready to buy.
+                  The fastest response wins. Reach every lead in seconds while
+                  your competitors are still checking their inbox. Your sales team
+                  only talks to prospects who are ready to buy.
                 </p>
 
                 <div className="flex flex-wrap gap-4 mb-8">
@@ -364,10 +363,10 @@ export default function LeadQualificationPage() {
               className="max-w-2xl"
             >
               <h2 className="text-3xl md:text-4xl font-semibold mb-6">
-                Ready to qualify leads automatically?
+                Ready to close more deals?
               </h2>
               <p className="text-xl text-gray-400 mb-8">
-                Start qualifying leads today with 15 free minutes.
+                Start with 15 free minutes and see how fast you can be.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link

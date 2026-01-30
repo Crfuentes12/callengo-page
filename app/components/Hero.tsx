@@ -77,12 +77,10 @@ export default function Hero() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-4xl mx-auto mb-16"
         >
-          <span className="badge badge-primary mb-6">Stop Losing Revenue</span>
-
           <h1 className="text-display mb-6">
             No more no-shows.
             <br />
-            <span className="gradient-text">No more bad data.</span>
+            No more bad data.
           </h1>
 
           <p className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">

@@ -106,12 +106,11 @@ export default function PricingPage() {
               transition={{ duration: 0.6 }}
               className="text-center max-w-3xl mx-auto mb-16"
             >
-              <span className="badge badge-outline mb-4">Pricing</span>
               <h1 className="text-display-sm mb-6">
-                Simple, transparent pricing
+                Invest in results, not promises
               </h1>
               <p className="text-xl text-gray-600 mb-10">
-                Start free, upgrade when you need more. No hidden fees.
+                Start free, upgrade when you see the ROI. No hidden fees, no surprises.
               </p>
 
               {/* Billing Toggle */}

@@ -70,12 +70,10 @@ export default function DataValidationPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <span className="badge badge-outline mb-4">AI Agent</span>
-                <h1 className="text-display-sm mb-6">Data Validation Agent</h1>
+                <h1 className="text-display-sm mb-6">Stop wasting money on bad contacts</h1>
                 <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                  Stop wasting money on bad data. Automatically verify phone
-                  numbers, update emails, and confirm business information across
-                  your entire database with AI-powered calls.
+                  Every campaign sent to outdated contacts is money down the drain.
+                  Clean your database and reach the right people every time.
                 </p>
 
                 <div className="flex flex-wrap gap-4 mb-8">
@@ -343,10 +341,10 @@ export default function DataValidationPage() {
               className="max-w-2xl"
             >
               <h2 className="text-3xl md:text-4xl font-semibold mb-6">
-                Ready to clean your database?
+                Ready to stop wasting campaign budget?
               </h2>
               <p className="text-xl text-gray-400 mb-8">
-                Start verifying your contacts today with 15 free minutes.
+                Start with 15 free minutes and see how much bad data is costing you.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link

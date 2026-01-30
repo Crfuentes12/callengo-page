@@ -60,11 +60,10 @@ export default function HowItWorks() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <span className="badge badge-gradient mb-4">How it works</span>
-            <h2 className="text-display-sm mt-4 mb-12">
+            <h2 className="text-display-sm mb-12">
               Setup in minutes.
               <br />
-              <span className="gradient-text">Results in hours.</span>
+              Results in hours.
             </h2>
 
             <div className="space-y-8">

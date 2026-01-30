@@ -66,7 +66,6 @@ export default function FAQ() {
             viewport={{ once: true }}
             className="lg:sticky lg:top-32 lg:self-start"
           >
-            <span className="badge badge-outline mb-4">FAQ</span>
             <h2 className="text-display-sm mb-6">
               Questions?
               <br />

@@ -31,7 +31,7 @@ const features = [
 export default function Features() {
   return (
     <section className="section bg-slate-50" id="features">
-      <div className="container mx-auto">
+      <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

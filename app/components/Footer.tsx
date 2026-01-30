@@ -43,7 +43,7 @@ const footerLinks = {
 export default function Footer() {
   return (
     <footer className="bg-dark text-white">
-      <div className="container mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6 px-6">
         {/* Main Footer Content */}
         <div className="py-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
           {/* Brand Column */}

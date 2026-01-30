@@ -97,7 +97,7 @@ export default function ContactPage() {
       <main className="pt-24">
         {/* Hero Section */}
         <section className="section">
-          <div className="container mx-auto">
+          <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -125,7 +125,7 @@ export default function ContactPage() {
 
         {/* Contact Methods */}
         <section className="pb-16">
-          <div className="container mx-auto">
+          <div className="max-w-7xl mx-auto px-6">
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {contactMethods.map((method, index) => (
                 <motion.a
@@ -154,7 +154,7 @@ export default function ContactPage() {
 
         {/* Contact Form Section */}
         <section className="section bg-background-secondary">
-          <div className="container mx-auto">
+          <div className="max-w-7xl mx-auto px-6">
             <div className="grid lg:grid-cols-2 gap-12">
               {/* Form */}
               <motion.div

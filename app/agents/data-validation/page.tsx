@@ -63,7 +63,7 @@ export default function DataValidationPage() {
       <main className="pt-24">
         {/* Hero Section */}
         <section className="section">
-          <div className="container mx-auto">
+          <div className="max-w-7xl mx-auto px-6">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -124,7 +124,7 @@ export default function DataValidationPage() {
 
         {/* How It Works */}
         <section className="section bg-dark text-white">
-          <div className="container mx-auto">
+          <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -180,7 +180,7 @@ export default function DataValidationPage() {
 
         {/* Features Section */}
         <section className="section">
-          <div className="container mx-auto">
+          <div className="max-w-7xl mx-auto px-6">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
@@ -230,7 +230,7 @@ export default function DataValidationPage() {
 
         {/* Results Section */}
         <section className="section bg-gray-50">
-          <div className="container mx-auto">
+          <div className="max-w-7xl mx-auto px-6">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
@@ -298,7 +298,7 @@ export default function DataValidationPage() {
 
         {/* Use Cases */}
         <section className="section">
-          <div className="container mx-auto">
+          <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -335,7 +335,7 @@ export default function DataValidationPage() {
 
         {/* CTA Section */}
         <section className="section bg-dark text-white">
-          <div className="container mx-auto">
+          <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

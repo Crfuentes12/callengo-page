@@ -108,10 +108,10 @@ export default function PricingPage() {
             >
               <span className="badge badge-outline mb-4">Pricing</span>
               <h1 className="text-display-sm mb-6">
-                Simple, transparent pricing
+                Invest in results, not promises
               </h1>
               <p className="text-xl text-gray-600 mb-10">
-                Start free, upgrade when you need more. No hidden fees.
+                Start free, upgrade when you see the ROI. No hidden fees, no surprises.
               </p>
 
               {/* Billing Toggle */}

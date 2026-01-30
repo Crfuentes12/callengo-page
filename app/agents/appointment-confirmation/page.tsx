@@ -77,14 +77,13 @@ export default function AppointmentConfirmationPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <span className="badge badge-outline mb-4">AI Agent</span>
+                <span className="badge badge-outline mb-4">Appointment Confirmation</span>
                 <h1 className="text-display-sm mb-6">
-                  Appointment Confirmation Agent
+                  Fill your calendar, not your voicemail
                 </h1>
                 <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                  Reduce no-shows by up to 60%. Automated confirmation calls 24-48
-                  hours before appointments keep your schedule full and customers
-                  accountable.
+                  Every empty time slot is lost revenue. Keep your schedule full
+                  and your customers accountable with automatic confirmation calls.
                 </p>
 
                 <div className="flex flex-wrap gap-4 mb-8">
@@ -364,10 +363,10 @@ export default function AppointmentConfirmationPage() {
               className="max-w-2xl"
             >
               <h2 className="text-3xl md:text-4xl font-semibold mb-6">
-                Ready to reduce no-shows?
+                Ready to fill your calendar?
               </h2>
               <p className="text-xl text-gray-400 mb-8">
-                Start confirming appointments today with 15 free minutes.
+                Start with 15 free minutes and see how much revenue you can recover.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link

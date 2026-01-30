@@ -70,7 +70,7 @@ export default function AppointmentConfirmationPage() {
       <main className="pt-24">
         {/* Hero Section */}
         <section className="section">
-          <div className="container mx-auto">
+          <div className="max-w-7xl mx-auto px-6">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -133,7 +133,7 @@ export default function AppointmentConfirmationPage() {
 
         {/* Stats Section */}
         <section className="section bg-dark text-white">
-          <div className="container mx-auto">
+          <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
               {stats.map((stat, index) => (
                 <motion.div
@@ -156,7 +156,7 @@ export default function AppointmentConfirmationPage() {
 
         {/* How It Works */}
         <section className="section">
-          <div className="container mx-auto">
+          <div className="max-w-7xl mx-auto px-6">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
@@ -218,7 +218,7 @@ export default function AppointmentConfirmationPage() {
 
         {/* Features Section */}
         <section className="section bg-gray-50">
-          <div className="container mx-auto">
+          <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -251,7 +251,7 @@ export default function AppointmentConfirmationPage() {
 
         {/* ROI Section */}
         <section className="section">
-          <div className="container mx-auto">
+          <div className="max-w-7xl mx-auto px-6">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
@@ -319,7 +319,7 @@ export default function AppointmentConfirmationPage() {
 
         {/* Industries */}
         <section className="section bg-gray-50">
-          <div className="container mx-auto">
+          <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -356,7 +356,7 @@ export default function AppointmentConfirmationPage() {
 
         {/* CTA Section */}
         <section className="section bg-dark text-white">
-          <div className="container mx-auto">
+          <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

@@ -99,7 +99,7 @@ export default function PricingPage() {
       <main className="pt-24">
         {/* Hero Section */}
         <section className="section">
-          <div className="container mx-auto">
+          <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -250,7 +250,7 @@ export default function PricingPage() {
 
         {/* Feature Comparison */}
         <section className="section bg-gray-50">
-          <div className="container mx-auto">
+          <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -297,7 +297,7 @@ export default function PricingPage() {
 
         {/* FAQ Preview */}
         <section className="section">
-          <div className="container mx-auto text-center">
+          <div className="max-w-7xl mx-auto px-6 text-center">
             <h2 className="text-3xl font-bold mb-4">Have questions?</h2>
             <p className="text-gray-600 mb-8">
               Check out our FAQ or get in touch with our team.

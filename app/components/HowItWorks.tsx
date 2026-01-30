@@ -28,7 +28,7 @@ const steps = [
 export default function HowItWorks() {
   return (
     <section className="section-dark section" id="how-it-works">
-      <div className="container mx-auto">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left - Image Placeholder */}
           <motion.div

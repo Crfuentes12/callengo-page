@@ -150,22 +150,22 @@ export default function DocsPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mt-16 bg-slate-50 rounded-3xl p-8 md:p-12 text-center"
+              className="mt-16 gradient-bg rounded-3xl p-8 md:p-12 text-center text-white"
             >
               <h3 className="text-2xl font-bold mb-4">Need more help?</h3>
-              <p className="text-slate-600 mb-6 max-w-md mx-auto">
+              <p className="text-white/70 mb-6 max-w-md mx-auto">
                 Our support team is ready to assist you with any questions or issues.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="/help"
-                  className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-slate-900 rounded-full hover:bg-slate-800 transition-colors"
+                  className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold bg-white text-primary rounded-full hover:bg-white/90 transition-colors"
                 >
                   Visit Help Center
                 </Link>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold bg-white text-slate-900 border border-slate-200 rounded-full hover:bg-slate-50 transition-colors"
+                  className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold border border-white/30 text-white rounded-full hover:bg-white/10 transition-colors"
                 >
                   Contact Support
                 </Link>

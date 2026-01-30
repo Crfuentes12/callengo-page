@@ -9,15 +9,27 @@ export default function TermsPage() {
     <>
       <Header />
       <main className="pt-24">
-        <section className="section">
+        {/* Hero Section */}
+        <section className="gradient-bg text-white py-16">
           <div className="max-w-3xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-display-sm mb-6">Terms of Service</h1>
-              <p className="text-slate-500 mb-12">Last updated: January 2026</p>
+              <h1 className="text-display-sm mb-4">Terms of Service</h1>
+              <p className="text-white/70">Last updated: January 2026</p>
+            </motion.div>
+          </div>
+        </section>
+
+        <section className="section">
+          <div className="max-w-3xl mx-auto px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
 
               <div className="prose prose-slate max-w-none">
                 <h2 className="text-2xl font-semibold mt-12 mb-4">1. Acceptance of Terms</h2>

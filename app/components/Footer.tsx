@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 const footerLinks = {
   product: {
@@ -49,9 +50,13 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-6">
-              <div className="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">C</span>
-              </div>
+              <Image
+                src="/callengo-logo-white.png"
+                alt="Callengo Logo"
+                width={32}
+                height={32}
+                className="w-8 h-8"
+              />
               <span className="text-2xl font-semibold">Callengo</span>
             </Link>
 

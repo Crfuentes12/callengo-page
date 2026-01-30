@@ -170,31 +170,31 @@ export default function HelpPage() {
               <h3 className="text-2xl font-bold mb-6">Quick Links</h3>
               <div className="grid md:grid-cols-2 gap-4">
                 <Link
-                  href="/docs/quick-start"
+                  href="/help/quick-start"
                   className="flex items-center justify-between p-4 bg-white/10 rounded-xl border border-white/20 hover:bg-white/20 transition-all group"
                 >
                   <span className="font-medium">Quick Start Guide</span>
                   <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </Link>
                 <Link
-                  href="/docs/api/auth"
-                  className="flex items-center justify-between p-4 bg-white/10 rounded-xl border border-white/20 hover:bg-white/20 transition-all group"
-                >
-                  <span className="font-medium">API Documentation</span>
-                  <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
-                </Link>
-                <Link
-                  href="/docs/integrations/crm"
+                  href="/help/crm-integrations"
                   className="flex items-center justify-between p-4 bg-white/10 rounded-xl border border-white/20 hover:bg-white/20 transition-all group"
                 >
                   <span className="font-medium">CRM Integrations</span>
                   <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </Link>
                 <Link
-                  href="/pricing"
+                  href="/blog"
                   className="flex items-center justify-between p-4 bg-white/10 rounded-xl border border-white/20 hover:bg-white/20 transition-all group"
                 >
-                  <span className="font-medium">Pricing & Plans</span>
+                  <span className="font-medium">Blog & Articles</span>
+                  <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
+                </Link>
+                <Link
+                  href="/docs"
+                  className="flex items-center justify-between p-4 bg-white/10 rounded-xl border border-white/20 hover:bg-white/20 transition-all group"
+                >
+                  <span className="font-medium">Documentation</span>
                   <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </Link>
               </div>

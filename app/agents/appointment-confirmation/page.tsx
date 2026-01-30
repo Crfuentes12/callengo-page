@@ -4,108 +4,62 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import {
-  Calendar,
-  Check,
-  ArrowRight,
-  Clock,
-  CalendarCheck,
-  CalendarX,
-  Phone,
-  Bell,
-  RefreshCw,
-  TrendingUp,
-  DollarSign,
-  Users,
-  Building2,
-  Stethoscope,
-  Scissors,
-  Car,
-  Briefcase,
-} from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 
 const features = [
   {
-    icon: Phone,
-    title: "Automated Confirmation Calls",
-    description:
-      "AI calls patients/clients 24-48 hours before their appointment to confirm attendance.",
+    title: "Automated Reminders",
+    description: "Call patients/clients 24-48 hours before their appointments.",
   },
   {
-    icon: CalendarCheck,
-    title: "Easy Rescheduling",
-    description:
-      "If they can't make it, the agent offers alternative times and reschedules on the spot.",
+    title: "Rescheduling Support",
+    description: "Let customers reschedule directly during the call.",
   },
   {
-    icon: Bell,
-    title: "Smart Voicemail",
-    description:
-      "Detects voicemail automatically and leaves a personalized reminder message.",
+    title: "Cancellation Handling",
+    description: "Capture cancellations early to fill empty slots.",
   },
   {
-    icon: RefreshCw,
-    title: "Automatic Follow-ups",
-    description:
-      "Retry contacts who didn't answer until you get a confirmed response.",
+    title: "Multi-attempt Outreach",
+    description: "Automatic retries if the first call isn't answered.",
   },
   {
-    icon: Clock,
-    title: "Timezone Aware",
-    description:
-      "Calls at appropriate times based on the customer's local timezone.",
+    title: "Calendar Sync",
+    description: "Real-time updates to your scheduling system.",
   },
   {
-    icon: Calendar,
-    title: "Calendar Integration",
-    description:
-      "Sync with your scheduling system to automatically trigger confirmation calls.",
+    title: "Custom Scripts",
+    description: "Personalized messages for your brand and service.",
   },
 ];
 
-const results = [
-  {
-    metric: "60%",
-    label: "Reduction in No-Shows",
-    description: "Average across all industries",
-  },
-  {
-    metric: "85%",
-    label: "Confirmation Rate",
-    description: "Percentage of appointments confirmed",
-  },
-  {
-    metric: "$500+",
-    label: "Saved Per Week",
-    description: "Average for small businesses",
-  },
-  {
-    metric: "0 hrs",
-    label: "Staff Time",
-    description: "Zero manual calling required",
-  },
+const stats = [
+  { value: "60%", label: "reduction in no-shows" },
+  { value: "85%", label: "confirmation rate" },
+  { value: "24hr", label: "advance notice" },
+  { value: "3x", label: "ROI on average" },
 ];
 
 const industries = [
   {
-    icon: Stethoscope,
-    name: "Healthcare",
-    description: "Medical clinics, dental offices, therapy practices",
+    title: "Healthcare & Medical",
+    description: "Reduce patient no-shows for clinics, dentists, and specialists.",
+    metric: "Save $150+ per missed appointment",
   },
   {
-    icon: Scissors,
-    name: "Beauty & Wellness",
-    description: "Hair salons, spas, fitness studios",
+    title: "Salons & Spas",
+    description: "Keep your appointment book full and stylists busy.",
+    metric: "Fill 90%+ of time slots",
   },
   {
-    icon: Car,
-    name: "Auto Services",
-    description: "Repair shops, car dealerships, detailing",
+    title: "Professional Services",
+    description: "Confirm consultations for lawyers, accountants, and advisors.",
+    metric: "Increase billable hours by 20%",
   },
   {
-    icon: Briefcase,
-    name: "Professional Services",
-    description: "Law firms, consulting, financial advisors",
+    title: "Home Services",
+    description: "Ensure customers are home for HVAC, plumbing, and repairs.",
+    metric: "Eliminate wasted service calls",
   },
 ];
 
@@ -117,30 +71,20 @@ export default function AppointmentConfirmationPage() {
         {/* Hero Section */}
         <section className="section">
           <div className="container mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <div className="inline-flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center">
-                    <Calendar className="w-6 h-6 text-secondary" />
-                  </div>
-                  <span className="text-sm font-medium text-secondary bg-secondary/10 px-3 py-1 rounded-full">
-                    AI Agent
-                  </span>
-                </div>
-
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                  Appointment Confirmation{" "}
-                  <span className="gradient-text">Agent</span>
+                <span className="badge badge-outline mb-4">AI Agent</span>
+                <h1 className="text-display-sm mb-6">
+                  Appointment Confirmation Agent
                 </h1>
-
-                <p className="text-xl text-foreground-secondary mb-8 leading-relaxed">
-                  Stop losing money to empty appointment slots. Automatically
-                  confirm, reschedule, and remind clients 24-48 hours before
-                  their appointments.
+                <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                  Reduce no-shows by up to 60%. Automated confirmation calls 24-48
+                  hours before appointments keep your schedule full and customers
+                  accountable.
                 </p>
 
                 <div className="flex flex-wrap gap-4 mb-8">
@@ -148,140 +92,143 @@ export default function AppointmentConfirmationPage() {
                     Start Free Trial
                     <ArrowRight className="w-5 h-5" />
                   </Link>
-                  <Link href="#demo" className="btn btn-secondary">
-                    See Demo
+                  <Link
+                    href="/contact"
+                    className="btn bg-gray-100 text-dark hover:bg-gray-200"
+                  >
+                    Talk to Sales
                   </Link>
                 </div>
 
-                <div className="flex flex-wrap gap-6 text-sm text-foreground-secondary">
+                <div className="flex flex-wrap gap-6 text-sm text-gray-600">
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-accent-dark" />
+                    <Check className="w-4 h-4 text-green-600" />
                     60% fewer no-shows
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-accent-dark" />
-                    85% confirmation rate
+                    <Check className="w-4 h-4 text-green-600" />
+                    24-48hr advance notice
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-accent-dark" />
-                    Zero staff time
+                    <Check className="w-4 h-4 text-green-600" />
+                    Calendar sync included
                   </div>
                 </div>
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="relative"
               >
-                <div className="bg-background rounded-3xl border border-border p-8 shadow-xl">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
-                      <Calendar className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <div className="font-semibold">Sample Confirmation Call</div>
-                      <div className="text-sm text-foreground-tertiary">
-                        Typical conversation flow
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-4 text-sm">
-                    <div className="bg-secondary/5 p-4 rounded-xl">
-                      <div className="text-xs text-secondary font-medium mb-1">
-                        AI Agent
-                      </div>
-                      <p>
-                        "Hello! I'm calling from Smile Dental to confirm your
-                        appointment tomorrow at 3pm with Dr. Garcia. Can you
-                        confirm you'll be there?"
-                      </p>
-                    </div>
-                    <div className="bg-background-secondary p-4 rounded-xl ml-8">
-                      <div className="text-xs text-foreground-tertiary font-medium mb-1">
-                        Patient
-                      </div>
-                      <p>"I can't make it tomorrow. Something came up."</p>
-                    </div>
-                    <div className="bg-secondary/5 p-4 rounded-xl">
-                      <div className="text-xs text-secondary font-medium mb-1">
-                        AI Agent
-                      </div>
-                      <p>
-                        "No problem! Would you like to reschedule? We have
-                        openings on Friday morning or next Monday afternoon."
-                      </p>
-                    </div>
-                    <div className="bg-background-secondary p-4 rounded-xl ml-8">
-                      <div className="text-xs text-foreground-tertiary font-medium mb-1">
-                        Patient
-                      </div>
-                      <p>"Friday morning works for me."</p>
-                    </div>
-                  </div>
-
-                  <div className="mt-6 pt-6 border-t border-border">
-                    <div className="text-xs text-foreground-tertiary mb-2">
-                      Result
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      <span className="px-3 py-1 bg-secondary/10 text-secondary rounded-full text-xs">
-                        Rescheduled
-                      </span>
-                      <span className="px-3 py-1 bg-accent/10 text-accent-dark rounded-full text-xs">
-                        Slot Filled
-                      </span>
-                    </div>
-                  </div>
+                <div className="aspect-square rounded-3xl bg-gray-100 flex items-center justify-center">
+                  <span className="text-gray-400">Agent preview placeholder</span>
                 </div>
+                <div className="absolute -z-10 -bottom-4 -right-4 w-full h-full bg-gray-200 rounded-3xl" />
               </motion.div>
             </div>
           </div>
         </section>
 
-        {/* Results Stats */}
-        <section className="py-16 bg-gradient-to-r from-secondary to-secondary-dark text-white">
+        {/* Stats Section */}
+        <section className="section bg-dark text-white">
           <div className="container mx-auto">
-            <div className="grid md:grid-cols-4 gap-8 text-center">
-              {results.map((result, index) => (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+              {stats.map((stat, index) => (
                 <motion.div
-                  key={result.label}
+                  key={stat.label}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="text-center"
                 >
                   <div className="text-4xl md:text-5xl font-bold mb-2">
-                    {result.metric}
+                    {stat.value}
                   </div>
-                  <div className="font-medium mb-1">{result.label}</div>
-                  <div className="text-sm text-white/60">{result.description}</div>
+                  <div className="text-gray-400">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Features Section */}
+        {/* How It Works */}
         <section className="section">
+          <div className="container mx-auto">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="relative order-2 lg:order-1"
+              >
+                <div className="aspect-4-3 rounded-3xl bg-gray-100 flex items-center justify-center">
+                  <span className="text-gray-400">Workflow diagram</span>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="order-1 lg:order-2"
+              >
+                <span className="badge badge-outline mb-4">How it works</span>
+                <h2 className="text-3xl md:text-4xl font-semibold mb-6">
+                  Set it and forget it
+                </h2>
+                <div className="space-y-6">
+                  {[
+                    {
+                      step: "01",
+                      title: "Connect your calendar",
+                      description:
+                        "Sync with Google Calendar, Outlook, or your scheduling software.",
+                    },
+                    {
+                      step: "02",
+                      title: "Configure timing",
+                      description:
+                        "Set when calls go out - 24 hours, 48 hours, or custom.",
+                    },
+                    {
+                      step: "03",
+                      title: "Let AI handle it",
+                      description:
+                        "Our agent calls, confirms, and updates your calendar automatically.",
+                    },
+                  ].map((item) => (
+                    <div key={item.step} className="flex gap-4">
+                      <div className="text-2xl font-bold text-gray-300">
+                        {item.step}
+                      </div>
+                      <div>
+                        <h3 className="font-semibold mb-1">{item.title}</h3>
+                        <p className="text-gray-600">{item.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Features Section */}
+        <section className="section bg-gray-50">
           <div className="container mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center max-w-3xl mx-auto mb-16"
+              className="max-w-2xl mb-16"
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Never Miss an{" "}
-                <span className="gradient-text">Appointment Again</span>
+              <span className="badge badge-outline mb-4">Features</span>
+              <h2 className="text-3xl md:text-4xl font-semibold">
+                Everything you need to eliminate no-shows
               </h2>
-              <p className="text-lg text-foreground-secondary">
-                Our Appointment Confirmation Agent handles every aspect of
-                appointment management.
-              </p>
             </motion.div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -291,147 +238,116 @@ export default function AppointmentConfirmationPage() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="card"
+                  transition={{ delay: index * 0.05 }}
+                  className="bg-white rounded-2xl border border-gray-200 p-6"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center mb-4">
-                    <feature.icon className="w-6 h-6 text-secondary" />
-                  </div>
                   <h3 className="font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-foreground-secondary text-sm">
-                    {feature.description}
-                  </p>
+                  <p className="text-gray-600 text-sm">{feature.description}</p>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ROI Calculator Preview */}
-        <section className="section bg-background-secondary">
+        {/* ROI Section */}
+        <section className="section">
           <div className="container mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
               >
-                <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                  Calculate Your{" "}
-                  <span className="gradient-text">Savings</span>
+                <span className="badge badge-outline mb-4">ROI Calculator</span>
+                <h2 className="text-3xl md:text-4xl font-semibold mb-6">
+                  Calculate your savings
                 </h2>
-                <p className="text-lg text-foreground-secondary mb-8">
-                  Every no-show costs you money. See how much you could save with
-                  automated confirmations.
+                <p className="text-lg text-gray-600 mb-8">
+                  Every no-show costs you money. A typical business with 50
+                  appointments per week loses over $1,800 weekly to no-shows.
                 </p>
-
-                <div className="bg-background rounded-2xl border border-border p-6 space-y-6">
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Appointments per week
-                    </label>
-                    <input
-                      type="number"
-                      defaultValue={50}
-                      className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Current no-show rate (%)
-                    </label>
-                    <input
-                      type="number"
-                      defaultValue={25}
-                      className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Revenue per appointment ($)
-                    </label>
-                    <input
-                      type="number"
-                      defaultValue={150}
-                      className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none"
-                    />
-                  </div>
-                </div>
+                <ul className="space-y-3">
+                  {[
+                    "60% average reduction in no-shows",
+                    "Fill empty slots with rescheduled appointments",
+                    "Save staff hours on manual calling",
+                    "ROI in the first month for most businesses",
+                  ].map((item) => (
+                    <li key={item} className="flex items-center gap-3 text-gray-700">
+                      <Check className="w-5 h-5 text-green-600 flex-shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
 
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                className="relative"
               >
-                <div className="bg-gradient-to-br from-secondary to-secondary-dark rounded-3xl p-8 text-white">
-                  <DollarSign className="w-10 h-10 mb-6 opacity-70" />
-                  <h3 className="text-2xl font-bold mb-6">Estimated Savings</h3>
-
-                  <div className="space-y-4 mb-8">
-                    <div className="flex justify-between items-center pb-4 border-b border-white/20">
-                      <span className="text-white/70">Current weekly loss</span>
-                      <span className="text-2xl font-bold">$1,875</span>
+                <div className="bg-white rounded-3xl border border-gray-200 p-8">
+                  <h3 className="font-semibold mb-6">Example Savings</h3>
+                  <div className="space-y-4">
+                    <div className="flex justify-between pb-4 border-b border-gray-100">
+                      <span className="text-gray-600">50 appointments/week</span>
                     </div>
-                    <div className="flex justify-between items-center pb-4 border-b border-white/20">
-                      <span className="text-white/70">With Callengo (60% reduction)</span>
-                      <span className="text-2xl font-bold">$750</span>
+                    <div className="flex justify-between pb-4 border-b border-gray-100">
+                      <span className="text-gray-600">Current weekly loss</span>
+                      <span className="font-semibold">$1,875</span>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-white/70">Weekly savings</span>
-                      <span className="text-3xl font-bold text-accent">
-                        $1,125
-                      </span>
+                    <div className="flex justify-between pb-4 border-b border-gray-100">
+                      <span className="text-gray-600">With Callengo (60% reduction)</span>
+                      <span className="font-semibold">$750</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Weekly savings</span>
+                      <span className="font-bold text-green-600 text-xl">$1,125</span>
                     </div>
                   </div>
-
-                  <div className="bg-white/10 rounded-xl p-4 text-center">
-                    <div className="text-sm text-white/70 mb-1">
-                      Annual savings potential
-                    </div>
-                    <div className="text-4xl font-bold">$58,500</div>
+                  <div className="mt-6 pt-6 border-t border-gray-100 text-center">
+                    <div className="text-sm text-gray-500 mb-1">Annual savings</div>
+                    <div className="text-3xl font-bold">$58,500</div>
                   </div>
                 </div>
+                <div className="absolute -z-10 -bottom-4 -left-4 w-full h-full bg-gray-200 rounded-3xl" />
               </motion.div>
             </div>
           </div>
         </section>
 
         {/* Industries */}
-        <section className="section">
+        <section className="section bg-gray-50">
           <div className="container mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center max-w-3xl mx-auto mb-16"
+              className="max-w-2xl mb-16"
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Built for{" "}
-                <span className="gradient-text">Your Industry</span>
+              <span className="badge badge-outline mb-4">Industries</span>
+              <h2 className="text-3xl md:text-4xl font-semibold">
+                Built for appointment-based businesses
               </h2>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid md:grid-cols-2 gap-6">
               {industries.map((industry, index) => (
                 <motion.div
-                  key={industry.name}
+                  key={industry.title}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="card text-center"
+                  transition={{ delay: index * 0.1 }}
+                  className="bg-white rounded-2xl border border-gray-200 p-6"
                 >
-                  <div className="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center mx-auto mb-4">
-                    <industry.icon className="w-7 h-7 text-secondary" />
+                  <h3 className="font-semibold text-lg mb-2">{industry.title}</h3>
+                  <p className="text-gray-600 mb-4">{industry.description}</p>
+                  <div className="inline-flex items-center gap-2 text-sm font-medium text-green-600">
+                    <Check className="w-4 h-4" />
+                    {industry.metric}
                   </div>
-                  <h3 className="font-semibold mb-2">{industry.name}</h3>
-                  <p className="text-sm text-foreground-secondary">
-                    {industry.description}
-                  </p>
                 </motion.div>
               ))}
             </div>
@@ -439,32 +355,31 @@ export default function AppointmentConfirmationPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="section bg-gradient-to-br from-secondary via-secondary-dark to-navy text-white">
-          <div className="container mx-auto text-center">
+        <section className="section bg-dark text-white">
+          <div className="container mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="max-w-2xl mx-auto"
+              className="max-w-2xl"
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Ready to Eliminate No-Shows?
+              <h2 className="text-3xl md:text-4xl font-semibold mb-6">
+                Ready to reduce no-shows?
               </h2>
-              <p className="text-xl text-white/70 mb-8">
-                Start confirming appointments automatically with 15 free minutes.
-                No credit card required.
+              <p className="text-xl text-gray-400 mb-8">
+                Start confirming appointments today with 15 free minutes.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/signup"
-                  className="btn bg-white text-secondary hover:bg-white/90 px-8 py-4"
+                  className="btn bg-white text-dark hover:bg-gray-100 px-8 py-4"
                 >
                   Start Free Trial
+                  <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
                   href="/contact"
-                  className="btn border border-white/30 text-white hover:bg-white/10 px-8 py-4"
+                  className="btn border border-white/20 text-white hover:bg-white/10 px-8 py-4"
                 >
                   Talk to Sales
                 </Link>

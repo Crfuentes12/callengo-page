@@ -2,64 +2,54 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
   {
     id: 1,
     quote:
-      "Callengo transformed our sales process. Our SDRs now only talk to qualified leads, and our conversion rate has tripled. The AI voices are so realistic that most people don't even realize they're talking to an AI.",
+      "Callengo transformed our sales process. Our SDRs now only talk to qualified leads, and our conversion rate has tripled.",
     author: "Sarah Mitchell",
     role: "VP of Sales",
     company: "TechScale Solutions",
-    avatar: "SM",
-    rating: 5,
-    metric: "3x conversion rate",
+    metric: { value: "3x", label: "conversion rate" },
   },
   {
     id: 2,
     quote:
-      "We used to have a 28% no-show rate for our dental appointments. After implementing Callengo's confirmation agent, we're down to 9%. That's thousands of dollars saved every month.",
+      "We used to have a 28% no-show rate for our appointments. After implementing Callengo's confirmation agent, we're down to 9%.",
     author: "Dr. James Chen",
     role: "Practice Owner",
     company: "Smile Dental Group",
-    avatar: "JC",
-    rating: 5,
-    metric: "68% reduction in no-shows",
+    metric: { value: "68%", label: "fewer no-shows" },
   },
   {
     id: 3,
     quote:
-      "Our CRM was a mess with outdated data. Callengo verified 50,000 contacts in a week - something that would have taken our team months. The data quality is now at 95%+.",
+      "Callengo verified 50,000 contacts in a week - something that would have taken our team months. The data quality is now at 95%+.",
     author: "Michael Torres",
     role: "Director of Operations",
     company: "GlobalReach Marketing",
-    avatar: "MT",
-    rating: 5,
-    metric: "50K contacts verified",
+    metric: { value: "50K", label: "contacts verified" },
   },
   {
     id: 4,
     quote:
-      "The speed-to-lead improvement has been incredible. New leads get a call within 60 seconds, and we're qualifying them before competitors even know they exist.",
+      "New leads get a call within 60 seconds, and we're qualifying them before competitors even know they exist.",
     author: "Emma Rodriguez",
     role: "Head of Growth",
     company: "Velocity SaaS",
-    avatar: "ER",
-    rating: 5,
-    metric: "<60s response time",
+    metric: { value: "<60s", label: "response time" },
   },
-  {
-    id: 5,
-    quote:
-      "I was skeptical about AI calls, but Callengo's voices are genuinely impressive. Our customers often compliment our 'team members' without knowing they're AI agents.",
-    author: "David Park",
-    role: "Customer Success Manager",
-    company: "ServicePro Inc",
-    avatar: "DP",
-    rating: 5,
-    metric: "98% satisfaction rate",
-  },
+];
+
+const companyLogos = [
+  "TechScale",
+  "Smile Dental",
+  "GlobalReach",
+  "Velocity",
+  "ServicePro",
+  "Acme Corp",
 ];
 
 export default function Testimonials() {
@@ -83,139 +73,116 @@ export default function Testimonials() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="max-w-2xl mb-20"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/10 rounded-full mb-6">
-            <span className="text-sm font-medium text-secondary">
-              Customer Stories
-            </span>
-          </div>
-
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-            Trusted by{" "}
-            <span className="gradient-text">Growing Companies</span>
+          <span className="badge badge-outline mb-4">Customer stories</span>
+          <h2 className="text-display-sm mb-6">
+            Results that speak
+            <br />
+            for themselves
           </h2>
-
-          <p className="text-lg text-foreground-secondary">
-            See how businesses like yours are saving time and increasing revenue
-            with Callengo's AI-powered calling platform.
-          </p>
         </motion.div>
 
-        {/* Featured Testimonial */}
-        <div className="relative max-w-4xl mx-auto mb-16">
-          <div className="absolute -top-4 -left-4 w-16 h-16 bg-primary/10 rounded-full blur-xl" />
-          <div className="absolute -bottom-4 -right-4 w-20 h-20 bg-secondary/10 rounded-full blur-xl" />
-
-          <div className="relative bg-background rounded-3xl border border-border p-8 md:p-12">
-            <Quote className="w-12 h-12 text-primary/20 mb-6" />
-
+        {/* Testimonial Carousel */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-24">
+          {/* Left - Quote */}
+          <div className="relative">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4 }}
               >
-                {/* Rating */}
-                <div className="flex gap-1 mb-6">
-                  {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="w-5 h-5 fill-yellow-400 text-yellow-400"
-                    />
-                  ))}
-                </div>
-
-                {/* Quote */}
-                <p className="text-xl md:text-2xl text-foreground leading-relaxed mb-8">
+                <p className="text-2xl md:text-3xl lg:text-4xl font-medium leading-relaxed mb-10">
                   "{testimonials[currentIndex].quote}"
                 </p>
 
-                {/* Author */}
-                <div className="flex items-center justify-between flex-wrap gap-4">
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-semibold text-lg">
-                      {testimonials[currentIndex].avatar}
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground">
-                        {testimonials[currentIndex].author}
-                      </div>
-                      <div className="text-foreground-secondary text-sm">
-                        {testimonials[currentIndex].role} at{" "}
-                        {testimonials[currentIndex].company}
-                      </div>
-                    </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-semibold">
+                    {testimonials[currentIndex].author
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")}
                   </div>
-
-                  {/* Metric Badge */}
-                  <div className="px-4 py-2 bg-accent/10 rounded-full">
-                    <span className="text-sm font-semibold text-accent-dark">
-                      {testimonials[currentIndex].metric}
-                    </span>
+                  <div>
+                    <div className="font-semibold text-dark">
+                      {testimonials[currentIndex].author}
+                    </div>
+                    <div className="text-gray-500 text-sm">
+                      {testimonials[currentIndex].role},{" "}
+                      {testimonials[currentIndex].company}
+                    </div>
                   </div>
                 </div>
               </motion.div>
             </AnimatePresence>
 
             {/* Navigation */}
-            <div className="flex items-center justify-center gap-4 mt-8 pt-8 border-t border-border">
+            <div className="flex items-center gap-4 mt-10">
               <button
                 onClick={prevTestimonial}
-                className="w-12 h-12 rounded-full border border-border hover:border-primary hover:bg-primary/5 flex items-center justify-center transition-colors"
+                className="w-12 h-12 rounded-full border border-gray-200 hover:border-gray-400 flex items-center justify-center transition-colors"
               >
-                <ChevronLeft className="w-5 h-5 text-foreground-secondary" />
+                <ChevronLeft className="w-5 h-5 text-gray-600" />
               </button>
-
-              <div className="flex gap-2">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentIndex(index)}
-                    className={`w-2 h-2 rounded-full transition-all ${
-                      index === currentIndex
-                        ? "w-8 bg-primary"
-                        : "bg-border hover:bg-foreground-tertiary"
-                    }`}
-                  />
-                ))}
-              </div>
-
               <button
                 onClick={nextTestimonial}
-                className="w-12 h-12 rounded-full border border-border hover:border-primary hover:bg-primary/5 flex items-center justify-center transition-colors"
+                className="w-12 h-12 rounded-full border border-gray-200 hover:border-gray-400 flex items-center justify-center transition-colors"
               >
-                <ChevronRight className="w-5 h-5 text-foreground-secondary" />
+                <ChevronRight className="w-5 h-5 text-gray-600" />
               </button>
+              <span className="text-sm text-gray-400 ml-4">
+                {currentIndex + 1} / {testimonials.length}
+              </span>
             </div>
+          </div>
+
+          {/* Right - Metric Card */}
+          <div className="relative">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.4 }}
+                className="bg-dark rounded-3xl p-12 text-white text-center"
+              >
+                <div className="text-7xl md:text-8xl font-bold mb-4">
+                  {testimonials[currentIndex].metric.value}
+                </div>
+                <div className="text-xl text-gray-400">
+                  {testimonials[currentIndex].metric.label}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Decorative */}
+            <div className="absolute -z-10 -bottom-4 -right-4 w-full h-full bg-gray-200 rounded-3xl" />
           </div>
         </div>
 
-        {/* Company Logos Placeholder */}
+        {/* Company Logos */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center"
+          className="pt-12 border-t border-gray-200"
         >
-          <p className="text-foreground-tertiary text-sm mb-8">
+          <p className="text-gray-400 text-sm text-center mb-8">
             Trusted by innovative companies worldwide
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16 opacity-50">
-            {["TechScale", "Smile Dental", "GlobalReach", "Velocity", "ServicePro"].map(
-              (company) => (
-                <div
-                  key={company}
-                  className="text-xl md:text-2xl font-bold text-foreground-tertiary"
-                >
-                  {company}
-                </div>
-              )
-            )}
+          <div className="flex flex-wrap items-center justify-center gap-x-16 gap-y-8">
+            {companyLogos.map((company) => (
+              <div
+                key={company}
+                className="text-xl font-semibold text-gray-300 hover:text-gray-400 transition-colors"
+              >
+                {company}
+              </div>
+            ))}
           </div>
         </motion.div>
       </div>

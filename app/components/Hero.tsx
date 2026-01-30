@@ -77,17 +77,17 @@ export default function Hero() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-4xl mx-auto mb-16"
         >
-          <span className="badge badge-primary mb-6">AI Voice Agents</span>
+          <span className="badge badge-primary mb-6">Stop Losing Revenue</span>
 
           <h1 className="text-display mb-6">
-            Your calls.
+            No more no-shows.
             <br />
-            <span className="gradient-text">On autopilot.</span>
+            <span className="gradient-text">No more bad data.</span>
           </h1>
 
           <p className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-            AI agents that make phone calls indistinguishable from humans.
-            Verify data, confirm appointments, qualify leads—automatically.
+            Every missed appointment costs you money. Every bad lead wastes your team's time.
+            Stop the losses and let your team focus on closing deals.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -118,11 +118,11 @@ export default function Hero() {
               <div className="gradient-bg p-5 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                    <span className="text-white text-sm font-medium">AI</span>
+                    <span className="text-white text-sm font-medium">C</span>
                   </div>
                   <div>
-                    <div className="text-white font-medium">Maya · AI Agent</div>
-                    <div className="text-white/70 text-sm">Data Validation Call</div>
+                    <div className="text-white font-medium">Maya from Callengo</div>
+                    <div className="text-white/70 text-sm">Verifying Contact Information</div>
                   </div>
                 </div>
                 {isPlaying && (
@@ -201,7 +201,7 @@ export default function Hero() {
                   animate={{ opacity: 1 }}
                   className="border-t border-slate-200 p-5 gradient-bg-subtle"
                 >
-                  <p className="text-sm font-medium text-slate-900 mb-3">Data extracted by AI:</p>
+                  <p className="text-sm font-medium text-slate-900 mb-3">Results from this call:</p>
                   <div className="flex flex-wrap gap-2">
                     {["Address updated", "Email verified", "Contact confirmed"].map((item) => (
                       <span key={item} className="text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-full text-slate-700">

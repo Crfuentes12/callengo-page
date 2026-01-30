@@ -29,9 +29,9 @@ export default function CTA() {
               transition={{ delay: 0.1 }}
               className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight"
             >
-              Ready to automate
+              Ready to stop
               <br />
-              your calls?
+              losing revenue?
             </motion.h2>
 
             <motion.p
@@ -41,8 +41,8 @@ export default function CTA() {
               transition={{ delay: 0.2 }}
               className="text-xl text-white/70 mb-10 max-w-xl"
             >
-              Join hundreds of companies using Callengo to scale their outreach.
-              Start with 15 free minutes.
+              Join hundreds of companies recovering lost revenue from no-shows,
+              bad data, and slow lead response. Start with 15 free minutes.
             </motion.p>
 
             <motion.div

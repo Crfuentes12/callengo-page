@@ -6,22 +6,22 @@ import { ArrowRight } from "lucide-react";
 
 const features = [
   {
-    title: "Verify your database",
-    description: "Clean contact data automatically. Verify phone numbers, update emails, and remove bad leads.",
+    title: "Stop wasting money on bad data",
+    description: "Outdated contacts cost you campaigns. Clean your database and reach the right people every time.",
     image: "/images/feature-verify.jpg",
-    stats: { value: "95%", label: "accuracy rate" },
+    stats: { value: "95%", label: "data accuracy" },
     link: "/agents/data-validation",
   },
   {
-    title: "Confirm appointments",
-    description: "Reduce no-shows by up to 60%. Automated confirmation calls 24-48 hours before appointments.",
+    title: "Fill your calendar, not your voicemail",
+    description: "Every no-show is lost revenue. Keep your schedule full and your customers accountable.",
     image: "/images/feature-appointments.jpg",
     stats: { value: "60%", label: "fewer no-shows" },
     link: "/agents/appointment-confirmation",
   },
   {
-    title: "Qualify every lead",
-    description: "Respond to leads in under 60 seconds. AI qualifies using BANT criteria before sales touches them.",
+    title: "Be first, win more deals",
+    description: "The fastest response wins. Reach every lead in seconds while your competitors check their inbox.",
     image: "/images/feature-leads.jpg",
     stats: { value: "<1min", label: "response time" },
     link: "/agents/lead-qualification",
@@ -39,15 +39,15 @@ export default function Features() {
           viewport={{ once: true }}
           className="max-w-2xl mb-20"
         >
-          <span className="badge badge-primary mb-4">How it works</span>
+          <span className="badge badge-primary mb-4">Solutions</span>
           <h2 className="text-display-sm mb-6">
-            AI agents that handle
+            Problems solved.
             <br />
-            <span className="gradient-text">your calls at scale</span>
+            <span className="gradient-text">Revenue recovered.</span>
           </h2>
           <p className="text-xl text-slate-600">
-            From data validation to lead qualification, our AI agents work 24/7
-            to automate your phone operations.
+            Your team should focus on closing deals, not chasing confirmations
+            or cleaning spreadsheets.
           </p>
         </motion.div>
 

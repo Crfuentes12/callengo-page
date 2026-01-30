@@ -111,13 +111,13 @@ export default function ContactPage() {
               </div>
 
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                Let's Start a{" "}
-                <span className="gradient-text">Conversation</span>
+                Let's talk about{" "}
+                <span className="gradient-text">your goals</span>
               </h1>
 
               <p className="text-xl text-foreground-secondary">
-                Have questions about Callengo? Want to learn how AI calling can
-                transform your business? We'd love to hear from you.
+                Have questions? Want to see how much revenue you could recover?
+                We would love to hear from you.
               </p>
             </motion.div>
           </div>

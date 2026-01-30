@@ -1,192 +1,109 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Mic2,
-  Brain,
-  BarChart3,
-  Zap,
-  Shield,
-  Globe,
-  Clock,
-  Headphones,
-} from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 const features = [
   {
-    icon: Mic2,
-    title: "Hyper-Realistic Voices",
-    description:
-      "77+ professional voices that sound indistinguishable from real humans. Multiple accents and languages available.",
-    color: "text-primary",
-    bgColor: "bg-primary/10",
+    title: "Verify your database",
+    description: "Clean contact data automatically. Verify phone numbers, update emails, and remove bad leads.",
+    image: "/images/feature-verify.jpg",
+    stats: { value: "95%", label: "accuracy rate" },
   },
   {
-    icon: Brain,
-    title: "Conversational AI",
-    description:
-      "Powered by GPT-4o for natural conversations. Handles objections, understands context, and adapts in real-time.",
-    color: "text-secondary",
-    bgColor: "bg-secondary/10",
+    title: "Confirm appointments",
+    description: "Reduce no-shows by up to 60%. Automated confirmation calls 24-48 hours before appointments.",
+    image: "/images/feature-appointments.jpg",
+    stats: { value: "60%", label: "fewer no-shows" },
   },
   {
-    icon: BarChart3,
-    title: "Automatic Analysis",
-    description:
-      "Every call is transcribed and analyzed. Get structured data, sentiment analysis, and actionable insights.",
-    color: "text-accent-dark",
-    bgColor: "bg-accent/10",
-  },
-  {
-    icon: Zap,
-    title: "Instant Scalability",
-    description:
-      "Go from 10 to 10,000 calls without hiring anyone. Launch campaigns in minutes, not weeks.",
-    color: "text-primary",
-    bgColor: "bg-primary/10",
-  },
-  {
-    icon: Shield,
-    title: "Enterprise Security",
-    description:
-      "SOC 2 compliant infrastructure. Full audit logs, encryption at rest and in transit. Your data stays yours.",
-    color: "text-secondary",
-    bgColor: "bg-secondary/10",
-  },
-  {
-    icon: Globe,
-    title: "Multi-Language Support",
-    description:
-      "Reach customers in their native language. Support for English, Spanish, French, German, and more.",
-    color: "text-accent-dark",
-    bgColor: "bg-accent/10",
-  },
-  {
-    icon: Clock,
-    title: "24/7 Availability",
-    description:
-      "Your AI agents never sleep, never take breaks, and always follow your script perfectly.",
-    color: "text-primary",
-    bgColor: "bg-primary/10",
-  },
-  {
-    icon: Headphones,
-    title: "Smart Voicemail",
-    description:
-      "Automatically detects voicemail, leaves personalized messages, and schedules follow-ups.",
-    color: "text-secondary",
-    bgColor: "bg-secondary/10",
+    title: "Qualify every lead",
+    description: "Respond to leads in under 60 seconds. AI qualifies using BANT criteria before sales touches them.",
+    image: "/images/feature-leads.jpg",
+    stats: { value: "<1min", label: "response time" },
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5 },
-  },
-};
-
 export default function Features() {
   return (
-    <section className="section bg-background-secondary" id="features">
+    <section className="section bg-gray-50" id="features">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="max-w-2xl mb-20"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
-            <span className="text-sm font-medium text-primary">
-              Powerful Features
-            </span>
-          </div>
-
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-            Everything You Need to{" "}
-            <span className="gradient-text">Scale Your Calls</span>
+          <span className="badge badge-outline mb-4">How it works</span>
+          <h2 className="text-display-sm mb-6">
+            AI agents that handle
+            <br />
+            your calls at scale
           </h2>
-
-          <p className="text-lg text-foreground-secondary">
-            Built on cutting-edge AI technology, Callengo gives you the tools to
-            automate your entire calling operation without sacrificing quality.
+          <p className="text-xl text-gray-600">
+            From data validation to lead qualification, our AI agents work 24/7
+            to automate your phone operations.
           </p>
         </motion.div>
 
-        {/* Features Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
-        >
+        {/* Features - Vertical Stack */}
+        <div className="space-y-32">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
-              variants={itemVariants}
-              className="group"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6 }}
+              className={`grid lg:grid-cols-2 gap-12 lg:gap-20 items-center ${
+                index % 2 === 1 ? "lg:flex-row-reverse" : ""
+              }`}
             >
-              <div className="card h-full hover:translate-y-[-4px]">
-                <div
-                  className={`${feature.bgColor} w-14 h-14 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform`}
-                >
-                  <feature.icon className={`w-7 h-7 ${feature.color}`} />
+              {/* Text Content */}
+              <div className={index % 2 === 1 ? "lg:order-2" : ""}>
+                <div className="inline-flex items-center gap-2 mb-6">
+                  <span className="text-5xl font-bold text-gray-200">0{index + 1}</span>
                 </div>
 
-                <h3 className="text-xl font-semibold mb-3 text-foreground">
+                <h3 className="text-3xl md:text-4xl font-semibold mb-6">
                   {feature.title}
                 </h3>
 
-                <p className="text-foreground-secondary leading-relaxed">
+                <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                   {feature.description}
                 </p>
+
+                <div className="flex items-center gap-8 mb-8">
+                  <div>
+                    <div className="text-4xl font-bold text-dark">{feature.stats.value}</div>
+                    <div className="text-sm text-gray-500">{feature.stats.label}</div>
+                  </div>
+                </div>
+
+                <Link
+                  href={`/agents/${index === 0 ? 'data-validation' : index === 1 ? 'appointment-confirmation' : 'lead-qualification'}`}
+                  className="inline-flex items-center gap-2 text-dark font-medium hover:gap-3 transition-all"
+                >
+                  Learn more
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+
+              {/* Image Placeholder */}
+              <div className={index % 2 === 1 ? "lg:order-1" : ""}>
+                <div className="relative">
+                  <div className="aspect-4-3 rounded-2xl img-placeholder overflow-hidden">
+                    <span className="text-sm">Feature image placeholder</span>
+                  </div>
+                  {/* Decorative element */}
+                  <div className="absolute -z-10 -bottom-4 -right-4 w-full h-full bg-gray-200 rounded-2xl" />
+                </div>
               </div>
             </motion.div>
           ))}
-        </motion.div>
-
-        {/* Stats Banner */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-20 bg-gradient-to-r from-primary to-primary-dark rounded-3xl p-8 md:p-12"
-        >
-          <div className="grid md:grid-cols-4 gap-8 text-center text-white">
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">77+</div>
-              <div className="text-white/70">AI Voices</div>
-            </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">&lt;500ms</div>
-              <div className="text-white/70">Response Time</div>
-            </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">95%</div>
-              <div className="text-white/70">Accuracy Rate</div>
-            </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">24/7</div>
-              <div className="text-white/70">Availability</div>
-            </div>
-          </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -3,40 +3,23 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  ChevronDown,
-  Menu,
-  X,
-  Database,
-  Calendar,
-  UserCheck,
-  Sparkles,
-} from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 
 const agents = [
   {
     name: "Data Validation",
-    description: "Clean and verify your contact database",
+    description: "Clean your contact database automatically",
     href: "/agents/data-validation",
-    icon: Database,
-    color: "text-primary",
-    bgColor: "bg-primary/10",
   },
   {
     name: "Appointment Confirmation",
-    description: "Reduce no-shows up to 60%",
+    description: "Reduce no-shows by up to 60%",
     href: "/agents/appointment-confirmation",
-    icon: Calendar,
-    color: "text-secondary",
-    bgColor: "bg-secondary/10",
   },
   {
     name: "Lead Qualification",
-    description: "Filter and qualify leads automatically",
+    description: "Qualify leads before sales touches them",
     href: "/agents/lead-qualification",
-    icon: UserCheck,
-    color: "text-accent-dark",
-    bgColor: "bg-accent/10",
   },
 ];
 
@@ -47,7 +30,7 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 10);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -57,21 +40,19 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-border shadow-sm"
+          ? "bg-white/95 backdrop-blur-md border-b border-gray-200"
           : "bg-transparent"
       }`}
     >
-      <nav className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
+      <nav className="container mx-auto">
+        <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-              {/* Placeholder for logo - replace with actual logo */}
-              <Sparkles className="w-5 h-5 text-white" />
+          <Link href="/" className="flex items-center gap-2">
+            {/* Logo placeholder */}
+            <div className="w-8 h-8 bg-dark rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-sm">C</span>
             </div>
-            <span className="text-2xl font-semibold tracking-tight">
-              <span className="gradient-text">Callengo</span>
-            </span>
+            <span className="text-xl font-semibold text-dark">Callengo</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -83,7 +64,7 @@ export default function Header() {
               onMouseLeave={() => setIsAgentsOpen(false)}
             >
               <button
-                className="flex items-center gap-1.5 text-foreground-secondary hover:text-foreground transition-colors py-2"
+                className="flex items-center gap-1 text-gray-600 hover:text-dark transition-colors text-sm font-medium"
                 onClick={() => setIsAgentsOpen(!isAgentsOpen)}
               >
                 Agents
@@ -97,30 +78,23 @@ export default function Header() {
               <AnimatePresence>
                 {isAgentsOpen && (
                   <motion.div
-                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-80 bg-background rounded-2xl border border-border shadow-xl p-2"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 8 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute top-full left-0 mt-2 w-72 bg-white rounded-xl border border-gray-200 shadow-lg p-2"
                   >
                     {agents.map((agent) => (
                       <Link
                         key={agent.name}
                         href={agent.href}
-                        className="flex items-start gap-4 p-4 rounded-xl hover:bg-background-secondary transition-colors group"
+                        className="block p-3 rounded-lg hover:bg-gray-50 transition-colors"
                       >
-                        <div
-                          className={`${agent.bgColor} p-2.5 rounded-xl transition-transform group-hover:scale-110`}
-                        >
-                          <agent.icon className={`w-5 h-5 ${agent.color}`} />
+                        <div className="font-medium text-dark text-sm">
+                          {agent.name}
                         </div>
-                        <div>
-                          <div className="font-medium text-foreground group-hover:text-primary transition-colors">
-                            {agent.name}
-                          </div>
-                          <div className="text-sm text-foreground-secondary mt-0.5">
-                            {agent.description}
-                          </div>
+                        <div className="text-xs text-gray-500 mt-0.5">
+                          {agent.description}
                         </div>
                       </Link>
                     ))}
@@ -130,49 +104,49 @@ export default function Header() {
             </div>
 
             <Link
+              href="/pricing"
+              className="text-gray-600 hover:text-dark transition-colors text-sm font-medium"
+            >
+              Pricing
+            </Link>
+
+            <Link
               href="/about"
-              className="text-foreground-secondary hover:text-foreground transition-colors"
+              className="text-gray-600 hover:text-dark transition-colors text-sm font-medium"
             >
               About
             </Link>
 
             <Link
               href="/contact"
-              className="text-foreground-secondary hover:text-foreground transition-colors"
+              className="text-gray-600 hover:text-dark transition-colors text-sm font-medium"
             >
               Contact
-            </Link>
-
-            <Link
-              href="/#pricing"
-              className="text-foreground-secondary hover:text-foreground transition-colors"
-            >
-              Pricing
             </Link>
           </div>
 
           {/* CTA Buttons */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-3">
             <Link
               href="/login"
-              className="text-foreground-secondary hover:text-foreground transition-colors font-medium"
+              className="text-gray-600 hover:text-dark transition-colors text-sm font-medium px-4 py-2"
             >
               Log in
             </Link>
-            <Link href="/signup" className="btn btn-primary">
-              Start Free
+            <Link href="/signup" className="btn btn-primary text-sm">
+              Get Started
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 rounded-xl hover:bg-background-secondary transition-colors"
+            className="lg:hidden p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
-              <X className="w-6 h-6 text-foreground" />
+              <X className="w-6 h-6 text-dark" />
             ) : (
-              <Menu className="w-6 h-6 text-foreground" />
+              <Menu className="w-6 h-6 text-dark" />
             )}
           </button>
         </div>
@@ -184,71 +158,55 @@ export default function Header() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="lg:hidden overflow-hidden"
+              transition={{ duration: 0.2 }}
+              className="lg:hidden overflow-hidden bg-white border-t border-gray-100"
             >
-              <div className="py-6 space-y-4">
-                {/* Agents Section */}
-                <div className="space-y-2">
-                  <div className="text-sm font-medium text-foreground-tertiary uppercase tracking-wider px-4">
-                    AI Agents
-                  </div>
-                  {agents.map((agent) => (
-                    <Link
-                      key={agent.name}
-                      href={agent.href}
-                      className="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-background-secondary transition-colors"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      <div className={`${agent.bgColor} p-2 rounded-lg`}>
-                        <agent.icon className={`w-4 h-4 ${agent.color}`} />
-                      </div>
-                      <div>
-                        <div className="font-medium text-foreground">
-                          {agent.name}
-                        </div>
-                        <div className="text-sm text-foreground-secondary">
-                          {agent.description}
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
+              <div className="py-4 space-y-1">
+                <div className="px-2 py-2 text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  AI Agents
                 </div>
-
-                <div className="h-px bg-border mx-4" />
-
-                {/* Other Links */}
-                <div className="space-y-1">
+                {agents.map((agent) => (
                   <Link
-                    href="/about"
-                    className="block px-4 py-3 text-foreground hover:bg-background-secondary rounded-xl transition-colors"
+                    key={agent.name}
+                    href={agent.href}
+                    className="block px-4 py-3 text-dark hover:bg-gray-50 rounded-lg"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    About
+                    <div className="font-medium">{agent.name}</div>
+                    <div className="text-sm text-gray-500">{agent.description}</div>
                   </Link>
-                  <Link
-                    href="/contact"
-                    className="block px-4 py-3 text-foreground hover:bg-background-secondary rounded-xl transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Contact
-                  </Link>
-                  <Link
-                    href="/#pricing"
-                    className="block px-4 py-3 text-foreground hover:bg-background-secondary rounded-xl transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Pricing
-                  </Link>
-                </div>
+                ))}
 
-                <div className="h-px bg-border mx-4" />
+                <div className="h-px bg-gray-100 my-2" />
 
-                {/* Mobile CTA */}
-                <div className="space-y-3 px-4 pt-2">
+                <Link
+                  href="/pricing"
+                  className="block px-4 py-3 text-dark hover:bg-gray-50 rounded-lg font-medium"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Pricing
+                </Link>
+                <Link
+                  href="/about"
+                  className="block px-4 py-3 text-dark hover:bg-gray-50 rounded-lg font-medium"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  About
+                </Link>
+                <Link
+                  href="/contact"
+                  className="block px-4 py-3 text-dark hover:bg-gray-50 rounded-lg font-medium"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Contact
+                </Link>
+
+                <div className="h-px bg-gray-100 my-2" />
+
+                <div className="px-4 pt-2 space-y-2">
                   <Link
                     href="/login"
-                    className="block w-full text-center py-3 text-foreground font-medium hover:bg-background-secondary rounded-full transition-colors"
+                    className="block w-full text-center py-3 text-dark font-medium"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Log in
@@ -258,7 +216,7 @@ export default function Header() {
                     className="btn btn-primary w-full justify-center"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Start Free
+                    Get Started
                   </Link>
                 </div>
               </div>

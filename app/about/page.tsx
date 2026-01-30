@@ -7,10 +7,10 @@ import Footer from "../components/Footer";
 import { ArrowRight } from "lucide-react";
 
 const stats = [
-  { label: "Calls Made", value: "1M+" },
-  { label: "Minutes Saved", value: "500K+" },
+  { label: "Revenue Recovered", value: "$50M+" },
+  { label: "Hours Saved", value: "500K+" },
   { label: "Happy Customers", value: "1,000+" },
-  { label: "Languages", value: "10+" },
+  { label: "Countries", value: "25+" },
 ];
 
 const values = [
@@ -75,12 +75,11 @@ export default function AboutPage() {
               >
                 <span className="badge badge-outline mb-4">About Us</span>
                 <h1 className="text-display-sm mb-6">
-                  Making business calls smarter
+                  We help businesses stop losing money
                 </h1>
                 <p className="text-xl text-gray-600 leading-relaxed">
-                  We believe businesses shouldn't have to choose between personal
-                  touch and operational efficiency. Callengo bridges that gap with
-                  AI that sounds and feels genuinely human.
+                  Every no-show, every outdated contact, every slow lead response
+                  is revenue walking out the door. We built Callengo to plug those leaks.
                 </p>
               </motion.div>
 
@@ -145,18 +144,17 @@ export default function AboutPage() {
               >
                 <span className="badge badge-outline mb-4">Our Mission</span>
                 <h2 className="text-3xl md:text-4xl font-semibold mb-6">
-                  Enterprise-grade calling for everyone
+                  Your team should sell, not chase
                 </h2>
                 <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                  Phone calls remain one of the most effective ways to connect
-                  with customers, but they're incredibly time-consuming. Sales
-                  teams spend hours on repetitive calls, clinics lose thousands
-                  to no-shows, and dirty data costs businesses millions.
+                  Sales teams spend hours on repetitive calls that never close.
+                  Clinics lose thousands to patients who forget appointments.
+                  Marketing wastes budgets on outdated contact lists.
                 </p>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  We're building AI voice agents that handle these routine calls
-                  so humans can focus on what they do best: building
-                  relationships, solving complex problems, and closing deals.
+                  We handle the routine calls so your team can focus on what
+                  actually drives revenue: building relationships, solving
+                  problems, and closing deals.
                 </p>
               </motion.div>
             </div>
@@ -254,11 +252,11 @@ export default function AboutPage() {
               className="max-w-2xl"
             >
               <h2 className="text-3xl md:text-4xl font-semibold mb-6">
-                Ready to transform your calls?
+                Ready to recover lost revenue?
               </h2>
               <p className="text-xl text-gray-400 mb-8">
-                Join thousands of businesses already using Callengo to scale
-                their outreach.
+                Join thousands of businesses that stopped losing money to
+                no-shows, bad data, and slow response times.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link

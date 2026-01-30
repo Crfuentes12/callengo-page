@@ -10,25 +10,22 @@ const footerLinks = {
       { name: "Data Validation", href: "/agents/data-validation" },
       { name: "Appointment Confirmation", href: "/agents/appointment-confirmation" },
       { name: "Lead Qualification", href: "/agents/lead-qualification" },
-      { name: "Pricing", href: "/pricing" },
     ],
   },
   company: {
     title: "Company",
     links: [
       { name: "About", href: "/about" },
-      { name: "Careers", href: "/careers" },
-      { name: "Blog", href: "/blog" },
+      { name: "Pricing", href: "/pricing" },
       { name: "Contact", href: "/contact" },
     ],
   },
   resources: {
     title: "Resources",
     links: [
+      { name: "Blog", href: "/blog" },
       { name: "Documentation", href: "/docs" },
-      { name: "API Reference", href: "/api" },
       { name: "Help Center", href: "/help" },
-      { name: "Status", href: "/status" },
     ],
   },
   legal: {
@@ -44,7 +41,7 @@ const footerLinks = {
 export default function Footer() {
   return (
     <footer className="bg-dark text-white">
-      <div className="max-w-7xl mx-auto px-6 px-6">
+      <div className="max-w-7xl mx-auto px-6">
         {/* Main Footer Content */}
         <div className="py-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
           {/* Brand Column */}
@@ -61,21 +58,12 @@ export default function Footer() {
             </Link>
 
             <p className="text-gray-400 mb-6 max-w-xs leading-relaxed">
-              AI-powered phone calls that scale your outreach without scaling
-              your headcount.
+              Stop losing revenue to no-shows, bad data, and slow lead response. Let your team focus on closing deals.
             </p>
 
             <div className="flex gap-4">
               <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                Twitter
-              </a>
-              <a
-                href="https://linkedin.com"
+                href="https://linkedin.com/company/callengo"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors"

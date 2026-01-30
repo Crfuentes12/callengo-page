@@ -8,21 +8,21 @@ const agents = [
   {
     id: "data-validation",
     name: "Data Validation",
-    description: "Clean your CRM. Verify phone numbers, update emails, detect wrong contacts.",
+    description: "Stop wasting campaigns on bad contacts. Get accurate data before you spend another dollar.",
     href: "/agents/data-validation",
     metric: { value: "95%+", label: "accuracy" },
   },
   {
     id: "appointment-confirmation",
     name: "Appointment Confirmation",
-    description: "Reduce no-shows. Automated calls to confirm, remind, and reschedule.",
+    description: "Turn empty time slots into revenue. Keep customers accountable and your schedule full.",
     href: "/agents/appointment-confirmation",
     metric: { value: "60%", label: "fewer no-shows" },
   },
   {
     id: "lead-qualification",
     name: "Lead Qualification",
-    description: "Qualify leads instantly. BANT scoring, interest detection, meeting scheduling.",
+    description: "Your sales team should talk to buyers, not tire kickers. Filter the noise automatically.",
     href: "/agents/lead-qualification",
     metric: { value: "<1min", label: "response time" },
   },
@@ -39,14 +39,14 @@ export default function Agents() {
           viewport={{ once: true }}
           className="text-center max-w-2xl mx-auto mb-16"
         >
-          <span className="badge badge-primary mb-4">AI Agents</span>
+          <span className="badge badge-primary mb-4">Three Problems Solved</span>
           <h2 className="text-display-sm mb-6">
-            Three agents.
+            Stop the leaks.
             <br />
-            <span className="gradient-text">Three solutions.</span>
+            <span className="gradient-text">Keep the revenue.</span>
           </h2>
           <p className="text-xl text-slate-600">
-            Purpose-built AI agents for your most time-consuming phone tasks.
+            Every missed appointment, bad contact, or slow response is money walking out the door.
           </p>
         </motion.div>
 

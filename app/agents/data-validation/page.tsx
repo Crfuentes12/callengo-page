@@ -70,7 +70,6 @@ export default function DataValidationPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <span className="badge badge-outline mb-4">Data Validation</span>
                 <h1 className="text-display-sm mb-6">Stop wasting money on bad contacts</h1>
                 <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                   Every campaign sent to outdated contacts is money down the drain.

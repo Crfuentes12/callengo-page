@@ -73,7 +73,6 @@ export default function AboutPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <span className="badge badge-outline mb-4">About Us</span>
                 <h1 className="text-display-sm mb-6">
                   We help businesses stop losing money
                 </h1>

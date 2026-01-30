@@ -12,24 +12,18 @@ const agents = [
     description: "Clean your contact database automatically",
     href: "/agents/data-validation",
     icon: Database,
-    color: "text-blue-600",
-    bgColor: "bg-blue-50",
   },
   {
     name: "Appointment Confirmation",
     description: "Reduce no-shows by up to 60%",
     href: "/agents/appointment-confirmation",
     icon: Calendar,
-    color: "text-purple-600",
-    bgColor: "bg-purple-50",
   },
   {
     name: "Lead Qualification",
     description: "Qualify leads before sales touches them",
     href: "/agents/lead-qualification",
     icon: Users,
-    color: "text-pink-600",
-    bgColor: "bg-pink-50",
   },
 ];
 
@@ -67,15 +61,7 @@ export default function Header() {
                 className="w-10 h-10 transition-transform group-hover:scale-105"
               />
             </div>
-            <span
-              className="text-2xl font-bold tracking-tight"
-              style={{
-                background: "linear-gradient(135deg, #173657 0%, #403d8a 50%, #bb2fb8 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
+            <span className="text-2xl font-bold tracking-tight text-slate-900">
               Callengo
             </span>
           </Link>
@@ -117,8 +103,8 @@ export default function Header() {
                           href={agent.href}
                           className="flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50 transition-all group"
                         >
-                          <div className={`w-10 h-10 rounded-lg ${agent.bgColor} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform`}>
-                            <Icon className={`w-5 h-5 ${agent.color}`} />
+                          <div className="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center flex-shrink-0 group-hover:bg-slate-200 transition-colors">
+                            <Icon className="w-5 h-5 text-slate-600" />
                           </div>
                           <div>
                             <div className="font-semibold text-gray-900 text-sm">
@@ -168,10 +154,7 @@ export default function Header() {
             </Link>
             <Link
               href="/signup"
-              className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white rounded-full transition-all hover:shadow-lg hover:scale-105"
-              style={{
-                background: "linear-gradient(135deg, #173657 0%, #403d8a 50%, #bb2fb8 100%)",
-              }}
+              className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-slate-900 rounded-full transition-all hover:bg-slate-800"
             >
               Get Started Free
             </Link>
@@ -213,8 +196,8 @@ export default function Header() {
                       className="flex items-center gap-3 px-4 py-3 text-dark hover:bg-gray-50 rounded-lg"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
-                      <div className={`w-9 h-9 rounded-lg ${agent.bgColor} flex items-center justify-center flex-shrink-0`}>
-                        <Icon className={`w-4 h-4 ${agent.color}`} />
+                      <div className="w-9 h-9 rounded-lg bg-slate-100 flex items-center justify-center flex-shrink-0">
+                        <Icon className="w-4 h-4 text-slate-600" />
                       </div>
                       <div>
                         <div className="font-medium">{agent.name}</div>
@@ -260,10 +243,7 @@ export default function Header() {
                   </Link>
                   <Link
                     href="/signup"
-                    className="block w-full text-center py-3 text-white font-semibold rounded-full"
-                    style={{
-                      background: "linear-gradient(135deg, #173657 0%, #403d8a 50%, #bb2fb8 100%)",
-                    }}
+                    className="block w-full text-center py-3 text-white font-semibold rounded-full bg-slate-900"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Get Started Free

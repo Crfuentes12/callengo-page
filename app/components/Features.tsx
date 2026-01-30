@@ -39,11 +39,10 @@ export default function Features() {
           viewport={{ once: true }}
           className="max-w-2xl mb-20"
         >
-          <span className="badge badge-primary mb-4">Solutions</span>
           <h2 className="text-display-sm mb-6">
             Problems solved.
             <br />
-            <span className="gradient-text">Revenue recovered.</span>
+            Revenue recovered.
           </h2>
           <p className="text-xl text-slate-600">
             Your team should focus on closing deals, not chasing confirmations
@@ -67,7 +66,7 @@ export default function Features() {
               {/* Text Content */}
               <div className={index % 2 === 1 ? "lg:order-2" : ""}>
                 <div className="inline-flex items-center gap-2 mb-6">
-                  <span className="text-5xl font-bold gradient-text">0{index + 1}</span>
+                  <span className="text-5xl font-bold text-slate-200">0{index + 1}</span>
                 </div>
 
                 <h3 className="text-3xl md:text-4xl font-semibold mb-6">
@@ -87,7 +86,7 @@ export default function Features() {
 
                 <Link
                   href={feature.link}
-                  className="inline-flex items-center gap-2 text-primary font-medium hover:gap-3 transition-all"
+                  className="inline-flex items-center gap-2 text-slate-900 font-medium hover:gap-3 transition-all"
                 >
                   Learn more
                   <ArrowRight className="w-4 h-4" />
@@ -100,8 +99,8 @@ export default function Features() {
                   <div className="aspect-4-3 rounded-2xl img-placeholder overflow-hidden">
                     <span className="text-sm">Feature image placeholder</span>
                   </div>
-                  {/* Decorative gradient element */}
-                  <div className="absolute -z-10 -bottom-4 -right-4 w-full h-full gradient-bg opacity-20 rounded-2xl" />
+                  {/* Decorative element */}
+                  <div className="absolute -z-10 -bottom-4 -right-4 w-full h-full bg-slate-200 rounded-2xl" />
                 </div>
               </div>
             </motion.div>

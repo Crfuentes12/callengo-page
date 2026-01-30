@@ -106,7 +106,6 @@ export default function PricingPage() {
               transition={{ duration: 0.6 }}
               className="text-center max-w-3xl mx-auto mb-16"
             >
-              <span className="badge badge-outline mb-4">Pricing</span>
               <h1 className="text-display-sm mb-6">
                 Invest in results, not promises
               </h1>

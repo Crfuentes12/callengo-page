@@ -77,7 +77,6 @@ export default function LeadQualificationPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <span className="badge badge-outline mb-4">Lead Qualification</span>
                 <h1 className="text-display-sm mb-6">Be first, win more deals</h1>
                 <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                   The fastest response wins. Reach every lead in seconds while

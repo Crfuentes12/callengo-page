@@ -121,7 +121,7 @@ export default function DataValidationPage() {
         </section>
 
         {/* How It Works */}
-        <section className="section bg-dark text-white">
+        <section className="section gradient-bg text-white">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -129,9 +129,6 @@ export default function DataValidationPage() {
               viewport={{ once: true }}
               className="max-w-2xl mb-16"
             >
-              <span className="text-gray-400 text-sm font-medium mb-4 block">
-                How it works
-              </span>
               <h2 className="text-3xl md:text-4xl font-semibold">
                 Clean data in three steps
               </h2>
@@ -165,11 +162,11 @@ export default function DataValidationPage() {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <div className="text-6xl font-bold text-gray-700 mb-4">
+                  <div className="text-6xl font-bold text-white/30 mb-4">
                     {item.step}
                   </div>
                   <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                  <p className="text-gray-400">{item.description}</p>
+                  <p className="text-white/70">{item.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -185,7 +182,6 @@ export default function DataValidationPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
               >
-                <span className="badge badge-outline mb-4">Features</span>
                 <h2 className="text-3xl md:text-4xl font-semibold mb-6">
                   Everything you need for clean data
                 </h2>
@@ -268,7 +264,6 @@ export default function DataValidationPage() {
                 viewport={{ once: true }}
                 className="order-1 lg:order-2"
               >
-                <span className="badge badge-outline mb-4">Results</span>
                 <h2 className="text-3xl md:text-4xl font-semibold mb-6">
                   Clear, actionable insights
                 </h2>
@@ -303,7 +298,6 @@ export default function DataValidationPage() {
               viewport={{ once: true }}
               className="max-w-2xl mb-16"
             >
-              <span className="badge badge-outline mb-4">Use Cases</span>
               <h2 className="text-3xl md:text-4xl font-semibold">
                 Perfect for your workflow
               </h2>
@@ -332,34 +326,43 @@ export default function DataValidationPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="section bg-dark text-white">
+        <section className="section">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="max-w-2xl"
+              className="relative overflow-hidden rounded-3xl gradient-bg p-12 md:p-20"
             >
-              <h2 className="text-3xl md:text-4xl font-semibold mb-6">
-                Ready to stop wasting campaign budget?
-              </h2>
-              <p className="text-xl text-gray-400 mb-8">
-                Start with 15 free minutes and see how much bad data is costing you.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  href="/signup"
-                  className="btn bg-white text-dark hover:bg-gray-100 px-8 py-4"
-                >
-                  Start Free Trial
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link
-                  href="/contact"
-                  className="btn border border-white/20 text-white hover:bg-white/10 px-8 py-4"
-                >
-                  Talk to Sales
-                </Link>
+              {/* Background Pattern */}
+              <div className="absolute inset-0 opacity-20">
+                <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+              </div>
+
+              {/* Content */}
+              <div className="relative z-10 max-w-3xl">
+                <h2 className="text-4xl md:text-5xl font-semibold text-white mb-6 leading-tight">
+                  Ready to stop wasting campaign budget?
+                </h2>
+                <p className="text-xl text-white/70 mb-10 max-w-xl">
+                  Start with 15 free minutes and see how much bad data is costing you.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Link
+                    href="/signup"
+                    className="btn bg-white text-primary hover:bg-white/90 px-8 py-4 font-semibold"
+                  >
+                    Start free trial
+                    <ArrowRight className="w-5 h-5" />
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="btn border border-white/30 text-white hover:bg-white/10 px-8 py-4"
+                  >
+                    Talk to sales
+                  </Link>
+                </div>
               </div>
             </motion.div>
           </div>

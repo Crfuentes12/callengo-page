@@ -98,7 +98,7 @@ export default function AboutPage() {
         </section>
 
         {/* Stats Section */}
-        <section className="section bg-slate-900 text-white">
+        <section className="section gradient-bg text-white">
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
               {stats.map((stat, index) => (
@@ -113,7 +113,7 @@ export default function AboutPage() {
                   <div className="text-4xl md:text-5xl font-bold mb-2">
                     {stat.value}
                   </div>
-                  <div className="text-slate-400">{stat.label}</div>
+                  <div className="text-white/70">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
@@ -239,35 +239,43 @@ export default function AboutPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="section bg-slate-900 text-white">
+        <section className="section">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="max-w-2xl"
+              className="relative overflow-hidden rounded-3xl gradient-bg p-12 md:p-20"
             >
-              <h2 className="text-3xl md:text-4xl font-semibold mb-6">
-                Ready to recover lost revenue?
-              </h2>
-              <p className="text-xl text-slate-400 mb-8">
-                Join thousands of businesses that stopped losing money to
-                no-shows, bad data, and slow response times.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  href="/signup"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-semibold bg-white text-slate-900 rounded-full transition-all hover:bg-slate-100"
-                >
-                  Start Free Trial
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-semibold border border-white/20 text-white rounded-full transition-all hover:bg-white/10"
-                >
-                  Contact Sales
-                </Link>
+              {/* Background Pattern */}
+              <div className="absolute inset-0 opacity-20">
+                <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+              </div>
+
+              {/* Content */}
+              <div className="relative z-10 max-w-3xl">
+                <h2 className="text-4xl md:text-5xl font-semibold text-white mb-6 leading-tight">
+                  Ready to join our mission?
+                </h2>
+                <p className="text-xl text-white/70 mb-10 max-w-xl">
+                  Help businesses recover lost revenue from no-shows, bad data, and slow lead response.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Link
+                    href="/signup"
+                    className="btn bg-white text-primary hover:bg-white/90 px-8 py-4 font-semibold"
+                  >
+                    Start free trial
+                    <ArrowRight className="w-5 h-5" />
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="btn border border-white/30 text-white hover:bg-white/10 px-8 py-4"
+                  >
+                    Talk to sales
+                  </Link>
+                </div>
               </div>
             </motion.div>
           </div>

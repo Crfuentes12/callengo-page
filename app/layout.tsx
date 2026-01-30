@@ -2,31 +2,42 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Callengo - AI-Powered Phone Calls at Scale",
+  title: {
+    default: "Callengo - Stop No-Shows. Fix Bad Data. Close More Deals.",
+    template: "%s | Callengo",
+  },
   description:
-    "Automate your phone calls with hyper-realistic AI voices. Verify data, confirm appointments, and qualify leads 24/7. The most effective way to scale your outreach.",
+    "Stop losing revenue to no-shows, bad data, and slow lead response. Callengo automates appointment confirmations, data validation, and lead qualification so your team can focus on closing deals.",
   keywords: [
-    "AI phone calls",
-    "automated calling",
-    "lead qualification",
+    "reduce no-shows",
     "appointment confirmation",
     "data validation",
-    "AI voice agents",
+    "lead qualification",
+    "automated phone calls",
+    "CRM data quality",
     "sales automation",
+    "appointment reminders",
   ],
   authors: [{ name: "Callengo" }],
+  creator: "Callengo",
+  metadataBase: new URL("https://callengo.com"),
   openGraph: {
-    title: "Callengo - AI-Powered Phone Calls at Scale",
+    title: "Callengo - Stop No-Shows. Fix Bad Data. Close More Deals.",
     description:
-      "Automate your phone calls with hyper-realistic AI voices. Verify data, confirm appointments, and qualify leads 24/7.",
+      "Stop losing revenue to no-shows, bad data, and slow lead response. Let your team focus on closing deals.",
     type: "website",
     locale: "en_US",
+    siteName: "Callengo",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Callengo - AI-Powered Phone Calls at Scale",
+    title: "Callengo - Stop No-Shows. Fix Bad Data. Close More Deals.",
     description:
-      "Automate your phone calls with hyper-realistic AI voices. Verify data, confirm appointments, and qualify leads 24/7.",
+      "Stop losing revenue to no-shows, bad data, and slow lead response. Let your team focus on closing deals.",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 

@@ -159,18 +159,17 @@ const testimonials = [
   },
 ];
 
-const roiCalculation = {
-  appointments: 50,
-  noShowRate: 25,
-  appointmentValue: 150,
-  reductionRate: 60,
-};
-
 export default function AppointmentConfirmationPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
-  const weeklyLoss = roiCalculation.appointments * (roiCalculation.noShowRate / 100) * roiCalculation.appointmentValue;
-  const weeklySavings = weeklyLoss * (roiCalculation.reductionRate / 100);
+  // Interactive ROI Calculator state
+  const [appointments, setAppointments] = useState(50);
+  const [noShowRate, setNoShowRate] = useState(25);
+  const [appointmentValue, setAppointmentValue] = useState(150);
+  const reductionRate = 60; // Fixed based on our average results
+
+  const weeklyLoss = appointments * (noShowRate / 100) * appointmentValue;
+  const weeklySavings = weeklyLoss * (reductionRate / 100);
   const annualSavings = weeklySavings * 52;
 
   return (
@@ -307,32 +306,84 @@ export default function AppointmentConfirmationPage() {
                 <div className="gradient-border p-8">
                   <h3 className="font-semibold mb-6 flex items-center gap-2">
                     <DollarSign className="w-5 h-5 text-primary" />
-                    Example Savings Calculator
+                    Your Savings Calculator
                   </h3>
-                  <div className="space-y-4">
-                    <div className="flex justify-between pb-4 border-b border-slate-100">
-                      <span className="text-slate-600">Appointments per week</span>
-                      <span className="font-medium">{roiCalculation.appointments}</span>
+                  <div className="space-y-6">
+                    {/* Appointments per week */}
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <label className="text-slate-600">Appointments per week</label>
+                        <span className="font-medium">{appointments}</span>
+                      </div>
+                      <input
+                        type="range"
+                        min="10"
+                        max="200"
+                        value={appointments}
+                        onChange={(e) => setAppointments(Number(e.target.value))}
+                        className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-primary"
+                      />
+                      <div className="flex justify-between text-xs text-slate-400">
+                        <span>10</span>
+                        <span>200</span>
+                      </div>
                     </div>
-                    <div className="flex justify-between pb-4 border-b border-slate-100">
-                      <span className="text-slate-600">Current no-show rate</span>
-                      <span className="font-medium">{roiCalculation.noShowRate}%</span>
+
+                    {/* No-show rate */}
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <label className="text-slate-600">Current no-show rate</label>
+                        <span className="font-medium">{noShowRate}%</span>
+                      </div>
+                      <input
+                        type="range"
+                        min="5"
+                        max="50"
+                        value={noShowRate}
+                        onChange={(e) => setNoShowRate(Number(e.target.value))}
+                        className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-primary"
+                      />
+                      <div className="flex justify-between text-xs text-slate-400">
+                        <span>5%</span>
+                        <span>50%</span>
+                      </div>
                     </div>
-                    <div className="flex justify-between pb-4 border-b border-slate-100">
-                      <span className="text-slate-600">Avg appointment value</span>
-                      <span className="font-medium">${roiCalculation.appointmentValue}</span>
+
+                    {/* Appointment value */}
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <label className="text-slate-600">Avg appointment value</label>
+                        <span className="font-medium">${appointmentValue}</span>
+                      </div>
+                      <input
+                        type="range"
+                        min="25"
+                        max="500"
+                        step="25"
+                        value={appointmentValue}
+                        onChange={(e) => setAppointmentValue(Number(e.target.value))}
+                        className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-primary"
+                      />
+                      <div className="flex justify-between text-xs text-slate-400">
+                        <span>$25</span>
+                        <span>$500</span>
+                      </div>
                     </div>
-                    <div className="flex justify-between pb-4 border-b border-slate-100">
-                      <span className="text-slate-600">Current weekly loss</span>
-                      <span className="font-semibold text-red-600">${weeklyLoss.toLocaleString()}</span>
-                    </div>
-                    <div className="flex justify-between pb-4 border-b border-slate-100">
-                      <span className="text-slate-600">With Callengo (60% reduction)</span>
-                      <span className="font-semibold text-green-600">+${weeklySavings.toLocaleString()}/week</span>
+
+                    {/* Results */}
+                    <div className="pt-4 border-t border-slate-200 space-y-3">
+                      <div className="flex justify-between">
+                        <span className="text-slate-600">Current weekly loss</span>
+                        <span className="font-semibold text-red-600">-${weeklyLoss.toLocaleString()}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-600">Weekly savings (60% reduction)</span>
+                        <span className="font-semibold text-green-600">+${weeklySavings.toLocaleString()}</span>
+                      </div>
                     </div>
                   </div>
                   <div className="mt-6 pt-6 border-t border-slate-100 text-center gradient-bg-subtle rounded-xl p-4">
-                    <div className="text-sm text-slate-600 mb-1">Projected Annual Savings</div>
+                    <div className="text-sm text-slate-600 mb-1">Your Projected Annual Savings</div>
                     <div className="text-4xl font-bold gradient-text">${annualSavings.toLocaleString()}</div>
                   </div>
                 </div>

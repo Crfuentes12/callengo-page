@@ -77,7 +77,7 @@ export default function AboutPage() {
                   We help businesses stop losing money
                 </h1>
                 <p className="text-xl text-slate-600 leading-relaxed">
-                  Every no-show, every outdated contact, every slow lead response
+                  Every no-show, every outdated contact, every unqualified lead
                   is revenue walking out the door. We built Callengo to plug those leaks.
                 </p>
               </motion.div>
@@ -259,7 +259,7 @@ export default function AboutPage() {
                   Ready to join our mission?
                 </h2>
                 <p className="text-xl text-white/70 mb-10 max-w-xl">
-                  Help businesses recover lost revenue from no-shows, bad data, and slow lead response.
+                  Help businesses recover lost revenue from no-shows, bad data, and unqualified leads.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link

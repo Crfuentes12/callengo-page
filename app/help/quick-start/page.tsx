@@ -43,7 +43,7 @@ const steps = [
     details: [
       "Data Validation: Clean and verify your contact database",
       "Appointment Confirmation: Reduce no-shows by up to 60%",
-      "Lead Qualification: Filter and prioritize leads automatically",
+      "Lead Qualification: Score and rank leads so your team focuses on buyers",
     ],
   },
   {
@@ -128,12 +128,12 @@ const agents = [
   {
     title: "Lead Qualification Agent",
     slug: "lead-qualification",
-    description: "Qualify leads instantly, score prospects, route to sales",
+    description: "Score and rank leads so your team only calls buyers, not browsers",
     bestFor: "Sales teams, marketing agencies, B2B companies",
     outcomes: [
-      "Respond to leads in under 60 seconds",
+      "50% less time wasted on bad leads",
       "3x more qualified leads for sales",
-      "50% SDR time saved",
+      "Hot leads ranked and prioritized",
     ],
     icon: Zap,
   },

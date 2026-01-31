@@ -78,14 +78,14 @@ export default function Hero() {
           className="text-center max-w-4xl mx-auto mb-16"
         >
           <h1 className="text-display mb-6">
-            Stop losing revenue.
+            Less time on calls.
             <br />
-            Start closing deals.
+            More time making money.
           </h1>
 
           <p className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-            No-shows, outdated contacts, and slow lead response are costing you money every day.
-            Automate the busywork and let your team focus on what matters.
+            Your team spends hours every week on repetitive phone calls that don't close deals.
+            We handle those calls automatically, so your people can focus on what actually drives revenue.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

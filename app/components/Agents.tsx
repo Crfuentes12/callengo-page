@@ -32,23 +32,6 @@ export default function Agents() {
   return (
     <section className="section" id="agents">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center max-w-2xl mx-auto mb-16"
-        >
-          <h2 className="text-display-sm mb-6">
-            Stop the leaks.
-            <br />
-            Keep the revenue.
-          </h2>
-          <p className="text-xl text-slate-600">
-            Every missed appointment, bad contact, or slow response is money walking out the door.
-          </p>
-        </motion.div>
-
         {/* Agents Grid */}
         <div className="grid md:grid-cols-3 gap-6">
           {agents.map((agent, index) => (

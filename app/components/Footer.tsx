@@ -58,7 +58,7 @@ export default function Footer() {
             </Link>
 
             <p className="text-gray-400 mb-6 max-w-xs leading-relaxed">
-              Stop losing revenue to no-shows, bad data, and slow lead response. Let your team focus on closing deals.
+              Stop losing revenue to no-shows, bad data, and unqualified leads. Let your team focus on closing deals.
             </p>
 
             <div className="flex gap-4">

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     template: "%s | Callengo",
   },
   description:
-    "Stop losing revenue to no-shows, bad data, and slow lead response. Callengo automates appointment confirmations, data validation, and lead qualification so your team can focus on closing deals.",
+    "Stop losing revenue to no-shows, bad data, and unqualified leads. Callengo automates appointment confirmations, data validation, and lead qualification so your team can focus on closing deals.",
   keywords: [
     "reduce no-shows",
     "appointment confirmation",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Callengo - Stop No-Shows. Fix Bad Data. Close More Deals.",
     description:
-      "Stop losing revenue to no-shows, bad data, and slow lead response. Let your team focus on closing deals.",
+      "Stop losing revenue to no-shows, bad data, and unqualified leads. Let your team focus on closing deals.",
     type: "website",
     locale: "en_US",
     siteName: "Callengo",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Callengo - Stop No-Shows. Fix Bad Data. Close More Deals.",
     description:
-      "Stop losing revenue to no-shows, bad data, and slow lead response. Let your team focus on closing deals.",
+      "Stop losing revenue to no-shows, bad data, and unqualified leads. Let your team focus on closing deals.",
   },
   robots: {
     index: true,

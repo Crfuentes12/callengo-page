@@ -22,11 +22,11 @@ const features = [
     link: "/agents/appointment-confirmation",
   },
   {
-    title: "Be first, win more deals",
-    description: "Speed kills in sales. The first company to respond wins the deal 78% of the time.",
+    title: "Stop wasting time on bad leads",
+    description: "Sales reps waste 50% of their time on leads that will never buy. Let AI score and rank every lead first.",
     image: "/images/feature-leads.jpg",
-    stats: { value: "<1min", label: "response time" },
-    insight: "Responding within 5 minutes increases conversion 100x — Harvard Business Review",
+    stats: { value: "50%", label: "less time wasted" },
+    insight: "67% of lost sales are due to reps chasing unqualified leads — MarketingSherpa",
     link: "/agents/lead-qualification",
   },
 ];

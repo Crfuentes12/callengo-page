@@ -1,18 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  /* Callengo Brand Colors - Purple to Teal Gradient */
-  --color-primary: #7c3aed;
-  --color-primary-dark: #6d28d9;
-  --color-primary-light: #a78bfa;
+  /* Callengo Brand Colors - Deep Blue to Purple Gradient */
+  --color-primary: #2e3a76;
+  --color-primary-dark: #173657;
+  --color-primary-light: #8938b0;
 
-  --color-accent: #14b8a6;
-  --color-accent-dark: #0d9488;
-  --color-accent-light: #5eead4;
+  --color-accent: #8938b0;
+  --color-accent-dark: #6b2a8a;
+  --color-accent-light: #a855f7;
 
-  /* Gradient endpoints for brand identity - Clean 2-color gradient */
-  --color-gradient-start: #7c3aed;
-  --color-gradient-end: #14b8a6;
+  /* Gradient endpoints for brand identity */
+  --color-gradient-start: #173657;
+  --color-gradient-mid: #2e3a76;
+  --color-gradient-end: #8938b0;
 
   /* Dark colors */
   --color-dark: #0f172a;
@@ -85,7 +86,7 @@
 
   .card:hover {
     @apply border-transparent shadow-xl;
-    box-shadow: 0 20px 40px rgba(124, 58, 237, 0.1);
+    box-shadow: 0 20px 40px rgba(46, 58, 118, 0.1);
   }
 
   .card-hover {
@@ -94,7 +95,7 @@
 
   .card-hover:hover {
     @apply -translate-y-1;
-    box-shadow: 0 20px 40px rgba(124, 58, 237, 0.15);
+    box-shadow: 0 20px 40px rgba(137, 56, 176, 0.15);
   }
 
   /* Buttons */
@@ -104,13 +105,13 @@
 
   .btn-primary {
     @apply text-white px-7 py-3.5;
-    background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-end) 100%);
-    box-shadow: 0 4px 14px rgba(124, 58, 237, 0.25);
+    background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-mid) 50%, var(--color-gradient-end) 100%);
+    box-shadow: 0 4px 14px rgba(46, 58, 118, 0.25);
   }
 
   .btn-primary:hover {
     @apply -translate-y-0.5;
-    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.35);
+    box-shadow: 0 6px 20px rgba(137, 56, 176, 0.35);
   }
 
   .btn-secondary {
@@ -136,7 +137,7 @@
 
   .badge-primary {
     @apply text-primary;
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(20, 184, 166, 0.1) 100%);
+    background: linear-gradient(135deg, rgba(23, 54, 87, 0.1) 0%, rgba(137, 56, 176, 0.1) 100%);
   }
 
   .badge-outline {
@@ -145,7 +146,7 @@
 
   .badge-gradient {
     @apply text-white;
-    background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-end) 100%);
+    background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-mid) 50%, var(--color-gradient-end) 100%);
   }
 
   /* Image Placeholder */
@@ -186,7 +187,7 @@
 @layer utilities {
   /* Gradient Text */
   .gradient-text {
-    background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-end) 100%);
+    background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-mid) 50%, var(--color-gradient-end) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -194,11 +195,11 @@
 
   /* Gradient Background */
   .gradient-bg {
-    background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-end) 100%);
+    background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-mid) 50%, var(--color-gradient-end) 100%);
   }
 
   .gradient-bg-subtle {
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.08) 0%, rgba(20, 184, 166, 0.08) 100%);
+    background: linear-gradient(135deg, rgba(23, 54, 87, 0.08) 0%, rgba(46, 58, 118, 0.08) 50%, rgba(137, 56, 176, 0.08) 100%);
   }
 
   /* Gradient Border */
@@ -210,7 +211,7 @@
     content: '';
     @apply absolute inset-0 rounded-[inherit] pointer-events-none;
     padding: 2px;
-    background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-end) 100%);
+    background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-mid) 50%, var(--color-gradient-end) 100%);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
@@ -220,7 +221,7 @@
   /* Stat Number with Gradient */
   .stat-number {
     @apply font-bold;
-    background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-end) 100%);
+    background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-mid) 50%, var(--color-gradient-end) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -229,29 +230,29 @@
   /* Background Patterns */
   .bg-grid {
     background-image:
-      linear-gradient(rgba(124, 58, 237, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(124, 58, 237, 0.03) 1px, transparent 1px);
+      linear-gradient(rgba(46, 58, 118, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(46, 58, 118, 0.03) 1px, transparent 1px);
     background-size: 60px 60px;
   }
 
   .bg-dots {
-    background-image: radial-gradient(rgba(124, 58, 237, 0.15) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(137, 56, 176, 0.15) 1px, transparent 1px);
     background-size: 20px 20px;
   }
 
   /* Accent Decorations */
   .accent-dot {
     @apply w-2 h-2 rounded-full;
-    background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-end) 100%);
+    background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-mid) 50%, var(--color-gradient-end) 100%);
   }
 
   .accent-line {
     @apply h-0.5 w-16 rounded;
-    background: linear-gradient(90deg, var(--color-gradient-start) 0%, var(--color-gradient-end) 100%);
+    background: linear-gradient(90deg, var(--color-gradient-start) 0%, var(--color-gradient-mid) 50%, var(--color-gradient-end) 100%);
   }
 
   .accent-glow {
-    box-shadow: 0 0 60px rgba(124, 58, 237, 0.3), 0 0 100px rgba(20, 184, 166, 0.2);
+    box-shadow: 0 0 60px rgba(46, 58, 118, 0.3), 0 0 100px rgba(137, 56, 176, 0.2);
   }
 
   /* Gradient Divider */
@@ -286,8 +287,8 @@
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(124, 58, 237, 0.4); }
-  50% { box-shadow: 0 0 40px rgba(124, 58, 237, 0.6), 0 0 60px rgba(20, 184, 166, 0.3); }
+  0%, 100% { box-shadow: 0 0 20px rgba(46, 58, 118, 0.4); }
+  50% { box-shadow: 0 0 40px rgba(46, 58, 118, 0.6), 0 0 60px rgba(137, 56, 176, 0.3); }
 }
 
 @layer utilities {

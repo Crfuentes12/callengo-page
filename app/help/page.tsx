@@ -29,7 +29,7 @@ const faqItems = [
   },
   {
     question: "Can I integrate Callengo with my CRM?",
-    answer: "Callengo integrates with popular CRMs like Salesforce, HubSpot, and Zoho. We also offer a REST API and Zapier integration for custom workflows.",
+    answer: "CRM integrations are coming soon. Currently, you can export all data as CSV, Excel, or JSON for easy import into any CRM or business system.",
   },
 ];
 

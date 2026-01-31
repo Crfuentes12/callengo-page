@@ -78,7 +78,7 @@ const plans = [
       { name: "Full analytics suite", included: true },
       { name: "User permissions", included: true },
       { name: "Advanced retry logic", included: true },
-      { name: "CRM integrations (Beta)", included: true },
+      { name: "CRM integrations (coming soon)", included: true },
       { name: "Priority support", included: true },
     ],
   },

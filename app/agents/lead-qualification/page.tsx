@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import { Check, ArrowRight, Target, TrendingUp, Phone, Users, Zap, ChevronDown, Building2, Landmark, Cpu, ShoppingBag, BarChart3, Clock, Filter, Star } from "lucide-react";
+import { Check, ArrowRight, Target, TrendingUp, Phone, Users, Zap, Building2, Landmark, Cpu, ShoppingBag, BarChart3, Clock, Filter, Star, Plus, Minus } from "lucide-react";
 
 const painStats = [
   {
@@ -33,8 +33,8 @@ const painStats = [
 const processSteps = [
   {
     step: "01",
-    title: "Lead enters your CRM",
-    description: "New lead from any source - forms, ads, referrals, or imports",
+    title: "Upload your leads",
+    description: "Import leads from any source - CSV, Excel, or manual entry",
     icon: Target,
   },
   {
@@ -79,8 +79,8 @@ const features = [
     description: "Low-score leads automatically deprioritized, saving your reps hours daily.",
   },
   {
-    title: "CRM Auto-Updates",
-    description: "Scores, notes, and call summaries pushed directly to your CRM.",
+    title: "Exportable Reports",
+    description: "Download scores, notes, and call summaries as CSV or Excel.",
   },
   {
     title: "Multi-Language Support",
@@ -161,12 +161,12 @@ const faqItems = [
     answer: "You decide. Options include: auto-assign to nurture campaigns, mark for future follow-up, or simply deprioritize in your CRM. No lead data is lost—they're just ranked lower so your team focuses on buyers first.",
   },
   {
-    question: "How quickly are leads qualified after they come in?",
-    answer: "Leads are called within minutes of entering your system. The qualification call typically takes 3-5 minutes. Scores and notes sync to your CRM immediately after the call ends.",
+    question: "How quickly are leads qualified?",
+    answer: "Leads are called within minutes of upload. Each qualification call takes 3-5 minutes. Scores and call notes are available in your dashboard immediately after each call ends.",
   },
   {
-    question: "Does it integrate with my CRM?",
-    answer: "Yes. Native integrations with Salesforce, HubSpot, Pipedrive, and Zoho. Plus Zapier and REST API for custom workflows. Lead scores, call transcripts, and notes flow directly into your existing system.",
+    question: "How do I get the qualified leads back?",
+    answer: "Export your scored leads as CSV or Excel with all qualification data, scores, and call transcripts. Simply import back into your CRM or sales tools. Native integrations are coming soon.",
   },
   {
     question: "What if a lead wants to speak to a human during qualification?",
@@ -634,24 +634,42 @@ export default function LeadQualificationPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.05 }}
-                  className="gradient-border rounded-2xl"
                 >
-                  <button
-                    onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                    className="w-full p-6 text-left flex items-center justify-between gap-4"
+                  <div
+                    className={`bg-white rounded-2xl border transition-all ${
+                      openFaq === index
+                        ? "border-slate-900 shadow-sm"
+                        : "border-slate-200 hover:border-slate-300"
+                    }`}
                   >
-                    <span className="font-medium">{item.question}</span>
-                    <ChevronDown
-                      className={`w-5 h-5 text-slate-400 transition-transform flex-shrink-0 ${
-                        openFaq === index ? "rotate-180" : ""
-                      }`}
-                    />
-                  </button>
-                  {openFaq === index && (
-                    <div className="px-6 pb-6">
-                      <p className="text-slate-600">{item.answer}</p>
-                    </div>
-                  )}
+                    <button
+                      onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                      className="w-full p-6 text-left flex items-center justify-between gap-4"
+                    >
+                      <span className="font-medium">{item.question}</span>
+                      <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
+                        openFaq === index ? "gradient-bg text-white" : "bg-slate-100 text-slate-600"
+                      }`}>
+                        {openFaq === index ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                      </div>
+                    </button>
+
+                    <AnimatePresence>
+                      {openFaq === index && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="px-6 pb-6 text-slate-600 leading-relaxed">
+                            {item.answer}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 </motion.div>
               ))}
             </div>

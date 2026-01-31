@@ -34,7 +34,7 @@ const faqs = [
   {
     question: "Can I integrate Callengo with my CRM?",
     answer:
-      "CRM integrations are available on our Teams and Enterprise plans. We currently support Salesforce and HubSpot, with more integrations coming soon. All plans can export data via CSV or JSON.",
+      "CRM integrations are coming soon and will be available on Teams and Enterprise plans. Currently, all plans can export data via CSV, Excel, or JSON for easy import into any CRM.",
   },
   {
     question: "What languages are supported?",

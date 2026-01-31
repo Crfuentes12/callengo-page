@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -52,9 +52,9 @@ const features = [
     icon: "🔄",
   },
   {
-    title: "Calendar Sync",
-    description: "Real-time updates to your scheduling system.",
-    icon: "🗓️",
+    title: "Detailed Reports",
+    description: "Export confirmation status, reschedules, and cancellations.",
+    icon: "📊",
   },
   {
     title: "Custom Scripts",
@@ -101,8 +101,8 @@ const industries = [
 const processSteps = [
   {
     step: "01",
-    title: "Connect your calendar",
-    description: "Sync with Google Calendar, Outlook, Calendly, or your practice management software.",
+    title: "Upload your appointments",
+    description: "Import your upcoming appointments via CSV or Excel. Include customer name, phone, date, and time.",
   },
   {
     step: "02",
@@ -135,8 +135,8 @@ const faqs = [
     answer: "Yes! If a customer doesn't answer, we can send an SMS with a confirmation link. They can confirm, cancel, or request a reschedule via text. This increases your overall confirmation rate.",
   },
   {
-    question: "How does this integrate with my scheduling software?",
-    answer: "We integrate with Google Calendar, Outlook, Calendly, Acuity, and most practice management systems. For custom systems, we offer API integration and Zapier connections.",
+    question: "How do I import my appointments?",
+    answer: "Upload your appointments via CSV or Excel with columns for customer name, phone number, appointment date, and time. You can also set up recurring imports. Calendar integrations are coming soon.",
   },
   {
     question: "What if I have multiple locations or providers?",
@@ -592,7 +592,7 @@ export default function AppointmentConfirmationPage() {
                   </div>
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-green-600" />
-                    <span>Calendar integrations included</span>
+                    <span>Easy CSV/Excel import</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-green-600" />
@@ -630,24 +630,42 @@ export default function AppointmentConfirmationPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.05 }}
-                  className="bg-white rounded-2xl border border-slate-200"
                 >
-                  <button
-                    onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                    className="w-full flex items-center justify-between p-6 text-left"
+                  <div
+                    className={`bg-white rounded-2xl border transition-all ${
+                      openFaq === index
+                        ? "border-slate-900 shadow-sm"
+                        : "border-slate-200 hover:border-slate-300"
+                    }`}
                   >
-                    <span className="font-medium pr-4">{faq.question}</span>
-                    <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
-                      openFaq === index ? "gradient-bg text-white" : "bg-slate-100 text-slate-600"
-                    }`}>
-                      {openFaq === index ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
-                    </div>
-                  </button>
-                  {openFaq === index && (
-                    <div className="px-6 pb-6 text-slate-600">
-                      {faq.answer}
-                    </div>
-                  )}
+                    <button
+                      onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                      className="w-full flex items-center justify-between p-6 text-left"
+                    >
+                      <span className="font-medium pr-4">{faq.question}</span>
+                      <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
+                        openFaq === index ? "gradient-bg text-white" : "bg-slate-100 text-slate-600"
+                      }`}>
+                        {openFaq === index ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                      </div>
+                    </button>
+
+                    <AnimatePresence>
+                      {openFaq === index && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="px-6 pb-6 text-slate-600 leading-relaxed">
+                            {faq.answer}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 </motion.div>
               ))}
             </div>

@@ -72,7 +72,7 @@ const plans = [
       "Full analytics suite",
       "User permissions",
       "Advanced retry logic",
-      "CRM integrations",
+      "CRM integrations (coming soon)",
       "Priority support",
     ],
   },
@@ -86,7 +86,7 @@ const comparisonFeatures = [
   { name: "Analytics", free: "Basic", starter: "Full", business: "Advanced", teams: "Full suite" },
   { name: "Follow-ups", free: "-", starter: "-", business: "Yes", teams: "Yes" },
   { name: "Voicemail handling", free: "-", starter: "-", business: "Yes", teams: "Yes" },
-  { name: "CRM integration", free: "-", starter: "-", business: "-", teams: "Yes" },
+  { name: "CRM integration", free: "-", starter: "-", business: "-", teams: "Coming soon" },
   { name: "Support", free: "Email", starter: "Email", business: "Priority", teams: "Priority" },
 ];
 

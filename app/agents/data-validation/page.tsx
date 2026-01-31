@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -98,7 +98,7 @@ const processSteps = [
   {
     step: "01",
     title: "Upload your contacts",
-    description: "Import your contact list via CSV or connect directly to your CRM. We support Salesforce, HubSpot, and more.",
+    description: "Import your contact list via CSV, Excel, or JSON. Simple drag-and-drop upload with automatic field mapping.",
   },
   {
     step: "02",
@@ -135,8 +135,8 @@ const faqs = [
     answer: "Yes, we support verification calls in 29 languages including Spanish, French, German, Portuguese, and more. Each call uses a native-speaking AI voice.",
   },
   {
-    question: "How does this integrate with my CRM?",
-    answer: "We offer native integrations with Salesforce, HubSpot, and Pipedrive. For other CRMs, you can use our API, Zapier integration, or simple CSV import/export.",
+    question: "How do I get the data back into my system?",
+    answer: "Export your verified contacts as CSV or Excel with all status tags and updated information. Simply import back into your CRM or database. Native integrations are coming soon.",
   },
 ];
 
@@ -553,24 +553,42 @@ export default function DataValidationPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.05 }}
-                  className="bg-white rounded-2xl border border-slate-200"
                 >
-                  <button
-                    onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                    className="w-full flex items-center justify-between p-6 text-left"
+                  <div
+                    className={`bg-white rounded-2xl border transition-all ${
+                      openFaq === index
+                        ? "border-slate-900 shadow-sm"
+                        : "border-slate-200 hover:border-slate-300"
+                    }`}
                   >
-                    <span className="font-medium pr-4">{faq.question}</span>
-                    <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
-                      openFaq === index ? "gradient-bg text-white" : "bg-slate-100 text-slate-600"
-                    }`}>
-                      {openFaq === index ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
-                    </div>
-                  </button>
-                  {openFaq === index && (
-                    <div className="px-6 pb-6 text-slate-600">
-                      {faq.answer}
-                    </div>
-                  )}
+                    <button
+                      onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                      className="w-full flex items-center justify-between p-6 text-left"
+                    >
+                      <span className="font-medium pr-4">{faq.question}</span>
+                      <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
+                        openFaq === index ? "gradient-bg text-white" : "bg-slate-100 text-slate-600"
+                      }`}>
+                        {openFaq === index ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                      </div>
+                    </button>
+
+                    <AnimatePresence>
+                      {openFaq === index && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="px-6 pb-6 text-slate-600 leading-relaxed">
+                            {faq.answer}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 </motion.div>
               ))}
             </div>

@@ -61,14 +61,14 @@ const docCategories = [
     ],
   },
   {
-    title: "Integrations",
-    description: "Connect Callengo with your favorite tools and platforms.",
+    title: "Data Export",
+    description: "Export your data and connect with your existing tools.",
     icon: Webhook,
     articles: [
-      { title: "CRM Integrations", href: "/help/crm-integrations" },
-      { title: "Webhooks", href: "#webhooks" },
+      { title: "CRM Integrations (Coming Soon)", href: "/help/crm-integrations" },
+      { title: "CSV/Excel Export", href: "#export" },
       { title: "API Overview", href: "#api" },
-      { title: "Custom Integrations", href: "#custom-integrations" },
+      { title: "Custom Workflows", href: "#custom-integrations" },
     ],
   },
   {

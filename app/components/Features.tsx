@@ -45,7 +45,7 @@ export default function Features() {
           <h2 className="text-display-sm mb-6">
             Problems solved.
             <br />
-            Revenue recovered.
+            <span className="gradient-text">Revenue recovered.</span>
           </h2>
           <p className="text-xl text-slate-600">
             Your team should focus on closing deals, not chasing confirmations

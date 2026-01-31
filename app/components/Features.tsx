@@ -7,23 +7,26 @@ import { ArrowRight } from "lucide-react";
 const features = [
   {
     title: "Stop wasting money on bad data",
-    description: "Outdated contacts cost you campaigns. Clean your database and reach the right people every time.",
+    description: "Data decays at 30% per year. Outdated contacts drain your marketing budget and waste your team's time on calls that go nowhere.",
     image: "/images/feature-verify.jpg",
     stats: { value: "95%", label: "data accuracy" },
+    insight: "Bad data costs companies an average of $12.9M annually — Gartner",
     link: "/agents/data-validation",
   },
   {
     title: "Fill your calendar, not your voicemail",
-    description: "Every no-show is lost revenue. Keep your schedule full and your customers accountable.",
+    description: "Industry no-show rates average 20-30%. Each empty slot is revenue you'll never recover.",
     image: "/images/feature-appointments.jpg",
     stats: { value: "60%", label: "fewer no-shows" },
+    insight: "No-shows cost the healthcare industry alone $150B per year — SCI Solutions",
     link: "/agents/appointment-confirmation",
   },
   {
     title: "Be first, win more deals",
-    description: "The fastest response wins. Reach every lead in seconds while your competitors check their inbox.",
+    description: "Speed kills in sales. The first company to respond wins the deal 78% of the time.",
     image: "/images/feature-leads.jpg",
     stats: { value: "<1min", label: "response time" },
+    insight: "Responding within 5 minutes increases conversion 100x — Harvard Business Review",
     link: "/agents/lead-qualification",
   },
 ];
@@ -73,9 +76,13 @@ export default function Features() {
                   {feature.title}
                 </h3>
 
-                <p className="text-xl text-slate-600 mb-8 leading-relaxed">
+                <p className="text-xl text-slate-600 mb-6 leading-relaxed">
                   {feature.description}
                 </p>
+
+                <div className="p-4 bg-slate-100 rounded-xl mb-8">
+                  <p className="text-sm text-slate-600 italic">{feature.insight}</p>
+                </div>
 
                 <div className="flex items-center gap-8 mb-8">
                   <div>

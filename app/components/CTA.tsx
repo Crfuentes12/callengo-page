@@ -29,9 +29,9 @@ export default function CTA() {
               transition={{ delay: 0.1 }}
               className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight"
             >
-              Ready to stop
+              Ready to get your
               <br />
-              losing revenue?
+              time back?
             </motion.h2>
 
             <motion.p
@@ -41,8 +41,8 @@ export default function CTA() {
               transition={{ delay: 0.2 }}
               className="text-xl text-white/70 mb-10 max-w-xl"
             >
-              Join hundreds of companies recovering lost revenue from no-shows,
-              bad data, and slow lead response. Start with 15 free minutes.
+              Stop wasting hours on repetitive calls. Let your team focus on
+              closing deals while we handle the rest. Start with 15 free minutes.
             </motion.p>
 
             <motion.div

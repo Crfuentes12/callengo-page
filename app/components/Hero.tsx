@@ -3,24 +3,68 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Play, Pause, ArrowRight } from "lucide-react";
+import { Play, Pause, ArrowRight, Database, Calendar, Target } from "lucide-react";
 
-const callTranscript = [
-  { speaker: "ai", text: "Hello! My name is Maya from TechCorp. I'm calling to verify some information. Is this ABC Industries?", delay: 0 },
-  { speaker: "human", text: "Yes, this is ABC Industries.", delay: 3500 },
-  { speaker: "ai", text: "I have your address as 123 Main Street. Is that correct?", delay: 5500 },
-  { speaker: "human", text: "We moved. Our new address is 456 Oak Avenue.", delay: 8500 },
-  { speaker: "ai", text: "Got it. And what's the best email to reach you?", delay: 12000 },
-  { speaker: "human", text: "contact@abcindustries.com", delay: 15000 },
-  { speaker: "ai", text: "Perfect, I've updated everything. Have a great day!", delay: 17500 },
+const scenarios = [
+  {
+    id: "data-validation",
+    label: "Data Validation",
+    icon: Database,
+    subtitle: "Verifying Contact Information",
+    transcript: [
+      { speaker: "ai", text: "Hello! My name is Maya from TechCorp. I'm calling to verify some information. Is this ABC Industries?", delay: 0 },
+      { speaker: "human", text: "Yes, this is ABC Industries.", delay: 3500 },
+      { speaker: "ai", text: "I have your address as 123 Main Street. Is that correct?", delay: 5500 },
+      { speaker: "human", text: "We moved. Our new address is 456 Oak Avenue.", delay: 8500 },
+      { speaker: "ai", text: "Got it. And what's the best email to reach you?", delay: 12000 },
+      { speaker: "human", text: "contact@abcindustries.com", delay: 15000 },
+      { speaker: "ai", text: "Perfect, I've updated everything. Have a great day!", delay: 17500 },
+    ],
+    results: ["Address updated", "Email verified", "Contact confirmed"],
+  },
+  {
+    id: "appointment",
+    label: "Appointments",
+    icon: Calendar,
+    subtitle: "Confirming Appointments",
+    transcript: [
+      { speaker: "ai", text: "Hi! This is Maya calling from Smile Dental. I'm confirming your appointment for tomorrow at 2 PM with Dr. Johnson.", delay: 0 },
+      { speaker: "human", text: "Oh yes, I have that scheduled.", delay: 4000 },
+      { speaker: "ai", text: "Great! Will you be able to make it at 2 PM?", delay: 6500 },
+      { speaker: "human", text: "Actually, can I reschedule to 4 PM instead?", delay: 9000 },
+      { speaker: "ai", text: "Let me check... Yes, 4 PM is available. I've updated your appointment. You'll receive a confirmation text.", delay: 12000 },
+      { speaker: "human", text: "Perfect, thank you!", delay: 16000 },
+      { speaker: "ai", text: "You're welcome! See you tomorrow at 4 PM. Have a great day!", delay: 17500 },
+    ],
+    results: ["Appointment rescheduled", "4 PM confirmed", "SMS sent"],
+  },
+  {
+    id: "lead-qualification",
+    label: "Lead Qualification",
+    icon: Target,
+    subtitle: "Qualifying Leads",
+    transcript: [
+      { speaker: "ai", text: "Hi! This is Maya from SalesFlow. Thanks for your interest in our platform. Do you have a few minutes to chat?", delay: 0 },
+      { speaker: "human", text: "Sure, I submitted a demo request yesterday.", delay: 3500 },
+      { speaker: "ai", text: "Great! What's driving your interest in a new sales tool?", delay: 6000 },
+      { speaker: "human", text: "Our team is growing and we need better lead tracking.", delay: 9000 },
+      { speaker: "ai", text: "Makes sense. How many sales reps are on your team currently?", delay: 12000 },
+      { speaker: "human", text: "About 15, and we're hiring 5 more this quarter.", delay: 15000 },
+      { speaker: "ai", text: "Perfect fit! I'll have our sales team reach out with a personalized demo. What time works best?", delay: 17500 },
+    ],
+    results: ["Budget: Confirmed", "Authority: Decision maker", "Timeline: This quarter"],
+  },
 ];
 
 export default function Hero() {
+  const [activeScenario, setActiveScenario] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [visibleMessages, setVisibleMessages] = useState<number[]>([]);
   const transcriptRef = useRef<HTMLDivElement>(null);
   const totalDuration = 20000;
+
+  const currentScenario = scenarios[activeScenario];
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -39,12 +83,12 @@ export default function Hero() {
   }, [isPlaying]);
 
   useEffect(() => {
-    callTranscript.forEach((message, index) => {
+    currentScenario.transcript.forEach((message, index) => {
       if (currentTime >= message.delay && !visibleMessages.includes(index)) {
         setVisibleMessages((prev) => [...prev, index]);
       }
     });
-  }, [currentTime, visibleMessages]);
+  }, [currentTime, visibleMessages, currentScenario.transcript]);
 
   useEffect(() => {
     if (transcriptRef.current) {
@@ -58,6 +102,15 @@ export default function Hero() {
       setVisibleMessages([]);
     }
     setIsPlaying(!isPlaying);
+  };
+
+  const handleScenarioChange = (index: number) => {
+    if (index !== activeScenario) {
+      setActiveScenario(index);
+      setIsPlaying(false);
+      setCurrentTime(0);
+      setVisibleMessages([]);
+    }
   };
 
   const progress = (currentTime / totalDuration) * 100;
@@ -113,23 +166,45 @@ export default function Hero() {
           <div className="gradient-border overflow-hidden shadow-2xl">
             <div className="bg-white rounded-2xl overflow-hidden">
               {/* Header */}
-              <div className="gradient-bg p-5 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                    <span className="text-white text-sm font-medium">C</span>
+              <div className="gradient-bg p-5">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                      <span className="text-white text-sm font-medium">M</span>
+                    </div>
+                    <div>
+                      <div className="text-white font-medium">Maya Nat</div>
+                      <div className="text-white/70 text-sm">{currentScenario.subtitle}</div>
+                    </div>
                   </div>
-                  <div>
-                    <div className="text-white font-medium">Maya from Callengo</div>
-                    <div className="text-white/70 text-sm">Verifying Contact Information</div>
-                  </div>
+                  {isPlaying && (
+                    <div className="flex items-center gap-1">
+                      <span className="w-1 h-3 bg-white rounded-full animate-pulse" />
+                      <span className="w-1 h-5 bg-white rounded-full animate-pulse" style={{ animationDelay: "0.1s" }} />
+                      <span className="w-1 h-3 bg-white rounded-full animate-pulse" style={{ animationDelay: "0.2s" }} />
+                    </div>
+                  )}
                 </div>
-                {isPlaying && (
-                  <div className="flex items-center gap-1">
-                    <span className="w-1 h-3 bg-white rounded-full animate-pulse" />
-                    <span className="w-1 h-5 bg-white rounded-full animate-pulse" style={{ animationDelay: "0.1s" }} />
-                    <span className="w-1 h-3 bg-white rounded-full animate-pulse" style={{ animationDelay: "0.2s" }} />
-                  </div>
-                )}
+                {/* Scenario Badges */}
+                <div className="flex gap-2">
+                  {scenarios.map((scenario, index) => {
+                    const Icon = scenario.icon;
+                    return (
+                      <button
+                        key={scenario.id}
+                        onClick={() => handleScenarioChange(index)}
+                        className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
+                          activeScenario === index
+                            ? "bg-white text-primary"
+                            : "bg-white/20 text-white hover:bg-white/30"
+                        }`}
+                      >
+                        <Icon className="w-3.5 h-3.5" />
+                        {scenario.label}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
 
               {/* Audio Control */}
@@ -168,7 +243,8 @@ export default function Hero() {
                 )}
 
                 {visibleMessages.map((index) => {
-                  const message = callTranscript[index];
+                  const message = currentScenario.transcript[index];
+                  if (!message) return null;
                   const isAI = message.speaker === "ai";
 
                   return (
@@ -201,7 +277,7 @@ export default function Hero() {
                 >
                   <p className="text-sm font-medium text-slate-900 mb-3">Results from this call:</p>
                   <div className="flex flex-wrap gap-2">
-                    {["Address updated", "Email verified", "Contact confirmed"].map((item) => (
+                    {currentScenario.results.map((item) => (
                       <span key={item} className="text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-full text-slate-700">
                         {item}
                       </span>

@@ -173,7 +173,7 @@ export default function Hero() {
                       <span className="text-white text-sm font-medium">M</span>
                     </div>
                     <div>
-                      <div className="text-white font-medium">Maya Nat</div>
+                      <div className="text-white font-medium">Nat from Callengo</div>
                       <div className="text-white/70 text-sm">{currentScenario.subtitle}</div>
                     </div>
                   </div>

@@ -80,7 +80,7 @@ export default function Hero() {
           <h1 className="text-display mb-6">
             Less time on calls.
             <br />
-            More time making money.
+            More time <span className="gradient-text">making money.</span>
           </h1>
 
           <p className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">

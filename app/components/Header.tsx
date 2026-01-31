@@ -61,7 +61,7 @@ export default function Header() {
                 className="w-10 h-10 transition-transform group-hover:scale-105"
               />
             </div>
-            <span className="text-2xl font-bold tracking-tight text-slate-900">
+            <span className="text-2xl font-bold tracking-tight gradient-text">
               Callengo
             </span>
           </Link>
@@ -154,7 +154,7 @@ export default function Header() {
             </Link>
             <Link
               href="/signup"
-              className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-slate-900 rounded-full transition-all hover:bg-slate-800"
+              className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white rounded-full transition-all hover:-translate-y-0.5 gradient-bg"
             >
               Get Started Free
             </Link>
@@ -243,7 +243,7 @@ export default function Header() {
                   </Link>
                   <Link
                     href="/signup"
-                    className="block w-full text-center py-3 text-white font-semibold rounded-full bg-slate-900"
+                    className="block w-full text-center py-3 text-white font-semibold rounded-full gradient-bg"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Get Started Free

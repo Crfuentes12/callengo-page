@@ -69,13 +69,13 @@ export default function FAQ() {
             <h2 className="text-display-sm mb-6">
               Questions?
               <br />
-              We've got answers.
+              <span className="gradient-text">We've got answers.</span>
             </h2>
             <p className="text-xl text-gray-600 mb-8">
               Everything you need to know about Callengo.
             </p>
 
-            <div className="p-6 bg-white rounded-2xl border border-gray-200">
+            <div className="gradient-border p-6">
               <h4 className="font-semibold mb-2">Still have questions?</h4>
               <p className="text-gray-600 text-sm mb-4">
                 Our team is here to help. Reach out and we'll get back to you
@@ -83,7 +83,7 @@ export default function FAQ() {
               </p>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 text-dark font-medium hover:gap-3 transition-all"
+                className="inline-flex items-center gap-2 gradient-text font-medium hover:gap-3 transition-all"
               >
                 Contact support
                 <ArrowRight className="w-4 h-4" />
@@ -118,7 +118,7 @@ export default function FAQ() {
                     <div
                       className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
                         openIndex === index
-                          ? "bg-dark text-white"
+                          ? "gradient-bg text-white"
                           : "bg-gray-100 text-gray-600"
                       }`}
                     >

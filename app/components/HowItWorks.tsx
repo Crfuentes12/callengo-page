@@ -63,7 +63,7 @@ export default function HowItWorks() {
             <h2 className="text-display-sm mb-12">
               Setup in minutes.
               <br />
-              Results in hours.
+              <span className="gradient-text">Results in hours.</span>
             </h2>
 
             <div className="space-y-8">

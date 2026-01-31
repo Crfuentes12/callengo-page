@@ -103,7 +103,7 @@ export default function ContactPage() {
               className="max-w-3xl mx-auto text-center"
             >
               <h1 className="text-display-sm mb-6">
-                Let's talk about your goals
+                Let's talk about <span className="gradient-text">your goals</span>
               </h1>
               <p className="text-xl text-slate-600">
                 Have questions? Want to see how much revenue you could recover?
@@ -126,8 +126,8 @@ export default function ContactPage() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="bg-white rounded-2xl border border-slate-200 p-6 hover:border-slate-300 hover:shadow-lg transition-all group"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center mb-4 group-hover:bg-slate-200 transition-colors">
-                    <method.icon className="w-6 h-6 text-slate-600" />
+                  <div className="w-12 h-12 rounded-xl gradient-bg-subtle flex items-center justify-center mb-4 group-hover:gradient-bg transition-colors">
+                    <method.icon className="w-6 h-6 text-primary" />
                   </div>
                   <h3 className="font-semibold mb-1">{method.title}</h3>
                   <p className="text-sm text-slate-500 mb-2">
@@ -282,7 +282,7 @@ export default function ContactPage() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-slate-900 rounded-full transition-all hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white gradient-bg rounded-full transition-all hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? (
                         <>
@@ -355,7 +355,7 @@ export default function ContactPage() {
                 </div>
 
                 {/* Quick Links */}
-                <div className="bg-slate-900 rounded-2xl p-6 text-white">
+                <div className="gradient-bg rounded-2xl p-6 text-white">
                   <h3 className="font-semibold mb-4">Looking for something?</h3>
                   <ul className="space-y-3 text-sm">
                     <li>

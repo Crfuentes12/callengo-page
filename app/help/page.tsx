@@ -70,7 +70,7 @@ export default function HelpPage() {
               transition={{ duration: 0.6 }}
               className="text-center max-w-3xl mx-auto mb-16"
             >
-              <h1 className="text-display-sm mb-6">Help Center</h1>
+              <h1 className="text-display-sm mb-6"><span className="gradient-text">Help</span> Center</h1>
               <p className="text-xl text-slate-600">
                 Find answers, get support, and learn how to get the most out of Callengo.
               </p>
@@ -104,8 +104,8 @@ export default function HelpPage() {
                   key={channel.title}
                   className="bg-white rounded-2xl border border-slate-200 p-6 text-center"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center mx-auto mb-4">
-                    <channel.icon className="w-6 h-6 text-slate-600" />
+                  <div className="w-12 h-12 rounded-xl gradient-bg-subtle flex items-center justify-center mx-auto mb-4">
+                    <channel.icon className="w-6 h-6 text-primary" />
                   </div>
                   <h3 className="text-lg font-semibold mb-2">{channel.title}</h3>
                   <p className="text-slate-600 text-sm mb-4">{channel.description}</p>
@@ -118,12 +118,12 @@ export default function HelpPage() {
                   {channel.href ? (
                     <a
                       href={channel.href}
-                      className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold bg-slate-900 text-white rounded-full hover:bg-slate-800 transition-colors"
+                      className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold gradient-bg text-white rounded-full hover:-translate-y-0.5 transition-all"
                     >
                       {channel.action}
                     </a>
                   ) : (
-                    <button className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold bg-slate-900 text-white rounded-full hover:bg-slate-800 transition-colors">
+                    <button className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold gradient-bg text-white rounded-full hover:-translate-y-0.5 transition-all">
                       {channel.action}
                     </button>
                   )}

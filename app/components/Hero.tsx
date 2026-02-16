@@ -353,26 +353,28 @@ function QualityRing({ score, size = 44 }: { score: number; size?: number }) {
    ────────────────────────────────────────── */
 function CurvedArrow() {
   return (
-    <div className="absolute -right-8 top-1/3 -translate-y-1/2 hidden lg:block pointer-events-none z-0" aria-hidden>
-      <svg width="80" height="160" viewBox="0 0 80 160" fill="none" className="opacity-20">
+    <div className="absolute -right-4 top-[40%] hidden lg:block pointer-events-none z-0" aria-hidden>
+      <svg width="120" height="80" viewBox="0 0 120 80" fill="none" className="opacity-[0.15]">
+        {/* Smooth horizontal curve sweeping right and slightly down toward the phone */}
         <path
-          d="M4 8 C 20 8, 40 20, 50 50 C 60 80, 55 120, 68 145"
-          stroke="url(#arrowGrad)"
+          d="M8 20 C 35 18, 55 10, 75 22 C 95 34, 100 50, 110 52"
+          stroke="url(#arrowGradH)"
           strokeWidth="1.5"
           strokeLinecap="round"
           fill="none"
         />
+        {/* Arrowhead */}
         <path
-          d="M62 138 L68 145 L74 138"
-          stroke="url(#arrowGrad)"
+          d="M104 46 L111 52 L104 58"
+          stroke="url(#arrowGradH)"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
           fill="none"
         />
         <defs>
-          <linearGradient id="arrowGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="var(--color-gradient-start)" />
+          <linearGradient id="arrowGradH" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="var(--color-gradient-start)" stopOpacity="0.4" />
             <stop offset="100%" stopColor="var(--color-gradient-end)" />
           </linearGradient>
         </defs>
@@ -618,7 +620,7 @@ export default function Hero() {
                 </div>
 
                 {/* Screen — FIXED HEIGHT */}
-                <div className="rounded-[2rem] bg-white overflow-hidden relative h-[600px] flex flex-col">
+                <div className="rounded-[2rem] bg-white overflow-hidden relative h-[680px] flex flex-col">
 
                   {/* Status bar */}
                   <div className="flex items-center justify-between px-6 pt-7 pb-1 bg-slate-50 shrink-0">
@@ -817,79 +819,64 @@ export default function Hero() {
                     <AnimatePresence>
                       {showAnalysisPopup && (
                         <motion.div
-                          initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                          animate={{ opacity: 1, scale: 1, y: 0 }}
-                          exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                          transition={{ duration: 0.35, ease: "easeOut" }}
-                          className="absolute inset-3 z-40 flex flex-col"
+                          initial={{ opacity: 0, scale: 0.92 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.92 }}
+                          transition={{ duration: 0.3, ease: "easeOut" }}
+                          className="absolute inset-0 z-40 bg-black/20 backdrop-blur-[2px] flex items-center justify-center p-4"
                         >
-                          <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden h-full">
-                            {/* Popup header */}
-                            <div className="gradient-bg px-4 py-3 flex items-center justify-between shrink-0">
-                              <div className="flex items-center gap-2">
-                                <BarChart3 className="w-4 h-4 text-white" />
-                                <span className="text-white font-semibold text-xs">Call Analysis</span>
+                          <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 w-full max-w-[280px] overflow-hidden">
+                            {/* Close button */}
+                            <button
+                              onClick={() => setShowAnalysisPopup(false)}
+                              className="absolute top-6 right-6 w-6 h-6 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center cursor-pointer transition-colors z-50"
+                            >
+                              <X className="w-3 h-3 text-slate-500" />
+                            </button>
+
+                            {/* Quality score centered */}
+                            <div className="pt-5 pb-3 flex flex-col items-center">
+                              <QualityRing score={scenario.callQuality} size={56} />
+                              <div className="text-xs font-semibold text-slate-800 mt-2">Call Complete</div>
+                              <div className="text-[10px] text-slate-400 flex items-center gap-1 mt-0.5">
+                                <Clock className="w-2.5 h-2.5" />{scenario.durationLabel}
                               </div>
-                              <button
-                                onClick={() => setShowAnalysisPopup(false)}
-                                className="w-6 h-6 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center cursor-pointer transition-colors"
-                              >
-                                <X className="w-3.5 h-3.5 text-white" />
-                              </button>
                             </div>
 
-                            {/* Popup content */}
-                            <div className="flex-1 overflow-y-auto p-4 space-y-4">
-                              {/* Quality + Outcome */}
-                              <div className="flex items-center gap-3">
-                                <QualityRing score={scenario.callQuality} size={50} />
-                                <div className="flex-1 min-w-0">
-                                  <div className="text-xs font-semibold text-slate-800 mb-0.5">Call Complete</div>
-                                  <div className="text-[11px] text-slate-500 leading-snug">{scenario.callOutcome}</div>
-                                  <div className="flex items-center gap-1 mt-1 text-[10px] text-slate-400">
-                                    <Clock className="w-3 h-3" />
-                                    Duration: {scenario.durationLabel}
+                            {/* Outcome */}
+                            <div className="px-4 pb-3">
+                              <div className="text-[10px] text-slate-500 text-center leading-snug bg-slate-50 rounded-lg px-3 py-2">
+                                {scenario.callOutcome}
+                              </div>
+                            </div>
+
+                            {/* Key data — compact grid */}
+                            <div className="px-4 pb-3">
+                              <div className="space-y-1">
+                                {scenario.validatedFields.map((f, i) => (
+                                  <div key={i} className={`flex items-center justify-between px-2.5 py-1.5 rounded-lg text-[10px] ${f.status === "confirmed" ? "bg-emerald-50" : "bg-amber-50"}`}>
+                                    <span className="text-slate-500 font-medium">{f.field}</span>
+                                    <span className="font-semibold text-slate-800 truncate ml-2 max-w-[120px] text-right">{f.value}</span>
                                   </div>
-                                </div>
+                                ))}
+                                {scenario.extractedData.map((f, i) => (
+                                  <div key={`e-${i}`} className="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-[10px] bg-blue-50">
+                                    <span className="text-slate-500 font-medium">{f.field}</span>
+                                    <span className="font-semibold text-slate-800 truncate ml-2 max-w-[120px] text-right">{f.value}</span>
+                                  </div>
+                                ))}
                               </div>
+                            </div>
 
-                              {/* Next Actions */}
-                              <div>
-                                <div className="flex items-center gap-1.5 mb-2">
-                                  <ArrowUpRight className="w-3.5 h-3.5 text-primary" />
-                                  <span className="text-[11px] font-semibold text-slate-700">Next Actions</span>
+                            {/* Next steps — minimal */}
+                            <div className="px-4 pb-4">
+                              <div className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Next Steps</div>
+                              {scenario.nextActions.map((action, i) => (
+                                <div key={i} className="flex items-center gap-1.5 text-[10px] text-slate-600 mb-1">
+                                  <span className="w-3.5 h-3.5 rounded-full gradient-bg text-white flex items-center justify-center text-[8px] font-bold shrink-0">{i + 1}</span>
+                                  {action}
                                 </div>
-                                <div className="space-y-1.5">
-                                  {scenario.nextActions.map((action, i) => (
-                                    <motion.div
-                                      key={i}
-                                      initial={{ opacity: 0, x: -10 }}
-                                      animate={{ opacity: 1, x: 0 }}
-                                      transition={{ delay: i * 0.1 }}
-                                      className="flex items-start gap-2 text-[10px] text-slate-600"
-                                    >
-                                      <span className="w-5 h-5 rounded-full gradient-bg text-white flex items-center justify-center text-[9px] font-bold shrink-0">{i + 1}</span>
-                                      <span className="pt-0.5">{action}</span>
-                                    </motion.div>
-                                  ))}
-                                </div>
-                              </div>
-
-                              {/* Full Summary */}
-                              <div>
-                                <div className="flex items-center gap-1.5 mb-2">
-                                  <Star className="w-3.5 h-3.5 text-amber-500" />
-                                  <span className="text-[11px] font-semibold text-slate-700">Data Summary</span>
-                                </div>
-                                <div className="space-y-1">
-                                  {scenario.validatedFields.map((f, i) => (
-                                    <DataRow key={i} field={f.field} value={f.value} status={f.status} original={f.original} index={i} />
-                                  ))}
-                                  {scenario.extractedData.map((f, i) => (
-                                    <DataRow key={`ext-${i}`} field={f.field} value={f.value} status="new" index={i + scenario.validatedFields.length} />
-                                  ))}
-                                </div>
-                              </div>
+                              ))}
                             </div>
                           </div>
                         </motion.div>

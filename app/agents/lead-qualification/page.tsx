@@ -175,9 +175,9 @@ const faqItems = [
 ];
 
 const pricingTiers = [
-  { name: "Starter", leads: "50", price: "Free", note: "No credit card required" },
-  { name: "Growth", leads: "500", price: "$299/mo", note: "Most popular" },
-  { name: "Scale", leads: "2,000", price: "$999/mo", note: "Volume discount" },
+  { name: "Free", minutes: "15 min", price: "$0", note: "No credit card required", perMin: "one-time trial" },
+  { name: "Starter", minutes: "250 min/mo", price: "$99/mo", note: null, perMin: "$0.40/min" },
+  { name: "Business", minutes: "1,000 min/mo", price: "$299/mo", note: "Most popular", perMin: "$0.30/min" },
 ];
 
 export default function LeadQualificationPage() {
@@ -573,7 +573,7 @@ export default function LeadQualificationPage() {
                 Simple, transparent <span className="gradient-text">pricing</span>
               </h2>
               <p className="text-lg text-slate-600">
-                Pay per lead qualified. Start free, scale as you grow.
+                Pay per minute of call time. Start free, scale as you grow.
               </p>
             </motion.div>
 
@@ -586,20 +586,20 @@ export default function LeadQualificationPage() {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                   className={`bg-white rounded-2xl border p-6 text-center ${
-                    index === 1 ? "border-primary ring-2 ring-primary/20" : "border-slate-200"
+                    tier.note === "Most popular" ? "border-primary ring-2 ring-primary/20" : "border-slate-200"
                   }`}
                 >
-                  {tier.note && index === 1 && (
+                  {tier.note === "Most popular" && (
                     <div className="inline-flex px-3 py-1 rounded-full text-xs font-medium gradient-bg text-white mb-4">
                       {tier.note}
                     </div>
                   )}
                   <div className="text-lg font-medium mb-1">{tier.name}</div>
                   <div className="text-3xl font-bold mb-1">{tier.price}</div>
-                  <div className="text-sm text-slate-500">{tier.leads} leads/month</div>
-                  {tier.note && index !== 1 && (
-                    <div className="text-xs text-slate-400 mt-2">{tier.note}</div>
-                  )}
+                  <div className="text-sm text-slate-500">{tier.minutes}</div>
+                  <div className="text-xs text-slate-400 mt-2">
+                    {tier.note && tier.note !== "Most popular" ? tier.note : tier.perMin}
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -695,7 +695,7 @@ export default function LeadQualificationPage() {
                   Stop wasting time on leads that won't buy
                 </h2>
                 <p className="text-xl text-white/70 mb-10 max-w-xl">
-                  Start with 50 free lead qualifications. See how much time your
+                  Start with 15 free minutes. See how much time your
                   team saves when every lead is scored before they call.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">

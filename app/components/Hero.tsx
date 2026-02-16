@@ -16,13 +16,14 @@ import {
   Phone,
   Clock,
   Star,
-  ChevronDown,
   Volume2,
   Mic,
   Zap,
   Wifi,
   Battery,
   Signal,
+  X,
+  BarChart3,
 } from "lucide-react";
 
 /* ──────────────────────────────────────────
@@ -32,7 +33,7 @@ import {
 interface TranscriptLine {
   speaker: "ai" | "human";
   text: string;
-  time: number; // seconds into the audio when this line starts
+  time: number;
 }
 
 interface ValidatedField {
@@ -40,7 +41,7 @@ interface ValidatedField {
   status: "confirmed" | "updated";
   original?: string;
   value: string;
-  revealAt: number; // seconds into audio
+  revealAt: number;
 }
 
 interface ExtractedData {
@@ -53,10 +54,9 @@ interface Scenario {
   id: string;
   label: string;
   icon: typeof Database;
-  subtitle: string;
   agentName: string;
   audioSrc: string;
-  duration: number; // seconds
+  duration: number;
   durationLabel: string;
   phone: string;
   callQuality: number;
@@ -65,7 +65,8 @@ interface Scenario {
   validatedFields: ValidatedField[];
   extractedData: ExtractedData[];
   nextActions: string[];
-  ctaMessage: string;
+  ctaHeadline: string;
+  ctaSub: string;
 }
 
 const scenarios: Scenario[] = [
@@ -73,7 +74,6 @@ const scenarios: Scenario[] = [
     id: "data-validation",
     label: "Data Validation",
     icon: Database,
-    subtitle: "Verifying Contact Information",
     agentName: "Data Validation Agent",
     audioSrc: "/audio-test/data-validation.wav",
     duration: 44,
@@ -81,7 +81,8 @@ const scenarios: Scenario[] = [
     phone: "+34 6** *** **7",
     callQuality: 7,
     callOutcome: "Information updated successfully",
-    ctaMessage: "Hear how our AI verifies and updates customer data in real time",
+    ctaHeadline: "Your CRM is full of wrong numbers and outdated contacts",
+    ctaSub: "Press play and see the problem get solved",
     transcript: [
       { speaker: "human", text: "Hello.", time: 3 },
       { speaker: "ai", text: "Hi! This is Data Validation Agent, calling for a quick demo.", time: 5 },
@@ -112,7 +113,6 @@ const scenarios: Scenario[] = [
     id: "appointment-confirmation",
     label: "Appointments",
     icon: Calendar,
-    subtitle: "Confirming & Rescheduling",
     agentName: "Appointment Confirmation Agent",
     audioSrc: "/audio-test/appointment-confirmation.wav",
     duration: 49,
@@ -120,7 +120,8 @@ const scenarios: Scenario[] = [
     phone: "+34 6** *** **7",
     callQuality: 9,
     callOutcome: "Consultation rescheduled for next Monday at 10:00 AM",
-    ctaMessage: "Listen to an AI agent reschedule an appointment seamlessly",
+    ctaHeadline: "Every no-show is revenue walking out the door",
+    ctaSub: "Press play and watch it get handled",
     transcript: [
       { speaker: "ai", text: "Hi, this is the Healthcare Clinic calling for Robert Taylor. I'm just calling to confirm your consultation appointment scheduled for tomorrow at two o'clock PM. Can you make it?", time: 1 },
       { speaker: "human", text: "No, actually I'm not going to be tomorrow at 2 PM. Can we schedule it for maybe next Monday?", time: 10 },
@@ -146,9 +147,8 @@ const scenarios: Scenario[] = [
   },
   {
     id: "lead-qualification",
-    label: "Lead Qualification",
+    label: "Qualification",
     icon: Target,
-    subtitle: "Qualifying Sales Leads",
     agentName: "Lead Qualification Agent",
     audioSrc: "/audio-test/lead-qualification.wav",
     duration: 83,
@@ -156,7 +156,8 @@ const scenarios: Scenario[] = [
     phone: "+34 6** *** **7",
     callQuality: 9,
     callOutcome: "Qualified lead — passed to sales team for follow-up",
-    ctaMessage: "Discover how AI qualifies leads using the BANT framework",
+    ctaHeadline: "Your reps are wasting hours on leads that will never buy",
+    ctaSub: "Press play and see how we fix that",
     transcript: [
       { speaker: "human", text: "Hello.", time: 1 },
       { speaker: "ai", text: "Hi! This is Lead Qualification Agent, calling for a quick demo.", time: 4 },
@@ -219,14 +220,14 @@ function FlyingDataParticle({ datum, onDone }: { datum: FlyingDatum; onDone: () 
           <Zap className="w-3.5 h-3.5 text-blue-500" />
         )}
         <span className="font-medium text-slate-700">{datum.label}:</span>
-        <span className="text-slate-500">{datum.value}</span>
+        <span className="text-slate-500 max-w-[120px] truncate">{datum.value}</span>
       </div>
     </motion.div>
   );
 }
 
 /* ──────────────────────────────────────────
-   DATA CAPTURE ROW
+   COMPACT DATA ROW
    ────────────────────────────────────────── */
 function DataRow({
   field,
@@ -253,26 +254,26 @@ function DataRow({
       initial={{ opacity: 0, x: -12 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.35, delay: index * 0.06, ease: "easeOut" }}
-      className={`flex items-center gap-2.5 px-3 py-2 rounded-xl ${c.bg} transition-colors`}
+      className={`flex items-center gap-2 px-2.5 py-1.5 rounded-lg ${c.bg}`}
     >
       {status === "confirmed" ? (
-        <CheckCircle2 className={`w-4 h-4 ${c.text} shrink-0`} />
+        <CheckCircle2 className={`w-3.5 h-3.5 ${c.text} shrink-0`} />
       ) : status === "updated" ? (
-        <AlertCircle className={`w-4 h-4 ${c.text} shrink-0`} />
+        <AlertCircle className={`w-3.5 h-3.5 ${c.text} shrink-0`} />
       ) : (
-        <Zap className={`w-4 h-4 ${c.text} shrink-0`} />
+        <Zap className={`w-3.5 h-3.5 ${c.text} shrink-0`} />
       )}
       <div className="flex-1 min-w-0">
-        <div className="text-[11px] font-medium text-slate-500">{field}</div>
-        <div className="flex items-center gap-1.5">
+        <div className="text-[10px] font-medium text-slate-500 leading-tight">{field}</div>
+        <div className="flex items-center gap-1">
           {original && (
-            <span className="text-[10px] text-slate-400 line-through">{original}</span>
+            <span className="text-[9px] text-slate-400 line-through truncate max-w-[60px]">{original}</span>
           )}
-          {original && <span className="text-[10px] text-slate-400">→</span>}
-          <span className="text-xs font-semibold text-slate-800 truncate">{value}</span>
+          {original && <span className="text-[9px] text-slate-400">→</span>}
+          <span className="text-[11px] font-semibold text-slate-800 truncate">{value}</span>
         </div>
       </div>
-      <span className={`text-[9px] font-bold uppercase px-1.5 py-0.5 rounded ${c.text} opacity-80`}>
+      <span className={`text-[8px] font-bold uppercase px-1 py-0.5 rounded ${c.text} opacity-80 shrink-0`}>
         {c.badge}
       </span>
     </motion.div>
@@ -280,7 +281,7 @@ function DataRow({
 }
 
 /* ──────────────────────────────────────────
-   WAVEFORM VISUALIZER (seeded, stable bars)
+   WAVEFORM VISUALIZER
    ────────────────────────────────────────── */
 function seededRandom(seed: number) {
   const x = Math.sin(seed * 9301 + 49297) * 49297;
@@ -288,8 +289,7 @@ function seededRandom(seed: number) {
 }
 
 function WaveformVisualizer({ isPlaying }: { isPlaying: boolean }) {
-  const bars = 32;
-
+  const bars = 28;
   const barData = useMemo(() => {
     return Array.from({ length: bars }).map((_, i) => {
       const r1 = seededRandom(i);
@@ -308,38 +308,18 @@ function WaveformVisualizer({ isPlaying }: { isPlaying: boolean }) {
   }, []);
 
   return (
-    <div className="flex items-end gap-[2px] h-7 w-full">
+    <div className="flex items-end gap-[2px] h-6 w-full">
       {barData.map((b, i) => (
         <motion.div
           key={i}
           className="flex-1 rounded-full"
-          style={{
-            background: `linear-gradient(to top, var(--color-gradient-start), var(--color-gradient-end))`,
-          }}
+          style={{ background: `linear-gradient(to top, var(--color-gradient-start), var(--color-gradient-end))` }}
           animate={
             isPlaying
-              ? {
-                  height: [
-                    `${b.baseHeight}%`,
-                    `${b.peakA}%`,
-                    `${b.midA}%`,
-                    `${b.peakB}%`,
-                    `${b.baseHeight}%`,
-                  ],
-                  opacity: [0.5, 0.9, 0.6, 0.85, 0.5],
-                }
+              ? { height: [`${b.baseHeight}%`, `${b.peakA}%`, `${b.midA}%`, `${b.peakB}%`, `${b.baseHeight}%`], opacity: [0.5, 0.9, 0.6, 0.85, 0.5] }
               : { height: `${b.baseHeight}%`, opacity: 0.3 }
           }
-          transition={
-            isPlaying
-              ? {
-                  duration: b.duration,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: i * 0.02,
-                }
-              : { duration: 0.4 }
-          }
+          transition={isPlaying ? { duration: b.duration, repeat: Infinity, ease: "easeInOut", delay: i * 0.02 } : { duration: 0.4 }}
         />
       ))}
     </div>
@@ -347,41 +327,56 @@ function WaveformVisualizer({ isPlaying }: { isPlaying: boolean }) {
 }
 
 /* ──────────────────────────────────────────
-   QUALITY INDICATOR RING
+   QUALITY RING
    ────────────────────────────────────────── */
-function QualityRing({ score, size = 48 }: { score: number; size?: number }) {
+function QualityRing({ score, size = 44 }: { score: number; size?: number }) {
   const pct = (score / 10) * 100;
   const r = (size - 6) / 2;
   const circ = 2 * Math.PI * r;
   const offset = circ - (pct / 100) * circ;
-
   return (
     <div className="relative" style={{ width: size, height: size }}>
       <svg width={size} height={size} className="-rotate-90">
         <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#e2e8f0" strokeWidth={3} />
-        <motion.circle
-          cx={size / 2}
-          cy={size / 2}
-          r={r}
-          fill="none"
-          stroke="url(#qualityGrad)"
-          strokeWidth={3}
+        <motion.circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="url(#qg)" strokeWidth={3} strokeLinecap="round" strokeDasharray={circ} initial={{ strokeDashoffset: circ }} animate={{ strokeDashoffset: offset }} transition={{ duration: 1.2, ease: "easeOut" }} />
+        <defs><linearGradient id="qg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="var(--color-gradient-start)" /><stop offset="100%" stopColor="var(--color-gradient-end)" /></linearGradient></defs>
+      </svg>
+      <div className="absolute inset-0 flex items-center justify-center">
+        <span className="text-xs font-bold text-slate-800">{score}</span>
+      </div>
+    </div>
+  );
+}
+
+/* ──────────────────────────────────────────
+   DECORATIVE CURVED ARROW (SVG)
+   ────────────────────────────────────────── */
+function CurvedArrow() {
+  return (
+    <div className="absolute -right-8 top-1/3 -translate-y-1/2 hidden lg:block pointer-events-none z-0" aria-hidden>
+      <svg width="80" height="160" viewBox="0 0 80 160" fill="none" className="opacity-20">
+        <path
+          d="M4 8 C 20 8, 40 20, 50 50 C 60 80, 55 120, 68 145"
+          stroke="url(#arrowGrad)"
+          strokeWidth="1.5"
           strokeLinecap="round"
-          strokeDasharray={circ}
-          initial={{ strokeDashoffset: circ }}
-          animate={{ strokeDashoffset: offset }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
+          fill="none"
+        />
+        <path
+          d="M62 138 L68 145 L74 138"
+          stroke="url(#arrowGrad)"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
         />
         <defs>
-          <linearGradient id="qualityGrad" x1="0" y1="0" x2="1" y2="1">
+          <linearGradient id="arrowGrad" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="var(--color-gradient-start)" />
             <stop offset="100%" stopColor="var(--color-gradient-end)" />
           </linearGradient>
         </defs>
       </svg>
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="text-sm font-bold text-slate-800">{score}</span>
-      </div>
     </div>
   );
 }
@@ -394,14 +389,15 @@ export default function Hero() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [showAnalysis, setShowAnalysis] = useState(false);
+  const [showAnalysisPopup, setShowAnalysisPopup] = useState(false);
   const [flyingData, setFlyingData] = useState<FlyingDatum[]>([]);
   const [revealedValidated, setRevealedValidated] = useState<number[]>([]);
   const [revealedExtracted, setRevealedExtracted] = useState<number[]>([]);
-  const [expandedSection, setExpandedSection] = useState<string | null>(null);
   const [hasStartedPlaying, setHasStartedPlaying] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement>(null);
   const transcriptRef = useRef<HTMLDivElement>(null);
+  const dataRef = useRef<HTMLDivElement>(null);
   const flyIdCounter = useRef(0);
   const [audioAvailable, setAudioAvailable] = useState(true);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
@@ -412,81 +408,53 @@ export default function Hero() {
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
-
     const onCanPlay = () => setAudioAvailable(true);
     const onError = () => setAudioAvailable(false);
-
     audio.addEventListener("canplaythrough", onCanPlay);
     audio.addEventListener("error", onError);
-
     audio.load();
-
-    return () => {
-      audio.removeEventListener("canplaythrough", onCanPlay);
-      audio.removeEventListener("error", onError);
-    };
+    return () => { audio.removeEventListener("canplaythrough", onCanPlay); audio.removeEventListener("error", onError); };
   }, [activeScenario]);
 
-  /* ── Sync currentTime from <audio> (real mode) ── */
+  /* ── Sync currentTime from <audio> ── */
   useEffect(() => {
     if (!audioAvailable) return;
     const audio = audioRef.current;
     if (!audio) return;
-
     const onTime = () => setCurrentTime(audio.currentTime);
-    const onEnd = () => {
-      setIsPlaying(false);
-      setShowAnalysis(true);
-    };
-
+    const onEnd = () => { setIsPlaying(false); setShowAnalysis(true); setShowAnalysisPopup(true); };
     audio.addEventListener("timeupdate", onTime);
     audio.addEventListener("ended", onEnd);
-    return () => {
-      audio.removeEventListener("timeupdate", onTime);
-      audio.removeEventListener("ended", onEnd);
-    };
+    return () => { audio.removeEventListener("timeupdate", onTime); audio.removeEventListener("ended", onEnd); };
   }, [activeScenario, audioAvailable]);
 
-  /* ── Timer-based fallback when audio file is missing ── */
+  /* ── Timer-based fallback ── */
   useEffect(() => {
     if (audioAvailable) return;
-    if (!isPlaying) {
-      if (timerRef.current) clearInterval(timerRef.current);
-      return;
-    }
-
+    if (!isPlaying) { if (timerRef.current) clearInterval(timerRef.current); return; }
     timerRef.current = setInterval(() => {
       setCurrentTime((prev) => {
         const next = prev + 0.1;
         if (next >= scenario.duration) {
-          setIsPlaying(false);
-          setShowAnalysis(true);
+          setIsPlaying(false); setShowAnalysis(true); setShowAnalysisPopup(true);
           if (timerRef.current) clearInterval(timerRef.current);
           return scenario.duration;
         }
         return next;
       });
     }, 100);
-
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, [isPlaying, audioAvailable, scenario.duration]);
 
-  /* ── Reveal validated fields as audio plays ── */
+  /* ── Reveal validated fields ── */
   useEffect(() => {
     scenario.validatedFields.forEach((f, i) => {
       if (currentTime >= f.revealAt && !revealedValidated.includes(i)) {
         setRevealedValidated((prev) => [...prev, i]);
         flyIdCounter.current += 1;
         const id = `fly-${flyIdCounter.current}`;
-        setFlyingData((prev) => [
-          ...prev,
-          { id, label: f.field, value: f.value, status: f.status },
-        ]);
-        setTimeout(() => {
-          setFlyingData((prev) => prev.filter((d) => d.id !== id));
-        }, 2500);
+        setFlyingData((prev) => [...prev, { id, label: f.field, value: f.value, status: f.status }]);
+        setTimeout(() => { setFlyingData((prev) => prev.filter((d) => d.id !== id)); }, 2500);
       }
     });
   }, [currentTime, revealedValidated, scenario.validatedFields]);
@@ -498,13 +466,8 @@ export default function Hero() {
         setRevealedExtracted((prev) => [...prev, i]);
         flyIdCounter.current += 1;
         const id = `fly-ext-${flyIdCounter.current}`;
-        setFlyingData((prev) => [
-          ...prev,
-          { id, label: f.field, value: f.value, status: "new" },
-        ]);
-        setTimeout(() => {
-          setFlyingData((prev) => prev.filter((d) => d.id !== id));
-        }, 2500);
+        setFlyingData((prev) => [...prev, { id, label: f.field, value: f.value, status: "new" }]);
+        setTimeout(() => { setFlyingData((prev) => prev.filter((d) => d.id !== id)); }, 2500);
       }
     });
   }, [currentTime, revealedExtracted, scenario.extractedData]);
@@ -512,14 +475,17 @@ export default function Hero() {
   /* ── Auto-scroll transcript ── */
   useEffect(() => {
     if (transcriptRef.current) {
-      transcriptRef.current.scrollTo({
-        top: transcriptRef.current.scrollHeight,
-        behavior: "smooth",
-      });
+      transcriptRef.current.scrollTo({ top: transcriptRef.current.scrollHeight, behavior: "smooth" });
     }
   }, [currentTime]);
 
-  /* ── Visible transcript messages ── */
+  /* ── Auto-scroll data captured ── */
+  useEffect(() => {
+    if (dataRef.current) {
+      dataRef.current.scrollTo({ top: dataRef.current.scrollHeight, behavior: "smooth" });
+    }
+  }, [revealedValidated.length, revealedExtracted.length]);
+
   const visibleMessages = scenario.transcript.filter((m) => currentTime >= m.time);
 
   /* ── Play / Pause ── */
@@ -529,97 +495,61 @@ export default function Hero() {
       setIsPlaying(false);
     } else {
       if (!hasStartedPlaying) setHasStartedPlaying(true);
-      // If at end, restart
       if (currentTime >= scenario.duration - 0.5) {
         if (audioAvailable && audioRef.current) audioRef.current.currentTime = 0;
-        setCurrentTime(0);
-        setRevealedValidated([]);
-        setRevealedExtracted([]);
-        setShowAnalysis(false);
-        setFlyingData([]);
-        setExpandedSection(null);
+        setCurrentTime(0); setRevealedValidated([]); setRevealedExtracted([]);
+        setShowAnalysis(false); setShowAnalysisPopup(false); setFlyingData([]);
       }
-      if (audioAvailable && audioRef.current) {
-        audioRef.current.play().catch(() => {});
-      }
+      if (audioAvailable && audioRef.current) { audioRef.current.play().catch(() => {}); }
       setIsPlaying(true);
     }
   }, [isPlaying, currentTime, scenario.duration, audioAvailable, hasStartedPlaying]);
 
   /* ── Switch scenario ── */
-  const handleScenarioChange = useCallback(
-    (index: number) => {
-      if (index === activeScenario) return;
-      if (timerRef.current) clearInterval(timerRef.current);
-      const audio = audioRef.current;
-      if (audio) {
-        audio.pause();
-        audio.currentTime = 0;
-      }
-      setActiveScenario(index);
-      setIsPlaying(false);
-      setCurrentTime(0);
-      setRevealedValidated([]);
-      setRevealedExtracted([]);
-      setShowAnalysis(false);
-      setFlyingData([]);
-      setExpandedSection(null);
-      setHasStartedPlaying(false);
-    },
-    [activeScenario],
-  );
+  const handleScenarioChange = useCallback((index: number) => {
+    if (index === activeScenario) return;
+    if (timerRef.current) clearInterval(timerRef.current);
+    const audio = audioRef.current;
+    if (audio) { audio.pause(); audio.currentTime = 0; }
+    setActiveScenario(index); setIsPlaying(false); setCurrentTime(0);
+    setRevealedValidated([]); setRevealedExtracted([]); setShowAnalysis(false);
+    setShowAnalysisPopup(false); setFlyingData([]); setHasStartedPlaying(false);
+  }, [activeScenario]);
 
   /* ── Progress bar click ── */
   const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const pct = (e.clientX - rect.left) / rect.width;
     const newTime = pct * scenario.duration;
-    if (audioAvailable && audioRef.current) {
-      audioRef.current.currentTime = newTime;
-    }
+    if (audioAvailable && audioRef.current) { audioRef.current.currentTime = newTime; }
     setCurrentTime(newTime);
-    setRevealedValidated(
-      scenario.validatedFields.map((_, i) => i).filter((i) => scenario.validatedFields[i].revealAt <= newTime),
-    );
-    setRevealedExtracted(
-      scenario.extractedData.map((_, i) => i).filter((i) => scenario.extractedData[i].revealAt <= newTime),
-    );
-    if (newTime >= scenario.duration - 0.5) {
-      setShowAnalysis(true);
-    } else {
-      setShowAnalysis(false);
-    }
+    setRevealedValidated(scenario.validatedFields.map((_, i) => i).filter((i) => scenario.validatedFields[i].revealAt <= newTime));
+    setRevealedExtracted(scenario.extractedData.map((_, i) => i).filter((i) => scenario.extractedData[i].revealAt <= newTime));
+    if (newTime >= scenario.duration - 0.5) { setShowAnalysis(true); setShowAnalysisPopup(true); }
+    else { setShowAnalysis(false); setShowAnalysisPopup(false); }
   };
 
   const progress = (currentTime / scenario.duration) * 100;
-
-  const formatTime = (s: number) => {
-    const m = Math.floor(s / 60);
-    const sec = Math.floor(s % 60);
-    return `${m}:${sec.toString().padStart(2, "0")}`;
-  };
-
+  const formatTime = (s: number) => { const m = Math.floor(s / 60); const sec = Math.floor(s % 60); return `${m}:${sec.toString().padStart(2, "0")}`; };
   const totalDataFields = revealedValidated.length + revealedExtracted.length;
 
   return (
     <section className="pt-28 pb-16 md:pt-36 md:pb-24 relative overflow-hidden">
-      {/* Background decorations */}
       <div className="absolute inset-0 bg-grid opacity-50" />
       <div className="absolute top-20 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
       <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
 
-      {/* Hidden audio element */}
       <audio ref={audioRef} src={scenario.audioSrc} preload="metadata" />
 
       <div className="max-w-7xl mx-auto px-6 relative">
-        {/* SPLIT LAYOUT: left text + right phone */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* ─── LEFT COLUMN: Text + CTA ─── */}
+
+          {/* ─── LEFT COLUMN ─── */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col justify-center"
+            className="flex flex-col justify-center relative"
           >
             <div className="inline-flex items-center gap-2 mb-6">
               <span className="badge badge-primary">
@@ -655,7 +585,6 @@ export default function Hero() {
               No credit card required · 15 free minutes · Setup in 5 minutes
             </p>
 
-            {/* Mini stats */}
             <div className="grid grid-cols-3 gap-4 mt-10 pt-8 border-t border-slate-200">
               {[
                 { label: "Calls Automated", value: "50K+" },
@@ -668,28 +597,31 @@ export default function Hero() {
                 </div>
               ))}
             </div>
+
+            {/* Decorative curved arrow pointing to phone */}
+            <CurvedArrow />
           </motion.div>
 
-          {/* ─── RIGHT COLUMN: Phone Mockup ─── */}
+          {/* ─── RIGHT COLUMN: Phone ─── */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
             className="relative flex justify-center"
           >
-            {/* Phone Frame */}
-            <div className="relative w-[340px] sm:w-[360px]">
-              {/* Phone outer shell */}
+            <div className="relative w-[320px] sm:w-[340px]">
+              {/* Phone shell */}
               <div className="rounded-[2.5rem] bg-slate-900 p-[10px] shadow-2xl ring-1 ring-slate-700/50">
-                {/* Phone notch */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-slate-900 rounded-b-2xl z-20 flex items-center justify-center">
-                  <div className="w-16 h-3 bg-slate-800 rounded-full" />
+                {/* Notch */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-slate-900 rounded-b-2xl z-20 flex items-center justify-center">
+                  <div className="w-14 h-3 bg-slate-800 rounded-full" />
                 </div>
 
-                {/* Phone screen */}
-                <div className="rounded-[2rem] bg-white overflow-hidden relative">
-                  {/* Fake status bar */}
-                  <div className="flex items-center justify-between px-6 pt-7 pb-1 bg-slate-50">
+                {/* Screen — FIXED HEIGHT */}
+                <div className="rounded-[2rem] bg-white overflow-hidden relative h-[600px] flex flex-col">
+
+                  {/* Status bar */}
+                  <div className="flex items-center justify-between px-6 pt-7 pb-1 bg-slate-50 shrink-0">
                     <span className="text-[10px] font-semibold text-slate-500">9:41</span>
                     <div className="flex items-center gap-1">
                       <Signal className="w-3 h-3 text-slate-400" />
@@ -698,250 +630,266 @@ export default function Hero() {
                     </div>
                   </div>
 
-                  {/* ── Call Header ── */}
-                  <div className="gradient-bg px-4 py-3">
-                    <div className="flex items-center justify-between mb-2.5">
-                      <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-                          <Phone className="w-3.5 h-3.5 text-white" />
+                  {/* Call header */}
+                  <div className="gradient-bg px-4 py-2.5 shrink-0">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <div className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center">
+                          <Phone className="w-3 h-3 text-white" />
                         </div>
                         <div>
-                          <div className="text-white font-medium text-xs leading-tight">
-                            {scenario.agentName}
-                          </div>
-                          <div className="text-white/60 text-[10px] flex items-center gap-1.5">
-                            <span>{scenario.phone}</span>
-                          </div>
+                          <div className="text-white font-medium text-[11px] leading-tight">{scenario.agentName}</div>
+                          <div className="text-white/60 text-[9px]">{scenario.phone}</div>
                         </div>
                       </div>
                       <div className="flex items-center gap-1.5">
                         {isPlaying && (
-                          <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            className="flex items-center gap-1.5"
-                          >
+                          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-1">
                             <span className="relative flex h-2 w-2">
                               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
                               <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
                             </span>
-                            <span className="text-white/80 text-[10px] font-medium">LIVE</span>
+                            <span className="text-white/80 text-[9px] font-medium">LIVE</span>
                           </motion.div>
                         )}
-                        <Volume2 className="w-3.5 h-3.5 text-white/40" />
+                        <Volume2 className="w-3 h-3 text-white/40" />
                       </div>
                     </div>
 
-                    {/* Scenario selector tabs */}
-                    <div className="flex gap-1.5">
+                    {/* Tabs — single row, always fits */}
+                    <div className="flex gap-1">
                       {scenarios.map((s, index) => {
                         const Icon = s.icon;
                         return (
                           <button
                             key={s.id}
                             onClick={() => handleScenarioChange(index)}
-                            className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-medium transition-all cursor-pointer ${
+                            className={`flex items-center gap-1 px-2 py-1 rounded-full text-[9px] font-medium transition-all cursor-pointer whitespace-nowrap ${
                               activeScenario === index
                                 ? "bg-white text-primary shadow-sm"
                                 : "bg-white/15 text-white/80 hover:bg-white/25"
                             }`}
                           >
                             <Icon className="w-2.5 h-2.5" />
-                            <span className="hidden sm:inline">{s.label}</span>
+                            {s.label}
                           </button>
                         );
                       })}
                     </div>
                   </div>
 
-                  {/* ── Waveform + Controls ── */}
-                  <div className="px-4 py-2.5 bg-slate-50 border-b border-slate-100">
-                    <div className="flex items-center gap-2.5">
+                  {/* Waveform + controls */}
+                  <div className="px-3 py-2 bg-slate-50 border-b border-slate-100 shrink-0">
+                    <div className="flex items-center gap-2">
                       <button
                         onClick={handlePlayPause}
-                        className="w-9 h-9 rounded-full gradient-bg text-white flex items-center justify-center hover:opacity-90 transition-all shadow-lg shrink-0 cursor-pointer active:scale-95"
+                        className="w-8 h-8 rounded-full gradient-bg text-white flex items-center justify-center hover:opacity-90 transition-all shadow-lg shrink-0 cursor-pointer active:scale-95"
                       >
-                        {isPlaying ? (
-                          <Pause className="w-3.5 h-3.5" />
-                        ) : (
-                          <Play className="w-3.5 h-3.5 ml-0.5" />
-                        )}
+                        {isPlaying ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3 ml-0.5" />}
                       </button>
-
                       <div className="flex-1 space-y-0.5">
                         <WaveformVisualizer isPlaying={isPlaying} />
-                        <div
-                          className="h-1 bg-slate-200 rounded-full overflow-hidden cursor-pointer relative group"
-                          onClick={handleProgressClick}
-                        >
-                          <div
-                            className="h-full gradient-bg rounded-full transition-all duration-200"
-                            style={{ width: `${Math.min(progress, 100)}%` }}
-                          />
-                          <div
-                            className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full gradient-bg shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
-                            style={{ left: `calc(${Math.min(progress, 100)}% - 5px)` }}
-                          />
+                        <div className="h-1 bg-slate-200 rounded-full overflow-hidden cursor-pointer relative group" onClick={handleProgressClick}>
+                          <div className="h-full gradient-bg rounded-full transition-all duration-200" style={{ width: `${Math.min(progress, 100)}%` }} />
+                          <div className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full gradient-bg shadow-md opacity-0 group-hover:opacity-100 transition-opacity" style={{ left: `calc(${Math.min(progress, 100)}% - 5px)` }} />
                         </div>
                       </div>
-
-                      <span className="text-[10px] text-slate-400 font-mono tabular-nums shrink-0">
+                      <span className="text-[9px] text-slate-400 font-mono tabular-nums shrink-0">
                         {formatTime(currentTime)}/{formatTime(scenario.duration)}
                       </span>
                     </div>
                   </div>
 
-                  {/* ── Content Area: CTA or Transcript ── */}
-                  <div className="relative">
-                    {/* Flying particles overlay */}
+                  {/* ── CONTENT: fixed split area ── */}
+                  <div className="flex-1 flex flex-col min-h-0 relative">
+                    {/* Flying particles */}
                     <AnimatePresence>
                       {flyingData.map((d) => (
-                        <FlyingDataParticle
-                          key={d.id}
-                          datum={d}
-                          onDone={() => {}}
-                        />
+                        <FlyingDataParticle key={d.id} datum={d} onDone={() => {}} />
                       ))}
                     </AnimatePresence>
 
-                    {/* Transcript header */}
-                    <div className="px-4 py-1.5 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
-                      <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
-                        Live Transcript
-                      </span>
-                      {totalDataFields > 0 && (
-                        <motion.span
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded flex items-center gap-1"
-                        >
-                          <Zap className="w-2.5 h-2.5" />
-                          {totalDataFields} captured
-                        </motion.span>
-                      )}
-                    </div>
-
-                    {/* Transcript / CTA content */}
-                    <div
-                      ref={transcriptRef}
-                      className="h-[220px] overflow-y-auto p-3 space-y-2 scroll-smooth"
-                    >
-                      {!hasStartedPlaying ? (
-                        /* ── CTA Banner: shown before first play ── */
+                    {!hasStartedPlaying ? (
+                      /* ── CTA Banner ── */
+                      <div className="flex-1 flex flex-col items-center justify-center text-center px-6">
                         <motion.div
-                          initial={{ opacity: 0, scale: 0.95 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          className="h-full flex flex-col items-center justify-center text-center px-4"
+                          animate={{ scale: [1, 1.08, 1] }}
+                          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                          className="w-14 h-14 rounded-full gradient-bg flex items-center justify-center mb-4 shadow-lg cursor-pointer"
+                          onClick={handlePlayPause}
                         >
-                          <motion.div
-                            animate={{ scale: [1, 1.08, 1] }}
-                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                            className="w-14 h-14 rounded-full gradient-bg flex items-center justify-center mb-4 shadow-lg cursor-pointer"
-                            onClick={handlePlayPause}
-                          >
-                            <Play className="w-6 h-6 text-white ml-0.5" />
-                          </motion.div>
-                          <p className="text-sm font-medium text-slate-700 mb-1.5">
-                            {scenario.ctaMessage}
-                          </p>
-                          <p className="text-[11px] text-slate-400">
-                            Press play to start the demo
-                          </p>
+                          <Play className="w-6 h-6 text-white ml-0.5" />
                         </motion.div>
-                      ) : visibleMessages.length === 0 ? (
-                        <div className="h-full flex items-center justify-center">
-                          <motion.div
-                            animate={{ opacity: [0.3, 1, 0.3] }}
-                            transition={{ duration: 1.2, repeat: Infinity }}
-                            className="flex items-center gap-1.5 text-slate-300"
-                          >
-                            <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
-                            <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
-                            <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
-                            <span className="text-xs ml-1">Connecting call...</span>
-                          </motion.div>
+                        <p className="text-[13px] font-semibold text-slate-800 mb-1 leading-snug">
+                          {scenario.ctaHeadline}
+                        </p>
+                        <p className="text-[11px] text-slate-400">
+                          {scenario.ctaSub}
+                        </p>
+                      </div>
+                    ) : (
+                      <>
+                        {/* Transcript section */}
+                        <div className="flex-[3] min-h-0 flex flex-col">
+                          <div className="px-3 py-1 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between shrink-0">
+                            <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider">Live Transcript</span>
+                            {totalDataFields > 0 && (
+                              <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded flex items-center gap-0.5">
+                                <Zap className="w-2.5 h-2.5" />{totalDataFields} captured
+                              </motion.span>
+                            )}
+                          </div>
+                          <div ref={transcriptRef} className="flex-1 overflow-y-auto p-2.5 space-y-1.5 scroll-smooth">
+                            {visibleMessages.length === 0 ? (
+                              <div className="h-full flex items-center justify-center">
+                                <motion.div animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 1.2, repeat: Infinity }} className="flex items-center gap-1.5 text-slate-300">
+                                  <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+                                  <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+                                  <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+                                  <span className="text-[10px] ml-1">Connecting call...</span>
+                                </motion.div>
+                              </div>
+                            ) : (
+                              <>
+                                {visibleMessages.map((msg, idx) => {
+                                  const isAI = msg.speaker === "ai";
+                                  return (
+                                    <motion.div
+                                      key={`${scenario.id}-${idx}`}
+                                      initial={{ opacity: 0, y: 6 }}
+                                      animate={{ opacity: 1, y: 0 }}
+                                      transition={{ duration: 0.2 }}
+                                      className={`flex ${isAI ? "justify-start" : "justify-end"}`}
+                                    >
+                                      <div className={`max-w-[85%] px-2.5 py-1.5 rounded-xl text-[10px] leading-relaxed ${isAI ? "bg-slate-100 text-slate-700 rounded-bl-sm" : "gradient-bg text-white rounded-br-sm"}`}>
+                                        {msg.text}
+                                      </div>
+                                    </motion.div>
+                                  );
+                                })}
+                                {isPlaying && visibleMessages.length > 0 && (
+                                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 1.2, repeat: Infinity }} className="flex items-center gap-1 pl-2">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+                                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+                                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+                                  </motion.div>
+                                )}
+                              </>
+                            )}
+                          </div>
                         </div>
-                      ) : (
-                        <>
-                          {visibleMessages.map((msg, idx) => {
-                            const isAI = msg.speaker === "ai";
-                            return (
-                              <motion.div
-                                key={`${scenario.id}-${idx}`}
-                                initial={{ opacity: 0, y: 8 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.25 }}
-                                className={`flex ${isAI ? "justify-start" : "justify-end"}`}
-                              >
-                                <div
-                                  className={`max-w-[85%] px-3 py-2 rounded-xl text-[11px] leading-relaxed ${
-                                    isAI
-                                      ? "bg-slate-100 text-slate-700 rounded-bl-sm"
-                                      : "gradient-bg text-white rounded-br-sm"
-                                  }`}
-                                >
-                                  {msg.text}
-                                </div>
-                              </motion.div>
-                            );
-                          })}
-                          {isPlaying && visibleMessages.length > 0 && (
-                            <motion.div
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: [0.3, 1, 0.3] }}
-                              transition={{ duration: 1.2, repeat: Infinity }}
-                              className="flex items-center gap-1 pl-2"
-                            >
-                              <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
-                              <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
-                              <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
-                            </motion.div>
-                          )}
-                        </>
-                      )}
-                    </div>
 
-                    {/* ── Data Captured Section (simplified) ── */}
+                        {/* Data captured section */}
+                        <div className="flex-[2] min-h-0 flex flex-col border-t border-slate-100">
+                          <div className="px-3 py-1 bg-slate-50/80 flex items-center gap-1 shrink-0">
+                            <Database className="w-2.5 h-2.5 text-slate-400" />
+                            <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider">Data Captured</span>
+                          </div>
+                          <div ref={dataRef} className="flex-1 overflow-y-auto p-2 space-y-1 scroll-smooth">
+                            {revealedValidated.length === 0 && revealedExtracted.length === 0 ? (
+                              <div className="h-full flex flex-col items-center justify-center text-slate-300 gap-1">
+                                <Database className="w-4 h-4" />
+                                <span className="text-[10px]">Waiting for data...</span>
+                                {isPlaying && (
+                                  <motion.div className="w-12 h-0.5 rounded-full overflow-hidden bg-slate-100" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                                    <motion.div className="h-full gradient-bg" animate={{ x: ["-100%", "100%"] }} transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }} style={{ width: "60%" }} />
+                                  </motion.div>
+                                )}
+                              </div>
+                            ) : (
+                              <>
+                                {revealedValidated.map((vi, ri) => {
+                                  const f = scenario.validatedFields[vi];
+                                  return <DataRow key={`v-${vi}`} field={f.field} value={f.value} status={f.status} original={f.original} index={ri} />;
+                                })}
+                                {revealedExtracted.map((ei, ri) => {
+                                  const f = scenario.extractedData[ei];
+                                  return <DataRow key={`e-${ei}`} field={f.field} value={f.value} status="new" index={ri + revealedValidated.length} />;
+                                })}
+                              </>
+                            )}
+                          </div>
+                        </div>
+                      </>
+                    )}
+
+                    {/* ── Analysis Popup Overlay ── */}
                     <AnimatePresence>
-                      {(revealedValidated.length > 0 || revealedExtracted.length > 0) && (
+                      {showAnalysisPopup && (
                         <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3 }}
-                          className="border-t border-slate-100 overflow-hidden"
+                          initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
+                          exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                          transition={{ duration: 0.35, ease: "easeOut" }}
+                          className="absolute inset-3 z-40 flex flex-col"
                         >
-                          <div className="px-3 py-2 bg-slate-50/80">
-                            <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1">
-                              <Database className="w-3 h-3" />
-                              Data Captured
+                          <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden h-full">
+                            {/* Popup header */}
+                            <div className="gradient-bg px-4 py-3 flex items-center justify-between shrink-0">
+                              <div className="flex items-center gap-2">
+                                <BarChart3 className="w-4 h-4 text-white" />
+                                <span className="text-white font-semibold text-xs">Call Analysis</span>
+                              </div>
+                              <button
+                                onClick={() => setShowAnalysisPopup(false)}
+                                className="w-6 h-6 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center cursor-pointer transition-colors"
+                              >
+                                <X className="w-3.5 h-3.5 text-white" />
+                              </button>
                             </div>
-                            <div className="space-y-1.5 max-h-[140px] overflow-y-auto">
-                              {revealedValidated.map((vi, ri) => {
-                                const f = scenario.validatedFields[vi];
-                                return (
-                                  <DataRow
-                                    key={`v-${vi}`}
-                                    field={f.field}
-                                    value={f.value}
-                                    status={f.status}
-                                    original={f.original}
-                                    index={ri}
-                                  />
-                                );
-                              })}
-                              {revealedExtracted.map((ei, ri) => {
-                                const f = scenario.extractedData[ei];
-                                return (
-                                  <DataRow
-                                    key={`e-${ei}`}
-                                    field={f.field}
-                                    value={f.value}
-                                    status="new"
-                                    index={ri + revealedValidated.length}
-                                  />
-                                );
-                              })}
+
+                            {/* Popup content */}
+                            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+                              {/* Quality + Outcome */}
+                              <div className="flex items-center gap-3">
+                                <QualityRing score={scenario.callQuality} size={50} />
+                                <div className="flex-1 min-w-0">
+                                  <div className="text-xs font-semibold text-slate-800 mb-0.5">Call Complete</div>
+                                  <div className="text-[11px] text-slate-500 leading-snug">{scenario.callOutcome}</div>
+                                  <div className="flex items-center gap-1 mt-1 text-[10px] text-slate-400">
+                                    <Clock className="w-3 h-3" />
+                                    Duration: {scenario.durationLabel}
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* Next Actions */}
+                              <div>
+                                <div className="flex items-center gap-1.5 mb-2">
+                                  <ArrowUpRight className="w-3.5 h-3.5 text-primary" />
+                                  <span className="text-[11px] font-semibold text-slate-700">Next Actions</span>
+                                </div>
+                                <div className="space-y-1.5">
+                                  {scenario.nextActions.map((action, i) => (
+                                    <motion.div
+                                      key={i}
+                                      initial={{ opacity: 0, x: -10 }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ delay: i * 0.1 }}
+                                      className="flex items-start gap-2 text-[10px] text-slate-600"
+                                    >
+                                      <span className="w-5 h-5 rounded-full gradient-bg text-white flex items-center justify-center text-[9px] font-bold shrink-0">{i + 1}</span>
+                                      <span className="pt-0.5">{action}</span>
+                                    </motion.div>
+                                  ))}
+                                </div>
+                              </div>
+
+                              {/* Full Summary */}
+                              <div>
+                                <div className="flex items-center gap-1.5 mb-2">
+                                  <Star className="w-3.5 h-3.5 text-amber-500" />
+                                  <span className="text-[11px] font-semibold text-slate-700">Data Summary</span>
+                                </div>
+                                <div className="space-y-1">
+                                  {scenario.validatedFields.map((f, i) => (
+                                    <DataRow key={i} field={f.field} value={f.value} status={f.status} original={f.original} index={i} />
+                                  ))}
+                                  {scenario.extractedData.map((f, i) => (
+                                    <DataRow key={`ext-${i}`} field={f.field} value={f.value} status="new" index={i + scenario.validatedFields.length} />
+                                  ))}
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </motion.div>
@@ -949,150 +897,25 @@ export default function Hero() {
                     </AnimatePresence>
                   </div>
 
-                  {/* ── Post-call analysis (expandable) ── */}
-                  <AnimatePresence>
-                    {showAnalysis && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.4, ease: "easeInOut" }}
-                        className="border-t border-slate-200 overflow-hidden"
+                  {/* Home indicator + re-open analysis button */}
+                  <div className="flex items-center justify-center py-1.5 shrink-0 relative">
+                    {showAnalysis && !showAnalysisPopup && (
+                      <motion.button
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        onClick={() => setShowAnalysisPopup(true)}
+                        className="absolute left-3 flex items-center gap-1 px-2 py-0.5 rounded-full gradient-bg text-white text-[9px] font-medium cursor-pointer hover:opacity-90 transition-opacity"
                       >
-                        <div className="p-3 gradient-bg-subtle">
-                          {/* Summary bar */}
-                          <div className="flex items-center justify-between mb-2.5">
-                            <div className="flex items-center gap-2.5">
-                              <QualityRing score={scenario.callQuality} size={40} />
-                              <div>
-                                <div className="text-[11px] font-semibold text-slate-800">
-                                  Call Complete
-                                </div>
-                                <div className="text-[10px] text-slate-500 max-w-[180px] leading-tight">
-                                  {scenario.callOutcome}
-                                </div>
-                              </div>
-                            </div>
-                            <div className="flex items-center gap-1.5 text-[10px] text-slate-500">
-                              <Clock className="w-3 h-3" />
-                              {scenario.durationLabel}
-                            </div>
-                          </div>
-
-                          {/* Expandable sections */}
-                          <div className="space-y-1">
-                            {/* Next Actions */}
-                            <button
-                              onClick={() =>
-                                setExpandedSection(
-                                  expandedSection === "actions" ? null : "actions",
-                                )
-                              }
-                              className="w-full flex items-center justify-between px-2.5 py-1.5 bg-white rounded-lg hover:bg-slate-50 transition-colors text-[11px] font-medium text-slate-700 cursor-pointer"
-                            >
-                              <span className="flex items-center gap-1.5">
-                                <ArrowUpRight className="w-3 h-3 text-primary" />
-                                Next Actions ({scenario.nextActions.length})
-                              </span>
-                              <ChevronDown
-                                className={`w-3 h-3 text-slate-400 transition-transform ${
-                                  expandedSection === "actions" ? "rotate-180" : ""
-                                }`}
-                              />
-                            </button>
-                            <AnimatePresence>
-                              {expandedSection === "actions" && (
-                                <motion.div
-                                  initial={{ height: 0, opacity: 0 }}
-                                  animate={{ height: "auto", opacity: 1 }}
-                                  exit={{ height: 0, opacity: 0 }}
-                                  className="overflow-hidden"
-                                >
-                                  <div className="px-2.5 pb-1.5 space-y-1">
-                                    {scenario.nextActions.map((action, i) => (
-                                      <motion.div
-                                        key={i}
-                                        initial={{ opacity: 0, x: -10 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: i * 0.1 }}
-                                        className="flex items-start gap-1.5 text-[10px] text-slate-600"
-                                      >
-                                        <span className="w-4 h-4 rounded-full gradient-bg text-white flex items-center justify-center text-[9px] font-bold shrink-0 mt-0.5">
-                                          {i + 1}
-                                        </span>
-                                        {action}
-                                      </motion.div>
-                                    ))}
-                                  </div>
-                                </motion.div>
-                              )}
-                            </AnimatePresence>
-
-                            {/* Full Results */}
-                            <button
-                              onClick={() =>
-                                setExpandedSection(
-                                  expandedSection === "results" ? null : "results",
-                                )
-                              }
-                              className="w-full flex items-center justify-between px-2.5 py-1.5 bg-white rounded-lg hover:bg-slate-50 transition-colors text-[11px] font-medium text-slate-700 cursor-pointer"
-                            >
-                              <span className="flex items-center gap-1.5">
-                                <Star className="w-3 h-3 text-amber-500" />
-                                Full Summary
-                              </span>
-                              <ChevronDown
-                                className={`w-3 h-3 text-slate-400 transition-transform ${
-                                  expandedSection === "results" ? "rotate-180" : ""
-                                }`}
-                              />
-                            </button>
-                            <AnimatePresence>
-                              {expandedSection === "results" && (
-                                <motion.div
-                                  initial={{ height: 0, opacity: 0 }}
-                                  animate={{ height: "auto", opacity: 1 }}
-                                  exit={{ height: 0, opacity: 0 }}
-                                  className="overflow-hidden"
-                                >
-                                  <div className="px-1 pb-1.5 space-y-1">
-                                    {scenario.validatedFields.map((f, i) => (
-                                      <DataRow
-                                        key={i}
-                                        field={f.field}
-                                        value={f.value}
-                                        status={f.status}
-                                        original={f.original}
-                                        index={i}
-                                      />
-                                    ))}
-                                    {scenario.extractedData.map((f, i) => (
-                                      <DataRow
-                                        key={`ext-${i}`}
-                                        field={f.field}
-                                        value={f.value}
-                                        status="new"
-                                        index={i + scenario.validatedFields.length}
-                                      />
-                                    ))}
-                                  </div>
-                                </motion.div>
-                              )}
-                            </AnimatePresence>
-                          </div>
-                        </div>
-                      </motion.div>
+                        <BarChart3 className="w-2.5 h-2.5" />
+                        View Analysis
+                      </motion.button>
                     )}
-                  </AnimatePresence>
-
-                  {/* Phone home indicator */}
-                  <div className="flex justify-center py-2">
                     <div className="w-20 h-1 rounded-full bg-slate-200" />
                   </div>
                 </div>
               </div>
 
-              {/* Decorative glow behind phone */}
+              {/* Glow behind phone */}
               <div className="absolute -inset-6 gradient-bg opacity-[0.08] blur-3xl rounded-[3rem] -z-10" />
             </div>
           </motion.div>
@@ -1105,17 +928,11 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-16 text-center"
         >
-          <p className="text-sm text-slate-500 mb-6">
-            Trusted by innovative companies
-          </p>
+          <p className="text-sm text-slate-500 mb-6">Trusted by innovative companies</p>
           <div className="flex flex-wrap justify-center gap-8 opacity-50">
-            {["TechCorp", "Acme Inc", "StartupXYZ", "Enterprise Co", "InnovateLabs"].map(
-              (company) => (
-                <span key={company} className="text-slate-400 font-semibold text-lg">
-                  {company}
-                </span>
-              ),
-            )}
+            {["TechCorp", "Acme Inc", "StartupXYZ", "Enterprise Co", "InnovateLabs"].map((company) => (
+              <span key={company} className="text-slate-400 font-semibold text-lg">{company}</span>
+            ))}
           </div>
         </motion.div>
       </div>

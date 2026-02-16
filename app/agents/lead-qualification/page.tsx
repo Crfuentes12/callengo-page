@@ -174,11 +174,6 @@ const faqItems = [
   },
 ];
 
-const pricingTiers = [
-  { name: "Free", minutes: "15 min", price: "$0", note: "No credit card required", perMin: "one-time trial" },
-  { name: "Starter", minutes: "250 min/mo", price: "$99/mo", note: null, perMin: "$0.40/min" },
-  { name: "Business", minutes: "1,000 min/mo", price: "$299/mo", note: "Most popular", perMin: "$0.30/min" },
-];
 
 export default function LeadQualificationPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -560,55 +555,59 @@ export default function LeadQualificationPage() {
           </div>
         </section>
 
-        {/* Pricing Teaser */}
+        {/* Pricing Teaser — ROI-focused */}
         <section className="section bg-slate-50">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center max-w-3xl mx-auto mb-12"
+              className="gradient-border p-8 md:p-12"
             >
-              <h2 className="text-3xl md:text-4xl font-semibold mb-4">
-                Simple, transparent <span className="gradient-text">pricing</span>
-              </h2>
-              <p className="text-lg text-slate-600">
-                Pay per minute of call time. Start free, scale as you grow.
-              </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-8">
-              {pricingTiers.map((tier, index) => (
-                <motion.div
-                  key={tier.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className={`bg-white rounded-2xl border p-6 text-center ${
-                    tier.note === "Most popular" ? "border-primary ring-2 ring-primary/20" : "border-slate-200"
-                  }`}
-                >
-                  {tier.note === "Most popular" && (
-                    <div className="inline-flex px-3 py-1 rounded-full text-xs font-medium gradient-bg text-white mb-4">
-                      {tier.note}
-                    </div>
-                  )}
-                  <div className="text-lg font-medium mb-1">{tier.name}</div>
-                  <div className="text-3xl font-bold mb-1">{tier.price}</div>
-                  <div className="text-sm text-slate-500">{tier.minutes}</div>
-                  <div className="text-xs text-slate-400 mt-2">
-                    {tier.note && tier.note !== "Most popular" ? tier.note : tier.perMin}
+              <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                  <h2 className="text-2xl md:text-3xl font-semibold mb-4">
+                    One qualified lead pays for a full month
+                  </h2>
+                  <p className="text-slate-600 mb-6">
+                    Your SDRs cost $4,000+/month and spend half their time on leads
+                    that never buy. Callengo qualifies every lead for a fraction of
+                    that cost — so your reps only call buyers who are ready to close.
+                  </p>
+                  <div className="flex items-baseline gap-2 mb-2">
+                    <span className="text-4xl font-bold">~$1.20</span>
+                    <span className="text-slate-500">per lead qualified (avg)</span>
                   </div>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="text-center">
-              <Link href="/pricing" className="text-primary font-medium hover:underline">
-                View full pricing details →
-              </Link>
-            </div>
+                  <p className="text-sm text-slate-400 mb-6">
+                    Based on a 3-5 min qualification call at $0.30/min
+                  </p>
+                  <Link href="/pricing" className="btn btn-primary">
+                    View Full Pricing
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+                <div className="space-y-4">
+                  <div className="bg-white rounded-xl p-4 border border-slate-200">
+                    <div className="text-sm text-slate-500 mb-1">Without Callengo</div>
+                    <div className="text-lg font-bold text-slate-800">$25+ per lead</div>
+                    <div className="text-xs text-slate-400">SDR salary ÷ leads handled per month</div>
+                  </div>
+                  <div className="bg-white rounded-xl p-4 border border-primary/30 ring-1 ring-primary/10">
+                    <div className="text-sm text-slate-500 mb-1">With Callengo</div>
+                    <div className="text-lg font-bold gradient-text">~$1.20 per lead</div>
+                    <div className="text-xs text-slate-400">AI qualifies in 3-5 min, your reps close</div>
+                  </div>
+                  <div className="flex items-center gap-3 pt-2">
+                    <Check className="w-5 h-5 text-green-600" />
+                    <span className="text-sm">15 free minutes to start — no credit card</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-green-600" />
+                    <span className="text-sm">Cancel anytime, no contracts</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </section>
 

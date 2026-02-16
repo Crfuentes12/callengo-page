@@ -1,293 +1,995 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { Play, Pause, ArrowRight, Database, Calendar, Target } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Play,
+  Pause,
+  ArrowRight,
+  Database,
+  Calendar,
+  Target,
+  CheckCircle2,
+  AlertCircle,
+  ArrowUpRight,
+  Phone,
+  Clock,
+  Star,
+  ChevronDown,
+  Volume2,
+  Mic,
+  Shield,
+  Zap,
+} from "lucide-react";
 
-const scenarios = [
+/* ──────────────────────────────────────────
+   SCENARIO DATA – real calls
+   ────────────────────────────────────────── */
+
+interface TranscriptLine {
+  speaker: "ai" | "human";
+  text: string;
+  time: number; // seconds into the audio when this line starts
+}
+
+interface ValidatedField {
+  field: string;
+  status: "confirmed" | "updated";
+  original?: string;
+  value: string;
+  revealAt: number; // seconds into audio
+}
+
+interface ExtractedData {
+  field: string;
+  value: string;
+  revealAt: number;
+}
+
+interface Scenario {
+  id: string;
+  label: string;
+  icon: typeof Database;
+  subtitle: string;
+  agentName: string;
+  audioSrc: string;
+  duration: number; // seconds
+  durationLabel: string;
+  phone: string;
+  callQuality: number;
+  callOutcome: string;
+  transcript: TranscriptLine[];
+  validatedFields: ValidatedField[];
+  extractedData: ExtractedData[];
+  nextActions: string[];
+}
+
+const scenarios: Scenario[] = [
   {
     id: "data-validation",
     label: "Data Validation",
     icon: Database,
     subtitle: "Verifying Contact Information",
+    agentName: "Data Validation Agent",
+    audioSrc: "/test-calls/data-validation.wav",
+    duration: 44,
+    durationLabel: "0:44",
+    phone: "+34 692 675 287",
+    callQuality: 7,
+    callOutcome: "Information updated successfully",
     transcript: [
-      { speaker: "ai", text: "Hello! My name is Maya from TechCorp. I'm calling to verify some information. Is this ABC Industries?", delay: 0 },
-      { speaker: "human", text: "Yes, this is ABC Industries.", delay: 3500 },
-      { speaker: "ai", text: "I have your address as 123 Main Street. Is that correct?", delay: 5500 },
-      { speaker: "human", text: "We moved. Our new address is 456 Oak Avenue.", delay: 8500 },
-      { speaker: "ai", text: "Got it. And what's the best email to reach you?", delay: 12000 },
-      { speaker: "human", text: "contact@abcindustries.com", delay: 15000 },
-      { speaker: "ai", text: "Perfect, I've updated everything. Have a great day!", delay: 17500 },
+      { speaker: "human", text: "Hello.", time: 0 },
+      { speaker: "ai", text: "Hi! This is Data Validation Agent, calling for a quick demo.", time: 2 },
+      { speaker: "human", text: "Yep.", time: 6 },
+      { speaker: "ai", text: "Great. I'm just verifying some information for TechCorp Solutions. Could you confirm your name is John Smith?", time: 7 },
+      { speaker: "human", text: "No, that's actually Mike Marshall.", time: 14 },
+      { speaker: "ai", text: "Oh, I apologize for the mix-up, Mike. Let me update that. Could you also confirm your email address?", time: 17 },
+      { speaker: "human", text: "Sure. It's mike.marshall@example.com.", time: 23 },
+      { speaker: "ai", text: "Got it. Thanks for the update, Mike. I appreciate your time helping me verify this information.", time: 28 },
+      { speaker: "human", text: "Bye-bye.", time: 35 },
+      { speaker: "ai", text: "Goodbye!", time: 38 },
     ],
-    results: ["Address updated", "Email verified", "Contact confirmed"],
+    validatedFields: [
+      { field: "Company Name", status: "confirmed", value: "TechCorp Solutions", revealAt: 10 },
+      { field: "Contact Name", status: "updated", original: "John Smith", value: "Mike Marshall", revealAt: 16 },
+      { field: "Email", status: "updated", original: "john.smith@example.com", value: "mike.marshall@example.com", revealAt: 27 },
+    ],
+    extractedData: [
+      { field: "Name", value: "Mike Marshall", revealAt: 16 },
+      { field: "Email", value: "mike.marshall@example.com", revealAt: 27 },
+    ],
+    nextActions: [
+      "Update customer records with new name and email",
+      "Confirm if additional information is needed",
+    ],
   },
   {
-    id: "appointment",
+    id: "appointment-confirmation",
     label: "Appointments",
     icon: Calendar,
-    subtitle: "Confirming Appointments",
+    subtitle: "Confirming & Rescheduling",
+    agentName: "Appointment Confirmation Agent",
+    audioSrc: "/test-calls/appointment-confirmation.wav",
+    duration: 49,
+    durationLabel: "0:49",
+    phone: "+34 692 675 287",
+    callQuality: 9,
+    callOutcome: "Consultation rescheduled for next Monday at 10:00 AM",
     transcript: [
-      { speaker: "ai", text: "Hi! This is Maya calling from Smile Dental. I'm confirming your appointment for tomorrow at 2 PM with Dr. Johnson.", delay: 0 },
-      { speaker: "human", text: "Oh yes, I have that scheduled.", delay: 4000 },
-      { speaker: "ai", text: "Great! Will you be able to make it at 2 PM?", delay: 6500 },
-      { speaker: "human", text: "Actually, can I reschedule to 4 PM instead?", delay: 9000 },
-      { speaker: "ai", text: "Let me check... Yes, 4 PM is available. I've updated your appointment. You'll receive a confirmation text.", delay: 12000 },
-      { speaker: "human", text: "Perfect, thank you!", delay: 16000 },
-      { speaker: "ai", text: "You're welcome! See you tomorrow at 4 PM. Have a great day!", delay: 17500 },
+      { speaker: "ai", text: "Hi, this is the Healthcare Clinic calling for Robert Taylor. I'm just calling to confirm your consultation appointment scheduled for tomorrow at two o'clock PM. Can you make it?", time: 0 },
+      { speaker: "human", text: "No, actually I'm not going to be tomorrow at 2 PM. Can we schedule it for maybe next Monday?", time: 8 },
+      { speaker: "ai", text: "I understand. Let me check our availability for next Monday. Would you prefer the morning or afternoon?", time: 14 },
+      { speaker: "human", text: "Let's do... 10 AM. Is that okay for you?", time: 20 },
+      { speaker: "ai", text: "Let me check... Yes, ten o'clock AM next Monday works perfectly. I've rescheduled your consultation for that time. Is there anything else I can help you with?", time: 26 },
+      { speaker: "human", text: "No. Thank you.", time: 36 },
+      { speaker: "ai", text: "Great, you're all set. Thanks for letting us know, and have a wonderful day. Goodbye!", time: 38 },
     ],
-    results: ["Appointment rescheduled", "4 PM confirmed", "SMS sent"],
+    validatedFields: [
+      { field: "Company Name", status: "confirmed", value: "Healthcare Clinic", revealAt: 5 },
+      { field: "Appointment Type", status: "confirmed", value: "Consultation", revealAt: 5 },
+      { field: "Appointment Date", status: "updated", original: "Tomorrow at 2:00 PM", value: "Next Monday at 10:00 AM", revealAt: 30 },
+    ],
+    extractedData: [
+      { field: "Contact Name", value: "Robert Taylor", revealAt: 5 },
+      { field: "Appointment Date", value: "Next Monday at 10:00 AM", revealAt: 30 },
+    ],
+    nextActions: [
+      "Update appointment calendar with new date and time",
+      "Send confirmation email to Robert Taylor",
+    ],
   },
   {
     id: "lead-qualification",
     label: "Lead Qualification",
     icon: Target,
-    subtitle: "Qualifying Leads",
+    subtitle: "Qualifying Sales Leads",
+    agentName: "Lead Qualification Agent",
+    audioSrc: "/test-calls/lead-qualification.wav",
+    duration: 83,
+    durationLabel: "1:23",
+    phone: "+34 692 675 287",
+    callQuality: 9,
+    callOutcome: "Qualified lead — passed to sales team for follow-up",
     transcript: [
-      { speaker: "ai", text: "Hi! This is Maya from SalesFlow. Thanks for your interest in our platform. Do you have a few minutes to chat?", delay: 0 },
-      { speaker: "human", text: "Sure, I submitted a demo request yesterday.", delay: 3500 },
-      { speaker: "ai", text: "Great! What's driving your interest in a new sales tool?", delay: 6000 },
-      { speaker: "human", text: "Our team is growing and we need better lead tracking.", delay: 9000 },
-      { speaker: "ai", text: "Makes sense. How many sales reps are on your team currently?", delay: 12000 },
-      { speaker: "human", text: "About 15, and we're hiring 5 more this quarter.", delay: 15000 },
-      { speaker: "ai", text: "Perfect fit! I'll have our sales team reach out with a personalized demo. What time works best?", delay: 17500 },
+      { speaker: "human", text: "Hello.", time: 0 },
+      { speaker: "ai", text: "Hi! This is Lead Qualification Agent, calling for a quick demo.", time: 2 },
+      { speaker: "human", text: "Okay.", time: 6 },
+      { speaker: "ai", text: "Great. I'm reaching out because you submitted a form on our website. I see you're interested in the Enterprise Plan. Is that correct?", time: 7 },
+      { speaker: "human", text: "I am.", time: 14 },
+      { speaker: "ai", text: "Excellent. To make sure we're a good fit, I'd like to ask a few quick questions. First, what is your estimated budget for this solution?", time: 16 },
+      { speaker: "human", text: "I don't know.", time: 24 },
+      { speaker: "ai", text: "No problem. Do you have a rough range in mind, or would you need to discuss that with your team first?", time: 26 },
+      { speaker: "human", text: "We don't want to pay over $200 for the subscription model.", time: 33 },
+      { speaker: "ai", text: "Understood. So you're looking to stay under two hundred dollars per month. Next, are you the decision maker for this purchase, or will others need to be involved?", time: 38 },
+      { speaker: "human", text: "Um, yeah, I am.", time: 48 },
+      { speaker: "ai", text: "Great. And what is your timeline for implementing a solution like this?", time: 51 },
+      { speaker: "human", text: "I would say one month, roughly.", time: 56 },
+      { speaker: "ai", text: "Okay, so about one month. Thanks for the information. Based on your budget, authority, and timeline, it sounds like you could be a good fit. I'll pass this along to our sales team for follow-up. Thanks for your time, have a great day!", time: 60 },
     ],
-    results: ["Budget: Confirmed", "Authority: Decision maker", "Timeline: This quarter"],
+    validatedFields: [
+      { field: "Company Name", status: "confirmed", value: "Sales Pro Inc", revealAt: 10 },
+      { field: "Contact Name", status: "confirmed", value: "Alex Martinez", revealAt: 10 },
+      { field: "Interest", status: "confirmed", value: "Enterprise Plan", revealAt: 15 },
+    ],
+    extractedData: [
+      { field: "Budget", value: "Under $200/mo", revealAt: 36 },
+      { field: "Decision Maker", value: "Yes", revealAt: 50 },
+      { field: "Timeline", value: "~1 month", revealAt: 58 },
+    ],
+    nextActions: [
+      "Pass customer information to sales team",
+      "Ensure sales team is aware of budget and timeline",
+    ],
   },
 ];
 
+/* ──────────────────────────────────────────
+   FLYING DATA PARTICLE
+   ────────────────────────────────────────── */
+interface FlyingDatum {
+  id: string;
+  label: string;
+  value: string;
+  status: "confirmed" | "updated" | "new";
+}
+
+function FlyingDataParticle({ datum, onDone }: { datum: FlyingDatum; onDone: () => void }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -10, scale: 0.7 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.8, y: 10 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      onAnimationComplete={onDone}
+      className="absolute top-0 right-0 z-30 pointer-events-none"
+    >
+      <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white border border-slate-200 shadow-lg text-xs">
+        {datum.status === "confirmed" ? (
+          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+        ) : datum.status === "updated" ? (
+          <AlertCircle className="w-3.5 h-3.5 text-amber-500" />
+        ) : (
+          <Zap className="w-3.5 h-3.5 text-blue-500" />
+        )}
+        <span className="font-medium text-slate-700">{datum.label}:</span>
+        <span className="text-slate-500">{datum.value}</span>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ──────────────────────────────────────────
+   DATA ROW ANIMATION in the results table
+   ────────────────────────────────────────── */
+function DataRow({
+  field,
+  value,
+  status,
+  original,
+  index,
+}: {
+  field: string;
+  value: string;
+  status: "confirmed" | "updated" | "new";
+  original?: string;
+  index: number;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: 20, scale: 0.95 }}
+      animate={{ opacity: 1, x: 0, scale: 1 }}
+      transition={{ duration: 0.4, delay: index * 0.08, ease: "easeOut" }}
+      className="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-slate-50/80 transition-colors group"
+    >
+      <div className="flex items-center gap-2 min-w-0">
+        {status === "confirmed" ? (
+          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+        ) : status === "updated" ? (
+          <AlertCircle className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+        ) : (
+          <Zap className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+        )}
+        <span className="text-xs font-medium text-slate-500 truncate">{field}</span>
+      </div>
+      <div className="text-right min-w-0 ml-2">
+        {original && (
+          <span className="text-[10px] text-slate-400 line-through mr-2">{original}</span>
+        )}
+        <span className="text-xs font-semibold text-slate-800">{value}</span>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ──────────────────────────────────────────
+   WAVEFORM VISUALIZER
+   ────────────────────────────────────────── */
+function WaveformVisualizer({ isPlaying }: { isPlaying: boolean }) {
+  const bars = 40;
+  return (
+    <div className="flex items-end gap-[2px] h-8 w-full">
+      {Array.from({ length: bars }).map((_, i) => {
+        const baseHeight = 15 + Math.sin(i * 0.5) * 10 + Math.random() * 5;
+        return (
+          <motion.div
+            key={i}
+            className="flex-1 rounded-full"
+            style={{
+              background: `linear-gradient(to top, var(--color-gradient-start), var(--color-gradient-end))`,
+              opacity: 0.6,
+            }}
+            animate={
+              isPlaying
+                ? {
+                    height: [
+                      `${baseHeight}%`,
+                      `${Math.min(100, baseHeight + 30 + Math.random() * 40)}%`,
+                      `${baseHeight + 10}%`,
+                      `${Math.min(100, baseHeight + 20 + Math.random() * 30)}%`,
+                      `${baseHeight}%`,
+                    ],
+                    opacity: [0.5, 0.9, 0.6, 0.85, 0.5],
+                  }
+                : { height: `${baseHeight}%`, opacity: 0.3 }
+            }
+            transition={
+              isPlaying
+                ? {
+                    duration: 0.8 + Math.random() * 0.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: i * 0.02,
+                  }
+                : { duration: 0.4 }
+            }
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+/* ──────────────────────────────────────────
+   QUALITY INDICATOR RING
+   ────────────────────────────────────────── */
+function QualityRing({ score, size = 48 }: { score: number; size?: number }) {
+  const pct = (score / 10) * 100;
+  const r = (size - 6) / 2;
+  const circ = 2 * Math.PI * r;
+  const offset = circ - (pct / 100) * circ;
+
+  return (
+    <div className="relative" style={{ width: size, height: size }}>
+      <svg width={size} height={size} className="-rotate-90">
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#e2e8f0" strokeWidth={3} />
+        <motion.circle
+          cx={size / 2}
+          cy={size / 2}
+          r={r}
+          fill="none"
+          stroke="url(#qualityGrad)"
+          strokeWidth={3}
+          strokeLinecap="round"
+          strokeDasharray={circ}
+          initial={{ strokeDashoffset: circ }}
+          animate={{ strokeDashoffset: offset }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+        />
+        <defs>
+          <linearGradient id="qualityGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="var(--color-gradient-start)" />
+            <stop offset="100%" stopColor="var(--color-gradient-end)" />
+          </linearGradient>
+        </defs>
+      </svg>
+      <div className="absolute inset-0 flex items-center justify-center">
+        <span className="text-sm font-bold text-slate-800">{score}</span>
+      </div>
+    </div>
+  );
+}
+
+/* ──────────────────────────────────────────
+   HERO COMPONENT
+   ────────────────────────────────────────── */
 export default function Hero() {
   const [activeScenario, setActiveScenario] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
-  const [visibleMessages, setVisibleMessages] = useState<number[]>([]);
+  const [showAnalysis, setShowAnalysis] = useState(false);
+  const [flyingData, setFlyingData] = useState<FlyingDatum[]>([]);
+  const [revealedValidated, setRevealedValidated] = useState<number[]>([]);
+  const [revealedExtracted, setRevealedExtracted] = useState<number[]>([]);
+  const [expandedSection, setExpandedSection] = useState<string | null>(null);
+
+  const audioRef = useRef<HTMLAudioElement>(null);
   const transcriptRef = useRef<HTMLDivElement>(null);
-  const totalDuration = 20000;
+  const flyIdCounter = useRef(0);
 
-  const currentScenario = scenarios[activeScenario];
+  const scenario = scenarios[activeScenario];
 
+  /* ── Sync currentTime from <audio> ── */
   useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (isPlaying) {
-      interval = setInterval(() => {
-        setCurrentTime((prev) => {
-          if (prev >= totalDuration) {
-            setIsPlaying(false);
-            return prev;
-          }
-          return prev + 100;
-        });
-      }, 100);
-    }
-    return () => clearInterval(interval);
-  }, [isPlaying]);
+    const audio = audioRef.current;
+    if (!audio) return;
 
+    const onTime = () => setCurrentTime(audio.currentTime);
+    const onEnd = () => {
+      setIsPlaying(false);
+      setShowAnalysis(true);
+    };
+
+    audio.addEventListener("timeupdate", onTime);
+    audio.addEventListener("ended", onEnd);
+    return () => {
+      audio.removeEventListener("timeupdate", onTime);
+      audio.removeEventListener("ended", onEnd);
+    };
+  }, [activeScenario]);
+
+  /* ── Reveal validated fields as audio plays ── */
   useEffect(() => {
-    currentScenario.transcript.forEach((message, index) => {
-      if (currentTime >= message.delay && !visibleMessages.includes(index)) {
-        setVisibleMessages((prev) => [...prev, index]);
+    scenario.validatedFields.forEach((f, i) => {
+      if (currentTime >= f.revealAt && !revealedValidated.includes(i)) {
+        setRevealedValidated((prev) => [...prev, i]);
+        // Spawn flying particle
+        flyIdCounter.current += 1;
+        const id = `fly-${flyIdCounter.current}`;
+        setFlyingData((prev) => [
+          ...prev,
+          { id, label: f.field, value: f.value, status: f.status },
+        ]);
+        // Remove particle after animation
+        setTimeout(() => {
+          setFlyingData((prev) => prev.filter((d) => d.id !== id));
+        }, 2000);
       }
     });
-  }, [currentTime, visibleMessages, currentScenario.transcript]);
+  }, [currentTime, revealedValidated, scenario.validatedFields]);
 
+  /* ── Reveal extracted data ── */
+  useEffect(() => {
+    scenario.extractedData.forEach((f, i) => {
+      if (currentTime >= f.revealAt && !revealedExtracted.includes(i)) {
+        setRevealedExtracted((prev) => [...prev, i]);
+        flyIdCounter.current += 1;
+        const id = `fly-ext-${flyIdCounter.current}`;
+        setFlyingData((prev) => [
+          ...prev,
+          { id, label: f.field, value: f.value, status: "new" },
+        ]);
+        setTimeout(() => {
+          setFlyingData((prev) => prev.filter((d) => d.id !== id));
+        }, 2000);
+      }
+    });
+  }, [currentTime, revealedExtracted, scenario.extractedData]);
+
+  /* ── Auto-scroll transcript ── */
   useEffect(() => {
     if (transcriptRef.current) {
-      transcriptRef.current.scrollTop = transcriptRef.current.scrollHeight;
+      transcriptRef.current.scrollTo({
+        top: transcriptRef.current.scrollHeight,
+        behavior: "smooth",
+      });
     }
-  }, [visibleMessages]);
+  }, [currentTime]);
 
-  const handlePlayPause = () => {
-    if (currentTime >= totalDuration) {
-      setCurrentTime(0);
-      setVisibleMessages([]);
+  /* ── Visible transcript messages ── */
+  const visibleMessages = scenario.transcript.filter((m) => currentTime >= m.time);
+
+  /* ── Play / Pause ── */
+  const handlePlayPause = useCallback(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (isPlaying) {
+      audio.pause();
+      setIsPlaying(false);
+    } else {
+      // If at end, restart
+      if (audio.ended || currentTime >= scenario.duration - 0.5) {
+        audio.currentTime = 0;
+        setCurrentTime(0);
+        setRevealedValidated([]);
+        setRevealedExtracted([]);
+        setShowAnalysis(false);
+        setFlyingData([]);
+        setExpandedSection(null);
+      }
+      audio.play().catch(() => {});
+      setIsPlaying(true);
     }
-    setIsPlaying(!isPlaying);
-  };
+  }, [isPlaying, currentTime, scenario.duration]);
 
-  const handleScenarioChange = (index: number) => {
-    if (index !== activeScenario) {
+  /* ── Switch scenario ── */
+  const handleScenarioChange = useCallback(
+    (index: number) => {
+      if (index === activeScenario) return;
+      const audio = audioRef.current;
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
       setActiveScenario(index);
       setIsPlaying(false);
       setCurrentTime(0);
-      setVisibleMessages([]);
+      setRevealedValidated([]);
+      setRevealedExtracted([]);
+      setShowAnalysis(false);
+      setFlyingData([]);
+      setExpandedSection(null);
+    },
+    [activeScenario],
+  );
+
+  /* ── Progress bar click ── */
+  const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const pct = (e.clientX - rect.left) / rect.width;
+    const newTime = pct * scenario.duration;
+    if (audioRef.current) {
+      audioRef.current.currentTime = newTime;
+      setCurrentTime(newTime);
+      // Re-evaluate which fields should be revealed up to this time
+      setRevealedValidated(
+        scenario.validatedFields.map((_, i) => i).filter((i) => scenario.validatedFields[i].revealAt <= newTime),
+      );
+      setRevealedExtracted(
+        scenario.extractedData.map((_, i) => i).filter((i) => scenario.extractedData[i].revealAt <= newTime),
+      );
+      if (newTime >= scenario.duration - 0.5) {
+        setShowAnalysis(true);
+      } else {
+        setShowAnalysis(false);
+      }
     }
   };
 
-  const progress = (currentTime / totalDuration) * 100;
+  const progress = (currentTime / scenario.duration) * 100;
+
+  const formatTime = (s: number) => {
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return `${m}:${sec.toString().padStart(2, "0")}`;
+  };
 
   return (
-    <section className="pt-32 pb-20 md:pt-40 md:pb-32 relative overflow-hidden">
+    <section className="pt-28 pb-16 md:pt-36 md:pb-24 relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0 bg-grid opacity-50" />
       <div className="absolute top-20 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
       <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
 
+      {/* Hidden audio element */}
+      <audio ref={audioRef} src={scenario.audioSrc} preload="metadata" />
+
       <div className="max-w-7xl mx-auto px-6 relative">
-        {/* Hero Text - Centered */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-4xl mx-auto mb-16"
-        >
-          <h1 className="text-display mb-6">
-            Less time on calls.
-            <br />
-            More time <span className="gradient-text">making money.</span>
-          </h1>
+        {/* SPLIT LAYOUT: left text + right player */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          {/* ─── LEFT COLUMN: Text + CTA ─── */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col justify-center lg:pt-8"
+          >
+            <div className="inline-flex items-center gap-2 mb-6">
+              <span className="badge badge-primary">
+                <Mic className="w-3 h-3 mr-1" />
+                AI Voice Agents
+              </span>
+            </div>
 
-          <p className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Your team spends hours every week on repetitive phone calls that don't close deals.
-            We handle those calls automatically, so your people can focus on what actually drives revenue.
-          </p>
+            <h1 className="text-display mb-6">
+              Less time on calls.
+              <br />
+              More time{" "}
+              <span className="gradient-text">making money.</span>
+            </h1>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/signup" className="btn btn-primary">
-              Start free trial
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link href="/contact" className="btn btn-secondary">
-              Talk to sales
-            </Link>
-          </div>
+            <p className="text-lg text-slate-600 mb-8 max-w-lg leading-relaxed">
+              Your team spends hours every week on repetitive phone calls that
+              don&apos;t close deals. We handle those calls automatically, so
+              your people can focus on what actually drives revenue.
+            </p>
 
-          <p className="text-sm text-slate-500 mt-6">
-            No credit card required · 15 free minutes · Setup in 5 minutes
-          </p>
-        </motion.div>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link href="/signup" className="btn btn-primary">
+                Start free trial
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link href="/contact" className="btn btn-secondary">
+                Talk to sales
+              </Link>
+            </div>
 
-        {/* Call Simulator - Full Width Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-4xl mx-auto"
-        >
-          <div className="gradient-border overflow-hidden shadow-2xl">
-            <div className="bg-white rounded-2xl overflow-hidden">
-              {/* Header */}
-              <div className="gradient-bg p-5">
-                <div className="flex items-center justify-between mb-4">
+            <p className="text-sm text-slate-500 mt-6">
+              No credit card required · 15 free minutes · Setup in 5 minutes
+            </p>
+
+            {/* Mini stats */}
+            <div className="grid grid-cols-3 gap-4 mt-10 pt-8 border-t border-slate-200">
+              {[
+                { label: "Calls Automated", value: "50K+" },
+                { label: "Avg. Quality", value: "9.2/10" },
+                { label: "Time Saved", value: "120h/mo" },
+              ].map((stat) => (
+                <div key={stat.label}>
+                  <div className="stat-number text-2xl">{stat.value}</div>
+                  <div className="text-xs text-slate-500 mt-1">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* ─── RIGHT COLUMN: Audio Player + Real-time Analysis ─── */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="relative"
+          >
+            <div className="gradient-border overflow-hidden shadow-2xl">
+              <div className="bg-white rounded-2xl overflow-hidden">
+                {/* ── Player Header ── */}
+                <div className="gradient-bg px-5 py-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
+                        <Phone className="w-4 h-4 text-white" />
+                      </div>
+                      <div>
+                        <div className="text-white font-medium text-sm">
+                          {scenario.agentName}
+                        </div>
+                        <div className="text-white/60 text-xs flex items-center gap-2">
+                          <span>{scenario.phone}</span>
+                          <span className="w-1 h-1 rounded-full bg-white/40" />
+                          <span>{scenario.durationLabel}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {isPlaying && (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          className="flex items-center gap-2"
+                        >
+                          <span className="relative flex h-2.5 w-2.5">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
+                            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500" />
+                          </span>
+                          <span className="text-white/80 text-xs font-medium">LIVE</span>
+                        </motion.div>
+                      )}
+                      <Volume2 className="w-4 h-4 text-white/50" />
+                    </div>
+                  </div>
+
+                  {/* Scenario selector */}
+                  <div className="flex gap-2">
+                    {scenarios.map((s, index) => {
+                      const Icon = s.icon;
+                      return (
+                        <button
+                          key={s.id}
+                          onClick={() => handleScenarioChange(index)}
+                          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer ${
+                            activeScenario === index
+                              ? "bg-white text-primary shadow-sm"
+                              : "bg-white/15 text-white/80 hover:bg-white/25"
+                          }`}
+                        >
+                          <Icon className="w-3 h-3" />
+                          <span className="hidden sm:inline">{s.label}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* ── Waveform + Controls ── */}
+                <div className="px-5 py-3 bg-slate-50 border-b border-slate-100">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                      <span className="text-white text-sm font-medium">M</span>
-                    </div>
-                    <div>
-                      <div className="text-white font-medium">Nat from Callengo</div>
-                      <div className="text-white/70 text-sm">{currentScenario.subtitle}</div>
-                    </div>
-                  </div>
-                  {isPlaying && (
-                    <div className="flex items-center gap-1">
-                      <span className="w-1 h-3 bg-white rounded-full animate-pulse" />
-                      <span className="w-1 h-5 bg-white rounded-full animate-pulse" style={{ animationDelay: "0.1s" }} />
-                      <span className="w-1 h-3 bg-white rounded-full animate-pulse" style={{ animationDelay: "0.2s" }} />
-                    </div>
-                  )}
-                </div>
-                {/* Scenario Badges */}
-                <div className="flex gap-2">
-                  {scenarios.map((scenario, index) => {
-                    const Icon = scenario.icon;
-                    return (
-                      <button
-                        key={scenario.id}
-                        onClick={() => handleScenarioChange(index)}
-                        className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
-                          activeScenario === index
-                            ? "bg-white text-primary"
-                            : "bg-white/20 text-white hover:bg-white/30"
-                        }`}
-                      >
-                        <Icon className="w-3.5 h-3.5" />
-                        {scenario.label}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Audio Control */}
-              <div className="bg-slate-50 px-5 py-4 border-b border-slate-200">
-                <div className="flex items-center gap-4">
-                  <button
-                    onClick={handlePlayPause}
-                    className="w-12 h-12 rounded-full gradient-bg text-white flex items-center justify-center hover:opacity-90 transition-opacity shadow-lg"
-                  >
-                    {isPlaying ? (
-                      <Pause className="w-5 h-5" />
-                    ) : (
-                      <Play className="w-5 h-5 ml-0.5" />
-                    )}
-                  </button>
-                  <div className="flex-1">
-                    <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
-                      <div
-                        className="h-full gradient-bg rounded-full transition-all duration-100"
-                        style={{ width: `${progress}%` }}
-                      />
-                    </div>
-                  </div>
-                  <span className="text-sm text-slate-500 font-medium tabular-nums">
-                    {Math.floor(currentTime / 1000)}s / {totalDuration / 1000}s
-                  </span>
-                </div>
-              </div>
-
-              {/* Transcript */}
-              <div ref={transcriptRef} className="h-80 overflow-y-auto p-6 space-y-4">
-                {visibleMessages.length === 0 && !isPlaying && (
-                  <div className="h-full flex items-center justify-center text-slate-400">
-                    <p>Press play to hear the conversation</p>
-                  </div>
-                )}
-
-                {visibleMessages.map((index) => {
-                  const message = currentScenario.transcript[index];
-                  if (!message) return null;
-                  const isAI = message.speaker === "ai";
-
-                  return (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className={`flex ${isAI ? "justify-start" : "justify-end"}`}
+                    <button
+                      onClick={handlePlayPause}
+                      className="w-10 h-10 rounded-full gradient-bg text-white flex items-center justify-center hover:opacity-90 transition-all shadow-lg shrink-0 cursor-pointer active:scale-95"
                     >
+                      {isPlaying ? (
+                        <Pause className="w-4 h-4" />
+                      ) : (
+                        <Play className="w-4 h-4 ml-0.5" />
+                      )}
+                    </button>
+
+                    <div className="flex-1 space-y-1">
+                      <WaveformVisualizer isPlaying={isPlaying} />
                       <div
-                        className={`max-w-[80%] p-4 rounded-2xl ${
-                          isAI
-                            ? "bg-slate-100 rounded-bl-md"
-                            : "gradient-bg text-white rounded-br-md"
-                        }`}
+                        className="h-1.5 bg-slate-200 rounded-full overflow-hidden cursor-pointer relative group"
+                        onClick={handleProgressClick}
                       >
-                        <p className="text-sm leading-relaxed">{message.text}</p>
+                        <div
+                          className="h-full gradient-bg rounded-full transition-all duration-200"
+                          style={{ width: `${Math.min(progress, 100)}%` }}
+                        />
+                        {/* Hover thumb */}
+                        <div
+                          className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full gradient-bg shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
+                          style={{ left: `calc(${Math.min(progress, 100)}% - 6px)` }}
+                        />
+                      </div>
+                    </div>
+
+                    <span className="text-xs text-slate-400 font-mono tabular-nums shrink-0">
+                      {formatTime(currentTime)} / {formatTime(scenario.duration)}
+                    </span>
+                  </div>
+                </div>
+
+                {/* ── Transcript + Real-time data panel ── */}
+                <div className="grid grid-cols-1 sm:grid-cols-5">
+                  {/* Transcript side */}
+                  <div className="sm:col-span-3 border-r border-slate-100">
+                    <div className="px-3 py-2 border-b border-slate-100 bg-slate-50/50">
+                      <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
+                        Live Transcript
+                      </span>
+                    </div>
+                    <div
+                      ref={transcriptRef}
+                      className="h-56 overflow-y-auto p-3 space-y-2 scroll-smooth"
+                    >
+                      {visibleMessages.length === 0 && !isPlaying ? (
+                        <div className="h-full flex items-center justify-center text-slate-300 text-xs">
+                          Press play to start
+                        </div>
+                      ) : (
+                        visibleMessages.map((msg, idx) => {
+                          const isAI = msg.speaker === "ai";
+                          return (
+                            <motion.div
+                              key={`${scenario.id}-${idx}`}
+                              initial={{ opacity: 0, y: 8 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.25 }}
+                              className={`flex ${isAI ? "justify-start" : "justify-end"}`}
+                            >
+                              <div
+                                className={`max-w-[90%] px-3 py-2 rounded-xl text-xs leading-relaxed ${
+                                  isAI
+                                    ? "bg-slate-100 text-slate-700 rounded-bl-sm"
+                                    : "gradient-bg text-white rounded-br-sm"
+                                }`}
+                              >
+                                {msg.text}
+                              </div>
+                            </motion.div>
+                          );
+                        })
+                      )}
+                      {isPlaying && visibleMessages.length > 0 && (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: [0.3, 1, 0.3] }}
+                          transition={{ duration: 1.2, repeat: Infinity }}
+                          className="flex items-center gap-1 pl-2"
+                        >
+                          <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+                          <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+                          <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+                        </motion.div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Real-time data side */}
+                  <div className="sm:col-span-2 relative">
+                    {/* Flying particles overlay */}
+                    <AnimatePresence>
+                      {flyingData.map((d) => (
+                        <FlyingDataParticle
+                          key={d.id}
+                          datum={d}
+                          onDone={() => {}}
+                        />
+                      ))}
+                    </AnimatePresence>
+
+                    <div className="px-3 py-2 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
+                      <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1">
+                        <Shield className="w-3 h-3" />
+                        Real-time Analysis
+                      </span>
+                      {revealedValidated.length > 0 && (
+                        <motion.span
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded"
+                        >
+                          {revealedValidated.length + revealedExtracted.length} fields
+                        </motion.span>
+                      )}
+                    </div>
+
+                    <div className="h-56 overflow-y-auto p-2 space-y-1">
+                      {revealedValidated.length === 0 && revealedExtracted.length === 0 ? (
+                        <div className="h-full flex flex-col items-center justify-center text-slate-300 gap-2">
+                          <Database className="w-5 h-5" />
+                          <span className="text-xs">Waiting for data...</span>
+                          {isPlaying && (
+                            <motion.div
+                              className="w-16 h-0.5 rounded-full overflow-hidden bg-slate-100"
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                            >
+                              <motion.div
+                                className="h-full gradient-bg"
+                                animate={{ x: ["-100%", "100%"] }}
+                                transition={{
+                                  duration: 1.2,
+                                  repeat: Infinity,
+                                  ease: "linear",
+                                }}
+                                style={{ width: "60%" }}
+                              />
+                            </motion.div>
+                          )}
+                        </div>
+                      ) : (
+                        <>
+                          {/* Validated fields section */}
+                          {revealedValidated.length > 0 && (
+                            <div>
+                              <div className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider px-2 py-1">
+                                Validated
+                              </div>
+                              {revealedValidated.map((vi, ri) => {
+                                const f = scenario.validatedFields[vi];
+                                return (
+                                  <DataRow
+                                    key={`v-${vi}`}
+                                    field={f.field}
+                                    value={f.value}
+                                    status={f.status}
+                                    original={f.original}
+                                    index={ri}
+                                  />
+                                );
+                              })}
+                            </div>
+                          )}
+
+                          {/* Extracted data section */}
+                          {revealedExtracted.length > 0 && (
+                            <div className="mt-2">
+                              <div className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider px-2 py-1">
+                                Extracted
+                              </div>
+                              {revealedExtracted.map((ei, ri) => {
+                                const f = scenario.extractedData[ei];
+                                return (
+                                  <DataRow
+                                    key={`e-${ei}`}
+                                    field={f.field}
+                                    value={f.value}
+                                    status="new"
+                                    index={ri}
+                                  />
+                                );
+                              })}
+                            </div>
+                          )}
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── Post-call analysis (expandable) ── */}
+                <AnimatePresence>
+                  {showAnalysis && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.4, ease: "easeInOut" }}
+                      className="border-t border-slate-200 overflow-hidden"
+                    >
+                      <div className="p-4 gradient-bg-subtle">
+                        {/* Summary bar */}
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="flex items-center gap-3">
+                            <QualityRing score={scenario.callQuality} />
+                            <div>
+                              <div className="text-xs font-semibold text-slate-800">
+                                Call Complete
+                              </div>
+                              <div className="text-[11px] text-slate-500 max-w-[220px] truncate">
+                                {scenario.callOutcome}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2 text-xs text-slate-500">
+                            <Clock className="w-3.5 h-3.5" />
+                            {scenario.durationLabel}
+                          </div>
+                        </div>
+
+                        {/* Expandable sections */}
+                        <div className="space-y-1.5">
+                          {/* Next Actions */}
+                          <button
+                            onClick={() =>
+                              setExpandedSection(
+                                expandedSection === "actions" ? null : "actions",
+                              )
+                            }
+                            className="w-full flex items-center justify-between px-3 py-2 bg-white rounded-lg hover:bg-slate-50 transition-colors text-xs font-medium text-slate-700 cursor-pointer"
+                          >
+                            <span className="flex items-center gap-2">
+                              <ArrowUpRight className="w-3.5 h-3.5 text-primary" />
+                              Next Actions ({scenario.nextActions.length})
+                            </span>
+                            <ChevronDown
+                              className={`w-3.5 h-3.5 text-slate-400 transition-transform ${
+                                expandedSection === "actions" ? "rotate-180" : ""
+                              }`}
+                            />
+                          </button>
+                          <AnimatePresence>
+                            {expandedSection === "actions" && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                className="overflow-hidden"
+                              >
+                                <div className="px-3 pb-2 space-y-1.5">
+                                  {scenario.nextActions.map((action, i) => (
+                                    <motion.div
+                                      key={i}
+                                      initial={{ opacity: 0, x: -10 }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ delay: i * 0.1 }}
+                                      className="flex items-start gap-2 text-xs text-slate-600"
+                                    >
+                                      <span className="w-5 h-5 rounded-full gradient-bg text-white flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">
+                                        {i + 1}
+                                      </span>
+                                      {action}
+                                    </motion.div>
+                                  ))}
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+
+                          {/* Full Results */}
+                          <button
+                            onClick={() =>
+                              setExpandedSection(
+                                expandedSection === "results" ? null : "results",
+                              )
+                            }
+                            className="w-full flex items-center justify-between px-3 py-2 bg-white rounded-lg hover:bg-slate-50 transition-colors text-xs font-medium text-slate-700 cursor-pointer"
+                          >
+                            <span className="flex items-center gap-2">
+                              <Star className="w-3.5 h-3.5 text-amber-500" />
+                              Full Validation Summary
+                            </span>
+                            <ChevronDown
+                              className={`w-3.5 h-3.5 text-slate-400 transition-transform ${
+                                expandedSection === "results" ? "rotate-180" : ""
+                              }`}
+                            />
+                          </button>
+                          <AnimatePresence>
+                            {expandedSection === "results" && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                className="overflow-hidden"
+                              >
+                                <div className="px-2 pb-2">
+                                  {scenario.validatedFields.map((f, i) => (
+                                    <DataRow
+                                      key={i}
+                                      field={f.field}
+                                      value={f.value}
+                                      status={f.status}
+                                      original={f.original}
+                                      index={i}
+                                    />
+                                  ))}
+                                  {scenario.extractedData.map((f, i) => (
+                                    <DataRow
+                                      key={`ext-${i}`}
+                                      field={f.field}
+                                      value={f.value}
+                                      status="new"
+                                      index={i + scenario.validatedFields.length}
+                                    />
+                                  ))}
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
                       </div>
                     </motion.div>
-                  );
-                })}
+                  )}
+                </AnimatePresence>
               </div>
-
-              {/* Extracted Data Footer */}
-              {currentTime >= totalDuration && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="border-t border-slate-200 p-5 gradient-bg-subtle"
-                >
-                  <p className="text-sm font-medium text-slate-900 mb-3">Results from this call:</p>
-                  <div className="flex flex-wrap gap-2">
-                    {currentScenario.results.map((item) => (
-                      <span key={item} className="text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-full text-slate-700">
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
             </div>
-          </div>
-        </motion.div>
+
+            {/* Decorative glow behind card */}
+            <div className="absolute -inset-4 gradient-bg opacity-[0.07] blur-3xl rounded-3xl -z-10" />
+          </motion.div>
+        </div>
 
         {/* Trust indicators */}
         <motion.div
@@ -296,11 +998,17 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-16 text-center"
         >
-          <p className="text-sm text-slate-500 mb-6">Trusted by innovative companies</p>
+          <p className="text-sm text-slate-500 mb-6">
+            Trusted by innovative companies
+          </p>
           <div className="flex flex-wrap justify-center gap-8 opacity-50">
-            {["TechCorp", "Acme Inc", "StartupXYZ", "Enterprise Co", "InnovateLabs"].map((company) => (
-              <span key={company} className="text-slate-400 font-semibold text-lg">{company}</span>
-            ))}
+            {["TechCorp", "Acme Inc", "StartupXYZ", "Enterprise Co", "InnovateLabs"].map(
+              (company) => (
+                <span key={company} className="text-slate-400 font-semibold text-lg">
+                  {company}
+                </span>
+              ),
+            )}
           </div>
         </motion.div>
       </div>

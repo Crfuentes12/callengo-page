@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -72,10 +72,10 @@ const scenarios: Scenario[] = [
     icon: Database,
     subtitle: "Verifying Contact Information",
     agentName: "Data Validation Agent",
-    audioSrc: "/test-calls/data-validation.wav",
+    audioSrc: "/audio-test/data-validation.wav",
     duration: 44,
     durationLabel: "0:44",
-    phone: "+34 692 675 287",
+    phone: "+34 6** *** **7",
     callQuality: 7,
     callOutcome: "Information updated successfully",
     transcript: [
@@ -110,10 +110,10 @@ const scenarios: Scenario[] = [
     icon: Calendar,
     subtitle: "Confirming & Rescheduling",
     agentName: "Appointment Confirmation Agent",
-    audioSrc: "/test-calls/appointment-confirmation.wav",
+    audioSrc: "/audio-test/appointment-confirmation.wav",
     duration: 49,
     durationLabel: "0:49",
-    phone: "+34 692 675 287",
+    phone: "+34 6** *** **7",
     callQuality: 9,
     callOutcome: "Consultation rescheduled for next Monday at 10:00 AM",
     transcript: [
@@ -145,10 +145,10 @@ const scenarios: Scenario[] = [
     icon: Target,
     subtitle: "Qualifying Sales Leads",
     agentName: "Lead Qualification Agent",
-    audioSrc: "/test-calls/lead-qualification.wav",
+    audioSrc: "/audio-test/lead-qualification.wav",
     duration: 83,
     durationLabel: "1:23",
-    phone: "+34 692 675 287",
+    phone: "+34 6** *** **7",
     callQuality: 9,
     callOutcome: "Qualified lead — passed to sales team for follow-up",
     transcript: [
@@ -263,49 +263,69 @@ function DataRow({
 }
 
 /* ──────────────────────────────────────────
-   WAVEFORM VISUALIZER
+   WAVEFORM VISUALIZER (seeded, stable bars)
    ────────────────────────────────────────── */
+function seededRandom(seed: number) {
+  const x = Math.sin(seed * 9301 + 49297) * 49297;
+  return x - Math.floor(x);
+}
+
 function WaveformVisualizer({ isPlaying }: { isPlaying: boolean }) {
   const bars = 40;
+
+  // Pre-compute all random-ish values once so they never change between renders
+  const barData = useMemo(() => {
+    return Array.from({ length: bars }).map((_, i) => {
+      const r1 = seededRandom(i);
+      const r2 = seededRandom(i + 100);
+      const r3 = seededRandom(i + 200);
+      const r4 = seededRandom(i + 300);
+      const baseHeight = 15 + Math.sin(i * 0.5) * 10 + r1 * 5;
+      return {
+        baseHeight,
+        peakA: Math.min(100, baseHeight + 30 + r2 * 40),
+        midA: baseHeight + 10,
+        peakB: Math.min(100, baseHeight + 20 + r3 * 30),
+        duration: 0.8 + r4 * 0.5,
+      };
+    });
+  }, []);
+
   return (
     <div className="flex items-end gap-[2px] h-8 w-full">
-      {Array.from({ length: bars }).map((_, i) => {
-        const baseHeight = 15 + Math.sin(i * 0.5) * 10 + Math.random() * 5;
-        return (
-          <motion.div
-            key={i}
-            className="flex-1 rounded-full"
-            style={{
-              background: `linear-gradient(to top, var(--color-gradient-start), var(--color-gradient-end))`,
-              opacity: 0.6,
-            }}
-            animate={
-              isPlaying
-                ? {
-                    height: [
-                      `${baseHeight}%`,
-                      `${Math.min(100, baseHeight + 30 + Math.random() * 40)}%`,
-                      `${baseHeight + 10}%`,
-                      `${Math.min(100, baseHeight + 20 + Math.random() * 30)}%`,
-                      `${baseHeight}%`,
-                    ],
-                    opacity: [0.5, 0.9, 0.6, 0.85, 0.5],
-                  }
-                : { height: `${baseHeight}%`, opacity: 0.3 }
-            }
-            transition={
-              isPlaying
-                ? {
-                    duration: 0.8 + Math.random() * 0.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: i * 0.02,
-                  }
-                : { duration: 0.4 }
-            }
-          />
-        );
-      })}
+      {barData.map((b, i) => (
+        <motion.div
+          key={i}
+          className="flex-1 rounded-full"
+          style={{
+            background: `linear-gradient(to top, var(--color-gradient-start), var(--color-gradient-end))`,
+          }}
+          animate={
+            isPlaying
+              ? {
+                  height: [
+                    `${b.baseHeight}%`,
+                    `${b.peakA}%`,
+                    `${b.midA}%`,
+                    `${b.peakB}%`,
+                    `${b.baseHeight}%`,
+                  ],
+                  opacity: [0.5, 0.9, 0.6, 0.85, 0.5],
+                }
+              : { height: `${b.baseHeight}%`, opacity: 0.3 }
+          }
+          transition={
+            isPlaying
+              ? {
+                  duration: b.duration,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.02,
+                }
+              : { duration: 0.4 }
+          }
+        />
+      ))}
     </div>
   );
 }
@@ -366,11 +386,34 @@ export default function Hero() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const transcriptRef = useRef<HTMLDivElement>(null);
   const flyIdCounter = useRef(0);
+  const [audioAvailable, setAudioAvailable] = useState(true);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const scenario = scenarios[activeScenario];
 
-  /* ── Sync currentTime from <audio> ── */
+  /* ── Detect if real audio file loaded ── */
   useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const onCanPlay = () => setAudioAvailable(true);
+    const onError = () => setAudioAvailable(false);
+
+    audio.addEventListener("canplaythrough", onCanPlay);
+    audio.addEventListener("error", onError);
+
+    // Force a reload when src changes
+    audio.load();
+
+    return () => {
+      audio.removeEventListener("canplaythrough", onCanPlay);
+      audio.removeEventListener("error", onError);
+    };
+  }, [activeScenario]);
+
+  /* ── Sync currentTime from <audio> (real mode) ── */
+  useEffect(() => {
+    if (!audioAvailable) return;
     const audio = audioRef.current;
     if (!audio) return;
 
@@ -386,7 +429,33 @@ export default function Hero() {
       audio.removeEventListener("timeupdate", onTime);
       audio.removeEventListener("ended", onEnd);
     };
-  }, [activeScenario]);
+  }, [activeScenario, audioAvailable]);
+
+  /* ── Timer-based fallback when audio file is missing ── */
+  useEffect(() => {
+    if (audioAvailable) return;
+    if (!isPlaying) {
+      if (timerRef.current) clearInterval(timerRef.current);
+      return;
+    }
+
+    timerRef.current = setInterval(() => {
+      setCurrentTime((prev) => {
+        const next = prev + 0.1;
+        if (next >= scenario.duration) {
+          setIsPlaying(false);
+          setShowAnalysis(true);
+          if (timerRef.current) clearInterval(timerRef.current);
+          return scenario.duration;
+        }
+        return next;
+      });
+    }, 100);
+
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [isPlaying, audioAvailable, scenario.duration]);
 
   /* ── Reveal validated fields as audio plays ── */
   useEffect(() => {
@@ -441,16 +510,13 @@ export default function Hero() {
 
   /* ── Play / Pause ── */
   const handlePlayPause = useCallback(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
     if (isPlaying) {
-      audio.pause();
+      if (audioAvailable && audioRef.current) audioRef.current.pause();
       setIsPlaying(false);
     } else {
       // If at end, restart
-      if (audio.ended || currentTime >= scenario.duration - 0.5) {
-        audio.currentTime = 0;
+      if (currentTime >= scenario.duration - 0.5) {
+        if (audioAvailable && audioRef.current) audioRef.current.currentTime = 0;
         setCurrentTime(0);
         setRevealedValidated([]);
         setRevealedExtracted([]);
@@ -458,15 +524,18 @@ export default function Hero() {
         setFlyingData([]);
         setExpandedSection(null);
       }
-      audio.play().catch(() => {});
+      if (audioAvailable && audioRef.current) {
+        audioRef.current.play().catch(() => {});
+      }
       setIsPlaying(true);
     }
-  }, [isPlaying, currentTime, scenario.duration]);
+  }, [isPlaying, currentTime, scenario.duration, audioAvailable]);
 
   /* ── Switch scenario ── */
   const handleScenarioChange = useCallback(
     (index: number) => {
       if (index === activeScenario) return;
+      if (timerRef.current) clearInterval(timerRef.current);
       const audio = audioRef.current;
       if (audio) {
         audio.pause();
@@ -489,21 +558,20 @@ export default function Hero() {
     const rect = e.currentTarget.getBoundingClientRect();
     const pct = (e.clientX - rect.left) / rect.width;
     const newTime = pct * scenario.duration;
-    if (audioRef.current) {
+    if (audioAvailable && audioRef.current) {
       audioRef.current.currentTime = newTime;
-      setCurrentTime(newTime);
-      // Re-evaluate which fields should be revealed up to this time
-      setRevealedValidated(
-        scenario.validatedFields.map((_, i) => i).filter((i) => scenario.validatedFields[i].revealAt <= newTime),
-      );
-      setRevealedExtracted(
-        scenario.extractedData.map((_, i) => i).filter((i) => scenario.extractedData[i].revealAt <= newTime),
-      );
-      if (newTime >= scenario.duration - 0.5) {
-        setShowAnalysis(true);
-      } else {
-        setShowAnalysis(false);
-      }
+    }
+    setCurrentTime(newTime);
+    setRevealedValidated(
+      scenario.validatedFields.map((_, i) => i).filter((i) => scenario.validatedFields[i].revealAt <= newTime),
+    );
+    setRevealedExtracted(
+      scenario.extractedData.map((_, i) => i).filter((i) => scenario.extractedData[i].revealAt <= newTime),
+    );
+    if (newTime >= scenario.duration - 0.5) {
+      setShowAnalysis(true);
+    } else {
+      setShowAnalysis(false);
     }
   };
 

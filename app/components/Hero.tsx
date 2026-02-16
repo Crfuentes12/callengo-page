@@ -19,12 +19,14 @@ import {
   ChevronDown,
   Volume2,
   Mic,
-  Shield,
   Zap,
+  Wifi,
+  Battery,
+  Signal,
 } from "lucide-react";
 
 /* ──────────────────────────────────────────
-   SCENARIO DATA – real calls
+   SCENARIO DATA – real calls (timestamps synced to audio)
    ────────────────────────────────────────── */
 
 interface TranscriptLine {
@@ -63,6 +65,7 @@ interface Scenario {
   validatedFields: ValidatedField[];
   extractedData: ExtractedData[];
   nextActions: string[];
+  ctaMessage: string;
 }
 
 const scenarios: Scenario[] = [
@@ -78,26 +81,27 @@ const scenarios: Scenario[] = [
     phone: "+34 6** *** **7",
     callQuality: 7,
     callOutcome: "Information updated successfully",
+    ctaMessage: "Hear how our AI verifies and updates customer data in real time",
     transcript: [
-      { speaker: "human", text: "Hello.", time: 0 },
-      { speaker: "ai", text: "Hi! This is Data Validation Agent, calling for a quick demo.", time: 2 },
-      { speaker: "human", text: "Yep.", time: 6 },
-      { speaker: "ai", text: "Great. I'm just verifying some information for TechCorp Solutions. Could you confirm your name is John Smith?", time: 7 },
-      { speaker: "human", text: "No, that's actually Mike Marshall.", time: 14 },
-      { speaker: "ai", text: "Oh, I apologize for the mix-up, Mike. Let me update that. Could you also confirm your email address?", time: 17 },
-      { speaker: "human", text: "Sure. It's mike.marshall@example.com.", time: 23 },
-      { speaker: "ai", text: "Got it. Thanks for the update, Mike. I appreciate your time helping me verify this information.", time: 28 },
-      { speaker: "human", text: "Bye-bye.", time: 35 },
-      { speaker: "ai", text: "Goodbye!", time: 38 },
+      { speaker: "human", text: "Hello.", time: 3 },
+      { speaker: "ai", text: "Hi! This is Data Validation Agent, calling for a quick demo.", time: 5 },
+      { speaker: "human", text: "Yep.", time: 10 },
+      { speaker: "ai", text: "Great. I'm just verifying some information for TechCorp Solutions. Could you confirm your name is John Smith?", time: 12 },
+      { speaker: "human", text: "No, that's actually Mike Marshall.", time: 19 },
+      { speaker: "ai", text: "Oh, I apologize for the mix-up, Mike. Let me update that. Could you also confirm your email address?", time: 24 },
+      { speaker: "human", text: "Sure. It's mike.marshall@example.com.", time: 31 },
+      { speaker: "ai", text: "Got it. Thanks for the update, Mike. I appreciate your time helping me verify this information.", time: 36 },
+      { speaker: "human", text: "Bye-bye.", time: 42 },
+      { speaker: "ai", text: "Goodbye!", time: 44 },
     ],
     validatedFields: [
-      { field: "Company Name", status: "confirmed", value: "TechCorp Solutions", revealAt: 10 },
-      { field: "Contact Name", status: "updated", original: "John Smith", value: "Mike Marshall", revealAt: 16 },
-      { field: "Email", status: "updated", original: "john.smith@example.com", value: "mike.marshall@example.com", revealAt: 27 },
+      { field: "Company Name", status: "confirmed", value: "TechCorp Solutions", revealAt: 15 },
+      { field: "Contact Name", status: "updated", original: "John Smith", value: "Mike Marshall", revealAt: 22 },
+      { field: "Email", status: "updated", original: "john.smith@example.com", value: "mike.marshall@example.com", revealAt: 34 },
     ],
     extractedData: [
-      { field: "Name", value: "Mike Marshall", revealAt: 16 },
-      { field: "Email", value: "mike.marshall@example.com", revealAt: 27 },
+      { field: "Name", value: "Mike Marshall", revealAt: 22 },
+      { field: "Email", value: "mike.marshall@example.com", revealAt: 34 },
     ],
     nextActions: [
       "Update customer records with new name and email",
@@ -116,23 +120,24 @@ const scenarios: Scenario[] = [
     phone: "+34 6** *** **7",
     callQuality: 9,
     callOutcome: "Consultation rescheduled for next Monday at 10:00 AM",
+    ctaMessage: "Listen to an AI agent reschedule an appointment seamlessly",
     transcript: [
-      { speaker: "ai", text: "Hi, this is the Healthcare Clinic calling for Robert Taylor. I'm just calling to confirm your consultation appointment scheduled for tomorrow at two o'clock PM. Can you make it?", time: 0 },
-      { speaker: "human", text: "No, actually I'm not going to be tomorrow at 2 PM. Can we schedule it for maybe next Monday?", time: 8 },
-      { speaker: "ai", text: "I understand. Let me check our availability for next Monday. Would you prefer the morning or afternoon?", time: 14 },
-      { speaker: "human", text: "Let's do... 10 AM. Is that okay for you?", time: 20 },
-      { speaker: "ai", text: "Let me check... Yes, ten o'clock AM next Monday works perfectly. I've rescheduled your consultation for that time. Is there anything else I can help you with?", time: 26 },
-      { speaker: "human", text: "No. Thank you.", time: 36 },
-      { speaker: "ai", text: "Great, you're all set. Thanks for letting us know, and have a wonderful day. Goodbye!", time: 38 },
+      { speaker: "ai", text: "Hi, this is the Healthcare Clinic calling for Robert Taylor. I'm just calling to confirm your consultation appointment scheduled for tomorrow at two o'clock PM. Can you make it?", time: 1 },
+      { speaker: "human", text: "No, actually I'm not going to be tomorrow at 2 PM. Can we schedule it for maybe next Monday?", time: 10 },
+      { speaker: "ai", text: "I understand. Let me check our availability for next Monday. Would you prefer the morning or afternoon?", time: 20 },
+      { speaker: "human", text: "Let's do... 10 AM. Is that okay for you?", time: 27 },
+      { speaker: "ai", text: "Let me check... Yes, ten o'clock AM next Monday works perfectly. I've rescheduled your consultation for that time. Is there anything else I can help you with?", time: 33 },
+      { speaker: "human", text: "No. Thank you.", time: 42 },
+      { speaker: "ai", text: "Great, you're all set. Thanks for letting us know, and have a wonderful day. Goodbye!", time: 45 },
     ],
     validatedFields: [
-      { field: "Company Name", status: "confirmed", value: "Healthcare Clinic", revealAt: 5 },
-      { field: "Appointment Type", status: "confirmed", value: "Consultation", revealAt: 5 },
-      { field: "Appointment Date", status: "updated", original: "Tomorrow at 2:00 PM", value: "Next Monday at 10:00 AM", revealAt: 30 },
+      { field: "Company Name", status: "confirmed", value: "Healthcare Clinic", revealAt: 4 },
+      { field: "Appointment Type", status: "confirmed", value: "Consultation", revealAt: 4 },
+      { field: "Appointment Date", status: "updated", original: "Tomorrow at 2:00 PM", value: "Next Monday at 10:00 AM", revealAt: 36 },
     ],
     extractedData: [
-      { field: "Contact Name", value: "Robert Taylor", revealAt: 5 },
-      { field: "Appointment Date", value: "Next Monday at 10:00 AM", revealAt: 30 },
+      { field: "Contact Name", value: "Robert Taylor", revealAt: 4 },
+      { field: "Appointment Date", value: "Next Monday at 10:00 AM", revealAt: 36 },
     ],
     nextActions: [
       "Update appointment calendar with new date and time",
@@ -151,31 +156,32 @@ const scenarios: Scenario[] = [
     phone: "+34 6** *** **7",
     callQuality: 9,
     callOutcome: "Qualified lead — passed to sales team for follow-up",
+    ctaMessage: "Discover how AI qualifies leads using the BANT framework",
     transcript: [
-      { speaker: "human", text: "Hello.", time: 0 },
-      { speaker: "ai", text: "Hi! This is Lead Qualification Agent, calling for a quick demo.", time: 2 },
-      { speaker: "human", text: "Okay.", time: 6 },
-      { speaker: "ai", text: "Great. I'm reaching out because you submitted a form on our website. I see you're interested in the Enterprise Plan. Is that correct?", time: 7 },
-      { speaker: "human", text: "I am.", time: 14 },
-      { speaker: "ai", text: "Excellent. To make sure we're a good fit, I'd like to ask a few quick questions. First, what is your estimated budget for this solution?", time: 16 },
-      { speaker: "human", text: "I don't know.", time: 24 },
-      { speaker: "ai", text: "No problem. Do you have a rough range in mind, or would you need to discuss that with your team first?", time: 26 },
-      { speaker: "human", text: "We don't want to pay over $200 for the subscription model.", time: 33 },
-      { speaker: "ai", text: "Understood. So you're looking to stay under two hundred dollars per month. Next, are you the decision maker for this purchase, or will others need to be involved?", time: 38 },
-      { speaker: "human", text: "Um, yeah, I am.", time: 48 },
-      { speaker: "ai", text: "Great. And what is your timeline for implementing a solution like this?", time: 51 },
-      { speaker: "human", text: "I would say one month, roughly.", time: 56 },
-      { speaker: "ai", text: "Okay, so about one month. Thanks for the information. Based on your budget, authority, and timeline, it sounds like you could be a good fit. I'll pass this along to our sales team for follow-up. Thanks for your time, have a great day!", time: 60 },
+      { speaker: "human", text: "Hello.", time: 1 },
+      { speaker: "ai", text: "Hi! This is Lead Qualification Agent, calling for a quick demo.", time: 4 },
+      { speaker: "human", text: "Okay.", time: 10 },
+      { speaker: "ai", text: "Great. I'm reaching out because you submitted a form on our website. I see you're interested in the Enterprise Plan. Is that correct?", time: 12 },
+      { speaker: "human", text: "I am.", time: 17 },
+      { speaker: "ai", text: "Excellent. To make sure we're a good fit, I'd like to ask a few quick questions. First, what is your estimated budget for this solution?", time: 22 },
+      { speaker: "human", text: "I don't know.", time: 30 },
+      { speaker: "ai", text: "No problem. Do you have a rough range in mind, or would you need to discuss that with your team first?", time: 33 },
+      { speaker: "human", text: "We don't want to pay over $200 for the subscription model.", time: 40 },
+      { speaker: "ai", text: "Understood. So you're looking to stay under two hundred dollars per month. Next, are you the decision maker for this purchase, or will others need to be involved?", time: 45 },
+      { speaker: "human", text: "Um, yeah, I am.", time: 58 },
+      { speaker: "ai", text: "Great. And what is your timeline for implementing a solution like this?", time: 60 },
+      { speaker: "human", text: "I would say one month, roughly.", time: 65 },
+      { speaker: "ai", text: "Okay, so about one month. Thanks for the information. Based on your budget, authority, and timeline, it sounds like you could be a good fit. I'll pass this along to our sales team for follow-up. Thanks for your time, have a great day!", time: 70 },
     ],
     validatedFields: [
-      { field: "Company Name", status: "confirmed", value: "Sales Pro Inc", revealAt: 10 },
-      { field: "Contact Name", status: "confirmed", value: "Alex Martinez", revealAt: 10 },
-      { field: "Interest", status: "confirmed", value: "Enterprise Plan", revealAt: 15 },
+      { field: "Company Name", status: "confirmed", value: "Sales Pro Inc", revealAt: 6 },
+      { field: "Contact Name", status: "confirmed", value: "Alex Martinez", revealAt: 6 },
+      { field: "Interest", status: "confirmed", value: "Enterprise Plan", revealAt: 18 },
     ],
     extractedData: [
-      { field: "Budget", value: "Under $200/mo", revealAt: 36 },
-      { field: "Decision Maker", value: "Yes", revealAt: 50 },
-      { field: "Timeline", value: "~1 month", revealAt: 58 },
+      { field: "Budget", value: "Under $200/mo", revealAt: 43 },
+      { field: "Decision Maker", value: "Yes", revealAt: 60 },
+      { field: "Timeline", value: "~1 month", revealAt: 67 },
     ],
     nextActions: [
       "Pass customer information to sales team",
@@ -202,9 +208,9 @@ function FlyingDataParticle({ datum, onDone }: { datum: FlyingDatum; onDone: () 
       exit={{ opacity: 0, scale: 0.8, y: 10 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       onAnimationComplete={onDone}
-      className="absolute top-0 right-0 z-30 pointer-events-none"
+      className="absolute top-2 left-1/2 -translate-x-1/2 z-30 pointer-events-none"
     >
-      <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white border border-slate-200 shadow-lg text-xs">
+      <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white border border-slate-200 shadow-lg text-xs whitespace-nowrap">
         {datum.status === "confirmed" ? (
           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
         ) : datum.status === "updated" ? (
@@ -220,7 +226,7 @@ function FlyingDataParticle({ datum, onDone }: { datum: FlyingDatum; onDone: () 
 }
 
 /* ──────────────────────────────────────────
-   DATA ROW ANIMATION in the results table
+   DATA CAPTURE ROW
    ────────────────────────────────────────── */
 function DataRow({
   field,
@@ -235,29 +241,40 @@ function DataRow({
   original?: string;
   index: number;
 }) {
+  const colors = {
+    confirmed: { bg: "bg-emerald-50", text: "text-emerald-700", badge: "Confirmed" },
+    updated: { bg: "bg-amber-50", text: "text-amber-700", badge: "Updated" },
+    new: { bg: "bg-blue-50", text: "text-blue-700", badge: "New" },
+  };
+  const c = colors[status];
+
   return (
     <motion.div
-      initial={{ opacity: 0, x: 20, scale: 0.95 }}
-      animate={{ opacity: 1, x: 0, scale: 1 }}
-      transition={{ duration: 0.4, delay: index * 0.08, ease: "easeOut" }}
-      className="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-slate-50/80 transition-colors group"
+      initial={{ opacity: 0, x: -12 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.35, delay: index * 0.06, ease: "easeOut" }}
+      className={`flex items-center gap-2.5 px-3 py-2 rounded-xl ${c.bg} transition-colors`}
     >
-      <div className="flex items-center gap-2 min-w-0">
-        {status === "confirmed" ? (
-          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-        ) : status === "updated" ? (
-          <AlertCircle className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-        ) : (
-          <Zap className="w-3.5 h-3.5 text-blue-500 shrink-0" />
-        )}
-        <span className="text-xs font-medium text-slate-500 truncate">{field}</span>
+      {status === "confirmed" ? (
+        <CheckCircle2 className={`w-4 h-4 ${c.text} shrink-0`} />
+      ) : status === "updated" ? (
+        <AlertCircle className={`w-4 h-4 ${c.text} shrink-0`} />
+      ) : (
+        <Zap className={`w-4 h-4 ${c.text} shrink-0`} />
+      )}
+      <div className="flex-1 min-w-0">
+        <div className="text-[11px] font-medium text-slate-500">{field}</div>
+        <div className="flex items-center gap-1.5">
+          {original && (
+            <span className="text-[10px] text-slate-400 line-through">{original}</span>
+          )}
+          {original && <span className="text-[10px] text-slate-400">→</span>}
+          <span className="text-xs font-semibold text-slate-800 truncate">{value}</span>
+        </div>
       </div>
-      <div className="text-right min-w-0 ml-2">
-        {original && (
-          <span className="text-[10px] text-slate-400 line-through mr-2">{original}</span>
-        )}
-        <span className="text-xs font-semibold text-slate-800">{value}</span>
-      </div>
+      <span className={`text-[9px] font-bold uppercase px-1.5 py-0.5 rounded ${c.text} opacity-80`}>
+        {c.badge}
+      </span>
     </motion.div>
   );
 }
@@ -271,9 +288,8 @@ function seededRandom(seed: number) {
 }
 
 function WaveformVisualizer({ isPlaying }: { isPlaying: boolean }) {
-  const bars = 40;
+  const bars = 32;
 
-  // Pre-compute all random-ish values once so they never change between renders
   const barData = useMemo(() => {
     return Array.from({ length: bars }).map((_, i) => {
       const r1 = seededRandom(i);
@@ -292,7 +308,7 @@ function WaveformVisualizer({ isPlaying }: { isPlaying: boolean }) {
   }, []);
 
   return (
-    <div className="flex items-end gap-[2px] h-8 w-full">
+    <div className="flex items-end gap-[2px] h-7 w-full">
       {barData.map((b, i) => (
         <motion.div
           key={i}
@@ -382,6 +398,7 @@ export default function Hero() {
   const [revealedValidated, setRevealedValidated] = useState<number[]>([]);
   const [revealedExtracted, setRevealedExtracted] = useState<number[]>([]);
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
+  const [hasStartedPlaying, setHasStartedPlaying] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement>(null);
   const transcriptRef = useRef<HTMLDivElement>(null);
@@ -402,7 +419,6 @@ export default function Hero() {
     audio.addEventListener("canplaythrough", onCanPlay);
     audio.addEventListener("error", onError);
 
-    // Force a reload when src changes
     audio.load();
 
     return () => {
@@ -462,17 +478,15 @@ export default function Hero() {
     scenario.validatedFields.forEach((f, i) => {
       if (currentTime >= f.revealAt && !revealedValidated.includes(i)) {
         setRevealedValidated((prev) => [...prev, i]);
-        // Spawn flying particle
         flyIdCounter.current += 1;
         const id = `fly-${flyIdCounter.current}`;
         setFlyingData((prev) => [
           ...prev,
           { id, label: f.field, value: f.value, status: f.status },
         ]);
-        // Remove particle after animation
         setTimeout(() => {
           setFlyingData((prev) => prev.filter((d) => d.id !== id));
-        }, 2000);
+        }, 2500);
       }
     });
   }, [currentTime, revealedValidated, scenario.validatedFields]);
@@ -490,7 +504,7 @@ export default function Hero() {
         ]);
         setTimeout(() => {
           setFlyingData((prev) => prev.filter((d) => d.id !== id));
-        }, 2000);
+        }, 2500);
       }
     });
   }, [currentTime, revealedExtracted, scenario.extractedData]);
@@ -514,6 +528,7 @@ export default function Hero() {
       if (audioAvailable && audioRef.current) audioRef.current.pause();
       setIsPlaying(false);
     } else {
+      if (!hasStartedPlaying) setHasStartedPlaying(true);
       // If at end, restart
       if (currentTime >= scenario.duration - 0.5) {
         if (audioAvailable && audioRef.current) audioRef.current.currentTime = 0;
@@ -529,7 +544,7 @@ export default function Hero() {
       }
       setIsPlaying(true);
     }
-  }, [isPlaying, currentTime, scenario.duration, audioAvailable]);
+  }, [isPlaying, currentTime, scenario.duration, audioAvailable, hasStartedPlaying]);
 
   /* ── Switch scenario ── */
   const handleScenarioChange = useCallback(
@@ -549,6 +564,7 @@ export default function Hero() {
       setShowAnalysis(false);
       setFlyingData([]);
       setExpandedSection(null);
+      setHasStartedPlaying(false);
     },
     [activeScenario],
   );
@@ -583,6 +599,8 @@ export default function Hero() {
     return `${m}:${sec.toString().padStart(2, "0")}`;
   };
 
+  const totalDataFields = revealedValidated.length + revealedExtracted.length;
+
   return (
     <section className="pt-28 pb-16 md:pt-36 md:pb-24 relative overflow-hidden">
       {/* Background decorations */}
@@ -594,14 +612,14 @@ export default function Hero() {
       <audio ref={audioRef} src={scenario.audioSrc} preload="metadata" />
 
       <div className="max-w-7xl mx-auto px-6 relative">
-        {/* SPLIT LAYOUT: left text + right player */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        {/* SPLIT LAYOUT: left text + right phone */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* ─── LEFT COLUMN: Text + CTA ─── */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col justify-center lg:pt-8"
+            className="flex flex-col justify-center"
           >
             <div className="inline-flex items-center gap-2 mb-6">
               <span className="badge badge-primary">
@@ -652,169 +670,129 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* ─── RIGHT COLUMN: Audio Player + Real-time Analysis ─── */}
+          {/* ─── RIGHT COLUMN: Phone Mockup ─── */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="relative"
+            className="relative flex justify-center"
           >
-            <div className="gradient-border overflow-hidden shadow-2xl">
-              <div className="bg-white rounded-2xl overflow-hidden">
-                {/* ── Player Header ── */}
-                <div className="gradient-bg px-5 py-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
-                        <Phone className="w-4 h-4 text-white" />
-                      </div>
-                      <div>
-                        <div className="text-white font-medium text-sm">
-                          {scenario.agentName}
-                        </div>
-                        <div className="text-white/60 text-xs flex items-center gap-2">
-                          <span>{scenario.phone}</span>
-                          <span className="w-1 h-1 rounded-full bg-white/40" />
-                          <span>{scenario.durationLabel}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      {isPlaying && (
-                        <motion.div
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          className="flex items-center gap-2"
-                        >
-                          <span className="relative flex h-2.5 w-2.5">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
-                            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500" />
-                          </span>
-                          <span className="text-white/80 text-xs font-medium">LIVE</span>
-                        </motion.div>
-                      )}
-                      <Volume2 className="w-4 h-4 text-white/50" />
-                    </div>
-                  </div>
-
-                  {/* Scenario selector */}
-                  <div className="flex gap-2">
-                    {scenarios.map((s, index) => {
-                      const Icon = s.icon;
-                      return (
-                        <button
-                          key={s.id}
-                          onClick={() => handleScenarioChange(index)}
-                          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer ${
-                            activeScenario === index
-                              ? "bg-white text-primary shadow-sm"
-                              : "bg-white/15 text-white/80 hover:bg-white/25"
-                          }`}
-                        >
-                          <Icon className="w-3 h-3" />
-                          <span className="hidden sm:inline">{s.label}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
+            {/* Phone Frame */}
+            <div className="relative w-[340px] sm:w-[360px]">
+              {/* Phone outer shell */}
+              <div className="rounded-[2.5rem] bg-slate-900 p-[10px] shadow-2xl ring-1 ring-slate-700/50">
+                {/* Phone notch */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-slate-900 rounded-b-2xl z-20 flex items-center justify-center">
+                  <div className="w-16 h-3 bg-slate-800 rounded-full" />
                 </div>
 
-                {/* ── Waveform + Controls ── */}
-                <div className="px-5 py-3 bg-slate-50 border-b border-slate-100">
-                  <div className="flex items-center gap-3">
-                    <button
-                      onClick={handlePlayPause}
-                      className="w-10 h-10 rounded-full gradient-bg text-white flex items-center justify-center hover:opacity-90 transition-all shadow-lg shrink-0 cursor-pointer active:scale-95"
-                    >
-                      {isPlaying ? (
-                        <Pause className="w-4 h-4" />
-                      ) : (
-                        <Play className="w-4 h-4 ml-0.5" />
-                      )}
-                    </button>
+                {/* Phone screen */}
+                <div className="rounded-[2rem] bg-white overflow-hidden relative">
+                  {/* Fake status bar */}
+                  <div className="flex items-center justify-between px-6 pt-7 pb-1 bg-slate-50">
+                    <span className="text-[10px] font-semibold text-slate-500">9:41</span>
+                    <div className="flex items-center gap-1">
+                      <Signal className="w-3 h-3 text-slate-400" />
+                      <Wifi className="w-3 h-3 text-slate-400" />
+                      <Battery className="w-3.5 h-3.5 text-slate-400" />
+                    </div>
+                  </div>
 
-                    <div className="flex-1 space-y-1">
-                      <WaveformVisualizer isPlaying={isPlaying} />
-                      <div
-                        className="h-1.5 bg-slate-200 rounded-full overflow-hidden cursor-pointer relative group"
-                        onClick={handleProgressClick}
+                  {/* ── Call Header ── */}
+                  <div className="gradient-bg px-4 py-3">
+                    <div className="flex items-center justify-between mb-2.5">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+                          <Phone className="w-3.5 h-3.5 text-white" />
+                        </div>
+                        <div>
+                          <div className="text-white font-medium text-xs leading-tight">
+                            {scenario.agentName}
+                          </div>
+                          <div className="text-white/60 text-[10px] flex items-center gap-1.5">
+                            <span>{scenario.phone}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        {isPlaying && (
+                          <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            className="flex items-center gap-1.5"
+                          >
+                            <span className="relative flex h-2 w-2">
+                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
+                              <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
+                            </span>
+                            <span className="text-white/80 text-[10px] font-medium">LIVE</span>
+                          </motion.div>
+                        )}
+                        <Volume2 className="w-3.5 h-3.5 text-white/40" />
+                      </div>
+                    </div>
+
+                    {/* Scenario selector tabs */}
+                    <div className="flex gap-1.5">
+                      {scenarios.map((s, index) => {
+                        const Icon = s.icon;
+                        return (
+                          <button
+                            key={s.id}
+                            onClick={() => handleScenarioChange(index)}
+                            className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-medium transition-all cursor-pointer ${
+                              activeScenario === index
+                                ? "bg-white text-primary shadow-sm"
+                                : "bg-white/15 text-white/80 hover:bg-white/25"
+                            }`}
+                          >
+                            <Icon className="w-2.5 h-2.5" />
+                            <span className="hidden sm:inline">{s.label}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* ── Waveform + Controls ── */}
+                  <div className="px-4 py-2.5 bg-slate-50 border-b border-slate-100">
+                    <div className="flex items-center gap-2.5">
+                      <button
+                        onClick={handlePlayPause}
+                        className="w-9 h-9 rounded-full gradient-bg text-white flex items-center justify-center hover:opacity-90 transition-all shadow-lg shrink-0 cursor-pointer active:scale-95"
                       >
+                        {isPlaying ? (
+                          <Pause className="w-3.5 h-3.5" />
+                        ) : (
+                          <Play className="w-3.5 h-3.5 ml-0.5" />
+                        )}
+                      </button>
+
+                      <div className="flex-1 space-y-0.5">
+                        <WaveformVisualizer isPlaying={isPlaying} />
                         <div
-                          className="h-full gradient-bg rounded-full transition-all duration-200"
-                          style={{ width: `${Math.min(progress, 100)}%` }}
-                        />
-                        {/* Hover thumb */}
-                        <div
-                          className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full gradient-bg shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
-                          style={{ left: `calc(${Math.min(progress, 100)}% - 6px)` }}
-                        />
+                          className="h-1 bg-slate-200 rounded-full overflow-hidden cursor-pointer relative group"
+                          onClick={handleProgressClick}
+                        >
+                          <div
+                            className="h-full gradient-bg rounded-full transition-all duration-200"
+                            style={{ width: `${Math.min(progress, 100)}%` }}
+                          />
+                          <div
+                            className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full gradient-bg shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
+                            style={{ left: `calc(${Math.min(progress, 100)}% - 5px)` }}
+                          />
+                        </div>
                       </div>
-                    </div>
 
-                    <span className="text-xs text-slate-400 font-mono tabular-nums shrink-0">
-                      {formatTime(currentTime)} / {formatTime(scenario.duration)}
-                    </span>
-                  </div>
-                </div>
-
-                {/* ── Transcript + Real-time data panel ── */}
-                <div className="grid grid-cols-1 sm:grid-cols-5">
-                  {/* Transcript side */}
-                  <div className="sm:col-span-3 border-r border-slate-100">
-                    <div className="px-3 py-2 border-b border-slate-100 bg-slate-50/50">
-                      <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
-                        Live Transcript
+                      <span className="text-[10px] text-slate-400 font-mono tabular-nums shrink-0">
+                        {formatTime(currentTime)}/{formatTime(scenario.duration)}
                       </span>
                     </div>
-                    <div
-                      ref={transcriptRef}
-                      className="h-56 overflow-y-auto p-3 space-y-2 scroll-smooth"
-                    >
-                      {visibleMessages.length === 0 && !isPlaying ? (
-                        <div className="h-full flex items-center justify-center text-slate-300 text-xs">
-                          Press play to start
-                        </div>
-                      ) : (
-                        visibleMessages.map((msg, idx) => {
-                          const isAI = msg.speaker === "ai";
-                          return (
-                            <motion.div
-                              key={`${scenario.id}-${idx}`}
-                              initial={{ opacity: 0, y: 8 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ duration: 0.25 }}
-                              className={`flex ${isAI ? "justify-start" : "justify-end"}`}
-                            >
-                              <div
-                                className={`max-w-[90%] px-3 py-2 rounded-xl text-xs leading-relaxed ${
-                                  isAI
-                                    ? "bg-slate-100 text-slate-700 rounded-bl-sm"
-                                    : "gradient-bg text-white rounded-br-sm"
-                                }`}
-                              >
-                                {msg.text}
-                              </div>
-                            </motion.div>
-                          );
-                        })
-                      )}
-                      {isPlaying && visibleMessages.length > 0 && (
-                        <motion.div
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: [0.3, 1, 0.3] }}
-                          transition={{ duration: 1.2, repeat: Infinity }}
-                          className="flex items-center gap-1 pl-2"
-                        >
-                          <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
-                          <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
-                          <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
-                        </motion.div>
-                      )}
-                    </div>
                   </div>
 
-                  {/* Real-time data side */}
-                  <div className="sm:col-span-2 relative">
+                  {/* ── Content Area: CTA or Transcript ── */}
+                  <div className="relative">
                     {/* Flying particles overlay */}
                     <AnimatePresence>
                       {flyingData.map((d) => (
@@ -826,54 +804,119 @@ export default function Hero() {
                       ))}
                     </AnimatePresence>
 
-                    <div className="px-3 py-2 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
-                      <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1">
-                        <Shield className="w-3 h-3" />
-                        Real-time Analysis
+                    {/* Transcript header */}
+                    <div className="px-4 py-1.5 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
+                      <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
+                        Live Transcript
                       </span>
-                      {revealedValidated.length > 0 && (
+                      {totalDataFields > 0 && (
                         <motion.span
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
-                          className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded"
+                          className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded flex items-center gap-1"
                         >
-                          {revealedValidated.length + revealedExtracted.length} fields
+                          <Zap className="w-2.5 h-2.5" />
+                          {totalDataFields} captured
                         </motion.span>
                       )}
                     </div>
 
-                    <div className="h-56 overflow-y-auto p-2 space-y-1">
-                      {revealedValidated.length === 0 && revealedExtracted.length === 0 ? (
-                        <div className="h-full flex flex-col items-center justify-center text-slate-300 gap-2">
-                          <Database className="w-5 h-5" />
-                          <span className="text-xs">Waiting for data...</span>
-                          {isPlaying && (
-                            <motion.div
-                              className="w-16 h-0.5 rounded-full overflow-hidden bg-slate-100"
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                            >
-                              <motion.div
-                                className="h-full gradient-bg"
-                                animate={{ x: ["-100%", "100%"] }}
-                                transition={{
-                                  duration: 1.2,
-                                  repeat: Infinity,
-                                  ease: "linear",
-                                }}
-                                style={{ width: "60%" }}
-                              />
-                            </motion.div>
-                          )}
+                    {/* Transcript / CTA content */}
+                    <div
+                      ref={transcriptRef}
+                      className="h-[220px] overflow-y-auto p-3 space-y-2 scroll-smooth"
+                    >
+                      {!hasStartedPlaying ? (
+                        /* ── CTA Banner: shown before first play ── */
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          className="h-full flex flex-col items-center justify-center text-center px-4"
+                        >
+                          <motion.div
+                            animate={{ scale: [1, 1.08, 1] }}
+                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                            className="w-14 h-14 rounded-full gradient-bg flex items-center justify-center mb-4 shadow-lg cursor-pointer"
+                            onClick={handlePlayPause}
+                          >
+                            <Play className="w-6 h-6 text-white ml-0.5" />
+                          </motion.div>
+                          <p className="text-sm font-medium text-slate-700 mb-1.5">
+                            {scenario.ctaMessage}
+                          </p>
+                          <p className="text-[11px] text-slate-400">
+                            Press play to start the demo
+                          </p>
+                        </motion.div>
+                      ) : visibleMessages.length === 0 ? (
+                        <div className="h-full flex items-center justify-center">
+                          <motion.div
+                            animate={{ opacity: [0.3, 1, 0.3] }}
+                            transition={{ duration: 1.2, repeat: Infinity }}
+                            className="flex items-center gap-1.5 text-slate-300"
+                          >
+                            <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+                            <span className="text-xs ml-1">Connecting call...</span>
+                          </motion.div>
                         </div>
                       ) : (
                         <>
-                          {/* Validated fields section */}
-                          {revealedValidated.length > 0 && (
-                            <div>
-                              <div className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider px-2 py-1">
-                                Validated
-                              </div>
+                          {visibleMessages.map((msg, idx) => {
+                            const isAI = msg.speaker === "ai";
+                            return (
+                              <motion.div
+                                key={`${scenario.id}-${idx}`}
+                                initial={{ opacity: 0, y: 8 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.25 }}
+                                className={`flex ${isAI ? "justify-start" : "justify-end"}`}
+                              >
+                                <div
+                                  className={`max-w-[85%] px-3 py-2 rounded-xl text-[11px] leading-relaxed ${
+                                    isAI
+                                      ? "bg-slate-100 text-slate-700 rounded-bl-sm"
+                                      : "gradient-bg text-white rounded-br-sm"
+                                  }`}
+                                >
+                                  {msg.text}
+                                </div>
+                              </motion.div>
+                            );
+                          })}
+                          {isPlaying && visibleMessages.length > 0 && (
+                            <motion.div
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: [0.3, 1, 0.3] }}
+                              transition={{ duration: 1.2, repeat: Infinity }}
+                              className="flex items-center gap-1 pl-2"
+                            >
+                              <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+                              <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+                              <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+                            </motion.div>
+                          )}
+                        </>
+                      )}
+                    </div>
+
+                    {/* ── Data Captured Section (simplified) ── */}
+                    <AnimatePresence>
+                      {(revealedValidated.length > 0 || revealedExtracted.length > 0) && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="border-t border-slate-100 overflow-hidden"
+                        >
+                          <div className="px-3 py-2 bg-slate-50/80">
+                            <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1">
+                              <Database className="w-3 h-3" />
+                              Data Captured
+                            </div>
+                            <div className="space-y-1.5 max-h-[140px] overflow-y-auto">
                               {revealedValidated.map((vi, ri) => {
                                 const f = scenario.validatedFields[vi];
                                 return (
@@ -887,15 +930,6 @@ export default function Hero() {
                                   />
                                 );
                               })}
-                            </div>
-                          )}
-
-                          {/* Extracted data section */}
-                          {revealedExtracted.length > 0 && (
-                            <div className="mt-2">
-                              <div className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider px-2 py-1">
-                                Extracted
-                              </div>
                               {revealedExtracted.map((ei, ri) => {
                                 const f = scenario.extractedData[ei];
                                 return (
@@ -904,158 +938,163 @@ export default function Hero() {
                                     field={f.field}
                                     value={f.value}
                                     status="new"
-                                    index={ri}
+                                    index={ri + revealedValidated.length}
                                   />
                                 );
                               })}
                             </div>
-                          )}
-                        </>
+                          </div>
+                        </motion.div>
                       )}
-                    </div>
+                    </AnimatePresence>
                   </div>
-                </div>
 
-                {/* ── Post-call analysis (expandable) ── */}
-                <AnimatePresence>
-                  {showAnalysis && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.4, ease: "easeInOut" }}
-                      className="border-t border-slate-200 overflow-hidden"
-                    >
-                      <div className="p-4 gradient-bg-subtle">
-                        {/* Summary bar */}
-                        <div className="flex items-center justify-between mb-3">
-                          <div className="flex items-center gap-3">
-                            <QualityRing score={scenario.callQuality} />
-                            <div>
-                              <div className="text-xs font-semibold text-slate-800">
-                                Call Complete
-                              </div>
-                              <div className="text-[11px] text-slate-500 max-w-[220px] truncate">
-                                {scenario.callOutcome}
+                  {/* ── Post-call analysis (expandable) ── */}
+                  <AnimatePresence>
+                    {showAnalysis && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.4, ease: "easeInOut" }}
+                        className="border-t border-slate-200 overflow-hidden"
+                      >
+                        <div className="p-3 gradient-bg-subtle">
+                          {/* Summary bar */}
+                          <div className="flex items-center justify-between mb-2.5">
+                            <div className="flex items-center gap-2.5">
+                              <QualityRing score={scenario.callQuality} size={40} />
+                              <div>
+                                <div className="text-[11px] font-semibold text-slate-800">
+                                  Call Complete
+                                </div>
+                                <div className="text-[10px] text-slate-500 max-w-[180px] leading-tight">
+                                  {scenario.callOutcome}
+                                </div>
                               </div>
                             </div>
+                            <div className="flex items-center gap-1.5 text-[10px] text-slate-500">
+                              <Clock className="w-3 h-3" />
+                              {scenario.durationLabel}
+                            </div>
                           </div>
-                          <div className="flex items-center gap-2 text-xs text-slate-500">
-                            <Clock className="w-3.5 h-3.5" />
-                            {scenario.durationLabel}
+
+                          {/* Expandable sections */}
+                          <div className="space-y-1">
+                            {/* Next Actions */}
+                            <button
+                              onClick={() =>
+                                setExpandedSection(
+                                  expandedSection === "actions" ? null : "actions",
+                                )
+                              }
+                              className="w-full flex items-center justify-between px-2.5 py-1.5 bg-white rounded-lg hover:bg-slate-50 transition-colors text-[11px] font-medium text-slate-700 cursor-pointer"
+                            >
+                              <span className="flex items-center gap-1.5">
+                                <ArrowUpRight className="w-3 h-3 text-primary" />
+                                Next Actions ({scenario.nextActions.length})
+                              </span>
+                              <ChevronDown
+                                className={`w-3 h-3 text-slate-400 transition-transform ${
+                                  expandedSection === "actions" ? "rotate-180" : ""
+                                }`}
+                              />
+                            </button>
+                            <AnimatePresence>
+                              {expandedSection === "actions" && (
+                                <motion.div
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: "auto", opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  className="overflow-hidden"
+                                >
+                                  <div className="px-2.5 pb-1.5 space-y-1">
+                                    {scenario.nextActions.map((action, i) => (
+                                      <motion.div
+                                        key={i}
+                                        initial={{ opacity: 0, x: -10 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: i * 0.1 }}
+                                        className="flex items-start gap-1.5 text-[10px] text-slate-600"
+                                      >
+                                        <span className="w-4 h-4 rounded-full gradient-bg text-white flex items-center justify-center text-[9px] font-bold shrink-0 mt-0.5">
+                                          {i + 1}
+                                        </span>
+                                        {action}
+                                      </motion.div>
+                                    ))}
+                                  </div>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+
+                            {/* Full Results */}
+                            <button
+                              onClick={() =>
+                                setExpandedSection(
+                                  expandedSection === "results" ? null : "results",
+                                )
+                              }
+                              className="w-full flex items-center justify-between px-2.5 py-1.5 bg-white rounded-lg hover:bg-slate-50 transition-colors text-[11px] font-medium text-slate-700 cursor-pointer"
+                            >
+                              <span className="flex items-center gap-1.5">
+                                <Star className="w-3 h-3 text-amber-500" />
+                                Full Summary
+                              </span>
+                              <ChevronDown
+                                className={`w-3 h-3 text-slate-400 transition-transform ${
+                                  expandedSection === "results" ? "rotate-180" : ""
+                                }`}
+                              />
+                            </button>
+                            <AnimatePresence>
+                              {expandedSection === "results" && (
+                                <motion.div
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: "auto", opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  className="overflow-hidden"
+                                >
+                                  <div className="px-1 pb-1.5 space-y-1">
+                                    {scenario.validatedFields.map((f, i) => (
+                                      <DataRow
+                                        key={i}
+                                        field={f.field}
+                                        value={f.value}
+                                        status={f.status}
+                                        original={f.original}
+                                        index={i}
+                                      />
+                                    ))}
+                                    {scenario.extractedData.map((f, i) => (
+                                      <DataRow
+                                        key={`ext-${i}`}
+                                        field={f.field}
+                                        value={f.value}
+                                        status="new"
+                                        index={i + scenario.validatedFields.length}
+                                      />
+                                    ))}
+                                  </div>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
                           </div>
                         </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
 
-                        {/* Expandable sections */}
-                        <div className="space-y-1.5">
-                          {/* Next Actions */}
-                          <button
-                            onClick={() =>
-                              setExpandedSection(
-                                expandedSection === "actions" ? null : "actions",
-                              )
-                            }
-                            className="w-full flex items-center justify-between px-3 py-2 bg-white rounded-lg hover:bg-slate-50 transition-colors text-xs font-medium text-slate-700 cursor-pointer"
-                          >
-                            <span className="flex items-center gap-2">
-                              <ArrowUpRight className="w-3.5 h-3.5 text-primary" />
-                              Next Actions ({scenario.nextActions.length})
-                            </span>
-                            <ChevronDown
-                              className={`w-3.5 h-3.5 text-slate-400 transition-transform ${
-                                expandedSection === "actions" ? "rotate-180" : ""
-                              }`}
-                            />
-                          </button>
-                          <AnimatePresence>
-                            {expandedSection === "actions" && (
-                              <motion.div
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: "auto", opacity: 1 }}
-                                exit={{ height: 0, opacity: 0 }}
-                                className="overflow-hidden"
-                              >
-                                <div className="px-3 pb-2 space-y-1.5">
-                                  {scenario.nextActions.map((action, i) => (
-                                    <motion.div
-                                      key={i}
-                                      initial={{ opacity: 0, x: -10 }}
-                                      animate={{ opacity: 1, x: 0 }}
-                                      transition={{ delay: i * 0.1 }}
-                                      className="flex items-start gap-2 text-xs text-slate-600"
-                                    >
-                                      <span className="w-5 h-5 rounded-full gradient-bg text-white flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">
-                                        {i + 1}
-                                      </span>
-                                      {action}
-                                    </motion.div>
-                                  ))}
-                                </div>
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
-
-                          {/* Full Results */}
-                          <button
-                            onClick={() =>
-                              setExpandedSection(
-                                expandedSection === "results" ? null : "results",
-                              )
-                            }
-                            className="w-full flex items-center justify-between px-3 py-2 bg-white rounded-lg hover:bg-slate-50 transition-colors text-xs font-medium text-slate-700 cursor-pointer"
-                          >
-                            <span className="flex items-center gap-2">
-                              <Star className="w-3.5 h-3.5 text-amber-500" />
-                              Full Validation Summary
-                            </span>
-                            <ChevronDown
-                              className={`w-3.5 h-3.5 text-slate-400 transition-transform ${
-                                expandedSection === "results" ? "rotate-180" : ""
-                              }`}
-                            />
-                          </button>
-                          <AnimatePresence>
-                            {expandedSection === "results" && (
-                              <motion.div
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: "auto", opacity: 1 }}
-                                exit={{ height: 0, opacity: 0 }}
-                                className="overflow-hidden"
-                              >
-                                <div className="px-2 pb-2">
-                                  {scenario.validatedFields.map((f, i) => (
-                                    <DataRow
-                                      key={i}
-                                      field={f.field}
-                                      value={f.value}
-                                      status={f.status}
-                                      original={f.original}
-                                      index={i}
-                                    />
-                                  ))}
-                                  {scenario.extractedData.map((f, i) => (
-                                    <DataRow
-                                      key={`ext-${i}`}
-                                      field={f.field}
-                                      value={f.value}
-                                      status="new"
-                                      index={i + scenario.validatedFields.length}
-                                    />
-                                  ))}
-                                </div>
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                  {/* Phone home indicator */}
+                  <div className="flex justify-center py-2">
+                    <div className="w-20 h-1 rounded-full bg-slate-200" />
+                  </div>
+                </div>
               </div>
-            </div>
 
-            {/* Decorative glow behind card */}
-            <div className="absolute -inset-4 gradient-bg opacity-[0.07] blur-3xl rounded-3xl -z-10" />
+              {/* Decorative glow behind phone */}
+              <div className="absolute -inset-6 gradient-bg opacity-[0.08] blur-3xl rounded-[3rem] -z-10" />
+            </div>
           </motion.div>
         </div>
 

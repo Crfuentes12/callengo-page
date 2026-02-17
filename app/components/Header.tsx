@@ -54,10 +54,10 @@ export default function Header() {
           <Link href="/" className="flex items-center gap-3 group">
             <div className="relative">
               <Image
-                src="/callengo-logo.png"
+                src="/callengo-logo.svg"
                 alt="Callengo Logo"
-                width={40}
-                height={40}
+                width={80}
+                height={50}
                 className="w-10 h-10 transition-transform group-hover:scale-105"
               />
             </div>

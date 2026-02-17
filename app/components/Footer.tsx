@@ -48,13 +48,13 @@ export default function Footer() {
           <div className="col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-6">
               <Image
-                src="/callengo-logo-white.png"
+                src="/callengo-logo.svg"
                 alt="Callengo Logo"
                 width={32}
                 height={32}
                 className="w-8 h-8"
               />
-              <span className="text-2xl font-semibold">Callengo</span>
+              <span className="text-2xl font-semibold text-gray-400">Callengo</span>
             </Link>
 
             <p className="text-gray-400 mb-6 max-w-xs leading-relaxed">

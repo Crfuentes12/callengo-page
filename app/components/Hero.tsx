@@ -78,7 +78,7 @@ const scenarios: Scenario[] = [
     audioSrc: "/audio-test/data-validation.wav",
     duration: 44,
     durationLabel: "0:44",
-    phone: "+34 6** *** **7",
+    phone: "+1 5** *** **4",
     callQuality: 7,
     callOutcome: "Information updated successfully",
     ctaHeadline: "Your CRM is full of wrong numbers and outdated contacts",
@@ -117,7 +117,7 @@ const scenarios: Scenario[] = [
     audioSrc: "/audio-test/appointment-confirmation.wav",
     duration: 49,
     durationLabel: "0:49",
-    phone: "+34 6** *** **7",
+    phone: "+1 4** *** **7",
     callQuality: 9,
     callOutcome: "Consultation rescheduled for next Monday at 10:00 AM",
     ctaHeadline: "Every no-show is revenue walking out the door",
@@ -153,7 +153,7 @@ const scenarios: Scenario[] = [
     audioSrc: "/audio-test/lead-qualification.wav",
     duration: 83,
     durationLabel: "1:23",
-    phone: "+34 6** *** **7",
+    phone: "+1 5** *** **2",
     callQuality: 9,
     callOutcome: "Qualified lead — passed to sales team for follow-up",
     ctaHeadline: "Your reps are wasting hours on leads that will never buy",
@@ -353,35 +353,45 @@ function QualityRing({ score, size = 44 }: { score: number; size?: number }) {
    ────────────────────────────────────────── */
 function CurvedArrow() {
   return (
-    <div className="absolute -right-16 top-[30%] hidden lg:block pointer-events-none z-0" aria-hidden>
-      <svg width="180" height="120" viewBox="0 0 180 120" fill="none" className="opacity-30">
-        {/* Smooth S-curve sweeping right and down toward the phone */}
+    <div className="absolute -right-25 top-[65%] hidden lg:block pointer-events-none z-0">
+      <svg
+        width="180"
+        height="120"
+        viewBox="0 0 180 120"
+        fill="none"
+        className="opacity-30"
+      >
+        {/* Curve bending DOWN */}
         <path
-          d="M10 25 C 50 20, 80 15, 110 35 S 155 80, 165 95"
+          d="M20 20 C 80 70, 150 50, 165 20"
           stroke="url(#arrowCurveGrad)"
           strokeWidth="2"
           strokeLinecap="round"
           fill="none"
         />
-        {/* Arrowhead pointing down-right */}
+
+        {/* Arrowhead pointing up-right */}
         <path
-          d="M158 88 L165 96 L172 88"
+          d="M166 30 L166 20 L155 20"
           stroke="url(#arrowCurveGrad)"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
           fill="none"
         />
+
         <defs>
-          <linearGradient id="arrowCurveGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="var(--color-gradient-start)" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="var(--color-gradient-end)" stopOpacity="0.8" />
+          <linearGradient id="arrowCurveGrad" x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0%" stopOpacity="0.3" />
+            <stop offset="100%" stopOpacity="0.8" />
           </linearGradient>
         </defs>
       </svg>
     </div>
   );
 }
+
+
 
 /* ──────────────────────────────────────────
    HERO COMPONENT
@@ -623,7 +633,7 @@ export default function Hero() {
                 <div className="rounded-[2rem] bg-white overflow-hidden relative h-[680px] flex flex-col">
 
                   {/* Status bar */}
-                  <div className="flex items-center justify-between px-6 pt-2 pb-1 bg-slate-50 shrink-0">
+                  <div className="flex items-center justify-between px-6 pt-1 pb-1 bg-slate-50 shrink-0">
                     <span className="text-[10px] font-semibold text-slate-500">9:41</span>
                     <div className="flex items-center gap-1">
                       <Signal className="w-3 h-3 text-slate-400" />

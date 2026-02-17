@@ -160,16 +160,16 @@ export default function HowItWorks() {
           <h2 className="text-display-sm mb-5">
             Setup in minutes.
             <br />
-            <span className="gradient-text">Results in hours.</span>
+            <span>Results in hours.</span>
           </h2>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">
-            Six simple steps — from zero to fully automated calling campaigns.
+            Six simple steps, from zero to fully automated calling campaigns.
             No technical expertise required.
           </p>
         </div>
 
         {/* ── Main interactive area ── */}
-        <div className="grid lg:grid-cols-5 gap-8 xl:gap-12 items-start">
+        <div className="grid lg:grid-cols-6 gap-8 xl:gap-12 items-start">
 
           {/* LEFT — Screenshot viewer (3 cols) */}
           <motion.div
@@ -272,7 +272,7 @@ export default function HowItWorks() {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-2 space-y-1.5"
+            className="lg:col-span-3 space-y-1.5"
           >
             {steps.map((s, index) => {
               const Icon = s.icon;

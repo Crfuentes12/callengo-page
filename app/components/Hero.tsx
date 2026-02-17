@@ -350,7 +350,7 @@ function QualityRing({ score, size = 44 }: { score: number; size?: number }) {
    ────────────────────────────────────────── */
 function CurvedArrow() {
   return (
-    <div className="absolute -right-25 top-[65%] hidden lg:block pointer-events-none z-0">
+    <div className="absolute -right-25 top-[60%] hidden lg:block pointer-events-none z-0">
       <svg
         width="180"
         height="120"
@@ -378,9 +378,9 @@ function CurvedArrow() {
         />
 
         <defs>
-          <linearGradient id="arrowCurveGrad" x1="0" y1="1" x2="1" y2="0">
-            <stop offset="0%" stopOpacity="0.3" />
-            <stop offset="100%" stopOpacity="0.8" />
+          <linearGradient id="arrowCurveGrad" x1="0" y1="0" x2="1" y2="1"> 
+            <stop offset="0%" stopColor="var(--color-gradient-start)" stopOpacity="0.5" /> 
+            <stop offset="100%" stopColor="var(--color-gradient-end)" stopOpacity="1" />
           </linearGradient>
         </defs>
       </svg>
@@ -560,13 +560,6 @@ export default function Hero() {
             transition={{ duration: 0.6 }}
             className="flex flex-col justify-center relative"
           >
-            <div className="inline-flex items-center gap-2 mb-6">
-              <span className="badge badge-primary">
-                <Mic className="w-3 h-3 mr-1" />
-                AI Voice Agents
-              </span>
-            </div>
-
             <h1 className="text-display mb-6">
               Less time on calls.
               <br />
@@ -618,27 +611,12 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="relative flex justify-center"
           >
-            <div className="relative w-[360px] sm:w-[390px]">
+            <div className="relative w-100 sm:w-100 bottom-12">
               {/* Software window shell */}
               <div className="rounded-2xl bg-slate-950 shadow-2xl ring-1 ring-slate-700/50 overflow-hidden">
 
-                {/* Window chrome bar */}
-                <div className="flex items-center gap-3 px-4 py-2.5 bg-slate-950 border-b border-slate-800">
-                  <div className="flex items-center gap-1.5 shrink-0">
-                    <span className="w-3 h-3 rounded-full bg-red-400/60" />
-                    <span className="w-3 h-3 rounded-full bg-yellow-400/60" />
-                    <span className="w-3 h-3 rounded-full bg-green-400/60" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="bg-slate-800 rounded-md px-3 py-1.5 flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full gradient-bg shrink-0" />
-                      <span className="text-[11px] text-slate-400 font-mono truncate">app.callengo.com/campaigns/live</span>
-                    </div>
-                  </div>
-                </div>
-
                 {/* App screen — FIXED HEIGHT */}
-                <div className="bg-white overflow-hidden relative h-[560px] flex flex-col">
+                <div className="bg-white overflow-hidden relative h-140 flex flex-col">
 
                   {/* App header / call header */}
                   <div className="gradient-bg px-4 py-2.5 shrink-0">
@@ -856,7 +834,7 @@ export default function Hero() {
                           animate={{ opacity: 1, scale: 1 }}
                           exit={{ opacity: 0, scale: 0.97 }}
                           transition={{ duration: 0.2, ease: "easeOut" }}
-                          className="flex-1 m-3 bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+                          className="flex-1 bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden"
                         >
                           {/* Header */}
                           <div className="px-5 pt-4 pb-3 text-center border-b border-slate-100">
@@ -928,21 +906,6 @@ export default function Hero() {
             </div>
           </motion.div>
         </div>
-
-        {/* Trust indicators */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-16 text-center"
-        >
-          <p className="text-sm text-slate-500 mb-6">Trusted by innovative companies</p>
-          <div className="flex flex-wrap justify-center gap-8 opacity-50">
-            {["TechCorp", "Acme Inc", "StartupXYZ", "Enterprise Co", "InnovateLabs"].map((company) => (
-              <span key={company} className="text-slate-400 font-semibold text-lg">{company}</span>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );

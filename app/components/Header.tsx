@@ -103,7 +103,7 @@ export default function Header() {
                           href={agent.href}
                           className="flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50 transition-all group"
                         >
-                          <div className="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center flex-shrink-0 group-hover:bg-slate-200 transition-colors">
+                          <div className="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center shrink-0 group-hover:bg-slate-200 transition-colors">
                             <Icon className="w-5 h-5 text-slate-600" />
                           </div>
                           <div>
@@ -196,7 +196,7 @@ export default function Header() {
                       className="flex items-center gap-3 px-4 py-3 text-dark hover:bg-gray-50 rounded-lg"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
-                      <div className="w-9 h-9 rounded-lg bg-slate-100 flex items-center justify-center flex-shrink-0">
+                      <div className="w-9 h-9 rounded-lg bg-slate-100 flex items-center justify-center shrink-0">
                         <Icon className="w-4 h-4 text-slate-600" />
                       </div>
                       <div>

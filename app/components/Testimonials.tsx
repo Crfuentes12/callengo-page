@@ -11,8 +11,8 @@ const testimonials = [
       "Callengo transformed our sales process. Our SDRs now only talk to qualified leads, and our conversion rate has tripled.",
     author: "Sarah Mitchell",
     role: "VP of Sales",
-    company: "TechScale Solutions",
     metric: { value: "3x", label: "conversion rate" },
+    avatar: "/testimonials/sarah.png",
   },
   {
     id: 2,
@@ -20,8 +20,8 @@ const testimonials = [
       "We used to have a 28% no-show rate for our appointments. After implementing Callengo's confirmation agent, we're down to 9%.",
     author: "Dr. James Chen",
     role: "Practice Owner",
-    company: "Smile Dental Group",
     metric: { value: "68%", label: "fewer no-shows" },
+    avatar: "/testimonials/james.png",
   },
   {
     id: 3,
@@ -29,8 +29,8 @@ const testimonials = [
       "Callengo verified 50,000 contacts in a week - something that would have taken our team months. The data quality is now at 95%+.",
     author: "Michael Torres",
     role: "Director of Operations",
-    company: "GlobalReach Marketing",
     metric: { value: "50K", label: "contacts verified" },
+    avatar: "/testimonials/michael.png",
   },
   {
     id: 4,
@@ -38,10 +38,11 @@ const testimonials = [
       "New leads get a call within 60 seconds, and we're qualifying them before competitors even know they exist.",
     author: "Emma Rodriguez",
     role: "Head of Growth",
-    company: "Velocity SaaS",
     metric: { value: "<60s", label: "response time" },
+    avatar: "/testimonials/emma.png",
   },
 ];
+
 
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -90,19 +91,20 @@ export default function Testimonials() {
                 </p>
 
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-full gradient-bg flex items-center justify-center text-white font-semibold">
-                    {testimonials[currentIndex].author
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")}
+                  <div className="w-14 h-14 rounded-full overflow-hidden border border-slate-200">
+                    <img
+                      src={testimonials[currentIndex].avatar}
+                      alt={testimonials[currentIndex].author}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
+
                   <div>
                     <div className="font-semibold">
                       {testimonials[currentIndex].author}
                     </div>
                     <div className="text-slate-500 text-sm">
-                      {testimonials[currentIndex].role},{" "}
-                      {testimonials[currentIndex].company}
+                      {testimonials[currentIndex].role}
                     </div>
                   </div>
                 </div>

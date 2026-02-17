@@ -116,7 +116,7 @@ export default function Features() {
               {/* Feature Image */}
               <div className={index % 2 === 1 ? "lg:order-1" : ""}>
                 <div className="relative">
-                  <div className="relative aspect-4/3 overflow-hidden rounded-2xl shadow-lg">
+                  <div className="relative aspect-video overflow-hidden rounded-2xl shadow-lg">
                     <Image
                       src={feature.image}
                       alt={feature.title}

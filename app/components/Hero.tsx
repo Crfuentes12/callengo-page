@@ -220,7 +220,7 @@ function FlyingDataParticle({ datum, onDone }: { datum: FlyingDatum; onDone: () 
           <Zap className="w-3.5 h-3.5 text-blue-500" />
         )}
         <span className="font-medium text-slate-700">{datum.label}:</span>
-        <span className="text-slate-500 max-w-[120px] truncate">{datum.value}</span>
+        <span className="text-slate-500 max-w-30 truncate">{datum.value}</span>
       </div>
     </motion.div>
   );
@@ -267,7 +267,7 @@ function DataRow({
         <div className="text-[10px] font-medium text-slate-500 leading-tight">{field}</div>
         <div className="flex items-center gap-1">
           {original && (
-            <span className="text-[9px] text-slate-400 line-through truncate max-w-[60px]">{original}</span>
+            <span className="text-[9px] text-slate-400 line-through truncate max-w-15">{original}</span>
           )}
           {original && <span className="text-[9px] text-slate-400">→</span>}
           <span className="text-[11px] font-semibold text-slate-800 truncate">{value}</span>
@@ -308,7 +308,7 @@ function WaveformVisualizer({ isPlaying }: { isPlaying: boolean }) {
   }, []);
 
   return (
-    <div className="flex items-end gap-[2px] h-6 w-full">
+    <div className="flex items-end gap-0.5 h-6 w-full">
       {barData.map((b, i) => (
         <motion.div
           key={i}
@@ -621,16 +621,16 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="relative flex justify-center"
           >
-            <div className="relative w-[320px] sm:w-[340px]">
+            <div className="relative w-[320px] sm:w-85">
               {/* Phone shell */}
-              <div className="rounded-[2.5rem] bg-slate-900 p-[10px] shadow-2xl ring-1 ring-slate-700/50">
+              <div className="rounded-[2.5rem] bg-slate-900 p-2.5 shadow-2xl ring-1 ring-slate-700/50">
                 {/* Notch */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-slate-900 rounded-b-2xl z-20 flex items-center justify-center">
                   <div className="w-14 h-3 bg-slate-800 rounded-full" />
                 </div>
 
                 {/* Screen — FIXED HEIGHT */}
-                <div className="rounded-[2rem] bg-white overflow-hidden relative h-[680px] flex flex-col">
+                <div className="rounded-4xl bg-white overflow-hidden relative h-170 flex flex-col">
 
                   {/* Status bar */}
                   <div className="flex items-center justify-between px-6 pt-1 pb-1 bg-slate-50 shrink-0">
@@ -742,7 +742,7 @@ export default function Hero() {
                     ) : (
                       <>
                         {/* Transcript section */}
-                        <div className="flex-[3] min-h-0 flex flex-col">
+                        <div className="flex-3 min-h-0 flex flex-col">
                           <div className="px-3 py-1 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between shrink-0">
                             <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider">Live Transcript</span>
                             {totalDataFields > 0 && (
@@ -792,7 +792,7 @@ export default function Hero() {
                         </div>
 
                         {/* Data captured section */}
-                        <div className="flex-[2] min-h-0 flex flex-col border-t border-slate-100">
+                        <div className="flex-2 min-h-0 flex flex-col border-t border-slate-100">
                           <div className="px-3 py-1 bg-slate-50/80 flex items-center gap-1 shrink-0">
                             <Database className="w-2.5 h-2.5 text-slate-400" />
                             <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider">Data Captured</span>
@@ -851,12 +851,12 @@ export default function Hero() {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute inset-0 z-50 bg-black/40 backdrop-blur-sm flex flex-col rounded-[2rem] overflow-hidden"
+                        className="absolute inset-0 z-50 bg-black/40 backdrop-blur-sm flex flex-col rounded-4xl overflow-hidden"
                       >
                         {/* iOS-style drag indicator + close area */}
                         <button
                           onClick={() => setShowAnalysisPopup(false)}
-                          className="flex-shrink-0 w-full pt-3 pb-2 flex justify-center cursor-pointer"
+                          className="shrink-0 w-full pt-3 pb-2 flex justify-center cursor-pointer"
                         >
                           <div className="w-8 h-1 rounded-full bg-white/50" />
                         </button>
@@ -895,13 +895,13 @@ export default function Hero() {
                               {scenario.validatedFields.map((f, i) => (
                                 <div key={i} className={`flex items-center justify-between px-3 py-2 rounded-xl text-[10px] ${f.status === "confirmed" ? "bg-emerald-50" : "bg-amber-50"}`}>
                                   <span className="text-slate-500 font-medium">{f.field}</span>
-                                  <span className="font-semibold text-slate-800 truncate ml-2 max-w-[130px] text-right">{f.value}</span>
+                                  <span className="font-semibold text-slate-800 truncate ml-2 max-w-32.5 text-right">{f.value}</span>
                                 </div>
                               ))}
                               {scenario.extractedData.map((f, i) => (
                                 <div key={`e-${i}`} className="flex items-center justify-between px-3 py-2 rounded-xl text-[10px] bg-blue-50">
                                   <span className="text-slate-500 font-medium">{f.field}</span>
-                                  <span className="font-semibold text-slate-800 truncate ml-2 max-w-[130px] text-right">{f.value}</span>
+                                  <span className="font-semibold text-slate-800 truncate ml-2 max-w-32.5 text-right">{f.value}</span>
                                 </div>
                               ))}
                             </div>

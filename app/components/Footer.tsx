@@ -54,7 +54,7 @@ export default function Footer() {
                 height={32}
                 className="w-8 h-8"
               />
-              <span className="text-2xl font-semibold text-gray-400">Callengo</span>
+              <span className="text-2xl font-semibold text-white">Callengo</span>
             </Link>
 
             <p className="text-gray-400 mb-6 max-w-xs leading-relaxed">

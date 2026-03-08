@@ -39,7 +39,7 @@ const features = [
 
 export default function Features() {
   return (
-    <section className="section bg-slate-50" id="features">
+    <section className="section bg-background-secondary" id="features">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <motion.div
@@ -54,7 +54,7 @@ export default function Features() {
             <span className="gradient-text">Revenue recovered.</span>
           </h2>
 
-          <p className="text-xl text-slate-600">
+          <p className="text-xl text-foreground-secondary">
             Your team should focus on closing deals, not chasing confirmations
             or cleaning spreadsheets.
           </p>
@@ -74,7 +74,7 @@ export default function Features() {
               {/* Text Content */}
               <div className={index % 2 === 1 ? "lg:order-2" : ""}>
                 <div className="inline-flex items-center gap-2 mb-6">
-                  <span className="text-5xl font-bold text-slate-200">
+                  <span className="text-5xl font-bold text-border-dark">
                     0{index + 1}
                   </span>
                 </div>
@@ -83,12 +83,12 @@ export default function Features() {
                   {feature.title}
                 </h3>
 
-                <p className="text-xl text-slate-600 mb-6 leading-relaxed">
+                <p className="text-xl text-foreground-secondary mb-6 leading-relaxed">
                   {feature.description}
                 </p>
 
-                <div className="p-4 bg-slate-100 rounded-xl mb-8">
-                  <p className="text-sm text-slate-600 italic">
+                <div className="p-4 bg-background-tertiary rounded-xl mb-8">
+                  <p className="text-sm text-foreground-secondary italic">
                     {feature.insight}
                   </p>
                 </div>
@@ -98,7 +98,7 @@ export default function Features() {
                     <div className="text-4xl font-bold stat-number">
                       {feature.stats.value}
                     </div>
-                    <div className="text-sm text-slate-500">
+                    <div className="text-sm text-foreground-secondary">
                       {feature.stats.label}
                     </div>
                   </div>
@@ -106,17 +106,17 @@ export default function Features() {
 
                 <Link
                   href={feature.link}
-                  className="inline-flex items-center gap-2 text-slate-900 font-medium hover:gap-3 transition-all"
+                  className="inline-flex items-center gap-2 text-foreground font-medium hover:gap-3 transition-all group"
                 >
                   Learn more
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
 
               {/* Feature Image */}
               <div className={index % 2 === 1 ? "lg:order-1" : ""}>
                 <div className="relative">
-                  <div className="relative aspect-video overflow-hidden rounded-2xl shadow-lg">
+                  <div className="relative aspect-video overflow-hidden rounded-2xl border border-border">
                     <Image
                       src={feature.image}
                       alt={feature.title}
@@ -126,8 +126,9 @@ export default function Features() {
                     />
                   </div>
 
-                  {/* Decorative background */}
-                  <div className="absolute -z-10 -bottom-4 -right-4 w-full h-full bg-slate-200 rounded-2xl" />
+                  <div
+                    className="absolute -z-10 -bottom-3 -right-3 w-full h-full rounded-2xl gradient-bg opacity-[0.06]"
+                  />
                 </div>
               </div>
             </motion.div>

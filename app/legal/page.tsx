@@ -35,7 +35,7 @@ export default function LegalPage() {
               className="text-center mb-16"
             >
               <h1 className="text-display-sm mb-6">Legal</h1>
-              <p className="text-xl text-slate-600">
+              <p className="text-xl text-foreground-secondary">
                 Important legal information about using Callengo services.
               </p>
             </motion.div>
@@ -50,16 +50,16 @@ export default function LegalPage() {
                 >
                   <Link
                     href={page.href}
-                    className="flex items-start gap-4 p-6 bg-white rounded-2xl border border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all group"
+                    className="flex items-start gap-4 p-6 bg-white rounded-2xl border border-border hover:border-slate-300 hover:shadow-lg transition-all group"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center flex-shrink-0 group-hover:bg-slate-200 transition-colors">
-                      <page.icon className="w-6 h-6 text-slate-600" />
+                    <div className="w-12 h-12 rounded-xl bg-background-tertiary flex items-center justify-center flex-shrink-0 group-hover:bg-background-tertiary transition-colors">
+                      <page.icon className="w-6 h-6 text-foreground-secondary" />
                     </div>
                     <div>
-                      <h2 className="text-lg font-semibold mb-1 group-hover:text-slate-900">
+                      <h2 className="text-lg font-semibold mb-1 group-hover:text-foreground">
                         {page.title}
                       </h2>
-                      <p className="text-slate-600">{page.description}</p>
+                      <p className="text-foreground-secondary">{page.description}</p>
                     </div>
                   </Link>
                 </motion.div>

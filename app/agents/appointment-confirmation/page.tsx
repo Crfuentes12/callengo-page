@@ -128,7 +128,7 @@ const faqs = [
   },
   {
     question: "What happens if someone wants to reschedule?",
-    answer: "Our AI can offer available time slots and reschedule appointments directly during the call. The new appointment syncs immediately to your calendar. You set which slots are available for rescheduling.",
+    answer: "Our AI can offer available time slots and reschedule appointments directly during the call. The new appointment syncs immediately to your calendar and CRM. CRM integrations include HubSpot and Pipedrive on Business+, and Salesforce, Zoho, and Dynamics 365 on Teams+. You set which slots are available for rescheduling.",
   },
   {
     question: "Can customers confirm via text instead of answering?",
@@ -136,7 +136,7 @@ const faqs = [
   },
   {
     question: "How do I import my appointments?",
-    answer: "Upload your appointments via CSV or Excel with columns for customer name, phone number, appointment date, and time. You can also set up recurring imports. Calendar integrations are coming soon.",
+    answer: "Upload your appointments via CSV or Excel with columns for customer name, phone number, appointment date, and time. You can also set up recurring imports. Or connect your calendar directly - Google Calendar is available on Free+, Outlook Calendar on Growth+, and SimplyBook.me on Business+.",
   },
   {
     question: "What if I have multiple locations or providers?",
@@ -197,7 +197,7 @@ export default function AppointmentConfirmationPage() {
                   <span className="gradient-text">not your voicemail</span>
                 </h1>
 
-                <p className="text-xl text-slate-600 mb-8 leading-relaxed max-w-2xl">
+                <p className="text-xl text-foreground-secondary mb-8 leading-relaxed max-w-2xl">
                   Every empty time slot is lost revenue. Reduce no-shows by 60% with
                   automatic confirmation calls that keep your schedule full and your customers accountable.
                 </p>
@@ -213,16 +213,16 @@ export default function AppointmentConfirmationPage() {
                 </div>
 
                 <div className="flex flex-wrap gap-8 text-sm">
-                  <div className="flex items-center gap-2 text-slate-600">
-                    <Check className="w-5 h-5 text-green-600" />
+                  <div className="flex items-center gap-2 text-foreground-secondary">
+                    <Check className="w-5 h-5 text-accent-dark" />
                     <span><strong>60%</strong> fewer no-shows</span>
                   </div>
-                  <div className="flex items-center gap-2 text-slate-600">
-                    <Check className="w-5 h-5 text-green-600" />
+                  <div className="flex items-center gap-2 text-foreground-secondary">
+                    <Check className="w-5 h-5 text-accent-dark" />
                     <span><strong>24-48hr</strong> advance notice</span>
                   </div>
-                  <div className="flex items-center gap-2 text-slate-600">
-                    <Check className="w-5 h-5 text-green-600" />
+                  <div className="flex items-center gap-2 text-foreground-secondary">
+                    <Check className="w-5 h-5 text-accent-dark" />
                     <span><strong>Calendar sync</strong> included</span>
                   </div>
                 </div>
@@ -232,7 +232,7 @@ export default function AppointmentConfirmationPage() {
         </section>
 
         {/* Pain Statistics */}
-        <section className="py-16 bg-slate-900 text-white">
+        <section className="py-16 bg-navy text-white">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -258,8 +258,8 @@ export default function AppointmentConfirmationPage() {
                   <div className="text-4xl md:text-5xl font-bold mb-2 gradient-text">
                     {item.stat}
                   </div>
-                  <p className="text-slate-300 mb-2">{item.description}</p>
-                  <p className="text-xs text-slate-500">Source: {item.source}</p>
+                  <p className="text-white/70 mb-2">{item.description}</p>
+                  <p className="text-xs text-foreground-tertiary">Source: {item.source}</p>
                 </motion.div>
               ))}
             </div>
@@ -278,7 +278,7 @@ export default function AppointmentConfirmationPage() {
                 <h2 className="text-display-sm mb-6">
                   Calculate your <span className="gradient-text">savings</span>
                 </h2>
-                <p className="text-xl text-slate-600 mb-8">
+                <p className="text-xl text-foreground-secondary mb-8">
                   Every no-show costs you money. See how much you could recover
                   with automatic appointment confirmations.
                 </p>
@@ -290,8 +290,8 @@ export default function AppointmentConfirmationPage() {
                     "Save staff hours on manual calling",
                     "ROI in the first month for most businesses",
                   ].map((item) => (
-                    <li key={item} className="flex items-center gap-3 text-slate-700">
-                      <Check className="w-5 h-5 text-green-600 flex-shrink-0" />
+                    <li key={item} className="flex items-center gap-3 text-foreground-secondary">
+                      <Check className="w-5 h-5 text-accent-dark flex-shrink-0" />
                       {item}
                     </li>
                   ))}
@@ -312,7 +312,7 @@ export default function AppointmentConfirmationPage() {
                     {/* Appointments per week */}
                     <div className="space-y-2">
                       <div className="flex justify-between">
-                        <label className="text-slate-600">Appointments per week</label>
+                        <label className="text-foreground-secondary">Appointments per week</label>
                         <span className="font-medium">{appointments}</span>
                       </div>
                       <input
@@ -321,9 +321,9 @@ export default function AppointmentConfirmationPage() {
                         max="200"
                         value={appointments}
                         onChange={(e) => setAppointments(Number(e.target.value))}
-                        className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-primary"
+                        className="w-full h-2 bg-background-tertiary rounded-lg appearance-none cursor-pointer accent-primary"
                       />
-                      <div className="flex justify-between text-xs text-slate-400">
+                      <div className="flex justify-between text-xs text-foreground-tertiary">
                         <span>10</span>
                         <span>200</span>
                       </div>
@@ -332,7 +332,7 @@ export default function AppointmentConfirmationPage() {
                     {/* No-show rate */}
                     <div className="space-y-2">
                       <div className="flex justify-between">
-                        <label className="text-slate-600">Current no-show rate</label>
+                        <label className="text-foreground-secondary">Current no-show rate</label>
                         <span className="font-medium">{noShowRate}%</span>
                       </div>
                       <input
@@ -341,9 +341,9 @@ export default function AppointmentConfirmationPage() {
                         max="50"
                         value={noShowRate}
                         onChange={(e) => setNoShowRate(Number(e.target.value))}
-                        className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-primary"
+                        className="w-full h-2 bg-background-tertiary rounded-lg appearance-none cursor-pointer accent-primary"
                       />
-                      <div className="flex justify-between text-xs text-slate-400">
+                      <div className="flex justify-between text-xs text-foreground-tertiary">
                         <span>5%</span>
                         <span>50%</span>
                       </div>
@@ -352,7 +352,7 @@ export default function AppointmentConfirmationPage() {
                     {/* Appointment value */}
                     <div className="space-y-2">
                       <div className="flex justify-between">
-                        <label className="text-slate-600">Avg appointment value</label>
+                        <label className="text-foreground-secondary">Avg appointment value</label>
                         <span className="font-medium">${appointmentValue}</span>
                       </div>
                       <input
@@ -362,28 +362,28 @@ export default function AppointmentConfirmationPage() {
                         step="25"
                         value={appointmentValue}
                         onChange={(e) => setAppointmentValue(Number(e.target.value))}
-                        className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-primary"
+                        className="w-full h-2 bg-background-tertiary rounded-lg appearance-none cursor-pointer accent-primary"
                       />
-                      <div className="flex justify-between text-xs text-slate-400">
+                      <div className="flex justify-between text-xs text-foreground-tertiary">
                         <span>$25</span>
                         <span>$500</span>
                       </div>
                     </div>
 
                     {/* Results */}
-                    <div className="pt-4 border-t border-slate-200 space-y-3">
+                    <div className="pt-4 border-t border-border space-y-3">
                       <div className="flex justify-between">
-                        <span className="text-slate-600">Current weekly loss</span>
+                        <span className="text-foreground-secondary">Current weekly loss</span>
                         <span className="font-semibold text-red-600">-${weeklyLoss.toLocaleString()}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-slate-600">Weekly savings (60% reduction)</span>
-                        <span className="font-semibold text-green-600">+${weeklySavings.toLocaleString()}</span>
+                        <span className="text-foreground-secondary">Weekly savings (60% reduction)</span>
+                        <span className="font-semibold text-accent-dark">+${weeklySavings.toLocaleString()}</span>
                       </div>
                     </div>
                   </div>
-                  <div className="mt-6 pt-6 border-t border-slate-100 text-center gradient-bg-subtle rounded-xl p-4">
-                    <div className="text-sm text-slate-600 mb-1">Your Projected Annual Savings</div>
+                  <div className="mt-6 pt-6 border-t border-border-light text-center gradient-bg-subtle rounded-xl p-4">
+                    <div className="text-sm text-foreground-secondary mb-1">Your Projected Annual Savings</div>
                     <div className="text-4xl font-bold gradient-text">${annualSavings.toLocaleString()}</div>
                   </div>
                 </div>
@@ -393,7 +393,7 @@ export default function AppointmentConfirmationPage() {
         </section>
 
         {/* How It Works */}
-        <section className="section bg-slate-50">
+        <section className="section bg-background-secondary">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -404,7 +404,7 @@ export default function AppointmentConfirmationPage() {
               <h2 className="text-display-sm mb-6">
                 Set it up once, <span className="gradient-text">save forever</span>
               </h2>
-              <p className="text-xl text-slate-600">
+              <p className="text-xl text-foreground-secondary">
                 Connect your calendar and let AI handle the rest. No manual calling, no missed confirmations.
               </p>
             </motion.div>
@@ -419,11 +419,11 @@ export default function AppointmentConfirmationPage() {
                   transition={{ delay: index * 0.1 }}
                   className="relative"
                 >
-                  <div className="text-7xl font-bold text-slate-200 mb-4">
+                  <div className="text-7xl font-bold text-background-tertiary mb-4">
                     {item.step}
                   </div>
                   <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                  <p className="text-slate-600">{item.description}</p>
+                  <p className="text-foreground-secondary">{item.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -442,7 +442,7 @@ export default function AppointmentConfirmationPage() {
               <h2 className="text-display-sm mb-6">
                 Everything you need to <span className="gradient-text">eliminate no-shows</span>
               </h2>
-              <p className="text-xl text-slate-600">
+              <p className="text-xl text-foreground-secondary">
                 Powerful features that work together to keep your calendar full
                 and your revenue protected.
               </p>
@@ -456,11 +456,11 @@ export default function AppointmentConfirmationPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.05 }}
-                  className="bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-lg transition-shadow"
+                  className="bg-white rounded-2xl border border-border p-6 hover:shadow-lg transition-shadow"
                 >
                   <div className="text-3xl mb-4">{feature.icon}</div>
                   <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-slate-600">{feature.description}</p>
+                  <p className="text-foreground-secondary">{feature.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -509,8 +509,8 @@ export default function AppointmentConfirmationPage() {
                       <span className="text-sm text-white/60">{industry.painPoint}</span>
                     </div>
                     <div className="flex items-start gap-2">
-                      <Check className="w-4 h-4 text-green-400 mt-1 flex-shrink-0" />
-                      <span className="text-sm font-medium text-green-400">{industry.result}</span>
+                      <Check className="w-4 h-4 text-accent-dark mt-1 flex-shrink-0" />
+                      <span className="text-sm font-medium text-accent-dark">{industry.result}</span>
                     </div>
                   </div>
                 </motion.div>
@@ -541,14 +541,14 @@ export default function AppointmentConfirmationPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-slate-50 rounded-2xl p-8"
+                  className="bg-background-secondary rounded-2xl p-8"
                 >
-                  <p className="text-lg text-slate-700 mb-6 leading-relaxed">
+                  <p className="text-lg text-foreground-secondary mb-6 leading-relaxed">
                     &quot;{testimonial.quote}&quot;
                   </p>
                   <div>
                     <div className="font-semibold">{testimonial.author}</div>
-                    <div className="text-sm text-slate-500">
+                    <div className="text-sm text-foreground-tertiary">
                       {testimonial.title}, {testimonial.company}
                     </div>
                   </div>
@@ -559,7 +559,7 @@ export default function AppointmentConfirmationPage() {
         </section>
 
         {/* Pricing Teaser */}
-        <section className="section bg-slate-50">
+        <section className="section bg-background-secondary">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -572,13 +572,13 @@ export default function AppointmentConfirmationPage() {
                   <h2 className="text-2xl md:text-3xl font-semibold mb-4">
                     Pays for itself in the first week
                   </h2>
-                  <p className="text-slate-600 mb-6">
+                  <p className="text-foreground-secondary mb-6">
                     Most businesses recover their monthly Callengo cost with just
                     1-2 prevented no-shows. Start free and see results immediately.
                   </p>
                   <div className="flex items-baseline gap-2 mb-6">
                     <span className="text-4xl font-bold">$99</span>
-                    <span className="text-slate-500">/month for 500 confirmation calls</span>
+                    <span className="text-foreground-tertiary">/month for 500 confirmation calls</span>
                   </div>
                   <Link href="/pricing" className="btn btn-primary">
                     View Full Pricing
@@ -587,19 +587,19 @@ export default function AppointmentConfirmationPage() {
                 </div>
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-green-600" />
+                    <Check className="w-5 h-5 text-accent-dark" />
                     <span>15 free minutes to start</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-green-600" />
+                    <Check className="w-5 h-5 text-accent-dark" />
                     <span>Easy CSV/Excel import</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-green-600" />
+                    <Check className="w-5 h-5 text-accent-dark" />
                     <span>SMS fallback available</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-green-600" />
+                    <Check className="w-5 h-5 text-accent-dark" />
                     <span>Cancel anytime, no contracts</span>
                   </div>
                 </div>
@@ -634,8 +634,8 @@ export default function AppointmentConfirmationPage() {
                   <div
                     className={`bg-white rounded-2xl border transition-all ${
                       openFaq === index
-                        ? "border-slate-900 shadow-sm"
-                        : "border-slate-200 hover:border-slate-300"
+                        ? "border-foreground shadow-sm"
+                        : "border-border hover:border-border"
                     }`}
                   >
                     <button
@@ -644,7 +644,7 @@ export default function AppointmentConfirmationPage() {
                     >
                       <span className="font-medium pr-4">{faq.question}</span>
                       <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
-                        openFaq === index ? "gradient-bg text-white" : "bg-slate-100 text-slate-600"
+                        openFaq === index ? "gradient-bg text-white" : "bg-background-tertiary text-foreground-secondary"
                       }`}>
                         {openFaq === index ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
                       </div>
@@ -659,7 +659,7 @@ export default function AppointmentConfirmationPage() {
                           transition={{ duration: 0.3 }}
                           className="overflow-hidden"
                         >
-                          <div className="px-6 pb-6 text-slate-600 leading-relaxed">
+                          <div className="px-6 pb-6 text-foreground-secondary leading-relaxed">
                             {faq.answer}
                           </div>
                         </motion.div>

@@ -76,7 +76,7 @@ export default function AboutPage() {
                 <h1 className="text-display-sm mb-6">
                   We help businesses stop losing money
                 </h1>
-                <p className="text-xl text-slate-600 leading-relaxed">
+                <p className="text-xl text-foreground-secondary leading-relaxed">
                   Every no-show, every outdated contact, every unqualified lead
                   is revenue walking out the door. We built Callengo to plug those leaks.
                 </p>
@@ -88,10 +88,10 @@ export default function AboutPage() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="relative"
               >
-                <div className="aspect-square rounded-3xl bg-slate-100 flex items-center justify-center">
-                  <span className="text-slate-400">Team photo placeholder</span>
+                <div className="aspect-square rounded-3xl bg-background-tertiary flex items-center justify-center">
+                  <span className="text-foreground-tertiary">Team photo placeholder</span>
                 </div>
-                <div className="absolute -z-10 -bottom-4 -right-4 w-full h-full bg-slate-200 rounded-3xl" />
+                <div className="absolute -z-10 -bottom-4 -right-4 w-full h-full bg-border rounded-3xl" />
               </motion.div>
             </div>
           </div>
@@ -130,8 +130,8 @@ export default function AboutPage() {
                 viewport={{ once: true }}
                 className="order-2 lg:order-1"
               >
-                <div className="aspect-4-3 rounded-3xl bg-slate-100 flex items-center justify-center">
-                  <span className="text-slate-400">Office image placeholder</span>
+                <div className="aspect-4-3 rounded-3xl bg-background-tertiary flex items-center justify-center">
+                  <span className="text-foreground-tertiary">Office image placeholder</span>
                 </div>
               </motion.div>
 
@@ -144,12 +144,12 @@ export default function AboutPage() {
                 <h2 className="text-3xl md:text-4xl font-semibold mb-6">
                   Your team should sell, not chase
                 </h2>
-                <p className="text-lg text-slate-600 mb-6 leading-relaxed">
+                <p className="text-lg text-foreground-secondary mb-6 leading-relaxed">
                   Sales teams spend hours on repetitive calls that never close.
                   Clinics lose thousands to patients who forget appointments.
                   Marketing wastes budgets on outdated contact lists.
                 </p>
-                <p className="text-lg text-slate-600 leading-relaxed">
+                <p className="text-lg text-foreground-secondary leading-relaxed">
                   We handle the routine calls so your team can focus on what
                   actually drives revenue: building relationships, solving
                   problems, and closing deals.
@@ -160,7 +160,7 @@ export default function AboutPage() {
         </section>
 
         {/* Values Section */}
-        <section className="section bg-slate-50">
+        <section className="section bg-background-secondary">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -181,13 +181,13 @@ export default function AboutPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="bg-white rounded-2xl border border-slate-200 p-8"
+                  className="bg-white rounded-2xl border border-border p-8"
                 >
-                  <div className="text-5xl font-bold text-slate-200 mb-4">
+                  <div className="text-5xl font-bold text-border mb-4">
                     0{index + 1}
                   </div>
                   <h3 className="text-xl font-semibold mb-3">{value.title}</h3>
-                  <p className="text-slate-600">{value.description}</p>
+                  <p className="text-foreground-secondary">{value.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -206,7 +206,7 @@ export default function AboutPage() {
               <h2 className="text-3xl md:text-4xl font-semibold mb-4">
                 The people behind Callengo
               </h2>
-              <p className="text-lg text-slate-600">
+              <p className="text-lg text-foreground-secondary">
                 Engineers, product builders, and AI researchers united by a
                 shared vision.
               </p>
@@ -221,8 +221,8 @@ export default function AboutPage() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                 >
-                  <div className="aspect-square rounded-2xl bg-slate-100 mb-4 flex items-center justify-center">
-                    <span className="text-4xl font-bold text-slate-300">
+                  <div className="aspect-square rounded-2xl bg-background-tertiary mb-4 flex items-center justify-center">
+                    <span className="text-4xl font-bold text-slate-indigo-light">
                       {member.name
                         .split(" ")
                         .map((n) => n[0])
@@ -230,8 +230,8 @@ export default function AboutPage() {
                     </span>
                   </div>
                   <h3 className="font-semibold">{member.name}</h3>
-                  <div className="text-sm text-slate-500 mb-2">{member.role}</div>
-                  <p className="text-sm text-slate-600">{member.bio}</p>
+                  <div className="text-sm text-foreground-tertiary mb-2">{member.role}</div>
+                  <p className="text-sm text-foreground-secondary">{member.bio}</p>
                 </motion.div>
               ))}
             </div>

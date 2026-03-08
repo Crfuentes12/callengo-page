@@ -162,7 +162,7 @@ export default function HowItWorks() {
             <br />
             <span>Results in hours.</span>
           </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-white/60 text-lg max-w-2xl mx-auto leading-relaxed">
             Six simple steps, from zero to fully automated calling campaigns.
             No technical expertise required.
           </p>
@@ -179,19 +179,19 @@ export default function HowItWorks() {
             className="lg:col-span-3 relative"
           >
             {/* Browser-chrome frame */}
-            <div className="rounded-2xl bg-slate-800 border border-slate-700/80 shadow-2xl overflow-hidden">
+            <div className="rounded-2xl bg-dark-light border border-white/10 shadow-2xl overflow-hidden">
 
               {/* Window chrome bar */}
-              <div className="flex items-center gap-3 px-4 py-3 bg-slate-900 border-b border-slate-700/60">
+              <div className="flex items-center gap-3 px-4 py-3 bg-navy border-b border-white/10">
                 <div className="flex items-center gap-1.5 shrink-0">
                   <span className="w-3 h-3 rounded-full bg-red-400/60" />
                   <span className="w-3 h-3 rounded-full bg-yellow-400/60" />
                   <span className="w-3 h-3 rounded-full bg-green-400/60" />
                 </div>
                 <div className="flex-1">
-                  <div className="bg-slate-800 rounded-md px-3 py-1.5 flex items-center gap-2">
+                  <div className="bg-dark-light rounded-md px-3 py-1.5 flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full gradient-bg shrink-0" />
-                    <span className="text-[11px] text-slate-400 font-mono truncate">
+                    <span className="text-[11px] text-white/50 font-mono truncate">
                       app.callengo.com
                     </span>
                   </div>
@@ -199,7 +199,7 @@ export default function HowItWorks() {
               </div>
 
               {/* Screenshot area */}
-              <div className="relative aspect-square bg-slate-900 overflow-hidden">
+              <div className="relative aspect-square bg-navy overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeStep}
@@ -228,14 +228,14 @@ export default function HowItWorks() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -8 }}
                       transition={{ duration: 0.3, delay: 0.15 }}
-                      className="bg-slate-900/85 backdrop-blur-sm border border-slate-700/70 rounded-xl px-4 py-3"
+                      className="bg-navy/85 backdrop-blur-sm border border-white/10/70 rounded-xl px-4 py-3"
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center shrink-0">
                           <StepIcon className="w-4 h-4 text-white" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">
+                          <div className="text-[10px] text-white/50 font-semibold uppercase tracking-wider">
                             Step {step.number}
                           </div>
                           <div className="text-white font-semibold text-sm leading-tight">
@@ -251,7 +251,7 @@ export default function HowItWorks() {
                               className={`rounded-full transition-all duration-300 cursor-pointer ${
                                 i === activeStep
                                   ? "w-5 h-1.5 gradient-bg"
-                                  : "w-1.5 h-1.5 bg-slate-600 hover:bg-slate-500"
+                                  : "w-1.5 h-1.5 bg-white/20 hover:bg-white/30"
                               }`}
                             />
                           ))}
@@ -284,8 +284,8 @@ export default function HowItWorks() {
                   onClick={() => handleStepClick(index)}
                   className={`w-full text-left rounded-xl border transition-all duration-300 cursor-pointer group ${
                     isActive
-                      ? "border-slate-600 bg-slate-800/80"
-                      : "border-transparent bg-slate-900/40 hover:bg-slate-800/40 hover:border-slate-700/60"
+                      ? "border-white/15 bg-dark-light/80"
+                      : "border-transparent bg-navy/40 hover:bg-dark-light/40 hover:border-white/10/60"
                   }`}
                 >
                   <div className="px-4 py-3.5">
@@ -295,11 +295,11 @@ export default function HowItWorks() {
                         className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 mt-0.5 transition-all ${
                           isActive
                             ? "gradient-bg shadow-lg"
-                            : "bg-slate-800 group-hover:bg-slate-700"
+                            : "bg-dark-light group-hover:bg-white/10"
                         }`}
                       >
                         <Icon
-                          className={`w-4 h-4 ${isActive ? "text-white" : "text-slate-400"}`}
+                          className={`w-4 h-4 ${isActive ? "text-white" : "text-white/50"}`}
                         />
                       </div>
 
@@ -308,7 +308,7 @@ export default function HowItWorks() {
                         <div className="flex items-center gap-2 mb-0.5">
                           <span
                             className={`text-[10px] font-bold tabular-nums ${
-                              isActive ? "gradient-text" : "text-slate-600"
+                              isActive ? "gradient-text" : "text-white/30"
                             }`}
                           >
                             {s.number}
@@ -317,7 +317,7 @@ export default function HowItWorks() {
                             className={`text-sm font-semibold leading-tight ${
                               isActive
                                 ? "text-white"
-                                : "text-slate-400 group-hover:text-slate-300"
+                                : "text-white/50 group-hover:text-white/60"
                             }`}
                           >
                             {s.title}
@@ -334,16 +334,16 @@ export default function HowItWorks() {
                               transition={{ duration: 0.25, ease: "easeInOut" }}
                               className="overflow-hidden"
                             >
-                              <p className="text-[12px] text-slate-400 leading-relaxed mt-1.5 mb-2.5">
+                              <p className="text-[12px] text-white/50 leading-relaxed mt-1.5 mb-2.5">
                                 {s.description}
                               </p>
                               <div className="flex flex-wrap gap-1.5 mb-3">
                                 {s.highlights.map((h) => (
                                   <span
                                     key={h}
-                                    className="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-slate-700/80 text-slate-300"
+                                    className="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-white/10/80 text-white/60"
                                   >
-                                    <CheckCircle2 className="w-2.5 h-2.5 text-slate-400" />
+                                    <CheckCircle2 className="w-2.5 h-2.5 text-white/50" />
                                     {h}
                                   </span>
                                 ))}
@@ -351,7 +351,7 @@ export default function HowItWorks() {
 
                               {/* Progress bar */}
                               {!isPaused && (
-                                <div className="h-0.5 bg-slate-700 rounded-full overflow-hidden">
+                                <div className="h-0.5 bg-white/10 rounded-full overflow-hidden">
                                   <motion.div
                                     className="h-full gradient-bg rounded-full"
                                     style={{ width: `${progress}%` }}
@@ -367,8 +367,8 @@ export default function HowItWorks() {
                       <ChevronRight
                         className={`w-4 h-4 shrink-0 transition-all mt-1 ${
                           isActive
-                            ? "text-slate-400 rotate-90"
-                            : "text-slate-600 group-hover:text-slate-500"
+                            ? "text-white/50 rotate-90"
+                            : "text-white/30 group-hover:text-white/40"
                         }`}
                       />
                     </div>
@@ -386,7 +386,7 @@ export default function HowItWorks() {
                 Start free trial
                 <ChevronRight className="w-4 h-4" />
               </a>
-              <p className="text-center text-xs text-slate-500">
+              <p className="text-center text-xs text-white/40">
                 No credit card required · 15 free minutes
               </p>
             </div>

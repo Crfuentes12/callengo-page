@@ -65,7 +65,7 @@ const docCategories = [
     description: "Export your data and connect with your existing tools.",
     icon: Webhook,
     articles: [
-      { title: "CRM Integrations (Coming Soon)", href: "/help/crm-integrations" },
+      { title: "CRM Integrations", href: "/help/crm-integrations" },
       { title: "CSV/Excel Export", href: "#export" },
       { title: "API Overview", href: "#api" },
       { title: "Custom Workflows", href: "#custom-integrations" },
@@ -289,19 +289,19 @@ export default function DocsPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.1 + index * 0.05 }}
-                    className="bg-white rounded-2xl border border-slate-200 p-6 hover:border-slate-300 hover:shadow-lg transition-all"
+                    className="bg-white rounded-2xl border border-border p-6 hover:border-slate-300 hover:shadow-lg transition-all"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center mb-4">
-                      <category.icon className="w-6 h-6 text-slate-600" />
+                    <div className="w-12 h-12 rounded-xl bg-background-tertiary flex items-center justify-center mb-4">
+                      <category.icon className="w-6 h-6 text-foreground-secondary" />
                     </div>
                     <h3 className="text-lg font-semibold mb-2">{category.title}</h3>
-                    <p className="text-slate-600 text-sm mb-4">{category.description}</p>
+                    <p className="text-foreground-secondary text-sm mb-4">{category.description}</p>
                     <ul className="space-y-2">
                       {category.articles.map((article) => (
                         <li key={article.title}>
                           <Link
                             href={article.href}
-                            className="text-sm text-slate-600 hover:text-slate-900 hover:underline flex items-center gap-1 group"
+                            className="text-sm text-foreground-secondary hover:text-foreground hover:underline flex items-center gap-1 group"
                           >
                             <ArrowRight className="w-3 h-3 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" />
                             {article.title}
@@ -317,7 +317,7 @@ export default function DocsPage() {
         </section>
 
         {/* Agent Types */}
-        <section id="agent-types" className="section bg-slate-50">
+        <section id="agent-types" className="section bg-background-secondary">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -326,7 +326,7 @@ export default function DocsPage() {
               className="mb-12"
             >
               <h2 className="text-3xl font-bold mb-4">AI Agent Types</h2>
-              <p className="text-lg text-slate-600 max-w-3xl">
+              <p className="text-lg text-foreground-secondary max-w-3xl">
                 Callengo offers three specialized AI agents, each designed to solve a specific
                 business problem. Choose the agent that matches your primary use case.
               </p>
@@ -340,7 +340,7 @@ export default function DocsPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-white rounded-2xl border border-slate-200 p-8"
+                  className="bg-white rounded-2xl border border-border p-8"
                 >
                   <div className="flex items-start gap-6">
                     <div className="w-14 h-14 rounded-xl gradient-bg flex items-center justify-center flex-shrink-0">
@@ -348,15 +348,15 @@ export default function DocsPage() {
                     </div>
                     <div className="flex-1">
                       <h3 className="text-2xl font-bold mb-2">{agent.title}</h3>
-                      <p className="text-slate-600 mb-6">{agent.description}</p>
+                      <p className="text-foreground-secondary mb-6">{agent.description}</p>
 
                       <div className="grid md:grid-cols-2 gap-8">
                         <div>
                           <h4 className="font-semibold mb-3">Capabilities</h4>
                           <ul className="space-y-2">
                             {agent.capabilities.map((cap) => (
-                              <li key={cap} className="flex items-start gap-2 text-sm text-slate-600">
-                                <Check className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                              <li key={cap} className="flex items-start gap-2 text-sm text-foreground-secondary">
+                                <Check className="w-4 h-4 text-accent-dark flex-shrink-0 mt-0.5" />
                                 {cap}
                               </li>
                             ))}
@@ -368,7 +368,7 @@ export default function DocsPage() {
                             {agent.outcomes.map((outcome) => (
                               <span
                                 key={outcome}
-                                className="px-3 py-1 bg-slate-100 text-slate-600 text-sm rounded-full"
+                                className="px-3 py-1 bg-background-tertiary text-foreground-secondary text-sm rounded-full"
                               >
                                 {outcome}
                               </span>
@@ -380,7 +380,7 @@ export default function DocsPage() {
                       <div className="mt-6">
                         <Link
                           href={`/agents/${agent.slug}`}
-                          className="inline-flex items-center gap-2 text-sm font-medium text-slate-900 hover:underline"
+                          className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:underline"
                         >
                           Learn more about this agent
                           <ChevronRight className="w-4 h-4" />
@@ -404,10 +404,10 @@ export default function DocsPage() {
               className="mb-12"
             >
               <div className="flex items-center gap-3 mb-4">
-                <Volume2 className="w-8 h-8 text-slate-600" />
+                <Volume2 className="w-8 h-8 text-foreground-secondary" />
                 <h2 className="text-3xl font-bold">Voice Library</h2>
               </div>
-              <p className="text-lg text-slate-600 max-w-3xl">
+              <p className="text-lg text-foreground-secondary max-w-3xl">
                 Choose from 77+ professional AI voices across multiple languages and accents.
                 Each voice is designed to sound natural and professional.
               </p>
@@ -421,15 +421,15 @@ export default function DocsPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.05 }}
-                  className="bg-white rounded-2xl border border-slate-200 p-6"
+                  className="bg-white rounded-2xl border border-border p-6"
                 >
                   <h3 className="font-semibold mb-2">{category.language}</h3>
-                  <p className="text-sm text-slate-500 mb-4">{category.count} voices available</p>
+                  <p className="text-sm text-foreground-tertiary mb-4">{category.count} voices available</p>
                   <div className="flex flex-wrap gap-2">
                     {category.popular.map((voice) => (
                       <span
                         key={voice}
-                        className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded-full"
+                        className="px-2 py-1 bg-background-tertiary text-foreground-secondary text-xs rounded-full"
                       >
                         {voice}
                       </span>
@@ -443,10 +443,10 @@ export default function DocsPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mt-8 bg-slate-50 rounded-2xl p-6"
+              className="mt-8 bg-background-secondary rounded-2xl p-6"
             >
               <h4 className="font-semibold mb-2">Background Audio</h4>
-              <p className="text-slate-600 text-sm">
+              <p className="text-foreground-secondary text-sm">
                 All calls include subtle office background sounds to create a natural, professional
                 atmosphere. This increases trust and reduces the perception of talking to a robot.
               </p>
@@ -455,7 +455,7 @@ export default function DocsPage() {
         </section>
 
         {/* Data Formats */}
-        <section id="data-formats" className="section bg-slate-50">
+        <section id="data-formats" className="section bg-background-secondary">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -464,10 +464,10 @@ export default function DocsPage() {
               className="mb-12"
             >
               <div className="flex items-center gap-3 mb-4">
-                <Upload className="w-8 h-8 text-slate-600" />
+                <Upload className="w-8 h-8 text-foreground-secondary" />
                 <h2 className="text-3xl font-bold">Data Import & Export</h2>
               </div>
-              <p className="text-lg text-slate-600 max-w-3xl">
+              <p className="text-lg text-foreground-secondary max-w-3xl">
                 Import contacts from any system using standard file formats. Callengo automatically
                 normalizes phone numbers, removes duplicates, and maps fields.
               </p>
@@ -478,18 +478,18 @@ export default function DocsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-2xl border border-slate-200 p-8"
+                className="bg-white rounded-2xl border border-border p-8"
               >
                 <h3 className="text-xl font-bold mb-6">Supported Formats</h3>
                 <div className="space-y-4">
                   {dataFormats.map((format) => (
                     <div key={format.format} className="flex items-start gap-4">
-                      <div className="w-16 h-10 rounded-lg bg-slate-100 flex items-center justify-center flex-shrink-0">
-                        <span className="text-xs font-bold text-slate-600">{format.format}</span>
+                      <div className="w-16 h-10 rounded-lg bg-background-tertiary flex items-center justify-center flex-shrink-0">
+                        <span className="text-xs font-bold text-foreground-secondary">{format.format}</span>
                       </div>
                       <div>
                         <p className="font-medium">{format.extension}</p>
-                        <p className="text-sm text-slate-600">{format.description}</p>
+                        <p className="text-sm text-foreground-secondary">{format.description}</p>
                       </div>
                     </div>
                   ))}
@@ -501,17 +501,17 @@ export default function DocsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="bg-white rounded-2xl border border-slate-200 p-8"
+                className="bg-white rounded-2xl border border-border p-8"
               >
                 <h3 className="text-xl font-bold mb-6">Contact Fields</h3>
                 <div className="space-y-3">
                   {contactFields.map((field) => (
                     <div key={field.field} className="flex items-start justify-between gap-4">
                       <div>
-                        <code className="text-sm bg-slate-100 px-2 py-1 rounded">
+                        <code className="text-sm bg-background-tertiary px-2 py-1 rounded">
                           {field.field}
                         </code>
-                        <p className="text-sm text-slate-600 mt-1">{field.description}</p>
+                        <p className="text-sm text-foreground-secondary mt-1">{field.description}</p>
                       </div>
                       {field.required && (
                         <span className="text-xs text-red-600 font-medium">Required</span>
@@ -534,12 +534,12 @@ export default function DocsPage() {
               className="mb-12"
             >
               <div className="flex items-center gap-3 mb-4">
-                <Users className="w-8 h-8 text-slate-600" />
+                <Users className="w-8 h-8 text-foreground-secondary" />
                 <h2 className="text-3xl font-bold">Plans & Limits</h2>
               </div>
-              <p className="text-lg text-slate-600 max-w-3xl">
+              <p className="text-lg text-foreground-secondary max-w-3xl">
                 Reference table for plan limits and features. See the{" "}
-                <Link href="/pricing" className="underline hover:text-slate-900">
+                <Link href="/pricing" className="underline hover:text-foreground">
                   pricing page
                 </Link>{" "}
                 for full details.
@@ -550,11 +550,11 @@ export default function DocsPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-white rounded-2xl border border-slate-200 overflow-hidden"
+              className="bg-white rounded-2xl border border-border overflow-hidden"
             >
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-slate-50 border-b border-slate-200">
+                  <thead className="bg-background-secondary border-b border-border">
                     <tr>
                       <th className="text-left px-6 py-4 font-semibold">Plan</th>
                       <th className="text-left px-6 py-4 font-semibold">Price</th>
@@ -570,8 +570,8 @@ export default function DocsPage() {
                     {plans.map((plan, index) => (
                       <tr
                         key={plan.name}
-                        className={`border-b border-slate-100 ${
-                          plan.popular ? "bg-blue-50" : ""
+                        className={`border-b border-border-light ${
+                          plan.popular ? "bg-secondary/10" : ""
                         }`}
                       >
                         <td className="px-6 py-4 font-medium">
@@ -599,7 +599,7 @@ export default function DocsPage() {
         </section>
 
         {/* Webhooks & API */}
-        <section id="webhooks" className="section bg-slate-50">
+        <section id="webhooks" className="section bg-background-secondary">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -608,10 +608,10 @@ export default function DocsPage() {
               className="mb-12"
             >
               <div className="flex items-center gap-3 mb-4">
-                <Code className="w-8 h-8 text-slate-600" />
+                <Code className="w-8 h-8 text-foreground-secondary" />
                 <h2 className="text-3xl font-bold">Webhooks & API</h2>
               </div>
-              <p className="text-lg text-slate-600 max-w-3xl">
+              <p className="text-lg text-foreground-secondary max-w-3xl">
                 Integrate Callengo with your existing systems using webhooks and our REST API.
                 Available on Teams and Enterprise plans.
               </p>
@@ -622,14 +622,14 @@ export default function DocsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-2xl border border-slate-200 p-8"
+                className="bg-white rounded-2xl border border-border p-8"
               >
                 <h3 className="text-xl font-bold mb-4">Webhook Events</h3>
-                <p className="text-slate-600 mb-6">
+                <p className="text-foreground-secondary mb-6">
                   Receive real-time notifications when calls complete. Configure your webhook URL
                   in the dashboard settings.
                 </p>
-                <div className="bg-slate-900 rounded-xl p-4 text-sm font-mono text-slate-300 overflow-x-auto">
+                <div className="bg-navy rounded-xl p-4 text-sm font-mono text-slate-300 overflow-x-auto">
                   <pre>{`POST /your-webhook-url
 {
   "call_id": "uuid",
@@ -652,10 +652,10 @@ export default function DocsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="bg-white rounded-2xl border border-slate-200 p-8"
+                className="bg-white rounded-2xl border border-border p-8"
               >
                 <h3 className="text-xl font-bold mb-4">API Endpoints</h3>
-                <p className="text-slate-600 mb-6">
+                <p className="text-foreground-secondary mb-6">
                   Our REST API allows you to programmatically manage contacts, campaigns, and
                   retrieve call data.
                 </p>
@@ -678,7 +678,7 @@ export default function DocsPage() {
                         {api.method}
                       </span>
                       <code className="text-sm">{api.endpoint}</code>
-                      <span className="text-slate-400 text-sm">{api.desc}</span>
+                      <span className="text-foreground-tertiary text-sm">{api.desc}</span>
                     </div>
                   ))}
                 </div>

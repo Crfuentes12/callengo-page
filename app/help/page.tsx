@@ -29,7 +29,7 @@ const faqItems = [
   },
   {
     question: "Can I integrate Callengo with my CRM?",
-    answer: "CRM integrations are coming soon. Currently, you can export all data as CSV, Excel, or JSON for easy import into any CRM or business system.",
+    answer: "Yes! Callengo integrates natively with HubSpot and Pipedrive on Business+ plans, and Salesforce, Zoho, and Dynamics 365 on Teams+ plans. You can also export all data as CSV, Excel, or JSON for easy import into any CRM or business system.",
   },
 ];
 
@@ -71,7 +71,7 @@ export default function HelpPage() {
               className="text-center max-w-3xl mx-auto mb-16"
             >
               <h1 className="text-display-sm mb-6"><span className="gradient-text">Help</span> Center</h1>
-              <p className="text-xl text-slate-600">
+              <p className="text-xl text-foreground-secondary">
                 Find answers, get support, and learn how to get the most out of Callengo.
               </p>
             </motion.div>
@@ -87,7 +87,7 @@ export default function HelpPage() {
                 <input
                   type="text"
                   placeholder="Search for help..."
-                  className="w-full px-6 py-4 rounded-2xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent text-lg"
+                  className="w-full px-6 py-4 rounded-2xl border border-border focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent text-lg"
                 />
               </div>
             </motion.div>
@@ -102,15 +102,15 @@ export default function HelpPage() {
               {supportChannels.map((channel) => (
                 <div
                   key={channel.title}
-                  className="bg-white rounded-2xl border border-slate-200 p-6 text-center"
+                  className="bg-white rounded-2xl border border-border p-6 text-center"
                 >
                   <div className="w-12 h-12 rounded-xl gradient-bg-subtle flex items-center justify-center mx-auto mb-4">
                     <channel.icon className="w-6 h-6 text-primary" />
                   </div>
                   <h3 className="text-lg font-semibold mb-2">{channel.title}</h3>
-                  <p className="text-slate-600 text-sm mb-4">{channel.description}</p>
+                  <p className="text-foreground-secondary text-sm mb-4">{channel.description}</p>
                   {channel.availability && (
-                    <div className="flex items-center justify-center gap-1 text-sm text-slate-400 mb-4">
+                    <div className="flex items-center justify-center gap-1 text-sm text-foreground-tertiary mb-4">
                       <Clock className="w-4 h-4" />
                       {channel.availability}
                     </div>
@@ -139,7 +139,7 @@ export default function HelpPage() {
               className="mb-16"
             >
               <div className="flex items-center gap-3 mb-8">
-                <FileQuestion className="w-6 h-6 text-slate-600" />
+                <FileQuestion className="w-6 h-6 text-foreground-secondary" />
                 <h2 className="text-2xl font-bold">Frequently Asked Questions</h2>
               </div>
 
@@ -151,10 +151,10 @@ export default function HelpPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.05 }}
-                    className="bg-white rounded-2xl border border-slate-200 p-6"
+                    className="bg-white rounded-2xl border border-border p-6"
                   >
                     <h3 className="font-semibold mb-2">{item.question}</h3>
-                    <p className="text-slate-600">{item.answer}</p>
+                    <p className="text-foreground-secondary">{item.answer}</p>
                   </motion.div>
                 ))}
               </div>

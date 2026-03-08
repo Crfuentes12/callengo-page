@@ -10,6 +10,7 @@ const footerLinks = {
       { name: "Data Validation", href: "/agents/data-validation" },
       { name: "Appointment Confirmation", href: "/agents/appointment-confirmation" },
       { name: "Lead Qualification", href: "/agents/lead-qualification" },
+      { name: "Integrations", href: "/integrations" },
     ],
   },
   company: {
@@ -40,7 +41,7 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="bg-dark text-white">
+    <footer className="bg-navy text-white">
       <div className="max-w-7xl mx-auto px-6">
         {/* Main Footer Content */}
         <div className="py-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
@@ -57,8 +58,9 @@ export default function Footer() {
               <span className="text-2xl font-semibold text-white">Callengo</span>
             </Link>
 
-            <p className="text-gray-400 mb-6 max-w-xs leading-relaxed">
-              Stop losing revenue to no-shows, bad data, and unqualified leads. Let your team focus on closing deals.
+            <p className="text-white/50 mb-6 max-w-xs leading-relaxed">
+              AI-powered phone agents that handle appointment confirmations, data
+              validation, and lead qualification. 16+ integrations, 77+ voices.
             </p>
 
             <div className="flex gap-4">
@@ -66,7 +68,7 @@ export default function Footer() {
                 href="https://linkedin.com/company/callengo"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-white/40 hover:text-white transition-colors"
               >
                 LinkedIn
               </a>
@@ -76,13 +78,15 @@ export default function Footer() {
           {/* Link Columns */}
           {Object.values(footerLinks).map((section) => (
             <div key={section.title}>
-              <h4 className="font-semibold mb-4 text-sm">{section.title}</h4>
+              <h4 className="font-semibold mb-4 text-sm text-white">
+                {section.title}
+              </h4>
               <ul className="space-y-3">
                 {section.links.map((link) => (
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-gray-400 hover:text-white transition-colors text-sm"
+                      className="text-white/50 hover:text-white transition-colors text-sm"
                     >
                       {link.name}
                     </Link>
@@ -95,12 +99,12 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="py-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-gray-500 text-sm">
+          <p className="text-white/40 text-sm">
             &copy; {new Date().getFullYear()} Callengo. All rights reserved.
           </p>
 
-          <div className="flex items-center gap-2 text-sm text-gray-500">
-            <span className="w-2 h-2 bg-green-500 rounded-full" />
+          <div className="flex items-center gap-2 text-sm text-white/40">
+            <span className="w-2 h-2 bg-accent rounded-full" />
             All systems operational
           </div>
         </div>

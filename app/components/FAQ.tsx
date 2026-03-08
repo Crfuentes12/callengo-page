@@ -24,17 +24,22 @@ const faqs = [
   {
     question: "Is there a limit to how many calls I can make?",
     answer:
-      "Each plan includes a certain number of minutes per month. You can make as many calls as you want within your minute allowance. If you exceed your limit, overage minutes are billed at your plan's overage rate.",
+      "Each plan includes a certain number of minutes per month. You can make as many calls as you want within your minute allowance. If you exceed your limit, additional minutes are available through our Calls Booster add-on at $35 for 500 extra minutes.",
   },
   {
     question: "How does the free trial work?",
     answer:
-      "Our free plan gives you 15 minutes of calls to test the platform - no credit card required. You can create one agent and make real calls to see exactly how Callengo works.",
+      "Our free plan gives you 15 minutes of calls to test the platform — no credit card required. You can create one agent and make real calls to see exactly how Callengo works.",
   },
   {
     question: "Can I integrate Callengo with my CRM?",
     answer:
-      "CRM integrations are coming soon and will be available on Teams and Enterprise plans. Currently, all plans can export data via CSV, Excel, or JSON for easy import into any CRM.",
+      "Yes! We offer native integrations with HubSpot, Salesforce, Pipedrive, Zoho CRM, Microsoft Dynamics 365, and Clio. CRM integrations are available on Business plans and above. All plans can also export data via CSV, Excel, or JSON, and we support webhooks for custom integrations.",
+  },
+  {
+    question: "What other integrations are available?",
+    answer:
+      "We integrate with 16+ tools including Google Calendar, Outlook Calendar, Google Meet, Zoom, Microsoft Teams, Slack, SimplyBook.me, Google Sheets, Stripe, and more. Check our Integrations page for the full list and which plans include each integration.",
   },
   {
     question: "What languages are supported?",
@@ -56,7 +61,7 @@ export default function FAQ() {
   };
 
   return (
-    <section className="section bg-gray-50" id="faq">
+    <section className="section bg-background-secondary" id="faq">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Left - Header */}
@@ -69,16 +74,16 @@ export default function FAQ() {
             <h2 className="text-display-sm mb-6">
               Questions?
               <br />
-              <span className="gradient-text">We've got answers.</span>
+              <span className="gradient-text">We&apos;ve got answers.</span>
             </h2>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-xl text-foreground-secondary mb-8">
               Everything you need to know about Callengo.
             </p>
 
             <div className="gradient-border p-6">
               <h4 className="font-semibold mb-2">Still have questions?</h4>
-              <p className="text-gray-600 text-sm mb-4">
-                Our team is here to help. Reach out and we'll get back to you
+              <p className="text-foreground-secondary text-sm mb-4">
+                Our team is here to help. Reach out and we&apos;ll get back to you
                 within 24 hours.
               </p>
               <Link
@@ -102,24 +107,30 @@ export default function FAQ() {
                 transition={{ duration: 0.4, delay: index * 0.05 }}
               >
                 <div
-                  className={`bg-white rounded-2xl border transition-all ${
+                  className={`bg-background rounded-2xl border transition-all ${
                     openIndex === index
-                      ? "border-dark shadow-sm"
-                      : "border-gray-200 hover:border-gray-300"
+                      ? "border-secondary/30 shadow-sm"
+                      : "border-border hover:border-border-dark"
                   }`}
+                  style={{
+                    boxShadow:
+                      openIndex === index
+                        ? "0 2px 12px rgba(79, 95, 232, 0.06)"
+                        : "none",
+                  }}
                 >
                   <button
                     onClick={() => toggleFAQ(index)}
                     className="w-full flex items-center justify-between p-6 text-left"
                   >
-                    <span className="font-medium text-dark pr-4">
+                    <span className="font-medium text-foreground pr-4">
                       {faq.question}
                     </span>
                     <div
                       className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
                         openIndex === index
                           ? "gradient-bg text-white"
-                          : "bg-gray-100 text-gray-600"
+                          : "bg-background-tertiary text-foreground-secondary"
                       }`}
                     >
                       {openIndex === index ? (
@@ -139,7 +150,7 @@ export default function FAQ() {
                         transition={{ duration: 0.3 }}
                         className="overflow-hidden"
                       >
-                        <div className="px-6 pb-6 text-gray-600 leading-relaxed">
+                        <div className="px-6 pb-6 text-foreground-secondary leading-relaxed">
                           {faq.answer}
                         </div>
                       </motion.div>

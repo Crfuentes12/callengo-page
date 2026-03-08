@@ -43,7 +43,6 @@ const testimonials = [
   },
 ];
 
-
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -58,7 +57,7 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="section" id="testimonials">
+    <section className="section bg-background" id="testimonials">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <motion.div
@@ -86,12 +85,12 @@ export default function Testimonials() {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.4 }}
               >
-                <p className="text-2xl md:text-3xl lg:text-4xl font-medium leading-relaxed mb-10">
-                  "{testimonials[currentIndex].quote}"
+                <p className="text-2xl md:text-3xl lg:text-4xl font-medium leading-relaxed text-foreground mb-10">
+                  &ldquo;{testimonials[currentIndex].quote}&rdquo;
                 </p>
 
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-full overflow-hidden border border-slate-200">
+                  <div className="w-14 h-14 rounded-full overflow-hidden border border-border">
                     <img
                       src={testimonials[currentIndex].avatar}
                       alt={testimonials[currentIndex].author}
@@ -100,10 +99,10 @@ export default function Testimonials() {
                   </div>
 
                   <div>
-                    <div className="font-semibold">
+                    <div className="font-semibold text-foreground">
                       {testimonials[currentIndex].author}
                     </div>
-                    <div className="text-slate-500 text-sm">
+                    <div className="text-foreground-tertiary text-sm">
                       {testimonials[currentIndex].role}
                     </div>
                   </div>
@@ -115,17 +114,17 @@ export default function Testimonials() {
             <div className="flex items-center gap-4 mt-10">
               <button
                 onClick={prevTestimonial}
-                className="w-12 h-12 rounded-full border border-slate-200 hover:border-primary hover:text-primary flex items-center justify-center transition-colors"
+                className="w-12 h-12 rounded-full border border-border hover:border-secondary hover:text-secondary flex items-center justify-center transition-colors"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={nextTestimonial}
-                className="w-12 h-12 rounded-full border border-slate-200 hover:border-primary hover:text-primary flex items-center justify-center transition-colors"
+                className="w-12 h-12 rounded-full border border-border hover:border-secondary hover:text-secondary flex items-center justify-center transition-colors"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
-              <span className="text-sm text-slate-400 ml-4">
+              <span className="text-sm text-foreground-tertiary ml-4">
                 {currentIndex + 1} / {testimonials.length}
               </span>
             </div>
@@ -151,11 +150,9 @@ export default function Testimonials() {
               </motion.div>
             </AnimatePresence>
 
-            {/* Decorative */}
-            <div className="absolute -z-10 -bottom-4 -right-4 w-full h-full bg-slate-200 rounded-3xl" />
+            <div className="absolute -z-10 -bottom-3 -right-3 w-full h-full bg-background-tertiary rounded-3xl" />
           </div>
         </div>
-
       </div>
     </section>
   );

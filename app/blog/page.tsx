@@ -69,7 +69,7 @@ export default function BlogPage() {
               className="text-center max-w-3xl mx-auto mb-16"
             >
               <h1 className="text-display-sm mb-6">Blog</h1>
-              <p className="text-xl text-slate-600">
+              <p className="text-xl text-foreground-secondary">
                 Insights, strategies, and best practices for reducing no-shows,
                 improving data quality, and accelerating lead response.
               </p>
@@ -121,18 +121,18 @@ export default function BlogPage() {
                 >
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="block h-full bg-white rounded-2xl border border-slate-200 p-6 hover:border-slate-300 hover:shadow-lg transition-all group"
+                    className="block h-full bg-white rounded-2xl border border-border p-6 hover:border-border-dark hover:shadow-lg transition-all group"
                   >
-                    <span className="inline-block px-3 py-1 bg-slate-100 rounded-full text-sm text-slate-600 mb-4">
+                    <span className="inline-block px-3 py-1 bg-background-tertiary rounded-full text-sm text-foreground-secondary mb-4">
                       {post.category}
                     </span>
-                    <h3 className="text-lg font-semibold mb-3 group-hover:text-slate-700 transition-colors">
+                    <h3 className="text-lg font-semibold mb-3 group-hover:text-foreground-secondary transition-colors">
                       {post.title}
                     </h3>
-                    <p className="text-slate-600 text-sm mb-4 line-clamp-2">
+                    <p className="text-foreground-secondary text-sm mb-4 line-clamp-2">
                       {post.excerpt}
                     </p>
-                    <div className="flex items-center gap-2 text-sm text-slate-400">
+                    <div className="flex items-center gap-2 text-sm text-foreground-tertiary">
                       <Calendar className="w-4 h-4" />
                       {post.date}
                     </div>

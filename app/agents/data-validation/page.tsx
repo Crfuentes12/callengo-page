@@ -136,7 +136,7 @@ const faqs = [
   },
   {
     question: "How do I get the data back into my system?",
-    answer: "Export your verified contacts as CSV or Excel with all status tags and updated information. Simply import back into your CRM or database. Native integrations are coming soon.",
+    answer: "Export your verified contacts as CSV or Excel with all status tags and updated information. You can also sync directly via our native CRM integrations -- HubSpot and Pipedrive are available on Business+ plans, while Salesforce, Zoho, and Dynamics 365 are available on Teams+ plans.",
   },
 ];
 
@@ -183,7 +183,7 @@ export default function DataValidationPage() {
                   <span className="gradient-text">bad data</span>
                 </h1>
 
-                <p className="text-xl text-slate-600 mb-8 leading-relaxed max-w-2xl">
+                <p className="text-xl text-foreground-secondary mb-8 leading-relaxed max-w-2xl">
                   Your CRM is full of outdated contacts costing you campaigns, wasting rep time,
                   and killing deals. Clean your database automatically with AI-powered verification calls.
                 </p>
@@ -199,16 +199,16 @@ export default function DataValidationPage() {
                 </div>
 
                 <div className="flex flex-wrap gap-8 text-sm">
-                  <div className="flex items-center gap-2 text-slate-600">
-                    <Check className="w-5 h-5 text-green-600" />
+                  <div className="flex items-center gap-2 text-foreground-secondary">
+                    <Check className="w-5 h-5 text-accent-dark" />
                     <span><strong>95%+</strong> accuracy rate</span>
                   </div>
-                  <div className="flex items-center gap-2 text-slate-600">
-                    <Check className="w-5 h-5 text-green-600" />
+                  <div className="flex items-center gap-2 text-foreground-secondary">
+                    <Check className="w-5 h-5 text-accent-dark" />
                     <span><strong>80%</strong> cost reduction vs manual</span>
                   </div>
-                  <div className="flex items-center gap-2 text-slate-600">
-                    <Check className="w-5 h-5 text-green-600" />
+                  <div className="flex items-center gap-2 text-foreground-secondary">
+                    <Check className="w-5 h-5 text-accent-dark" />
                     <span><strong>100x</strong> faster than human teams</span>
                   </div>
                 </div>
@@ -218,7 +218,7 @@ export default function DataValidationPage() {
         </section>
 
         {/* Pain Statistics */}
-        <section className="py-16 bg-slate-900 text-white">
+        <section className="py-16 bg-navy text-white">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -244,8 +244,8 @@ export default function DataValidationPage() {
                   <div className="text-4xl md:text-5xl font-bold mb-2 gradient-text">
                     {item.stat}
                   </div>
-                  <p className="text-slate-300 mb-2">{item.description}</p>
-                  <p className="text-xs text-slate-500">Source: {item.source}</p>
+                  <p className="text-foreground-secondary mb-2">{item.description}</p>
+                  <p className="text-xs text-foreground-tertiary">Source: {item.source}</p>
                 </motion.div>
               ))}
             </div>
@@ -264,7 +264,7 @@ export default function DataValidationPage() {
               <h2 className="text-display-sm mb-6">
                 Clean your database in <span className="gradient-text">4 simple steps</span>
               </h2>
-              <p className="text-xl text-slate-600">
+              <p className="text-xl text-foreground-secondary">
                 No complex setup. No technical expertise required. Just upload and verify.
               </p>
             </motion.div>
@@ -279,11 +279,11 @@ export default function DataValidationPage() {
                   transition={{ delay: index * 0.1 }}
                   className="relative"
                 >
-                  <div className="text-7xl font-bold text-slate-100 mb-4">
+                  <div className="text-7xl font-bold text-background-tertiary mb-4">
                     {item.step}
                   </div>
                   <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                  <p className="text-slate-600">{item.description}</p>
+                  <p className="text-foreground-secondary">{item.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -291,7 +291,7 @@ export default function DataValidationPage() {
         </section>
 
         {/* Features Grid */}
-        <section className="section bg-slate-50">
+        <section className="section bg-background-secondary">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -302,7 +302,7 @@ export default function DataValidationPage() {
               <h2 className="text-display-sm mb-6">
                 Everything you need for <span className="gradient-text">clean data</span>
               </h2>
-              <p className="text-xl text-slate-600">
+              <p className="text-xl text-foreground-secondary">
                 Our Data Validation Agent handles all aspects of contact verification
                 so you can trust your database.
               </p>
@@ -316,11 +316,11 @@ export default function DataValidationPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.05 }}
-                  className="bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-lg transition-shadow"
+                  className="bg-white rounded-2xl border border-border p-6 hover:shadow-lg transition-shadow"
                 >
                   <div className="text-3xl mb-4">{feature.icon}</div>
                   <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-slate-600">{feature.description}</p>
+                  <p className="text-foreground-secondary">{feature.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -339,7 +339,7 @@ export default function DataValidationPage() {
               <h2 className="text-display-sm mb-6">
                 Built for teams that <span className="gradient-text">depend on data</span>
               </h2>
-              <p className="text-xl text-slate-600">
+              <p className="text-xl text-foreground-secondary">
                 Whether you are in sales, marketing, or operations - bad data is killing your results.
               </p>
             </motion.div>
@@ -352,22 +352,22 @@ export default function DataValidationPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-white rounded-2xl border border-slate-200 p-8 hover:shadow-lg transition-shadow"
+                  className="bg-white rounded-2xl border border-border p-8 hover:shadow-lg transition-shadow"
                 >
                   <div className="w-12 h-12 rounded-xl gradient-bg flex items-center justify-center mb-6">
                     <industry.icon className="w-6 h-6 text-white" />
                   </div>
                   <h3 className="text-xl font-semibold mb-3">{industry.title}</h3>
-                  <p className="text-slate-600 mb-4">{industry.description}</p>
+                  <p className="text-foreground-secondary mb-4">{industry.description}</p>
 
-                  <div className="flex flex-col gap-2 pt-4 border-t border-slate-100">
+                  <div className="flex flex-col gap-2 pt-4 border-t border-border-light">
                     <div className="flex items-start gap-2">
                       <TrendingDown className="w-4 h-4 text-red-500 mt-1 flex-shrink-0" />
-                      <span className="text-sm text-slate-500">{industry.painPoint}</span>
+                      <span className="text-sm text-foreground-tertiary">{industry.painPoint}</span>
                     </div>
                     <div className="flex items-start gap-2">
-                      <Check className="w-4 h-4 text-green-600 mt-1 flex-shrink-0" />
-                      <span className="text-sm font-medium text-green-700">{industry.result}</span>
+                      <Check className="w-4 h-4 text-accent-dark mt-1 flex-shrink-0" />
+                      <span className="text-sm font-medium text-accent-dark">{industry.result}</span>
                     </div>
                   </div>
                 </motion.div>
@@ -413,21 +413,21 @@ export default function DataValidationPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
               >
-                <div className="bg-white rounded-2xl p-8 text-slate-900">
+                <div className="bg-white rounded-2xl p-8 text-foreground">
                   <h3 className="font-semibold mb-6">Typical Campaign Results</h3>
                   <div className="space-y-4">
                     {[
-                      { label: "Fully Verified", value: 65, color: "bg-green-500" },
-                      { label: "Updated Info", value: 15, color: "bg-blue-500" },
+                      { label: "Fully Verified", value: 65, color: "bg-accent" },
+                      { label: "Updated Info", value: 15, color: "bg-secondary" },
                       { label: "Bad Data Removed", value: 12, color: "bg-red-500" },
-                      { label: "No Answer (Retry)", value: 8, color: "bg-slate-400" },
+                      { label: "No Answer (Retry)", value: 8, color: "bg-foreground-tertiary" },
                     ].map((item) => (
                       <div key={item.label}>
                         <div className="flex justify-between mb-1 text-sm">
-                          <span className="text-slate-600">{item.label}</span>
+                          <span className="text-foreground-secondary">{item.label}</span>
                           <span className="font-medium">{item.value}%</span>
                         </div>
-                        <div className="h-2 bg-slate-100 rounded-full">
+                        <div className="h-2 bg-background-tertiary rounded-full">
                           <div
                             className={`h-full ${item.color} rounded-full transition-all`}
                             style={{ width: `${item.value}%` }}
@@ -443,7 +443,7 @@ export default function DataValidationPage() {
         </section>
 
         {/* Testimonials */}
-        <section className="section bg-slate-50">
+        <section className="section bg-background-secondary">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -464,14 +464,14 @@ export default function DataValidationPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-white rounded-2xl p-8 border border-slate-200"
+                  className="bg-white rounded-2xl p-8 border border-border"
                 >
-                  <p className="text-lg text-slate-700 mb-6 leading-relaxed">
+                  <p className="text-lg text-foreground-secondary mb-6 leading-relaxed">
                     &quot;{testimonial.quote}&quot;
                   </p>
                   <div>
                     <div className="font-semibold">{testimonial.author}</div>
-                    <div className="text-sm text-slate-500">
+                    <div className="text-sm text-foreground-tertiary">
                       {testimonial.title}, {testimonial.company}
                     </div>
                   </div>
@@ -495,13 +495,16 @@ export default function DataValidationPage() {
                   <h2 className="text-2xl md:text-3xl font-semibold mb-4">
                     Simple, transparent pricing
                   </h2>
-                  <p className="text-slate-600 mb-6">
+                  <p className="text-foreground-secondary mb-6">
                     Pay only for verified contacts. No setup fees, no hidden costs.
                     Start with 15 free minutes to test with your own data.
                   </p>
-                  <div className="flex items-baseline gap-2 mb-6">
+                  <div className="flex items-baseline gap-2 mb-2">
                     <span className="text-4xl font-bold">$0.50</span>
-                    <span className="text-slate-500">per verified contact (avg)</span>
+                    <span className="text-foreground-tertiary">per verified contact (avg)</span>
+                  </div>
+                  <div className="text-sm text-foreground-tertiary mb-6">
+                    See V4 pricing for latest plans and volume discounts.
                   </div>
                   <Link href="/pricing" className="btn btn-primary">
                     View Full Pricing
@@ -510,19 +513,19 @@ export default function DataValidationPage() {
                 </div>
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-green-600" />
+                    <Check className="w-5 h-5 text-accent-dark" />
                     <span>15 free minutes to start</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-green-600" />
+                    <Check className="w-5 h-5 text-accent-dark" />
                     <span>No credit card required for trial</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-green-600" />
+                    <Check className="w-5 h-5 text-accent-dark" />
                     <span>Cancel anytime, no contracts</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-green-600" />
+                    <Check className="w-5 h-5 text-accent-dark" />
                     <span>Volume discounts available</span>
                   </div>
                 </div>
@@ -532,7 +535,7 @@ export default function DataValidationPage() {
         </section>
 
         {/* FAQ Section */}
-        <section className="section bg-slate-50">
+        <section className="section bg-background-secondary">
           <div className="max-w-3xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -557,8 +560,8 @@ export default function DataValidationPage() {
                   <div
                     className={`bg-white rounded-2xl border transition-all ${
                       openFaq === index
-                        ? "border-slate-900 shadow-sm"
-                        : "border-slate-200 hover:border-slate-300"
+                        ? "border-foreground shadow-sm"
+                        : "border-border hover:border-foreground-tertiary"
                     }`}
                   >
                     <button
@@ -567,7 +570,7 @@ export default function DataValidationPage() {
                     >
                       <span className="font-medium pr-4">{faq.question}</span>
                       <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
-                        openFaq === index ? "gradient-bg text-white" : "bg-slate-100 text-slate-600"
+                        openFaq === index ? "gradient-bg text-white" : "bg-background-tertiary text-foreground-secondary"
                       }`}>
                         {openFaq === index ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
                       </div>
@@ -582,7 +585,7 @@ export default function DataValidationPage() {
                           transition={{ duration: 0.3 }}
                           className="overflow-hidden"
                         >
-                          <div className="px-6 pb-6 text-slate-600 leading-relaxed">
+                          <div className="px-6 pb-6 text-foreground-secondary leading-relaxed">
                             {faq.answer}
                           </div>
                         </motion.div>

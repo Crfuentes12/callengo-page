@@ -1,35 +1,87 @@
 @import "tailwindcss";
 
+/* =====================================================
+   CALLENGO DESIGN SYSTEM v2.0
+   Deep Indigo / Electric Blue / Clean Corporate
+   ===================================================== */
+
 @theme {
-  /* Callengo Brand Colors - Deep Blue to Purple Gradient */
-  --color-primary: #2e3a76;
-  --color-primary-dark: #173657;
-  --color-primary-light: #8938b0;
+  /* ─── Primary Brand ─── */
+  --color-primary: #1E2D6B;
+  --color-primary-dark: #0F1A42;
+  --color-primary-light: #2A3F8F;
 
-  --color-accent: #8938b0;
-  --color-accent-dark: #6b2a8a;
-  --color-accent-light: #a855f7;
+  /* ─── Secondary / Electric ─── */
+  --color-secondary: #4F5FE8;
+  --color-secondary-dark: #3A49C9;
+  --color-secondary-light: #6B79F5;
 
-  /* Gradient endpoints for brand identity */
-  --color-gradient-start: #173657;
-  --color-gradient-mid: #2e3a76;
-  --color-gradient-end: #8938b0;
+  /* ─── Accent / Highlight ─── */
+  --color-accent: #06D6A0;
+  --color-accent-dark: #05B586;
+  --color-accent-light: #34EDBB;
 
-  /* Dark colors */
-  --color-dark: #0f172a;
-  --color-dark-light: #1e293b;
+  /* ─── Slate Indigo (text tones) ─── */
+  --color-slate-indigo: #8B96C8;
+  --color-slate-indigo-dark: #5A6499;
+  --color-slate-indigo-light: #B8C0E0;
 
-  /* Success/Error */
-  --color-success: #10b981;
-  --color-error: #ef4444;
-  --color-warning: #f59e0b;
+  /* ─── Gradient endpoints ─── */
+  --color-gradient-start: #1E2D6B;
+  --color-gradient-mid: #3347A8;
+  --color-gradient-end: #4F5FE8;
 
-  /* Font family */
+  /* ─── Navy / Dark ─── */
+  --color-navy: #0B1437;
+  --color-navy-light: #131D4F;
+  --color-dark: #0A0F1E;
+  --color-dark-light: #141B33;
+
+  /* ─── Background system ─── */
+  --color-background: #FFFFFF;
+  --color-background-secondary: #F7F8FC;
+  --color-background-tertiary: #EEF0F8;
+
+  /* ─── Foreground system ─── */
+  --color-foreground: #0F1629;
+  --color-foreground-secondary: #4A5578;
+  --color-foreground-tertiary: #8B96C8;
+
+  /* ─── Border system ─── */
+  --color-border: #E2E6F2;
+  --color-border-light: #EEF0F8;
+  --color-border-dark: #C5CBDE;
+
+  /* ─── Semantic ─── */
+  --color-success: #06D6A0;
+  --color-error: #EF4444;
+  --color-warning: #F59E0B;
+  --color-info: #4F5FE8;
+
+  /* ─── Font families ─── */
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Poppins", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* ─── Shadows ─── */
+  --shadow-sm: 0 1px 2px rgba(14, 22, 55, 0.04);
+  --shadow-md: 0 4px 12px rgba(14, 22, 55, 0.06);
+  --shadow-lg: 0 8px 30px rgba(14, 22, 55, 0.08);
+  --shadow-xl: 0 16px 50px rgba(14, 22, 55, 0.1);
+  --shadow-electric: 0 4px 20px rgba(79, 95, 232, 0.2);
+  --shadow-electric-lg: 0 8px 40px rgba(79, 95, 232, 0.25);
+
+  /* ─── Border Radius ─── */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
 }
 
 /* =====================================================
-   BASE LAYER - Reset and base styles
+   BASE LAYER
    ===================================================== */
 @layer base {
   * {
@@ -43,7 +95,7 @@
   }
 
   body {
-    @apply bg-white text-slate-900;
+    @apply bg-background text-foreground;
     font-family: var(--font-sans);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
@@ -51,22 +103,29 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold;
+    font-family: var(--font-display);
+    font-weight: 600;
     line-height: 1.2;
     letter-spacing: -0.02em;
+    color: var(--color-foreground);
+  }
+
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
   }
 
   *:focus-visible {
-    @apply outline-2 outline-primary outline-offset-2;
+    @apply outline-2 outline-secondary outline-offset-2;
   }
 
   ::selection {
-    @apply bg-primary text-white;
+    background: rgba(79, 95, 232, 0.15);
+    color: var(--color-primary);
   }
 }
 
 /* =====================================================
-   COMPONENTS LAYER - Reusable component styles
+   COMPONENTS LAYER
    ===================================================== */
 @layer components {
   /* Section Wrapper */
@@ -81,113 +140,184 @@
 
   /* Cards */
   .card {
-    @apply bg-white border border-slate-200 rounded-2xl p-6 transition-all duration-300;
+    @apply bg-background border border-border rounded-2xl p-6 transition-all duration-300;
+    box-shadow: var(--shadow-sm);
   }
 
   .card:hover {
-    @apply border-transparent shadow-xl;
-    box-shadow: 0 20px 40px rgba(46, 58, 118, 0.1);
+    @apply border-border-dark;
+    box-shadow: var(--shadow-lg);
   }
 
-  .card-hover {
-    @apply transition-all duration-300;
+  .card-glass {
+    @apply rounded-2xl p-6 transition-all duration-300;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(226, 230, 242, 0.6);
+    box-shadow: var(--shadow-sm);
   }
 
-  .card-hover:hover {
-    @apply -translate-y-1;
-    box-shadow: 0 20px 40px rgba(137, 56, 176, 0.15);
+  .card-glass:hover {
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: var(--shadow-md);
+  }
+
+  .card-elevated {
+    @apply bg-background rounded-2xl p-6 transition-all duration-300;
+    box-shadow: var(--shadow-md);
+  }
+
+  .card-elevated:hover {
+    @apply -translate-y-0.5;
+    box-shadow: var(--shadow-xl);
   }
 
   /* Buttons */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 font-medium text-sm transition-all duration-200 cursor-pointer rounded-lg no-underline;
+    @apply inline-flex items-center justify-center gap-2 font-medium text-sm transition-all duration-200 cursor-pointer no-underline;
+    border-radius: var(--radius-lg);
   }
 
   .btn-primary {
     @apply text-white px-7 py-3.5;
-    background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-mid) 50%, var(--color-gradient-end) 100%);
-    box-shadow: 0 4px 14px rgba(46, 58, 118, 0.25);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    box-shadow: var(--shadow-electric);
   }
 
   .btn-primary:hover {
     @apply -translate-y-0.5;
-    box-shadow: 0 6px 20px rgba(137, 56, 176, 0.35);
+    box-shadow: var(--shadow-electric-lg);
+    filter: brightness(1.05);
   }
 
   .btn-secondary {
-    @apply bg-transparent text-slate-900 px-7 py-3.5 border border-slate-200;
+    @apply bg-transparent text-foreground px-7 py-3.5 border border-border;
   }
 
   .btn-secondary:hover {
-    @apply bg-slate-50 border-slate-300;
+    @apply bg-background-secondary border-border-dark;
   }
 
   .btn-ghost {
-    @apply bg-transparent text-slate-500 px-4 py-2;
+    @apply bg-transparent text-foreground-secondary px-4 py-2;
   }
 
   .btn-ghost:hover {
-    @apply text-slate-900;
+    @apply text-foreground;
+  }
+
+  .btn-electric {
+    @apply text-white px-7 py-3.5;
+    background: var(--color-secondary);
+    box-shadow: var(--shadow-electric);
+  }
+
+  .btn-electric:hover {
+    @apply -translate-y-0.5;
+    background: var(--color-secondary-dark);
+    box-shadow: var(--shadow-electric-lg);
   }
 
   /* Badges */
   .badge {
-    @apply inline-flex items-center px-3.5 py-1.5 text-xs font-medium rounded-full uppercase tracking-wide;
+    @apply inline-flex items-center px-3.5 py-1.5 text-xs font-medium rounded-full tracking-wide;
   }
 
   .badge-primary {
     @apply text-primary;
-    background: linear-gradient(135deg, rgba(23, 54, 87, 0.1) 0%, rgba(137, 56, 176, 0.1) 100%);
+    background: rgba(30, 45, 107, 0.08);
+  }
+
+  .badge-electric {
+    @apply text-secondary;
+    background: rgba(79, 95, 232, 0.08);
+  }
+
+  .badge-accent {
+    @apply text-accent-dark;
+    background: rgba(6, 214, 160, 0.1);
   }
 
   .badge-outline {
-    @apply bg-transparent border border-slate-200 text-slate-500;
+    @apply bg-transparent border border-border text-foreground-secondary;
   }
 
   .badge-gradient {
     @apply text-white;
-    background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-mid) 50%, var(--color-gradient-end) 100%);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   }
 
   /* Image Placeholder */
   .img-placeholder {
-    @apply flex items-center justify-center text-slate-400 text-sm rounded-2xl;
-    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    @apply flex items-center justify-center text-foreground-tertiary text-sm rounded-2xl;
+    background: linear-gradient(135deg, var(--color-background-secondary) 0%, var(--color-background-tertiary) 100%);
   }
 
   /* Typography */
   .text-display {
-    @apply font-semibold;
+    font-family: var(--font-display);
+    font-weight: 600;
     font-size: clamp(2.5rem, 6vw, 4.5rem);
     line-height: 1.1;
     letter-spacing: -0.03em;
   }
 
   .text-display-sm {
-    @apply font-semibold;
+    font-family: var(--font-display);
+    font-weight: 600;
     font-size: clamp(2rem, 4vw, 3rem);
     line-height: 1.15;
     letter-spacing: -0.02em;
   }
 
+  .text-display-xs {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
   /* Dark Section */
   .section-dark {
     @apply text-white;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-primary-dark) 50%, var(--color-primary) 100%);
   }
 
   .section-dark .badge-outline {
     @apply border-white/20 text-white/70;
   }
+
+  /* Glass Panel */
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-2xl);
+  }
+
+  .glass-panel-light {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(226, 230, 242, 0.5);
+    border-radius: var(--radius-2xl);
+  }
 }
 
 /* =====================================================
-   UTILITIES LAYER - Custom utility classes
+   UTILITIES LAYER
    ===================================================== */
 @layer utilities {
   /* Gradient Text */
   .gradient-text {
-    background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-mid) 50%, var(--color-gradient-end) 100%);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-electric {
+    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-accent) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -195,23 +325,27 @@
 
   /* Gradient Background */
   .gradient-bg {
-    background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-mid) 50%, var(--color-gradient-end) 100%);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   }
 
   .gradient-bg-subtle {
-    background: linear-gradient(135deg, rgba(23, 54, 87, 0.08) 0%, rgba(46, 58, 118, 0.08) 50%, rgba(137, 56, 176, 0.08) 100%);
+    background: linear-gradient(135deg, rgba(30, 45, 107, 0.04) 0%, rgba(79, 95, 232, 0.04) 100%);
+  }
+
+  .gradient-bg-radial {
+    background: radial-gradient(ellipse at 50% 0%, rgba(79, 95, 232, 0.08) 0%, transparent 70%);
   }
 
   /* Gradient Border */
   .gradient-border {
-    @apply relative bg-white rounded-2xl;
+    @apply relative bg-background rounded-2xl;
   }
 
   .gradient-border::before {
     content: '';
     @apply absolute inset-0 rounded-[inherit] pointer-events-none;
-    padding: 2px;
-    background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-mid) 50%, var(--color-gradient-end) 100%);
+    padding: 1.5px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
@@ -220,8 +354,9 @@
 
   /* Stat Number with Gradient */
   .stat-number {
-    @apply font-bold;
-    background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-mid) 50%, var(--color-gradient-end) 100%);
+    font-family: var(--font-display);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -230,35 +365,71 @@
   /* Background Patterns */
   .bg-grid {
     background-image:
-      linear-gradient(rgba(46, 58, 118, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(46, 58, 118, 0.03) 1px, transparent 1px);
+      linear-gradient(rgba(30, 45, 107, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30, 45, 107, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .bg-grid-dark {
+    background-image:
+      linear-gradient(rgba(79, 95, 232, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(79, 95, 232, 0.06) 1px, transparent 1px);
     background-size: 60px 60px;
   }
 
   .bg-dots {
-    background-image: radial-gradient(rgba(137, 56, 176, 0.15) 1px, transparent 1px);
-    background-size: 20px 20px;
+    background-image: radial-gradient(rgba(79, 95, 232, 0.12) 1px, transparent 1px);
+    background-size: 24px 24px;
   }
 
   /* Accent Decorations */
   .accent-dot {
     @apply w-2 h-2 rounded-full;
-    background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-mid) 50%, var(--color-gradient-end) 100%);
+    background: var(--color-secondary);
   }
 
   .accent-line {
     @apply h-0.5 w-16 rounded;
-    background: linear-gradient(90deg, var(--color-gradient-start) 0%, var(--color-gradient-mid) 50%, var(--color-gradient-end) 100%);
+    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   }
 
   .accent-glow {
-    box-shadow: 0 0 60px rgba(46, 58, 118, 0.3), 0 0 100px rgba(137, 56, 176, 0.2);
+    box-shadow: 0 0 40px rgba(79, 95, 232, 0.15), 0 0 80px rgba(30, 45, 107, 0.08);
   }
 
   /* Gradient Divider */
   .divider-gradient {
     @apply h-px;
-    background: linear-gradient(90deg, transparent 0%, var(--color-primary) 50%, transparent 100%);
+    background: linear-gradient(90deg, transparent 0%, var(--color-secondary) 50%, transparent 100%);
+  }
+
+  /* Electric highlight underline */
+  .highlight-underline {
+    position: relative;
+    display: inline-block;
+  }
+
+  .highlight-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-secondary), var(--color-accent));
+    border-radius: 2px;
+    opacity: 0.6;
+  }
+
+  /* Noise texture overlay */
+  .noise-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    border-radius: inherit;
   }
 }
 
@@ -268,7 +439,7 @@
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(24px);
   }
   to {
     opacity: 1;
@@ -281,14 +452,52 @@
   to { opacity: 1; }
 }
 
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
 
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(46, 58, 118, 0.4); }
-  50% { box-shadow: 0 0 40px rgba(46, 58, 118, 0.6), 0 0 60px rgba(137, 56, 176, 0.3); }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 @layer utilities {
@@ -300,30 +509,50 @@
     animation: fadeIn 0.6s ease forwards;
   }
 
+  .animate-slideInLeft {
+    animation: slideInLeft 0.6s ease forwards;
+  }
+
+  .animate-slideInRight {
+    animation: slideInRight 0.6s ease forwards;
+  }
+
   .animate-shimmer {
-    background: linear-gradient(90deg, #f1f5f9 0%, #e2e8f0 50%, #f1f5f9 100%);
+    background: linear-gradient(90deg, var(--color-background-secondary) 0%, var(--color-background-tertiary) 50%, var(--color-background-secondary) 100%);
     background-size: 200% 100%;
     animation: shimmer 2s infinite;
   }
 
-  .animate-pulse-glow {
-    animation: pulse-glow 2s ease-in-out infinite;
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-scaleIn {
+    animation: scaleIn 0.5s ease forwards;
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
   }
 }
 
-/* Custom scrollbar */
+/* =====================================================
+   SCROLLBAR
+   ===================================================== */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-slate-100;
+  background: var(--color-background-secondary);
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply rounded bg-slate-300;
+  background: var(--color-border-dark);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-slate-400;
+  background: var(--color-slate-indigo);
 }

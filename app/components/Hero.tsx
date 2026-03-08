@@ -208,16 +208,16 @@ function FlyingDataParticle({ datum, onDone }: { datum: FlyingDatum; onDone: () 
       onAnimationComplete={onDone}
       className="absolute top-2 left-1/2 -translate-x-1/2 z-30 pointer-events-none"
     >
-      <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white border border-slate-200 shadow-lg text-xs whitespace-nowrap">
+      <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white border border-border shadow-lg text-xs whitespace-nowrap">
         {datum.status === "confirmed" ? (
-          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+          <CheckCircle2 className="w-3.5 h-3.5 text-accent-dark" />
         ) : datum.status === "updated" ? (
           <AlertCircle className="w-3.5 h-3.5 text-amber-500" />
         ) : (
-          <Zap className="w-3.5 h-3.5 text-blue-500" />
+          <Zap className="w-3.5 h-3.5 text-secondary" />
         )}
-        <span className="font-medium text-slate-700">{datum.label}:</span>
-        <span className="text-slate-500 max-w-30 truncate">{datum.value}</span>
+        <span className="font-medium text-foreground">{datum.label}:</span>
+        <span className="text-foreground-secondary max-w-30 truncate">{datum.value}</span>
       </div>
     </motion.div>
   );
@@ -240,9 +240,9 @@ function DataRow({
   index: number;
 }) {
   const colors = {
-    confirmed: { bg: "bg-emerald-50", text: "text-emerald-700", badge: "Confirmed" },
+    confirmed: { bg: "bg-accent/10", text: "text-accent-dark", badge: "Confirmed" },
     updated: { bg: "bg-amber-50", text: "text-amber-700", badge: "Updated" },
-    new: { bg: "bg-blue-50", text: "text-blue-700", badge: "New" },
+    new: { bg: "bg-secondary/10", text: "text-secondary", badge: "New" },
   };
   const c = colors[status];
 
@@ -261,13 +261,13 @@ function DataRow({
         <Zap className={`w-3.5 h-3.5 ${c.text} shrink-0`} />
       )}
       <div className="flex-1 min-w-0">
-        <div className="text-[10px] font-medium text-slate-500 leading-tight">{field}</div>
+        <div className="text-[10px] font-medium text-foreground-tertiary leading-tight">{field}</div>
         <div className="flex items-center gap-1">
           {original && (
-            <span className="text-[9px] text-slate-400 line-through truncate max-w-15">{original}</span>
+            <span className="text-[9px] text-foreground-tertiary line-through truncate max-w-15">{original}</span>
           )}
-          {original && <span className="text-[9px] text-slate-400">→</span>}
-          <span className="text-[11px] font-semibold text-slate-800 truncate">{value}</span>
+          {original && <span className="text-[9px] text-foreground-tertiary">→</span>}
+          <span className="text-[11px] font-semibold text-foreground truncate">{value}</span>
         </div>
       </div>
       <span className={`text-[8px] font-bold uppercase px-1 py-0.5 rounded ${c.text} opacity-80 shrink-0`}>
@@ -334,12 +334,12 @@ function QualityRing({ score, size = 44 }: { score: number; size?: number }) {
   return (
     <div className="relative" style={{ width: size, height: size }}>
       <svg width={size} height={size} className="-rotate-90">
-        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#e2e8f0" strokeWidth={3} />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="var(--color-border)" strokeWidth={3} />
         <motion.circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="url(#qg)" strokeWidth={3} strokeLinecap="round" strokeDasharray={circ} initial={{ strokeDashoffset: circ }} animate={{ strokeDashoffset: offset }} transition={{ duration: 1.2, ease: "easeOut" }} />
         <defs><linearGradient id="qg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="var(--color-gradient-start)" /><stop offset="100%" stopColor="var(--color-gradient-end)" /></linearGradient></defs>
       </svg>
       <div className="absolute inset-0 flex items-center justify-center">
-        <span className="text-xs font-bold text-slate-800">{score}</span>
+        <span className="text-xs font-bold text-foreground">{score}</span>
       </div>
     </div>
   );
@@ -543,10 +543,9 @@ export default function Hero() {
   const totalDataFields = revealedValidated.length + revealedExtracted.length;
 
   return (
-    <section className="pt-28 pb-16 md:pt-36 md:pb-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-grid opacity-50" />
-      <div className="absolute top-20 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+    <section className="pt-28 pb-16 md:pt-36 md:pb-24 relative overflow-hidden bg-background">
+      <div className="absolute inset-0 bg-grid opacity-40" />
+      <div className="absolute top-0 left-0 right-0 h-full gradient-bg-radial" />
 
       <audio ref={audioRef} src={scenario.audioSrc} preload="metadata" />
 
@@ -567,7 +566,7 @@ export default function Hero() {
               <span className="gradient-text">making money.</span>
             </h1>
 
-            <p className="text-lg text-slate-600 mb-8 max-w-lg leading-relaxed">
+            <p className="text-lg text-foreground-secondary mb-8 max-w-lg leading-relaxed">
               Your team spends hours every week on repetitive phone calls that
               don&apos;t close deals. We handle those calls automatically, so
               your people can focus on what actually drives revenue.
@@ -583,11 +582,11 @@ export default function Hero() {
               </Link>
             </div>
 
-            <p className="text-sm text-slate-500 mt-6">
+            <p className="text-sm text-foreground-tertiary mt-6">
               No credit card required · 15 free minutes · Setup in 5 minutes
             </p>
 
-            <div className="grid grid-cols-3 gap-4 mt-10 pt-8 border-t border-slate-200">
+            <div className="grid grid-cols-3 gap-4 mt-10 pt-8 border-t border-border">
               {[
                 { label: "Calls Automated", value: "50K+" },
                 { label: "Avg. Quality", value: "9.2/10" },
@@ -595,7 +594,7 @@ export default function Hero() {
               ].map((stat) => (
                 <div key={stat.label}>
                   <div className="stat-number text-2xl">{stat.value}</div>
-                  <div className="text-xs text-slate-500 mt-1">{stat.label}</div>
+                  <div className="text-xs text-foreground-tertiary mt-1">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -613,7 +612,7 @@ export default function Hero() {
           >
             <div className="relative w-100 sm:w-100 bottom-12">
               {/* Software window shell */}
-              <div className="rounded-2xl bg-slate-950 shadow-2xl ring-1 ring-slate-700/50 overflow-hidden">
+              <div className="rounded-2xl bg-navy shadow-2xl ring-1 ring-white/10 overflow-hidden">
 
                 {/* App screen — FIXED HEIGHT */}
                 <div className="bg-white overflow-hidden relative h-140 flex flex-col">
@@ -667,7 +666,7 @@ export default function Hero() {
                   </div>
 
                   {/* Waveform + controls */}
-                  <div className="px-3 py-2 bg-slate-50 border-b border-slate-100 shrink-0">
+                  <div className="px-3 py-2 bg-background-secondary border-b border-border shrink-0">
                     <div className="flex items-center gap-2">
                       <button
                         onClick={handlePlayPause}
@@ -677,12 +676,12 @@ export default function Hero() {
                       </button>
                       <div className="flex-1 space-y-0.5">
                         <WaveformVisualizer isPlaying={isPlaying} />
-                        <div className="h-1 bg-slate-200 rounded-full overflow-hidden cursor-pointer relative group" onClick={handleProgressClick}>
+                        <div className="h-1 bg-border rounded-full overflow-hidden cursor-pointer relative group" onClick={handleProgressClick}>
                           <div className="h-full gradient-bg rounded-full transition-all duration-200" style={{ width: `${Math.min(progress, 100)}%` }} />
                           <div className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full gradient-bg shadow-md opacity-0 group-hover:opacity-100 transition-opacity" style={{ left: `calc(${Math.min(progress, 100)}% - 5px)` }} />
                         </div>
                       </div>
-                      <span className="text-[9px] text-slate-400 font-mono tabular-nums shrink-0">
+                      <span className="text-[9px] text-foreground-tertiary font-mono tabular-nums shrink-0">
                         {formatTime(currentTime)}/{formatTime(scenario.duration)}
                       </span>
                     </div>
@@ -701,17 +700,18 @@ export default function Hero() {
                       /* ── CTA Banner ── */
                       <div className="flex-1 flex flex-col items-center justify-center text-center px-6">
                         <motion.div
-                          animate={{ scale: [1, 1.08, 1] }}
-                          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                          className="w-14 h-14 rounded-full gradient-bg flex items-center justify-center mb-4 shadow-lg cursor-pointer"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="w-14 h-14 rounded-full gradient-bg flex items-center justify-center mb-4 cursor-pointer"
+                          style={{ boxShadow: "var(--shadow-electric-lg)" }}
                           onClick={handlePlayPause}
                         >
                           <Play className="w-6 h-6 text-white ml-0.5" />
                         </motion.div>
-                        <p className="text-[13px] font-semibold text-slate-800 mb-1 leading-snug">
+                        <p className="text-[13px] font-semibold text-foreground mb-1 leading-snug">
                           {scenario.ctaHeadline}
                         </p>
-                        <p className="text-[11px] text-slate-400">
+                        <p className="text-[11px] text-foreground-tertiary">
                           {scenario.ctaSub}
                         </p>
                       </div>
@@ -719,10 +719,10 @@ export default function Hero() {
                       <>
                         {/* Transcript section */}
                         <div className="flex-3 min-h-0 flex flex-col">
-                          <div className="px-3 py-1 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between shrink-0">
-                            <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider">Live Transcript</span>
+                          <div className="px-3 py-1 border-b border-border-light bg-background-secondary/50 flex items-center justify-between shrink-0">
+                            <span className="text-[9px] font-semibold text-foreground-tertiary uppercase tracking-wider">Live Transcript</span>
                             {totalDataFields > 0 && (
-                              <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded flex items-center gap-0.5">
+                              <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className="text-[9px] font-bold text-accent-dark bg-accent/10 px-1.5 py-0.5 rounded flex items-center gap-0.5">
                                 <Zap className="w-2.5 h-2.5" />{totalDataFields} captured
                               </motion.span>
                             )}
@@ -730,10 +730,10 @@ export default function Hero() {
                           <div ref={transcriptRef} className="flex-1 overflow-y-auto p-2.5 space-y-1.5 scroll-smooth">
                             {visibleMessages.length === 0 ? (
                               <div className="h-full flex items-center justify-center">
-                                <motion.div animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 1.2, repeat: Infinity }} className="flex items-center gap-1.5 text-slate-300">
-                                  <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
-                                  <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
-                                  <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+                                <motion.div animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 1.2, repeat: Infinity }} className="flex items-center gap-1.5 text-slate-indigo-light">
+                                  <div className="w-1.5 h-1.5 rounded-full bg-slate-indigo-light" />
+                                  <div className="w-1.5 h-1.5 rounded-full bg-slate-indigo-light" />
+                                  <div className="w-1.5 h-1.5 rounded-full bg-slate-indigo-light" />
                                   <span className="text-[10px] ml-1">Connecting call...</span>
                                 </motion.div>
                               </div>
@@ -749,7 +749,7 @@ export default function Hero() {
                                       transition={{ duration: 0.2 }}
                                       className={`flex ${isAI ? "justify-start" : "justify-end"}`}
                                     >
-                                      <div className={`max-w-[85%] px-2.5 py-1.5 rounded-xl text-[10px] leading-relaxed ${isAI ? "bg-slate-100 text-slate-700 rounded-bl-sm" : "gradient-bg text-white rounded-br-sm"}`}>
+                                      <div className={`max-w-[85%] px-2.5 py-1.5 rounded-xl text-[10px] leading-relaxed ${isAI ? "bg-background-tertiary text-foreground-secondary rounded-bl-sm" : "gradient-bg text-white rounded-br-sm"}`}>
                                         {msg.text}
                                       </div>
                                     </motion.div>
@@ -757,9 +757,9 @@ export default function Hero() {
                                 })}
                                 {isPlaying && visibleMessages.length > 0 && (
                                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 1.2, repeat: Infinity }} className="flex items-center gap-1 pl-2">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
-                                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
-                                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+                                    <div className="w-1.5 h-1.5 rounded-full bg-slate-indigo-light" />
+                                    <div className="w-1.5 h-1.5 rounded-full bg-slate-indigo-light" />
+                                    <div className="w-1.5 h-1.5 rounded-full bg-slate-indigo-light" />
                                   </motion.div>
                                 )}
                               </>
@@ -768,18 +768,18 @@ export default function Hero() {
                         </div>
 
                         {/* Data captured section */}
-                        <div className="flex-2 min-h-0 flex flex-col border-t border-slate-100">
-                          <div className="px-3 py-1 bg-slate-50/80 flex items-center gap-1 shrink-0">
-                            <Database className="w-2.5 h-2.5 text-slate-400" />
-                            <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider">Data Captured</span>
+                        <div className="flex-2 min-h-0 flex flex-col border-t border-border-light">
+                          <div className="px-3 py-1 bg-background-secondary/80 flex items-center gap-1 shrink-0">
+                            <Database className="w-2.5 h-2.5 text-foreground-tertiary" />
+                            <span className="text-[9px] font-semibold text-foreground-tertiary uppercase tracking-wider">Data Captured</span>
                           </div>
                           <div ref={dataRef} className="flex-1 overflow-y-auto p-2 space-y-1 scroll-smooth">
                             {revealedValidated.length === 0 && revealedExtracted.length === 0 ? (
-                              <div className="h-full flex flex-col items-center justify-center text-slate-300 gap-1">
+                              <div className="h-full flex flex-col items-center justify-center text-slate-indigo-light gap-1">
                                 <Database className="w-4 h-4" />
                                 <span className="text-[10px]">Waiting for data...</span>
                                 {isPlaying && (
-                                  <motion.div className="w-12 h-0.5 rounded-full overflow-hidden bg-slate-100" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                                  <motion.div className="w-12 h-0.5 rounded-full overflow-hidden bg-background-tertiary" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                                     <motion.div className="h-full gradient-bg" animate={{ x: ["-100%", "100%"] }} transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }} style={{ width: "60%" }} />
                                   </motion.div>
                                 )}
@@ -805,14 +805,14 @@ export default function Hero() {
 
                   {/* Re-open analysis */}
                   {showAnalysis && !showAnalysisPopup && (
-                    <div className="shrink-0 px-3 py-2 border-t border-slate-100">
+                    <div className="shrink-0 px-3 py-2 border-t border-border-light">
                       <motion.button
                         initial={{ opacity: 0, y: 4 }}
                         animate={{ opacity: 1, y: 0 }}
                         onClick={() => setShowAnalysisPopup(true)}
-                        className="w-full flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-[10px] font-medium text-slate-600 cursor-pointer hover:bg-slate-100 transition-colors"
+                        className="w-full flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-background-secondary border border-slate-200 text-[10px] font-medium text-foreground-secondary cursor-pointer hover:bg-background-tertiary transition-colors"
                       >
-                        <BarChart3 className="w-3 h-3 text-slate-400" />
+                        <BarChart3 className="w-3 h-3 text-foreground-tertiary" />
                         View call analysis
                       </motion.button>
                     </div>
@@ -837,8 +837,8 @@ export default function Hero() {
                           className="flex-1 bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden"
                         >
                           {/* Header */}
-                          <div className="px-5 pt-4 pb-3 text-center border-b border-slate-100">
-                            <div className="text-[11px] font-semibold text-slate-800">Call Analysis</div>
+                          <div className="px-5 pt-4 pb-3 text-center border-b border-border-light">
+                            <div className="text-[11px] font-semibold text-foreground">Call Analysis</div>
                           </div>
 
                           {/* Content — scrollable */}
@@ -846,38 +846,38 @@ export default function Hero() {
                             {/* Quality score */}
                             <div className="flex flex-col items-center mb-4">
                               <QualityRing score={scenario.callQuality} size={52} />
-                              <div className="text-[11px] font-semibold text-slate-800 mt-2">Call Complete</div>
-                              <div className="text-[10px] text-slate-400 flex items-center gap-1 mt-0.5">
+                              <div className="text-[11px] font-semibold text-foreground mt-2">Call Complete</div>
+                              <div className="text-[10px] text-foreground-tertiary flex items-center gap-1 mt-0.5">
                                 <Clock className="w-2.5 h-2.5" />{scenario.durationLabel}
                               </div>
                             </div>
 
                             {/* Outcome */}
-                            <div className="text-[10px] text-slate-500 text-center leading-snug bg-slate-50 rounded-xl px-3 py-2 mb-4">
+                            <div className="text-[10px] text-foreground-secondary text-center leading-snug bg-background-secondary rounded-xl px-3 py-2 mb-4">
                               {scenario.callOutcome}
                             </div>
 
                             {/* Data rows */}
                             <div className="space-y-1.5 mb-4">
                               {scenario.validatedFields.map((f, i) => (
-                                <div key={i} className={`flex items-center justify-between px-3 py-2 rounded-xl text-[10px] ${f.status === "confirmed" ? "bg-emerald-50" : "bg-amber-50"}`}>
-                                  <span className="text-slate-500 font-medium">{f.field}</span>
-                                  <span className="font-semibold text-slate-800 truncate ml-2 max-w-32.5 text-right">{f.value}</span>
+                                <div key={i} className={`flex items-center justify-between px-3 py-2 rounded-xl text-[10px] ${f.status === "confirmed" ? "bg-accent/10" : "bg-amber-50"}`}>
+                                  <span className="text-foreground-secondary font-medium">{f.field}</span>
+                                  <span className="font-semibold text-foreground truncate ml-2 max-w-32.5 text-right">{f.value}</span>
                                 </div>
                               ))}
                               {scenario.extractedData.map((f, i) => (
-                                <div key={`e-${i}`} className="flex items-center justify-between px-3 py-2 rounded-xl text-[10px] bg-blue-50">
-                                  <span className="text-slate-500 font-medium">{f.field}</span>
-                                  <span className="font-semibold text-slate-800 truncate ml-2 max-w-32.5 text-right">{f.value}</span>
+                                <div key={`e-${i}`} className="flex items-center justify-between px-3 py-2 rounded-xl text-[10px] bg-secondary/10">
+                                  <span className="text-foreground-secondary font-medium">{f.field}</span>
+                                  <span className="font-semibold text-foreground truncate ml-2 max-w-32.5 text-right">{f.value}</span>
                                 </div>
                               ))}
                             </div>
 
                             {/* Next steps */}
-                            <div className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Next Steps</div>
+                            <div className="text-[9px] font-semibold text-foreground-tertiary uppercase tracking-wider mb-2">Next Steps</div>
                             <div className="space-y-1.5">
                               {scenario.nextActions.map((action, i) => (
-                                <div key={i} className="flex items-start gap-2 text-[10px] text-slate-600">
+                                <div key={i} className="flex items-start gap-2 text-[10px] text-foreground-secondary">
                                   <span className="w-4 h-4 rounded-full gradient-bg text-white flex items-center justify-center text-[8px] font-bold shrink-0 mt-0.5">{i + 1}</span>
                                   <span className="leading-snug">{action}</span>
                                 </div>
@@ -886,10 +886,10 @@ export default function Hero() {
                           </div>
 
                           {/* Bottom close */}
-                          <div className="px-5 pb-4 pt-2 border-t border-slate-100">
+                          <div className="px-5 pb-4 pt-2 border-t border-border-light">
                             <button
                               onClick={() => setShowAnalysisPopup(false)}
-                              className="w-full py-2.5 rounded-xl bg-slate-100 text-[11px] font-semibold text-slate-600 cursor-pointer hover:bg-slate-200 transition-colors"
+                              className="w-full py-2.5 rounded-xl bg-background-tertiary text-[11px] font-semibold text-foreground-secondary cursor-pointer hover:bg-background-tertiary transition-colors"
                             >
                               Close
                             </button>

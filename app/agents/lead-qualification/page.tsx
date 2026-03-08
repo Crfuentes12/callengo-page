@@ -158,7 +158,7 @@ const faqItems = [
   },
   {
     question: "What happens to low-scoring leads?",
-    answer: "You decide. Options include: auto-assign to nurture campaigns, mark for future follow-up, or simply deprioritize in your CRM. No lead data is lost—they're just ranked lower so your team focuses on buyers first.",
+    answer: "You decide. Options include: auto-assign to nurture campaigns, mark for future follow-up, or deprioritize directly in your CRM via our native integrations. No lead data is lost—they're just ranked lower so your team focuses on buyers first.",
   },
   {
     question: "How quickly are leads qualified?",
@@ -166,7 +166,7 @@ const faqItems = [
   },
   {
     question: "How do I get the qualified leads back?",
-    answer: "Export your scored leads as CSV or Excel with all qualification data, scores, and call transcripts. Simply import back into your CRM or sales tools. Native integrations are coming soon.",
+    answer: "Export your scored leads as CSV or Excel with all qualification data, scores, and call transcripts — or push qualified leads directly to your CRM pipeline. Native integrations are live for HubSpot and Pipedrive on Business+ plans, and Salesforce, Zoho, and Dynamics 365 on Teams+ plans.",
   },
   {
     question: "What if a lead wants to speak to a human during qualification?",
@@ -191,7 +191,7 @@ export default function LeadQualificationPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 text-sm text-slate-600 mb-6">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-background-tertiary text-sm text-foreground-secondary mb-6">
                   <Filter className="w-4 h-4" />
                   Lead Qualification Agent
                 </div>
@@ -200,7 +200,7 @@ export default function LeadQualificationPage() {
                   Stop chasing leads that{" "}
                   <span className="gradient-text">will never buy</span>
                 </h1>
-                <p className="text-xl text-slate-600 mb-8 leading-relaxed">
+                <p className="text-xl text-foreground-secondary mb-8 leading-relaxed">
                   Your sales team wastes 50% of their time on unqualified leads.
                   Let AI score and rank every lead so your reps only talk to buyers
                   who are actually ready to close.
@@ -213,23 +213,23 @@ export default function LeadQualificationPage() {
                   </Link>
                   <Link
                     href="/contact"
-                    className="btn bg-slate-100 text-slate-900 hover:bg-slate-200"
+                    className="btn bg-background-tertiary text-foreground hover:bg-background-tertiary/80"
                   >
                     See a Demo
                   </Link>
                 </div>
 
-                <div className="flex flex-wrap gap-6 text-sm text-slate-600">
+                <div className="flex flex-wrap gap-6 text-sm text-foreground-secondary">
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-green-600" />
+                    <Check className="w-4 h-4 text-accent-dark" />
                     BANT scoring
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-green-600" />
+                    <Check className="w-4 h-4 text-accent-dark" />
                     Custom criteria
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-green-600" />
+                    <Check className="w-4 h-4 text-accent-dark" />
                     CRM integration
                   </div>
                 </div>
@@ -242,14 +242,14 @@ export default function LeadQualificationPage() {
                 className="relative"
               >
                 {/* Lead Scoring Visualization */}
-                <div className="bg-white rounded-3xl border border-slate-200 p-8 shadow-sm">
+                <div className="bg-white rounded-3xl border border-border p-8 shadow-[var(--shadow-sm)]">
                   <h3 className="font-semibold mb-6 text-center">Your Leads, Ranked</h3>
                   <div className="space-y-4">
-                    <div className="flex items-center gap-4 p-3 rounded-xl bg-green-50 border border-green-200">
+                    <div className="flex items-center gap-4 p-3 rounded-xl bg-accent/10 border border-accent/20">
                       <div className="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-sm">92</div>
                       <div className="flex-1">
-                        <div className="font-medium text-green-800">Sarah M. — Hot Lead</div>
-                        <div className="text-sm text-green-600">Budget confirmed, decision maker, needs solution now</div>
+                        <div className="font-medium text-accent-dark">Sarah M. — Hot Lead</div>
+                        <div className="text-sm text-accent-dark/80">Budget confirmed, decision maker, needs solution now</div>
                       </div>
                       <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
                     </div>
@@ -260,15 +260,15 @@ export default function LeadQualificationPage() {
                         <div className="text-sm text-yellow-600">Budget TBD, evaluating in Q2</div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-4 p-3 rounded-xl bg-slate-50 border border-slate-200">
-                      <div className="w-10 h-10 rounded-full bg-slate-300 flex items-center justify-center text-white font-bold text-sm">23</div>
+                    <div className="flex items-center gap-4 p-3 rounded-xl bg-background-secondary border border-border">
+                      <div className="w-10 h-10 rounded-full bg-foreground-tertiary flex items-center justify-center text-white font-bold text-sm">23</div>
                       <div className="flex-1">
-                        <div className="font-medium text-slate-600">Mike T. — Cold Lead</div>
-                        <div className="text-sm text-slate-500">No budget, just researching</div>
+                        <div className="font-medium text-foreground-secondary">Mike T. — Cold Lead</div>
+                        <div className="text-sm text-foreground-tertiary">No budget, just researching</div>
                       </div>
                     </div>
                   </div>
-                  <p className="text-sm text-slate-500 mt-6 text-center">
+                  <p className="text-sm text-foreground-tertiary mt-6 text-center">
                     Your team calls Sarah first. Mike goes to nurture.
                   </p>
                 </div>
@@ -279,7 +279,7 @@ export default function LeadQualificationPage() {
         </section>
 
         {/* Pain Stats Section */}
-        <section className="section bg-slate-50">
+        <section className="section bg-background-secondary">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -290,7 +290,7 @@ export default function LeadQualificationPage() {
               <h2 className="text-3xl md:text-4xl font-semibold mb-4">
                 Unqualified leads are <span className="gradient-text">killing productivity</span>
               </h2>
-              <p className="text-lg text-slate-600">
+              <p className="text-lg text-foreground-secondary">
                 Your sales team can't tell buyers from browsers. Here's what that costs you.
               </p>
             </motion.div>
@@ -303,13 +303,13 @@ export default function LeadQualificationPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-white rounded-2xl border border-slate-200 p-6 text-center"
+                  className="bg-white rounded-2xl border border-border p-6 text-center"
                 >
                   <div className="text-4xl font-bold gradient-text mb-3">
                     {stat.value}
                   </div>
-                  <p className="text-slate-600 mb-3">{stat.label}</p>
-                  <p className="text-xs text-slate-400">{stat.source}</p>
+                  <p className="text-foreground-secondary mb-3">{stat.label}</p>
+                  <p className="text-xs text-foreground-tertiary">{stat.source}</p>
                 </motion.div>
               ))}
             </div>
@@ -328,7 +328,7 @@ export default function LeadQualificationPage() {
               <h2 className="text-3xl md:text-4xl font-semibold mb-4">
                 Every lead <span className="gradient-text">scored and ranked</span>
               </h2>
-              <p className="text-lg text-slate-600">
+              <p className="text-lg text-foreground-secondary">
                 No more guessing which leads to call first. AI qualifies every lead
                 so your team focuses on the ones ready to buy.
               </p>
@@ -344,16 +344,16 @@ export default function LeadQualificationPage() {
                   transition={{ delay: index * 0.1 }}
                   className="relative"
                 >
-                  <div className="text-6xl font-bold text-slate-100 mb-4">
+                  <div className="text-6xl font-bold text-background-tertiary mb-4">
                     {step.step}
                   </div>
                   <div className="w-12 h-12 rounded-xl gradient-bg-subtle flex items-center justify-center mb-4">
                     <step.icon className="w-6 h-6 text-primary" />
                   </div>
                   <h3 className="font-semibold mb-2">{step.title}</h3>
-                  <p className="text-slate-600 text-sm">{step.description}</p>
+                  <p className="text-foreground-secondary text-sm">{step.description}</p>
                   {index < processSteps.length - 1 && (
-                    <div className="hidden lg:block absolute top-8 right-0 w-1/2 h-px bg-slate-200" />
+                    <div className="hidden lg:block absolute top-8 right-0 w-1/2 h-px bg-border" />
                   )}
                 </motion.div>
               ))}
@@ -437,7 +437,7 @@ export default function LeadQualificationPage() {
               <h2 className="text-3xl md:text-4xl font-semibold mb-4">
                 Everything you need to <span className="gradient-text">prioritize better</span>
               </h2>
-              <p className="text-lg text-slate-600">
+              <p className="text-lg text-foreground-secondary">
                 Built for sales teams who want to close more, not chase more.
               </p>
             </motion.div>
@@ -450,10 +450,10 @@ export default function LeadQualificationPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.05 }}
-                  className="bg-white rounded-2xl border border-slate-200 p-6 hover:border-slate-300 transition-colors"
+                  className="bg-white rounded-2xl border border-border p-6 hover:border-border/80 transition-colors"
                 >
                   <h3 className="font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-slate-600 text-sm">{feature.description}</p>
+                  <p className="text-foreground-secondary text-sm">{feature.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -461,7 +461,7 @@ export default function LeadQualificationPage() {
         </section>
 
         {/* Industries Section */}
-        <section className="section bg-slate-50">
+        <section className="section bg-background-secondary">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -472,7 +472,7 @@ export default function LeadQualificationPage() {
               <h2 className="text-3xl md:text-4xl font-semibold mb-4">
                 Built for <span className="gradient-text">your industry</span>
               </h2>
-              <p className="text-lg text-slate-600">
+              <p className="text-lg text-foreground-secondary">
                 Every business has unqualified leads. Here's how we help filter them out.
               </p>
             </motion.div>
@@ -485,7 +485,7 @@ export default function LeadQualificationPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-white rounded-2xl border border-slate-200 p-8"
+                  className="bg-white rounded-2xl border border-border p-8"
                 >
                   <div className="flex items-start gap-4 mb-4">
                     <div className="w-12 h-12 rounded-xl gradient-bg-subtle flex items-center justify-center flex-shrink-0">
@@ -493,13 +493,13 @@ export default function LeadQualificationPage() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-lg">{industry.name}</h3>
-                      <p className="text-slate-500 text-sm">{industry.pain}</p>
+                      <p className="text-foreground-tertiary text-sm">{industry.pain}</p>
                     </div>
                   </div>
-                  <p className="text-slate-600 mb-4">{industry.solution}</p>
+                  <p className="text-foreground-secondary mb-4">{industry.solution}</p>
                   <div className="flex items-center gap-2 text-sm">
-                    <TrendingUp className="w-4 h-4 text-green-600" />
-                    <span className="font-medium text-green-600">{industry.stat}</span>
+                    <TrendingUp className="w-4 h-4 text-accent-dark" />
+                    <span className="font-medium text-accent-dark">{industry.stat}</span>
                   </div>
                 </motion.div>
               ))}
@@ -529,9 +529,9 @@ export default function LeadQualificationPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-white rounded-2xl border border-slate-200 p-8"
+                  className="bg-white rounded-2xl border border-border p-8"
                 >
-                  <p className="text-slate-600 mb-6 italic">"{testimonial.quote}"</p>
+                  <p className="text-foreground-secondary mb-6 italic">"{testimonial.quote}"</p>
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 rounded-full gradient-bg-subtle flex items-center justify-center">
                       <span className="text-sm font-medium text-primary">
@@ -540,13 +540,13 @@ export default function LeadQualificationPage() {
                     </div>
                     <div>
                       <div className="font-medium">{testimonial.author}</div>
-                      <div className="text-sm text-slate-500">
+                      <div className="text-sm text-foreground-tertiary">
                         {testimonial.role}, {testimonial.company}
                       </div>
                     </div>
                   </div>
-                  <div className="pt-4 border-t border-slate-100">
-                    <div className="text-sm text-slate-500">Result</div>
+                  <div className="pt-4 border-t border-border-light">
+                    <div className="text-sm text-foreground-tertiary">Result</div>
                     <div className="font-semibold gradient-text">{testimonial.result}</div>
                   </div>
                 </motion.div>
@@ -556,7 +556,7 @@ export default function LeadQualificationPage() {
         </section>
 
         {/* Pricing Teaser — ROI-focused */}
-        <section className="section bg-slate-50">
+        <section className="section bg-background-secondary">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -569,16 +569,16 @@ export default function LeadQualificationPage() {
                   <h2 className="text-2xl md:text-3xl font-semibold mb-4">
                     One qualified lead pays for a full month
                   </h2>
-                  <p className="text-slate-600 mb-6">
+                  <p className="text-foreground-secondary mb-6">
                     Your SDRs cost $4,000+/month and spend half their time on leads
                     that never buy. Callengo qualifies every lead for a fraction of
                     that cost — so your reps only call buyers who are ready to close.
                   </p>
                   <div className="flex items-baseline gap-2 mb-2">
                     <span className="text-4xl font-bold">~$1.20</span>
-                    <span className="text-slate-500">per lead qualified (avg)</span>
+                    <span className="text-foreground-tertiary">per lead qualified (avg)</span>
                   </div>
-                  <p className="text-sm text-slate-400 mb-6">
+                  <p className="text-sm text-foreground-tertiary mb-6">
                     Based on a 3-5 min qualification call at $0.30/min
                   </p>
                   <Link href="/pricing" className="btn btn-primary">
@@ -587,22 +587,22 @@ export default function LeadQualificationPage() {
                   </Link>
                 </div>
                 <div className="space-y-4">
-                  <div className="bg-white rounded-xl p-4 border border-slate-200">
-                    <div className="text-sm text-slate-500 mb-1">Without Callengo</div>
-                    <div className="text-lg font-bold text-slate-800">$25+ per lead</div>
-                    <div className="text-xs text-slate-400">SDR salary ÷ leads handled per month</div>
+                  <div className="bg-white rounded-xl p-4 border border-border">
+                    <div className="text-sm text-foreground-tertiary mb-1">Without Callengo</div>
+                    <div className="text-lg font-bold text-foreground">$25+ per lead</div>
+                    <div className="text-xs text-foreground-tertiary">SDR salary ÷ leads handled per month</div>
                   </div>
                   <div className="bg-white rounded-xl p-4 border border-primary/30 ring-1 ring-primary/10">
-                    <div className="text-sm text-slate-500 mb-1">With Callengo</div>
+                    <div className="text-sm text-foreground-tertiary mb-1">With Callengo</div>
                     <div className="text-lg font-bold gradient-text">~$1.20 per lead</div>
-                    <div className="text-xs text-slate-400">AI qualifies in 3-5 min, your reps close</div>
+                    <div className="text-xs text-foreground-tertiary">AI qualifies in 3-5 min, your reps close</div>
                   </div>
                   <div className="flex items-center gap-3 pt-2">
-                    <Check className="w-5 h-5 text-green-600" />
+                    <Check className="w-5 h-5 text-accent-dark" />
                     <span className="text-sm">15 free minutes to start — no credit card</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-green-600" />
+                    <Check className="w-5 h-5 text-accent-dark" />
                     <span className="text-sm">Cancel anytime, no contracts</span>
                   </div>
                 </div>
@@ -637,8 +637,8 @@ export default function LeadQualificationPage() {
                   <div
                     className={`bg-white rounded-2xl border transition-all ${
                       openFaq === index
-                        ? "border-slate-900 shadow-sm"
-                        : "border-slate-200 hover:border-slate-300"
+                        ? "border-foreground shadow-[var(--shadow-sm)]"
+                        : "border-border hover:border-border/80"
                     }`}
                   >
                     <button
@@ -647,7 +647,7 @@ export default function LeadQualificationPage() {
                     >
                       <span className="font-medium">{item.question}</span>
                       <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
-                        openFaq === index ? "gradient-bg text-white" : "bg-slate-100 text-slate-600"
+                        openFaq === index ? "gradient-bg text-white" : "bg-background-tertiary text-foreground-secondary"
                       }`}>
                         {openFaq === index ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
                       </div>
@@ -662,7 +662,7 @@ export default function LeadQualificationPage() {
                           transition={{ duration: 0.3 }}
                           className="overflow-hidden"
                         >
-                          <div className="px-6 pb-6 text-slate-600 leading-relaxed">
+                          <div className="px-6 pb-6 text-foreground-secondary leading-relaxed">
                             {item.answer}
                           </div>
                         </motion.div>

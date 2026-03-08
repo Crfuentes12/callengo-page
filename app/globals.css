@@ -1,65 +1,61 @@
 @import "tailwindcss";
 
-/* =====================================================
-   CALLENGO DESIGN SYSTEM v3.0
-   Stripe-inspired · Sleek · Minimal · High contrast
-   ===================================================== */
+/* ============================================================
+   CALLENGO — GLOBAL DESIGN SYSTEM v2.0
+   Brand: Deep Indigo / Slate Indigo / Electric
+   Typography: Inter (cv02, cv03) + Poppins display + JetBrains Mono
+   ============================================================ */
 
 @theme {
-  /* ─── Primary Brand ─── */
-  --color-primary: #0A2540;
-  --color-primary-dark: #061B2E;
-  --color-primary-light: #1A3A5C;
+  /* ─── Brand Core ─── */
+  --color-deep-indigo: #1E2D6B;
+  --color-slate-indigo: #8B96C8;
+  --color-electric: #4F5FE8;
+  --color-void: #0D1117;
+  --color-arctic: #F4F5FA;
+  --color-ink: #1A1B2E;
 
-  /* ─── Secondary / Electric ─── */
-  --color-secondary: #635BFF;
-  --color-secondary-dark: #4F46E5;
-  --color-secondary-light: #7C75FF;
+  /* ─── Primary Scale ─── */
+  --color-primary: #4F5FE8;
+  --color-primary-dark: #1E2D6B;
+  --color-primary-light: #8B96C8;
 
-  /* ─── Accent ─── */
-  --color-accent: #00D4AA;
-  --color-accent-dark: #00B894;
-  --color-accent-light: #33EDCC;
+  /* ─── Secondary (action color) ─── */
+  --color-secondary: #4F5FE8;
+  --color-secondary-dark: #3347D4;
+  --color-secondary-light: #6070E0;
 
-  /* ─── Cyan highlight ─── */
-  --color-cyan: #80E9FF;
-  --color-cyan-dark: #00C7E6;
+  /* ─── Accent / Success ─── */
+  --color-accent: #1DB87A;
+  --color-accent-dark: #128055;
+  --color-accent-light: #3DCB91;
 
-  /* ─── Warm tones ─── */
-  --color-orange: #FF7A00;
-  --color-pink: #FF5CAA;
-
-  /* ─── Gradient endpoints ─── */
-  --color-gradient-start: #0A2540;
-  --color-gradient-mid: #1B3A5C;
-  --color-gradient-end: #635BFF;
-
-  /* ─── Navy / Dark ─── */
-  --color-navy: #0A2540;
-  --color-navy-light: #0F3052;
-  --color-dark: #040D21;
-  --color-dark-light: #0C1F3A;
+  /* ─── Navy / Dark surfaces ─── */
+  --color-navy: #1E2D6B;
+  --color-navy-light: #2538B8;
+  --color-dark: #0D1117;
+  --color-dark-light: #141D47;
 
   /* ─── Background system ─── */
   --color-background: #FFFFFF;
-  --color-background-secondary: #F6F9FC;
-  --color-background-tertiary: #E9EDF5;
+  --color-background-secondary: #F4F5FA;
+  --color-background-tertiary: #ECEDF5;
 
   /* ─── Foreground system ─── */
-  --color-foreground: #0A2540;
-  --color-foreground-secondary: #425466;
-  --color-foreground-tertiary: #8898AA;
+  --color-foreground: #1A1B2E;
+  --color-foreground-secondary: #4A5072;
+  --color-foreground-tertiary: #9399B8;
 
   /* ─── Border system ─── */
-  --color-border: #E3E8EE;
-  --color-border-light: #F0F3F7;
-  --color-border-dark: #C1C9D2;
+  --color-border: #DDE0EE;
+  --color-border-light: #ECEDF5;
+  --color-border-dark: #C4C9DE;
 
   /* ─── Semantic ─── */
-  --color-success: #00D4AA;
-  --color-error: #FF5567;
-  --color-warning: #FF9F43;
-  --color-info: #635BFF;
+  --color-success: #1DB87A;
+  --color-error: #EF4444;
+  --color-warning: #F59E0B;
+  --color-info: #4F5FE8;
 
   /* ─── Font families ─── */
   --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
@@ -67,15 +63,19 @@
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
   --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
 
-  /* ─── Shadows ─── */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.08);
-  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.1);
-  --shadow-electric: 0 4px 24px rgba(99, 91, 255, 0.18);
-  --shadow-electric-lg: 0 8px 40px rgba(99, 91, 255, 0.25);
+  /* ─── Shadows — Indigo-tinted ─── */
+  --shadow-xs: 0 1px 2px rgba(26, 27, 46, 0.04);
+  --shadow-sm: 0 1px 3px rgba(26, 27, 46, 0.06), 0 1px 2px rgba(26, 27, 46, 0.04);
+  --shadow-md: 0 4px 6px rgba(26, 27, 46, 0.05), 0 2px 4px rgba(26, 27, 46, 0.04);
+  --shadow-lg: 0 10px 20px rgba(26, 27, 46, 0.08), 0 4px 8px rgba(26, 27, 46, 0.04);
+  --shadow-xl: 0 20px 40px rgba(26, 27, 46, 0.10), 0 8px 16px rgba(26, 27, 46, 0.06);
+  --shadow-2xl: 0 32px 64px rgba(26, 27, 46, 0.14), 0 16px 32px rgba(26, 27, 46, 0.08);
+  --shadow-electric: 0 4px 16px rgba(79, 95, 232, 0.30), 0 2px 6px rgba(79, 95, 232, 0.15);
+  --shadow-electric-lg: 0 8px 32px rgba(79, 95, 232, 0.35), 0 4px 12px rgba(79, 95, 232, 0.20);
+  --shadow-premium: 0 8px 32px rgba(30, 45, 107, 0.20), 0 2px 8px rgba(30, 45, 107, 0.10);
 
   /* ─── Border Radius ─── */
+  --radius-xs: 4px;
   --radius-sm: 6px;
   --radius-md: 8px;
   --radius-lg: 12px;
@@ -84,9 +84,9 @@
   --radius-3xl: 24px;
 }
 
-/* =====================================================
+/* ============================================================
    BASE LAYER
-   ===================================================== */
+   ============================================================ */
 @layer base {
   * {
     box-sizing: border-box;
@@ -101,7 +101,10 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);
-    line-height: 1.7;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    line-height: 1.5;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
@@ -127,9 +130,9 @@
     @apply outline-2 outline-secondary outline-offset-2;
   }
 
-  /* ── Selection highlight — visible cyan on dark, purple on light ── */
+  /* Selection highlight */
   ::selection {
-    background: rgba(99, 91, 255, 0.2);
+    background: rgba(79, 95, 232, 0.15);
     color: var(--color-foreground);
   }
 
@@ -137,15 +140,15 @@
   .gradient-bg ::selection,
   [class*="bg-navy"] ::selection,
   [class*="bg-dark"] ::selection,
-  [class*="bg-primary"] ::selection {
-    background: rgba(128, 233, 255, 0.3);
+  [class*="bg-deep-indigo"] ::selection {
+    background: rgba(139, 150, 200, 0.3);
     color: #FFFFFF;
   }
 }
 
-/* =====================================================
+/* ============================================================
    COMPONENTS LAYER
-   ===================================================== */
+   ============================================================ */
 @layer components {
   .section {
     @apply py-24 md:py-32;
@@ -172,7 +175,7 @@
     @apply rounded-xl p-6 transition-all duration-300;
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(227, 232, 238, 0.6);
+    border: 1px solid rgba(221, 224, 238, 0.6);
     box-shadow: var(--shadow-sm);
   }
 
@@ -201,7 +204,7 @@
 
   .btn-primary {
     @apply text-white px-7 py-3.5;
-    background: var(--color-secondary);
+    background: var(--color-electric);
     box-shadow: var(--shadow-electric);
   }
 
@@ -229,15 +232,16 @@
     @apply text-foreground;
   }
 
-  .btn-electric {
+  .btn-premium {
     @apply text-white px-7 py-3.5;
-    background: linear-gradient(135deg, var(--color-secondary) 0%, #9B8AFB 100%);
+    background: linear-gradient(135deg, #1E2D6B 0%, #3347D4 50%, #4F5FE8 100%);
     box-shadow: var(--shadow-electric);
   }
 
-  .btn-electric:hover {
+  .btn-premium:hover {
     transform: translateY(-1px);
     box-shadow: var(--shadow-electric-lg);
+    opacity: 0.95;
   }
 
   /* ── Badges ── */
@@ -247,18 +251,13 @@
   }
 
   .badge-primary {
-    color: var(--color-secondary);
-    background: rgba(99, 91, 255, 0.08);
-  }
-
-  .badge-electric {
-    color: var(--color-secondary);
-    background: rgba(99, 91, 255, 0.08);
+    color: var(--color-electric);
+    background: rgba(79, 95, 232, 0.08);
   }
 
   .badge-accent {
     color: var(--color-accent-dark);
-    background: rgba(0, 212, 170, 0.08);
+    background: rgba(29, 184, 122, 0.08);
   }
 
   .badge-outline {
@@ -268,13 +267,13 @@
 
   .badge-gradient {
     @apply text-white;
-    background: linear-gradient(135deg, var(--color-secondary) 0%, #9B8AFB 100%);
+    background: linear-gradient(135deg, #1E2D6B 0%, #4F5FE8 100%);
   }
 
   /* ── Typography Display ── */
   .text-display {
     font-family: var(--font-display);
-    font-weight: 600;
+    font-weight: 700;
     font-size: clamp(2.75rem, 6vw, 4.75rem);
     line-height: 1.05;
     letter-spacing: -0.035em;
@@ -296,18 +295,14 @@
     letter-spacing: -0.02em;
   }
 
-  /* ── Section Dark — proper contrast ── */
+  /* ── Section Dark ── */
   .section-dark {
     @apply text-white;
-    background: var(--color-navy);
+    background: var(--color-deep-indigo);
   }
 
-  .section-dark h1,
-  .section-dark h2,
-  .section-dark h3,
-  .section-dark h4,
-  .section-dark h5,
-  .section-dark h6 {
+  .section-dark h1, .section-dark h2, .section-dark h3,
+  .section-dark h4, .section-dark h5, .section-dark h6 {
     color: #FFFFFF;
   }
 
@@ -331,7 +326,7 @@
   .glass-panel-light {
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(227, 232, 238, 0.5);
+    border: 1px solid rgba(221, 224, 238, 0.5);
     border-radius: var(--radius-2xl);
   }
 
@@ -342,51 +337,54 @@
   }
 }
 
-/* =====================================================
+/* ============================================================
    UTILITIES LAYER
-   ===================================================== */
+   ============================================================ */
 @layer utilities {
-  /* ── Gradient Text ── */
+  /* ── Gradient Text — Brand gradient ── */
   .gradient-text {
-    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-cyan-dark) 100%);
+    background: linear-gradient(135deg, #1E2D6B 0%, #3347D4 50%, #4F5FE8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .gradient-text-electric {
-    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-accent) 100%);
+    background: linear-gradient(135deg, #4F5FE8 0%, #6070E0 50%, #8B96C8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  .gradient-text-warm {
-    background: linear-gradient(135deg, var(--color-orange) 0%, var(--color-pink) 100%);
+  .gradient-text-premium {
+    background: linear-gradient(135deg, #8B96C8 0%, #FFFFFF 50%, #8B96C8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  /* ── Gradient Background ── */
+  /* ── Gradient Backgrounds ── */
   .gradient-bg {
-    background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-secondary) 100%);
+    background: linear-gradient(135deg, #1E2D6B 0%, #3347D4 50%, #4F5FE8 100%);
   }
 
   .gradient-bg-subtle {
-    background: linear-gradient(135deg, rgba(99, 91, 255, 0.04) 0%, rgba(0, 199, 230, 0.04) 100%);
+    background: linear-gradient(135deg, rgba(30, 45, 107, 0.04) 0%, rgba(79, 95, 232, 0.07) 100%);
+  }
+
+  .gradient-bg-premium {
+    background: linear-gradient(135deg, #0D1117 0%, #1E2D6B 40%, #3347D4 100%);
   }
 
   .gradient-bg-radial {
-    background: radial-gradient(ellipse at 50% 0%, rgba(99, 91, 255, 0.06) 0%, transparent 70%);
+    background: radial-gradient(ellipse at 50% 0%, rgba(79, 95, 232, 0.06) 0%, transparent 70%);
   }
 
   .gradient-bg-mesh {
     background:
-      radial-gradient(at 27% 37%, rgba(99, 91, 255, 0.08) 0px, transparent 50%),
-      radial-gradient(at 97% 21%, rgba(0, 212, 170, 0.06) 0px, transparent 50%),
-      radial-gradient(at 52% 99%, rgba(128, 233, 255, 0.05) 0px, transparent 50%),
-      radial-gradient(at 10% 29%, rgba(255, 122, 0, 0.04) 0px, transparent 50%);
+      radial-gradient(at 27% 37%, rgba(79, 95, 232, 0.06) 0px, transparent 50%),
+      radial-gradient(at 97% 21%, rgba(30, 45, 107, 0.05) 0px, transparent 50%),
+      radial-gradient(at 52% 99%, rgba(139, 150, 200, 0.04) 0px, transparent 50%);
   }
 
   /* ── Gradient Border ── */
@@ -398,7 +396,7 @@
     content: '';
     @apply absolute inset-0 rounded-[inherit] pointer-events-none;
     padding: 1px;
-    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-cyan-dark) 100%);
+    background: linear-gradient(135deg, #1E2D6B 0%, #4F5FE8 100%);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
@@ -409,7 +407,7 @@
   .stat-number {
     font-family: var(--font-display);
     font-weight: 700;
-    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-cyan-dark) 100%);
+    background: linear-gradient(135deg, #1E2D6B 0%, #4F5FE8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -418,8 +416,8 @@
   /* ── Background Patterns ── */
   .bg-grid {
     background-image:
-      linear-gradient(rgba(10, 37, 64, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(10, 37, 64, 0.03) 1px, transparent 1px);
+      linear-gradient(rgba(30, 45, 107, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30, 45, 107, 0.03) 1px, transparent 1px);
     background-size: 48px 48px;
   }
 
@@ -431,23 +429,23 @@
   }
 
   .bg-dots {
-    background-image: radial-gradient(rgba(99, 91, 255, 0.1) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(79, 95, 232, 0.1) 1px, transparent 1px);
     background-size: 24px 24px;
   }
 
   /* ── Accent Decorations ── */
   .accent-dot {
     @apply w-2 h-2 rounded-full;
-    background: var(--color-secondary);
+    background: var(--color-electric);
   }
 
   .accent-line {
     @apply h-px w-16 rounded;
-    background: linear-gradient(90deg, var(--color-secondary) 0%, var(--color-cyan-dark) 100%);
+    background: linear-gradient(90deg, #1E2D6B 0%, #4F5FE8 100%);
   }
 
   .accent-glow {
-    box-shadow: 0 0 60px rgba(99, 91, 255, 0.12), 0 0 120px rgba(99, 91, 255, 0.06);
+    box-shadow: 0 0 60px rgba(79, 95, 232, 0.12), 0 0 120px rgba(79, 95, 232, 0.06);
   }
 
   /* ── Divider ── */
@@ -469,11 +467,11 @@
     left: 0;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, var(--color-secondary), var(--color-cyan-dark));
+    background: linear-gradient(90deg, #1E2D6B, #4F5FE8);
     border-radius: 2px;
   }
 
-  /* ── Stripe-style glow orbs ── */
+  /* ── Glow orbs — brand-tinted ── */
   .glow-orb {
     position: absolute;
     border-radius: 50%;
@@ -481,31 +479,42 @@
     pointer-events: none;
   }
 
+  .glow-orb-primary {
+    background: rgba(79, 95, 232, 0.12);
+  }
+
+  .glow-orb-deep {
+    background: rgba(30, 45, 107, 0.15);
+  }
+
+  .glow-orb-slate {
+    background: rgba(139, 150, 200, 0.10);
+  }
+
+  .glow-orb-success {
+    background: rgba(29, 184, 122, 0.08);
+  }
+
+  /* Legacy aliases */
   .glow-orb-purple {
-    background: rgba(99, 91, 255, 0.15);
+    background: rgba(79, 95, 232, 0.12);
   }
 
   .glow-orb-cyan {
-    background: rgba(128, 233, 255, 0.12);
+    background: rgba(139, 150, 200, 0.10);
   }
 
   .glow-orb-green {
-    background: rgba(0, 212, 170, 0.1);
+    background: rgba(29, 184, 122, 0.08);
   }
 }
 
-/* =====================================================
+/* ============================================================
    ANIMATIONS
-   ===================================================== */
+   ============================================================ */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeIn {
@@ -514,25 +523,13 @@
 }
 
 @keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes shimmer {
@@ -546,14 +543,8 @@
 }
 
 @keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes gradient-shift {
@@ -607,22 +598,28 @@
   }
 }
 
-/* =====================================================
+/* ============================================================
    SCROLLBAR
-   ===================================================== */
+   ============================================================ */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-background-secondary);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--color-border-dark);
-  border-radius: 3px;
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-foreground-tertiary);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-dark) transparent;
 }

@@ -6,35 +6,44 @@ import Image from "next/image";
 const footerLinks = {
   Product: [
     { name: "Pricing", href: "/pricing" },
-    { name: "Documentation", href: "/docs" },
     { name: "Data Validation", href: "/agents/data-validation" },
     { name: "Appointments", href: "/agents/appointment-confirmation" },
     { name: "Lead Qualification", href: "/agents/lead-qualification" },
   ],
+  Resources: [
+    { name: "Documentation", href: "/docs" },
+    { name: "Help Center", href: "/help" },
+    { name: "Blog", href: "/blog" },
+  ],
   Company: [
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
-    { name: "Blog", href: "/blog" },
-  ],
-  Resources: [
-    { name: "Help Center", href: "/help" },
-    { name: "Documentation", href: "/docs" },
-  ],
-  Legal: [
     { name: "Privacy Policy", href: "/privacy" },
     { name: "Terms of Service", href: "/terms" },
     { name: "Compliance", href: "/compliance" },
+  ],
+  Comparison: [
+    { name: "Callengo vs Bland AI", href: "/compare/bland-ai" },
+    { name: "Callengo vs Vapi", href: "/compare/vapi" },
+    { name: "Callengo vs Aircall", href: "/compare/aircall" },
+    { name: "Callengo vs Dialpad AI", href: "/compare/dialpad" },
+    { name: "Callengo vs JustCall", href: "/compare/justcall" },
+    { name: "Callengo vs Synthflow", href: "/compare/synthflow" },
+    { name: "Callengo vs Retell AI", href: "/compare/retell-ai" },
+    { name: "Callengo vs Air AI", href: "/compare/air-ai" },
+    { name: "Callengo vs Thoughtly", href: "/compare/thoughtly" },
+    { name: "Callengo vs PlayAI", href: "/compare/play-ai" },
   ],
 };
 
 export default function Footer() {
   return (
-    <footer className="bg-navy text-white">
+    <footer className="bg-deep-indigo text-white">
       <div className="max-w-7xl mx-auto px-6">
         {/* Main footer */}
-        <div className="py-16 grid grid-cols-2 md:grid-cols-6 gap-8">
+        <div className="py-16 grid grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-8">
           {/* Brand */}
-          <div className="col-span-2">
+          <div className="col-span-2 lg:col-span-3">
             <Link href="/" className="flex items-center gap-2.5 mb-5">
               <Image
                 src="/callengo-logo.svg"
@@ -43,7 +52,7 @@ export default function Footer() {
                 height={32}
                 className="w-8 h-8 brightness-0 invert"
               />
-              <span className="text-lg font-bold text-white tracking-tight">
+              <span className="text-lg font-bold text-white tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
                 Callengo
               </span>
             </Link>
@@ -67,11 +76,11 @@ export default function Footer() {
 
           {/* Link columns */}
           {Object.entries(footerLinks).map(([title, links]) => (
-            <div key={title}>
+            <div key={title} className={title === "Comparison" ? "col-span-2 lg:col-span-2" : "col-span-1 lg:col-span-2"}>
               <h4 className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-4">
                 {title}
               </h4>
-              <ul className="space-y-3">
+              <ul className="space-y-2.5">
                 {links.map((link) => (
                   <li key={link.name}>
                     <Link

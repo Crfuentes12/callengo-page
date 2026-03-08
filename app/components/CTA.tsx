@@ -11,12 +11,12 @@ export default function CTA() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative overflow-hidden rounded-3xl bg-navy"
+          className="relative overflow-hidden rounded-3xl bg-deep-indigo"
         >
           {/* Background effects */}
           <div className="absolute inset-0 bg-grid-dark opacity-40" />
-          <div className="glow-orb glow-orb-purple w-[500px] h-[500px] -top-40 right-0" />
-          <div className="glow-orb glow-orb-cyan w-[400px] h-[400px] bottom-0 -left-40" />
+          <div className="glow-orb glow-orb-primary w-[500px] h-[500px] -top-40 right-0" />
+          <div className="glow-orb glow-orb-slate w-[400px] h-[400px] bottom-0 -left-40" />
 
           {/* Content */}
           <div className="relative z-10 p-12 md:p-20">
@@ -54,7 +54,7 @@ export default function CTA() {
               >
                 <a
                   href="https://app.callengo.com/auth/signup"
-                  className="btn bg-white text-navy hover:bg-white/90 px-8 py-4 font-semibold rounded-xl"
+                  className="btn bg-white text-deep-indigo hover:bg-white/90 px-8 py-4 font-semibold rounded-xl"
                 >
                   Get started free
                   <ArrowRight className="w-5 h-5" />

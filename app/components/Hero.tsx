@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Play,
   Pause,
@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 
 /* ──────────────────────────────────────────
-   SCENARIO DATA – real calls (timestamps synced to audio)
+   SCENARIO DATA
    ────────────────────────────────────────── */
 
 interface TranscriptLine {
@@ -208,7 +208,7 @@ function FlyingDataParticle({ datum, onDone }: { datum: FlyingDatum; onDone: () 
         ) : datum.status === "updated" ? (
           <AlertCircle className="w-3.5 h-3.5 text-amber-500" />
         ) : (
-          <Zap className="w-3.5 h-3.5 text-secondary" />
+          <Zap className="w-3.5 h-3.5 text-electric" />
         )}
         <span className="font-medium text-foreground">{datum.label}:</span>
         <span className="text-foreground-secondary max-w-30 truncate">{datum.value}</span>
@@ -233,7 +233,7 @@ function DataRow({
   const colors = {
     confirmed: { bg: "bg-accent/10", text: "text-accent-dark", badge: "Confirmed" },
     updated: { bg: "bg-amber-50", text: "text-amber-700", badge: "Updated" },
-    new: { bg: "bg-secondary/10", text: "text-secondary", badge: "New" },
+    new: { bg: "bg-electric/10", text: "text-electric", badge: "New" },
   };
   const c = colors[status];
 
@@ -274,7 +274,7 @@ function seededRandom(seed: number) {
 }
 
 function WaveformVisualizer({ isPlaying }: { isPlaying: boolean }) {
-  const bars = 28;
+  const bars = 32;
   const barData = useMemo(() => {
     return Array.from({ length: bars }).map((_, i) => {
       const r1 = seededRandom(i);
@@ -293,16 +293,15 @@ function WaveformVisualizer({ isPlaying }: { isPlaying: boolean }) {
   }, []);
 
   return (
-    <div className="flex items-end gap-0.5 h-6 w-full">
+    <div className="flex items-end gap-px h-5 w-full">
       {barData.map((b, i) => (
         <motion.div
           key={i}
-          className="flex-1 rounded-full"
-          style={{ background: `linear-gradient(to top, var(--color-secondary), var(--color-cyan))` }}
+          className="flex-1 rounded-full bg-electric"
           animate={
             isPlaying
-              ? { height: [`${b.baseHeight}%`, `${b.peakA}%`, `${b.midA}%`, `${b.peakB}%`, `${b.baseHeight}%`], opacity: [0.5, 0.9, 0.6, 0.85, 0.5] }
-              : { height: `${b.baseHeight}%`, opacity: 0.3 }
+              ? { height: [`${b.baseHeight}%`, `${b.peakA}%`, `${b.midA}%`, `${b.peakB}%`, `${b.baseHeight}%`], opacity: [0.3, 0.7, 0.4, 0.65, 0.3] }
+              : { height: `${b.baseHeight}%`, opacity: 0.2 }
           }
           transition={isPlaying ? { duration: b.duration, repeat: Infinity, ease: "easeInOut", delay: i * 0.02 } : { duration: 0.4 }}
         />
@@ -320,8 +319,7 @@ function QualityRing({ score, size = 44 }: { score: number; size?: number }) {
     <div className="relative" style={{ width: size, height: size }}>
       <svg width={size} height={size} className="-rotate-90">
         <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="var(--color-border)" strokeWidth={3} />
-        <motion.circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="url(#qg)" strokeWidth={3} strokeLinecap="round" strokeDasharray={circ} initial={{ strokeDashoffset: circ }} animate={{ strokeDashoffset: offset }} transition={{ duration: 1.2, ease: "easeOut" }} />
-        <defs><linearGradient id="qg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="var(--color-secondary)" /><stop offset="100%" stopColor="var(--color-cyan-dark)" /></linearGradient></defs>
+        <motion.circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="var(--color-electric)" strokeWidth={3} strokeLinecap="round" strokeDasharray={circ} initial={{ strokeDashoffset: circ }} animate={{ strokeDashoffset: offset }} transition={{ duration: 1.2, ease: "easeOut" }} />
       </svg>
       <div className="absolute inset-0 flex items-center justify-center">
         <span className="text-xs font-bold text-foreground">{score}</span>
@@ -348,17 +346,8 @@ export default function Hero() {
   const flyIdCounter = useRef(0);
   const [audioAvailable, setAudioAvailable] = useState(true);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const sectionRef = useRef<HTMLDivElement>(null);
 
   const scenario = scenarios[activeScenario];
-
-  // Parallax scroll
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   /* ── Audio detection ── */
   useEffect(() => {
@@ -482,24 +471,14 @@ export default function Hero() {
   const totalDataFields = revealedValidated.length + revealedExtracted.length;
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-navy min-h-screen flex items-center">
-      {/* Gradient mesh background */}
-      <motion.div
-        className="absolute inset-0"
-        style={{ y: bgY }}
-      >
-        <div className="absolute inset-0 bg-grid-dark" />
-        <div className="glow-orb glow-orb-purple w-[600px] h-[600px] -top-40 -right-40" />
-        <div className="glow-orb glow-orb-cyan w-[500px] h-[500px] top-1/3 -left-60" />
-        <div className="glow-orb glow-orb-green w-[400px] h-[400px] bottom-0 right-1/4" />
-      </motion.div>
+    <section className="relative overflow-hidden bg-background min-h-screen flex items-center">
+      {/* Subtle background */}
+      <div className="absolute inset-0 bg-grid opacity-50" />
+      <div className="absolute inset-0 gradient-bg-mesh" />
 
       <audio ref={audioRef} src={scenario.audioSrc} preload="metadata" />
 
-      <motion.div
-        className="max-w-7xl mx-auto px-6 py-32 md:py-40 relative z-10 w-full"
-        style={{ opacity: contentOpacity }}
-      >
+      <div className="max-w-7xl mx-auto px-6 py-32 md:py-40 relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
           {/* ─── LEFT COLUMN ─── */}
@@ -515,19 +494,19 @@ export default function Hero() {
               transition={{ delay: 0.2, duration: 0.5 }}
               className="inline-flex items-center gap-2 mb-6"
             >
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border border-white/10 text-white/70 bg-white/5 backdrop-blur-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border border-border text-foreground-tertiary bg-background-secondary">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                 AI-powered phone agents
               </span>
             </motion.div>
 
-            <h1 className="text-display text-white mb-6">
+            <h1 className="text-display text-foreground mb-6">
               Less time on calls.
               <br />
               <span className="gradient-text">More time closing.</span>
             </h1>
 
-            <p className="text-lg text-white/60 mb-10 max-w-lg leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>
+            <p className="text-lg text-foreground-secondary mb-10 max-w-lg leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>
               Your team spends hours every week on repetitive phone calls that
               don&apos;t close deals. We handle those calls automatically, so
               your people can focus on what actually drives revenue.
@@ -536,39 +515,38 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href="https://app.callengo.com/auth/signup"
-                className="btn text-sm px-7 py-3.5 bg-secondary text-white rounded-lg hover:-translate-y-0.5 transition-all"
-                style={{ boxShadow: "var(--shadow-electric)" }}
+                className="btn btn-primary text-sm px-7 py-3.5 rounded-xl"
               >
                 Get started free
                 <ArrowRight className="w-4 h-4" />
               </a>
               <a
                 href="mailto:sales@callengo.com"
-                className="btn text-sm px-7 py-3.5 border border-white/15 text-white rounded-lg hover:bg-white/5 transition-all"
+                className="btn btn-secondary text-sm px-7 py-3.5 rounded-xl"
               >
                 Talk to sales
               </a>
             </div>
 
-            <p className="text-sm text-white/40 mt-6" style={{ fontFamily: "var(--font-body)" }}>
+            <p className="text-sm text-foreground-tertiary mt-6" style={{ fontFamily: "var(--font-body)" }}>
               No credit card required · 15 free minutes · Setup in 5 minutes
             </p>
 
-            <div className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-white/10">
+            <div className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-border">
               {[
                 { label: "Calls Automated", value: "50K+" },
                 { label: "Avg. Quality", value: "9.2/10" },
                 { label: "Time Saved", value: "120h/mo" },
               ].map((stat) => (
                 <div key={stat.label}>
-                  <div className="text-2xl font-bold text-white">{stat.value}</div>
-                  <div className="text-xs text-white/40 mt-1" style={{ fontFamily: "var(--font-body)" }}>{stat.label}</div>
+                  <div className="text-2xl font-bold gradient-text">{stat.value}</div>
+                  <div className="text-xs text-foreground-tertiary mt-1" style={{ fontFamily: "var(--font-body)" }}>{stat.label}</div>
                 </div>
               ))}
             </div>
           </motion.div>
 
-          {/* ─── RIGHT COLUMN: Software window ─── */}
+          {/* ─── RIGHT COLUMN: Call Demo ─── */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -576,14 +554,14 @@ export default function Hero() {
             className="relative flex justify-center"
           >
             <div className="relative w-full max-w-md">
-              {/* Software window shell */}
-              <div className="rounded-2xl bg-dark shadow-2xl ring-1 ring-white/10 overflow-hidden">
+              {/* Card shell */}
+              <div className="rounded-2xl bg-white shadow-xl ring-1 ring-border overflow-hidden">
 
                 {/* App screen */}
-                <div className="bg-white overflow-hidden relative h-140 flex flex-col">
+                <div className="overflow-hidden relative h-140 flex flex-col">
 
                   {/* Call header */}
-                  <div className="bg-navy px-4 py-2.5 shrink-0">
+                  <div className="bg-deep-indigo px-4 py-2.5 shrink-0">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
                         <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
@@ -618,7 +596,7 @@ export default function Hero() {
                             onClick={() => handleScenarioChange(index)}
                             className={`flex items-center gap-1 px-2 py-1 rounded-full text-[9px] font-medium transition-all cursor-pointer whitespace-nowrap ${
                               activeScenario === index
-                                ? "bg-white text-navy shadow-sm"
+                                ? "bg-white text-deep-indigo shadow-sm"
                                 : "bg-white/10 text-white/70 hover:bg-white/20"
                             }`}
                           >
@@ -635,15 +613,15 @@ export default function Hero() {
                     <div className="flex items-center gap-2">
                       <button
                         onClick={handlePlayPause}
-                        className="w-8 h-8 rounded-full bg-secondary text-white flex items-center justify-center hover:opacity-90 transition-all shadow-lg shrink-0 cursor-pointer active:scale-95"
+                        className="w-8 h-8 rounded-full bg-electric text-white flex items-center justify-center hover:opacity-90 transition-all shadow-lg shrink-0 cursor-pointer active:scale-95"
                       >
                         {isPlaying ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3 ml-0.5" />}
                       </button>
                       <div className="flex-1 space-y-0.5">
                         <WaveformVisualizer isPlaying={isPlaying} />
                         <div className="h-1 bg-border rounded-full overflow-hidden cursor-pointer relative group" onClick={handleProgressClick}>
-                          <div className="h-full bg-secondary rounded-full transition-all duration-200" style={{ width: `${Math.min(progress, 100)}%` }} />
-                          <div className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-secondary shadow-md opacity-0 group-hover:opacity-100 transition-opacity" style={{ left: `calc(${Math.min(progress, 100)}% - 5px)` }} />
+                          <div className="h-full bg-electric rounded-full transition-all duration-200" style={{ width: `${Math.min(progress, 100)}%` }} />
+                          <div className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-electric shadow-md opacity-0 group-hover:opacity-100 transition-opacity" style={{ left: `calc(${Math.min(progress, 100)}% - 5px)` }} />
                         </div>
                       </div>
                       <span className="text-[9px] text-foreground-tertiary font-mono tabular-nums shrink-0">
@@ -665,7 +643,7 @@ export default function Hero() {
                         <motion.div
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
-                          className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center mb-4 cursor-pointer"
+                          className="w-14 h-14 rounded-full bg-electric flex items-center justify-center mb-4 cursor-pointer"
                           style={{ boxShadow: "var(--shadow-electric-lg)" }}
                           onClick={handlePlayPause}
                         >
@@ -712,7 +690,7 @@ export default function Hero() {
                                       transition={{ duration: 0.2 }}
                                       className={`flex ${isAI ? "justify-start" : "justify-end"}`}
                                     >
-                                      <div className={`max-w-[85%] px-2.5 py-1.5 rounded-xl text-[10px] leading-relaxed ${isAI ? "bg-background-tertiary text-foreground-secondary rounded-bl-sm" : "bg-secondary text-white rounded-br-sm"}`}>
+                                      <div className={`max-w-[85%] px-2.5 py-1.5 rounded-xl text-[10px] leading-relaxed ${isAI ? "bg-background-tertiary text-foreground-secondary rounded-bl-sm" : "bg-electric text-white rounded-br-sm"}`}>
                                         {msg.text}
                                       </div>
                                     </motion.div>
@@ -743,7 +721,7 @@ export default function Hero() {
                                 <span className="text-[10px]">Waiting for data...</span>
                                 {isPlaying && (
                                   <motion.div className="w-12 h-0.5 rounded-full overflow-hidden bg-background-tertiary" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                                    <motion.div className="h-full bg-secondary" animate={{ x: ["-100%", "100%"] }} transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }} style={{ width: "60%" }} />
+                                    <motion.div className="h-full bg-electric" animate={{ x: ["-100%", "100%"] }} transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }} style={{ width: "60%" }} />
                                   </motion.div>
                                 )}
                               </div>
@@ -822,7 +800,7 @@ export default function Hero() {
                                 </div>
                               ))}
                               {scenario.extractedData.map((f, i) => (
-                                <div key={`e-${i}`} className="flex items-center justify-between px-3 py-2 rounded-xl text-[10px] bg-secondary/10">
+                                <div key={`e-${i}`} className="flex items-center justify-between px-3 py-2 rounded-xl text-[10px] bg-electric/10">
                                   <span className="text-foreground-secondary font-medium">{f.field}</span>
                                   <span className="font-semibold text-foreground truncate ml-2 max-w-32.5 text-right">{f.value}</span>
                                 </div>
@@ -833,7 +811,7 @@ export default function Hero() {
                             <div className="space-y-1.5">
                               {scenario.nextActions.map((action, i) => (
                                 <div key={i} className="flex items-start gap-2 text-[10px] text-foreground-secondary">
-                                  <span className="w-4 h-4 rounded-full bg-secondary text-white flex items-center justify-center text-[8px] font-bold shrink-0 mt-0.5">{i + 1}</span>
+                                  <span className="w-4 h-4 rounded-full bg-electric text-white flex items-center justify-center text-[8px] font-bold shrink-0 mt-0.5">{i + 1}</span>
                                   <span className="leading-snug">{action}</span>
                                 </div>
                               ))}
@@ -855,12 +833,12 @@ export default function Hero() {
                 </div>
               </div>
 
-              {/* Glow behind window */}
-              <div className="absolute -inset-8 bg-secondary/10 blur-3xl rounded-[3rem] -z-10" />
+              {/* Subtle glow behind card */}
+              <div className="absolute -inset-8 bg-electric/5 blur-3xl rounded-[3rem] -z-10" />
             </div>
           </motion.div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

@@ -87,7 +87,7 @@ export default function HelpPage() {
                 <input
                   type="text"
                   placeholder="Search for help..."
-                  className="w-full px-6 py-4 rounded-2xl border border-border focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent text-lg"
+                  className="w-full px-6 py-4 rounded-2xl border border-border focus:outline-none focus:ring-2 focus:ring-electric focus:border-transparent text-lg"
                 />
               </div>
             </motion.div>
@@ -177,10 +177,10 @@ export default function HelpPage() {
                   <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </Link>
                 <Link
-                  href="/help/crm-integrations"
+                  href="/docs#integrations"
                   className="flex items-center justify-between p-4 bg-white/10 rounded-xl border border-white/20 hover:bg-white/20 transition-all group"
                 >
-                  <span className="font-medium">CRM Integrations</span>
+                  <span className="font-medium">Integrations</span>
                   <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </Link>
                 <Link

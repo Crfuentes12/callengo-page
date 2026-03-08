@@ -137,10 +137,10 @@ export default function Testimonials() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4 }}
-                className="relative rounded-2xl p-12 text-center overflow-hidden bg-navy"
+                className="relative rounded-2xl p-12 text-center overflow-hidden bg-deep-indigo"
               >
                 <div className="absolute inset-0 bg-grid-dark opacity-50" />
-                <div className="glow-orb glow-orb-purple w-60 h-60 top-0 right-0" />
+                <div className="glow-orb glow-orb-primary w-60 h-60 top-0 right-0" />
                 <div className="relative z-10">
                   <div className="text-7xl md:text-8xl font-bold text-white mb-3">
                     {testimonials[currentIndex].metric.value}

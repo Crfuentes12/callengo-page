@@ -144,13 +144,6 @@ export default function Header() {
             </Link>
 
             <Link
-              href="/docs"
-              className="text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium px-4 py-2 rounded-lg hover:bg-background-secondary"
-            >
-              Docs
-            </Link>
-
-            <Link
               href="/about"
               className="text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium px-4 py-2 rounded-lg hover:bg-background-secondary"
             >
@@ -239,13 +232,6 @@ export default function Header() {
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Pricing
-                </Link>
-                <Link
-                  href="/docs"
-                  className="block px-4 py-3 text-foreground hover:bg-background-secondary rounded-lg font-medium text-sm"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Docs
                 </Link>
                 <Link
                   href="/about"

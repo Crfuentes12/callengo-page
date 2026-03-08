@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 
 const testimonials = [
   {
@@ -57,26 +57,26 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="section bg-background" id="testimonials">
+    <section className="section bg-background-secondary" id="testimonials">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="max-w-2xl mb-20"
         >
-          <h2 className="text-display-sm mb-6">
+          <span className="badge badge-primary mb-4">Testimonials</span>
+          <h2 className="text-display-sm text-foreground mb-4">
             Results that speak
             <br />
             for themselves
           </h2>
         </motion.div>
 
-        {/* Testimonial Carousel */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-24">
-          {/* Left - Quote */}
-          <div className="relative">
+        <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 items-center">
+          {/* Quote */}
+          <div className="lg:col-span-3 relative">
+            <Quote className="w-10 h-10 text-border mb-6" />
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
@@ -85,24 +85,23 @@ export default function Testimonials() {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.4 }}
               >
-                <p className="text-2xl md:text-3xl lg:text-4xl font-medium leading-relaxed text-foreground mb-10">
+                <p className="text-2xl md:text-3xl font-medium leading-relaxed text-foreground mb-10">
                   &ldquo;{testimonials[currentIndex].quote}&rdquo;
                 </p>
 
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-full overflow-hidden border border-border">
+                  <div className="w-12 h-12 rounded-full overflow-hidden border border-border bg-background-tertiary">
                     <img
                       src={testimonials[currentIndex].avatar}
                       alt={testimonials[currentIndex].author}
                       className="w-full h-full object-cover"
                     />
                   </div>
-
                   <div>
-                    <div className="font-semibold text-foreground">
+                    <div className="font-semibold text-foreground text-sm">
                       {testimonials[currentIndex].author}
                     </div>
-                    <div className="text-foreground-tertiary text-sm">
+                    <div className="text-foreground-tertiary text-sm" style={{ fontFamily: "var(--font-body)" }}>
                       {testimonials[currentIndex].role}
                     </div>
                   </div>
@@ -110,28 +109,27 @@ export default function Testimonials() {
               </motion.div>
             </AnimatePresence>
 
-            {/* Navigation */}
-            <div className="flex items-center gap-4 mt-10">
+            <div className="flex items-center gap-3 mt-10">
               <button
                 onClick={prevTestimonial}
-                className="w-12 h-12 rounded-full border border-border hover:border-secondary hover:text-secondary flex items-center justify-center transition-colors"
+                className="w-10 h-10 rounded-full border border-border hover:border-foreground-tertiary flex items-center justify-center transition-colors cursor-pointer"
               >
-                <ChevronLeft className="w-5 h-5" />
+                <ChevronLeft className="w-4 h-4 text-foreground-secondary" />
               </button>
               <button
                 onClick={nextTestimonial}
-                className="w-12 h-12 rounded-full border border-border hover:border-secondary hover:text-secondary flex items-center justify-center transition-colors"
+                className="w-10 h-10 rounded-full border border-border hover:border-foreground-tertiary flex items-center justify-center transition-colors cursor-pointer"
               >
-                <ChevronRight className="w-5 h-5" />
+                <ChevronRight className="w-4 h-4 text-foreground-secondary" />
               </button>
-              <span className="text-sm text-foreground-tertiary ml-4">
+              <span className="text-sm text-foreground-tertiary ml-3" style={{ fontFamily: "var(--font-body)" }}>
                 {currentIndex + 1} / {testimonials.length}
               </span>
             </div>
           </div>
 
-          {/* Right - Metric Card */}
-          <div className="relative">
+          {/* Metric Card */}
+          <div className="lg:col-span-2 relative">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
@@ -139,18 +137,20 @@ export default function Testimonials() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4 }}
-                className="gradient-bg rounded-3xl p-12 text-white text-center"
+                className="relative rounded-2xl p-12 text-center overflow-hidden bg-navy"
               >
-                <div className="text-7xl md:text-8xl font-bold mb-4">
-                  {testimonials[currentIndex].metric.value}
-                </div>
-                <div className="text-xl text-white/70">
-                  {testimonials[currentIndex].metric.label}
+                <div className="absolute inset-0 bg-grid-dark opacity-50" />
+                <div className="glow-orb glow-orb-purple w-60 h-60 top-0 right-0" />
+                <div className="relative z-10">
+                  <div className="text-7xl md:text-8xl font-bold text-white mb-3">
+                    {testimonials[currentIndex].metric.value}
+                  </div>
+                  <div className="text-base text-white/50" style={{ fontFamily: "var(--font-body)" }}>
+                    {testimonials[currentIndex].metric.label}
+                  </div>
                 </div>
               </motion.div>
             </AnimatePresence>
-
-            <div className="absolute -z-10 -bottom-3 -right-3 w-full h-full bg-background-tertiary rounded-3xl" />
           </div>
         </div>
       </div>

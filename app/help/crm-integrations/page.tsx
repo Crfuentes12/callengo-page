@@ -379,7 +379,7 @@ export default function CRMIntegrationsPage() {
                 Native integrations are ready to go on Business+ plans and above.
               </p>
               <Link
-                href="/signup"
+                href="https://app.callengo.com/auth/signup"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary font-semibold rounded-full hover:bg-white/90 transition-colors"
               >
                 Start Free Trial

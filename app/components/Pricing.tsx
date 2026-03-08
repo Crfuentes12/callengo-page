@@ -240,7 +240,7 @@ export default function Pricing() {
 
                 {/* CTA */}
                 <Link
-                  href="/signup"
+                  href="https://app.callengo.com/auth/signup"
                   className={`btn w-full justify-center mb-5 text-sm py-2.5 ${
                     plan.popular
                       ? "btn-primary"

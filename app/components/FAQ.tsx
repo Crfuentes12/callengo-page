@@ -2,163 +2,149 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
-import { Plus, Minus, ArrowRight } from "lucide-react";
+import { Plus, Minus, Mail } from "lucide-react";
 
 const faqs = [
   {
-    question: "How realistic do the AI voices sound?",
+    question: "How natural does the AI voice sound?",
     answer:
-      "Our AI voices are powered by state-of-the-art voice synthesis technology. With 77+ professional voices and natural conversation patterns, most people can't tell they're speaking with an AI.",
+      "Callengo uses the latest neural voice models with 77+ natural-sounding voices across 6 languages. Most call recipients can't tell they're speaking to an AI. You can preview and choose the voice that best fits your brand.",
   },
   {
-    question: "Can I customize what the AI agent says?",
+    question: "Can I customize what the agent says?",
     answer:
-      "Yes. You have full control over your agent's conversation script. You can customize greetings, questions, objection handling, and closing statements. The AI will follow your script while adapting naturally to the conversation flow.",
+      "Absolutely. You write the script, define objectives, and set conditional logic using our guided editor — no coding required. The agent follows your script while handling unexpected questions intelligently.",
   },
   {
-    question: "What happens if someone asks an unexpected question?",
+    question: "What happens when someone asks an unexpected question?",
     answer:
-      "Our AI agents can understand context and handle unexpected questions intelligently. They'll either provide a relevant response based on the conversation context or gracefully redirect back to the main purpose of the call.",
+      "The agent uses configurable fallback behaviors: it can acknowledge the question and redirect to the main objective, offer to have a team member follow up, or escalate the call to a live agent in real time.",
   },
   {
-    question: "Is there a limit to how many calls I can make?",
+    question: "How many minutes do I get per month?",
     answer:
-      "Each plan includes a certain number of minutes per month. You can make as many calls as you want within your minute allowance. If you exceed your limit, additional minutes are available through our Calls Booster add-on at $35 for 500 extra minutes.",
+      "Plans range from 15 one-time minutes (Free) to 3,000 monthly minutes (Teams). Need more? Add the Calls Booster add-on for $35 per 500 additional minutes. Enterprise plans offer custom volumes.",
   },
   {
-    question: "How does the free trial work?",
+    question: "Is there a free trial?",
     answer:
-      "Our free plan gives you 15 minutes of calls to test the platform — no credit card required. You can create one agent and make real calls to see exactly how Callengo works.",
+      "Yes. The Free plan gives you 15 minutes to test with up to 20 contacts — no credit card required. You can launch a real campaign and see results before committing to a paid plan.",
   },
   {
-    question: "Can I integrate Callengo with my CRM?",
+    question: "Do you integrate with CRM systems?",
     answer:
-      "Yes! We offer native integrations with HubSpot, Salesforce, Pipedrive, Zoho CRM, Microsoft Dynamics 365, and Clio. CRM integrations are available on Business plans and above. All plans can also export data via CSV, Excel, or JSON, and we support webhooks for custom integrations.",
+      "Yes! We offer native integrations with HubSpot, Salesforce, Pipedrive, Zoho CRM, Microsoft Dynamics 365, and Clio. Data syncs automatically after each call — no manual export needed.",
   },
   {
-    question: "What other integrations are available?",
+    question: "What other integrations do you support?",
     answer:
-      "We integrate with 16+ tools including Google Calendar, Outlook Calendar, Google Meet, Zoom, Microsoft Teams, Slack, SimplyBook.me, Google Sheets, Stripe, and more. Check our Integrations page for the full list and which plans include each integration.",
+      "We integrate with 16+ tools including Google Calendar, Outlook Calendar, Google Meet, Zoom, Microsoft Teams, Slack, SimplyBook.me, Google Sheets, Stripe, and Webhooks for custom workflows. Check our documentation for details.",
   },
   {
     question: "What languages are supported?",
     answer:
-      "We have voice agents optimized for English (US, UK, Australian accents), Spanish, French, German, and more. Multi-language support is available on all plans.",
+      "Callengo supports English, Spanish, French, German, Portuguese, and Italian with native-quality voices. Each language has multiple voice options. More languages are being added regularly.",
   },
   {
-    question: "Can I cancel my subscription anytime?",
+    question: "Can I cancel anytime?",
     answer:
-      "Yes, you can cancel anytime with no penalties. Your plan remains active until the end of your billing period. We don't do long-term contracts on standard plans.",
+      "Yes. All plans are month-to-month with no long-term contracts. Annual billing gives you a 12% discount but you can still cancel before the next billing cycle. No hidden fees or cancellation penalties.",
   },
 ];
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
-  const toggleFAQ = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="section bg-background-secondary" id="faq">
+    <section className="section bg-background" id="faq">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16">
+        <div className="grid lg:grid-cols-5 gap-12 lg:gap-20">
           {/* Left - Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="lg:sticky lg:top-32 lg:self-start"
-          >
-            <h2 className="text-display-sm mb-6">
-              Questions?
-              <br />
-              <span className="gradient-text">We&apos;ve got answers.</span>
-            </h2>
-            <p className="text-xl text-foreground-secondary mb-8">
-              Everything you need to know about Callengo.
-            </p>
-
-            <div className="gradient-border p-6">
-              <h4 className="font-semibold mb-2">Still have questions?</h4>
-              <p className="text-foreground-secondary text-sm mb-4">
-                Our team is here to help. Reach out and we&apos;ll get back to you
-                within 24 hours.
+          <div className="lg:col-span-2 lg:sticky lg:top-28 lg:self-start">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <span className="badge badge-primary mb-4">FAQ</span>
+              <h2 className="text-display-sm text-foreground mb-5">
+                Common
+                <br />
+                questions
+              </h2>
+              <p className="text-foreground-secondary mb-8" style={{ fontFamily: "var(--font-body)" }}>
+                Everything you need to know about Callengo. Can&apos;t find what
+                you&apos;re looking for?
               </p>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 gradient-text font-medium hover:gap-3 transition-all"
-              >
-                Contact support
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </motion.div>
 
-          {/* Right - FAQ Items */}
-          <div className="space-y-4">
-            {faqs.map((faq, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-              >
-                <div
-                  className={`bg-background rounded-2xl border transition-all ${
-                    openIndex === index
-                      ? "border-secondary/30 shadow-sm"
-                      : "border-border hover:border-border-dark"
-                  }`}
-                  style={{
-                    boxShadow:
-                      openIndex === index
-                        ? "0 2px 12px rgba(79, 95, 232, 0.06)"
-                        : "none",
-                  }}
-                >
-                  <button
-                    onClick={() => toggleFAQ(index)}
-                    className="w-full flex items-center justify-between p-6 text-left"
-                  >
-                    <span className="font-medium text-foreground pr-4">
-                      {faq.question}
-                    </span>
-                    <div
-                      className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
-                        openIndex === index
-                          ? "gradient-bg text-white"
-                          : "bg-background-tertiary text-foreground-secondary"
-                      }`}
-                    >
-                      {openIndex === index ? (
-                        <Minus className="w-4 h-4" />
-                      ) : (
-                        <Plus className="w-4 h-4" />
-                      )}
-                    </div>
-                  </button>
-
-                  <AnimatePresence>
-                    {openIndex === index && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="overflow-hidden"
-                      >
-                        <div className="px-6 pb-6 text-foreground-secondary leading-relaxed">
-                          {faq.answer}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+              <div className="p-5 rounded-xl border border-border bg-background-secondary">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-lg bg-secondary/8 flex items-center justify-center">
+                    <Mail className="w-5 h-5 text-secondary" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-foreground text-sm">Still have questions?</div>
+                    <div className="text-xs text-foreground-tertiary" style={{ fontFamily: "var(--font-body)" }}>We&apos;re here to help</div>
+                  </div>
                 </div>
-              </motion.div>
-            ))}
+                <a
+                  href="mailto:sales@callengo.com"
+                  className="text-sm font-medium text-secondary hover:underline"
+                >
+                  sales@callengo.com
+                </a>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Right - Questions */}
+          <div className="lg:col-span-3">
+            <div className="divide-y divide-border">
+              {faqs.map((faq, index) => {
+                const isOpen = openIndex === index;
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.03 }}
+                  >
+                    <button
+                      onClick={() => setOpenIndex(isOpen ? null : index)}
+                      className="flex items-start justify-between gap-4 w-full text-left py-5 group cursor-pointer"
+                    >
+                      <span className="text-foreground font-medium text-[15px] leading-relaxed group-hover:text-foreground/80 transition-colors">
+                        {faq.question}
+                      </span>
+                      <span className="shrink-0 mt-1">
+                        {isOpen ? (
+                          <Minus className="w-4 h-4 text-foreground-tertiary" />
+                        ) : (
+                          <Plus className="w-4 h-4 text-foreground-tertiary" />
+                        )}
+                      </span>
+                    </button>
+
+                    <AnimatePresence>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.25, ease: "easeInOut" }}
+                          className="overflow-hidden"
+                        >
+                          <p className="text-foreground-secondary text-sm leading-relaxed pb-5" style={{ fontFamily: "var(--font-body)" }}>
+                            {faq.answer}
+                          </p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

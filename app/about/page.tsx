@@ -98,7 +98,9 @@ export default function AboutPage() {
         </section>
 
         {/* Stats Section */}
-        <section className="section gradient-bg text-white">
+        <section className="section bg-navy text-white relative overflow-hidden">
+          <div className="absolute inset-0 bg-grid-dark opacity-30" />
+          <div className="glow-orb glow-orb-purple w-[400px] h-[400px] -top-40 right-0" />
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
               {stats.map((stat, index) => (
@@ -113,12 +115,13 @@ export default function AboutPage() {
                   <div className="text-4xl md:text-5xl font-bold mb-2">
                     {stat.value}
                   </div>
-                  <div className="text-white/70">{stat.label}</div>
+                  <div className="text-white/50" style={{ fontFamily: "var(--font-body)" }}>{stat.label}</div>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
+        {/* close extra wrappers from background divs */}
 
         {/* Mission Section */}
         <section className="section">
@@ -222,7 +225,7 @@ export default function AboutPage() {
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                 >
                   <div className="aspect-square rounded-2xl bg-background-tertiary mb-4 flex items-center justify-center">
-                    <span className="text-4xl font-bold text-slate-indigo-light">
+                    <span className="text-4xl font-bold text-foreground-tertiary">
                       {member.name
                         .split(" ")
                         .map((n) => n[0])
@@ -245,7 +248,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="relative overflow-hidden rounded-3xl gradient-bg p-12 md:p-20"
+              className="relative overflow-hidden rounded-3xl bg-navy p-12 md:p-20"
             >
               {/* Background Pattern */}
               <div className="absolute inset-0 opacity-20">
@@ -262,19 +265,19 @@ export default function AboutPage() {
                   Help businesses recover lost revenue from no-shows, bad data, and unqualified leads.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Link
-                    href="/signup"
-                    className="btn bg-white text-primary hover:bg-white/90 px-8 py-4 font-semibold"
+                  <a
+                    href="https://app.callengo.com/auth/signup"
+                    className="btn bg-white text-navy hover:bg-white/90 px-8 py-4 font-semibold rounded-xl"
                   >
                     Start free trial
                     <ArrowRight className="w-5 h-5" />
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="btn border border-white/30 text-white hover:bg-white/10 px-8 py-4"
+                  </a>
+                  <a
+                    href="mailto:sales@callengo.com"
+                    className="btn border border-white/20 text-white hover:bg-white/5 px-8 py-4 rounded-xl"
                   >
                     Talk to sales
-                  </Link>
+                  </a>
                 </div>
               </div>
             </motion.div>

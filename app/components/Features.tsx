@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
@@ -14,6 +15,7 @@ const features = [
     stats: { value: "95%", label: "data accuracy" },
     insight: "Bad data costs companies an average of $12.9M annually — Gartner",
     link: "/agents/data-validation",
+    color: "from-secondary/10 to-cyan/5",
   },
   {
     title: "Fill your calendar, not your voicemail",
@@ -24,6 +26,7 @@ const features = [
     insight:
       "No-shows cost the healthcare industry alone $150B per year — SCI Solutions",
     link: "/agents/appointment-confirmation",
+    color: "from-accent/10 to-cyan/5",
   },
   {
     title: "Stop wasting time on bad leads",
@@ -34,104 +37,109 @@ const features = [
     insight:
       "67% of lost sales are due to reps chasing unqualified leads — MarketingSherpa",
     link: "/agents/lead-qualification",
+    color: "from-secondary/10 to-pink/5",
   },
 ];
 
+function FeatureCard({ feature, index }: { feature: typeof features[0]; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "center center"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [80, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ y, opacity }}
+      className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center"
+    >
+      <div className={index % 2 === 1 ? "lg:order-2" : ""}>
+        <div className="inline-flex items-center gap-2 mb-4">
+          <span className="text-sm font-semibold text-foreground-tertiary tracking-wide">
+            0{index + 1}
+          </span>
+          <div className="w-8 h-px bg-border-dark" />
+        </div>
+
+        <h3 className="text-3xl md:text-4xl font-semibold text-foreground mb-5 leading-tight">
+          {feature.title}
+        </h3>
+
+        <p className="text-lg text-foreground-secondary mb-6 leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>
+          {feature.description}
+        </p>
+
+        <div className="p-4 rounded-xl border border-border bg-background-secondary mb-8">
+          <p className="text-sm text-foreground-secondary italic" style={{ fontFamily: "var(--font-body)" }}>
+            &ldquo;{feature.insight}&rdquo;
+          </p>
+        </div>
+
+        <div className="flex items-center gap-8 mb-8">
+          <div>
+            <div className="text-4xl font-bold gradient-text">
+              {feature.stats.value}
+            </div>
+            <div className="text-sm text-foreground-tertiary" style={{ fontFamily: "var(--font-body)" }}>
+              {feature.stats.label}
+            </div>
+          </div>
+        </div>
+
+        <Link
+          href={feature.link}
+          className="inline-flex items-center gap-2 text-foreground font-medium hover:gap-3 transition-all group text-sm"
+        >
+          Learn more
+          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+        </Link>
+      </div>
+
+      <div className={index % 2 === 1 ? "lg:order-1" : ""}>
+        <div className="relative">
+          <div className={`relative aspect-video overflow-hidden rounded-2xl border border-border bg-gradient-to-br ${feature.color}`}>
+            <Image
+              src={feature.image}
+              alt={feature.title}
+              fill
+              className="object-cover"
+              priority={index === 0}
+            />
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function Features() {
   return (
-    <section className="section bg-background-secondary" id="features">
+    <section className="section bg-background" id="features">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-2xl mb-20"
+          className="max-w-2xl mb-24"
         >
-          <h2 className="text-display-sm mb-6">
+          <span className="badge badge-primary mb-4">Why Callengo</span>
+          <h2 className="text-display-sm mb-6 text-foreground">
             Problems solved.
             <br />
             <span className="gradient-text">Revenue recovered.</span>
           </h2>
-
-          <p className="text-xl text-foreground-secondary">
+          <p className="text-lg text-foreground-secondary" style={{ fontFamily: "var(--font-body)" }}>
             Your team should focus on closing deals, not chasing confirmations
             or cleaning spreadsheets.
           </p>
         </motion.div>
 
-        {/* Features */}
-        <div className="space-y-32">
+        <div className="space-y-40">
           {features.map((feature, index) => (
-            <motion.div
-              key={feature.title}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6 }}
-              className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center"
-            >
-              {/* Text Content */}
-              <div className={index % 2 === 1 ? "lg:order-2" : ""}>
-                <div className="inline-flex items-center gap-2 mb-6">
-                  <span className="text-5xl font-bold text-border-dark">
-                    0{index + 1}
-                  </span>
-                </div>
-
-                <h3 className="text-3xl md:text-4xl font-semibold mb-6">
-                  {feature.title}
-                </h3>
-
-                <p className="text-xl text-foreground-secondary mb-6 leading-relaxed">
-                  {feature.description}
-                </p>
-
-                <div className="p-4 bg-background-tertiary rounded-xl mb-8">
-                  <p className="text-sm text-foreground-secondary italic">
-                    {feature.insight}
-                  </p>
-                </div>
-
-                <div className="flex items-center gap-8 mb-8">
-                  <div>
-                    <div className="text-4xl font-bold stat-number">
-                      {feature.stats.value}
-                    </div>
-                    <div className="text-sm text-foreground-secondary">
-                      {feature.stats.label}
-                    </div>
-                  </div>
-                </div>
-
-                <Link
-                  href={feature.link}
-                  className="inline-flex items-center gap-2 text-foreground font-medium hover:gap-3 transition-all group"
-                >
-                  Learn more
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </div>
-
-              {/* Feature Image */}
-              <div className={index % 2 === 1 ? "lg:order-1" : ""}>
-                <div className="relative">
-                  <div className="relative aspect-video overflow-hidden rounded-2xl border border-border">
-                    <Image
-                      src={feature.image}
-                      alt={feature.title}
-                      fill
-                      className="object-cover"
-                      priority={index === 0}
-                    />
-                  </div>
-
-                  <div
-                    className="absolute -z-10 -bottom-3 -right-3 w-full h-full rounded-2xl gradient-bg opacity-[0.06]"
-                  />
-                </div>
-              </div>
-            </motion.div>
+            <FeatureCard key={feature.title} feature={feature} index={index} />
           ))}
         </div>
       </div>

@@ -418,7 +418,7 @@ export default function QuickStartPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
-                  href="/signup"
+                  href="https://app.callengo.com/auth/signup"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary font-semibold rounded-full hover:bg-white/90 transition-colors"
                 >
                   Start Free Trial

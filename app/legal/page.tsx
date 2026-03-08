@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { FileText, Shield, Scale } from "lucide-react";
+import { Shield, FileText, Scale } from "lucide-react";
 
 const legalPages = [
   {
@@ -19,6 +19,12 @@ const legalPages = [
     href: "/terms",
     icon: FileText,
   },
+  {
+    title: "Compliance",
+    description: "Our regulatory standards, data protection, and security practices.",
+    href: "/compliance",
+    icon: Scale,
+  },
 ];
 
 export default function LegalPage() {
@@ -31,11 +37,10 @@ export default function LegalPage() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <h1 className="text-display-sm mb-6">Legal</h1>
-              <p className="text-xl text-foreground-secondary">
+              <h1 className="text-display-sm text-foreground mb-5">Legal</h1>
+              <p className="text-lg text-foreground-secondary" style={{ fontFamily: "var(--font-body)" }}>
                 Important legal information about using Callengo services.
               </p>
             </motion.div>
@@ -46,20 +51,22 @@ export default function LegalPage() {
                   key={page.title}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  transition={{ delay: index * 0.1 }}
                 >
                   <Link
                     href={page.href}
-                    className="flex items-start gap-4 p-6 bg-white rounded-2xl border border-border hover:border-slate-300 hover:shadow-lg transition-all group"
+                    className="flex items-start gap-4 p-6 bg-background rounded-xl border border-border hover:border-border-dark hover:shadow-lg transition-all group"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-background-tertiary flex items-center justify-center flex-shrink-0 group-hover:bg-background-tertiary transition-colors">
-                      <page.icon className="w-6 h-6 text-foreground-secondary" />
+                    <div className="w-11 h-11 rounded-lg bg-background-secondary flex items-center justify-center flex-shrink-0 group-hover:bg-background-tertiary transition-colors">
+                      <page.icon className="w-5 h-5 text-secondary" />
                     </div>
                     <div>
-                      <h2 className="text-lg font-semibold mb-1 group-hover:text-foreground">
+                      <h2 className="text-base font-semibold text-foreground mb-1 group-hover:text-secondary transition-colors">
                         {page.title}
                       </h2>
-                      <p className="text-foreground-secondary">{page.description}</p>
+                      <p className="text-sm text-foreground-secondary" style={{ fontFamily: "var(--font-body)" }}>
+                        {page.description}
+                      </p>
                     </div>
                   </Link>
                 </motion.div>
@@ -69,20 +76,19 @@ export default function LegalPage() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="mt-12 p-6 gradient-bg rounded-2xl text-white"
+              transition={{ delay: 0.4 }}
+              className="mt-12 p-6 rounded-xl bg-navy relative overflow-hidden"
             >
-              <h3 className="font-semibold mb-2">Questions?</h3>
-              <p className="text-white/70 mb-4">
-                If you have any questions about our legal policies or need assistance,
-                please contact our legal team.
-              </p>
-              <a
-                href="mailto:legal@callengo.com"
-                className="text-white font-medium hover:underline"
-              >
-                legal@callengo.com
-              </a>
+              <div className="absolute inset-0 bg-grid-dark opacity-30" />
+              <div className="relative z-10">
+                <h3 className="font-semibold text-white text-sm mb-2">Questions?</h3>
+                <p className="text-white/50 text-sm mb-4" style={{ fontFamily: "var(--font-body)" }}>
+                  If you have any questions about our legal policies, please contact our legal team.
+                </p>
+                <a href="mailto:legal@callengo.com" className="text-sm text-white font-medium hover:underline">
+                  legal@callengo.com
+                </a>
+              </div>
             </motion.div>
           </div>
         </section>

@@ -4,60 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import {
-  Mail,
-  MapPin,
-  Clock,
-  MessageSquare,
-  Building2,
-  Headphones,
-  Send,
-  CheckCircle,
-} from "lucide-react";
-
-const contactMethods = [
-  {
-    icon: Mail,
-    title: "Email Us",
-    description: "We'll respond within 24 hours",
-    contact: "hello@callengo.com",
-    href: "mailto:hello@callengo.com",
-  },
-  {
-    icon: MessageSquare,
-    title: "Live Chat",
-    description: "Available Mon-Fri, 9am-6pm EST",
-    contact: "Start a conversation",
-    href: "#",
-  },
-  {
-    icon: Headphones,
-    title: "Support",
-    description: "For existing customers",
-    contact: "support@callengo.com",
-    href: "mailto:support@callengo.com",
-  },
-  {
-    icon: Building2,
-    title: "Enterprise Sales",
-    description: "Custom solutions for large teams",
-    contact: "enterprise@callengo.com",
-    href: "mailto:enterprise@callengo.com",
-  },
-];
-
-const offices = [
-  {
-    city: "San Francisco",
-    address: "123 Market Street, Suite 500",
-    country: "United States",
-  },
-  {
-    city: "London",
-    address: "45 King William Street",
-    country: "United Kingdom",
-  },
-];
+import { Mail, Send, CheckCircle, ArrowRight } from "lucide-react";
 
 export default function ContactPage() {
   const [formState, setFormState] = useState({
@@ -93,97 +40,61 @@ export default function ContactPage() {
     <>
       <Header />
       <main className="pt-24">
-        {/* Hero Section */}
-        <section className="section">
-          <div className="max-w-7xl mx-auto px-6">
+        {/* Hero */}
+        <section className="relative overflow-hidden bg-navy py-20 md:py-28">
+          <div className="absolute inset-0 bg-grid-dark opacity-40" />
+          <div className="glow-orb glow-orb-purple w-[500px] h-[500px] -top-40 right-0" />
+          <div className="glow-orb glow-orb-cyan w-[300px] h-[300px] bottom-0 -left-40" />
+          <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="max-w-3xl mx-auto text-center"
             >
-              <h1 className="text-display-sm mb-6">
-                Let's talk about <span className="gradient-text">your goals</span>
+              <h1 className="text-display-sm text-white mb-5">
+                Get in touch
               </h1>
-              <p className="text-xl text-foreground-secondary">
-                Have questions? Want to see how much revenue you could recover?
-                We would love to hear from you.
+              <p className="text-lg text-white/50 max-w-xl mx-auto" style={{ fontFamily: "var(--font-body)" }}>
+                Have a question, need a demo, or want to discuss a custom plan?
+                Reach out and we&apos;ll get back to you within 24 hours.
               </p>
             </motion.div>
           </div>
         </section>
 
-        {/* Contact Methods */}
-        <section className="pb-16">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {contactMethods.map((method, index) => (
-                <motion.a
-                  key={method.title}
-                  href={method.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white rounded-2xl border border-border p-6 hover:border-border-dark hover:shadow-lg transition-all group"
-                >
-                  <div className="w-12 h-12 rounded-xl gradient-bg-subtle flex items-center justify-center mb-4 group-hover:gradient-bg transition-colors">
-                    <method.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="font-semibold mb-1">{method.title}</h3>
-                  <p className="text-sm text-foreground-tertiary mb-2">
-                    {method.description}
-                  </p>
-                  <p className="text-sm font-medium text-foreground">
-                    {method.contact}
-                  </p>
-                </motion.a>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Contact Form Section */}
-        <section className="section bg-background-secondary">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="grid lg:grid-cols-2 gap-12">
+        {/* Contact form + info */}
+        <section className="section bg-background">
+          <div className="max-w-4xl mx-auto px-6">
+            <div className="grid md:grid-cols-5 gap-12">
               {/* Form */}
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="md:col-span-3"
               >
-                <h2 className="text-3xl font-bold mb-2">Send us a message</h2>
-                <p className="text-foreground-secondary mb-8">
-                  Fill out the form below and we'll get back to you within one
-                  business day.
-                </p>
-
                 {isSubmitted ? (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="bg-white rounded-2xl border border-green-200 p-8 text-center"
+                    className="rounded-2xl border border-accent/20 bg-accent/5 p-10 text-center"
                   >
-                    <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
-                      <CheckCircle className="w-8 h-8 text-accent-dark" />
+                    <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                      <CheckCircle className="w-7 h-7 text-accent-dark" />
                     </div>
-                    <h3 className="text-xl font-semibold mb-2">
-                      Message Sent!
+                    <h3 className="text-xl font-semibold text-foreground mb-2">
+                      Message sent
                     </h3>
-                    <p className="text-foreground-secondary">
-                      Thanks for reaching out. We'll get back to you within 24
+                    <p className="text-foreground-secondary text-sm" style={{ fontFamily: "var(--font-body)" }}>
+                      Thanks for reaching out. We&apos;ll get back to you within 24
                       hours.
                     </p>
                   </motion.div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid sm:grid-cols-2 gap-6">
+                  <form onSubmit={handleSubmit} className="space-y-5">
+                    <div className="grid sm:grid-cols-2 gap-5">
                       <div>
-                        <label
-                          htmlFor="name"
-                          className="block text-sm font-medium mb-2"
-                        >
+                        <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1.5">
                           Name
                         </label>
                         <input
@@ -193,15 +104,13 @@ export default function ContactPage() {
                           value={formState.name}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 rounded-xl border border-border bg-white focus:border-foreground-tertiary focus:ring-2 focus:ring-border transition-colors outline-none"
+                          className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-colors outline-none text-sm"
+                          style={{ fontFamily: "var(--font-body)" }}
                           placeholder="John Smith"
                         />
                       </div>
                       <div>
-                        <label
-                          htmlFor="email"
-                          className="block text-sm font-medium mb-2"
-                        >
+                        <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1.5">
                           Email
                         </label>
                         <input
@@ -211,18 +120,16 @@ export default function ContactPage() {
                           value={formState.email}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 rounded-xl border border-border bg-white focus:border-foreground-tertiary focus:ring-2 focus:ring-border transition-colors outline-none"
+                          className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-colors outline-none text-sm"
+                          style={{ fontFamily: "var(--font-body)" }}
                           placeholder="john@company.com"
                         />
                       </div>
                     </div>
 
-                    <div className="grid sm:grid-cols-2 gap-6">
+                    <div className="grid sm:grid-cols-2 gap-5">
                       <div>
-                        <label
-                          htmlFor="company"
-                          className="block text-sm font-medium mb-2"
-                        >
+                        <label htmlFor="company" className="block text-sm font-medium text-foreground mb-1.5">
                           Company
                         </label>
                         <input
@@ -231,15 +138,13 @@ export default function ContactPage() {
                           name="company"
                           value={formState.company}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-xl border border-border bg-white focus:border-foreground-tertiary focus:ring-2 focus:ring-border transition-colors outline-none"
+                          className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-colors outline-none text-sm"
+                          style={{ fontFamily: "var(--font-body)" }}
                           placeholder="Acme Inc"
                         />
                       </div>
                       <div>
-                        <label
-                          htmlFor="subject"
-                          className="block text-sm font-medium mb-2"
-                        >
+                        <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-1.5">
                           Subject
                         </label>
                         <select
@@ -248,7 +153,8 @@ export default function ContactPage() {
                           value={formState.subject}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 rounded-xl border border-border bg-white focus:border-foreground-tertiary focus:ring-2 focus:ring-border transition-colors outline-none"
+                          className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-colors outline-none text-sm"
+                          style={{ fontFamily: "var(--font-body)" }}
                         >
                           <option value="">Select a topic</option>
                           <option value="sales">Sales Inquiry</option>
@@ -261,10 +167,7 @@ export default function ContactPage() {
                     </div>
 
                     <div>
-                      <label
-                        htmlFor="message"
-                        className="block text-sm font-medium mb-2"
-                      >
+                      <label htmlFor="message" className="block text-sm font-medium text-foreground mb-1.5">
                         Message
                       </label>
                       <textarea
@@ -274,7 +177,8 @@ export default function ContactPage() {
                         onChange={handleChange}
                         required
                         rows={5}
-                        className="w-full px-4 py-3 rounded-xl border border-border bg-white focus:border-foreground-tertiary focus:ring-2 focus:ring-border transition-colors outline-none resize-none"
+                        className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-colors outline-none resize-none text-sm"
+                        style={{ fontFamily: "var(--font-body)" }}
                         placeholder="Tell us how we can help..."
                       />
                     </div>
@@ -282,16 +186,17 @@ export default function ContactPage() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white gradient-bg rounded-full transition-all hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-secondary rounded-lg transition-all hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                      style={{ boxShadow: "var(--shadow-electric)" }}
                     >
                       {isSubmitting ? (
                         <>
-                          <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                           Sending...
                         </>
                       ) : (
                         <>
-                          Send Message
+                          Send message
                           <Send className="w-4 h-4" />
                         </>
                       )}
@@ -300,89 +205,58 @@ export default function ContactPage() {
                 )}
               </motion.div>
 
-              {/* Info Side */}
+              {/* Info sidebar */}
               <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="space-y-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="md:col-span-2 space-y-6"
               >
-                {/* Office Locations */}
-                <div className="bg-white rounded-2xl border border-border p-6">
-                  <h3 className="font-semibold mb-4 flex items-center gap-2">
-                    <MapPin className="w-5 h-5 text-foreground-secondary" />
-                    Our Offices
-                  </h3>
-                  <div className="space-y-4">
-                    {offices.map((office) => (
-                      <div
-                        key={office.city}
-                        className="pb-4 border-b border-border-light last:border-0 last:pb-0"
-                      >
-                        <div className="font-medium">{office.city}</div>
-                        <div className="text-sm text-foreground-secondary">
-                          {office.address}
-                        </div>
-                        <div className="text-sm text-foreground-tertiary">
-                          {office.country}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Business Hours */}
-                <div className="bg-white rounded-2xl border border-border p-6">
-                  <h3 className="font-semibold mb-4 flex items-center gap-2">
-                    <Clock className="w-5 h-5 text-foreground-secondary" />
-                    Business Hours
-                  </h3>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-foreground-secondary">Monday - Friday</span>
-                      <span className="font-medium">9:00 AM - 6:00 PM EST</span>
+                <div className="p-5 rounded-xl border border-border bg-background-secondary">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-9 h-9 rounded-lg bg-secondary/8 flex items-center justify-center">
+                      <Mail className="w-4 h-4 text-secondary" />
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-foreground-secondary">Saturday</span>
-                      <span className="font-medium">10:00 AM - 2:00 PM EST</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-foreground-secondary">Sunday</span>
-                      <span className="font-medium">Closed</span>
+                    <div>
+                      <div className="font-semibold text-foreground text-sm">Sales</div>
+                      <div className="text-xs text-foreground-tertiary" style={{ fontFamily: "var(--font-body)" }}>Custom plans & demos</div>
                     </div>
                   </div>
+                  <a href="mailto:sales@callengo.com" className="text-sm font-medium text-secondary hover:underline">
+                    sales@callengo.com
+                  </a>
                 </div>
 
-                {/* Quick Links */}
-                <div className="gradient-bg rounded-2xl p-6 text-white">
-                  <h3 className="font-semibold mb-4">Looking for something?</h3>
-                  <ul className="space-y-3 text-sm">
-                    <li>
-                      <a
-                        href="/docs"
-                        className="flex items-center gap-2 text-slate-indigo-light hover:text-white transition-colors"
-                      >
-                        → Documentation
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="/help"
-                        className="flex items-center gap-2 text-slate-indigo-light hover:text-white transition-colors"
-                      >
-                        → Help Center
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="/pricing"
-                        className="flex items-center gap-2 text-slate-indigo-light hover:text-white transition-colors"
-                      >
-                        → Pricing
-                      </a>
-                    </li>
-                  </ul>
+                <div className="p-5 rounded-xl border border-border bg-background-secondary">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-9 h-9 rounded-lg bg-accent/8 flex items-center justify-center">
+                      <Mail className="w-4 h-4 text-accent-dark" />
+                    </div>
+                    <div>
+                      <div className="font-semibold text-foreground text-sm">Support</div>
+                      <div className="text-xs text-foreground-tertiary" style={{ fontFamily: "var(--font-body)" }}>For existing customers</div>
+                    </div>
+                  </div>
+                  <a href="mailto:support@callengo.com" className="text-sm font-medium text-secondary hover:underline">
+                    support@callengo.com
+                  </a>
+                </div>
+
+                <div className="relative rounded-xl overflow-hidden bg-navy p-5">
+                  <div className="absolute inset-0 bg-grid-dark opacity-30" />
+                  <div className="relative z-10">
+                    <h3 className="font-semibold text-white text-sm mb-2">Ready to start?</h3>
+                    <p className="text-white/50 text-xs mb-4 leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>
+                      Get started with 15 free minutes. No credit card required.
+                    </p>
+                    <a
+                      href="https://app.callengo.com/auth/signup"
+                      className="inline-flex items-center gap-1.5 text-sm font-medium text-white hover:text-white/80 transition-colors"
+                    >
+                      Get started free
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
                 </div>
               </motion.div>
             </div>

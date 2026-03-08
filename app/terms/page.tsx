@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
@@ -9,95 +10,44 @@ export default function TermsPage() {
     <>
       <Header />
       <main className="pt-24">
-        {/* Hero Section */}
-        <section className="gradient-bg text-white py-16">
-          <div className="max-w-3xl mx-auto px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h1 className="text-display-sm mb-4">Terms of Service</h1>
-              <p className="text-white/70">Last updated: January 2026</p>
+        <section className="bg-navy py-16 relative overflow-hidden">
+          <div className="absolute inset-0 bg-grid-dark opacity-30" />
+          <div className="max-w-3xl mx-auto px-6 relative z-10">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+              <h1 className="text-display-sm text-white mb-3">Terms of Service</h1>
+              <p className="text-white/50 text-sm" style={{ fontFamily: "var(--font-body)" }}>Last updated: January 2026</p>
             </motion.div>
           </div>
         </section>
 
         <section className="section">
-          <div className="max-w-3xl mx-auto px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
+          <div className="max-w-3xl mx-auto px-6 space-y-10">
+            {[
+              { title: "1. Acceptance of Terms", text: "By accessing or using Callengo's services, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services." },
+              { title: "2. Description of Service", text: "Callengo provides AI-powered phone agent services for businesses, including data validation, appointment confirmation, and lead qualification. Our services are designed to automate repetitive phone calls and improve business efficiency." },
+              { title: "3. Account Registration", text: "To use our services, you must create an account and provide accurate information. You are responsible for maintaining the security of your account credentials and for all activities that occur under your account." },
+              { title: "4. Acceptable Use", text: "You agree not to use our services for any unlawful purposes, to harass or harm others, or to violate any applicable regulations. You must comply with all applicable telecommunications laws and regulations in your jurisdiction." },
+              { title: "5. Payment Terms", text: "Paid plans are billed monthly or annually as selected. All fees are non-refundable except as required by law. We reserve the right to change pricing with 30 days notice. Annual plans receive a 12% discount." },
+              { title: "6. Intellectual Property", text: "All intellectual property rights in the Callengo platform and services are owned by Callengo. You retain ownership of your data and content uploaded to our platform." },
+              { title: "7. Limitation of Liability", text: "Callengo shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or related to your use of our services." },
+              { title: "8. Termination", text: "Either party may terminate the agreement at any time. Upon termination, your access to the services will cease and your data will be handled in accordance with our Privacy Policy and data retention schedules." },
+              { title: "9. Changes to Terms", text: "We may modify these terms at any time. We will notify you of material changes by posting a notice on our website or sending you an email. Continued use of the services after changes constitutes acceptance." },
+            ].map((section, i) => (
+              <motion.div key={i} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+                <h2 className="text-xl font-semibold text-foreground mb-3">{section.title}</h2>
+                <p className="text-foreground-secondary text-sm leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>{section.text}</p>
+              </motion.div>
+            ))}
 
-              <div className="prose prose-slate max-w-none">
-                <h2 className="text-2xl font-semibold mt-12 mb-4">1. Acceptance of Terms</h2>
-                <p className="text-foreground-secondary mb-4 leading-relaxed">
-                  By accessing or using Callengo's services, you agree to be bound by these Terms of Service.
-                  If you do not agree to these terms, please do not use our services.
-                </p>
-
-                <h2 className="text-2xl font-semibold mt-12 mb-4">2. Description of Service</h2>
-                <p className="text-foreground-secondary mb-4 leading-relaxed">
-                  Callengo provides automated phone calling services for data validation, appointment
-                  confirmation, and lead qualification. Our services use voice technology to conduct
-                  calls on behalf of our customers.
-                </p>
-
-                <h2 className="text-2xl font-semibold mt-12 mb-4">3. Account Registration</h2>
-                <p className="text-foreground-secondary mb-4 leading-relaxed">
-                  To use our services, you must create an account and provide accurate, complete information.
-                  You are responsible for maintaining the confidentiality of your account credentials
-                  and for all activities that occur under your account.
-                </p>
-
-                <h2 className="text-2xl font-semibold mt-12 mb-4">4. Acceptable Use</h2>
-                <p className="text-foreground-secondary mb-4 leading-relaxed">
-                  You agree to use our services only for lawful purposes and in accordance with these terms.
-                  You may not use our services to make calls that violate any applicable laws, including
-                  telemarketing regulations, do-not-call lists, or anti-spam laws.
-                </p>
-
-                <h2 className="text-2xl font-semibold mt-12 mb-4">5. Payment Terms</h2>
-                <p className="text-foreground-secondary mb-4 leading-relaxed">
-                  Paid services are billed in advance on a monthly or annual basis. All fees are non-refundable
-                  except as required by law. We reserve the right to change our prices with 30 days notice.
-                </p>
-
-                <h2 className="text-2xl font-semibold mt-12 mb-4">6. Intellectual Property</h2>
-                <p className="text-foreground-secondary mb-4 leading-relaxed">
-                  All content, features, and functionality of our services are owned by Callengo and are
-                  protected by intellectual property laws. You may not copy, modify, or distribute our
-                  services without our written permission.
-                </p>
-
-                <h2 className="text-2xl font-semibold mt-12 mb-4">7. Limitation of Liability</h2>
-                <p className="text-foreground-secondary mb-4 leading-relaxed">
-                  Callengo shall not be liable for any indirect, incidental, special, consequential, or
-                  punitive damages resulting from your use of or inability to use our services.
-                  Our total liability shall not exceed the amount you paid us in the past 12 months.
-                </p>
-
-                <h2 className="text-2xl font-semibold mt-12 mb-4">8. Termination</h2>
-                <p className="text-foreground-secondary mb-4 leading-relaxed">
-                  We may terminate or suspend your account at any time for any reason, including violation
-                  of these terms. Upon termination, your right to use the services will immediately cease.
-                </p>
-
-                <h2 className="text-2xl font-semibold mt-12 mb-4">9. Changes to Terms</h2>
-                <p className="text-foreground-secondary mb-4 leading-relaxed">
-                  We reserve the right to modify these terms at any time. We will provide notice of
-                  significant changes by posting the updated terms on our website. Your continued use
-                  of our services constitutes acceptance of the modified terms.
-                </p>
-
-                <h2 className="text-2xl font-semibold mt-12 mb-4">10. Contact</h2>
-                <p className="text-foreground-secondary mb-4 leading-relaxed">
-                  If you have any questions about these Terms of Service, please contact us at
-                  legal@callengo.com.
-                </p>
-              </div>
+            <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+              <h2 className="text-xl font-semibold text-foreground mb-3">10. Contact</h2>
+              <p className="text-foreground-secondary text-sm leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>
+                For questions about these terms, contact us at{" "}
+                <a href="mailto:legal@callengo.com" className="text-secondary hover:underline">legal@callengo.com</a>.
+                For compliance and regulatory information, visit our{" "}
+                <Link href="/compliance" className="text-secondary hover:underline">Compliance</Link> page.
+                See also our <Link href="/privacy" className="text-secondary hover:underline">Privacy Policy</Link>.
+              </p>
             </motion.div>
           </div>
         </section>

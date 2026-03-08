@@ -11,7 +11,6 @@ import {
   Database,
   Calendar,
   Users,
-  Plug,
   ArrowRight,
 } from "lucide-react";
 
@@ -53,33 +52,34 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/95 backdrop-blur-xl border-b border-border"
-          : "bg-white/60 backdrop-blur-sm"
+          ? "bg-white/90 backdrop-blur-xl border-b border-border"
+          : "bg-transparent"
       }`}
       style={{
-        boxShadow: isScrolled ? "var(--shadow-sm)" : "none",
+        boxShadow: isScrolled ? "0 1px 3px rgba(0,0,0,0.04)" : "none",
       }}
     >
       <nav className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-18 md:h-20">
+        <div className="flex items-center justify-between h-16 md:h-[72px]">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative">
-              <Image
-                src="/callengo-logo.svg"
-                alt="Callengo Logo"
-                width={80}
-                height={50}
-                className="w-10 h-10 transition-transform group-hover:scale-105"
-              />
-            </div>
-            <span className="text-2xl font-bold tracking-tight gradient-text">
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <Image
+              src="/callengo-logo.svg"
+              alt="Callengo Logo"
+              width={36}
+              height={36}
+              className="w-9 h-9 transition-transform group-hover:scale-105"
+            />
+            <span
+              className="text-xl font-bold tracking-tight text-foreground"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
               Callengo
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-1">
             {/* Solutions Dropdown */}
             <div
               className="relative"
@@ -87,12 +87,12 @@ export default function Header() {
               onMouseLeave={() => setIsAgentsOpen(false)}
             >
               <button
-                className="flex items-center gap-1.5 text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium py-2"
+                className="flex items-center gap-1 text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium px-4 py-2 rounded-lg hover:bg-background-secondary"
                 onClick={() => setIsAgentsOpen(!isAgentsOpen)}
               >
                 Solutions
                 <ChevronDown
-                  className={`w-4 h-4 transition-transform duration-200 ${
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
                     isAgentsOpen ? "rotate-180" : ""
                   }`}
                 />
@@ -101,12 +101,12 @@ export default function Header() {
               <AnimatePresence>
                 {isAgentsOpen && (
                   <motion.div
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 8 }}
+                    initial={{ opacity: 0, y: 6, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 6, scale: 0.98 }}
                     transition={{ duration: 0.15, ease: "easeOut" }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-80 bg-white rounded-2xl border border-border p-2"
-                    style={{ boxShadow: "var(--shadow-xl)" }}
+                    className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[340px] bg-white rounded-xl border border-border p-2"
+                    style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)" }}
                   >
                     {agents.map((agent) => {
                       const Icon = agent.icon;
@@ -114,7 +114,7 @@ export default function Header() {
                         <Link
                           key={agent.name}
                           href={agent.href}
-                          className="flex items-start gap-3 p-3 rounded-xl hover:bg-background-secondary transition-all group"
+                          className="flex items-start gap-3 p-3 rounded-lg hover:bg-background-secondary transition-all group"
                         >
                           <div className="w-10 h-10 rounded-lg bg-background-secondary flex items-center justify-center shrink-0 group-hover:bg-background-tertiary transition-colors">
                             <Icon className="w-5 h-5 text-secondary" />
@@ -127,27 +127,10 @@ export default function Header() {
                               {agent.description}
                             </div>
                           </div>
+                          <ArrowRight className="w-4 h-4 text-foreground-tertiary opacity-0 group-hover:opacity-100 transition-opacity ml-auto mt-1" />
                         </Link>
                       );
                     })}
-                    <div className="h-px bg-border my-1" />
-                    <Link
-                      href="/integrations"
-                      className="flex items-center gap-3 p-3 rounded-xl hover:bg-background-secondary transition-all group"
-                    >
-                      <div className="w-10 h-10 rounded-lg bg-secondary/8 flex items-center justify-center shrink-0 group-hover:bg-secondary/12 transition-colors">
-                        <Plug className="w-5 h-5 text-secondary" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="font-semibold text-foreground text-sm">
-                          Integrations
-                        </div>
-                        <div className="text-xs text-foreground-tertiary mt-0.5">
-                          16+ apps and services
-                        </div>
-                      </div>
-                      <ArrowRight className="w-4 h-4 text-foreground-tertiary group-hover:text-secondary transition-colors" />
-                    </Link>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -155,58 +138,59 @@ export default function Header() {
 
             <Link
               href="/pricing"
-              className="text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium py-2"
+              className="text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium px-4 py-2 rounded-lg hover:bg-background-secondary"
             >
               Pricing
             </Link>
 
             <Link
-              href="/integrations"
-              className="text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium py-2"
+              href="/docs"
+              className="text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium px-4 py-2 rounded-lg hover:bg-background-secondary"
             >
-              Integrations
+              Docs
             </Link>
 
             <Link
               href="/about"
-              className="text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium py-2"
+              className="text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium px-4 py-2 rounded-lg hover:bg-background-secondary"
             >
               About
             </Link>
 
             <Link
               href="/contact"
-              className="text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium py-2"
+              className="text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium px-4 py-2 rounded-lg hover:bg-background-secondary"
             >
               Contact
             </Link>
           </div>
 
           {/* CTA Buttons */}
-          <div className="hidden lg:flex items-center gap-4">
-            <Link
-              href="/login"
-              className="text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium"
+          <div className="hidden lg:flex items-center gap-3">
+            <a
+              href="https://app.callengo.com/auth/login"
+              className="text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium px-4 py-2"
             >
-              Log in
-            </Link>
-            <Link
-              href="/signup"
-              className="btn btn-primary rounded-full text-sm px-6 py-2.5"
+              Sign in
+            </a>
+            <a
+              href="https://app.callengo.com/auth/signup"
+              className="btn btn-primary text-sm px-5 py-2.5 rounded-lg"
             >
               Get Started Free
-            </Link>
+              <ArrowRight className="w-4 h-4" />
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2"
+            className="lg:hidden p-2 rounded-lg hover:bg-background-secondary transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
-              <X className="w-6 h-6 text-foreground" />
+              <X className="w-5 h-5 text-foreground" />
             ) : (
-              <Menu className="w-6 h-6 text-foreground" />
+              <Menu className="w-5 h-5 text-foreground" />
             )}
           </button>
         </div>
@@ -238,8 +222,8 @@ export default function Header() {
                         <Icon className="w-4 h-4 text-secondary" />
                       </div>
                       <div>
-                        <div className="font-medium">{agent.name}</div>
-                        <div className="text-sm text-foreground-tertiary">
+                        <div className="font-medium text-sm">{agent.name}</div>
+                        <div className="text-xs text-foreground-tertiary">
                           {agent.description}
                         </div>
                       </div>
@@ -251,28 +235,28 @@ export default function Header() {
 
                 <Link
                   href="/pricing"
-                  className="block px-4 py-3 text-foreground hover:bg-background-secondary rounded-lg font-medium"
+                  className="block px-4 py-3 text-foreground hover:bg-background-secondary rounded-lg font-medium text-sm"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Pricing
                 </Link>
                 <Link
-                  href="/integrations"
-                  className="block px-4 py-3 text-foreground hover:bg-background-secondary rounded-lg font-medium"
+                  href="/docs"
+                  className="block px-4 py-3 text-foreground hover:bg-background-secondary rounded-lg font-medium text-sm"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Integrations
+                  Docs
                 </Link>
                 <Link
                   href="/about"
-                  className="block px-4 py-3 text-foreground hover:bg-background-secondary rounded-lg font-medium"
+                  className="block px-4 py-3 text-foreground hover:bg-background-secondary rounded-lg font-medium text-sm"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   About
                 </Link>
                 <Link
                   href="/contact"
-                  className="block px-4 py-3 text-foreground hover:bg-background-secondary rounded-lg font-medium"
+                  className="block px-4 py-3 text-foreground hover:bg-background-secondary rounded-lg font-medium text-sm"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Contact
@@ -281,20 +265,20 @@ export default function Header() {
                 <div className="h-px bg-border my-2" />
 
                 <div className="px-4 pt-2 space-y-3">
-                  <Link
-                    href="/login"
-                    className="block w-full text-center py-3 text-foreground-secondary font-medium hover:text-foreground transition-colors"
+                  <a
+                    href="https://app.callengo.com/auth/login"
+                    className="block w-full text-center py-2.5 text-foreground-secondary font-medium text-sm hover:text-foreground transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Log in
-                  </Link>
-                  <Link
-                    href="/signup"
-                    className="block w-full text-center py-3 text-white font-semibold rounded-full btn-primary"
+                    Sign in
+                  </a>
+                  <a
+                    href="https://app.callengo.com/auth/signup"
+                    className="block w-full text-center py-2.5 text-white font-semibold text-sm rounded-lg btn-primary"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Get Started Free
-                  </Link>
+                  </a>
                 </div>
               </div>
             </motion.div>

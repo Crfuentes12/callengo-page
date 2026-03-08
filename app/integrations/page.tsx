@@ -420,7 +420,7 @@ export default function IntegrationsPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
-                  href="/signup"
+                  href="https://app.callengo.com/auth/signup"
                   className="btn bg-white text-primary hover:bg-white/90 px-8 py-4 font-semibold"
                 >
                   Get Started Free

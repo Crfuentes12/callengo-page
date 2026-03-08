@@ -175,7 +175,7 @@ export default function PricingPage() {
                   onClick={() => setIsAnnual(false)}
                   className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all ${
                     !isAnnual
-                      ? "gradient-bg text-white"
+                      ? "bg-secondary text-white"
                       : "text-foreground-secondary hover:text-foreground"
                   }`}
                 >
@@ -185,7 +185,7 @@ export default function PricingPage() {
                   onClick={() => setIsAnnual(true)}
                   className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
                     isAnnual
-                      ? "gradient-bg text-white"
+                      ? "bg-secondary text-white"
                       : "text-foreground-secondary hover:text-foreground"
                   }`}
                 >
@@ -212,7 +212,7 @@ export default function PricingPage() {
                   className={`relative ${plan.popular ? "lg:-mt-3 lg:mb-3" : ""}`}
                 >
                   {plan.popular && (
-                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 gradient-bg text-white text-xs font-medium rounded-full flex items-center gap-1.5 z-10">
+                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 bg-secondary text-white text-xs font-medium rounded-full flex items-center gap-1.5 z-10">
                       <Sparkles className="w-3.5 h-3.5" />
                       Most Popular
                     </div>
@@ -245,16 +245,16 @@ export default function PricingPage() {
                       <div className="text-xs text-foreground-tertiary mt-1">{plan.minutes}</div>
                     </div>
 
-                    <Link
-                      href="/signup"
-                      className={`btn w-full justify-center mb-5 text-sm py-2.5 ${
+                    <a
+                      href="https://app.callengo.com/auth/signup"
+                      className={`btn w-full justify-center mb-5 text-sm py-2.5 rounded-lg ${
                         plan.popular
                           ? "btn-primary"
                           : "bg-background-secondary text-foreground hover:bg-background-tertiary border border-border"
                       }`}
                     >
                       {plan.cta}
-                    </Link>
+                    </a>
 
                     <div className="space-y-2.5">
                       {plan.features.map((feature) => (
@@ -274,7 +274,7 @@ export default function PricingPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="gradient-bg rounded-3xl p-8 md:p-12 text-white mb-12"
+              className="bg-navy rounded-3xl p-8 md:p-12 text-white mb-12 relative overflow-hidden"
             >
               <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
                 <div className="flex items-center gap-6">
@@ -290,13 +290,13 @@ export default function PricingPage() {
                     </p>
                   </div>
                 </div>
-                <Link
-                  href="/contact"
-                  className="btn bg-white text-primary hover:bg-white/90 px-8 py-4 font-semibold shrink-0"
+                <a
+                  href="mailto:sales@callengo.com"
+                  className="btn bg-white text-navy hover:bg-white/90 px-8 py-4 font-semibold shrink-0 rounded-xl"
                 >
                   Contact Sales
                   <ArrowRight className="w-4 h-4" />
-                </Link>
+                </a>
               </div>
             </motion.div>
 
@@ -401,7 +401,7 @@ export default function PricingPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="relative overflow-hidden rounded-3xl gradient-bg p-12 md:p-20"
+              className="relative overflow-hidden rounded-3xl bg-navy p-12 md:p-20"
             >
               <div className="absolute inset-0 bg-grid-dark opacity-30" />
               <div className="absolute inset-0 opacity-10">
@@ -416,19 +416,19 @@ export default function PricingPage() {
                   Start with 15 free minutes. No credit card required. See how much revenue you can recover.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Link
-                    href="/signup"
-                    className="btn bg-white text-primary hover:bg-white/90 px-8 py-4 font-semibold"
+                  <a
+                    href="https://app.callengo.com/auth/signup"
+                    className="btn bg-white text-navy hover:bg-white/90 px-8 py-4 font-semibold rounded-xl"
                   >
                     Start free trial
                     <ArrowRight className="w-5 h-5" />
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="btn border border-white/30 text-white hover:bg-white/10 px-8 py-4"
+                  </a>
+                  <a
+                    href="mailto:sales@callengo.com"
+                    className="btn border border-white/20 text-white hover:bg-white/5 px-8 py-4 rounded-xl"
                   >
                     Talk to sales
-                  </Link>
+                  </a>
                 </div>
               </div>
             </motion.div>

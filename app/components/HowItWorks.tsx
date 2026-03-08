@@ -12,6 +12,7 @@ import {
   BarChart3,
   ChevronRight,
   CheckCircle2,
+  Sparkles,
 } from "lucide-react";
 
 const steps = [
@@ -149,47 +150,173 @@ export default function HowItWorks() {
   const StepIcon = step.icon;
 
   return (
-    <section className="section-dark section" id="how-it-works">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="section-dark section relative overflow-hidden" id="how-it-works">
+      {/* Mesh / gradient background decorations */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        {/* Top-right gradient orb */}
+        <div
+          className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full opacity-[0.07]"
+          style={{
+            background:
+              "radial-gradient(circle, var(--color-accent-light) 0%, transparent 70%)",
+          }}
+        />
+        {/* Bottom-left gradient orb */}
+        <div
+          className="absolute -bottom-60 -left-40 w-[500px] h-[500px] rounded-full opacity-[0.05]"
+          style={{
+            background:
+              "radial-gradient(circle, var(--color-gradient-mid) 0%, transparent 70%)",
+          }}
+        />
+        {/* Subtle grid overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(79,95,232,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(79,95,232,0.4) 1px, transparent 1px)",
+            backgroundSize: "80px 80px",
+          }}
+        />
+      </div>
 
-        {/* ── Section header ── */}
-        <div className="text-center mb-16">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        {/* Section header */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
           <div className="inline-flex items-center gap-2 mb-5">
-            <span className="badge badge-outline">How it works</span>
+            <span className="badge badge-outline">
+              <Sparkles className="w-3 h-3 mr-1.5 opacity-70" />
+              How it works
+            </span>
           </div>
           <h2 className="text-display-sm mb-5">
             Setup in minutes.
             <br />
-            <span>Results in hours.</span>
+            <span className="gradient-text-electric">Results in hours.</span>
           </h2>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">
             Six simple steps, from zero to fully automated calling campaigns.
             No technical expertise required.
           </p>
-        </div>
+        </motion.div>
 
-        {/* ── Main interactive area ── */}
+        {/* Main interactive area */}
         <div className="grid lg:grid-cols-6 gap-8 xl:gap-12 items-start">
-
-          {/* LEFT — Screenshot viewer (3 cols) */}
+          {/* LEFT - Screenshot viewer (3 cols) */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
             className="lg:col-span-3 relative"
           >
-            {/* Browser-chrome frame */}
-            <div className="rounded-2xl bg-slate-800 border border-slate-700/80 shadow-2xl overflow-hidden">
+            {/* Floating gradient orbs behind screenshot */}
+            <div className="absolute -inset-12 pointer-events-none" aria-hidden="true">
+              <motion.div
+                className="absolute top-8 -left-8 w-48 h-48 rounded-full opacity-[0.12]"
+                style={{
+                  background:
+                    "radial-gradient(circle, var(--color-accent) 0%, transparent 70%)",
+                }}
+                animate={{
+                  y: [0, -12, 0],
+                  scale: [1, 1.05, 1],
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+              <motion.div
+                className="absolute -bottom-4 right-4 w-64 h-64 rounded-full opacity-[0.08]"
+                style={{
+                  background:
+                    "radial-gradient(circle, var(--color-gradient-mid) 0%, transparent 70%)",
+                }}
+                animate={{
+                  y: [0, 10, 0],
+                  scale: [1, 1.08, 1],
+                }}
+                transition={{
+                  duration: 8,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 1,
+                }}
+              />
+              <motion.div
+                className="absolute top-1/2 -right-6 w-36 h-36 rounded-full opacity-[0.06]"
+                style={{
+                  background:
+                    "radial-gradient(circle, var(--color-accent-light) 0%, transparent 70%)",
+                }}
+                animate={{
+                  x: [0, 8, 0],
+                  y: [0, -6, 0],
+                }}
+                transition={{
+                  duration: 7,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 2,
+                }}
+              />
+            </div>
+
+            {/* Browser-chrome frame with glassmorphism */}
+            <div
+              className="rounded-2xl overflow-hidden shadow-2xl relative"
+              style={{
+                background: "rgba(30, 35, 60, 0.6)",
+                backdropFilter: "blur(24px)",
+                border: "1px solid rgba(255, 255, 255, 0.08)",
+              }}
+            >
+              {/* Active glow ring */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeStep}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.6 }}
+                  className="absolute -inset-px rounded-2xl pointer-events-none z-20"
+                  style={{
+                    boxShadow:
+                      "inset 0 0 0 1px rgba(79, 95, 232, 0.15), 0 0 40px rgba(79, 95, 232, 0.08), 0 0 80px rgba(30, 45, 107, 0.06)",
+                  }}
+                />
+              </AnimatePresence>
 
               {/* Window chrome bar */}
-              <div className="flex items-center gap-3 px-4 py-3 bg-slate-900 border-b border-slate-700/60">
+              <div
+                className="flex items-center gap-3 px-4 py-3 border-b relative z-10"
+                style={{
+                  background: "rgba(13, 17, 23, 0.7)",
+                  backdropFilter: "blur(12px)",
+                  borderColor: "rgba(255, 255, 255, 0.06)",
+                }}
+              >
                 <div className="flex items-center gap-1.5 shrink-0">
-                  <span className="w-3 h-3 rounded-full bg-red-400/60" />
-                  <span className="w-3 h-3 rounded-full bg-yellow-400/60" />
-                  <span className="w-3 h-3 rounded-full bg-green-400/60" />
+                  <span className="w-3 h-3 rounded-full bg-red-400/70" />
+                  <span className="w-3 h-3 rounded-full bg-yellow-400/70" />
+                  <span className="w-3 h-3 rounded-full bg-green-400/70" />
                 </div>
                 <div className="flex-1">
-                  <div className="bg-slate-800 rounded-md px-3 py-1.5 flex items-center gap-2">
+                  <div
+                    className="rounded-lg px-3 py-1.5 flex items-center gap-2"
+                    style={{
+                      background: "rgba(255, 255, 255, 0.04)",
+                      border: "1px solid rgba(255, 255, 255, 0.06)",
+                    }}
+                  >
                     <div className="w-2 h-2 rounded-full gradient-bg shrink-0" />
                     <span className="text-[11px] text-slate-400 font-mono truncate">
                       app.callengo.com
@@ -199,14 +326,14 @@ export default function HowItWorks() {
               </div>
 
               {/* Screenshot area */}
-              <div className="relative aspect-square bg-slate-900 overflow-hidden">
+              <div className="relative aspect-square bg-slate-900/80 overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeStep}
-                    initial={{ opacity: 0, scale: 1.03 }}
+                    initial={{ opacity: 0, scale: 1.04 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.97 }}
-                    transition={{ duration: 0.45, ease: "easeInOut" }}
+                    exit={{ opacity: 0, scale: 0.96 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
                     className="absolute inset-0"
                   >
                     <Image
@@ -219,19 +346,34 @@ export default function HowItWorks() {
                   </motion.div>
                 </AnimatePresence>
 
+                {/* Vignette overlay for depth */}
+                <div
+                  className="absolute inset-0 pointer-events-none z-10"
+                  style={{
+                    background:
+                      "radial-gradient(ellipse at center, transparent 50%, rgba(13,17,23,0.3) 100%)",
+                  }}
+                />
+
                 {/* Step label overlay */}
-                <div className="absolute bottom-4 left-4 right-4">
+                <div className="absolute bottom-4 left-4 right-4 z-10">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={activeStep}
-                      initial={{ opacity: 0, y: 12 }}
+                      initial={{ opacity: 0, y: 14 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -8 }}
-                      transition={{ duration: 0.3, delay: 0.15 }}
-                      className="bg-slate-900/85 backdrop-blur-sm border border-slate-700/70 rounded-xl px-4 py-3"
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.35, delay: 0.15 }}
+                      className="rounded-xl px-4 py-3"
+                      style={{
+                        background: "rgba(13, 17, 23, 0.85)",
+                        backdropFilter: "blur(16px)",
+                        border: "1px solid rgba(255, 255, 255, 0.08)",
+                        boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
+                      }}
                     >
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center shrink-0">
+                        <div className="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center shrink-0 accent-glow-electric">
                           <StepIcon className="w-4 h-4 text-white" />
                         </div>
                         <div className="flex-1 min-w-0">
@@ -250,9 +392,10 @@ export default function HowItWorks() {
                               onClick={() => handleStepClick(i)}
                               className={`rounded-full transition-all duration-300 cursor-pointer ${
                                 i === activeStep
-                                  ? "w-5 h-1.5 gradient-bg"
-                                  : "w-1.5 h-1.5 bg-slate-600 hover:bg-slate-500"
+                                  ? "w-5 h-1.5 gradient-bg shadow-[0_0_8px_rgba(79,95,232,0.5)]"
+                                  : "w-1.5 h-1.5 bg-slate-600 hover:bg-slate-400"
                               }`}
+                              aria-label={`Go to step ${i + 1}`}
                             />
                           ))}
                         </div>
@@ -263,15 +406,27 @@ export default function HowItWorks() {
               </div>
             </div>
 
-            {/* Glow decoration */}
-            <div className="absolute -inset-8 gradient-bg opacity-[0.07] blur-3xl rounded-3xl -z-10" />
+            {/* Large background glow behind the whole frame */}
+            <motion.div
+              className="absolute -inset-10 gradient-bg rounded-3xl -z-10"
+              animate={{
+                opacity: [0.06, 0.1, 0.06],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              style={{ filter: "blur(48px)" }}
+            />
           </motion.div>
 
-          {/* RIGHT — Step list (2 cols) */}
+          {/* RIGHT - Step list (3 cols) */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-3 space-y-1.5"
           >
             {steps.map((s, index) => {
@@ -284,22 +439,33 @@ export default function HowItWorks() {
                   onClick={() => handleStepClick(index)}
                   className={`w-full text-left rounded-xl border transition-all duration-300 cursor-pointer group ${
                     isActive
-                      ? "border-slate-600 bg-slate-800/80"
-                      : "border-transparent bg-slate-900/40 hover:bg-slate-800/40 hover:border-slate-700/60"
+                      ? "border-white/10 bg-white/[0.04]"
+                      : "border-transparent bg-transparent hover:bg-white/[0.02] hover:border-white/[0.06]"
                   }`}
+                  style={
+                    isActive
+                      ? {
+                          backdropFilter: "blur(12px)",
+                          boxShadow:
+                            "0 4px 24px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.04)",
+                        }
+                      : undefined
+                  }
                 >
                   <div className="px-4 py-3.5">
                     <div className="flex items-start gap-3">
                       {/* Icon */}
                       <div
-                        className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 mt-0.5 transition-all ${
+                        className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 mt-0.5 transition-all duration-300 ${
                           isActive
-                            ? "gradient-bg shadow-lg"
-                            : "bg-slate-800 group-hover:bg-slate-700"
+                            ? "gradient-bg shadow-lg shadow-accent/20"
+                            : "bg-white/[0.05] group-hover:bg-white/[0.08]"
                         }`}
                       >
                         <Icon
-                          className={`w-4 h-4 ${isActive ? "text-white" : "text-slate-400"}`}
+                          className={`w-4 h-4 transition-colors duration-300 ${
+                            isActive ? "text-white" : "text-slate-400"
+                          }`}
                         />
                       </div>
 
@@ -307,14 +473,16 @@ export default function HowItWorks() {
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-0.5">
                           <span
-                            className={`text-[10px] font-bold tabular-nums ${
-                              isActive ? "gradient-text" : "text-slate-600"
+                            className={`text-[10px] font-bold tabular-nums transition-all duration-300 ${
+                              isActive
+                                ? "gradient-text-electric"
+                                : "text-slate-600"
                             }`}
                           >
                             {s.number}
                           </span>
                           <span
-                            className={`text-sm font-semibold leading-tight ${
+                            className={`text-sm font-semibold leading-tight transition-colors duration-300 ${
                               isActive
                                 ? "text-white"
                                 : "text-slate-400 group-hover:text-slate-300"
@@ -331,7 +499,7 @@ export default function HowItWorks() {
                               initial={{ height: 0, opacity: 0 }}
                               animate={{ height: "auto", opacity: 1 }}
                               exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.25, ease: "easeInOut" }}
+                              transition={{ duration: 0.3, ease: "easeInOut" }}
                               className="overflow-hidden"
                             >
                               <p className="text-[12px] text-slate-400 leading-relaxed mt-1.5 mb-2.5">
@@ -341,9 +509,16 @@ export default function HowItWorks() {
                                 {s.highlights.map((h) => (
                                   <span
                                     key={h}
-                                    className="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-slate-700/80 text-slate-300"
+                                    className="inline-flex items-center gap-1 text-[10px] px-2.5 py-1 rounded-full font-medium transition-all"
+                                    style={{
+                                      background:
+                                        "linear-gradient(135deg, rgba(79, 95, 232, 0.12) 0%, rgba(107, 122, 255, 0.08) 100%)",
+                                      border:
+                                        "1px solid rgba(79, 95, 232, 0.2)",
+                                      color: "rgba(167, 175, 255, 0.9)",
+                                    }}
                                   >
-                                    <CheckCircle2 className="w-2.5 h-2.5 text-slate-400" />
+                                    <CheckCircle2 className="w-2.5 h-2.5 text-accent-light opacity-80" />
                                     {h}
                                   </span>
                                 ))}
@@ -351,10 +526,19 @@ export default function HowItWorks() {
 
                               {/* Progress bar */}
                               {!isPaused && (
-                                <div className="h-0.5 bg-slate-700 rounded-full overflow-hidden">
+                                <div
+                                  className="h-[3px] rounded-full overflow-hidden"
+                                  style={{
+                                    background: "rgba(255, 255, 255, 0.06)",
+                                  }}
+                                >
                                   <motion.div
-                                    className="h-full gradient-bg rounded-full"
-                                    style={{ width: `${progress}%` }}
+                                    className="h-full rounded-full gradient-bg-electric"
+                                    style={{
+                                      width: `${progress}%`,
+                                      boxShadow:
+                                        "0 0 8px rgba(79, 95, 232, 0.4)",
+                                    }}
                                   />
                                 </div>
                               )}
@@ -365,9 +549,9 @@ export default function HowItWorks() {
 
                       {/* Chevron */}
                       <ChevronRight
-                        className={`w-4 h-4 shrink-0 transition-all mt-1 ${
+                        className={`w-4 h-4 shrink-0 transition-all duration-300 mt-1 ${
                           isActive
-                            ? "text-slate-400 rotate-90"
+                            ? "text-accent-light rotate-90"
                             : "text-slate-600 group-hover:text-slate-500"
                         }`}
                       />
@@ -378,10 +562,10 @@ export default function HowItWorks() {
             })}
 
             {/* CTA */}
-            <div className="pt-4 space-y-2">
+            <div className="pt-5 space-y-2.5">
               <a
                 href="/signup"
-                className="btn btn-primary w-full rounded-xl justify-center"
+                className="btn btn-primary w-full rounded-xl justify-center cursor-pointer"
               >
                 Start free trial
                 <ChevronRight className="w-4 h-4" />

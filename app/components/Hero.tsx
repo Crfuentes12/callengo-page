@@ -21,6 +21,12 @@ import {
   Zap,
   X,
   BarChart3,
+  Shield,
+  Sparkles,
+  Activity,
+  Bot,
+  CreditCard,
+  Timer,
 } from "lucide-react";
 
 /* ──────────────────────────────────────────
@@ -208,23 +214,30 @@ function FlyingDataParticle({ datum, onDone }: { datum: FlyingDatum; onDone: () 
       onAnimationComplete={onDone}
       className="absolute top-2 left-1/2 -translate-x-1/2 z-30 pointer-events-none"
     >
-      <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white border border-slate-200 shadow-lg text-xs whitespace-nowrap">
+      <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs whitespace-nowrap"
+        style={{
+          background: "rgba(15, 20, 40, 0.85)",
+          backdropFilter: "blur(12px)",
+          border: "1px solid rgba(79, 95, 232, 0.3)",
+          boxShadow: "0 0 20px rgba(79, 95, 232, 0.2), 0 4px 12px rgba(0,0,0,0.3)",
+        }}
+      >
         {datum.status === "confirmed" ? (
-          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
         ) : datum.status === "updated" ? (
-          <AlertCircle className="w-3.5 h-3.5 text-amber-500" />
+          <AlertCircle className="w-3.5 h-3.5 text-amber-400" />
         ) : (
-          <Zap className="w-3.5 h-3.5 text-blue-500" />
+          <Zap className="w-3.5 h-3.5 text-blue-400" />
         )}
-        <span className="font-medium text-slate-700">{datum.label}:</span>
-        <span className="text-slate-500 max-w-30 truncate">{datum.value}</span>
+        <span className="font-medium text-white/90">{datum.label}:</span>
+        <span className="text-white/60 max-w-30 truncate">{datum.value}</span>
       </div>
     </motion.div>
   );
 }
 
 /* ──────────────────────────────────────────
-   COMPACT DATA ROW
+   COMPACT DATA ROW (dark theme)
    ────────────────────────────────────────── */
 function DataRow({
   field,
@@ -240,39 +253,52 @@ function DataRow({
   index: number;
 }) {
   const colors = {
-    confirmed: { bg: "bg-emerald-50", text: "text-emerald-700", badge: "Confirmed" },
-    updated: { bg: "bg-amber-50", text: "text-amber-700", badge: "Updated" },
-    new: { bg: "bg-blue-50", text: "text-blue-700", badge: "New" },
+    confirmed: { bg: "rgba(16, 185, 129, 0.1)", border: "rgba(16, 185, 129, 0.2)", text: "text-emerald-400", glow: "0 0 12px rgba(16, 185, 129, 0.15)", badge: "Confirmed" },
+    updated: { bg: "rgba(245, 158, 11, 0.1)", border: "rgba(245, 158, 11, 0.2)", text: "text-amber-400", glow: "0 0 12px rgba(245, 158, 11, 0.15)", badge: "Updated" },
+    new: { bg: "rgba(79, 95, 232, 0.1)", border: "rgba(79, 95, 232, 0.2)", text: "text-blue-400", glow: "0 0 12px rgba(79, 95, 232, 0.15)", badge: "Extracted" },
   };
   const c = colors[status];
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: -12 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.35, delay: index * 0.06, ease: "easeOut" }}
-      className={`flex items-center gap-2 px-2.5 py-1.5 rounded-lg ${c.bg}`}
+      initial={{ opacity: 0, x: -12, scale: 0.95 }}
+      animate={{ opacity: 1, x: 0, scale: 1 }}
+      transition={{ duration: 0.4, delay: index * 0.08, ease: "easeOut" }}
+      className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg"
+      style={{ background: c.bg, border: `1px solid ${c.border}`, boxShadow: c.glow }}
     >
-      {status === "confirmed" ? (
-        <CheckCircle2 className={`w-3.5 h-3.5 ${c.text} shrink-0`} />
-      ) : status === "updated" ? (
-        <AlertCircle className={`w-3.5 h-3.5 ${c.text} shrink-0`} />
-      ) : (
-        <Zap className={`w-3.5 h-3.5 ${c.text} shrink-0`} />
-      )}
+      <motion.div
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ delay: index * 0.08 + 0.2, type: "spring", stiffness: 400, damping: 15 }}
+      >
+        {status === "confirmed" ? (
+          <CheckCircle2 className={`w-3.5 h-3.5 ${c.text} shrink-0`} />
+        ) : status === "updated" ? (
+          <AlertCircle className={`w-3.5 h-3.5 ${c.text} shrink-0`} />
+        ) : (
+          <Zap className={`w-3.5 h-3.5 ${c.text} shrink-0`} />
+        )}
+      </motion.div>
       <div className="flex-1 min-w-0">
-        <div className="text-[10px] font-medium text-slate-500 leading-tight">{field}</div>
+        <div className="text-[10px] font-medium text-white/40 leading-tight">{field}</div>
         <div className="flex items-center gap-1">
           {original && (
-            <span className="text-[9px] text-slate-400 line-through truncate max-w-15">{original}</span>
+            <span className="text-[9px] text-white/25 line-through truncate max-w-15">{original}</span>
           )}
-          {original && <span className="text-[9px] text-slate-400">→</span>}
-          <span className="text-[11px] font-semibold text-slate-800 truncate">{value}</span>
+          {original && <span className="text-[9px] text-white/25">→</span>}
+          <span className="text-[11px] font-semibold text-white/90 truncate">{value}</span>
         </div>
       </div>
-      <span className={`text-[8px] font-bold uppercase px-1 py-0.5 rounded ${c.text} opacity-80 shrink-0`}>
+      <motion.span
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: index * 0.08 + 0.3 }}
+        className={`text-[8px] font-bold uppercase px-1.5 py-0.5 rounded ${c.text} shrink-0`}
+        style={{ background: c.bg }}
+      >
         {c.badge}
-      </span>
+      </motion.span>
     </motion.div>
   );
 }
@@ -286,7 +312,7 @@ function seededRandom(seed: number) {
 }
 
 function WaveformVisualizer({ isPlaying }: { isPlaying: boolean }) {
-  const bars = 28;
+  const bars = 32;
   const barData = useMemo(() => {
     return Array.from({ length: bars }).map((_, i) => {
       const r1 = seededRandom(i);
@@ -305,16 +331,16 @@ function WaveformVisualizer({ isPlaying }: { isPlaying: boolean }) {
   }, []);
 
   return (
-    <div className="flex items-end gap-0.5 h-6 w-full">
+    <div className="flex items-end gap-[2px] h-7 w-full">
       {barData.map((b, i) => (
         <motion.div
           key={i}
           className="flex-1 rounded-full"
-          style={{ background: `linear-gradient(to top, var(--color-gradient-start), var(--color-gradient-end))` }}
+          style={{ background: `linear-gradient(to top, var(--color-accent), var(--color-accent-light))` }}
           animate={
             isPlaying
-              ? { height: [`${b.baseHeight}%`, `${b.peakA}%`, `${b.midA}%`, `${b.peakB}%`, `${b.baseHeight}%`], opacity: [0.5, 0.9, 0.6, 0.85, 0.5] }
-              : { height: `${b.baseHeight}%`, opacity: 0.3 }
+              ? { height: [`${b.baseHeight}%`, `${b.peakA}%`, `${b.midA}%`, `${b.peakB}%`, `${b.baseHeight}%`], opacity: [0.4, 0.9, 0.5, 0.85, 0.4] }
+              : { height: `${b.baseHeight}%`, opacity: 0.2 }
           }
           transition={isPlaying ? { duration: b.duration, repeat: Infinity, ease: "easeInOut", delay: i * 0.02 } : { duration: 0.4 }}
         />
@@ -324,7 +350,7 @@ function WaveformVisualizer({ isPlaying }: { isPlaying: boolean }) {
 }
 
 /* ──────────────────────────────────────────
-   QUALITY RING
+   QUALITY RING (dark theme)
    ────────────────────────────────────────── */
 function QualityRing({ score, size = 44 }: { score: number; size?: number }) {
   const pct = (score / 10) * 100;
@@ -334,61 +360,62 @@ function QualityRing({ score, size = 44 }: { score: number; size?: number }) {
   return (
     <div className="relative" style={{ width: size, height: size }}>
       <svg width={size} height={size} className="-rotate-90">
-        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#e2e8f0" strokeWidth={3} />
-        <motion.circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="url(#qg)" strokeWidth={3} strokeLinecap="round" strokeDasharray={circ} initial={{ strokeDashoffset: circ }} animate={{ strokeDashoffset: offset }} transition={{ duration: 1.2, ease: "easeOut" }} />
-        <defs><linearGradient id="qg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="var(--color-gradient-start)" /><stop offset="100%" stopColor="var(--color-gradient-end)" /></linearGradient></defs>
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth={3} />
+        <motion.circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="url(#qg-dark)" strokeWidth={3} strokeLinecap="round" strokeDasharray={circ} initial={{ strokeDashoffset: circ }} animate={{ strokeDashoffset: offset }} transition={{ duration: 1.2, ease: "easeOut" }} />
+        <defs><linearGradient id="qg-dark" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="var(--color-accent)" /><stop offset="100%" stopColor="var(--color-accent-light)" /></linearGradient></defs>
       </svg>
       <div className="absolute inset-0 flex items-center justify-center">
-        <span className="text-xs font-bold text-slate-800">{score}</span>
+        <span className="text-xs font-bold text-white">{score}</span>
       </div>
     </div>
   );
 }
 
 /* ──────────────────────────────────────────
-   DECORATIVE CURVED ARROW (SVG)
+   FLOATING PARTICLES
    ────────────────────────────────────────── */
-function CurvedArrow() {
+function FloatingParticles() {
+  const particles = useMemo(() => {
+    return Array.from({ length: 30 }).map((_, i) => ({
+      id: i,
+      x: seededRandom(i * 7) * 100,
+      y: seededRandom(i * 13) * 100,
+      size: 2 + seededRandom(i * 19) * 4,
+      duration: 15 + seededRandom(i * 23) * 20,
+      delay: seededRandom(i * 31) * 10,
+      opacity: 0.1 + seededRandom(i * 37) * 0.3,
+    }));
+  }, []);
+
   return (
-    <div className="absolute -right-25 top-[60%] hidden lg:block pointer-events-none z-0">
-      <svg
-        width="180"
-        height="120"
-        viewBox="0 0 180 120"
-        fill="none"
-        className="opacity-30"
-      >
-        {/* Curve bending DOWN */}
-        <path
-          d="M20 20 C 80 70, 150 50, 165 20"
-          stroke="url(#arrowCurveGrad)"
-          strokeWidth="2"
-          strokeLinecap="round"
-          fill="none"
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {particles.map((p) => (
+        <motion.div
+          key={p.id}
+          className="absolute rounded-full"
+          style={{
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+            width: p.size,
+            height: p.size,
+            background: `radial-gradient(circle, rgba(79, 95, 232, ${p.opacity}) 0%, transparent 70%)`,
+          }}
+          animate={{
+            y: [-20, 20, -20],
+            x: [-10, 10, -10],
+            opacity: [p.opacity * 0.5, p.opacity, p.opacity * 0.5],
+          }}
+          transition={{
+            duration: p.duration,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: p.delay,
+          }}
         />
-
-        {/* Arrowhead pointing up-right */}
-        <path
-          d="M166 30 L166 20 L155 20"
-          stroke="url(#arrowCurveGrad)"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-        />
-
-        <defs>
-          <linearGradient id="arrowCurveGrad" x1="0" y1="0" x2="1" y2="1"> 
-            <stop offset="0%" stopColor="var(--color-gradient-start)" stopOpacity="0.5" /> 
-            <stop offset="100%" stopColor="var(--color-gradient-end)" stopOpacity="1" />
-          </linearGradient>
-        </defs>
-      </svg>
+      ))}
     </div>
   );
 }
-
-
 
 /* ──────────────────────────────────────────
    HERO COMPONENT
@@ -543,122 +570,230 @@ export default function Hero() {
   const totalDataFields = revealedValidated.length + revealedExtracted.length;
 
   return (
-    <section className="pt-28 pb-16 md:pt-36 md:pb-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-grid opacity-50" />
-      <div className="absolute top-20 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+    <section className="relative overflow-hidden min-h-screen flex items-center" style={{ background: "linear-gradient(145deg, #080b16 0%, #0d1117 30%, #111827 60%, #0f1629 100%)" }}>
+      {/* Background effects */}
+      <div className="absolute inset-0">
+        {/* Mesh gradient orbs */}
+        <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full opacity-30" style={{ background: "radial-gradient(circle, rgba(30, 45, 107, 0.4) 0%, transparent 70%)" }} />
+        <div className="absolute top-[20%] right-[-5%] w-[500px] h-[500px] rounded-full opacity-25" style={{ background: "radial-gradient(circle, rgba(79, 95, 232, 0.35) 0%, transparent 70%)" }} />
+        <div className="absolute bottom-[-10%] left-[30%] w-[400px] h-[400px] rounded-full opacity-20" style={{ background: "radial-gradient(circle, rgba(107, 122, 255, 0.3) 0%, transparent 70%)" }} />
+
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(rgba(79, 95, 232, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(79, 95, 232, 0.5) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+
+        {/* Floating particles */}
+        <FloatingParticles />
+      </div>
 
       <audio ref={audioRef} src={scenario.audioSrc} preload="metadata" />
 
-      <div className="max-w-7xl mx-auto px-6 relative">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="max-w-7xl mx-auto px-6 relative z-10 w-full py-28 md:py-36">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-          {/* ─── LEFT COLUMN ─── */}
+          {/* ─── LEFT COLUMN: Headline + CTA ─── */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-col justify-center relative"
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="flex flex-col justify-center"
           >
-            <h1 className="text-display mb-6">
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="mb-6"
+            >
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium"
+                style={{
+                  background: "rgba(79, 95, 232, 0.1)",
+                  border: "1px solid rgba(79, 95, 232, 0.2)",
+                  color: "rgba(107, 122, 255, 1)",
+                }}
+              >
+                <Bot className="w-3.5 h-3.5" />
+                AI-Powered Calling Platform
+                <Sparkles className="w-3 h-3" />
+              </span>
+            </motion.div>
+
+            {/* Headline */}
+            <h1 className="text-display mb-6 text-white">
               Less time on calls.
               <br />
               More time{" "}
-              <span className="gradient-text">making money.</span>
+              <span className="gradient-text-electric" style={{ WebkitTextFillColor: "transparent" }}>making money.</span>
             </h1>
 
-            <p className="text-lg text-slate-600 mb-8 max-w-lg leading-relaxed">
+            {/* Subtitle */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="text-lg mb-10 max-w-lg leading-relaxed"
+              style={{ color: "rgba(139, 150, 200, 0.9)" }}
+            >
               Your team spends hours every week on repetitive phone calls that
               don&apos;t close deals. We handle those calls automatically, so
               your people can focus on what actually drives revenue.
-            </p>
+            </motion.p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/signup" className="btn btn-primary">
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+              className="flex flex-col sm:flex-row gap-4 mb-8"
+            >
+              <Link href="/signup" className="btn btn-electric rounded-xl text-base px-8 py-4 font-semibold group">
                 Start free trial
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>
-              <Link href="/contact" className="btn btn-secondary">
+              <Link href="/contact" className="btn rounded-xl text-base px-8 py-4 font-semibold transition-all"
+                style={{
+                  background: "rgba(255, 255, 255, 0.05)",
+                  border: "1px solid rgba(255, 255, 255, 0.12)",
+                  color: "rgba(255, 255, 255, 0.8)",
+                }}
+              >
                 Talk to sales
               </Link>
-            </div>
+            </motion.div>
 
-            <p className="text-sm text-slate-500 mt-6">
-              No credit card required · 15 free minutes · Setup in 5 minutes
-            </p>
+            {/* Trust indicators */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.55, duration: 0.5 }}
+              className="flex flex-wrap gap-5"
+            >
+              {[
+                { icon: CreditCard, text: "No credit card required" },
+                { icon: Timer, text: "15 free minutes" },
+                { icon: Zap, text: "Setup in 5 minutes" },
+              ].map((item) => (
+                <div key={item.text} className="flex items-center gap-1.5">
+                  <item.icon className="w-3.5 h-3.5" style={{ color: "rgba(79, 95, 232, 0.7)" }} />
+                  <span className="text-sm" style={{ color: "rgba(139, 150, 200, 0.7)" }}>{item.text}</span>
+                </div>
+              ))}
+            </motion.div>
 
-            <div className="grid grid-cols-3 gap-4 mt-10 pt-8 border-t border-slate-200">
+            {/* Stats */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.65, duration: 0.5 }}
+              className="grid grid-cols-3 gap-6 mt-12 pt-8"
+              style={{ borderTop: "1px solid rgba(255, 255, 255, 0.08)" }}
+            >
               {[
                 { label: "Calls Automated", value: "50K+" },
                 { label: "Avg. Quality", value: "9.2/10" },
                 { label: "Time Saved", value: "120h/mo" },
-              ].map((stat) => (
-                <div key={stat.label}>
-                  <div className="stat-number text-2xl">{stat.value}</div>
-                  <div className="text-xs text-slate-500 mt-1">{stat.label}</div>
-                </div>
+              ].map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.7 + i * 0.1, duration: 0.4 }}
+                >
+                  <div className="text-2xl font-bold gradient-text-electric" style={{ WebkitTextFillColor: "transparent" }}>{stat.value}</div>
+                  <div className="text-xs mt-1" style={{ color: "rgba(139, 150, 200, 0.6)" }}>{stat.label}</div>
+                </motion.div>
               ))}
-            </div>
-
-            {/* Decorative curved arrow pointing to phone */}
-            <CurvedArrow />
+            </motion.div>
           </motion.div>
 
-          {/* ─── RIGHT COLUMN: Software window ─── */}
+          {/* ─── RIGHT COLUMN: Interactive Demo Card ─── */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="relative flex justify-center"
+            initial={{ opacity: 0, y: 40, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="relative flex justify-center lg:justify-end"
           >
-            <div className="relative w-100 sm:w-100 bottom-12">
-              {/* Software window shell */}
-              <div className="rounded-2xl bg-slate-950 shadow-2xl ring-1 ring-slate-700/50 overflow-hidden">
+            {/* Outer glow */}
+            <div className="absolute -inset-8 rounded-[2rem] opacity-60 -z-10" style={{ background: "radial-gradient(ellipse at center, rgba(79, 95, 232, 0.15) 0%, transparent 70%)" }} />
+            <motion.div
+              className="absolute -inset-4 rounded-[2rem] -z-10"
+              animate={{ opacity: [0.3, 0.5, 0.3] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              style={{ background: "radial-gradient(ellipse at center, rgba(79, 95, 232, 0.1) 0%, transparent 60%)" }}
+            />
 
+            <div className="relative w-full max-w-[420px]">
+              {/* Glassmorphism demo card shell */}
+              <div className="rounded-2xl overflow-hidden"
+                style={{
+                  background: "rgba(13, 17, 30, 0.7)",
+                  backdropFilter: "blur(40px)",
+                  border: "1px solid rgba(79, 95, 232, 0.15)",
+                  boxShadow: "0 0 80px rgba(79, 95, 232, 0.08), 0 25px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
+                }}
+              >
                 {/* App screen — FIXED HEIGHT */}
-                <div className="bg-white overflow-hidden relative h-140 flex flex-col">
+                <div className="overflow-hidden relative h-[560px] flex flex-col">
 
-                  {/* App header / call header */}
-                  <div className="gradient-bg px-4 py-2.5 shrink-0">
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
-                          <Phone className="w-3.5 h-3.5 text-white" />
+                  {/* Call header - glass */}
+                  <div className="px-4 py-3 shrink-0"
+                    style={{
+                      background: "linear-gradient(135deg, rgba(30, 45, 107, 0.5) 0%, rgba(79, 95, 232, 0.3) 100%)",
+                      borderBottom: "1px solid rgba(79, 95, 232, 0.15)",
+                    }}
+                  >
+                    <div className="flex items-center justify-between mb-2.5">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-9 h-9 rounded-xl flex items-center justify-center"
+                          style={{ background: "rgba(79, 95, 232, 0.2)", border: "1px solid rgba(79, 95, 232, 0.3)" }}
+                        >
+                          <Phone className="w-4 h-4 text-accent-light" />
                         </div>
                         <div>
-                          <div className="text-white font-semibold text-[12px] leading-tight">{scenario.agentName}</div>
-                          <div className="text-white/60 text-[10px]">{scenario.phone}</div>
+                          <div className="text-white font-semibold text-[13px] leading-tight">{scenario.agentName}</div>
+                          <div className="text-white/40 text-[10px] font-mono">{scenario.phone}</div>
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
                         {isPlaying && (
-                          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-1.5 bg-red-500/25 px-2 py-1 rounded-full">
+                          <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="flex items-center gap-1.5 px-2.5 py-1 rounded-full"
+                            style={{ background: "rgba(239, 68, 68, 0.15)", border: "1px solid rgba(239, 68, 68, 0.25)" }}
+                          >
                             <span className="relative flex h-2 w-2">
                               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
                               <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
                             </span>
-                            <span className="text-white/90 text-[10px] font-semibold tracking-wide">LIVE</span>
+                            <span className="text-red-300 text-[10px] font-semibold tracking-wide">LIVE</span>
                           </motion.div>
                         )}
-                        <Volume2 className="w-3.5 h-3.5 text-white/40" />
+                        <div className="flex items-center gap-1 px-2 py-1 rounded-full" style={{ background: "rgba(255,255,255,0.05)" }}>
+                          <Activity className="w-3 h-3 text-emerald-400" />
+                          <span className="text-[9px] text-emerald-400 font-medium">{scenario.callQuality}/10</span>
+                        </div>
                       </div>
                     </div>
 
-                    {/* Tabs — single row, always fits */}
-                    <div className="flex gap-1">
+                    {/* Scenario tabs — premium glass style */}
+                    <div className="flex gap-1.5">
                       {scenarios.map((s, index) => {
                         const Icon = s.icon;
+                        const isActive = activeScenario === index;
                         return (
                           <button
                             key={s.id}
                             onClick={() => handleScenarioChange(index)}
-                            className={`flex items-center gap-1 px-2 py-1 rounded-full text-[9px] font-medium transition-all cursor-pointer whitespace-nowrap ${
-                              activeScenario === index
-                                ? "bg-white text-primary shadow-sm"
-                                : "bg-white/15 text-white/80 hover:bg-white/25"
-                            }`}
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-medium transition-all cursor-pointer whitespace-nowrap"
+                            style={isActive ? {
+                              background: "rgba(255, 255, 255, 0.12)",
+                              border: "1px solid rgba(255, 255, 255, 0.15)",
+                              color: "#fff",
+                              boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+                            } : {
+                              background: "rgba(255, 255, 255, 0.04)",
+                              border: "1px solid transparent",
+                              color: "rgba(255, 255, 255, 0.5)",
+                            }}
                           >
-                            <Icon className="w-2.5 h-2.5" />
+                            <Icon className="w-3 h-3" />
                             {s.label}
                           </button>
                         );
@@ -666,25 +801,48 @@ export default function Hero() {
                     </div>
                   </div>
 
-                  {/* Waveform + controls */}
-                  <div className="px-3 py-2 bg-slate-50 border-b border-slate-100 shrink-0">
-                    <div className="flex items-center gap-2">
+                  {/* Waveform + controls - glass */}
+                  <div className="px-3 py-2.5 shrink-0" style={{ background: "rgba(255, 255, 255, 0.02)", borderBottom: "1px solid rgba(255, 255, 255, 0.06)" }}>
+                    <div className="flex items-center gap-2.5">
                       <button
                         onClick={handlePlayPause}
-                        className="w-8 h-8 rounded-full gradient-bg text-white flex items-center justify-center hover:opacity-90 transition-all shadow-lg shrink-0 cursor-pointer active:scale-95"
+                        className="w-9 h-9 rounded-xl flex items-center justify-center transition-all shrink-0 cursor-pointer active:scale-95"
+                        style={{
+                          background: "linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%)",
+                          boxShadow: "0 0 20px rgba(79, 95, 232, 0.3), 0 4px 12px rgba(0,0,0,0.3)",
+                        }}
                       >
-                        {isPlaying ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3 ml-0.5" />}
+                        {isPlaying ? <Pause className="w-3.5 h-3.5 text-white" /> : <Play className="w-3.5 h-3.5 text-white ml-0.5" />}
                       </button>
-                      <div className="flex-1 space-y-0.5">
+                      <div className="flex-1 space-y-1">
                         <WaveformVisualizer isPlaying={isPlaying} />
-                        <div className="h-1 bg-slate-200 rounded-full overflow-hidden cursor-pointer relative group" onClick={handleProgressClick}>
-                          <div className="h-full gradient-bg rounded-full transition-all duration-200" style={{ width: `${Math.min(progress, 100)}%` }} />
-                          <div className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full gradient-bg shadow-md opacity-0 group-hover:opacity-100 transition-opacity" style={{ left: `calc(${Math.min(progress, 100)}% - 5px)` }} />
+                        <div className="h-1 rounded-full overflow-hidden cursor-pointer relative group" style={{ background: "rgba(255, 255, 255, 0.08)" }} onClick={handleProgressClick}>
+                          <motion.div
+                            className="h-full rounded-full"
+                            style={{
+                              width: `${Math.min(progress, 100)}%`,
+                              background: "linear-gradient(90deg, var(--color-accent), var(--color-accent-light))",
+                              boxShadow: "0 0 8px rgba(79, 95, 232, 0.4)",
+                            }}
+                          />
+                          <div
+                            className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                            style={{
+                              left: `calc(${Math.min(progress, 100)}% - 6px)`,
+                              background: "var(--color-accent-light)",
+                              boxShadow: "0 0 10px rgba(79, 95, 232, 0.5)",
+                            }}
+                          />
                         </div>
                       </div>
-                      <span className="text-[9px] text-slate-400 font-mono tabular-nums shrink-0">
-                        {formatTime(currentTime)}/{formatTime(scenario.duration)}
-                      </span>
+                      <div className="flex flex-col items-end shrink-0">
+                        <span className="text-[10px] text-white/40 font-mono tabular-nums">
+                          {formatTime(currentTime)}
+                        </span>
+                        <span className="text-[9px] text-white/20 font-mono tabular-nums">
+                          {formatTime(scenario.duration)}
+                        </span>
+                      </div>
                     </div>
                   </div>
 
@@ -701,40 +859,59 @@ export default function Hero() {
                       /* ── CTA Banner ── */
                       <div className="flex-1 flex flex-col items-center justify-center text-center px-6">
                         <motion.div
-                          animate={{ scale: [1, 1.08, 1] }}
-                          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                          className="w-14 h-14 rounded-full gradient-bg flex items-center justify-center mb-4 shadow-lg cursor-pointer"
+                          animate={{ scale: [1, 1.08, 1], boxShadow: ["0 0 20px rgba(79, 95, 232, 0.2)", "0 0 40px rgba(79, 95, 232, 0.4)", "0 0 20px rgba(79, 95, 232, 0.2)"] }}
+                          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                          className="w-16 h-16 rounded-2xl flex items-center justify-center mb-5 cursor-pointer"
+                          style={{
+                            background: "linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%)",
+                          }}
                           onClick={handlePlayPause}
                         >
-                          <Play className="w-6 h-6 text-white ml-0.5" />
+                          <Play className="w-7 h-7 text-white ml-0.5" />
                         </motion.div>
-                        <p className="text-[13px] font-semibold text-slate-800 mb-1 leading-snug">
+                        <p className="text-[14px] font-semibold text-white/90 mb-2 leading-snug max-w-[280px]">
                           {scenario.ctaHeadline}
                         </p>
-                        <p className="text-[11px] text-slate-400">
+                        <p className="text-[12px] text-white/40">
                           {scenario.ctaSub}
                         </p>
+                        {/* Decorative ring */}
+                        <motion.div
+                          className="absolute inset-0 pointer-events-none flex items-center justify-center"
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                        >
+                          <div className="w-40 h-40 rounded-full" style={{ border: "1px dashed rgba(79, 95, 232, 0.12)" }} />
+                        </motion.div>
                       </div>
                     ) : (
                       <>
                         {/* Transcript section */}
-                        <div className="flex-3 min-h-0 flex flex-col">
-                          <div className="px-3 py-1 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between shrink-0">
-                            <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider">Live Transcript</span>
+                        <div className="flex-[3] min-h-0 flex flex-col">
+                          <div className="px-3 py-1.5 flex items-center justify-between shrink-0" style={{ borderBottom: "1px solid rgba(255, 255, 255, 0.06)", background: "rgba(255, 255, 255, 0.02)" }}>
+                            <div className="flex items-center gap-1.5">
+                              <Mic className="w-3 h-3" style={{ color: "rgba(79, 95, 232, 0.6)" }} />
+                              <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: "rgba(255, 255, 255, 0.35)" }}>Live Transcript</span>
+                            </div>
                             {totalDataFields > 0 && (
-                              <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded flex items-center gap-0.5">
+                              <motion.span
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                className="text-[9px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1"
+                                style={{ background: "rgba(16, 185, 129, 0.1)", color: "rgba(16, 185, 129, 0.8)", border: "1px solid rgba(16, 185, 129, 0.2)" }}
+                              >
                                 <Zap className="w-2.5 h-2.5" />{totalDataFields} captured
                               </motion.span>
                             )}
                           </div>
-                          <div ref={transcriptRef} className="flex-1 overflow-y-auto p-2.5 space-y-1.5 scroll-smooth">
+                          <div ref={transcriptRef} className="flex-1 overflow-y-auto p-3 space-y-2 scroll-smooth" style={{ scrollbarWidth: "none" }}>
                             {visibleMessages.length === 0 ? (
                               <div className="h-full flex items-center justify-center">
-                                <motion.div animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 1.2, repeat: Infinity }} className="flex items-center gap-1.5 text-slate-300">
-                                  <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
-                                  <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
-                                  <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
-                                  <span className="text-[10px] ml-1">Connecting call...</span>
+                                <motion.div animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 1.2, repeat: Infinity }} className="flex items-center gap-1.5">
+                                  <div className="w-1.5 h-1.5 rounded-full" style={{ background: "rgba(79, 95, 232, 0.4)" }} />
+                                  <div className="w-1.5 h-1.5 rounded-full" style={{ background: "rgba(79, 95, 232, 0.4)" }} />
+                                  <div className="w-1.5 h-1.5 rounded-full" style={{ background: "rgba(79, 95, 232, 0.4)" }} />
+                                  <span className="text-[10px] ml-1" style={{ color: "rgba(255, 255, 255, 0.3)" }}>Connecting call...</span>
                                 </motion.div>
                               </div>
                             ) : (
@@ -744,12 +921,29 @@ export default function Hero() {
                                   return (
                                     <motion.div
                                       key={`${scenario.id}-${idx}`}
-                                      initial={{ opacity: 0, y: 6 }}
+                                      initial={{ opacity: 0, y: 8 }}
                                       animate={{ opacity: 1, y: 0 }}
-                                      transition={{ duration: 0.2 }}
+                                      transition={{ duration: 0.25, ease: "easeOut" }}
                                       className={`flex ${isAI ? "justify-start" : "justify-end"}`}
                                     >
-                                      <div className={`max-w-[85%] px-2.5 py-1.5 rounded-xl text-[10px] leading-relaxed ${isAI ? "bg-slate-100 text-slate-700 rounded-bl-sm" : "gradient-bg text-white rounded-br-sm"}`}>
+                                      <div
+                                        className={`max-w-[85%] px-3 py-2 rounded-xl text-[11px] leading-relaxed ${isAI ? "rounded-bl-sm" : "rounded-br-sm"}`}
+                                        style={isAI ? {
+                                          background: "rgba(255, 255, 255, 0.06)",
+                                          border: "1px solid rgba(255, 255, 255, 0.08)",
+                                          color: "rgba(255, 255, 255, 0.8)",
+                                        } : {
+                                          background: "linear-gradient(135deg, rgba(79, 95, 232, 0.3) 0%, rgba(107, 122, 255, 0.2) 100%)",
+                                          border: "1px solid rgba(79, 95, 232, 0.25)",
+                                          color: "rgba(255, 255, 255, 0.9)",
+                                        }}
+                                      >
+                                        {isAI && (
+                                          <div className="flex items-center gap-1 mb-0.5">
+                                            <Bot className="w-2.5 h-2.5" style={{ color: "rgba(79, 95, 232, 0.7)" }} />
+                                            <span className="text-[8px] font-semibold uppercase" style={{ color: "rgba(79, 95, 232, 0.6)" }}>AI Agent</span>
+                                          </div>
+                                        )}
                                         {msg.text}
                                       </div>
                                     </motion.div>
@@ -757,9 +951,9 @@ export default function Hero() {
                                 })}
                                 {isPlaying && visibleMessages.length > 0 && (
                                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 1.2, repeat: Infinity }} className="flex items-center gap-1 pl-2">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
-                                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
-                                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+                                    <div className="w-1.5 h-1.5 rounded-full" style={{ background: "rgba(79, 95, 232, 0.4)" }} />
+                                    <div className="w-1.5 h-1.5 rounded-full" style={{ background: "rgba(79, 95, 232, 0.4)" }} />
+                                    <div className="w-1.5 h-1.5 rounded-full" style={{ background: "rgba(79, 95, 232, 0.4)" }} />
                                   </motion.div>
                                 )}
                               </>
@@ -768,19 +962,19 @@ export default function Hero() {
                         </div>
 
                         {/* Data captured section */}
-                        <div className="flex-2 min-h-0 flex flex-col border-t border-slate-100">
-                          <div className="px-3 py-1 bg-slate-50/80 flex items-center gap-1 shrink-0">
-                            <Database className="w-2.5 h-2.5 text-slate-400" />
-                            <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider">Data Captured</span>
+                        <div className="flex-[2] min-h-0 flex flex-col" style={{ borderTop: "1px solid rgba(255, 255, 255, 0.06)" }}>
+                          <div className="px-3 py-1.5 flex items-center gap-1.5 shrink-0" style={{ background: "rgba(255, 255, 255, 0.02)" }}>
+                            <Database className="w-3 h-3" style={{ color: "rgba(79, 95, 232, 0.5)" }} />
+                            <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: "rgba(255, 255, 255, 0.35)" }}>Data Captured</span>
                           </div>
-                          <div ref={dataRef} className="flex-1 overflow-y-auto p-2 space-y-1 scroll-smooth">
+                          <div ref={dataRef} className="flex-1 overflow-y-auto p-2 space-y-1.5 scroll-smooth" style={{ scrollbarWidth: "none" }}>
                             {revealedValidated.length === 0 && revealedExtracted.length === 0 ? (
-                              <div className="h-full flex flex-col items-center justify-center text-slate-300 gap-1">
-                                <Database className="w-4 h-4" />
-                                <span className="text-[10px]">Waiting for data...</span>
+                              <div className="h-full flex flex-col items-center justify-center gap-2">
+                                <Database className="w-4 h-4" style={{ color: "rgba(255, 255, 255, 0.15)" }} />
+                                <span className="text-[10px]" style={{ color: "rgba(255, 255, 255, 0.25)" }}>Waiting for data...</span>
                                 {isPlaying && (
-                                  <motion.div className="w-12 h-0.5 rounded-full overflow-hidden bg-slate-100" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                                    <motion.div className="h-full gradient-bg" animate={{ x: ["-100%", "100%"] }} transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }} style={{ width: "60%" }} />
+                                  <motion.div className="w-16 h-0.5 rounded-full overflow-hidden" style={{ background: "rgba(255, 255, 255, 0.05)" }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                                    <motion.div className="h-full rounded-full" style={{ width: "60%", background: "linear-gradient(90deg, var(--color-accent), var(--color-accent-light))" }} animate={{ x: ["-100%", "200%"] }} transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }} />
                                   </motion.div>
                                 )}
                               </div>
@@ -805,14 +999,19 @@ export default function Hero() {
 
                   {/* Re-open analysis */}
                   {showAnalysis && !showAnalysisPopup && (
-                    <div className="shrink-0 px-3 py-2 border-t border-slate-100">
+                    <div className="shrink-0 px-3 py-2" style={{ borderTop: "1px solid rgba(255, 255, 255, 0.06)" }}>
                       <motion.button
                         initial={{ opacity: 0, y: 4 }}
                         animate={{ opacity: 1, y: 0 }}
                         onClick={() => setShowAnalysisPopup(true)}
-                        className="w-full flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-[10px] font-medium text-slate-600 cursor-pointer hover:bg-slate-100 transition-colors"
+                        className="w-full flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-[11px] font-medium cursor-pointer transition-colors"
+                        style={{
+                          background: "rgba(79, 95, 232, 0.1)",
+                          border: "1px solid rgba(79, 95, 232, 0.2)",
+                          color: "rgba(107, 122, 255, 0.8)",
+                        }}
                       >
-                        <BarChart3 className="w-3 h-3 text-slate-400" />
+                        <BarChart3 className="w-3.5 h-3.5" />
                         View call analysis
                       </motion.button>
                     </div>
@@ -826,7 +1025,8 @@ export default function Hero() {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute inset-0 z-50 bg-black/50 backdrop-blur-sm flex flex-col rounded-2xl overflow-hidden"
+                        className="absolute inset-0 z-50 flex flex-col overflow-hidden"
+                        style={{ background: "rgba(8, 11, 22, 0.8)", backdropFilter: "blur(12px)" }}
                       >
                         {/* Modal card */}
                         <motion.div
@@ -834,51 +1034,77 @@ export default function Hero() {
                           animate={{ opacity: 1, scale: 1 }}
                           exit={{ opacity: 0, scale: 0.97 }}
                           transition={{ duration: 0.2, ease: "easeOut" }}
-                          className="flex-1 bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+                          className="flex-1 flex flex-col overflow-hidden m-3 rounded-2xl"
+                          style={{
+                            background: "rgba(13, 17, 30, 0.95)",
+                            border: "1px solid rgba(79, 95, 232, 0.15)",
+                            boxShadow: "0 0 40px rgba(79, 95, 232, 0.1), 0 20px 40px rgba(0,0,0,0.4)",
+                          }}
                         >
                           {/* Header */}
-                          <div className="px-5 pt-4 pb-3 text-center border-b border-slate-100">
-                            <div className="text-[11px] font-semibold text-slate-800">Call Analysis</div>
+                          <div className="px-5 pt-4 pb-3 text-center" style={{ borderBottom: "1px solid rgba(255, 255, 255, 0.06)" }}>
+                            <div className="text-[12px] font-semibold text-white/90">Call Analysis</div>
                           </div>
 
                           {/* Content — scrollable */}
-                          <div className="flex-1 overflow-y-auto px-5 py-4">
+                          <div className="flex-1 overflow-y-auto px-5 py-4" style={{ scrollbarWidth: "none" }}>
                             {/* Quality score */}
-                            <div className="flex flex-col items-center mb-4">
-                              <QualityRing score={scenario.callQuality} size={52} />
-                              <div className="text-[11px] font-semibold text-slate-800 mt-2">Call Complete</div>
-                              <div className="text-[10px] text-slate-400 flex items-center gap-1 mt-0.5">
+                            <div className="flex flex-col items-center mb-5">
+                              <QualityRing score={scenario.callQuality} size={56} />
+                              <div className="text-[12px] font-semibold text-white/90 mt-2">Call Complete</div>
+                              <div className="text-[10px] flex items-center gap-1 mt-1" style={{ color: "rgba(139, 150, 200, 0.6)" }}>
                                 <Clock className="w-2.5 h-2.5" />{scenario.durationLabel}
                               </div>
                             </div>
 
                             {/* Outcome */}
-                            <div className="text-[10px] text-slate-500 text-center leading-snug bg-slate-50 rounded-xl px-3 py-2 mb-4">
+                            <div className="text-[11px] text-center leading-snug rounded-xl px-4 py-2.5 mb-5"
+                              style={{
+                                background: "rgba(79, 95, 232, 0.08)",
+                                border: "1px solid rgba(79, 95, 232, 0.12)",
+                                color: "rgba(139, 150, 200, 0.8)",
+                              }}
+                            >
                               {scenario.callOutcome}
                             </div>
 
                             {/* Data rows */}
-                            <div className="space-y-1.5 mb-4">
+                            <div className="space-y-1.5 mb-5">
                               {scenario.validatedFields.map((f, i) => (
-                                <div key={i} className={`flex items-center justify-between px-3 py-2 rounded-xl text-[10px] ${f.status === "confirmed" ? "bg-emerald-50" : "bg-amber-50"}`}>
-                                  <span className="text-slate-500 font-medium">{f.field}</span>
-                                  <span className="font-semibold text-slate-800 truncate ml-2 max-w-32.5 text-right">{f.value}</span>
+                                <div key={i} className="flex items-center justify-between px-3 py-2 rounded-xl text-[10px]"
+                                  style={{
+                                    background: f.status === "confirmed" ? "rgba(16, 185, 129, 0.08)" : "rgba(245, 158, 11, 0.08)",
+                                    border: `1px solid ${f.status === "confirmed" ? "rgba(16, 185, 129, 0.15)" : "rgba(245, 158, 11, 0.15)"}`,
+                                  }}
+                                >
+                                  <span className="font-medium" style={{ color: "rgba(139, 150, 200, 0.7)" }}>{f.field}</span>
+                                  <span className="font-semibold text-white/90 truncate ml-2 max-w-[130px] text-right">{f.value}</span>
                                 </div>
                               ))}
                               {scenario.extractedData.map((f, i) => (
-                                <div key={`e-${i}`} className="flex items-center justify-between px-3 py-2 rounded-xl text-[10px] bg-blue-50">
-                                  <span className="text-slate-500 font-medium">{f.field}</span>
-                                  <span className="font-semibold text-slate-800 truncate ml-2 max-w-32.5 text-right">{f.value}</span>
+                                <div key={`e-${i}`} className="flex items-center justify-between px-3 py-2 rounded-xl text-[10px]"
+                                  style={{
+                                    background: "rgba(79, 95, 232, 0.08)",
+                                    border: "1px solid rgba(79, 95, 232, 0.15)",
+                                  }}
+                                >
+                                  <span className="font-medium" style={{ color: "rgba(139, 150, 200, 0.7)" }}>{f.field}</span>
+                                  <span className="font-semibold text-white/90 truncate ml-2 max-w-[130px] text-right">{f.value}</span>
                                 </div>
                               ))}
                             </div>
 
                             {/* Next steps */}
-                            <div className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Next Steps</div>
-                            <div className="space-y-1.5">
+                            <div className="text-[9px] font-semibold uppercase tracking-wider mb-2" style={{ color: "rgba(255, 255, 255, 0.3)" }}>Next Steps</div>
+                            <div className="space-y-2">
                               {scenario.nextActions.map((action, i) => (
-                                <div key={i} className="flex items-start gap-2 text-[10px] text-slate-600">
-                                  <span className="w-4 h-4 rounded-full gradient-bg text-white flex items-center justify-center text-[8px] font-bold shrink-0 mt-0.5">{i + 1}</span>
+                                <div key={i} className="flex items-start gap-2.5 text-[10px]" style={{ color: "rgba(139, 150, 200, 0.7)" }}>
+                                  <span className="w-5 h-5 rounded-lg flex items-center justify-center text-[9px] font-bold shrink-0 mt-0.5"
+                                    style={{
+                                      background: "linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%)",
+                                      color: "white",
+                                    }}
+                                  >{i + 1}</span>
                                   <span className="leading-snug">{action}</span>
                                 </div>
                               ))}
@@ -886,10 +1112,15 @@ export default function Hero() {
                           </div>
 
                           {/* Bottom close */}
-                          <div className="px-5 pb-4 pt-2 border-t border-slate-100">
+                          <div className="px-5 pb-4 pt-2" style={{ borderTop: "1px solid rgba(255, 255, 255, 0.06)" }}>
                             <button
                               onClick={() => setShowAnalysisPopup(false)}
-                              className="w-full py-2.5 rounded-xl bg-slate-100 text-[11px] font-semibold text-slate-600 cursor-pointer hover:bg-slate-200 transition-colors"
+                              className="w-full py-2.5 rounded-xl text-[11px] font-semibold cursor-pointer transition-colors"
+                              style={{
+                                background: "rgba(255, 255, 255, 0.06)",
+                                color: "rgba(255, 255, 255, 0.6)",
+                                border: "1px solid rgba(255, 255, 255, 0.08)",
+                              }}
                             >
                               Close
                             </button>
@@ -901,12 +1132,18 @@ export default function Hero() {
                 </div>
               </div>
 
-              {/* Glow behind window */}
-              <div className="absolute -inset-6 gradient-bg opacity-[0.08] blur-3xl rounded-[3rem] -z-10" />
+              {/* Decorative corner accents */}
+              <div className="absolute -top-px -left-px w-8 h-8 pointer-events-none" style={{ borderTop: "2px solid rgba(79, 95, 232, 0.3)", borderLeft: "2px solid rgba(79, 95, 232, 0.3)", borderTopLeftRadius: "1rem" }} />
+              <div className="absolute -top-px -right-px w-8 h-8 pointer-events-none" style={{ borderTop: "2px solid rgba(79, 95, 232, 0.3)", borderRight: "2px solid rgba(79, 95, 232, 0.3)", borderTopRightRadius: "1rem" }} />
+              <div className="absolute -bottom-px -left-px w-8 h-8 pointer-events-none" style={{ borderBottom: "2px solid rgba(79, 95, 232, 0.3)", borderLeft: "2px solid rgba(79, 95, 232, 0.3)", borderBottomLeftRadius: "1rem" }} />
+              <div className="absolute -bottom-px -right-px w-8 h-8 pointer-events-none" style={{ borderBottom: "2px solid rgba(79, 95, 232, 0.3)", borderRight: "2px solid rgba(79, 95, 232, 0.3)", borderBottomRightRadius: "1rem" }} />
             </div>
           </motion.div>
         </div>
       </div>
+
+      {/* Bottom gradient fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none" style={{ background: "linear-gradient(to top, rgba(255,255,255,1) 0%, transparent 100%)" }} />
     </section>
   );
 }

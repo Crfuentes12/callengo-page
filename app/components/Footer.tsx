@@ -10,6 +10,7 @@ const footerLinks = {
       { name: "Data Validation", href: "/agents/data-validation" },
       { name: "Appointment Confirmation", href: "/agents/appointment-confirmation" },
       { name: "Lead Qualification", href: "/agents/lead-qualification" },
+      { name: "Integrations", href: "/integrations" },
     ],
   },
   company: {

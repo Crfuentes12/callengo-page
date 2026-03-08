@@ -136,7 +136,7 @@ const faqs = [
   },
   {
     question: "How do I import my appointments?",
-    answer: "Upload your appointments via CSV or Excel with columns for customer name, phone number, appointment date, and time. You can also set up recurring imports. Calendar integrations are coming soon.",
+    answer: "Upload your appointments via CSV or Excel with columns for customer name, phone number, appointment date, and time. You can also connect directly with Google Calendar, Outlook, Calendly, or SimplyBook.me for automatic appointment syncing.",
   },
   {
     question: "What if I have multiple locations or providers?",

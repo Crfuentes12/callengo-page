@@ -65,7 +65,7 @@ const docCategories = [
     description: "Export your data and connect with your existing tools.",
     icon: Webhook,
     articles: [
-      { title: "CRM Integrations (Coming Soon)", href: "/help/crm-integrations" },
+      { title: "CRM Integrations", href: "/help/crm-integrations" },
       { title: "CSV/Excel Export", href: "#export" },
       { title: "API Overview", href: "#api" },
       { title: "Custom Workflows", href: "#custom-integrations" },

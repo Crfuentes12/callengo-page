@@ -166,7 +166,7 @@ const faqItems = [
   },
   {
     question: "How do I get the qualified leads back?",
-    answer: "Export your scored leads as CSV or Excel with all qualification data, scores, and call transcripts. Simply import back into your CRM or sales tools. Native integrations are coming soon.",
+    answer: "Export your scored leads as CSV or Excel with all qualification data, scores, and call transcripts. You can also sync directly with HubSpot or Salesforce to push qualified leads into your pipeline automatically.",
   },
   {
     question: "What if a lead wants to speak to a human during qualification?",

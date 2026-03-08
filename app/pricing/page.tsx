@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { Check, ArrowRight } from "lucide-react";
+import { Check, ArrowRight, Minus } from "lucide-react";
 
 const plans = [
   {
@@ -13,8 +13,9 @@ const plans = [
     description: "Try Callengo risk-free",
     monthlyPrice: 0,
     annualPrice: 0,
-    minutes: "15 min (one-time)",
+    minutes: "15 min one-time",
     cta: "Start Free",
+    href: "/signup",
     features: [
       "1 AI agent",
       "1 user",
@@ -25,18 +26,39 @@ const plans = [
   },
   {
     name: "Starter",
-    description: "For small businesses",
+    description: "For small businesses getting started",
     monthlyPrice: 99,
     annualPrice: 87,
-    minutes: "250 min/month",
+    minutes: "300 min/month",
     cta: "Get Started",
+    href: "/signup",
     features: [
-      "1 AI agent",
+      "2 AI agents",
       "1 user",
       "5 min max per call",
       "Full analytics",
       "All import formats",
-      "Basic support",
+      "Email support",
+      "Calendar integrations",
+    ],
+  },
+  {
+    name: "Growth",
+    description: "For scaling operations",
+    monthlyPrice: 179,
+    annualPrice: 157,
+    minutes: "600 min/month",
+    cta: "Get Started",
+    href: "/signup",
+    features: [
+      "5 AI agents",
+      "2 users",
+      "7 min max per call",
+      "Advanced analytics",
+      "Auto follow-ups",
+      "Smart voicemail",
+      "Calendar + video integrations",
+      "Priority email support",
     ],
   },
   {
@@ -44,51 +66,219 @@ const plans = [
     description: "For growing teams",
     monthlyPrice: 299,
     annualPrice: 263,
-    minutes: "1,000 min/month",
+    minutes: "1,200 min/month",
     popular: true,
     cta: "Get Started",
+    href: "/signup",
     features: [
       "Unlimited agents",
-      "3 users",
+      "5 users",
       "10 min max per call",
-      "Advanced analytics",
-      "Automatic follow-ups",
-      "Smart voicemail",
-      "Call scheduling",
+      "Full analytics suite",
+      "Smart follow-ups & voicemail",
+      "All integrations",
+      "Webhook events",
       "Priority support",
     ],
   },
   {
     name: "Teams",
     description: "For established companies",
-    monthlyPrice: 699,
-    annualPrice: 615,
-    minutes: "3,000 min/month",
+    monthlyPrice: 649,
+    annualPrice: 571,
+    minutes: "2,250 min/month",
     cta: "Get Started",
+    href: "/signup",
     features: [
       "Unlimited agents",
-      "5 users ($79/extra)",
+      "10 users ($69/extra)",
       "15 min max per call",
-      "Full analytics suite",
-      "User permissions",
+      "Full analytics + exports",
+      "User permissions & roles",
+      "All integrations + API",
       "Advanced retry logic",
-      "CRM integrations (coming soon)",
-      "Priority support",
+      "Dedicated account manager",
+    ],
+  },
+  {
+    name: "Enterprise",
+    description: "For large organizations",
+    monthlyPrice: 1499,
+    annualPrice: 1319,
+    minutes: "6,000 min/month",
+    cta: "Contact Sales",
+    href: "/contact",
+    features: [
+      "Unlimited agents",
+      "Unlimited users",
+      "30 min max per call",
+      "Custom analytics & reports",
+      "SSO & advanced security",
+      "Custom integrations",
+      "SLA guarantees",
+      "24/7 dedicated support",
     ],
   },
 ];
 
-const comparisonFeatures = [
-  { name: "AI Agents", free: "1", starter: "1", business: "Unlimited", teams: "Unlimited" },
-  { name: "Users", free: "1", starter: "1", business: "3", teams: "5 ($79/extra)" },
-  { name: "Minutes/month", free: "15 (one-time)", starter: "250", business: "1,000", teams: "3,000" },
-  { name: "Max call duration", free: "3 min", starter: "5 min", business: "10 min", teams: "15 min" },
-  { name: "Analytics", free: "Basic", starter: "Full", business: "Advanced", teams: "Full suite" },
-  { name: "Follow-ups", free: "-", starter: "-", business: "Yes", teams: "Yes" },
-  { name: "Voicemail handling", free: "-", starter: "-", business: "Yes", teams: "Yes" },
-  { name: "CRM integration", free: "-", starter: "-", business: "-", teams: "Coming soon" },
-  { name: "Support", free: "Email", starter: "Email", business: "Priority", teams: "Priority" },
+const addOns = [
+  {
+    name: "Dedicated Number",
+    price: "$15/mo",
+    description: "A dedicated phone number for your brand",
+  },
+  {
+    name: "Recording Vault",
+    price: "$12/mo",
+    description: "Securely store and replay all call recordings",
+  },
+  {
+    name: "Calls Booster",
+    price: "$35/mo",
+    description: "500 extra minutes added to your plan",
+  },
 ];
+
+const comparisonFeatures = [
+  {
+    name: "AI Agents",
+    free: "1",
+    starter: "2",
+    growth: "5",
+    business: "Unlimited",
+    teams: "Unlimited",
+    enterprise: "Unlimited",
+  },
+  {
+    name: "Users",
+    free: "1",
+    starter: "1",
+    growth: "2",
+    business: "5",
+    teams: "10 ($69/extra)",
+    enterprise: "Unlimited",
+  },
+  {
+    name: "Minutes/month",
+    free: "15 (one-time)",
+    starter: "300",
+    growth: "600",
+    business: "1,200",
+    teams: "2,250",
+    enterprise: "6,000",
+  },
+  {
+    name: "Max call duration",
+    free: "3 min",
+    starter: "5 min",
+    growth: "7 min",
+    business: "10 min",
+    teams: "15 min",
+    enterprise: "30 min",
+  },
+  {
+    name: "Analytics",
+    free: "Basic",
+    starter: "Full",
+    growth: "Advanced",
+    business: "Full suite",
+    teams: "Full + exports",
+    enterprise: "Custom reports",
+  },
+  {
+    name: "Follow-ups",
+    free: "-",
+    starter: "-",
+    growth: "Auto",
+    business: "Smart",
+    teams: "Smart",
+    enterprise: "Smart",
+  },
+  {
+    name: "Voicemail handling",
+    free: "-",
+    starter: "-",
+    growth: "Smart",
+    business: "Smart",
+    teams: "Smart",
+    enterprise: "Smart",
+  },
+  {
+    name: "Calendar integrations",
+    free: "-",
+    starter: "check",
+    growth: "check",
+    business: "check",
+    teams: "check",
+    enterprise: "check",
+  },
+  {
+    name: "Video integrations",
+    free: "-",
+    starter: "-",
+    growth: "check",
+    business: "check",
+    teams: "check",
+    enterprise: "check",
+  },
+  {
+    name: "CRM integrations",
+    free: "-",
+    starter: "-",
+    growth: "-",
+    business: "check",
+    teams: "check",
+    enterprise: "check",
+  },
+  {
+    name: "Communication integrations",
+    free: "-",
+    starter: "-",
+    growth: "-",
+    business: "check",
+    teams: "check",
+    enterprise: "check",
+  },
+  {
+    name: "Webhooks",
+    free: "-",
+    starter: "-",
+    growth: "-",
+    business: "check",
+    teams: "check",
+    enterprise: "check",
+  },
+  {
+    name: "API access",
+    free: "-",
+    starter: "-",
+    growth: "-",
+    business: "-",
+    teams: "check",
+    enterprise: "check",
+  },
+  {
+    name: "Support",
+    free: "Community",
+    starter: "Email",
+    growth: "Priority email",
+    business: "Priority",
+    teams: "Dedicated AM",
+    enterprise: "24/7 dedicated",
+  },
+];
+
+type FeatureRow = (typeof comparisonFeatures)[number];
+
+function renderCell(value: string) {
+  if (value === "check") {
+    return <Check className="w-4 h-4 text-green-600 mx-auto" />;
+  }
+  if (value === "-") {
+    return <Minus className="w-4 h-4 text-slate-300 mx-auto" />;
+  }
+  return value;
+}
 
 export default function PricingPage() {
   const [isAnnual, setIsAnnual] = useState(true);
@@ -110,7 +300,8 @@ export default function PricingPage() {
                 Invest in results, not promises
               </h1>
               <p className="text-xl text-slate-600 mb-10">
-                Start free, upgrade when you see the ROI. No hidden fees, no surprises.
+                Start free, upgrade when you see the ROI. No hidden fees, no
+                surprises.
               </p>
 
               {/* Billing Toggle */}
@@ -119,8 +310,8 @@ export default function PricingPage() {
                   onClick={() => setIsAnnual(false)}
                   className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all ${
                     !isAnnual
-                      ? "bg-slate-900 text-white"
-                      : "text-slate-600 hover:text-slate-900"
+                      ? "bg-[#1E2D6B] text-white"
+                      : "text-slate-600 hover:text-ink"
                   }`}
                 >
                   Monthly
@@ -129,8 +320,8 @@ export default function PricingPage() {
                   onClick={() => setIsAnnual(true)}
                   className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
                     isAnnual
-                      ? "bg-slate-900 text-white"
-                      : "text-slate-600 hover:text-slate-900"
+                      ? "bg-[#1E2D6B] text-white"
+                      : "text-slate-600 hover:text-ink"
                   }`}
                 >
                   Annual
@@ -146,17 +337,17 @@ export default function PricingPage() {
             </motion.div>
 
             {/* Pricing Cards */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
               {plans.map((plan, index) => (
                 <motion.div
                   key={plan.name}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  transition={{ duration: 0.5, delay: index * 0.08 }}
                   className={`relative ${plan.popular ? "lg:-mt-4 lg:mb-4" : ""}`}
                 >
                   {plan.popular && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 gradient-bg text-white text-sm font-medium rounded-full">
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 gradient-bg text-white text-sm font-medium rounded-full z-10">
                       Most Popular
                     </div>
                   )}
@@ -164,23 +355,26 @@ export default function PricingPage() {
                   <div
                     className={`h-full rounded-2xl p-6 ${
                       plan.popular
-                        ? "bg-white border-2 border-slate-900 shadow-xl"
+                        ? "bg-white border-2 border-[#1E2D6B] shadow-xl"
                         : "bg-white border border-slate-200"
                     }`}
                   >
                     {/* Plan Header */}
                     <div className="mb-6">
-                      <h3 className="text-xl font-semibold text-slate-900 mb-1">
+                      <h3 className="text-xl font-semibold text-ink mb-1">
                         {plan.name}
                       </h3>
-                      <p className="text-sm text-slate-500">{plan.description}</p>
+                      <p className="text-sm text-slate-500">
+                        {plan.description}
+                      </p>
                     </div>
 
                     {/* Price */}
                     <div className="mb-6">
                       <div className="flex items-baseline gap-1">
-                        <span className="text-4xl font-bold text-slate-900">
-                          ${isAnnual ? plan.annualPrice : plan.monthlyPrice}
+                        <span className="text-4xl font-bold text-ink">
+                          $
+                          {isAnnual ? plan.annualPrice : plan.monthlyPrice}
                         </span>
                         {plan.monthlyPrice > 0 && (
                           <span className="text-slate-500">/month</span>
@@ -193,11 +387,11 @@ export default function PricingPage() {
 
                     {/* CTA */}
                     <Link
-                      href="/signup"
+                      href={plan.href}
                       className={`inline-flex items-center justify-center w-full py-3 text-sm font-semibold rounded-full transition-all mb-6 ${
                         plan.popular
-                          ? "bg-slate-900 text-white hover:bg-slate-800"
-                          : "bg-slate-100 text-slate-900 hover:bg-slate-200"
+                          ? "btn-primary text-white"
+                          : "bg-slate-100 text-ink hover:bg-slate-200"
                       }`}
                     >
                       {plan.cta}
@@ -206,7 +400,10 @@ export default function PricingPage() {
                     {/* Features */}
                     <div className="space-y-3">
                       {plan.features.map((feature) => (
-                        <div key={feature} className="flex items-center gap-3 text-sm">
+                        <div
+                          key={feature}
+                          className="flex items-center gap-3 text-sm"
+                        >
                           <Check className="w-4 h-4 text-green-600 flex-shrink-0" />
                           <span className="text-slate-700">{feature}</span>
                         </div>
@@ -217,6 +414,36 @@ export default function PricingPage() {
               ))}
             </div>
 
+            {/* Add-ons Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mb-20"
+            >
+              <h3 className="text-2xl font-bold text-ink text-center mb-8">
+                Boost your plan with add-ons
+              </h3>
+              <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                {addOns.map((addon) => (
+                  <div
+                    key={addon.name}
+                    className="bg-white border border-slate-200 rounded-2xl p-6 text-center"
+                  >
+                    <h4 className="text-lg font-semibold text-ink mb-1">
+                      {addon.name}
+                    </h4>
+                    <p className="text-2xl font-bold text-[#4F5FE8] mb-2">
+                      {addon.price}
+                    </p>
+                    <p className="text-sm text-slate-500">
+                      {addon.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
             {/* Enterprise CTA */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -226,10 +453,13 @@ export default function PricingPage() {
             >
               <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
                 <div>
-                  <h3 className="text-2xl font-bold mb-2">Enterprise</h3>
+                  <h3 className="text-2xl font-bold mb-2">
+                    Need a custom solution?
+                  </h3>
                   <p className="text-white/70 max-w-md">
-                    Custom solutions for large organizations. Dedicated support,
-                    SLA guarantees, and advanced integrations.
+                    Enterprise plans include SSO, SLA guarantees, custom
+                    integrations, unlimited users, and 24/7 dedicated support
+                    tailored to your organization.
                   </p>
                 </div>
 
@@ -256,9 +486,11 @@ export default function PricingPage() {
               viewport={{ once: true }}
               className="text-center mb-12"
             >
-              <h2 className="text-3xl font-bold mb-4">Compare plans</h2>
+              <h2 className="text-3xl font-bold text-ink mb-4">
+                Compare plans
+              </h2>
               <p className="text-slate-600">
-                See what's included in each plan at a glance.
+                See what&apos;s included in each plan at a glance.
               </p>
             </motion.div>
 
@@ -268,24 +500,59 @@ export default function PricingPage() {
               viewport={{ once: true }}
               className="overflow-x-auto"
             >
-              <table className="w-full min-w-[640px]">
+              <table className="w-full min-w-[900px]">
                 <thead>
                   <tr className="border-b border-slate-200">
-                    <th className="text-left py-4 pr-4 font-medium text-slate-500">Feature</th>
-                    <th className="text-center py-4 px-4 font-medium">Free</th>
-                    <th className="text-center py-4 px-4 font-medium">Starter</th>
-                    <th className="text-center py-4 px-4 font-medium bg-slate-100 rounded-t-xl">Business</th>
-                    <th className="text-center py-4 px-4 font-medium">Teams</th>
+                    <th className="text-left py-4 pr-4 font-medium text-slate-500 w-[180px]">
+                      Feature
+                    </th>
+                    <th className="text-center py-4 px-3 font-medium text-ink">
+                      Free
+                    </th>
+                    <th className="text-center py-4 px-3 font-medium text-ink">
+                      Starter
+                    </th>
+                    <th className="text-center py-4 px-3 font-medium text-ink">
+                      Growth
+                    </th>
+                    <th className="text-center py-4 px-3 font-medium text-ink bg-slate-100 rounded-t-xl">
+                      Business
+                    </th>
+                    <th className="text-center py-4 px-3 font-medium text-ink">
+                      Teams
+                    </th>
+                    <th className="text-center py-4 px-3 font-medium text-ink">
+                      Enterprise
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {comparisonFeatures.map((feature) => (
-                    <tr key={feature.name} className="border-b border-slate-100">
-                      <td className="py-4 pr-4 text-sm text-slate-600">{feature.name}</td>
-                      <td className="text-center py-4 px-4 text-sm">{feature.free}</td>
-                      <td className="text-center py-4 px-4 text-sm">{feature.starter}</td>
-                      <td className="text-center py-4 px-4 text-sm bg-slate-50">{feature.business}</td>
-                      <td className="text-center py-4 px-4 text-sm">{feature.teams}</td>
+                  {comparisonFeatures.map((feature: FeatureRow) => (
+                    <tr
+                      key={feature.name}
+                      className="border-b border-slate-100"
+                    >
+                      <td className="py-4 pr-4 text-sm text-slate-600">
+                        {feature.name}
+                      </td>
+                      <td className="text-center py-4 px-3 text-sm">
+                        {renderCell(feature.free)}
+                      </td>
+                      <td className="text-center py-4 px-3 text-sm">
+                        {renderCell(feature.starter)}
+                      </td>
+                      <td className="text-center py-4 px-3 text-sm">
+                        {renderCell(feature.growth)}
+                      </td>
+                      <td className="text-center py-4 px-3 text-sm bg-slate-50">
+                        {renderCell(feature.business)}
+                      </td>
+                      <td className="text-center py-4 px-3 text-sm">
+                        {renderCell(feature.teams)}
+                      </td>
+                      <td className="text-center py-4 px-3 text-sm">
+                        {renderCell(feature.enterprise)}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -315,7 +582,8 @@ export default function PricingPage() {
                   Ready to see the ROI?
                 </h2>
                 <p className="text-xl text-white/70 mb-10 max-w-xl">
-                  Start with 15 free minutes. No credit card required. See how much revenue you can recover.
+                  Start with 15 free minutes. No credit card required. See how
+                  much revenue you can recover.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link

@@ -9,7 +9,7 @@ const faqs = [
   {
     question: "How realistic do the AI voices sound?",
     answer:
-      "Our AI voices are powered by state-of-the-art voice synthesis technology. With 77+ professional voices and natural conversation patterns, most people can't tell they're speaking with an AI.",
+      "Our AI voices are powered by state-of-the-art voice synthesis technology. We offer multiple professional voices including Maya, Josh, Matt, and Nat, each with natural conversation patterns. Most people can't tell they're speaking with an AI.",
   },
   {
     question: "Can I customize what the AI agent says?",
@@ -34,7 +34,7 @@ const faqs = [
   {
     question: "Can I integrate Callengo with my CRM?",
     answer:
-      "CRM integrations are coming soon and will be available on Teams and Enterprise plans. Currently, all plans can export data via CSV, Excel, or JSON for easy import into any CRM.",
+      "Yes! Callengo integrates with HubSpot and Salesforce for CRM, Google Calendar, Outlook, and Calendly for calendar management, plus Zoom, Google Meet, and Microsoft Teams for video conferencing. We also support Twilio, SendGrid, WhatsApp, and Slack for communications. All integrations use OAuth 2.0 for secure authorization.",
   },
   {
     question: "What languages are supported?",

@@ -136,7 +136,7 @@ const faqs = [
   },
   {
     question: "How do I get the data back into my system?",
-    answer: "Export your verified contacts as CSV or Excel with all status tags and updated information. Simply import back into your CRM or database. Native integrations are coming soon.",
+    answer: "Export your verified contacts as CSV or Excel with all status tags and updated information. You can also sync directly with your CRM through our HubSpot and Salesforce integrations, keeping your database clean automatically.",
   },
 ];
 

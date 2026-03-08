@@ -72,6 +72,17 @@ const docCategories = [
     ],
   },
   {
+    title: "Integrations",
+    description: "Connect Callengo with your calendar, CRM, video, and communication tools.",
+    icon: Zap,
+    articles: [
+      { title: "All Integrations", href: "/docs/integrations" },
+      { title: "Calendar Sync", href: "/docs/integrations#calendar" },
+      { title: "CRM Connections", href: "/docs/integrations#crm" },
+      { title: "Webhooks", href: "/docs/integrations#webhooks" },
+    ],
+  },
+  {
     title: "Analytics & Reporting",
     description: "Understand your call performance and extract insights.",
     icon: BarChart3,

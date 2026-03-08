@@ -2,13 +2,24 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 import {
+  ArrowLeft,
   ArrowRight,
   Calendar,
+  CalendarCheck,
+  BookOpen,
+  Mail,
   Video,
+  MonitorPlay,
   Users,
+  CircleDot,
+  Cloud,
+  Smartphone,
+  Send,
+  MessageCircle,
+  Hash,
   MessageSquare,
   Webhook,
   Shield,
@@ -18,6 +29,7 @@ import {
   Globe,
   Lock,
   Key,
+  type LucideIcon,
 } from "lucide-react";
 
 // ---------------------------------------------------------------------------
@@ -26,7 +38,7 @@ import {
 
 interface Integration {
   name: string;
-  emoji: string;
+  icon: LucideIcon;
   auth: string;
   description: string;
   features: string[];
@@ -35,7 +47,7 @@ interface Integration {
 interface Category {
   title: string;
   subtitle: string;
-  icon: typeof Calendar;
+  icon: LucideIcon;
   integrations: Integration[];
 }
 
@@ -48,7 +60,7 @@ const categories: Category[] = [
     integrations: [
       {
         name: "Google Calendar",
-        emoji: "📅",
+        icon: Calendar,
         auth: "OAuth 2.0",
         description:
           "Bi-directional sync with Google Calendar for real-time event creation, updates, and automatic timezone handling.",
@@ -61,7 +73,7 @@ const categories: Category[] = [
       },
       {
         name: "Microsoft Outlook",
-        emoji: "📧",
+        icon: Mail,
         auth: "OAuth 2.0",
         description:
           "Full Exchange Online support for calendar event management, meeting scheduling, and availability checking.",
@@ -74,7 +86,7 @@ const categories: Category[] = [
       },
       {
         name: "Calendly",
-        emoji: "🗓️",
+        icon: CalendarCheck,
         auth: "OAuth 2.0",
         description:
           "Map event types, automatically book from call outcomes, and check real-time availability.",
@@ -87,7 +99,7 @@ const categories: Category[] = [
       },
       {
         name: "SimplyBook.me",
-        emoji: "📋",
+        icon: BookOpen,
         auth: "API Key",
         description:
           "REST API integration for appointment booking, service mapping, and staff assignment workflows.",
@@ -108,7 +120,7 @@ const categories: Category[] = [
     integrations: [
       {
         name: "Zoom",
-        emoji: "🎥",
+        icon: Video,
         auth: "OAuth 2.0",
         description:
           "Automatic meeting link generation, deep calendar integration, and recording support for every call.",
@@ -121,7 +133,7 @@ const categories: Category[] = [
       },
       {
         name: "Google Meet",
-        emoji: "🟢",
+        icon: MonitorPlay,
         auth: "OAuth 2.0",
         description:
           "Native Google Workspace integration with instant meeting creation and full calendar sync.",
@@ -134,7 +146,7 @@ const categories: Category[] = [
       },
       {
         name: "Microsoft Teams",
-        emoji: "🟣",
+        icon: Users,
         auth: "OAuth 2.0",
         description:
           "Schedule Teams meetings, send channel notifications, and detect user presence in real time.",
@@ -155,7 +167,7 @@ const categories: Category[] = [
     integrations: [
       {
         name: "HubSpot",
-        emoji: "🟠",
+        icon: CircleDot,
         auth: "OAuth 2.0",
         description:
           "Bi-directional contact sync, deal and pipeline management, activity logging, and custom property mapping.",
@@ -168,7 +180,7 @@ const categories: Category[] = [
       },
       {
         name: "Salesforce",
-        emoji: "☁️",
+        icon: Cloud,
         auth: "OAuth 2.0",
         description:
           "Full lead, contact, and opportunity management with custom object support and real-time sync.",
@@ -189,7 +201,7 @@ const categories: Category[] = [
     integrations: [
       {
         name: "Twilio",
-        emoji: "📱",
+        icon: Smartphone,
         auth: "API Key",
         description:
           "SMS notifications, call forwarding, and full voice capabilities powered by Twilio's global network.",
@@ -202,7 +214,7 @@ const categories: Category[] = [
       },
       {
         name: "SendGrid",
-        emoji: "✉️",
+        icon: Send,
         auth: "API Key",
         description:
           "Transactional emails, automated follow-up sequences, and template management for every touchpoint.",
@@ -215,7 +227,7 @@ const categories: Category[] = [
       },
       {
         name: "WhatsApp Business",
-        emoji: "💬",
+        icon: MessageCircle,
         auth: "OAuth 2.0",
         description:
           "Send message templates, follow-up messages, and rich media via the official Meta Business API.",
@@ -228,7 +240,7 @@ const categories: Category[] = [
       },
       {
         name: "Slack",
-        emoji: "💼",
+        icon: Hash,
         auth: "OAuth 2.0",
         description:
           "Post channel notifications, share call summaries, send team alerts, and trigger Slack workflows.",
@@ -309,14 +321,27 @@ const stagger = {
 // Component
 // ---------------------------------------------------------------------------
 
-export default function IntegrationsPage() {
+export default function IntegrationsDocsPage() {
   return (
     <>
       <Header />
       <main className="pt-24">
-        {/* ----------------------------------------------------------------- */}
+        {/* --------------------------------------------------------------- */}
+        {/* Back to docs */}
+        {/* --------------------------------------------------------------- */}
+        <div className="max-w-7xl mx-auto px-6 pt-6">
+          <Link
+            href="/docs"
+            className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-blue-600 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded cursor-pointer"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Docs
+          </Link>
+        </div>
+
+        {/* --------------------------------------------------------------- */}
         {/* Hero */}
-        {/* ----------------------------------------------------------------- */}
+        {/* --------------------------------------------------------------- */}
         <section className="section">
           <div className="max-w-7xl mx-auto px-6 text-center">
             <motion.div
@@ -352,10 +377,22 @@ export default function IntegrationsPage() {
                   label: "Native Integrations",
                   value: "16+",
                 },
-                { icon: Lock, label: "Auth Methods", value: "OAuth 2.0 & API Key" },
-                { icon: Webhook, label: "Webhook Events", value: "12 Event Types" },
+                {
+                  icon: Lock,
+                  label: "Auth Methods",
+                  value: "OAuth 2.0 & API Key",
+                },
+                {
+                  icon: Webhook,
+                  label: "Webhook Events",
+                  value: "12 Event Types",
+                },
               ].map((stat) => (
-                <div key={stat.label} className="card p-6 text-center">
+                <div
+                  key={stat.label}
+                  className="card p-6 text-center cursor-pointer hover:shadow-lg transition-shadow duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  tabIndex={0}
+                >
                   <stat.icon className="w-6 h-6 text-blue-600 mx-auto mb-3" />
                   <p className="text-2xl font-bold text-ink">{stat.value}</p>
                   <p className="text-sm text-slate-500 mt-1">{stat.label}</p>
@@ -365,9 +402,9 @@ export default function IntegrationsPage() {
           </div>
         </section>
 
-        {/* ----------------------------------------------------------------- */}
+        {/* --------------------------------------------------------------- */}
         {/* Category sections */}
-        {/* ----------------------------------------------------------------- */}
+        {/* --------------------------------------------------------------- */}
         {categories.map((category, catIdx) => (
           <section
             key={category.title}
@@ -411,15 +448,16 @@ export default function IntegrationsPage() {
                 {category.integrations.map((integration, i) => (
                   <motion.div
                     key={integration.name}
-                    className="card p-6 flex flex-col"
+                    className="card p-6 flex flex-col cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                     variants={fadeUp}
                     custom={i}
+                    tabIndex={0}
                   >
                     {/* Icon + name */}
                     <div className="flex items-center gap-3 mb-3">
-                      <span className="text-3xl" role="img" aria-label={integration.name}>
-                        {integration.emoji}
-                      </span>
+                      <div className="w-10 h-10 rounded-lg gradient-bg-subtle flex items-center justify-center shrink-0">
+                        <integration.icon className="w-5 h-5 text-blue-600" />
+                      </div>
                       <div>
                         <h3 className="text-lg font-semibold text-ink">
                           {integration.name}
@@ -463,9 +501,9 @@ export default function IntegrationsPage() {
           </section>
         ))}
 
-        {/* ----------------------------------------------------------------- */}
+        {/* --------------------------------------------------------------- */}
         {/* Webhook system */}
-        {/* ----------------------------------------------------------------- */}
+        {/* --------------------------------------------------------------- */}
         <section className="section surface-arctic">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
@@ -514,7 +552,11 @@ export default function IntegrationsPage() {
                   text: "Events are dispatched within milliseconds of the triggering action for real-time automation.",
                 },
               ].map((item) => (
-                <div key={item.title} className="card p-6">
+                <div
+                  key={item.title}
+                  className="card p-6 cursor-pointer hover:shadow-lg transition-shadow duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  tabIndex={0}
+                >
                   <item.icon className="w-8 h-8 text-blue-600 mb-4" />
                   <h3 className="text-lg font-semibold text-ink mb-2">
                     {item.title}
@@ -537,9 +579,10 @@ export default function IntegrationsPage() {
               {webhookEvents.map((event, i) => (
                 <motion.div
                   key={event.name}
-                  className="card p-4 flex items-start gap-3"
+                  className="card p-4 flex items-start gap-3 cursor-pointer hover:shadow-md transition-shadow duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                   variants={fadeUp}
                   custom={i}
+                  tabIndex={0}
                 >
                   <code className="text-xs font-mono gradient-bg text-white px-2 py-1 rounded shrink-0">
                     {event.name}
@@ -551,9 +594,9 @@ export default function IntegrationsPage() {
           </div>
         </section>
 
-        {/* ----------------------------------------------------------------- */}
+        {/* --------------------------------------------------------------- */}
         {/* CTA */}
-        {/* ----------------------------------------------------------------- */}
+        {/* --------------------------------------------------------------- */}
         <section className="section">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
@@ -574,16 +617,16 @@ export default function IntegrationsPage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="/contact"
-                  className="btn btn-primary bg-white text-blue-600 hover:bg-blue-50 inline-flex items-center gap-2"
+                  className="btn btn-primary bg-white text-blue-600 hover:bg-blue-50 inline-flex items-center gap-2 cursor-pointer transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-600"
                 >
                   Get Started Free
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
                   href="/docs"
-                  className="btn border border-white/30 text-white hover:bg-white/10 inline-flex items-center gap-2"
+                  className="btn border border-white/30 text-white hover:bg-white/10 inline-flex items-center gap-2 cursor-pointer transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-600"
                 >
-                  Read the Docs
+                  Back to Docs
                 </Link>
               </div>
             </motion.div>

@@ -428,7 +428,7 @@ export default function HelpPage() {
 
             <div className="text-center">
               <Link
-                href="/integrations"
+                href="/docs/integrations"
                 className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold gradient-bg text-white rounded-full hover:-translate-y-0.5 transition-all"
               >
                 View All Integrations
@@ -457,7 +457,7 @@ export default function HelpPage() {
                   <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </Link>
                 <Link
-                  href="/integrations"
+                  href="/docs/integrations"
                   className="flex items-center justify-between p-4 bg-white/10 rounded-xl border border-white/20 hover:bg-white/20 transition-all group"
                 >
                   <span className="font-medium">Integrations</span>
@@ -485,7 +485,7 @@ export default function HelpPage() {
                   <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </Link>
                 <Link
-                  href="/docs/webhooks"
+                  href="/docs/integrations#webhooks"
                   className="flex items-center justify-between p-4 bg-white/10 rounded-xl border border-white/20 hover:bg-white/20 transition-all group"
                 >
                   <span className="font-medium">Webhook Documentation</span>

@@ -123,10 +123,10 @@ export default function Header() {
             </div>
 
             <Link
-              href="/integrations"
+              href="/docs"
               className="text-gray-700 hover:text-gray-900 transition-colors text-sm font-medium py-2"
             >
-              Integrations
+              Docs
             </Link>
 
             <Link
@@ -217,11 +217,11 @@ export default function Header() {
                 <div className="h-px bg-gray-100 my-2" />
 
                 <Link
-                  href="/integrations"
+                  href="/docs"
                   className="block px-4 py-3 text-dark hover:bg-gray-50 rounded-lg font-medium"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Integrations
+                  Docs
                 </Link>
                 <Link
                   href="/pricing"

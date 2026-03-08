@@ -61,7 +61,7 @@ export default function Header() {
                 className="w-10 h-10 transition-transform group-hover:scale-105"
               />
             </div>
-            <span className="text-2xl font-bold tracking-tight gradient-text">
+            <span className="text-2xl font-bold tracking-tight font-display" style={{ color: '#1a1b2e' }}>
               Callengo
             </span>
           </Link>

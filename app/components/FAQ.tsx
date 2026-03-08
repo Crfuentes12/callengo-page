@@ -24,7 +24,7 @@ const faqs = [
   {
     question: "Is there a limit to how many calls I can make?",
     answer:
-      "Each plan includes a certain number of minutes per month. You can make as many calls as you want within your minute allowance. If you exceed your limit, overage minutes are billed at your plan's overage rate.",
+      "Each plan includes a set number of minutes per month. You can make as many calls as you want within your allowance. On paid plans, if you exceed your limit, overage minutes are billed at your plan's overage rate. The Free plan includes 15 one-time minutes with no overage option.",
   },
   {
     question: "How does the free trial work?",

@@ -10,17 +10,24 @@ import {
   ArrowRight,
   Minus,
   Zap,
-  Crown,
   Star,
-  Building2,
   Rocket,
+  Crown,
   Users,
   Shield,
+  Phone,
+  Archive,
+  Flame,
+  Clock,
+  Headphones,
+  Lock,
+  BarChart3,
+  Puzzle,
 } from "lucide-react";
 
 /* ───────────────────────────── Plan data ───────────────────────────── */
 
-const planIcons = [Zap, Star, Rocket, Crown, Users, Building2] as const;
+const planIcons = [Zap, Star, Rocket, Crown, Users] as const;
 
 const plans = [
   {
@@ -31,7 +38,6 @@ const plans = [
     minutes: "15 min one-time",
     cta: "Start Free",
     href: "/signup",
-    isEnterprise: false,
     features: [
       "1 AI agent",
       "1 user",
@@ -48,7 +54,6 @@ const plans = [
     minutes: "300 min/month",
     cta: "Get Started",
     href: "/signup",
-    isEnterprise: false,
     features: [
       "2 AI agents",
       "1 user",
@@ -67,7 +72,6 @@ const plans = [
     minutes: "600 min/month",
     cta: "Get Started",
     href: "/signup",
-    isEnterprise: false,
     features: [
       "5 AI agents",
       "2 users",
@@ -88,7 +92,6 @@ const plans = [
     popular: true,
     cta: "Get Started",
     href: "/signup",
-    isEnterprise: false,
     features: [
       "Unlimited agents",
       "5 users",
@@ -108,7 +111,6 @@ const plans = [
     minutes: "2,250 min/month",
     cta: "Get Started",
     href: "/signup",
-    isEnterprise: false,
     features: [
       "Unlimited agents",
       "10 users ($69/extra)",
@@ -120,26 +122,6 @@ const plans = [
       "Dedicated account manager",
     ],
   },
-  {
-    name: "Enterprise",
-    description: "For large organizations",
-    monthlyPrice: 1499,
-    annualPrice: 1499,
-    minutes: "6,000 min/month",
-    cta: "Contact Sales",
-    href: "/contact",
-    isEnterprise: true,
-    features: [
-      "Unlimited agents",
-      "Unlimited users",
-      "30 min max per call",
-      "Custom analytics & reports",
-      "SSO & advanced security",
-      "Custom integrations",
-      "SLA guarantees",
-      "24/7 dedicated support",
-    ],
-  },
 ];
 
 const addOns = [
@@ -147,17 +129,29 @@ const addOns = [
     name: "Dedicated Number",
     price: "$15/mo",
     description: "A dedicated phone number for your brand",
+    icon: Phone,
   },
   {
     name: "Recording Vault",
     price: "$12/mo",
     description: "Securely store and replay all call recordings",
+    icon: Archive,
   },
   {
     name: "Calls Booster",
     price: "$35/mo",
     description: "500 extra minutes added to your plan",
+    icon: Flame,
   },
+];
+
+const enterpriseFeatures = [
+  { icon: Lock, label: "SSO & advanced security" },
+  { icon: Shield, label: "SLA guarantees" },
+  { icon: Puzzle, label: "Custom integrations" },
+  { icon: Headphones, label: "24/7 dedicated support" },
+  { icon: BarChart3, label: "Custom analytics & reports" },
+  { icon: Clock, label: "30 min max per call" },
 ];
 
 /* ───────────────── Comparison table data with categories ───────────── */
@@ -172,7 +166,6 @@ type FeatureRow = {
   growth: string;
   business: string;
   teams: string;
-  enterprise: string;
 };
 
 const comparisonFeatures: FeatureRow[] = [
@@ -187,7 +180,6 @@ const comparisonFeatures: FeatureRow[] = [
     growth: "5",
     business: "Unlimited",
     teams: "Unlimited",
-    enterprise: "Unlimited",
   },
   {
     name: "Users",
@@ -198,29 +190,26 @@ const comparisonFeatures: FeatureRow[] = [
     growth: "2",
     business: "5",
     teams: "10 ($69/extra)",
-    enterprise: "Unlimited",
   },
   {
     name: "Minutes/month",
     isProgressBar: true,
-    maxValue: 6000,
+    maxValue: 2250,
     free: "15 (one-time)",
     starter: "300",
     growth: "600",
     business: "1,200",
     teams: "2,250",
-    enterprise: "6,000",
   },
   {
     name: "Max call duration",
     isProgressBar: true,
-    maxValue: 30,
+    maxValue: 15,
     free: "3 min",
     starter: "5 min",
     growth: "7 min",
     business: "10 min",
     teams: "15 min",
-    enterprise: "30 min",
   },
   // Analytics & Automation
   {
@@ -231,7 +220,6 @@ const comparisonFeatures: FeatureRow[] = [
     growth: "Advanced",
     business: "Full suite",
     teams: "Full + exports",
-    enterprise: "Custom reports",
   },
   {
     name: "Follow-ups",
@@ -240,7 +228,6 @@ const comparisonFeatures: FeatureRow[] = [
     growth: "Auto",
     business: "Smart",
     teams: "Smart",
-    enterprise: "Smart",
   },
   {
     name: "Voicemail handling",
@@ -249,7 +236,6 @@ const comparisonFeatures: FeatureRow[] = [
     growth: "Smart",
     business: "Smart",
     teams: "Smart",
-    enterprise: "Smart",
   },
   // Integrations
   {
@@ -260,7 +246,6 @@ const comparisonFeatures: FeatureRow[] = [
     growth: "check",
     business: "check",
     teams: "check",
-    enterprise: "check",
   },
   {
     name: "Video",
@@ -269,7 +254,6 @@ const comparisonFeatures: FeatureRow[] = [
     growth: "check",
     business: "check",
     teams: "check",
-    enterprise: "check",
   },
   {
     name: "CRM",
@@ -278,7 +262,6 @@ const comparisonFeatures: FeatureRow[] = [
     growth: "-",
     business: "check",
     teams: "check",
-    enterprise: "check",
   },
   {
     name: "Communication",
@@ -287,7 +270,6 @@ const comparisonFeatures: FeatureRow[] = [
     growth: "-",
     business: "check",
     teams: "check",
-    enterprise: "check",
   },
   {
     name: "Webhooks",
@@ -296,7 +278,6 @@ const comparisonFeatures: FeatureRow[] = [
     growth: "-",
     business: "check",
     teams: "check",
-    enterprise: "check",
   },
   {
     name: "API access",
@@ -305,7 +286,6 @@ const comparisonFeatures: FeatureRow[] = [
     growth: "-",
     business: "-",
     teams: "check",
-    enterprise: "check",
   },
   // Support
   {
@@ -316,18 +296,10 @@ const comparisonFeatures: FeatureRow[] = [
     growth: "Priority email",
     business: "Priority",
     teams: "Dedicated AM",
-    enterprise: "24/7 dedicated",
   },
 ];
 
-const planKeys = [
-  "free",
-  "starter",
-  "growth",
-  "business",
-  "teams",
-  "enterprise",
-] as const;
+const planKeys = ["free", "starter", "growth", "business", "teams"] as const;
 
 /* ───────────────────────── Helper components ──────────────────────── */
 
@@ -346,10 +318,7 @@ function ProgressIndicator({
   maxValue: number;
   isPopular: boolean;
 }) {
-  const isUnlimited =
-    value.toLowerCase().includes("unlimited") ||
-    value.toLowerCase().includes("6,000") ||
-    value.toLowerCase().includes("30 min");
+  const isUnlimited = value.toLowerCase().includes("unlimited");
   const numericValue = parseNumericValue(value);
   const percentage = isUnlimited
     ? 100
@@ -484,141 +453,273 @@ export default function PricingPage() {
               </div>
             </motion.div>
 
-            {/* ── Pricing Cards ── 6 columns on xl ── */}
-            <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-6 gap-4 mb-20">
-              {plans.map((plan, index) => {
-                const Icon = planIcons[index];
-                const price = plan.isEnterprise
-                  ? null
-                  : isAnnual
-                    ? plan.annualPrice
-                    : plan.monthlyPrice;
+            {/* ── Pricing Cards ── 3 top + 2 bottom centered ── */}
+            <div className="max-w-6xl mx-auto mb-20">
+              {/* Top row: Free, Starter, Growth */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                {plans.slice(0, 3).map((plan, index) => {
+                  const Icon = planIcons[index];
+                  const price = isAnnual ? plan.annualPrice : plan.monthlyPrice;
 
-                return (
-                  <motion.div
-                    key={plan.name}
-                    initial={{ opacity: 0, y: 24 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.45, delay: index * 0.06 }}
-                    className={`relative group ${plan.popular ? "xl:-mt-3 xl:mb-3" : ""}`}
-                  >
-                    {/* Most Popular ribbon */}
-                    {plan.popular && (
-                      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-10">
-                        <span className="gradient-bg text-white text-xs font-bold px-4 py-1 rounded-full shadow-lg whitespace-nowrap">
-                          Most Popular
-                        </span>
-                      </div>
-                    )}
-
-                    <div
-                      className={`h-full rounded-2xl p-5 flex flex-col transition-all duration-200 ${
-                        plan.popular
-                          ? "bg-white border-2 border-[#1E2D6B] shadow-xl ring-1 ring-[#4F5FE8]/10"
-                          : "bg-white border border-slate-200 hover:border-slate-300 hover:shadow-lg"
-                      }`}
+                  return (
+                    <motion.div
+                      key={plan.name}
+                      initial={{ opacity: 0, y: 24 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.45, delay: index * 0.08 }}
+                      className="relative group"
                     >
-                      {/* Icon + Name */}
-                      <div className="flex items-center gap-2.5 mb-3">
-                        <div
-                          className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors duration-200 ${
-                            plan.popular
-                              ? "gradient-bg text-white"
-                              : "bg-slate-100 text-slate-600 group-hover:bg-[#4F5FE8]/10 group-hover:text-[#4F5FE8]"
-                          }`}
-                        >
-                          <Icon className="w-4 h-4" />
+                      <div className="h-full rounded-2xl p-6 flex flex-col transition-all duration-200 bg-white border border-slate-200 hover:border-slate-300 hover:shadow-lg">
+                        {/* Icon + Name */}
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-slate-100 text-slate-600 group-hover:bg-[#4F5FE8]/10 group-hover:text-[#4F5FE8] transition-colors duration-200">
+                            <Icon className="w-5 h-5" />
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-bold text-ink leading-tight">
+                              {plan.name}
+                            </h3>
+                            <p className="text-xs text-slate-500">
+                              {plan.description}
+                            </p>
+                          </div>
                         </div>
-                        <div>
-                          <h3 className="text-base font-bold text-ink leading-tight">
-                            {plan.name}
-                          </h3>
-                        </div>
-                      </div>
 
-                      <p className="text-xs text-slate-500 mb-4 leading-relaxed">
-                        {plan.description}
-                      </p>
-
-                      {/* Price */}
-                      <div className="mb-4">
-                        {plan.isEnterprise ? (
-                          <>
-                            <div className="flex items-baseline gap-0.5">
-                              <span className="text-xs text-slate-500">
-                                From
-                              </span>
-                            </div>
-                            <div className="flex items-baseline gap-0.5">
-                              <span className="text-3xl font-extrabold text-ink tracking-tight">
-                                $1,499
-                              </span>
-                              <span className="text-base font-bold text-ink">
-                                +
-                              </span>
-                            </div>
-                            <span className="text-xs text-slate-400">
-                              /month
+                        {/* Price */}
+                        <div className="mb-5 mt-2">
+                          <div className="flex items-baseline gap-1">
+                            <span className="text-4xl font-extrabold text-ink tracking-tight">
+                              ${price}
                             </span>
-                          </>
-                        ) : (
-                          <>
-                            <div className="flex items-baseline gap-0.5">
-                              <span className="text-3xl font-extrabold text-ink tracking-tight">
-                                ${price}
-                              </span>
-                              {price! > 0 && (
-                                <span className="text-xs text-slate-400">
-                                  /mo
-                                </span>
-                              )}
-                            </div>
-                            {isAnnual && price! > 0 && (
-                              <span className="text-xs text-slate-400">
-                                billed annually
+                            {price > 0 && (
+                              <span className="text-sm text-slate-400">
+                                /mo
                               </span>
                             )}
-                          </>
-                        )}
-                        <div className="text-xs text-slate-400 mt-1">
-                          {plan.minutes}
+                          </div>
+                          {isAnnual && price > 0 && (
+                            <span className="text-xs text-slate-400">
+                              billed annually
+                            </span>
+                          )}
+                          <div className="text-sm text-slate-500 mt-1.5 font-medium">
+                            {plan.minutes}
+                          </div>
+                        </div>
+
+                        {/* CTA */}
+                        <Link
+                          href={plan.href}
+                          className="cursor-pointer inline-flex items-center justify-center w-full py-3 text-sm font-semibold rounded-full transition-all duration-200 mb-5 bg-slate-100 text-ink hover:bg-slate-200"
+                        >
+                          {plan.cta}
+                          <ArrowRight className="w-4 h-4 ml-1.5" />
+                        </Link>
+
+                        {/* Features */}
+                        <div className="space-y-2.5 mt-auto">
+                          {plan.features.map((feature) => (
+                            <div
+                              key={feature}
+                              className="flex items-start gap-2.5 text-sm"
+                            >
+                              <Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+                              <span className="text-slate-600 leading-relaxed">
+                                {feature}
+                              </span>
+                            </div>
+                          ))}
                         </div>
                       </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
 
-                      {/* CTA */}
-                      <Link
-                        href={plan.href}
-                        className={`cursor-pointer inline-flex items-center justify-center w-full py-2.5 text-sm font-semibold rounded-full transition-all duration-200 mb-4 ${
+              {/* Bottom row: Business (popular) + Teams, centered */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                {plans.slice(3, 5).map((plan, i) => {
+                  const index = i + 3;
+                  const Icon = planIcons[index];
+                  const price = isAnnual ? plan.annualPrice : plan.monthlyPrice;
+
+                  return (
+                    <motion.div
+                      key={plan.name}
+                      initial={{ opacity: 0, y: 24 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.45, delay: index * 0.08 }}
+                      className={`relative group ${plan.popular ? "md:-mt-2 md:mb-2" : ""}`}
+                    >
+                      {/* Most Popular ribbon */}
+                      {plan.popular && (
+                        <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-10">
+                          <span className="gradient-bg text-white text-xs font-bold px-5 py-1.5 rounded-full shadow-lg whitespace-nowrap">
+                            Most Popular
+                          </span>
+                        </div>
+                      )}
+
+                      <div
+                        className={`h-full rounded-2xl p-6 flex flex-col transition-all duration-200 ${
                           plan.popular
-                            ? "btn-primary text-white shadow-md hover:shadow-lg"
-                            : plan.isEnterprise
-                              ? "bg-slate-900 text-white hover:bg-slate-800"
-                              : "bg-slate-100 text-ink hover:bg-slate-200"
+                            ? "bg-white border-2 border-[#1E2D6B] shadow-xl ring-1 ring-[#4F5FE8]/10"
+                            : "bg-white border border-slate-200 hover:border-slate-300 hover:shadow-lg"
                         }`}
                       >
-                        {plan.cta}
-                        <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
-                      </Link>
-
-                      {/* Features */}
-                      <div className="space-y-2 mt-auto">
-                        {plan.features.map((feature) => (
+                        {/* Icon + Name */}
+                        <div className="flex items-center gap-3 mb-3">
                           <div
-                            key={feature}
-                            className="flex items-start gap-2 text-xs"
+                            className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors duration-200 ${
+                              plan.popular
+                                ? "gradient-bg text-white"
+                                : "bg-slate-100 text-slate-600 group-hover:bg-[#4F5FE8]/10 group-hover:text-[#4F5FE8]"
+                            }`}
                           >
-                            <Check className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                            <span className="text-slate-600 leading-relaxed">
-                              {feature}
-                            </span>
+                            <Icon className="w-5 h-5" />
                           </div>
-                        ))}
+                          <div>
+                            <h3 className="text-lg font-bold text-ink leading-tight">
+                              {plan.name}
+                            </h3>
+                            <p className="text-xs text-slate-500">
+                              {plan.description}
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Price */}
+                        <div className="mb-5 mt-2">
+                          <div className="flex items-baseline gap-1">
+                            <span className="text-4xl font-extrabold text-ink tracking-tight">
+                              ${price}
+                            </span>
+                            <span className="text-sm text-slate-400">/mo</span>
+                          </div>
+                          {isAnnual && (
+                            <span className="text-xs text-slate-400">
+                              billed annually
+                            </span>
+                          )}
+                          <div className="text-sm text-slate-500 mt-1.5 font-medium">
+                            {plan.minutes}
+                          </div>
+                        </div>
+
+                        {/* CTA */}
+                        <Link
+                          href={plan.href}
+                          className={`cursor-pointer inline-flex items-center justify-center w-full py-3 text-sm font-semibold rounded-full transition-all duration-200 mb-5 ${
+                            plan.popular
+                              ? "btn-primary text-white shadow-md hover:shadow-lg"
+                              : "bg-slate-100 text-ink hover:bg-slate-200"
+                          }`}
+                        >
+                          {plan.cta}
+                          <ArrowRight className="w-4 h-4 ml-1.5" />
+                        </Link>
+
+                        {/* Features */}
+                        <div className="space-y-2.5 mt-auto">
+                          {plan.features.map((feature) => (
+                            <div
+                              key={feature}
+                              className="flex items-start gap-2.5 text-sm"
+                            >
+                              <Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+                              <span className="text-slate-600 leading-relaxed">
+                                {feature}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* ── Enterprise CTA Banner ── */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="gradient-bg rounded-3xl p-8 md:p-12 text-white relative overflow-hidden mb-20"
+            >
+              <div className="absolute inset-0 opacity-10">
+                <div className="absolute top-0 right-0 w-80 h-80 bg-white rounded-full blur-3xl -translate-y-1/3 translate-x-1/3" />
+                <div className="absolute bottom-0 left-0 w-60 h-60 bg-white rounded-full blur-3xl translate-y-1/3 -translate-x-1/3" />
+              </div>
+              <div className="relative z-10">
+                <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
+                  {/* Left: Info */}
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center">
+                        <Shield className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-bold">
+                          Need a custom solution?
+                        </h3>
+                        <p className="text-white/60 text-sm">
+                          Enterprise plan for large organizations
+                        </p>
                       </div>
                     </div>
-                  </motion.div>
-                );
-              })}
-            </div>
+
+                    {/* Enterprise pricing highlight */}
+                    <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2 mb-6">
+                      <div className="flex items-baseline gap-1">
+                        <span className="text-sm text-white/60">From</span>
+                        <span className="text-3xl font-extrabold tracking-tight">
+                          $1,499+
+                        </span>
+                        <span className="text-sm text-white/60">/month</span>
+                      </div>
+                      <div className="flex items-center gap-4 text-sm text-white/70">
+                        <span>6,000 min/month</span>
+                        <span className="w-1 h-1 rounded-full bg-white/30" />
+                        <span>Unlimited agents</span>
+                        <span className="w-1 h-1 rounded-full bg-white/30" />
+                        <span>Unlimited users</span>
+                      </div>
+                    </div>
+
+                    {/* Enterprise features grid */}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                      {enterpriseFeatures.map((feat) => (
+                        <div
+                          key={feat.label}
+                          className="flex items-center gap-2.5 text-sm text-white/80"
+                        >
+                          <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+                            <feat.icon className="w-3.5 h-3.5" />
+                          </div>
+                          <span>{feat.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Right: CTA */}
+                  <div className="flex flex-col items-start lg:items-end gap-3 lg:pt-4">
+                    <Link
+                      href="/contact"
+                      className="cursor-pointer inline-flex items-center gap-2 px-8 py-4 text-sm font-bold bg-white text-[#1E2D6B] rounded-full transition-all duration-200 hover:bg-white/90 hover:shadow-xl whitespace-nowrap"
+                    >
+                      Talk to Sales
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                    <p className="text-xs text-white/50">
+                      Custom pricing tailored to your needs
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
 
             {/* ── Add-ons ── */}
             <motion.div
@@ -635,62 +736,32 @@ export default function PricingPage() {
                 Available on all paid plans
               </p>
               <div className="grid md:grid-cols-3 gap-5 max-w-3xl mx-auto">
-                {addOns.map((addon, i) => (
-                  <motion.div
-                    key={addon.name}
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: i * 0.08 }}
-                    className="bg-white border border-slate-200 rounded-2xl p-5 text-center hover:border-[#4F5FE8]/30 hover:shadow-md transition-all duration-200 group"
-                  >
-                    <h4 className="text-base font-bold text-ink mb-1">
-                      {addon.name}
-                    </h4>
-                    <p className="text-xl font-extrabold text-[#4F5FE8] mb-2">
-                      {addon.price}
-                    </p>
-                    <p className="text-xs text-slate-500 leading-relaxed">
-                      {addon.description}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* ── Enterprise CTA ── */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="gradient-bg rounded-3xl p-8 md:p-12 text-white relative overflow-hidden"
-            >
-              <div className="absolute inset-0 opacity-10">
-                <div className="absolute top-0 right-0 w-80 h-80 bg-white rounded-full blur-3xl -translate-y-1/3 translate-x-1/3" />
-                <div className="absolute bottom-0 left-0 w-60 h-60 bg-white rounded-full blur-3xl translate-y-1/3 -translate-x-1/3" />
-              </div>
-              <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
-                <div>
-                  <div className="flex items-center gap-3 mb-3">
-                    <Shield className="w-6 h-6 text-white/80" />
-                    <h3 className="text-2xl font-bold">
-                      Need a custom solution?
-                    </h3>
-                  </div>
-                  <p className="text-white/70 max-w-lg text-sm leading-relaxed">
-                    Enterprise plans include SSO, SLA guarantees, custom
-                    integrations, unlimited users, and 24/7 dedicated support
-                    tailored to your organization.
-                  </p>
-                </div>
-                <Link
-                  href="/contact"
-                  className="cursor-pointer inline-flex items-center gap-2 px-8 py-4 text-sm font-bold bg-white text-[#1E2D6B] rounded-full transition-all duration-200 hover:bg-white/90 hover:shadow-xl whitespace-nowrap"
-                >
-                  Contact Sales
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
+                {addOns.map((addon, i) => {
+                  const AddonIcon = addon.icon;
+                  return (
+                    <motion.div
+                      key={addon.name}
+                      initial={{ opacity: 0, y: 16 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: i * 0.08 }}
+                      className="bg-white border border-slate-200 rounded-2xl p-6 text-center hover:border-[#4F5FE8]/30 hover:shadow-md transition-all duration-200 group"
+                    >
+                      <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center mx-auto mb-3 group-hover:bg-[#4F5FE8]/10 transition-colors duration-200">
+                        <AddonIcon className="w-5 h-5 text-slate-600 group-hover:text-[#4F5FE8] transition-colors duration-200" />
+                      </div>
+                      <h4 className="text-base font-bold text-ink mb-1">
+                        {addon.name}
+                      </h4>
+                      <p className="text-xl font-extrabold text-[#4F5FE8] mb-2">
+                        {addon.price}
+                      </p>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        {addon.description}
+                      </p>
+                    </motion.div>
+                  );
+                })}
               </div>
             </motion.div>
           </div>
@@ -698,7 +769,7 @@ export default function PricingPage() {
 
         {/* ── Feature Comparison ── */}
         <section className="section surface-arctic">
-          <div className="max-w-[1440px] mx-auto px-6">
+          <div className="max-w-[1280px] mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -726,17 +797,17 @@ export default function PricingPage() {
               className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden"
             >
               <div className="overflow-x-auto">
-                <table className="w-full min-w-[960px]">
+                <table className="w-full min-w-[800px]">
                   {/* Sticky header */}
                   <thead className="sticky top-0 z-20">
                     <tr className="bg-slate-50 border-b border-slate-200">
-                      <th className="text-left py-4 pl-6 pr-4 font-semibold text-slate-500 text-xs uppercase tracking-wider w-[200px]">
+                      <th className="text-left py-4 pl-6 pr-4 font-semibold text-slate-500 text-xs uppercase tracking-wider w-[220px]">
                         Feature
                       </th>
                       {plans.map((plan) => (
                         <th
                           key={plan.name}
-                          className={`text-center py-4 px-3 font-bold text-sm ${
+                          className={`text-center py-4 px-4 font-bold text-sm ${
                             plan.popular
                               ? "bg-[#1E2D6B]/5 border-x-2 border-t-2 border-[#1E2D6B]/20"
                               : ""
@@ -761,7 +832,7 @@ export default function PricingPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {comparisonFeatures.map((feature, fi) => {
+                    {comparisonFeatures.map((feature) => {
                       const rows: React.ReactNode[] = [];
 
                       // Category header
@@ -769,7 +840,7 @@ export default function PricingPage() {
                         rows.push(
                           <tr key={`cat-${feature.category}`}>
                             <td
-                              colSpan={7}
+                              colSpan={6}
                               className="bg-slate-50/70 border-y border-slate-100"
                             >
                               <div className="py-3 pl-6 flex items-center gap-2">
@@ -800,7 +871,7 @@ export default function PricingPage() {
                             return (
                               <td
                                 key={key}
-                                className={`text-center py-3.5 px-3 ${
+                                className={`text-center py-3.5 px-4 ${
                                   isPopular
                                     ? "bg-[#1E2D6B]/[0.02] border-x-2 border-[#1E2D6B]/20"
                                     : ""
@@ -826,7 +897,7 @@ export default function PricingPage() {
                       {plans.map((plan) => (
                         <td
                           key={plan.name}
-                          className={`text-center py-5 px-3 ${
+                          className={`text-center py-5 px-4 ${
                             plan.popular
                               ? "bg-[#1E2D6B]/[0.02] border-x-2 border-b-2 border-[#1E2D6B]/20 rounded-b-xl"
                               : ""
@@ -834,7 +905,7 @@ export default function PricingPage() {
                         >
                           <Link
                             href={plan.href}
-                            className={`cursor-pointer inline-flex items-center justify-center px-4 py-2 text-xs font-semibold rounded-full transition-all duration-200 ${
+                            className={`cursor-pointer inline-flex items-center justify-center px-5 py-2.5 text-xs font-semibold rounded-full transition-all duration-200 ${
                               plan.popular
                                 ? "btn-primary text-white"
                                 : "bg-slate-100 text-ink hover:bg-slate-200"

@@ -575,13 +575,16 @@ export default function LeadQualificationPage() {
                     that cost — so your reps only call buyers who are ready to close.
                   </p>
                   <div className="flex items-baseline gap-2 mb-2">
-                    <span className="text-4xl font-bold">~$1.20</span>
-                    <span className="text-slate-500">per lead qualified (avg)</span>
+                    <span className="text-sm text-slate-500 uppercase tracking-wide">Starting at</span>
                   </div>
-                  <p className="text-sm text-slate-400 mb-6">
-                    Based on a 3-5 min qualification call at $0.30/min
+                  <div className="flex items-baseline gap-2 mb-2">
+                    <span className="text-4xl font-bold">$99</span>
+                    <span className="text-slate-500">/month</span>
+                  </div>
+                  <p className="text-sm text-slate-500 mb-6">
+                    300 minutes included. Qualify dozens of leads per day.
                   </p>
-                  <Link href="/pricing" className="btn btn-primary">
+                  <Link href="/pricing" className="btn btn-primary cursor-pointer">
                     View Full Pricing
                     <ArrowRight className="w-4 h-4" />
                   </Link>
@@ -594,7 +597,7 @@ export default function LeadQualificationPage() {
                   </div>
                   <div className="bg-white rounded-xl p-4 border border-primary/30 ring-1 ring-primary/10">
                     <div className="text-sm text-slate-500 mb-1">With Callengo</div>
-                    <div className="text-lg font-bold gradient-text">~$1.20 per lead</div>
+                    <div className="text-lg font-bold gradient-text">From $99/month</div>
                     <div className="text-xs text-slate-400">AI qualifies in 3-5 min, your reps close</div>
                   </div>
                   <div className="flex items-center gap-3 pt-2">

@@ -496,14 +496,17 @@ export default function DataValidationPage() {
                     Simple, transparent pricing
                   </h2>
                   <p className="text-slate-600 mb-6">
-                    Pay only for verified contacts. No setup fees, no hidden costs.
+                    300 minutes included. Additional minutes available as add-ons.
                     Start with 15 free minutes to test with your own data.
                   </p>
-                  <div className="flex items-baseline gap-2 mb-6">
-                    <span className="text-4xl font-bold">$0.50</span>
-                    <span className="text-slate-500">per verified contact (avg)</span>
+                  <div className="flex items-baseline gap-2 mb-2">
+                    <span className="text-sm text-slate-500 uppercase tracking-wide">Starting at</span>
                   </div>
-                  <Link href="/pricing" className="btn btn-primary">
+                  <div className="flex items-baseline gap-2 mb-6">
+                    <span className="text-4xl font-bold">$99</span>
+                    <span className="text-slate-500">/month</span>
+                  </div>
+                  <Link href="/pricing" className="btn btn-primary cursor-pointer">
                     View Full Pricing
                     <ArrowRight className="w-4 h-4" />
                   </Link>

@@ -576,11 +576,17 @@ export default function AppointmentConfirmationPage() {
                     Most businesses recover their monthly Callengo cost with just
                     1-2 prevented no-shows. Start free and see results immediately.
                   </p>
-                  <div className="flex items-baseline gap-2 mb-6">
-                    <span className="text-4xl font-bold">$99</span>
-                    <span className="text-slate-500">/month for 500 confirmation calls</span>
+                  <div className="flex items-baseline gap-2 mb-2">
+                    <span className="text-sm text-slate-500 uppercase tracking-wide">Starting at</span>
                   </div>
-                  <Link href="/pricing" className="btn btn-primary">
+                  <div className="flex items-baseline gap-2 mb-2">
+                    <span className="text-4xl font-bold">$99</span>
+                    <span className="text-slate-500">/month</span>
+                  </div>
+                  <p className="text-sm text-slate-500 mb-6">
+                    300 minutes included. Most confirmation calls take 1-2 minutes.
+                  </p>
+                  <Link href="/pricing" className="btn btn-primary cursor-pointer">
                     View Full Pricing
                     <ArrowRight className="w-4 h-4" />
                   </Link>

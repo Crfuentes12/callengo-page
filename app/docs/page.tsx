@@ -24,6 +24,7 @@ import {
   Check,
   Volume2,
   ChevronRight,
+  Link as LinkIcon,
 } from "lucide-react";
 
 const docCategories = [
@@ -67,7 +68,7 @@ const docCategories = [
     articles: [
       { title: "CRM Integrations", href: "/help/crm-integrations" },
       { title: "CSV/Excel Export", href: "#export" },
-      { title: "API Overview", href: "#api" },
+      { title: "Webhooks & Automations", href: "#webhooks" },
       { title: "Custom Workflows", href: "#custom-integrations" },
     ],
   },
@@ -185,12 +186,14 @@ const voiceCategories = [
   { language: "German", count: 2, popular: ["Hans", "Klaus"] },
 ];
 
-const dataFormats = [
+const importFormats = [
   { format: "CSV", extension: ".csv", description: "Comma-separated values, most common format" },
   { format: "Excel", extension: ".xlsx, .xls", description: "Microsoft Excel spreadsheets" },
-  { format: "JSON", extension: ".json", description: "JavaScript Object Notation for developers" },
-  { format: "XML", extension: ".xml", description: "Extensible Markup Language" },
-  { format: "TXT", extension: ".txt", description: "Tab or comma delimited text files" },
+];
+
+const exportFormats = [
+  { format: "CSV", extension: ".csv", description: "Export call results and contact data" },
+  { format: "Excel", extension: ".xlsx", description: "Export with formatting and multiple sheets" },
 ];
 
 const contactFields = [
@@ -211,52 +214,74 @@ const plans = [
     name: "Free",
     price: "$0",
     minutes: "15 (one-time)",
-    agents: 1,
-    users: 1,
+    agents: "1",
+    users: "1",
     maxDuration: "3 min",
-    concurrent: 1,
-    overage: "$0.80/min",
+    overage: "N/A",
   },
   {
     name: "Starter",
     price: "$99/mo",
-    minutes: "250/month",
-    agents: 1,
-    users: 1,
+    minutes: "300/month",
+    agents: "2",
+    users: "1",
     maxDuration: "5 min",
-    concurrent: 2,
     overage: "$0.45/min",
+  },
+  {
+    name: "Growth",
+    price: "$179/mo",
+    minutes: "600/month",
+    agents: "5",
+    users: "2",
+    maxDuration: "7 min",
+    overage: "$0.38/min",
   },
   {
     name: "Business",
     price: "$299/mo",
-    minutes: "1,000/month",
+    minutes: "1,200/month",
     agents: "Unlimited",
-    users: 3,
+    users: "5",
     maxDuration: "10 min",
-    concurrent: 5,
-    overage: "$0.35/min",
+    overage: "$0.32/min",
     popular: true,
   },
   {
     name: "Teams",
-    price: "$699/mo",
-    minutes: "3,000/month",
+    price: "$649/mo",
+    minutes: "2,250/month",
     agents: "Unlimited",
-    users: "5 (+$79/extra)",
+    users: "10 ($69/extra)",
     maxDuration: "15 min",
-    concurrent: 10,
-    overage: "$0.30/min",
+    overage: "$0.28/min",
   },
   {
     name: "Enterprise",
-    price: "Custom",
-    minutes: "Custom",
+    price: "From $1,499+/mo",
+    minutes: "6,000/month",
     agents: "Unlimited",
     users: "Unlimited",
     maxDuration: "30 min",
-    concurrent: "Custom",
-    overage: "$0.20/min",
+    overage: "Custom",
+  },
+];
+
+const automationTools = [
+  {
+    name: "Zapier",
+    description: "Connect Callengo webhook to 5,000+ apps",
+    icon: Zap,
+  },
+  {
+    name: "Make (Integromat)",
+    description: "Build complex automation workflows",
+    icon: LinkIcon,
+  },
+  {
+    name: "n8n",
+    description: "Self-hosted automation with full control",
+    icon: Code,
   },
 ];
 
@@ -465,7 +490,7 @@ export default function DocsPage() {
           </div>
         </section>
 
-        {/* Data Formats */}
+        {/* Data Import & Export */}
         <section id="data-formats" className="section bg-slate-50">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
@@ -479,21 +504,51 @@ export default function DocsPage() {
                 <h2 className="text-3xl font-bold">Data Import & Export</h2>
               </div>
               <p className="text-lg text-slate-600 max-w-3xl">
-                Import contacts from any system using standard file formats. Callengo automatically
-                normalizes phone numbers, removes duplicates, and maps fields.
+                Import contacts using CSV or Excel files. Callengo automatically normalizes phone
+                numbers, removes duplicates, and maps fields. Export your call results in the same
+                formats.
               </p>
             </motion.div>
 
-            <div className="grid lg:grid-cols-2 gap-8">
+            <div className="grid lg:grid-cols-3 gap-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 className="bg-white rounded-2xl border border-slate-200 p-8"
               >
-                <h3 className="text-xl font-bold mb-6">Supported Formats</h3>
+                <div className="flex items-center gap-2 mb-6">
+                  <Upload className="w-5 h-5 text-slate-600" />
+                  <h3 className="text-xl font-bold">Import Formats</h3>
+                </div>
                 <div className="space-y-4">
-                  {dataFormats.map((format) => (
+                  {importFormats.map((format) => (
+                    <div key={format.format} className="flex items-start gap-4">
+                      <div className="w-16 h-10 rounded-lg bg-slate-100 flex items-center justify-center flex-shrink-0">
+                        <span className="text-xs font-bold text-slate-600">{format.format}</span>
+                      </div>
+                      <div>
+                        <p className="font-medium">{format.extension}</p>
+                        <p className="text-sm text-slate-600">{format.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.05 }}
+                className="bg-white rounded-2xl border border-slate-200 p-8"
+              >
+                <div className="flex items-center gap-2 mb-6">
+                  <Download className="w-5 h-5 text-slate-600" />
+                  <h3 className="text-xl font-bold">Export Formats</h3>
+                </div>
+                <div className="space-y-4">
+                  {exportFormats.map((format) => (
                     <div key={format.format} className="flex items-start gap-4">
                       <div className="w-16 h-10 rounded-lg bg-slate-100 flex items-center justify-center flex-shrink-0">
                         <span className="text-xs font-bold text-slate-600">{format.format}</span>
@@ -512,7 +567,7 @@ export default function DocsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="bg-white rounded-2xl border border-slate-200 p-8"
+                className="bg-white rounded-2xl border border-slate-200 p-8 lg:row-span-1"
               >
                 <h3 className="text-xl font-bold mb-6">Contact Fields</h3>
                 <div className="space-y-3">
@@ -525,7 +580,7 @@ export default function DocsPage() {
                         <p className="text-sm text-slate-600 mt-1">{field.description}</p>
                       </div>
                       {field.required && (
-                        <span className="text-xs text-red-600 font-medium">Required</span>
+                        <span className="text-xs text-red-600 font-medium flex-shrink-0">Required</span>
                       )}
                     </div>
                   ))}
@@ -573,12 +628,11 @@ export default function DocsPage() {
                       <th className="text-left px-6 py-4 font-semibold">Agents</th>
                       <th className="text-left px-6 py-4 font-semibold">Users</th>
                       <th className="text-left px-6 py-4 font-semibold">Max Duration</th>
-                      <th className="text-left px-6 py-4 font-semibold">Concurrent</th>
                       <th className="text-left px-6 py-4 font-semibold">Overage</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {plans.map((plan, index) => (
+                    {plans.map((plan) => (
                       <tr
                         key={plan.name}
                         className={`border-b border-slate-100 ${
@@ -598,7 +652,6 @@ export default function DocsPage() {
                         <td className="px-6 py-4">{plan.agents}</td>
                         <td className="px-6 py-4">{plan.users}</td>
                         <td className="px-6 py-4">{plan.maxDuration}</td>
-                        <td className="px-6 py-4">{plan.concurrent}</td>
                         <td className="px-6 py-4">{plan.overage}</td>
                       </tr>
                     ))}
@@ -609,7 +662,7 @@ export default function DocsPage() {
           </div>
         </section>
 
-        {/* Webhooks & API */}
+        {/* Webhooks & Automations */}
         <section id="webhooks" className="section bg-slate-50">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
@@ -619,12 +672,13 @@ export default function DocsPage() {
               className="mb-12"
             >
               <div className="flex items-center gap-3 mb-4">
-                <Code className="w-8 h-8 text-slate-600" />
-                <h2 className="text-3xl font-bold">Webhooks & API</h2>
+                <Webhook className="w-8 h-8 text-slate-600" />
+                <h2 className="text-3xl font-bold">Webhooks & Automations</h2>
               </div>
               <p className="text-lg text-slate-600 max-w-3xl">
-                Integrate Callengo with your existing systems using webhooks and our REST API.
-                Available on Teams and Enterprise plans.
+                Callengo sends a webhook POST request to your configured URL when a call completes,
+                allowing you to automate workflows with your favorite tools. Available on Business
+                plans and above.
               </p>
             </motion.div>
 
@@ -635,10 +689,11 @@ export default function DocsPage() {
                 viewport={{ once: true }}
                 className="bg-white rounded-2xl border border-slate-200 p-8"
               >
-                <h3 className="text-xl font-bold mb-4">Webhook Events</h3>
+                <h3 className="text-xl font-bold mb-4">Webhook Payload</h3>
                 <p className="text-slate-600 mb-6">
-                  Receive real-time notifications when calls complete. Configure your webhook URL
-                  in the dashboard settings.
+                  When a call completes, Callengo sends a POST request to the webhook URL you
+                  configure in your dashboard. The payload includes all call data, transcripts,
+                  and AI analysis results.
                 </p>
                 <div className="bg-slate-900 rounded-xl p-4 text-sm font-mono text-slate-300 overflow-x-auto">
                   <pre>{`POST /your-webhook-url
@@ -665,33 +720,35 @@ export default function DocsPage() {
                 transition={{ delay: 0.1 }}
                 className="bg-white rounded-2xl border border-slate-200 p-8"
               >
-                <h3 className="text-xl font-bold mb-4">API Endpoints</h3>
+                <h3 className="text-xl font-bold mb-4">Automation Tools</h3>
                 <p className="text-slate-600 mb-6">
-                  Our REST API allows you to programmatically manage contacts, campaigns, and
-                  retrieve call data.
+                  Use Callengo webhooks with popular automation platforms to connect your call
+                  results to CRMs, spreadsheets, notifications, and thousands of other apps.
                 </p>
-                <div className="space-y-3">
-                  {[
-                    { method: "POST", endpoint: "/api/contacts/import", desc: "Import contacts" },
-                    { method: "GET", endpoint: "/api/contacts", desc: "List contacts" },
-                    { method: "POST", endpoint: "/api/campaigns", desc: "Create campaign" },
-                    { method: "GET", endpoint: "/api/calls/:id", desc: "Get call details" },
-                    { method: "GET", endpoint: "/api/analytics", desc: "Get analytics" },
-                  ].map((api) => (
-                    <div key={api.endpoint} className="flex items-center gap-3">
-                      <span
-                        className={`px-2 py-1 text-xs font-bold rounded ${
-                          api.method === "GET"
-                            ? "bg-green-100 text-green-700"
-                            : "bg-blue-100 text-blue-700"
-                        }`}
-                      >
-                        {api.method}
-                      </span>
-                      <code className="text-sm">{api.endpoint}</code>
-                      <span className="text-slate-400 text-sm">{api.desc}</span>
+                <div className="space-y-4">
+                  {automationTools.map((tool) => (
+                    <div
+                      key={tool.name}
+                      className="flex items-start gap-4 p-4 rounded-xl bg-slate-50"
+                    >
+                      <div className="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center flex-shrink-0">
+                        <tool.icon className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold">{tool.name}</h4>
+                        <p className="text-sm text-slate-600">{tool.description}</p>
+                      </div>
                     </div>
                   ))}
+                </div>
+                <div className="mt-6">
+                  <Link
+                    href="/docs/integrations#webhooks"
+                    className="btn-primary inline-flex items-center gap-2 cursor-pointer"
+                  >
+                    View integration guides
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
                 </div>
               </motion.div>
             </div>
@@ -714,13 +771,13 @@ export default function DocsPage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="/help"
-                  className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold bg-white text-primary rounded-full hover:bg-white/90 transition-colors"
+                  className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold bg-white text-primary rounded-full hover:bg-white/90 transition-colors cursor-pointer"
                 >
                   Visit Help Center
                 </Link>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold border border-white/30 text-white rounded-full hover:bg-white/10 transition-colors"
+                  className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold border border-white/30 text-white rounded-full hover:bg-white/10 transition-colors cursor-pointer"
                 >
                   Contact Support
                 </Link>

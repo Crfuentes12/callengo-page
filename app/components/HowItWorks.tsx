@@ -1171,15 +1171,15 @@ export default function HowItWorks() {
               <div className="absolute -inset-8 bg-white/10 blur-3xl rounded-3xl -z-10" />
             </motion.div>
 
-            {/* RIGHT — Step list with fixed height */}
+            {/* RIGHT — Step selector + details (separated to prevent layout shift) */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="lg:col-span-5"
-              style={{ minHeight: "700px" }}
             >
-              <div className="space-y-2">
+              {/* Step buttons — always same height */}
+              <div className="space-y-1.5">
                 {steps.map((s, index) => {
                   const Icon = s.icon;
                   const isActive = index === activeStep;
@@ -1194,66 +1194,68 @@ export default function HowItWorks() {
                           : "border-transparent bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/10"
                       }`}
                     >
-                      <div className="px-5 py-4">
-                        <div className="flex items-start gap-3">
+                      <div className="px-4 py-3">
+                        <div className="flex items-center gap-3">
                           <div
-                            className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 mt-0.5 transition-all ${
+                            className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-all ${
                               isActive
                                 ? "bg-white text-electric shadow-lg"
                                 : "bg-white/10 group-hover:bg-white/15"
                             }`}
                             style={isActive ? { boxShadow: "0 4px 16px rgba(79, 95, 232, 0.3)" } : {}}
                           >
-                            <Icon className={`w-5 h-5 ${isActive ? "text-electric" : "text-white/50"}`} />
+                            <Icon className={`w-4.5 h-4.5 ${isActive ? "text-electric" : "text-white/50"}`} />
                           </div>
 
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 mb-0.5">
-                              <span className={`text-[11px] font-bold tabular-nums ${isActive ? "text-white/80" : "text-white/25"}`}>
-                                {s.number}
-                              </span>
-                              <span className={`text-sm font-semibold leading-tight ${isActive ? "text-white" : "text-white/50 group-hover:text-white/60"}`}>
-                                {s.title}
-                              </span>
-                            </div>
-
-                            <div
-                              className="overflow-hidden"
-                              style={{
-                                maxHeight: isActive ? "220px" : "0px",
-                                opacity: isActive ? 1 : 0,
-                                transition: "max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease",
-                              }}
-                            >
-                              <p className="text-[13px] text-white/55 leading-relaxed mt-2 mb-3" style={{ fontFamily: "var(--font-body)" }}>
-                                {s.description}
-                              </p>
-                              <div className="flex flex-wrap gap-2 mb-3">
-                                {s.highlights.map((h) => (
-                                  <span key={h} className="inline-flex items-center gap-1 text-[11px] px-2.5 py-1 rounded-full bg-white/10 text-white/70 border border-white/10">
-                                    <CheckCircle2 className="w-3 h-3 text-white/50" />
-                                    {h}
-                                  </span>
-                                ))}
-                              </div>
-
-                              {!isPaused && (
-                                <div className="h-1 bg-white/10 rounded-full overflow-hidden">
-                                  <motion.div
-                                    className="h-full rounded-full"
-                                    style={{ width: `${progress}%`, background: "rgba(255, 255, 255, 0.6)" }}
-                                  />
-                                </div>
-                              )}
-                            </div>
+                          <div className="flex-1 min-w-0 flex items-center gap-2">
+                            <span className={`text-[11px] font-bold tabular-nums ${isActive ? "text-white/80" : "text-white/25"}`}>
+                              {s.number}
+                            </span>
+                            <span className={`text-sm font-semibold leading-tight ${isActive ? "text-white" : "text-white/50 group-hover:text-white/60"}`}>
+                              {s.title}
+                            </span>
                           </div>
 
-                          <ChevronRight className={`w-4 h-4 shrink-0 transition-all mt-1 ${isActive ? "text-white/60 rotate-90" : "text-white/25 group-hover:text-white/40"}`} />
+                          <ChevronRight className={`w-4 h-4 shrink-0 transition-all ${isActive ? "text-white/60 rotate-90" : "text-white/25 group-hover:text-white/40"}`} />
                         </div>
                       </div>
                     </button>
                   );
                 })}
+              </div>
+
+              {/* Active step details — fixed-height container, no layout shift */}
+              <div className="mt-4 rounded-xl border border-white/15 bg-white/[0.06] px-5 py-4" style={{ minHeight: "160px" }}>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeStep}
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <p className="text-[13px] text-white/60 leading-relaxed mb-3" style={{ fontFamily: "var(--font-body)" }}>
+                      {step.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {step.highlights.map((h) => (
+                        <span key={h} className="inline-flex items-center gap-1 text-[11px] px-2.5 py-1 rounded-full bg-white/10 text-white/70 border border-white/10">
+                          <CheckCircle2 className="w-3 h-3 text-white/50" />
+                          {h}
+                        </span>
+                      ))}
+                    </div>
+
+                    {!isPaused && (
+                      <div className="h-1 bg-white/10 rounded-full overflow-hidden">
+                        <motion.div
+                          className="h-full rounded-full"
+                          style={{ width: `${progress}%`, background: "rgba(255, 255, 255, 0.6)" }}
+                        />
+                      </div>
+                    )}
+                  </motion.div>
+                </AnimatePresence>
               </div>
 
               <div className="pt-5 space-y-2">

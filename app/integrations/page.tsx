@@ -433,9 +433,10 @@ export default function IntegrationsPage() {
             >
               {/* Internal lava lamp */}
               <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute rounded-full" style={{ width: 350, height: 350, top: "-10%", right: "10%", background: "radial-gradient(circle, rgba(255,255,255,0.10) 0%, transparent 70%)", filter: "blur(40px)", animation: "ctaLava1 20s ease-in-out infinite" }} />
-                <div className="absolute rounded-full" style={{ width: 300, height: 300, bottom: "-15%", left: "5%", background: "radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%)", filter: "blur(50px)", animation: "ctaLava2 25s ease-in-out infinite" }} />
-                <div className="absolute rounded-full" style={{ width: 250, height: 250, top: "40%", left: "50%", background: "radial-gradient(circle, rgba(139,150,200,0.12) 0%, transparent 60%)", filter: "blur(40px)", animation: "ctaLava3 18s ease-in-out infinite" }} />
+                <div className="absolute rounded-full" style={{ width: 450, height: 450, top: "-15%", right: "5%", background: "radial-gradient(circle, rgba(255,255,255,0.22) 0%, rgba(139,150,200,0.08) 40%, transparent 65%)", filter: "blur(25px)", animation: "ctaLava1 16s ease-in-out infinite" }} />
+                <div className="absolute rounded-full" style={{ width: 400, height: 400, bottom: "-20%", left: "0%", background: "radial-gradient(circle, rgba(139,150,200,0.25) 0%, rgba(255,255,255,0.06) 40%, transparent 65%)", filter: "blur(25px)", animation: "ctaLava2 20s ease-in-out infinite" }} />
+                <div className="absolute rounded-full" style={{ width: 300, height: 300, top: "30%", left: "45%", background: "radial-gradient(circle, rgba(255,255,255,0.18) 0%, rgba(79,95,232,0.08) 40%, transparent 60%)", filter: "blur(20px)", animation: "ctaLava3 14s ease-in-out infinite" }} />
+                <div className="absolute rounded-full" style={{ width: 250, height: 250, top: "10%", left: "20%", background: "radial-gradient(circle, rgba(29,184,122,0.10) 0%, rgba(255,255,255,0.06) 40%, transparent 60%)", filter: "blur(20px)", animation: "ctaLava1 18s ease-in-out infinite reverse" }} />
               </div>
               <style jsx>{`
                 @keyframes ctaLava1 { 0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); } 25% { transform: translate(-30px, 25px) scale(1.1) rotate(45deg); } 50% { transform: translate(-15px, 50px) scale(0.95) rotate(90deg); } 75% { transform: translate(25px, 15px) scale(1.1) rotate(135deg); } }

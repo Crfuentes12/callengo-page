@@ -975,6 +975,7 @@ export default function DocsPage() {
                 <div className="absolute -top-1/4 right-[-10%] w-3/5 h-[120%] bg-gradient-to-br from-white/40 via-[#8B96C8]/35 to-[#6070E0]/25 rounded-full blur-2xl animate-[ctaLava1_35s_ease-in-out_infinite]" />
                 <div className="absolute -bottom-1/3 left-[-10%] w-1/2 h-full bg-gradient-to-br from-[#8B96C8]/40 via-white/25 to-[#4F5FE8]/25 rounded-full blur-2xl animate-[ctaLava2_42s_ease-in-out_infinite]" />
                 <div className="absolute top-[10%] left-[30%] w-2/5 h-4/5 bg-gradient-to-br from-white/30 via-[#1DB87A]/18 to-[#8B96C8]/20 rounded-full blur-2xl animate-[ctaLava3_38s_ease-in-out_infinite]" />
+                <div className="absolute top-[-15%] left-[50%] w-1/3 h-[90%] bg-gradient-to-br from-[#6070E0]/30 via-white/20 to-[#8B96C8]/25 rounded-full blur-2xl animate-[ctaLava4_48s_ease-in-out_infinite]" />
               </div>
               <div className="absolute inset-0 bg-gradient-to-r from-[#1E2D6B]/40 via-[#1E2D6B]/15 to-transparent" />
               <div className="relative z-10 max-w-3xl">
@@ -1013,6 +1014,11 @@ export default function DocsPage() {
                 @keyframes ctaLava3 {
                   0%, 100% { transform: translate(0, 0) scale(1); }
                   50% { transform: translate(25px, -15px) scale(1.05); }
+            @keyframes ctaLava4 {
+              0%, 100% { transform: translate(0, 0) scale(1); }
+              35% { transform: translate(-20px, 30px) scale(1.06); }
+              65% { transform: translate(30px, -15px) scale(0.95); }
+            }
                 }
               `}</style>
             </motion.div>

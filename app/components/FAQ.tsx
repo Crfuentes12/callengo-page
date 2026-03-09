@@ -56,7 +56,7 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="section bg-white/80" id="faq">
+    <section className="section bg-background" id="faq">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-5 gap-12 lg:gap-20">
           {/* Left - Header */}

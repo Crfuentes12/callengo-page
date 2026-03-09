@@ -79,7 +79,7 @@ export default function Testimonials() {
   const nextIdx = (currentIndex + 1) % testimonials.length;
 
   return (
-    <section className="section bg-white/80" id="testimonials">
+    <section className="section bg-background" id="testimonials">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <motion.div

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import Image from "next/image";
 import {
   Plug,
   Calendar,
@@ -12,11 +13,11 @@ import {
   MessageSquare,
   BarChart3,
   Workflow,
+  Database,
   ArrowRight,
   ArrowLeft,
   ChevronRight,
   Shield,
-  Database,
   Globe,
   Search,
 } from "lucide-react";
@@ -58,6 +59,7 @@ type IntegrationCard = {
   category: string;
   tagline: string;
   initial: string;
+  logo: string;
   comingSoon?: boolean;
 };
 
@@ -69,6 +71,7 @@ const integrations: IntegrationCard[] = [
     category: "Calendar",
     tagline: "Sync appointments and availability in real time",
     initial: "G",
+    logo: "/integrations/calendar.png",
   },
   {
     name: "Outlook Calendar",
@@ -76,6 +79,7 @@ const integrations: IntegrationCard[] = [
     category: "Calendar",
     tagline: "Two-way calendar sync with Microsoft 365",
     initial: "O",
+    logo: "/integrations/outlook.png",
   },
   {
     name: "SimplyBook.me",
@@ -83,6 +87,7 @@ const integrations: IntegrationCard[] = [
     category: "Calendar",
     tagline: "Sync bookings and availability with SimplyBook.me",
     initial: "S",
+    logo: "/integrations/simplybook.png",
   },
 
   /* Video */
@@ -92,6 +97,7 @@ const integrations: IntegrationCard[] = [
     category: "Video",
     tagline: "Auto-generate Meet links for confirmed appointments",
     initial: "G",
+    logo: "/integrations/meets.png",
   },
   {
     name: "Zoom",
@@ -99,6 +105,7 @@ const integrations: IntegrationCard[] = [
     category: "Video",
     tagline: "Create Zoom meetings when appointments are confirmed",
     initial: "Z",
+    logo: "/integrations/zoom.png",
   },
   {
     name: "Microsoft Teams",
@@ -106,6 +113,7 @@ const integrations: IntegrationCard[] = [
     category: "Video",
     tagline: "Schedule Teams meetings from call outcomes",
     initial: "M",
+    logo: "/integrations/teams.png",
   },
 
   /* CRM */
@@ -115,6 +123,7 @@ const integrations: IntegrationCard[] = [
     category: "CRM",
     tagline: "Push call outcomes and lead scores to HubSpot contacts",
     initial: "H",
+    logo: "/integrations/hubspot.png",
   },
   {
     name: "Salesforce",
@@ -122,6 +131,7 @@ const integrations: IntegrationCard[] = [
     category: "CRM",
     tagline: "Enterprise-grade CRM integration with custom field mapping",
     initial: "S",
+    logo: "/integrations/salesforce.png",
   },
   {
     name: "Pipedrive",
@@ -129,6 +139,7 @@ const integrations: IntegrationCard[] = [
     category: "CRM",
     tagline: "Update deals and contacts in Pipedrive automatically",
     initial: "P",
+    logo: "/integrations/pipedrive.png",
   },
   {
     name: "Zoho CRM",
@@ -136,6 +147,7 @@ const integrations: IntegrationCard[] = [
     category: "CRM",
     tagline: "Sync call data and lead status with Zoho CRM",
     initial: "Z",
+    logo: "/integrations/zoho.png",
   },
   {
     name: "Microsoft Dynamics 365",
@@ -143,6 +155,7 @@ const integrations: IntegrationCard[] = [
     category: "CRM",
     tagline: "Bi-directional sync with Dynamics 365 entities",
     initial: "D",
+    logo: "/integrations/dynamics.png",
   },
 
   /* Communication */
@@ -152,6 +165,7 @@ const integrations: IntegrationCard[] = [
     category: "Communication",
     tagline: "Get real-time call notifications and summaries in Slack",
     initial: "S",
+    logo: "/integrations/slack.png",
   },
 
   /* Productivity */
@@ -161,6 +175,7 @@ const integrations: IntegrationCard[] = [
     category: "Productivity",
     tagline: "Export call results directly to Google Sheets",
     initial: "G",
+    logo: "/integrations/sheets.png",
   },
   {
     name: "Clio",
@@ -168,6 +183,7 @@ const integrations: IntegrationCard[] = [
     category: "Productivity",
     tagline: "Legal practice management — sync client and matter data",
     initial: "C",
+    logo: "/integrations/clio.png",
   },
 
   /* Automation */
@@ -177,6 +193,7 @@ const integrations: IntegrationCard[] = [
     category: "Automation",
     tagline: "Trigger calls based on Stripe payment events",
     initial: "S",
+    logo: "/integrations/stripe.png",
   },
   {
     name: "Zapier",
@@ -184,6 +201,7 @@ const integrations: IntegrationCard[] = [
     category: "Automation",
     tagline: "Connect Callengo to 5,000+ apps with Zapier",
     initial: "Z",
+    logo: "/integrations/zoho.png",
     comingSoon: true,
   },
 ];
@@ -342,12 +360,8 @@ export default function IntegrationsPage() {
                         Coming Soon
                       </span>
                     </div>
-                    <div
-                      className={`w-12 h-12 rounded-xl ${categoryColors[intg.category]} flex items-center justify-center mb-4`}
-                    >
-                      <span className="text-white font-bold text-lg">
-                        {intg.initial}
-                      </span>
+                    <div className="w-12 h-12 rounded-xl bg-background-secondary flex items-center justify-center mb-4 overflow-hidden">
+                      <Image src={intg.logo} alt={intg.name} width={40} height={40} className="object-contain" />
                     </div>
                     <h3
                       className="text-lg font-bold text-foreground mb-2"
@@ -371,12 +385,8 @@ export default function IntegrationsPage() {
                     href={`/docs/integrations/${intg.slug}`}
                     className="group bg-white border border-border rounded-xl p-6 h-full flex flex-col hover:shadow-lg hover:border-electric/30 transition-all duration-200"
                   >
-                    <div
-                      className={`w-12 h-12 rounded-xl ${categoryColors[intg.category]} flex items-center justify-center mb-4 group-hover:scale-105 transition-transform`}
-                    >
-                      <span className="text-white font-bold text-lg">
-                        {intg.initial}
-                      </span>
+                    <div className="w-12 h-12 rounded-xl bg-background-secondary flex items-center justify-center mb-4 group-hover:scale-105 transition-transform overflow-hidden">
+                      <Image src={intg.logo} alt={intg.name} width={40} height={40} className="object-contain" />
                     </div>
                     <h3
                       className="text-lg font-bold text-foreground mb-2"
@@ -422,8 +432,8 @@ export default function IntegrationsPage() {
                 href="/docs/integrations/webhooks"
                 className="group bg-white border border-border rounded-xl p-6 h-full flex flex-col hover:shadow-lg hover:border-electric/30 transition-all duration-200"
               >
-                <div className="w-12 h-12 rounded-xl bg-foreground flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
-                  <Workflow className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 rounded-xl bg-background-secondary flex items-center justify-center mb-4 group-hover:scale-105 transition-transform overflow-hidden">
+                  <Image src="/integrations/webhooks.png" alt="Webhooks" width={40} height={40} className="object-contain" />
                 </div>
                 <h3
                   className="text-lg font-bold text-foreground mb-2"

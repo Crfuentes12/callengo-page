@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
@@ -26,6 +27,7 @@ type IntegrationDetail = {
   minPlan: string;
   tagline: string;
   initial: string;
+  logo: string;
   color: string;
   whatItDoes: string;
   setup: string[];
@@ -42,6 +44,7 @@ const integrations: IntegrationDetail[] = [
     minPlan: "Starter",
     tagline: "Sync appointments and availability in real time",
     initial: "G",
+    logo: "/integrations/calendar.png",
     color: "bg-blue-500",
     whatItDoes:
       "Connects your Google Calendar with Callengo so that confirmed, rescheduled, or cancelled appointments are instantly reflected on your calendar. Callengo reads your availability to avoid double-booking and can create new calendar events automatically when an Appointment Confirmation agent confirms a meeting.",
@@ -84,6 +87,7 @@ const integrations: IntegrationDetail[] = [
     minPlan: "Starter",
     tagline: "Two-way calendar sync with Microsoft 365",
     initial: "O",
+    logo: "/integrations/outlook.png",
     color: "bg-blue-500",
     whatItDoes:
       "Provides a bidirectional sync between your Microsoft Outlook calendar and Callengo. When the AI agent confirms, reschedules, or cancels an appointment, the corresponding calendar event is created, updated, or removed in Outlook. Callengo also reads your Outlook calendar to check availability in real time.",
@@ -127,6 +131,7 @@ const integrations: IntegrationDetail[] = [
     minPlan: "Business",
     tagline: "Sync bookings and availability with SimplyBook.me",
     initial: "S",
+    logo: "/integrations/simplybook.png",
     color: "bg-blue-500",
     whatItDoes:
       "Connects Callengo with SimplyBook.me to sync bookings and availability. When the AI agent confirms an appointment, a booking is created in SimplyBook.me. Callengo also reads SimplyBook.me availability to offer open time slots during calls. Ideal for service businesses using SimplyBook.me as their booking system.",
@@ -169,6 +174,7 @@ const integrations: IntegrationDetail[] = [
     minPlan: "Starter",
     tagline: "Auto-generate Meet links for confirmed appointments",
     initial: "G",
+    logo: "/integrations/meets.png",
     color: "bg-purple-500",
     whatItDoes:
       "When a Callengo AI agent confirms an appointment, a unique Google Meet link is automatically generated and attached to the calendar event. The link is also included in any confirmation email or SMS sent to the contact. This eliminates the manual step of creating meeting links.",
@@ -208,6 +214,7 @@ const integrations: IntegrationDetail[] = [
     minPlan: "Starter",
     tagline: "Create Zoom meetings when appointments are confirmed",
     initial: "Z",
+    logo: "/integrations/zoom.png",
     color: "bg-purple-500",
     whatItDoes:
       "Automatically creates a Zoom meeting whenever a Callengo Appointment Confirmation agent confirms a booking. The Zoom link, meeting ID, and passcode are attached to the calendar event and can be shared with the contact via email, SMS, or during the call itself.",
@@ -250,6 +257,7 @@ const integrations: IntegrationDetail[] = [
     minPlan: "Business",
     tagline: "Schedule Teams meetings from call outcomes",
     initial: "M",
+    logo: "/integrations/teams.png",
     color: "bg-purple-500",
     whatItDoes:
       "Automatically creates a Microsoft Teams online meeting when a Callengo agent confirms an appointment. The Teams meeting link is added to the Outlook calendar event and included in notifications sent to the contact. Ideal for enterprises standardized on the Microsoft ecosystem.",
@@ -291,6 +299,7 @@ const integrations: IntegrationDetail[] = [
     minPlan: "Business",
     tagline: "Push call outcomes and lead scores to HubSpot contacts",
     initial: "H",
+    logo: "/integrations/hubspot.png",
     color: "bg-emerald-500",
     whatItDoes:
       "Syncs call data from Callengo directly into your HubSpot CRM. After each call, Callengo creates or updates a contact record, logs a call activity, and updates custom properties such as lead score, call outcome, and sentiment. This keeps your sales team informed without manual data entry.",
@@ -336,6 +345,7 @@ const integrations: IntegrationDetail[] = [
     minPlan: "Teams",
     tagline: "Enterprise-grade Salesforce integration with custom field mapping",
     initial: "S",
+    logo: "/integrations/salesforce.png",
     color: "bg-emerald-500",
     whatItDoes:
       "Provides a deep, enterprise-grade integration with Salesforce. Callengo creates and updates Leads, Contacts, and Accounts, logs call activities as Tasks, and can update Opportunity stages. Custom field mapping allows you to push any Callengo data point into any Salesforce field. Supports Salesforce validation rules, record types, and page layouts.",
@@ -383,6 +393,7 @@ const integrations: IntegrationDetail[] = [
     minPlan: "Business",
     tagline: "Update deals and contacts in Pipedrive automatically",
     initial: "P",
+    logo: "/integrations/pipedrive.png",
     color: "bg-emerald-500",
     whatItDoes:
       "Pushes call outcomes from Callengo into Pipedrive, updating person records, creating activities, and moving deals through pipeline stages based on call results. If a lead is qualified during a call, Callengo can automatically create a new deal in your chosen pipeline.",
@@ -424,6 +435,7 @@ const integrations: IntegrationDetail[] = [
     minPlan: "Business",
     tagline: "Sync call data and lead status with Zoho CRM",
     initial: "Z",
+    logo: "/integrations/zoho.png",
     color: "bg-emerald-500",
     whatItDoes:
       "Integrates Callengo with Zoho CRM to push call outcomes, update lead and contact records, and log call activities. Callengo can update lead status, add notes, and trigger Zoho workflows based on call results.",
@@ -467,6 +479,7 @@ const integrations: IntegrationDetail[] = [
     minPlan: "Teams",
     tagline: "Bi-directional sync with Dynamics 365 entities",
     initial: "D",
+    logo: "/integrations/dynamics.png",
     color: "bg-emerald-500",
     whatItDoes:
       "Enables bidirectional data sync between Callengo and Microsoft Dynamics 365. Callengo pushes call outcomes, creates and updates Contacts, Leads, and Accounts, logs phone call activities, and can update Opportunity stages. Dynamics 365 data can also be pulled into Callengo to enrich call scripts with customer context.",
@@ -513,6 +526,7 @@ const integrations: IntegrationDetail[] = [
     minPlan: "Starter",
     tagline: "Get real-time call notifications and summaries in Slack channels",
     initial: "S",
+    logo: "/integrations/slack.png",
     color: "bg-amber-500",
     whatItDoes:
       "Sends real-time notifications to your Slack workspace whenever a Callengo call completes. Each notification includes the contact name, call outcome, duration, sentiment, and a link to the full transcript. You can configure notifications per campaign and per channel, so different teams get relevant updates.",
@@ -557,6 +571,7 @@ const integrations: IntegrationDetail[] = [
     minPlan: "Starter",
     tagline: "Export call results directly to Google Sheets",
     initial: "G",
+    logo: "/integrations/sheets.png",
     color: "bg-pink-500",
     whatItDoes:
       "Automatically exports call results from Callengo campaigns into a Google Sheets spreadsheet. Each completed call adds a new row with all relevant data points. You can use this for reporting, analysis, sharing results with stakeholders who do not have Callengo access, or as a lightweight data warehouse.",
@@ -604,6 +619,7 @@ const integrations: IntegrationDetail[] = [
     minPlan: "Teams",
     tagline: "Legal practice management — sync client and matter data",
     initial: "C",
+    logo: "/integrations/clio.png",
     color: "bg-pink-500",
     whatItDoes:
       "Connects Callengo with Clio, the leading legal practice management software. Callengo can sync call outcomes with Clio Contacts and Matters, log call activities as Communications, and update Matter status. Designed for law firms that use AI calling for appointment confirmations, client intake follow-ups, and case status updates.",
@@ -647,6 +663,7 @@ const integrations: IntegrationDetail[] = [
     minPlan: "Business",
     tagline: "Trigger calls based on Stripe payment events",
     initial: "S",
+    logo: "/integrations/stripe.png",
     color: "bg-slate-600",
     whatItDoes:
       "Listens for Stripe payment events (successful payments, failed payments, subscription changes) and triggers Callengo campaigns automatically. For example, you can call customers after a failed payment to verify their information, or call new subscribers to confirm their onboarding appointment.",
@@ -692,6 +709,7 @@ const integrations: IntegrationDetail[] = [
     minPlan: "Business",
     tagline: "Connect Callengo to 5,000+ apps with Zapier",
     initial: "Z",
+    logo: "/integrations/zoho.png",
     color: "bg-slate-600",
     whatItDoes:
       "Zapier integration allows you to connect Callengo with over 5,000 apps without writing a single line of code. Use Zapier Zaps to trigger Callengo campaigns from any app, or push Callengo call results into any app in the Zapier ecosystem. Build multi-step workflows that combine Callengo with your existing tools.",
@@ -801,12 +819,8 @@ export default function IntegrationDetailPage({
 
               {/* Title block */}
               <div className="flex items-start gap-5 mb-6">
-                <div
-                  className={`w-16 h-16 rounded-2xl ${integration.color} flex items-center justify-center flex-shrink-0`}
-                >
-                  <span className="text-white font-bold text-2xl">
-                    {integration.initial}
-                  </span>
+                <div className="w-16 h-16 rounded-2xl bg-background-secondary flex items-center justify-center flex-shrink-0 overflow-hidden">
+                  <Image src={integration.logo} alt={integration.name} width={52} height={52} className="object-contain" />
                 </div>
                 <div>
                   <div className="flex items-center gap-3 mb-2">

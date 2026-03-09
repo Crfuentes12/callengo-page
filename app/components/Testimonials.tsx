@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 
@@ -94,17 +94,56 @@ function TestimonialCard({ t, highlighted }: { t: typeof testimonials[0]; highli
   );
 }
 
+const VISIBLE = 3;
+
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  const goNext = () => {
-    setCurrentIndex((prev) => Math.min(prev + 1, testimonials.length - 1));
-  };
+  // Triple the array: [...testimonials, ...testimonials, ...testimonials]
+  // Start at the middle copy so we can scroll both directions infinitely
+  const tripled = [...testimonials, ...testimonials, ...testimonials];
+  const len = testimonials.length;
 
-  const goPrev = () => {
-    setCurrentIndex((prev) => Math.max(prev - 1, 0));
-  };
+  // Initialize offset to the start of the middle copy
+  const [offset, setOffset] = useState(len);
+
+  const goNext = useCallback(() => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setOffset((prev) => prev + 1);
+  }, [isTransitioning]);
+
+  const goPrev = useCallback(() => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setOffset((prev) => prev - 1);
+  }, [isTransitioning]);
+
+  // After transition ends, silently reset to the middle copy if needed
+  const handleTransitionEnd = useCallback(() => {
+    setIsTransitioning(false);
+    setOffset((prev) => {
+      if (prev >= len * 2) return prev - len;
+      if (prev < len) return prev + len;
+      return prev;
+    });
+  }, [len]);
+
+  // Derive the "logical" index for highlighting and dots
+  const logicalIndex = ((offset % len) + len) % len;
+
+  // Determine if we need to skip transition for the reset jump
+  const [skipTransition, setSkipTransition] = useState(false);
+  useEffect(() => {
+    // When offset is silently reset, skip transition for one frame
+    if (offset >= len && offset < len * 2) {
+      setSkipTransition(false);
+    }
+  }, [offset, len]);
+
+  const slideWidth = 100 / VISIBLE + 1.2; // percentage per slide
 
   return (
     <section className="section bg-background" id="testimonials">
@@ -132,8 +171,7 @@ export default function Testimonials() {
           {/* Left arrow */}
           <button
             onClick={goPrev}
-            disabled={currentIndex === 0}
-            className="w-11 h-11 rounded-full border border-border hover:border-electric/30 hover:bg-electric/5 flex items-center justify-center transition-all cursor-pointer shrink-0 disabled:opacity-30 disabled:cursor-not-allowed"
+            className="w-11 h-11 rounded-full border border-border hover:border-electric/30 hover:bg-electric/5 flex items-center justify-center transition-all cursor-pointer shrink-0"
           >
             <ChevronLeft className="w-5 h-5 text-foreground-secondary" />
           </button>
@@ -142,14 +180,19 @@ export default function Testimonials() {
           <div className="flex-1 overflow-hidden">
             <div
               ref={trackRef}
-              className="flex gap-5 transition-transform duration-500 ease-out"
+              className="flex gap-5"
               style={{
-                transform: `translateX(-${currentIndex * (100 / 3 + 1.2)}%)`,
+                transform: `translateX(-${offset * slideWidth}%)`,
+                transition: isTransitioning ? "transform 500ms ease-out" : "none",
               }}
+              onTransitionEnd={handleTransitionEnd}
             >
-              {testimonials.map((t, idx) => (
-                <div key={t.id} className="w-full md:w-[calc(33.333%-14px)] shrink-0">
-                  <TestimonialCard t={t} highlighted={idx === currentIndex + 1 || (currentIndex === 0 && idx === 0) || (currentIndex === testimonials.length - 1 && idx === testimonials.length - 1)} />
+              {tripled.map((t, idx) => (
+                <div key={`${t.id}-${idx}`} className="w-full md:w-[calc(33.333%-14px)] shrink-0">
+                  <TestimonialCard
+                    t={t}
+                    highlighted={idx === offset + 1}
+                  />
                 </div>
               ))}
             </div>
@@ -158,8 +201,7 @@ export default function Testimonials() {
           {/* Right arrow */}
           <button
             onClick={goNext}
-            disabled={currentIndex >= testimonials.length - 3}
-            className="w-11 h-11 rounded-full border border-border hover:border-electric/30 hover:bg-electric/5 flex items-center justify-center transition-all cursor-pointer shrink-0 disabled:opacity-30 disabled:cursor-not-allowed"
+            className="w-11 h-11 rounded-full border border-border hover:border-electric/30 hover:bg-electric/5 flex items-center justify-center transition-all cursor-pointer shrink-0"
           >
             <ChevronRight className="w-5 h-5 text-foreground-secondary" />
           </button>
@@ -170,9 +212,13 @@ export default function Testimonials() {
           {testimonials.map((_, i) => (
             <button
               key={i}
-              onClick={() => setCurrentIndex(Math.min(i, testimonials.length - 3))}
+              onClick={() => {
+                if (isTransitioning) return;
+                setIsTransitioning(true);
+                setOffset(len + i);
+              }}
               className={`rounded-full transition-all duration-300 cursor-pointer ${
-                i >= currentIndex && i < currentIndex + 3
+                i === logicalIndex
                   ? "w-6 h-2 bg-electric"
                   : "w-2 h-2 bg-border hover:bg-foreground-tertiary"
               }`}

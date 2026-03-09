@@ -5,17 +5,10 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Image from "next/image";
 import {
-  Calendar,
-  Video,
-  MessageSquare,
-  Database,
-  Webhook,
-  CreditCard,
-  Sheet,
   ArrowRight,
   Check,
-  Building2,
 } from "lucide-react";
 
 type Category = "all" | "calendar" | "video" | "crm" | "communication" | "productivity" | "other";
@@ -24,7 +17,7 @@ interface Integration {
   name: string;
   description: string;
   category: Category;
-  icon: typeof Calendar;
+  logo: string;
   minPlan: string;
   features: string[];
   status: "live" | "beta";
@@ -35,7 +28,7 @@ const integrations: Integration[] = [
     name: "Google Calendar",
     description: "Sync appointments, check availability, and automatically create or reschedule events based on call outcomes.",
     category: "calendar",
-    icon: Calendar,
+    logo: "/integrations/calendar.png",
     minPlan: "Free",
     features: ["Two-way sync", "Availability checks", "Auto-create events", "Reschedule from calls"],
     status: "live",
@@ -44,7 +37,7 @@ const integrations: Integration[] = [
     name: "Outlook Calendar",
     description: "Full integration with Microsoft Outlook calendars for enterprise scheduling workflows.",
     category: "calendar",
-    icon: Calendar,
+    logo: "/integrations/outlook.png",
     minPlan: "Growth",
     features: ["Two-way sync", "Room booking", "Recurring events", "Teams integration"],
     status: "live",
@@ -53,7 +46,7 @@ const integrations: Integration[] = [
     name: "Google Meet",
     description: "Automatically generate and share Google Meet links when scheduling appointments via calls.",
     category: "video",
-    icon: Video,
+    logo: "/integrations/meets.png",
     minPlan: "Starter",
     features: ["Auto-generate links", "Include in confirmations", "Calendar integration"],
     status: "live",
@@ -62,7 +55,7 @@ const integrations: Integration[] = [
     name: "Zoom",
     description: "Create Zoom meeting links automatically and include them in appointment confirmations.",
     category: "video",
-    icon: Video,
+    logo: "/integrations/zoom.png",
     minPlan: "Growth",
     features: ["Auto-generate links", "Meeting settings", "Waiting room config"],
     status: "live",
@@ -71,7 +64,7 @@ const integrations: Integration[] = [
     name: "Microsoft Teams",
     description: "Generate Teams meeting links and integrate with your organization's Microsoft ecosystem.",
     category: "video",
-    icon: Video,
+    logo: "/integrations/teams.png",
     minPlan: "Business",
     features: ["Auto-generate links", "Channel notifications", "Azure AD integration"],
     status: "live",
@@ -80,7 +73,7 @@ const integrations: Integration[] = [
     name: "Slack",
     description: "Get real-time notifications about call outcomes, qualified leads, and important events directly in Slack.",
     category: "communication",
-    icon: MessageSquare,
+    logo: "/integrations/slack.png",
     minPlan: "Growth",
     features: ["Real-time notifications", "Channel routing", "Custom alerts", "Lead alerts"],
     status: "live",
@@ -89,7 +82,7 @@ const integrations: Integration[] = [
     name: "SimplyBook.me",
     description: "Sync your booking system with Callengo for seamless appointment management and confirmation calls.",
     category: "calendar",
-    icon: Calendar,
+    logo: "/integrations/simplybook.png",
     minPlan: "Business",
     features: ["Booking sync", "Availability checks", "Auto-confirmations"],
     status: "live",
@@ -98,7 +91,7 @@ const integrations: Integration[] = [
     name: "Webhooks",
     description: "Send real-time call data to any endpoint. Build custom integrations with your existing tools and workflows.",
     category: "other",
-    icon: Webhook,
+    logo: "/integrations/webhooks.png",
     minPlan: "Business",
     features: ["Real-time events", "Custom payloads", "Retry logic", "Event filtering"],
     status: "live",
@@ -107,7 +100,7 @@ const integrations: Integration[] = [
     name: "HubSpot",
     description: "Sync contacts, log call activities, update deal stages, and trigger workflows based on call outcomes.",
     category: "crm",
-    icon: Database,
+    logo: "/integrations/hubspot.png",
     minPlan: "Business",
     features: ["Contact sync", "Activity logging", "Deal updates", "Workflow triggers"],
     status: "live",
@@ -116,7 +109,7 @@ const integrations: Integration[] = [
     name: "Pipedrive",
     description: "Push qualified leads directly into your Pipedrive pipeline with full call context and extracted data.",
     category: "crm",
-    icon: Database,
+    logo: "/integrations/pipedrive.png",
     minPlan: "Business",
     features: ["Lead creation", "Pipeline sync", "Activity logging", "Custom fields"],
     status: "live",
@@ -125,7 +118,7 @@ const integrations: Integration[] = [
     name: "Zoho CRM",
     description: "Integrate with Zoho CRM to sync contacts, log calls, and update records automatically.",
     category: "crm",
-    icon: Database,
+    logo: "/integrations/zoho.png",
     minPlan: "Teams",
     features: ["Contact sync", "Call logging", "Module mapping", "Blueprint triggers"],
     status: "live",
@@ -134,7 +127,7 @@ const integrations: Integration[] = [
     name: "Salesforce",
     description: "Enterprise-grade Salesforce integration with full object mapping, triggers, and reporting.",
     category: "crm",
-    icon: Database,
+    logo: "/integrations/salesforce.png",
     minPlan: "Teams",
     features: ["Object mapping", "Task creation", "Lead conversion", "Custom objects"],
     status: "live",
@@ -143,7 +136,7 @@ const integrations: Integration[] = [
     name: "Microsoft Dynamics 365",
     description: "Connect with Dynamics 365 for comprehensive customer data synchronization and workflow automation.",
     category: "crm",
-    icon: Database,
+    logo: "/integrations/dynamics.png",
     minPlan: "Teams",
     features: ["Entity sync", "Activity logging", "Workflow triggers", "Power Automate"],
     status: "live",
@@ -152,7 +145,7 @@ const integrations: Integration[] = [
     name: "Clio",
     description: "Purpose-built integration for law firms using Clio. Sync client data and log call activities.",
     category: "crm",
-    icon: Building2,
+    logo: "/integrations/clio.png",
     minPlan: "Enterprise",
     features: ["Client sync", "Matter linking", "Activity logging", "Billing integration"],
     status: "live",
@@ -161,7 +154,7 @@ const integrations: Integration[] = [
     name: "Google Sheets",
     description: "Export call results, extracted data, and analytics directly to Google Sheets for custom reporting.",
     category: "productivity",
-    icon: Sheet,
+    logo: "/integrations/sheets.png",
     minPlan: "Teams",
     features: ["Auto-export results", "Custom templates", "Scheduled exports", "Shared sheets"],
     status: "live",
@@ -170,7 +163,7 @@ const integrations: Integration[] = [
     name: "Stripe",
     description: "Process payments and verify billing information during calls. Perfect for collections and invoicing.",
     category: "other",
-    icon: CreditCard,
+    logo: "/integrations/stripe.png",
     minPlan: "Teams",
     features: ["Payment verification", "Invoice status", "Subscription checks", "Payment links"],
     status: "live",
@@ -241,7 +234,6 @@ export default function IntegrationsPage() {
             {/* Integration Cards */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
               {filtered.map((integration, index) => {
-                const Icon = integration.icon;
                 return (
                   <motion.div
                     key={integration.name}
@@ -252,8 +244,8 @@ export default function IntegrationsPage() {
                     style={{ boxShadow: "var(--shadow-sm)" }}
                   >
                     <div className="flex items-start justify-between mb-4">
-                      <div className="w-12 h-12 rounded-xl bg-secondary/8 flex items-center justify-center">
-                        <Icon className="w-6 h-6 text-secondary" />
+                      <div className="w-12 h-12 rounded-xl bg-background-secondary flex items-center justify-center overflow-hidden">
+                        <Image src={integration.logo} alt={integration.name} width={40} height={40} className="object-contain" />
                       </div>
                       <div className="flex items-center gap-2">
                         <span
@@ -430,7 +422,7 @@ export default function IntegrationsPage() {
               className="gradient-bg rounded-3xl p-12 md:p-16 text-white text-center relative overflow-hidden"
             >
               {/* Subtle internal lava lamp */}
-              <div className="absolute inset-0 overflow-hidden opacity-70">
+              <div className="absolute inset-0 overflow-hidden opacity-90">
                 <div className="absolute -top-1/4 right-[-10%] w-3/5 h-[120%] bg-gradient-to-br from-white/20 via-[#8B96C8]/15 to-white/10 rounded-full blur-3xl animate-[intCta1_40s_ease-in-out_infinite]" />
                 <div className="absolute -bottom-1/3 left-[-10%] w-1/2 h-full bg-gradient-to-br from-[#8B96C8]/20 via-white/12 to-[#4F5FE8]/10 rounded-full blur-3xl animate-[intCta2_50s_ease-in-out_infinite]" />
               </div>

@@ -416,10 +416,10 @@ export default function QuickStartPage() {
               viewport={{ once: true }}
               className="gradient-bg rounded-3xl p-12 md:p-20 relative overflow-hidden"
             >
-              <div className="absolute inset-0 overflow-hidden opacity-70">
-                <div className="absolute -top-1/4 right-[-10%] w-3/5 h-[120%] bg-gradient-to-br from-white/25 via-[#8B96C8]/20 to-[#6070E0]/15 rounded-full blur-3xl animate-[ctaLava1_40s_ease-in-out_infinite]" />
-                <div className="absolute -bottom-1/3 left-[-10%] w-1/2 h-full bg-gradient-to-br from-[#8B96C8]/25 via-white/15 to-[#4F5FE8]/15 rounded-full blur-3xl animate-[ctaLava2_50s_ease-in-out_infinite]" />
-                <div className="absolute top-[10%] left-[30%] w-2/5 h-4/5 bg-gradient-to-br from-white/20 via-[#1DB87A]/10 to-[#8B96C8]/12 rounded-full blur-2xl animate-[ctaLava3_45s_ease-in-out_infinite]" />
+              <div className="absolute inset-0 overflow-hidden opacity-90">
+                <div className="absolute -top-1/4 right-[-10%] w-3/5 h-[120%] bg-gradient-to-br from-white/40 via-[#8B96C8]/35 to-[#6070E0]/25 rounded-full blur-2xl animate-[ctaLava1_35s_ease-in-out_infinite]" />
+                <div className="absolute -bottom-1/3 left-[-10%] w-1/2 h-full bg-gradient-to-br from-[#8B96C8]/40 via-white/25 to-[#4F5FE8]/25 rounded-full blur-2xl animate-[ctaLava2_42s_ease-in-out_infinite]" />
+                <div className="absolute top-[10%] left-[30%] w-2/5 h-4/5 bg-gradient-to-br from-white/30 via-[#1DB87A]/18 to-[#8B96C8]/20 rounded-full blur-2xl animate-[ctaLava3_38s_ease-in-out_infinite]" />
               </div>
               <div className="absolute inset-0 bg-gradient-to-r from-[#1E2D6B]/40 via-[#1E2D6B]/15 to-transparent" />
               <div className="relative z-10 max-w-3xl">

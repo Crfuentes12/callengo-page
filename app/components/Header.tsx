@@ -71,7 +71,7 @@ export default function Header() {
               className="w-9 h-9 transition-transform group-hover:scale-105"
             />
             <span
-              className="text-xl font-bold tracking-tight text-foreground"
+              className="text-xl font-semibold tracking-tight text-foreground"
               style={{ fontFamily: "var(--font-display)" }}
             >
               Callengo

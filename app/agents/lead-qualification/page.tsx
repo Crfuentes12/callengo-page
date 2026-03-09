@@ -213,7 +213,7 @@ export default function LeadQualificationPage() {
                   </Link>
                   <Link
                     href="/contact"
-                    className="btn bg-background-tertiary text-foreground hover:bg-background-tertiary/80"
+                    className="btn btn-secondary"
                   >
                     See a Demo
                   </Link>
@@ -305,7 +305,7 @@ export default function LeadQualificationPage() {
                   transition={{ delay: index * 0.1 }}
                   className="bg-white rounded-2xl border border-border p-6 text-center"
                 >
-                  <div className="text-4xl font-bold gradient-text mb-3">
+                  <div className="text-4xl font-semibold text-electric mb-3">
                     {stat.value}
                   </div>
                   <p className="text-foreground-secondary mb-3">{stat.label}</p>
@@ -370,7 +370,7 @@ export default function LeadQualificationPage() {
               viewport={{ once: true }}
               className="text-center max-w-3xl mx-auto mb-16"
             >
-              <h2 className="text-3xl md:text-4xl font-semibold mb-4">
+              <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-white">
                 BANT Scoring, Automated
               </h2>
               <p className="text-lg text-white/70">
@@ -416,7 +416,7 @@ export default function LeadQualificationPage() {
                   <div className="text-4xl font-bold text-white/30 mb-2">
                     {item.letter}
                   </div>
-                  <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
+                  <h3 className="font-semibold text-lg mb-2 text-white">{item.title}</h3>
                   <p className="text-white/70 text-sm mb-3">{item.question}</p>
                   <p className="text-white/50 text-sm">{item.scoring}</p>
                 </motion.div>
@@ -547,7 +547,7 @@ export default function LeadQualificationPage() {
                   </div>
                   <div className="pt-4 border-t border-border-light">
                     <div className="text-sm text-foreground-tertiary">Result</div>
-                    <div className="font-semibold gradient-text">{testimonial.result}</div>
+                    <div className="font-semibold text-electric">{testimonial.result}</div>
                   </div>
                 </motion.div>
               ))}
@@ -594,7 +594,7 @@ export default function LeadQualificationPage() {
                   </div>
                   <div className="bg-white rounded-xl p-4 border border-primary/30 ring-1 ring-primary/10">
                     <div className="text-sm text-foreground-tertiary mb-1">With Callengo</div>
-                    <div className="text-lg font-bold gradient-text">~$1.20 per lead</div>
+                    <div className="text-lg font-semibold text-electric">~$1.20 per lead</div>
                     <div className="text-xs text-foreground-tertiary">AI qualifies in 3-5 min, your reps close</div>
                   </div>
                   <div className="flex items-center gap-3 pt-2">

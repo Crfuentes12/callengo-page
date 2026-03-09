@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import { Check, ArrowRight, Calendar, TrendingDown, HeartPulse, Scissors, Briefcase, Home, Plus, Minus, DollarSign, Clock, Users } from "lucide-react";
+import { Check, ArrowRight, Calendar, TrendingDown, HeartPulse, Scissors, Briefcase, Home, Plus, Minus, DollarSign, Clock, Users, Phone, CalendarDays, Bell, RefreshCw, BarChart3, PenTool, LucideIcon } from "lucide-react";
 import { useState } from "react";
 
 const painStats = [
@@ -30,36 +30,36 @@ const painStats = [
   },
 ];
 
-const features = [
+const features: { title: string; description: string; icon: LucideIcon }[] = [
   {
     title: "Automated Reminders",
     description: "Call patients/clients 24-48 hours before their appointments.",
-    icon: "📞",
+    icon: Phone,
   },
   {
     title: "Rescheduling Support",
     description: "Let customers reschedule directly during the call.",
-    icon: "📅",
+    icon: CalendarDays,
   },
   {
     title: "Cancellation Handling",
     description: "Capture cancellations early to fill empty slots.",
-    icon: "🔔",
+    icon: Bell,
   },
   {
     title: "Multi-attempt Outreach",
     description: "Automatic retries if the first call isn't answered.",
-    icon: "🔄",
+    icon: RefreshCw,
   },
   {
     title: "Detailed Reports",
     description: "Export confirmation status, reschedules, and cancellations.",
-    icon: "📊",
+    icon: BarChart3,
   },
   {
     title: "Custom Scripts",
     description: "Personalized messages for your brand and service.",
-    icon: "✍️",
+    icon: PenTool,
   },
 ];
 
@@ -232,7 +232,7 @@ export default function AppointmentConfirmationPage() {
         </section>
 
         {/* Pain Statistics */}
-        <section className="py-16 bg-navy text-white">
+        <section className="py-16 bg-deep-indigo text-white">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -240,7 +240,7 @@ export default function AppointmentConfirmationPage() {
               viewport={{ once: true }}
               className="text-center mb-12"
             >
-              <h2 className="text-2xl md:text-3xl font-semibold mb-4">
+              <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-white">
                 No-shows are draining your business
               </h2>
             </motion.div>
@@ -255,11 +255,11 @@ export default function AppointmentConfirmationPage() {
                   transition={{ delay: index * 0.1 }}
                   className="text-center"
                 >
-                  <div className="text-4xl md:text-5xl font-bold mb-2 gradient-text">
+                  <div className="text-4xl md:text-5xl font-bold mb-2 text-white">
                     {item.stat}
                   </div>
                   <p className="text-white/70 mb-2">{item.description}</p>
-                  <p className="text-xs text-foreground-tertiary">Source: {item.source}</p>
+                  <p className="text-xs text-white/50">Source: {item.source}</p>
                 </motion.div>
               ))}
             </div>
@@ -384,7 +384,7 @@ export default function AppointmentConfirmationPage() {
                   </div>
                   <div className="mt-6 pt-6 border-t border-border-light text-center gradient-bg-subtle rounded-xl p-4">
                     <div className="text-sm text-foreground-secondary mb-1">Your Projected Annual Savings</div>
-                    <div className="text-4xl font-bold gradient-text">${annualSavings.toLocaleString()}</div>
+                    <div className="text-4xl font-semibold text-electric">${annualSavings.toLocaleString()}</div>
                   </div>
                 </div>
               </motion.div>
@@ -458,7 +458,9 @@ export default function AppointmentConfirmationPage() {
                   transition={{ delay: index * 0.05 }}
                   className="bg-white rounded-2xl border border-border p-6 hover:shadow-lg transition-shadow"
                 >
-                  <div className="text-3xl mb-4">{feature.icon}</div>
+                  <div className="w-10 h-10 rounded-xl bg-electric/10 flex items-center justify-center mb-4">
+                    <feature.icon className="w-5 h-5 text-electric" />
+                  </div>
                   <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
                   <p className="text-foreground-secondary">{feature.description}</p>
                 </motion.div>
@@ -476,7 +478,7 @@ export default function AppointmentConfirmationPage() {
               viewport={{ once: true }}
               className="text-center max-w-3xl mx-auto mb-16"
             >
-              <h2 className="text-3xl md:text-4xl font-semibold mb-6">
+              <h2 className="text-3xl md:text-4xl font-semibold mb-6 text-white">
                 Built for appointment-based businesses
               </h2>
               <p className="text-xl text-white/70">
@@ -498,7 +500,7 @@ export default function AppointmentConfirmationPage() {
                   <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mb-6">
                     <industry.icon className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-3">{industry.title}</h3>
+                  <h3 className="text-xl font-semibold mb-3 text-white">{industry.title}</h3>
                   <p className="text-white/70 mb-4">{industry.description}</p>
 
                   <div className="text-sm text-white/50 mb-4">{industry.examples}</div>

@@ -138,6 +138,7 @@ export default function Testimonials() {
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4 }}
                 className="relative rounded-2xl p-12 text-center overflow-hidden bg-deep-indigo"
+                style={{ boxShadow: "0 8px 40px rgba(30, 45, 107, 0.35), 0 4px 16px rgba(79, 95, 232, 0.20), 0 0 0 1px rgba(79, 95, 232, 0.10)" }}
               >
                 <div className="absolute inset-0 bg-grid-dark opacity-50" />
                 <div className="glow-orb glow-orb-primary w-60 h-60 top-0 right-0" />

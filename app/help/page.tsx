@@ -165,36 +165,37 @@ export default function HelpPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="gradient-bg rounded-3xl p-8 md:p-12 text-white"
+              className="bg-deep-indigo rounded-3xl p-8 md:p-12 text-white relative overflow-hidden"
             >
-              <h3 className="text-2xl font-bold mb-6">Quick Links</h3>
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="absolute inset-0 bg-grid-dark opacity-30" />
+              <h3 className="text-2xl font-semibold mb-6 relative z-10">Quick Links</h3>
+              <div className="grid md:grid-cols-2 gap-4 relative z-10">
                 <Link
                   href="/help/quick-start"
-                  className="flex items-center justify-between p-4 bg-white/10 rounded-xl border border-white/20 hover:bg-white/20 transition-all group"
+                  className="flex items-center justify-between p-4 bg-white/10 rounded-xl border border-white/15 hover:bg-white/20 transition-all group"
                 >
-                  <span className="font-medium">Quick Start Guide</span>
+                  <span className="font-medium text-white">Quick Start Guide</span>
                   <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </Link>
                 <Link
-                  href="/docs#integrations"
-                  className="flex items-center justify-between p-4 bg-white/10 rounded-xl border border-white/20 hover:bg-white/20 transition-all group"
+                  href="/docs/integrations"
+                  className="flex items-center justify-between p-4 bg-white/10 rounded-xl border border-white/15 hover:bg-white/20 transition-all group"
                 >
-                  <span className="font-medium">Integrations</span>
+                  <span className="font-medium text-white">Integrations</span>
                   <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </Link>
                 <Link
                   href="/blog"
-                  className="flex items-center justify-between p-4 bg-white/10 rounded-xl border border-white/20 hover:bg-white/20 transition-all group"
+                  className="flex items-center justify-between p-4 bg-white/10 rounded-xl border border-white/15 hover:bg-white/20 transition-all group"
                 >
-                  <span className="font-medium">Blog & Articles</span>
+                  <span className="font-medium text-white">Blog & Articles</span>
                   <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </Link>
                 <Link
                   href="/docs"
-                  className="flex items-center justify-between p-4 bg-white/10 rounded-xl border border-white/20 hover:bg-white/20 transition-all group"
+                  className="flex items-center justify-between p-4 bg-white/10 rounded-xl border border-white/15 hover:bg-white/20 transition-all group"
                 >
-                  <span className="font-medium">Documentation</span>
+                  <span className="font-medium text-white">Documentation</span>
                   <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </Link>
               </div>

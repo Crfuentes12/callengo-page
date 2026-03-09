@@ -41,20 +41,18 @@ export default function ContactPage() {
       <Header />
       <main className="pt-24">
         {/* Hero */}
-        <section className="relative overflow-hidden bg-navy py-20 md:py-28">
-          <div className="absolute inset-0 bg-grid-dark opacity-40" />
-          <div className="glow-orb glow-orb-purple w-[500px] h-[500px] -top-40 right-0" />
-          <div className="glow-orb glow-orb-cyan w-[300px] h-[300px] bottom-0 -left-40" />
+        <section className="relative overflow-hidden bg-background py-16 md:py-20">
+          <div className="absolute inset-0 bg-grid opacity-50" />
           <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-display-sm text-white mb-5">
+              <h1 className="text-display-sm text-foreground mb-5">
                 Get in touch
               </h1>
-              <p className="text-lg text-white/50 max-w-xl mx-auto" style={{ fontFamily: "var(--font-body)" }}>
+              <p className="text-lg text-foreground-secondary max-w-xl mx-auto" style={{ fontFamily: "var(--font-body)" }}>
                 Have a question, need a demo, or want to discuss a custom plan?
                 Reach out and we&apos;ll get back to you within 24 hours.
               </p>

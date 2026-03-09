@@ -200,42 +200,48 @@ function DataVerificationMockup() {
 
 /* ================================================================
    FEATURE 2 — Calendar / Appointment Confirmation
+   Shows a weekly calendar grid where appointments get confirmed,
+   and one no-show gets visually rescheduled to a different day.
    ================================================================ */
 
 type SlotStatus = "confirmed" | "pending" | "rescheduled" | "no-show" | "empty";
 
 interface CalendarSlot {
   id: number;
+  day: number; // 0=Mon ... 4=Fri
   time: string;
   name: string;
   status: SlotStatus;
+  newDay?: number;
+  newTime?: string;
 }
 
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+const dayDates = [10, 11, 12, 13, 14]; // Mar 10-14
 
-const initialSlots: CalendarSlot[] = [
-  { id: 1, time: "9:00", name: "A. Garcia", status: "pending" },
-  { id: 2, time: "10:30", name: "B. Taylor", status: "pending" },
-  { id: 3, time: "11:00", name: "C. Nguyen", status: "no-show" },
-  { id: 4, time: "1:00", name: "D. Miller", status: "pending" },
-  { id: 5, time: "2:30", name: "E. Brown", status: "pending" },
-  { id: 6, time: "3:00", name: "F. Davis", status: "pending" },
+const initialCalSlots: CalendarSlot[] = [
+  { id: 1, day: 0, time: "9:00", name: "A. Garcia", status: "pending" },
+  { id: 2, day: 0, time: "2:00", name: "B. Taylor", status: "pending" },
+  { id: 3, day: 1, time: "10:30", name: "C. Nguyen", status: "no-show" },
+  { id: 4, day: 2, time: "11:00", name: "D. Miller", status: "pending" },
+  { id: 5, day: 3, time: "9:30", name: "E. Brown", status: "pending" },
+  { id: 6, day: 4, time: "1:00", name: "F. Davis", status: "pending" },
 ];
 
-const calendarSequence: { slotId: number; newStatus: SlotStatus }[] = [
+const calSequence: { slotId: number; newStatus: SlotStatus; newDay?: number; newTime?: string }[] = [
   { slotId: 1, newStatus: "confirmed" },
   { slotId: 2, newStatus: "confirmed" },
-  { slotId: 3, newStatus: "rescheduled" },
+  { slotId: 3, newStatus: "rescheduled", newDay: 3, newTime: "3:00" },
   { slotId: 4, newStatus: "confirmed" },
   { slotId: 5, newStatus: "confirmed" },
   { slotId: 6, newStatus: "confirmed" },
 ];
 
-function SlotBadge({ status }: { status: SlotStatus }) {
+function CalSlotBadge({ status }: { status: SlotStatus }) {
   const cfg: Record<SlotStatus, { label: string; classes: string }> = {
     confirmed: { label: "Confirmed", classes: "bg-accent/10 text-accent" },
     pending: { label: "Pending", classes: "bg-background-secondary text-foreground-tertiary" },
-    rescheduled: { label: "Rescheduled", classes: "bg-electric/10 text-electric" },
+    rescheduled: { label: "Moved", classes: "bg-electric/10 text-electric" },
     "no-show": { label: "No-show", classes: "bg-error/10 text-error" },
     empty: { label: "", classes: "" },
   };
@@ -245,7 +251,7 @@ function SlotBadge({ status }: { status: SlotStatus }) {
       key={status}
       initial={{ scale: 0.7, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
-      className={`inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-medium whitespace-nowrap ${c.classes}`}
+      className={`inline-flex items-center px-1.5 py-0.5 rounded text-[8px] font-semibold whitespace-nowrap ${c.classes}`}
       style={{ fontFamily: "var(--font-body)" }}
     >
       {c.label}
@@ -254,8 +260,7 @@ function SlotBadge({ status }: { status: SlotStatus }) {
 }
 
 function CalendarMockup() {
-  const [slots, setSlots] = useState<CalendarSlot[]>(initialSlots);
-  const [noShowCount, setNoShowCount] = useState(3);
+  const [slots, setSlots] = useState<CalendarSlot[]>(initialCalSlots);
   const [step, setStep] = useState(-1);
   const [isInView, setIsInView] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -270,118 +275,95 @@ function CalendarMockup() {
   }, []);
 
   const resetAndReplay = useCallback(() => {
-    setSlots(initialSlots);
-    setNoShowCount(3);
+    setSlots(initialCalSlots);
     setStep(-1);
   }, []);
 
   useEffect(() => {
     if (!isInView) return;
-
     if (step === -1) {
-      const t = setTimeout(() => setStep(0), 600);
+      const t = setTimeout(() => setStep(0), 800);
       return () => clearTimeout(t);
     }
-
-    if (step >= calendarSequence.length) {
+    if (step >= calSequence.length) {
       const t = setTimeout(resetAndReplay, 3000);
       return () => clearTimeout(t);
     }
-
-    const seq = calendarSequence[step];
+    const seq = calSequence[step];
     const t = setTimeout(() => {
-      setSlots(prev => prev.map(s => s.id === seq.slotId ? { ...s, status: seq.newStatus } : s));
-      if (seq.newStatus === "rescheduled" || seq.newStatus === "confirmed") {
-        setNoShowCount(prev => Math.max(0, prev - (seq.slotId === 3 ? 1 : 0)));
-      }
+      setSlots(prev => prev.map(s =>
+        s.id === seq.slotId
+          ? { ...s, status: seq.newStatus, ...(seq.newDay !== undefined ? { day: seq.newDay, time: seq.newTime } : {}) }
+          : s
+      ));
       setStep(s => s + 1);
-    }, 650);
-
+    }, 800);
     return () => clearTimeout(t);
   }, [step, isInView, resetAndReplay]);
 
-  const confirmedCount = slots.filter(s => s.status === "confirmed").length;
+  const confirmedCount = slots.filter(s => s.status === "confirmed" || s.status === "rescheduled").length;
+  const noShowCount = slots.filter(s => s.status === "no-show").length;
 
   return (
     <div ref={containerRef} className="relative aspect-video overflow-hidden rounded-2xl border border-border bg-background">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-2.5 border-b border-border bg-background-secondary">
+      <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-background-secondary">
         <div className="flex items-center gap-2">
           <CalendarCheck className="w-3.5 h-3.5 text-electric" />
           <span className="text-[11px] font-semibold text-foreground" style={{ fontFamily: "var(--font-display)" }}>
-            Week of Mar 9 &ndash; 13
+            Week of Mar 10 &ndash; 14
           </span>
         </div>
-        <div className="flex items-center gap-3">
-          <span className="text-[10px] text-accent font-medium" style={{ fontFamily: "var(--font-body)" }}>
-            {confirmedCount} confirmed
-          </span>
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={noShowCount}
-              initial={{ scale: 1.3, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              className="text-[10px] text-error font-medium"
-              style={{ fontFamily: "var(--font-body)" }}
-            >
-              {noShowCount} no-show{noShowCount !== 1 ? "s" : ""}
-            </motion.span>
-          </AnimatePresence>
+        <div className="flex items-center gap-2">
+          <span className="text-[10px] text-accent font-medium">{confirmedCount} confirmed</span>
+          {noShowCount > 0 && <span className="text-[10px] text-error font-medium">{noShowCount} no-show</span>}
         </div>
       </div>
 
-      {/* Day headers */}
-      <div className="grid grid-cols-5 border-b border-border-light">
-        {days.map((d, i) => (
-          <div key={d} className={`text-center py-1.5 text-[10px] font-medium ${i === 2 ? "text-electric" : "text-foreground-tertiary"}`} style={{ fontFamily: "var(--font-display)" }}>
-            {d}
-            <div className={`text-[9px] mt-0.5 ${i === 2 ? "text-electric" : "text-foreground-tertiary"}`}>{9 + i}</div>
+      {/* Weekly grid */}
+      <div className="grid grid-cols-5 flex-1">
+        {days.map((d, dayIdx) => (
+          <div key={d} className={`border-r last:border-r-0 border-border-light ${dayIdx === 3 && slots.some(s => s.id === 3 && s.status === "rescheduled" && s.day === 3) ? "bg-electric/3" : ""}`}>
+            {/* Day header */}
+            <div className="text-center py-1.5 border-b border-border-light">
+              <div className="text-[9px] font-medium text-foreground-tertiary" style={{ fontFamily: "var(--font-display)" }}>{d}</div>
+              <div className="text-[10px] font-semibold text-foreground">{dayDates[dayIdx]}</div>
+            </div>
+            {/* Slots for this day */}
+            <div className="p-1 space-y-1 min-h-[80px]">
+              <AnimatePresence>
+                {slots.filter(s => s.day === dayIdx).map((slot) => (
+                  <motion.div
+                    key={slot.id}
+                    layout
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    className={`px-1.5 py-1 rounded-md text-[8px] border transition-colors ${
+                      slot.status === "confirmed" ? "border-accent/30 bg-accent/8" :
+                      slot.status === "rescheduled" ? "border-electric/30 bg-electric/8" :
+                      slot.status === "no-show" ? "border-error/20 bg-error/5 opacity-50" :
+                      "border-border-light bg-white"
+                    }`}
+                  >
+                    <div className="font-mono text-foreground-tertiary leading-tight" style={{ fontSize: "7px" }}>{slot.time}</div>
+                    <div className={`font-medium leading-tight truncate ${slot.status === "no-show" ? "line-through text-foreground-tertiary" : "text-foreground"}`} style={{ fontSize: "9px" }}>{slot.name}</div>
+                    <CalSlotBadge status={slot.status} />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
           </div>
         ))}
       </div>
 
-      {/* Calendar grid - simplified slot view */}
-      <div className="p-2 space-y-1">
-        {slots.map((slot) => (
-          <motion.div
-            key={slot.id}
-            layout
-            className={`flex items-center justify-between px-3 py-1.5 rounded-lg border transition-colors duration-300 ${
-              slot.status === "confirmed"
-                ? "border-accent/30 bg-accent/5"
-                : slot.status === "rescheduled"
-                ? "border-electric/30 bg-electric/5"
-                : slot.status === "no-show"
-                ? "border-error/30 bg-error/5"
-                : "border-border-light bg-background"
-            }`}
-          >
-            <div className="flex items-center gap-2">
-              <span className="text-[10px] text-foreground-tertiary w-8" style={{ fontFamily: "var(--font-mono)" }}>{slot.time}</span>
-              <span className={`text-[11px] font-medium ${slot.status === "no-show" ? "line-through text-foreground-tertiary" : "text-foreground"}`} style={{ fontFamily: "var(--font-body)" }}>
-                {slot.name}
-              </span>
-            </div>
-            <AnimatePresence mode="wait">
-              <SlotBadge status={slot.status} />
-            </AnimatePresence>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Bottom stat bar */}
-      <div className="absolute bottom-0 left-0 right-0 px-4 py-2 border-t border-border bg-background-secondary/80 backdrop-blur-sm">
-        <div className="flex items-center justify-between text-[10px]" style={{ fontFamily: "var(--font-body)" }}>
+      {/* Bottom bar */}
+      <div className="absolute bottom-0 left-0 right-0 px-4 py-1.5 border-t border-border bg-background-secondary/80 backdrop-blur-sm">
+        <div className="flex items-center justify-between text-[10px]">
           <span className="text-foreground-secondary">Confirmation rate</span>
           <div className="flex items-center gap-2">
-            <div className="w-24 h-1.5 rounded-full bg-background-tertiary overflow-hidden">
-              <motion.div
-                className="h-full rounded-full bg-accent"
-                initial={{ width: "0%" }}
-                animate={{ width: `${(confirmedCount / slots.length) * 100}%` }}
-                transition={{ duration: 0.5 }}
-              />
+            <div className="w-20 h-1.5 rounded-full bg-background-tertiary overflow-hidden">
+              <motion.div className="h-full rounded-full bg-accent" initial={{ width: "0%" }} animate={{ width: `${(confirmedCount / slots.length) * 100}%` }} transition={{ duration: 0.5 }} />
             </div>
             <span className="font-semibold text-accent">{Math.round((confirmedCount / slots.length) * 100)}%</span>
           </div>
@@ -465,36 +447,37 @@ function LeadScoringMockup() {
       timers.push(setTimeout(() => setPhase(1), 800));
     } else if (phase === 1) {
       // Reveal scores one by one
-      leads.forEach((lead, i) => {
+      initialLeads.forEach((lead, i) => {
         timers.push(setTimeout(() => {
           setLeads(prev => prev.map(l => l.id === lead.id ? { ...l, showScore: true } : l));
-        }, i * 400));
+        }, i * 500));
       });
-      timers.push(setTimeout(() => setPhase(2), leads.length * 400 + 500));
+      timers.push(setTimeout(() => setPhase(2), initialLeads.length * 500 + 600));
     } else if (phase === 2) {
       // Assign quality badges
-      leads.forEach((lead, i) => {
+      initialLeads.forEach((lead, i) => {
         const quality: LeadQuality = lead.score >= 85 ? "hot" : lead.score >= 60 ? "warm" : "cold";
         timers.push(setTimeout(() => {
           setLeads(prev => prev.map(l => l.id === lead.id ? { ...l, quality } : l));
-        }, i * 350));
+        }, i * 450));
       });
-      timers.push(setTimeout(() => setPhase(3), leads.length * 350 + 600));
+      timers.push(setTimeout(() => setPhase(3), initialLeads.length * 450 + 700));
     } else if (phase === 3) {
       // Pass hot leads to sales
-      const hotLeads = leads.filter(l => l.score >= 85);
-      hotLeads.forEach((lead, i) => {
+      const hotLeadIds = initialLeads.filter(l => l.score >= 85).map(l => l.id);
+      hotLeadIds.forEach((id, i) => {
         timers.push(setTimeout(() => {
-          setLeads(prev => prev.map(l => l.id === lead.id ? { ...l, passedToSales: true } : l));
-        }, i * 500));
+          setLeads(prev => prev.map(l => l.id === id ? { ...l, passedToSales: true } : l));
+        }, i * 600));
       });
-      timers.push(setTimeout(() => setPhase(4), hotLeads.length * 500 + 500));
+      timers.push(setTimeout(() => setPhase(4), hotLeadIds.length * 600 + 600));
     } else if (phase === 4) {
       timers.push(setTimeout(resetAndReplay, 3000));
     }
 
     return () => timers.forEach(clearTimeout);
-  }, [phase, isInView, leads, resetAndReplay]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase, isInView, resetAndReplay]);
 
   const scoreColor = (score: number) => {
     if (score >= 85) return "text-accent";
@@ -720,7 +703,7 @@ export default function Features() {
           <h2 className="text-display-sm mb-6 text-foreground">
             Problems solved.
             <br />
-            <span className="gradient-text">Revenue recovered.</span>
+            <span className="text-electric">Revenue recovered.</span>
           </h2>
           <p className="text-lg text-foreground-secondary" style={{ fontFamily: "var(--font-body)" }}>
             Your team should focus on closing deals, not chasing confirmations

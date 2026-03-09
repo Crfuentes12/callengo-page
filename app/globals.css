@@ -273,7 +273,7 @@
   /* ── Typography Display ── */
   .text-display {
     font-family: var(--font-display);
-    font-weight: 700;
+    font-weight: 600;
     font-size: clamp(2.75rem, 6vw, 4.75rem);
     line-height: 1.05;
     letter-spacing: -0.035em;

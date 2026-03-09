@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Header from "../components/Header";
@@ -260,6 +260,27 @@ const webhookPayload = `{
 export default function DocsPage() {
   const [activeSection, setActiveSection] = useState("getting-started");
   const [integrationFilter, setIntegrationFilter] = useState<string>("All");
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll sidebar based on scroll position
+  useEffect(() => {
+    const sectionIds = sidebarLinks.map(l => l.href.replace("#", ""));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-20% 0px -60% 0px", threshold: 0 }
+    );
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
 
   const filteredIntegrations =
     integrationFilter === "All"
@@ -271,8 +292,9 @@ export default function DocsPage() {
       <Header />
       <main style={{ fontFamily: "var(--font-body)" }}>
         {/* ────────── Hero ────────── */}
-        <section className="gradient-bg pt-32 pb-16 text-white">
-          <div className="max-w-7xl mx-auto px-6">
+        <section className="bg-background pt-32 pb-16 relative">
+          <div className="absolute inset-0 bg-grid opacity-50" />
+          <div className="max-w-7xl mx-auto px-6 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -280,15 +302,15 @@ export default function DocsPage() {
               className="max-w-3xl"
             >
               <div className="flex items-center gap-2 mb-4">
-                <Book className="w-5 h-5 text-white/70" />
-                <span className="text-sm font-medium text-white/70 uppercase tracking-wider">
+                <Book className="w-5 h-5 text-electric" />
+                <span className="text-sm font-medium text-foreground-tertiary uppercase tracking-wider">
                   Documentation
                 </span>
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+              <h1 className="text-4xl md:text-5xl font-semibold mb-6 text-foreground">
                 Callengo Documentation
               </h1>
-              <p className="text-xl text-white/80 leading-relaxed">
+              <p className="text-xl text-foreground-secondary leading-relaxed">
                 Everything you need to set up, configure, and get the most out of
                 your AI-powered calling campaigns.
               </p>
@@ -372,7 +394,7 @@ export default function DocsPage() {
                       key={item.step}
                       className="border border-border rounded-xl p-6 hover:shadow-sm transition-shadow"
                     >
-                      <div className="w-8 h-8 rounded-full bg-foreground text-white flex items-center justify-center text-sm font-bold mb-4">
+                      <div className="w-8 h-8 rounded-full bg-electric text-white flex items-center justify-center text-sm font-bold mb-4">
                         {item.step}
                       </div>
                       <h3 className="font-semibold mb-2">{item.title}</h3>
@@ -388,7 +410,7 @@ export default function DocsPage() {
                     href="https://app.callengo.com/auth/signup"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold bg-foreground text-white rounded-full hover:opacity-90 transition-opacity"
+                    className="btn btn-primary rounded-full"
                   >
                     Create free account
                     <ArrowRight className="w-4 h-4" />
@@ -630,7 +652,7 @@ export default function DocsPage() {
                     onClick={() => setIntegrationFilter(cat)}
                     className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
                       integrationFilter === cat
-                        ? "bg-foreground text-white"
+                        ? "bg-electric text-white"
                         : "bg-background-secondary text-foreground-secondary hover:bg-background-tertiary"
                     }`}
                   >
@@ -917,32 +939,56 @@ export default function DocsPage() {
               </div>
             </section>
 
+            {/* ────────── Integrations CTA ────────── */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="rounded-2xl border border-border bg-background-secondary p-8 md:p-10 flex flex-col md:flex-row items-center gap-6"
+            >
+              <div className="flex-1">
+                <h3 className="text-xl font-semibold text-foreground mb-2">Explore all integrations</h3>
+                <p className="text-sm text-foreground-secondary leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>
+                  Connect Callengo with your CRM, calendar, and business tools. See the full list of supported integrations.
+                </p>
+              </div>
+              <a
+                href="/docs/integrations"
+                className="btn btn-primary rounded-full whitespace-nowrap"
+              >
+                View Integrations
+              </a>
+            </motion.div>
+
             {/* ────────── CTA ────────── */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="gradient-bg rounded-2xl p-8 md:p-12 text-center text-white"
+              className="bg-deep-indigo rounded-2xl p-8 md:p-12 text-center text-white relative overflow-hidden"
             >
-              <h3 className="text-2xl font-bold mb-3 text-white">Need more help?</h3>
-              <p className="text-white/70 mb-6 max-w-md mx-auto">
-                Our support team is ready to assist you with any questions.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a
-                  href="https://app.callengo.com/auth/signup"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold bg-white text-primary rounded-full hover:bg-white/90 transition-colors"
-                >
-                  Get Started Free
-                </a>
-                <a
-                  href="mailto:support@callengo.com"
-                  className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold border border-white/30 text-white rounded-full hover:bg-white/10 transition-colors"
-                >
-                  Contact Support
-                </a>
+              <div className="absolute inset-0 bg-grid-dark opacity-30" />
+              <div className="relative z-10">
+                <h3 className="text-2xl font-semibold mb-3 text-white">Need more help?</h3>
+                <p className="text-white/50 mb-6 max-w-md mx-auto" style={{ fontFamily: "var(--font-body)" }}>
+                  Our support team is ready to assist you with any questions.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <a
+                    href="https://app.callengo.com/auth/signup"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold bg-white text-deep-indigo rounded-full hover:bg-white/90 transition-colors"
+                  >
+                    Get Started Free
+                  </a>
+                  <a
+                    href="mailto:support@callengo.com"
+                    className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold border border-white/20 text-white rounded-full hover:bg-white/10 transition-colors"
+                  >
+                    Contact Support
+                  </a>
+                </div>
               </div>
             </motion.div>
           </div>

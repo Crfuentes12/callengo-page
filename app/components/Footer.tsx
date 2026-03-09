@@ -12,6 +12,7 @@ const footerLinks = {
   ],
   Resources: [
     { name: "Documentation", href: "/docs" },
+    { name: "Integrations", href: "/docs/integrations" },
     { name: "Help Center", href: "/help" },
     { name: "Blog", href: "/blog" },
   ],
@@ -52,7 +53,7 @@ export default function Footer() {
                 height={32}
                 className="w-8 h-8 brightness-0 invert"
               />
-              <span className="text-lg font-bold text-white tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
+              <span className="text-lg font-semibold text-white tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
                 Callengo
               </span>
             </Link>

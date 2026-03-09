@@ -98,9 +98,10 @@ export default function AboutPage() {
         </section>
 
         {/* Stats Section */}
-        <section className="section bg-navy text-white relative overflow-hidden">
-          <div className="absolute inset-0 bg-grid-dark opacity-30" />
-          <div className="glow-orb glow-orb-purple w-[400px] h-[400px] -top-40 right-0" />
+        <section className="section gradient-bg text-white relative overflow-hidden">
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+          </div>
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
               {stats.map((stat, index) => (
@@ -248,9 +249,9 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="relative overflow-hidden rounded-3xl bg-navy p-12 md:p-20"
+              className="relative overflow-hidden rounded-3xl gradient-bg p-12 md:p-20"
             >
-              {/* Background Pattern */}
+              {/* Background decorations */}
               <div className="absolute inset-0 opacity-20">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
                 <div className="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
@@ -267,14 +268,14 @@ export default function AboutPage() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <a
                     href="https://app.callengo.com/auth/signup"
-                    className="btn bg-white text-navy hover:bg-white/90 px-8 py-4 font-semibold rounded-xl"
+                    className="btn bg-white text-primary hover:bg-white/90 px-8 py-4 font-semibold rounded-xl"
                   >
                     Start free trial
                     <ArrowRight className="w-5 h-5" />
                   </a>
                   <a
                     href="mailto:sales@callengo.com"
-                    className="btn border border-white/20 text-white hover:bg-white/5 px-8 py-4 rounded-xl"
+                    className="btn border border-white/30 text-white hover:bg-white/10 px-8 py-4 rounded-xl"
                   >
                     Talk to sales
                   </a>

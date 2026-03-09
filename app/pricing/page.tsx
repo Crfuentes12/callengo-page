@@ -274,9 +274,12 @@ export default function PricingPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-deep-indigo rounded-3xl p-8 md:p-12 text-white mb-12 relative overflow-hidden"
+              className="gradient-bg rounded-3xl p-8 md:p-12 text-white mb-12 relative overflow-hidden"
             >
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+              <div className="absolute inset-0 opacity-20">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+              </div>
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-8 relative z-10">
                 <div className="flex items-center gap-6">
                   <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
                     <Building2 className="w-8 h-8 text-white" />
@@ -292,7 +295,7 @@ export default function PricingPage() {
                 </div>
                 <a
                   href="mailto:sales@callengo.com"
-                  className="btn bg-white text-deep-indigo hover:bg-white/90 px-8 py-4 font-semibold shrink-0 rounded-xl"
+                  className="btn bg-white text-primary hover:bg-white/90 px-8 py-4 font-semibold shrink-0 rounded-xl"
                 >
                   Contact Sales
                   <ArrowRight className="w-4 h-4" />
@@ -401,11 +404,11 @@ export default function PricingPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="relative overflow-hidden rounded-3xl bg-deep-indigo p-12 md:p-20"
+              className="relative overflow-hidden rounded-3xl gradient-bg p-12 md:p-20"
             >
-              <div className="absolute inset-0 bg-grid-dark opacity-30" />
-              <div className="absolute inset-0 opacity-10">
+              <div className="absolute inset-0 opacity-20">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
               </div>
 
               <div className="relative z-10 max-w-3xl">
@@ -418,14 +421,14 @@ export default function PricingPage() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <a
                     href="https://app.callengo.com/auth/signup"
-                    className="btn bg-white text-deep-indigo hover:bg-white/90 px-8 py-4 font-semibold rounded-xl"
+                    className="btn bg-white text-primary hover:bg-white/90 px-8 py-4 font-semibold rounded-xl"
                   >
                     Start free trial
                     <ArrowRight className="w-5 h-5" />
                   </a>
                   <a
                     href="mailto:sales@callengo.com"
-                    className="btn border border-white/20 text-white hover:bg-white/5 px-8 py-4 rounded-xl"
+                    className="btn border border-white/30 text-white hover:bg-white/10 px-8 py-4 rounded-xl"
                   >
                     Talk to sales
                   </a>

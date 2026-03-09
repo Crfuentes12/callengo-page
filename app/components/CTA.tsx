@@ -11,76 +11,55 @@ export default function CTA() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative overflow-hidden rounded-3xl bg-deep-indigo"
+          className="relative overflow-hidden rounded-3xl gradient-bg p-12 md:p-20"
         >
-          {/* Background effects */}
-          <div className="absolute inset-0 bg-grid-dark opacity-40" />
-          <div className="glow-orb glow-orb-primary w-[500px] h-[500px] -top-40 right-0" />
-          <div className="glow-orb glow-orb-slate w-[400px] h-[400px] bottom-0 -left-40" />
+          {/* Background decorations */}
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+          </div>
 
           {/* Content */}
-          <div className="relative z-10 p-12 md:p-20">
-            <div className="max-w-3xl">
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight"
-              >
-                Ready to get your
-                <br />
-                time back?
-              </motion.h2>
+          <div className="relative z-10 max-w-3xl">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight">
+              Ready to get your
+              <br />
+              time back?
+            </h2>
 
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="text-xl text-white/50 mb-10 max-w-xl"
-                style={{ fontFamily: "var(--font-body)" }}
-              >
-                Stop wasting hours on repetitive calls. Let your team focus on
-                closing deals while we handle the rest. Start with 15 free minutes.
-              </motion.p>
+            <p
+              className="text-xl text-white/70 mb-10 max-w-xl"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
+              Stop wasting hours on repetitive calls. Let your team focus on
+              closing deals while we handle the rest. Start with 15 free minutes.
+            </p>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-                className="flex flex-col sm:flex-row gap-4"
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a
+                href="https://app.callengo.com/auth/signup"
+                className="btn bg-white text-primary hover:bg-white/90 px-8 py-4 font-semibold rounded-xl"
               >
-                <a
-                  href="https://app.callengo.com/auth/signup"
-                  className="btn bg-white text-deep-indigo hover:bg-white/90 px-8 py-4 font-semibold rounded-xl"
-                >
-                  Get started free
-                  <ArrowRight className="w-5 h-5" />
-                </a>
-                <a
-                  href="mailto:sales@callengo.com"
-                  className="btn border border-white/20 text-white hover:bg-white/5 px-8 py-4 rounded-xl"
-                >
-                  Talk to sales
-                </a>
-              </motion.div>
+                Get started free
+                <ArrowRight className="w-5 h-5" />
+              </a>
+              <a
+                href="mailto:sales@callengo.com"
+                className="btn border border-white/30 text-white hover:bg-white/10 px-8 py-4 rounded-xl"
+              >
+                Talk to sales
+              </a>
+            </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-                className="flex flex-wrap items-center gap-6 mt-10 text-white/40 text-sm"
-                style={{ fontFamily: "var(--font-body)" }}
-              >
-                <span>No credit card required</span>
-                <span className="hidden sm:inline text-white/20">&middot;</span>
-                <span>15 free minutes</span>
-                <span className="hidden sm:inline text-white/20">&middot;</span>
-                <span>Cancel anytime</span>
-              </motion.div>
+            <div
+              className="flex flex-wrap items-center gap-6 mt-10 text-white/40 text-sm"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
+              <span>No credit card required</span>
+              <span className="hidden sm:inline text-white/20">&middot;</span>
+              <span>15 free minutes</span>
+              <span className="hidden sm:inline text-white/20">&middot;</span>
+              <span>Cancel anytime</span>
             </div>
           </div>
         </motion.div>

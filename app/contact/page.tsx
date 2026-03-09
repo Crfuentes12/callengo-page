@@ -240,11 +240,13 @@ export default function ContactPage() {
                   </a>
                 </div>
 
-                <div className="relative rounded-xl overflow-hidden bg-navy p-5">
-                  <div className="absolute inset-0 bg-grid-dark opacity-30" />
+                <div className="relative rounded-xl overflow-hidden gradient-bg p-5">
+                  <div className="absolute inset-0 opacity-20">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-white rounded-full blur-2xl -translate-y-1/2 translate-x-1/2" />
+                  </div>
                   <div className="relative z-10">
                     <h3 className="font-semibold text-white text-sm mb-2">Ready to start?</h3>
-                    <p className="text-white/50 text-xs mb-4 leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>
+                    <p className="text-white/60 text-xs mb-4 leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>
                       Get started with 15 free minutes. No credit card required.
                     </p>
                     <a

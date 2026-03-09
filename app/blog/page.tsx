@@ -90,7 +90,7 @@ export default function BlogPage() {
                   <span className="inline-block px-3 py-1 bg-white/20 rounded-full text-sm mb-4">
                     {featuredPost.category}
                   </span>
-                  <h2 className="text-2xl md:text-3xl font-bold mb-4 group-hover:text-white/90 transition-colors">
+                  <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white group-hover:text-white/90 transition-colors">
                     {featuredPost.title}
                   </h2>
                   <p className="text-white/70 mb-6 max-w-2xl">
@@ -148,7 +148,7 @@ export default function BlogPage() {
               viewport={{ once: true }}
               className="mt-16 gradient-bg rounded-3xl p-8 md:p-12 text-center text-white"
             >
-              <h3 className="text-2xl font-bold mb-4">Stay updated</h3>
+              <h3 className="text-2xl font-bold mb-4 text-white">Stay updated</h3>
               <p className="text-white/70 mb-6 max-w-md mx-auto">
                 Get the latest insights on reducing no-shows and improving business efficiency delivered to your inbox.
               </p>

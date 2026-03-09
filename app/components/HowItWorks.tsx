@@ -85,9 +85,9 @@ function MockupImportContacts({ active }: { active: boolean }) {
       {/* Header */}
       <div className="flex items-center gap-3 mb-2">
         <Upload className="w-5 h-5 text-electric" />
-        <span className="text-white text-base font-semibold">Import Contacts</span>
+        <span className="text-foreground text-base font-semibold">Import Contacts</span>
       </div>
-      <p className="text-white/40 text-xs mb-5">Upload a CSV or Excel file with your contact list</p>
+      <p className="text-foreground-tertiary text-xs mb-5">Upload a CSV or Excel file with your contact list</p>
 
       {/* Drop zone */}
       <AnimatePresence mode="wait">
@@ -101,7 +101,7 @@ function MockupImportContacts({ active }: { active: boolean }) {
             className="flex-1 flex items-center justify-center"
           >
             <motion.div
-              className="border-2 border-dashed border-white/15 rounded-xl w-full py-14 flex flex-col items-center gap-4"
+              className="border-2 border-dashed border-gray-200 rounded-xl w-full py-14 flex flex-col items-center gap-4"
               animate={phase === "dropping" ? { borderColor: "rgba(79,95,232,0.6)", scale: 1.02 } : {}}
               transition={{ duration: 0.5 }}
             >
@@ -111,7 +111,7 @@ function MockupImportContacts({ active }: { active: boolean }) {
               >
                 <FileSpreadsheet className="w-12 h-12 text-electric" />
               </motion.div>
-              <p className="text-white/50 text-sm font-medium">
+              <p className="text-foreground-secondary text-sm font-medium">
                 {phase === "dropping" ? "contacts_list.csv" : "Drop CSV or Excel file here"}
               </p>
               {phase === "dropping" && (
@@ -137,14 +137,14 @@ function MockupImportContacts({ active }: { active: boolean }) {
             className="flex-1 flex flex-col items-center justify-center gap-4"
           >
             <FileSpreadsheet className="w-10 h-10 text-electric" />
-            <p className="text-white/70 text-sm font-medium">Processing contacts_list.csv</p>
-            <div className="w-64 h-2 bg-white/10 rounded-full overflow-hidden">
+            <p className="text-foreground-secondary text-sm font-medium">Processing contacts_list.csv</p>
+            <div className="w-64 h-2 bg-gray-100 rounded-full overflow-hidden">
               <motion.div
                 className="h-full bg-electric rounded-full"
                 style={{ width: `${progressVal}%` }}
               />
             </div>
-            <p className="text-white/40 text-xs">{Math.round(progressVal)}% — Validating fields and mapping columns</p>
+            <p className="text-foreground-tertiary text-xs">{Math.round(progressVal)}% — Validating fields and mapping columns</p>
           </motion.div>
         )}
 
@@ -157,7 +157,7 @@ function MockupImportContacts({ active }: { active: boolean }) {
             className="flex-1 flex flex-col"
           >
             {/* field mapping */}
-            <p className="text-white/40 text-[10px] uppercase tracking-wider mb-2">Auto-mapped fields</p>
+            <p className="text-foreground-tertiary text-[10px] uppercase tracking-wider mb-2">Auto-mapped fields</p>
             <div className="flex gap-2 mb-4 flex-wrap">
               {["Name → Full Name", "Email → Email", "Phone → Mobile"].map((m, i) => (
                 <motion.span
@@ -173,7 +173,7 @@ function MockupImportContacts({ active }: { active: boolean }) {
             </div>
 
             {/* table header */}
-            <div className="grid grid-cols-4 text-[11px] text-white/30 uppercase tracking-wider px-3 pb-2 border-b border-white/8">
+            <div className="grid grid-cols-4 text-[11px] text-foreground-tertiary uppercase tracking-wider px-3 pb-2 border-b border-gray-200 bg-gray-50 rounded-t-lg py-2">
               <span>Name</span><span>Email</span><span>Phone</span><span>Status</span>
             </div>
 
@@ -185,9 +185,9 @@ function MockupImportContacts({ active }: { active: boolean }) {
                   initial={{ opacity: 0, x: -16 }}
                   animate={i < visibleRows ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
                   transition={{ duration: 0.45 }}
-                  className="grid grid-cols-4 text-xs text-white/60 px-3 py-3 border-b border-white/5"
+                  className="grid grid-cols-4 text-xs text-foreground-secondary px-3 py-3 border-b border-gray-100"
                 >
-                  <span className="text-white/80 font-medium">{r.name}</span>
+                  <span className="text-foreground font-medium">{r.name}</span>
                   <span className="truncate">{r.email}</span>
                   <span>{r.phone}</span>
                   <span>
@@ -209,7 +209,7 @@ function MockupImportContacts({ active }: { active: boolean }) {
               transition={{ delay: 2.5, duration: 0.5 }}
               className="mt-auto pt-3 flex items-center justify-between text-xs"
             >
-              <span className="text-white/30">4 contacts imported successfully</span>
+              <span className="text-foreground-tertiary">4 contacts imported successfully</span>
               <span className="text-accent flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4" /> Ready to use</span>
             </motion.div>
           </motion.div>
@@ -261,19 +261,19 @@ function MockupAgentConfig({ active }: { active: boolean }) {
     <div className="p-6 md:p-8 h-full flex flex-col gap-5" style={uiFont}>
       <div className="flex items-center gap-3">
         <Bot className="w-5 h-5 text-electric" />
-        <span className="text-white text-base font-semibold">Agent Configuration</span>
+        <span className="text-foreground text-base font-semibold">Agent Configuration</span>
       </div>
 
       {/* Voice selector */}
       <div>
-        <label className="text-[11px] text-white/40 uppercase tracking-wider mb-2 block">Choose a Voice</label>
+        <label className="text-[11px] text-foreground-tertiary uppercase tracking-wider mb-2 block">Choose a Voice</label>
         <div className="relative">
-          <div className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white/70 flex items-center justify-between">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm text-foreground-secondary flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Mic className="w-4 h-4 text-electric" />
               {selectedVoice || "Select a voice..."}
             </div>
-            <ChevronRight className={`w-4 h-4 text-white/30 transition-transform duration-300 ${showVoice ? "rotate-90" : ""}`} />
+            <ChevronRight className={`w-4 h-4 text-foreground-tertiary transition-transform duration-300 ${showVoice ? "rotate-90" : ""}`} />
           </div>
           <AnimatePresence>
             {showVoice && (
@@ -282,7 +282,7 @@ function MockupAgentConfig({ active }: { active: boolean }) {
                 animate={{ opacity: 1, y: 0, height: "auto" }}
                 exit={{ opacity: 0, y: -4, height: 0 }}
                 transition={{ duration: 0.4 }}
-                className="absolute z-10 top-full mt-1 w-full bg-void border border-white/10 rounded-lg overflow-hidden"
+                className="absolute z-10 top-full mt-1 w-full bg-white border border-gray-200 rounded-lg overflow-hidden shadow-lg"
               >
                 {voices.map((v, i) => (
                   <motion.div
@@ -290,7 +290,7 @@ function MockupAgentConfig({ active }: { active: boolean }) {
                     initial={{ opacity: 0, x: -12 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.2, duration: 0.35 }}
-                    className={`px-4 py-3 text-sm text-white/60 hover:bg-white/5 cursor-pointer flex items-center gap-3 ${
+                    className={`px-4 py-3 text-sm text-foreground-secondary hover:bg-gray-50 cursor-pointer flex items-center gap-3 ${
                       v === "Elena – Professional" ? "bg-electric/10 text-electric" : ""
                     }`}
                   >
@@ -306,15 +306,15 @@ function MockupAgentConfig({ active }: { active: boolean }) {
 
       {/* Script editor */}
       <div className="flex-1">
-        <label className="text-[11px] text-white/40 uppercase tracking-wider mb-2 block">Call Script</label>
-        <div className="bg-white/5 border border-white/10 rounded-lg p-4 min-h-[100px]">
+        <label className="text-[11px] text-foreground-tertiary uppercase tracking-wider mb-2 block">Call Script</label>
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 min-h-[100px]">
           {script.map((line, i) => (
             <motion.p
               key={i}
               initial={{ opacity: 0 }}
               animate={i < scriptLines ? { opacity: 1 } : { opacity: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-sm text-white/60 mb-2 leading-relaxed"
+              className="text-sm text-foreground-secondary mb-2 leading-relaxed"
             >
               {line.split(/(\{\{.*?\}\})/).map((part, j) =>
                 part.startsWith("{{") ? (
@@ -326,21 +326,21 @@ function MockupAgentConfig({ active }: { active: boolean }) {
             </motion.p>
           ))}
           {scriptLines === 0 && (
-            <p className="text-white/20 text-sm italic">Script lines will appear here...</p>
+            <p className="text-foreground-tertiary text-sm italic">Script lines will appear here...</p>
           )}
         </div>
       </div>
 
       {/* Toggles */}
       <div>
-        <label className="text-[11px] text-white/40 uppercase tracking-wider mb-3 block">Features</label>
+        <label className="text-[11px] text-foreground-tertiary uppercase tracking-wider mb-3 block">Features</label>
         <div className="space-y-3">
           {toggleLabels.map((label, i) => (
             <div key={label} className="flex items-center justify-between">
-              <span className="text-xs text-white/50">{label}</span>
+              <span className="text-xs text-foreground-secondary">{label}</span>
               <motion.div
                 animate={{
-                  backgroundColor: toggles[i] ? "rgba(79,95,232,1)" : "rgba(255,255,255,0.1)",
+                  backgroundColor: toggles[i] ? "rgba(79,95,232,1)" : "rgba(0,0,0,0.1)",
                 }}
                 transition={{ duration: 0.3 }}
                 className="w-9 h-5 rounded-full p-0.5 cursor-pointer"
@@ -400,21 +400,21 @@ function MockupCampaignSetup({ active }: { active: boolean }) {
     <div className="p-6 md:p-8 h-full flex flex-col gap-5" style={uiFont}>
       <div className="flex items-center gap-3">
         <Settings2 className="w-5 h-5 text-electric" />
-        <span className="text-white text-base font-semibold">Campaign Settings</span>
+        <span className="text-foreground text-base font-semibold">Campaign Settings</span>
       </div>
 
       {/* Schedule grid */}
       <div>
-        <label className="text-[11px] text-white/40 uppercase tracking-wider mb-3 block">Calling Schedule</label>
-        <p className="text-white/30 text-xs mb-3">Select time slots when calls should be made</p>
+        <label className="text-[11px] text-foreground-tertiary uppercase tracking-wider mb-3 block">Calling Schedule</label>
+        <p className="text-foreground-tertiary text-xs mb-3">Select time slots when calls should be made</p>
         <div className="grid grid-cols-6 gap-1.5 text-xs">
           <div />
           {days.map((d) => (
-            <div key={d} className="text-center text-white/40 py-1 font-medium">{d}</div>
+            <div key={d} className="text-center text-foreground-tertiary py-1 font-medium">{d}</div>
           ))}
           {hours.map((h, hi) => (
             <div key={`row-${hi}`} className="contents">
-              <div className="text-white/40 py-2 text-right pr-2">{h}</div>
+              <div className="text-foreground-tertiary py-2 text-right pr-2">{h}</div>
               {days.map((_, di) => {
                 const idx = hi * 5 + di;
                 const isSelected = selectedSlots.includes(idx);
@@ -422,8 +422,8 @@ function MockupCampaignSetup({ active }: { active: boolean }) {
                   <motion.div
                     key={idx}
                     animate={{
-                      backgroundColor: isSelected ? "rgba(79,95,232,0.4)" : "rgba(255,255,255,0.04)",
-                      borderColor: isSelected ? "rgba(79,95,232,0.6)" : "rgba(255,255,255,0.08)",
+                      backgroundColor: isSelected ? "rgba(79,95,232,0.15)" : "rgba(0,0,0,0.02)",
+                      borderColor: isSelected ? "rgba(79,95,232,0.4)" : "rgba(0,0,0,0.08)",
                     }}
                     transition={{ duration: 0.35 }}
                     className="h-9 rounded-lg border flex items-center justify-center"
@@ -446,8 +446,8 @@ function MockupCampaignSetup({ active }: { active: boolean }) {
 
       {/* Timezone */}
       <div className="relative">
-        <label className="text-[11px] text-white/40 uppercase tracking-wider mb-2 block">Timezone</label>
-        <div className="bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white/60 flex items-center gap-3">
+        <label className="text-[11px] text-foreground-tertiary uppercase tracking-wider mb-2 block">Timezone</label>
+        <div className="bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-foreground-secondary flex items-center gap-3">
           <Globe className="w-4 h-4 text-electric" />
           <span>America/New_York (EST)</span>
         </div>
@@ -458,10 +458,10 @@ function MockupCampaignSetup({ active }: { active: boolean }) {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.4 }}
-              className="absolute z-10 top-full mt-1 w-full bg-void border border-white/10 rounded-lg overflow-hidden"
+              className="absolute z-10 top-full mt-1 w-full bg-white border border-gray-200 rounded-lg overflow-hidden shadow-lg"
             >
               {["America/New_York (EST)", "Europe/London (GMT)", "Asia/Tokyo (JST)"].map((tz) => (
-                <div key={tz} className="px-4 py-2.5 text-xs text-white/50 hover:bg-white/5">{tz}</div>
+                <div key={tz} className="px-4 py-2.5 text-xs text-foreground-secondary hover:bg-gray-50">{tz}</div>
               ))}
             </motion.div>
           )}
@@ -471,13 +471,13 @@ function MockupCampaignSetup({ active }: { active: boolean }) {
       {/* Retry count */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <RotateCcw className="w-4 h-4 text-white/30" />
-          <span className="text-xs text-white/50">Max retries per contact</span>
+          <RotateCcw className="w-4 h-4 text-foreground-tertiary" />
+          <span className="text-xs text-foreground-secondary">Max retries per contact</span>
         </div>
         <motion.span
           key={retryCount}
           initial={{ scale: 1.4, color: "#4F5FE8" }}
-          animate={{ scale: 1, color: "rgba(255,255,255,0.8)" }}
+          animate={{ scale: 1, color: "rgba(0,0,0,0.8)" }}
           transition={{ duration: 0.4 }}
           className="text-lg font-bold"
         >
@@ -487,16 +487,16 @@ function MockupCampaignSetup({ active }: { active: boolean }) {
 
       {/* Compliance */}
       <div>
-        <label className="text-[11px] text-white/40 uppercase tracking-wider mb-3 block">Compliance</label>
+        <label className="text-[11px] text-foreground-tertiary uppercase tracking-wider mb-3 block">Compliance</label>
         <div className="space-y-3">
           {["DNC list check", "TCPA compliance"].map((label, i) => (
             <div key={label} className="flex items-center justify-between">
-              <span className="text-xs text-white/50 flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-white/30" />
+              <span className="text-xs text-foreground-secondary flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-foreground-tertiary" />
                 {label}
               </span>
               <motion.div
-                animate={{ backgroundColor: complianceToggles[i] ? "rgba(29,184,122,1)" : "rgba(255,255,255,0.1)" }}
+                animate={{ backgroundColor: complianceToggles[i] ? "rgba(29,184,122,1)" : "rgba(0,0,0,0.1)" }}
                 transition={{ duration: 0.3 }}
                 className="w-9 h-5 rounded-full p-0.5"
               >
@@ -570,12 +570,12 @@ function MockupLaunch({ active }: { active: boolean }) {
         <motion.div className="flex flex-col items-center gap-5">
           <div className="flex items-center gap-3 mb-2">
             <Rocket className="w-5 h-5 text-electric" />
-            <span className="text-white text-base font-semibold">Ready to Launch</span>
+            <span className="text-foreground text-base font-semibold">Ready to Launch</span>
           </div>
-          <div className="text-center text-white/40 text-sm mb-2">
+          <div className="text-center text-foreground-tertiary text-sm mb-2">
             247 contacts · 3 retries · EST schedule
           </div>
-          <p className="text-white/30 text-xs text-center max-w-xs">
+          <p className="text-foreground-tertiary text-xs text-center max-w-xs">
             One click to start calling all contacts simultaneously
           </p>
           <motion.button
@@ -596,14 +596,14 @@ function MockupLaunch({ active }: { active: boolean }) {
         >
           {/* Live counter */}
           <div className="text-center">
-            <div className="text-xs text-white/30 uppercase tracking-wider mb-2">Calls in progress</div>
+            <div className="text-xs text-foreground-tertiary uppercase tracking-wider mb-2">Calls in progress</div>
             <motion.div
               key={callCount}
               className="text-4xl font-bold text-electric tabular-nums"
             >
               {Math.min(callCount, 247)}
             </motion.div>
-            <div className="text-xs text-white/40 mt-2">of 247 contacts</div>
+            <div className="text-xs text-foreground-tertiary mt-2">of 247 contacts</div>
           </div>
 
           {/* Active call indicators */}
@@ -614,7 +614,7 @@ function MockupLaunch({ active }: { active: boolean }) {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={activeCalls.includes(i) ? { opacity: 1, scale: 1 } : {}}
                 transition={{ type: "spring", stiffness: 300, duration: 0.5 }}
-                className="bg-white/5 border border-white/8 rounded-xl p-3 text-center"
+                className="bg-gray-50 border border-gray-200 rounded-xl p-3 text-center"
               >
                 <motion.div
                   animate={c.status === "Connected" ? { scale: [1, 1.15, 1] } : {}}
@@ -622,12 +622,12 @@ function MockupLaunch({ active }: { active: boolean }) {
                   className="mx-auto mb-2"
                 >
                   <Phone className={`w-5 h-5 mx-auto ${
-                    c.status === "Connected" ? "text-accent" : c.status === "Ringing" ? "text-electric" : "text-white/20"
+                    c.status === "Connected" ? "text-accent" : c.status === "Ringing" ? "text-electric" : "text-gray-300"
                   }`} />
                 </motion.div>
-                <div className="text-xs text-white/60 font-medium">{c.name}</div>
+                <div className="text-xs text-foreground-secondary font-medium">{c.name}</div>
                 <div className={`text-[10px] mt-1 font-medium ${
-                  c.status === "Connected" ? "text-accent" : c.status === "Ringing" ? "text-electric" : "text-white/30"
+                  c.status === "Connected" ? "text-accent" : c.status === "Ringing" ? "text-electric" : "text-foreground-tertiary"
                 }`}>
                   {c.status}
                 </div>
@@ -637,11 +637,11 @@ function MockupLaunch({ active }: { active: boolean }) {
 
           {/* Progress bar */}
           <div>
-            <div className="flex justify-between text-xs text-white/30 mb-2">
+            <div className="flex justify-between text-xs text-foreground-tertiary mb-2">
               <span>Campaign progress</span>
               <span>{Math.round(Math.min(callCount, 247) / 247 * 100)}%</span>
             </div>
-            <div className="h-2 bg-white/8 rounded-full overflow-hidden">
+            <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
               <motion.div
                 className="h-full bg-electric rounded-full"
                 animate={{ width: `${Math.min(callCount, 247) / 247 * 100}%` }}
@@ -695,7 +695,7 @@ function MockupAnalytics({ active }: { active: boolean }) {
     <div className="p-6 md:p-8 h-full flex flex-col gap-5" style={uiFont}>
       <div className="flex items-center gap-3">
         <BarChart3 className="w-5 h-5 text-electric" />
-        <span className="text-white text-base font-semibold">Analytics</span>
+        <span className="text-foreground text-base font-semibold">Analytics</span>
       </div>
 
       {/* Stats row */}
@@ -705,16 +705,16 @@ function MockupAnalytics({ active }: { active: boolean }) {
           { label: "Avg Duration", value: "3:24", color: "text-electric" },
           { label: "Positive", value: "64%", color: "text-accent" },
         ].map((s) => (
-          <div key={s.label} className="bg-white/5 rounded-xl p-3 text-center">
+          <div key={s.label} className="bg-gray-50 rounded-xl p-3 text-center border border-gray-200">
             <div className={`text-xl font-bold ${s.color}`}>{s.value}</div>
-            <div className="text-[10px] text-white/30 mt-1">{s.label}</div>
+            <div className="text-[10px] text-foreground-tertiary mt-1">{s.label}</div>
           </div>
         ))}
       </div>
 
       {/* Bar chart */}
       <div>
-        <div className="text-xs text-white/30 mb-3">Calls per day</div>
+        <div className="text-xs text-foreground-tertiary mb-3">Calls per day</div>
         <div className="flex items-end gap-3 h-24">
           {barHeights.map((h, i) => (
             <div key={i} className="flex-1 flex flex-col items-center gap-2">
@@ -724,7 +724,7 @@ function MockupAnalytics({ active }: { active: boolean }) {
                 animate={{ height: `${h}%` }}
                 transition={{ duration: 1.2, delay: i * 0.2, ease: "easeOut" }}
               />
-              <span className="text-[10px] text-white/30">{labels[i]}</span>
+              <span className="text-[10px] text-foreground-tertiary">{labels[i]}</span>
             </div>
           ))}
         </div>
@@ -737,9 +737,9 @@ function MockupAnalytics({ active }: { active: boolean }) {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-white/5 border border-white/8 rounded-xl p-4"
+            className="bg-gray-50 border border-gray-200 rounded-xl p-4"
           >
-            <div className="text-xs text-white/30 mb-2">Transcript Preview</div>
+            <div className="text-xs text-foreground-tertiary mb-2">Transcript Preview</div>
             {transcriptLines.map((l, i) => (
               <motion.div
                 key={i}
@@ -748,10 +748,10 @@ function MockupAnalytics({ active }: { active: boolean }) {
                 transition={{ delay: i * 0.5, duration: 0.4 }}
                 className="mb-2 last:mb-0"
               >
-                <span className={`text-xs font-semibold ${l.speaker === "Agent" ? "text-electric" : "text-white/50"}`}>
+                <span className={`text-xs font-semibold ${l.speaker === "Agent" ? "text-electric" : "text-foreground-secondary"}`}>
                   {l.speaker}:
                 </span>
-                <span className="text-xs text-white/40 ml-2">{l.text}</span>
+                <span className="text-xs text-foreground-tertiary ml-2">{l.text}</span>
               </motion.div>
             ))}
           </motion.div>
@@ -835,13 +835,13 @@ function MockupDashboard({ active }: { active: boolean }) {
     { label: "Total Calls", value: counters.calls.toLocaleString(), icon: Phone, color: "text-electric" },
     { label: "Connected", value: counters.connected.toLocaleString(), icon: Users, color: "text-accent" },
     { label: "Conversion", value: `${counters.conversion}%`, icon: TrendingUp, color: "text-electric" },
-    { label: "Campaigns", value: counters.campaigns.toString(), icon: Rocket, color: "text-white/70" },
+    { label: "Campaigns", value: counters.campaigns.toString(), icon: Rocket, color: "text-foreground-secondary" },
   ];
 
   const campaigns = [
     { name: "Q1 Outreach", status: "Active", progress: 78, color: "bg-accent" },
     { name: "Product Launch", status: "Active", progress: 45, color: "bg-electric" },
-    { name: "Re-engagement", status: "Scheduled", progress: 0, color: "bg-white/20" },
+    { name: "Re-engagement", status: "Scheduled", progress: 0, color: "bg-gray-300" },
   ];
 
   // Mini sparkline data
@@ -854,8 +854,8 @@ function MockupDashboard({ active }: { active: boolean }) {
     <div className="p-6 md:p-8 h-full flex flex-col gap-4" style={uiFont}>
       <div className="flex items-center gap-3">
         <LayoutDashboard className="w-5 h-5 text-electric" />
-        <span className="text-white text-base font-semibold">Dashboard</span>
-        <span className="text-xs text-white/20 ml-auto">Last 30 days</span>
+        <span className="text-foreground text-base font-semibold">Dashboard</span>
+        <span className="text-xs text-foreground-tertiary ml-auto">Last 30 days</span>
       </div>
 
       {/* Metric cards */}
@@ -868,12 +868,12 @@ function MockupDashboard({ active }: { active: boolean }) {
               initial={{ opacity: 0, y: 12 }}
               animate={showCards ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.2, duration: 0.4 }}
-              className="bg-white/5 border border-white/8 rounded-xl p-4"
+              className="bg-gray-50 border border-gray-200 rounded-xl p-4"
             >
               <div className="flex items-center justify-between mb-2">
                 <Icon className={`w-4 h-4 ${c.color}`} />
                 {i < 2 && (
-                  <svg width="48" height="20" className="opacity-40">
+                  <svg width="48" height="20" className="opacity-60">
                     <polyline
                       fill="none"
                       stroke={i === 0 ? "#4F5FE8" : "#1DB87A"}
@@ -885,8 +885,8 @@ function MockupDashboard({ active }: { active: boolean }) {
                   </svg>
                 )}
               </div>
-              <div className="text-xl font-bold text-white tabular-nums">{c.value}</div>
-              <div className="text-[10px] text-white/30 mt-1">{c.label}</div>
+              <div className="text-xl font-bold text-foreground tabular-nums">{c.value}</div>
+              <div className="text-[10px] text-foreground-tertiary mt-1">{c.label}</div>
             </motion.div>
           );
         })}
@@ -894,18 +894,18 @@ function MockupDashboard({ active }: { active: boolean }) {
 
       {/* Campaign list */}
       <div>
-        <div className="text-xs text-white/30 uppercase tracking-wider mb-3">Active Campaigns</div>
+        <div className="text-xs text-foreground-tertiary uppercase tracking-wider mb-3">Active Campaigns</div>
         {campaigns.map((camp, i) => (
           <motion.div
             key={camp.name}
             initial={{ opacity: 0, x: -12 }}
             animate={showCards ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 1 + i * 0.25, duration: 0.4 }}
-            className="flex items-center gap-3 py-3 border-b border-white/5 last:border-0"
+            className="flex items-center gap-3 py-3 border-b border-gray-100 last:border-0"
           >
             <div className="flex-1 min-w-0">
-              <div className="text-xs text-white/70 font-medium">{camp.name}</div>
-              <div className="h-1.5 bg-white/8 rounded-full mt-2 overflow-hidden">
+              <div className="text-xs text-foreground font-medium">{camp.name}</div>
+              <div className="h-1.5 bg-gray-100 rounded-full mt-2 overflow-hidden">
                 <motion.div
                   className={`h-full rounded-full ${camp.color}`}
                   initial={{ width: 0 }}
@@ -922,8 +922,8 @@ function MockupDashboard({ active }: { active: boolean }) {
                   transition={{ duration: 0.3 }}
                   className={`text-[10px] px-2 py-1 rounded-full font-medium ${
                     camp.status === "Active"
-                      ? "bg-accent/15 text-accent"
-                      : "bg-white/8 text-white/40"
+                      ? "bg-accent/10 text-accent"
+                      : "bg-gray-100 text-foreground-tertiary"
                   }`}
                 >
                   {camp.status}
@@ -1047,11 +1047,8 @@ export default function HowItWorks() {
 
   return (
     <section className="relative overflow-hidden" id="how-it-works">
-      {/* Dark background with glow orbs */}
-      <div className="absolute inset-0 bg-navy" />
-      <div className="absolute inset-0 bg-grid-dark" />
-      <div className="glow-orb glow-orb-purple w-[500px] h-[500px] top-0 right-0 opacity-50" />
-      <div className="glow-orb glow-orb-cyan w-[400px] h-[400px] bottom-0 left-0 opacity-30" />
+      {/* Gradient background */}
+      <div className="absolute inset-0 gradient-bg" />
 
       <div className="relative z-10 py-28 md:py-36">
         <div className="max-w-7xl mx-auto px-6">
@@ -1088,18 +1085,18 @@ export default function HowItWorks() {
               viewport={{ once: true }}
               className="lg:col-span-7 relative"
             >
-              <div className="rounded-2xl bg-dark-light border border-white/8 shadow-2xl overflow-hidden">
+              <div className="rounded-2xl bg-white border border-gray-200 shadow-2xl overflow-hidden">
                 {/* Window chrome */}
-                <div className="flex items-center gap-3 px-5 py-3.5 bg-dark border-b border-white/8">
+                <div className="flex items-center gap-3 px-5 py-3.5 bg-gray-50 border-b border-gray-200">
                   <div className="flex items-center gap-1.5 shrink-0">
-                    <span className="w-3 h-3 rounded-full bg-red-400/50" />
-                    <span className="w-3 h-3 rounded-full bg-yellow-400/50" />
-                    <span className="w-3 h-3 rounded-full bg-green-400/50" />
+                    <span className="w-3 h-3 rounded-full bg-red-400" />
+                    <span className="w-3 h-3 rounded-full bg-yellow-400" />
+                    <span className="w-3 h-3 rounded-full bg-green-400" />
                   </div>
                   <div className="flex-1">
-                    <div className="bg-dark-light/80 rounded-md px-3 py-1.5 flex items-center gap-2">
+                    <div className="bg-white rounded-md px-3 py-1.5 flex items-center gap-2 border border-gray-200">
                       <div className="w-2 h-2 rounded-full bg-accent shrink-0" />
-                      <span className="text-[11px] text-white/40 font-mono truncate">
+                      <span className="text-[11px] text-foreground-tertiary font-mono truncate">
                         app.callengo.com
                       </span>
                     </div>
@@ -1107,7 +1104,7 @@ export default function HowItWorks() {
                 </div>
 
                 {/* Mockup area — taller aspect ratio for more space */}
-                <div className="relative bg-dark overflow-hidden" style={{ aspectRatio: "4 / 3.5" }}>
+                <div className="relative bg-white overflow-hidden" style={{ aspectRatio: "4 / 3.5" }}>
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={activeStep}
@@ -1130,17 +1127,17 @@ export default function HowItWorks() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -8 }}
                         transition={{ duration: 0.4, delay: 0.15 }}
-                        className="bg-dark/90 backdrop-blur-md border border-white/8 rounded-xl px-5 py-4"
+                        className="bg-white/90 backdrop-blur-md border border-gray-200 rounded-xl px-5 py-4 shadow-sm"
                       >
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center shrink-0">
-                            <StepIcon className="w-5 h-5 text-white" />
+                          <div className="w-10 h-10 rounded-lg bg-electric/10 flex items-center justify-center shrink-0">
+                            <StepIcon className="w-5 h-5 text-electric" />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <div className="text-[11px] text-white/40 font-semibold uppercase tracking-wider">
+                            <div className="text-[11px] text-foreground-tertiary font-semibold uppercase tracking-wider">
                               Step {step.number}
                             </div>
-                            <div className="text-white font-semibold text-base leading-tight">
+                            <div className="text-foreground font-semibold text-base leading-tight">
                               {step.title}
                             </div>
                           </div>
@@ -1151,8 +1148,8 @@ export default function HowItWorks() {
                                 onClick={() => handleStepClick(i)}
                                 className={`rounded-full transition-all duration-300 cursor-pointer ${
                                   i === activeStep
-                                    ? "w-6 h-2 bg-secondary"
-                                    : "w-2 h-2 bg-white/20 hover:bg-white/30"
+                                    ? "w-6 h-2 bg-electric"
+                                    : "w-2 h-2 bg-gray-300 hover:bg-gray-400"
                                 }`}
                               />
                             ))}
@@ -1164,7 +1161,7 @@ export default function HowItWorks() {
                 </div>
               </div>
 
-              <div className="absolute -inset-8 bg-secondary/5 blur-3xl rounded-3xl -z-10" />
+              <div className="absolute -inset-8 bg-white/10 blur-3xl rounded-3xl -z-10" />
             </motion.div>
 
             {/* RIGHT — Step list */}

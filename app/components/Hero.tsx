@@ -171,28 +171,38 @@ interface FloatingBubble {
   yOffset: number;
 }
 
-function FloatingDataBubble({ bubble }: { bubble: FloatingBubble }) {
+/* Bubble positions: close to / overlapping the card edges */
+const bubblePositions = [
+  { top: "top-[16px]", side: "-right-[24px]" },
+  { top: "top-[90px]", side: "-left-[28px]" },
+  { top: "top-[160px]", side: "-right-[20px]" },
+  { top: "top-[230px]", side: "-left-[24px]" },
+  { top: "bottom-[80px]", side: "-right-[26px]" },
+  { top: "bottom-[20px]", side: "-left-[20px]" },
+];
+
+function FloatingDataBubble({ bubble, index }: { bubble: FloatingBubble; index: number }) {
   const statusConfig = {
     confirmed: { icon: <CheckCircle2 className="w-3 h-3 text-accent" />, borderColor: "border-accent/30", bgColor: "bg-accent/5" },
     updated: { icon: <AlertCircle className="w-3 h-3 text-amber-500" />, borderColor: "border-amber-300/40", bgColor: "bg-amber-50" },
     new: { icon: <Zap className="w-3 h-3 text-electric" />, borderColor: "border-electric/30", bgColor: "bg-electric/5" },
   };
   const cfg = statusConfig[bubble.status];
+  const pos = bubblePositions[index % bubblePositions.length];
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8, x: bubble.position === "left" ? -20 : 20 }}
-      animate={{ opacity: 1, scale: 1, x: 0 }}
-      exit={{ opacity: 0, scale: 0.9, x: bubble.position === "left" ? -10 : 10 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
-      className={`absolute z-30 ${bubble.position === "left" ? "-left-4 sm:-left-32 lg:-left-44" : "-right-4 sm:-right-32 lg:-right-44"}`}
-      style={{ top: `${bubble.yOffset}px` }}
+      initial={{ opacity: 0, scale: 0.7, y: 10 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.85, y: -5 }}
+      transition={{ duration: 0.35, ease: "easeOut" }}
+      className={`absolute z-30 ${pos.top} ${pos.side}`}
     >
-      <div className={`flex items-center gap-2 px-3 py-2 rounded-xl ${cfg.bgColor} border ${cfg.borderColor} shadow-lg backdrop-blur-sm bg-white/80 max-w-[200px]`}>
+      <div className={`flex items-center gap-2 px-2.5 py-1.5 rounded-xl ${cfg.bgColor} border ${cfg.borderColor} shadow-lg backdrop-blur-md bg-white/85 max-w-[180px]`}>
         {cfg.icon}
         <div className="min-w-0">
-          <div className="text-[9px] font-medium text-foreground-tertiary uppercase tracking-wider leading-tight">{bubble.label}</div>
-          <div className="text-[11px] font-semibold text-foreground truncate leading-tight">{bubble.value}</div>
+          <div className="text-[8px] font-medium text-foreground-tertiary uppercase tracking-wider leading-tight">{bubble.label}</div>
+          <div className="text-[10px] font-semibold text-foreground truncate leading-tight">{bubble.value}</div>
         </div>
       </div>
     </motion.div>
@@ -205,7 +215,7 @@ function seededRandom(seed: number) {
 }
 
 function WaveformVisualizer({ isPlaying }: { isPlaying: boolean }) {
-  const bars = 32;
+  const bars = 40;
   const barData = useMemo(() => {
     return Array.from({ length: bars }).map((_, i) => {
       const r1 = seededRandom(i);
@@ -224,7 +234,7 @@ function WaveformVisualizer({ isPlaying }: { isPlaying: boolean }) {
   }, []);
 
   return (
-    <div className="flex items-end gap-px h-4 w-full">
+    <div className="flex items-end gap-px h-6 w-full">
       {barData.map((b, i) => (
         <motion.div
           key={i}
@@ -232,7 +242,7 @@ function WaveformVisualizer({ isPlaying }: { isPlaying: boolean }) {
           animate={
             isPlaying
               ? { height: [`${b.baseHeight}%`, `${b.peakA}%`, `${b.midA}%`, `${b.peakB}%`, `${b.baseHeight}%`], opacity: [0.3, 0.7, 0.4, 0.65, 0.3] }
-              : { height: `${b.baseHeight}%`, opacity: 0.2 }
+              : { height: `${b.baseHeight}%`, opacity: 0.15 }
           }
           transition={isPlaying ? { duration: b.duration, repeat: Infinity, ease: "easeInOut", delay: i * 0.02 } : { duration: 0.4 }}
         />
@@ -442,55 +452,59 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* ─── RIGHT COLUMN: Call Demo ─── */}
+          {/* ─── RIGHT COLUMN: Call Demo (Redesigned) ─── */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="relative flex justify-center"
           >
-            <div className="relative w-full max-w-sm">
-              {/* Floating data bubbles */}
+            {/* Gradient glow behind card */}
+            <div className="absolute -inset-6 rounded-[3rem] bg-gradient-to-br from-electric/10 via-electric/5 to-transparent blur-2xl -z-10" />
+            <div className="absolute -inset-4 rounded-[2.5rem] bg-electric/[0.03] blur-xl -z-10" />
+
+            <div className="relative w-full max-w-md">
+              {/* Floating data bubbles - positioned close to / overlapping card */}
               <AnimatePresence>
-                {floatingBubbles.map((bubble) => (
-                  <FloatingDataBubble key={bubble.id} bubble={bubble} />
+                {floatingBubbles.map((bubble, idx) => (
+                  <FloatingDataBubble key={bubble.id} bubble={bubble} index={idx} />
                 ))}
               </AnimatePresence>
 
-              {/* Card shell */}
-              <div className="rounded-2xl bg-white shadow-xl ring-1 ring-border overflow-hidden">
+              {/* ── Card ── */}
+              <div className="rounded-3xl bg-white shadow-2xl ring-1 ring-border/60 overflow-hidden">
 
-                {/* Call header - compact */}
-                <div className="bg-deep-indigo px-4 py-2.5 shrink-0">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center">
-                        <Phone className="w-3 h-3 text-white" />
+                {/* ── Header: agent info + tabs ── */}
+                <div className="bg-deep-indigo px-4 py-3">
+                  <div className="flex items-center justify-between mb-2.5">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center">
+                        <Phone className="w-3.5 h-3.5 text-white" />
                       </div>
                       <div>
-                        <div className="text-white font-medium text-[11px] leading-tight">{scenario.agentName}</div>
-                        <div className="text-white/40 text-[9px]">{scenario.phone}</div>
+                        <div className="text-white font-semibold text-xs leading-tight">{scenario.agentName}</div>
+                        <div className="text-white/40 text-[10px] font-mono">{scenario.phone}</div>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
                       {isPlaying && (
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-1 bg-red-500/25 px-2 py-0.5 rounded-full">
+                        <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="flex items-center gap-1 bg-red-500/20 px-2 py-0.5 rounded-full">
                           <span className="relative flex h-1.5 w-1.5">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
                             <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500" />
                           </span>
-                          <span className="text-white/90 text-[9px] font-semibold tracking-wide">LIVE</span>
+                          <span className="text-white/90 text-[9px] font-bold tracking-wider">LIVE</span>
                         </motion.div>
                       )}
                       {totalDataFields > 0 && (
-                        <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className="text-[9px] font-semibold text-white/70 bg-white/10 px-1.5 py-0.5 rounded flex items-center gap-0.5">
+                        <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className="text-[9px] font-bold text-white/80 bg-white/10 px-2 py-0.5 rounded-full flex items-center gap-1">
                           <Zap className="w-2.5 h-2.5 text-accent" />{totalDataFields}
                         </motion.span>
                       )}
                     </div>
                   </div>
 
-                  {/* Tabs */}
+                  {/* Scenario tabs */}
                   <div className="flex gap-1">
                     {scenarios.map((s, index) => {
                       const Icon = s.icon;
@@ -498,10 +512,10 @@ export default function Hero() {
                         <button
                           key={s.id}
                           onClick={() => handleScenarioChange(index)}
-                          className={`flex items-center gap-1 px-2 py-1 rounded-full text-[9px] font-medium transition-all cursor-pointer whitespace-nowrap ${
+                          className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-medium transition-all cursor-pointer whitespace-nowrap ${
                             activeScenario === index
                               ? "bg-white text-deep-indigo shadow-sm"
-                              : "bg-white/10 text-white/70 hover:bg-white/20"
+                              : "bg-white/10 text-white/60 hover:bg-white/20 hover:text-white/80"
                           }`}
                         >
                           <Icon className="w-2.5 h-2.5" />
@@ -512,46 +526,42 @@ export default function Hero() {
                   </div>
                 </div>
 
-                {/* Compact waveform + controls */}
-                <div className="px-3 py-2 bg-background-secondary border-b border-border shrink-0">
-                  <div className="flex items-center gap-2">
+                {/* ── Player controls: waveform + play/pause + progress ── */}
+                <div className="px-4 py-3 bg-background border-b border-border">
+                  <div className="flex items-center gap-3">
                     <button
                       onClick={handlePlayPause}
-                      className="w-7 h-7 rounded-full bg-electric text-white flex items-center justify-center hover:opacity-90 transition-all shadow-md shrink-0 cursor-pointer active:scale-95"
+                      className="w-9 h-9 rounded-full bg-electric text-white flex items-center justify-center hover:brightness-110 transition-all shadow-md shadow-electric/20 shrink-0 cursor-pointer active:scale-95"
                     >
-                      {isPlaying ? <Pause className="w-2.5 h-2.5" /> : <Play className="w-2.5 h-2.5 ml-0.5" />}
+                      {isPlaying ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3 ml-0.5" />}
                     </button>
-                    <div className="flex-1 space-y-0.5">
+                    <div className="flex-1 space-y-1">
                       <WaveformVisualizer isPlaying={isPlaying} />
                       <div className="h-1 bg-border rounded-full overflow-hidden cursor-pointer relative group" onClick={handleProgressClick}>
                         <div className="h-full bg-electric rounded-full transition-all duration-200" style={{ width: `${Math.min(progress, 100)}%` }} />
                       </div>
                     </div>
-                    <span className="text-[9px] text-foreground-tertiary font-mono tabular-nums shrink-0">
+                    <span className="text-[10px] text-foreground-tertiary font-mono tabular-nums shrink-0">
                       {formatTime(currentTime)}/{formatTime(scenario.duration)}
                     </span>
                   </div>
                 </div>
 
-                {/* ── TRANSCRIPT CONTENT ── */}
-                <div className="h-80 flex flex-col min-h-0 relative">
+                {/* ── Transcript area ── */}
+                <div className="h-64 flex flex-col min-h-0 relative">
                   {!hasStartedPlaying ? (
-                    <div className="flex-1 flex flex-col items-center justify-center text-center px-6">
-                      <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="w-12 h-12 rounded-full bg-electric flex items-center justify-center mb-4 cursor-pointer"
-                        style={{ boxShadow: "var(--shadow-electric-lg)" }}
+                    /* ── Compact idle state ── */
+                    <div className="flex-1 flex flex-col items-center justify-center px-6">
+                      <div className="w-full max-w-[220px] mb-3 opacity-30">
+                        <WaveformVisualizer isPlaying={false} />
+                      </div>
+                      <button
                         onClick={handlePlayPause}
+                        className="flex items-center gap-2 px-4 py-2 rounded-full bg-electric/10 text-electric text-xs font-medium hover:bg-electric/15 transition-colors cursor-pointer"
                       >
-                        <Play className="w-5 h-5 text-white ml-0.5" />
-                      </motion.div>
-                      <p className="text-[12px] font-semibold text-foreground mb-1 leading-snug">
-                        {scenario.ctaHeadline}
-                      </p>
-                      <p className="text-[10px] text-foreground-tertiary">
-                        {scenario.ctaSub}
-                      </p>
+                        <Play className="w-3 h-3" />
+                        Press play to hear a live demo
+                      </button>
                     </div>
                   ) : (
                     <div ref={transcriptRef} className="flex-1 overflow-y-auto p-3 space-y-1.5 scroll-smooth">
@@ -595,9 +605,6 @@ export default function Hero() {
                   )}
                 </div>
               </div>
-
-              {/* Subtle glow behind card */}
-              <div className="absolute -inset-8 bg-electric/5 blur-3xl rounded-[3rem] -z-10" />
             </div>
           </motion.div>
         </div>

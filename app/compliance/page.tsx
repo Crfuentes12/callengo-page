@@ -82,7 +82,7 @@ export default function CompliancePage() {
       <Header />
       <main className="pt-24">
         {/* Hero Section */}
-        <section className="bg-navy text-white py-20">
+        <section className="gradient-bg text-white py-20">
           <div className="max-w-4xl mx-auto px-6 text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -90,7 +90,7 @@ export default function CompliancePage() {
               transition={{ duration: 0.6 }}
             >
               <h1
-                className="text-display-sm mb-6"
+                className="text-display-sm mb-6 text-white"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 Compliance
@@ -157,13 +157,13 @@ export default function CompliancePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="rounded-2xl bg-navy text-white p-10 text-center"
+              className="rounded-2xl gradient-bg text-white p-10 text-center relative overflow-hidden"
             >
               <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mx-auto mb-6">
                 <Mail className="w-6 h-6 text-white" />
               </div>
               <h2
-                className="text-2xl font-semibold mb-3"
+                className="text-2xl font-semibold mb-3 text-white"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 Questions about compliance?

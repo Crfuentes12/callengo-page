@@ -211,12 +211,12 @@ const planBadgeColors: Record<string, string> = {
 /* ─────────────────────────── Plans V4 ────────────────────────────── */
 
 const plans = [
-  { name: "Free", price: "$0", minutes: "15 (one-time)", contacts: "20" },
-  { name: "Starter", price: "$99/mo", minutes: "250/month", contacts: "1,000" },
-  { name: "Growth", price: "$179/mo", minutes: "500/month", contacts: "5,000" },
-  { name: "Business", price: "$299/mo", minutes: "1,000/month", contacts: "25,000", popular: true },
-  { name: "Teams", price: "$649/mo", minutes: "3,000/month", contacts: "Unlimited" },
-  { name: "Enterprise", price: "$1,499+/mo", minutes: "Custom", contacts: "Unlimited" },
+  { name: "Free", price: "$0", annual: "$0", minutes: "15 min (one-time)", agents: "1", users: "1", maxCall: "3 min", popular: false },
+  { name: "Starter", price: "$99/mo", annual: "$87/mo", minutes: "250/month", agents: "1", users: "1", maxCall: "5 min", popular: false },
+  { name: "Growth", price: "$179/mo", annual: "$157/mo", minutes: "500/month", agents: "3", users: "2", maxCall: "7 min", popular: false },
+  { name: "Business", price: "$299/mo", annual: "$263/mo", minutes: "1,000/month", agents: "Unlimited", users: "3", maxCall: "10 min", popular: true },
+  { name: "Teams", price: "$649/mo", annual: "$571/mo", minutes: "3,000/month", agents: "Unlimited", users: "5 ($79/extra)", maxCall: "15 min", popular: false },
+  { name: "Enterprise", price: "Starting $1,499/mo", annual: "Custom", minutes: "Custom", agents: "Unlimited", users: "Custom", maxCall: "Custom", popular: false },
 ];
 
 const addOns = [
@@ -372,7 +372,7 @@ export default function DocsPage() {
                     {
                       step: "1",
                       title: "Create your account",
-                      text: "Sign up at app.callengo.com. The Free plan gives you 15 minutes and 20 contacts to explore the platform.",
+                      text: "Sign up at app.callengo.com. The Free plan gives you 15 minutes to explore the platform.",
                     },
                     {
                       step: "2",
@@ -725,6 +725,16 @@ export default function DocsPage() {
                   <pre>{webhookPayload}</pre>
                 </div>
               </motion.div>
+
+              <div className="mt-8">
+                <Link
+                  href="/docs/integrations"
+                  className="btn btn-primary rounded-full"
+                >
+                  View full integrations documentation
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
             </section>
 
             {/* ═══════════ 6. Plans & Limits ═══════════ */}
@@ -757,8 +767,11 @@ export default function DocsPage() {
                       <tr>
                         <th className="text-left px-5 py-3 font-semibold">Plan</th>
                         <th className="text-left px-5 py-3 font-semibold">Price</th>
+                        <th className="text-left px-5 py-3 font-semibold">Annual</th>
                         <th className="text-left px-5 py-3 font-semibold">Minutes</th>
-                        <th className="text-left px-5 py-3 font-semibold">Contacts</th>
+                        <th className="text-left px-5 py-3 font-semibold">Agents</th>
+                        <th className="text-left px-5 py-3 font-semibold">Users</th>
+                        <th className="text-left px-5 py-3 font-semibold">Max/Call</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -766,20 +779,23 @@ export default function DocsPage() {
                         <tr
                           key={plan.name}
                           className={`border-b border-border last:border-0 ${
-                            (plan as any).popular ? "bg-blue-50/40" : ""
+                            plan.popular ? "bg-blue-50/40" : ""
                           }`}
                         >
                           <td className="px-5 py-3 font-medium whitespace-nowrap">
                             {plan.name}
-                            {(plan as any).popular && (
-                              <span className="ml-2 text-[10px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-semibold">
+                            {plan.popular && (
+                              <span className="ml-2 text-[10px] bg-secondary text-white px-2 py-0.5 rounded-full font-semibold">
                                 Popular
                               </span>
                             )}
                           </td>
                           <td className="px-5 py-3">{plan.price}</td>
+                          <td className="px-5 py-3">{plan.annual}</td>
                           <td className="px-5 py-3">{plan.minutes}</td>
-                          <td className="px-5 py-3">{plan.contacts}</td>
+                          <td className="px-5 py-3">{plan.agents}</td>
+                          <td className="px-5 py-3">{plan.users}</td>
+                          <td className="px-5 py-3">{plan.maxCall}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -818,7 +834,7 @@ export default function DocsPage() {
                   href="https://app.callengo.com/auth/signup"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold bg-foreground text-white rounded-full hover:opacity-90 transition-opacity"
+                  className="btn btn-primary rounded-full"
                 >
                   Start for free
                   <ArrowRight className="w-4 h-4" />
@@ -965,12 +981,15 @@ export default function DocsPage() {
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-deep-indigo rounded-2xl p-8 md:p-12 text-center text-white relative overflow-hidden"
+              className="relative overflow-hidden rounded-3xl gradient-bg p-12 md:p-20"
             >
-              <div className="absolute inset-0 bg-grid-dark opacity-30" />
-              <div className="relative z-10">
+              <div className="absolute inset-0 opacity-20">
+                <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+              </div>
+              <div className="relative z-10 text-center">
                 <h3 className="text-2xl font-semibold mb-3 text-white">Need more help?</h3>
-                <p className="text-white/50 mb-6 max-w-md mx-auto" style={{ fontFamily: "var(--font-body)" }}>
+                <p className="text-white/70 mb-6 max-w-md mx-auto" style={{ fontFamily: "var(--font-body)" }}>
                   Our support team is ready to assist you with any questions.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -978,13 +997,13 @@ export default function DocsPage() {
                     href="https://app.callengo.com/auth/signup"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold bg-white text-deep-indigo rounded-full hover:bg-white/90 transition-colors"
+                    className="btn bg-white text-primary hover:bg-white/90 px-8 py-4 font-semibold"
                   >
                     Get Started Free
                   </a>
                   <a
                     href="mailto:support@callengo.com"
-                    className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold border border-white/20 text-white rounded-full hover:bg-white/10 transition-colors"
+                    className="btn border border-white/20 text-white hover:bg-white/10 px-8 py-4 font-semibold"
                   >
                     Contact Support
                   </a>

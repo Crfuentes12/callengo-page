@@ -232,7 +232,7 @@ export default function AppointmentConfirmationPage() {
         </section>
 
         {/* Pain Statistics */}
-        <section className="py-16 bg-deep-indigo text-white">
+        <section className="py-16 gradient-bg text-white">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

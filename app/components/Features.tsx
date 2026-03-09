@@ -492,9 +492,9 @@ function LeadScoringMockup() {
   };
 
   return (
-    <div ref={containerRef} className="relative aspect-video overflow-hidden rounded-2xl border border-border bg-background">
+    <div ref={containerRef} className="relative overflow-hidden rounded-2xl border border-border bg-background pb-9">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-2.5 border-b border-border bg-background-secondary">
+      <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-background-secondary">
         <div className="flex items-center gap-2">
           <TrendingUp className="w-3.5 h-3.5 text-electric" />
           <span className="text-[11px] font-semibold text-foreground" style={{ fontFamily: "var(--font-display)" }}>
@@ -507,23 +507,23 @@ function LeadScoringMockup() {
       </div>
 
       {/* Lead cards */}
-      <div className="p-3 space-y-2">
+      <div className="p-2.5 space-y-1.5">
         {leads.map((lead) => (
           <motion.div
             key={lead.id}
             layout
-            className={`relative rounded-xl border p-3 transition-colors duration-300 ${
+            className={`relative rounded-lg border p-2.5 transition-colors duration-300 ${
               lead.passedToSales
                 ? "border-accent/40 bg-accent/5"
                 : "border-border-light bg-background"
             }`}
           >
-            <div className="flex items-center justify-between mb-2">
-              <div>
-                <div className="text-[11px] font-semibold text-foreground" style={{ fontFamily: "var(--font-body)" }}>{lead.name}</div>
-                <div className="text-[10px] text-foreground-tertiary" style={{ fontFamily: "var(--font-body)" }}>{lead.company}</div>
+            <div className="flex items-center justify-between mb-1.5">
+              <div className="min-w-0">
+                <div className="text-[11px] font-semibold text-foreground truncate" style={{ fontFamily: "var(--font-body)" }}>{lead.name}</div>
+                <div className="text-[9px] text-foreground-tertiary truncate" style={{ fontFamily: "var(--font-body)" }}>{lead.company}</div>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5 shrink-0">
                 <AnimatePresence>
                   {lead.quality && <QualityBadge quality={lead.quality} />}
                 </AnimatePresence>
@@ -532,11 +532,11 @@ function LeadScoringMockup() {
                     <motion.span
                       initial={{ scale: 0, opacity: 0, x: 10 }}
                       animate={{ scale: 1, opacity: 1, x: 0 }}
-                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-semibold bg-electric/10 text-electric"
+                      className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[8px] font-semibold bg-electric/10 text-electric"
                       style={{ fontFamily: "var(--font-display)" }}
                     >
-                      <Send className="w-2.5 h-2.5" />
-                      Passed to Sales
+                      <Send className="w-2 h-2" />
+                      Sales
                     </motion.span>
                   )}
                 </AnimatePresence>
@@ -662,7 +662,7 @@ function FeatureCard({ feature, index }: { feature: typeof features[0]; index: n
 
         <div className="flex items-center gap-8 mb-8">
           <div>
-            <div className="text-4xl font-bold gradient-text">
+            <div className="text-4xl font-bold text-electric">
               {feature.stats.value}
             </div>
             <div className="text-sm text-foreground-tertiary" style={{ fontFamily: "var(--font-body)" }}>

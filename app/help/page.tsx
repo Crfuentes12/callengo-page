@@ -70,7 +70,7 @@ export default function HelpPage() {
               transition={{ duration: 0.6 }}
               className="text-center max-w-3xl mx-auto mb-16"
             >
-              <h1 className="text-display-sm mb-6"><span className="gradient-text">Help</span> Center</h1>
+              <h1 className="text-display-sm mb-6">Help Center</h1>
               <p className="text-xl text-foreground-secondary">
                 Find answers, get support, and learn how to get the most out of Callengo.
               </p>
@@ -118,12 +118,12 @@ export default function HelpPage() {
                   {channel.href ? (
                     <a
                       href={channel.href}
-                      className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold gradient-bg text-white rounded-full hover:-translate-y-0.5 transition-all"
+                      className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold bg-electric text-white rounded-full hover:-translate-y-0.5 transition-all"
                     >
                       {channel.action}
                     </a>
                   ) : (
-                    <button className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold gradient-bg text-white rounded-full hover:-translate-y-0.5 transition-all">
+                    <button className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold bg-electric text-white rounded-full hover:-translate-y-0.5 transition-all">
                       {channel.action}
                     </button>
                   )}
@@ -165,9 +165,12 @@ export default function HelpPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-deep-indigo rounded-3xl p-8 md:p-12 text-white relative overflow-hidden"
+              className="rounded-3xl p-8 md:p-12 text-white relative overflow-hidden gradient-bg"
             >
-              <div className="absolute inset-0 bg-grid-dark opacity-30" />
+              <div className="absolute inset-0 opacity-20">
+                <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+              </div>
               <h3 className="text-2xl font-semibold mb-6 relative z-10">Quick Links</h3>
               <div className="grid md:grid-cols-2 gap-4 relative z-10">
                 <Link

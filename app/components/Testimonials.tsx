@@ -137,11 +137,13 @@ export default function Testimonials() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4 }}
-                className="relative rounded-2xl p-12 text-center overflow-hidden bg-deep-indigo"
+                className="relative rounded-2xl p-12 text-center overflow-hidden gradient-bg"
                 style={{ boxShadow: "0 8px 40px rgba(30, 45, 107, 0.35), 0 4px 16px rgba(79, 95, 232, 0.20), 0 0 0 1px rgba(79, 95, 232, 0.10)" }}
               >
-                <div className="absolute inset-0 bg-grid-dark opacity-50" />
-                <div className="glow-orb glow-orb-primary w-60 h-60 top-0 right-0" />
+                <div className="absolute inset-0 opacity-20">
+                  <div className="absolute top-0 right-0 w-48 h-48 bg-white rounded-full blur-3xl -translate-y-1/4 translate-x-1/4" />
+                  <div className="absolute bottom-0 left-0 w-32 h-32 bg-white rounded-full blur-2xl translate-y-1/4 -translate-x-1/4" />
+                </div>
                 <div className="relative z-10">
                   <div className="text-7xl md:text-8xl font-bold text-white mb-3">
                     {testimonials[currentIndex].metric.value}

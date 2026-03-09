@@ -176,7 +176,7 @@ export default function AppointmentConfirmationPage() {
   return (
     <>
       <Header />
-      <main className="pt-24 relative">
+      <main className="pt-24 relative overflow-hidden">
         <AnimatedBlobs />
         {/* Hero Section */}
         <section className="section relative overflow-hidden">

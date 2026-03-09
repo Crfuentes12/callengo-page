@@ -257,7 +257,7 @@ export default function Hero() {
   const formatTime = (s: number) => { const m = Math.floor(s / 60); const sec = Math.floor(s % 60); return `${m}:${sec.toString().padStart(2, "0")}`; };
 
   return (
-    <section className="relative overflow-hidden bg-background min-h-screen flex items-center">
+    <section className="relative overflow-hidden bg-background min-h-screen flex items-center" style={{ marginBottom: "-1px" }}>
       {/* Clean subtle mesh background - no grid */}
       <div className="absolute inset-0 gradient-bg-mesh" />
 
@@ -326,33 +326,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="relative flex justify-center"
           >
-            {/* Animated gradient blobs behind the player */}
-            <div className="absolute -inset-12 -z-10">
-              <div
-                className="absolute top-0 left-1/4 w-64 h-64 rounded-full opacity-60"
-                style={{
-                  background: "rgba(79, 95, 232, 0.25)",
-                  filter: "blur(80px)",
-                  animation: "heroBlob1 18s ease-in-out infinite",
-                }}
-              />
-              <div
-                className="absolute bottom-0 right-1/4 w-72 h-72 rounded-full opacity-50"
-                style={{
-                  background: "rgba(30, 45, 107, 0.2)",
-                  filter: "blur(90px)",
-                  animation: "heroBlob2 22s ease-in-out infinite",
-                }}
-              />
-              <div
-                className="absolute top-1/2 right-0 w-48 h-48 rounded-full opacity-40"
-                style={{
-                  background: "rgba(139, 150, 200, 0.2)",
-                  filter: "blur(70px)",
-                  animation: "heroBlob3 15s ease-in-out infinite",
-                }}
-              />
-            </div>
+            {/* No shadow blobs - let the page lava lamp handle the background */}
 
             <div className="relative w-full max-w-md">
               {/* ── Glassmorphism Card ── */}
@@ -363,7 +337,7 @@ export default function Hero() {
                   backdropFilter: "blur(40px)",
                   WebkitBackdropFilter: "blur(40px)",
                   border: "1px solid rgba(255, 255, 255, 0.18)",
-                  boxShadow: "0 24px 80px rgba(30, 45, 107, 0.20), 0 8px 32px rgba(79, 95, 232, 0.12), inset 0 1px 0 rgba(255,255,255,0.2), inset 0 -1px 0 rgba(0,0,0,0.05)",
+                  boxShadow: "0 16px 48px rgba(30, 45, 107, 0.10), 0 4px 16px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255,255,255,0.2)",
                 }}
               >
 
@@ -595,26 +569,9 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Smooth transition to next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-background pointer-events-none z-10" />
+      {/* Smooth transition to next section - seamless fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent via-background/50 to-background pointer-events-none z-10" />
 
-      {/* Keyframes for hero blobs */}
-      <style jsx>{`
-        @keyframes heroBlob1 {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          33% { transform: translate(30px, -20px) scale(1.1); }
-          66% { transform: translate(-20px, 15px) scale(0.95); }
-        }
-        @keyframes heroBlob2 {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          33% { transform: translate(-25px, 20px) scale(1.05); }
-          66% { transform: translate(20px, -15px) scale(1.1); }
-        }
-        @keyframes heroBlob3 {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          50% { transform: translate(-15px, -25px) scale(1.15); }
-        }
-      `}</style>
     </section>
   );
 }

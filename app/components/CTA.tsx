@@ -13,27 +13,54 @@ export default function CTA() {
           viewport={{ once: true }}
           className="relative overflow-hidden rounded-3xl gradient-bg p-12 md:p-20"
         >
-          {/* Animated blob decorations */}
+          {/* Internal lava lamp effect */}
           <div className="absolute inset-0 overflow-hidden">
             <div
-              className="absolute -top-20 -right-20 w-[400px] h-[400px] rounded-full opacity-20"
+              className="absolute rounded-full"
               style={{
-                background: "radial-gradient(circle, rgba(255,255,255,0.6) 0%, transparent 70%)",
-                animation: "ctaBlob1 20s ease-in-out infinite",
+                width: 400,
+                height: 400,
+                top: "-15%",
+                right: "-5%",
+                background: "radial-gradient(circle, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 40%, transparent 70%)",
+                filter: "blur(40px)",
+                animation: "ctaLava1 20s ease-in-out infinite",
               }}
             />
             <div
-              className="absolute -bottom-24 -left-24 w-[350px] h-[350px] rounded-full opacity-15"
+              className="absolute rounded-full"
               style={{
-                background: "radial-gradient(circle, rgba(255,255,255,0.5) 0%, transparent 70%)",
-                animation: "ctaBlob2 25s ease-in-out infinite",
+                width: 350,
+                height: 350,
+                bottom: "-20%",
+                left: "-5%",
+                background: "radial-gradient(circle, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.03) 40%, transparent 70%)",
+                filter: "blur(50px)",
+                animation: "ctaLava2 25s ease-in-out infinite",
               }}
             />
             <div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full opacity-10"
+              className="absolute rounded-full"
               style={{
-                background: "radial-gradient(circle, rgba(139,150,200,0.4) 0%, transparent 60%)",
-                animation: "ctaBlob3 18s ease-in-out infinite",
+                width: 300,
+                height: 300,
+                top: "30%",
+                left: "40%",
+                background: "radial-gradient(circle, rgba(139,150,200,0.15) 0%, rgba(139,150,200,0.04) 40%, transparent 70%)",
+                filter: "blur(45px)",
+                animation: "ctaLava3 18s ease-in-out infinite",
+              }}
+            />
+            <div
+              className="absolute rounded-full"
+              style={{
+                width: 250,
+                height: 250,
+                top: "10%",
+                left: "20%",
+                background: "radial-gradient(circle, rgba(79,95,232,0.08) 0%, transparent 60%)",
+                filter: "blur(35px)",
+                animation: "ctaLava1 22s ease-in-out infinite reverse",
               }}
             />
           </div>
@@ -82,23 +109,23 @@ export default function CTA() {
             </div>
           </div>
 
-          {/* CTA blob keyframes */}
+          {/* CTA lava lamp keyframes */}
           <style jsx>{`
-            @keyframes ctaBlob1 {
-              0%, 100% { transform: translate(0, 0) scale(1); }
-              25% { transform: translate(-40px, 30px) scale(1.15); }
-              50% { transform: translate(-20px, 60px) scale(0.95); }
-              75% { transform: translate(30px, 20px) scale(1.1); }
+            @keyframes ctaLava1 {
+              0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+              25% { transform: translate(-40px, 30px) scale(1.15) rotate(45deg); }
+              50% { transform: translate(-20px, 60px) scale(0.95) rotate(90deg); }
+              75% { transform: translate(30px, 20px) scale(1.1) rotate(135deg); }
             }
-            @keyframes ctaBlob2 {
-              0%, 100% { transform: translate(0, 0) scale(1); }
-              30% { transform: translate(40px, -30px) scale(1.1); }
-              60% { transform: translate(20px, -50px) scale(1.2); }
+            @keyframes ctaLava2 {
+              0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+              30% { transform: translate(40px, -30px) scale(1.1) rotate(-60deg); }
+              60% { transform: translate(20px, -50px) scale(1.2) rotate(-120deg); }
             }
-            @keyframes ctaBlob3 {
-              0%, 100% { transform: translate(-50%, -50%) scale(1); }
-              33% { transform: translate(-45%, -55%) scale(1.2); }
-              66% { transform: translate(-55%, -45%) scale(0.9); }
+            @keyframes ctaLava3 {
+              0%, 100% { transform: translate(0, 0) scale(1); }
+              33% { transform: translate(30px, -20px) scale(1.2); }
+              66% { transform: translate(-20px, 30px) scale(0.9); }
             }
           `}</style>
         </motion.div>

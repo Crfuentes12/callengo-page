@@ -32,7 +32,7 @@ export default function LegalPage() {
   return (
     <>
       <Header />
-      <main className="pt-24 relative">
+      <main className="pt-24 relative overflow-hidden">
         <AnimatedBlobs />
         <section className="section">
           <div className="max-w-3xl mx-auto px-6">

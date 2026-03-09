@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import AnimatedBlobs from "../components/AnimatedBlobs";
 import {
   Calendar,
   Video,
@@ -200,7 +201,8 @@ export default function IntegrationsPage() {
   return (
     <>
       <Header />
-      <main className="pt-24">
+      <main className="pt-24 relative overflow-hidden">
+        <AnimatedBlobs />
         {/* Hero */}
         <section className="section bg-background">
           <div className="max-w-7xl mx-auto px-6">
@@ -256,10 +258,28 @@ export default function IntegrationsPage() {
                         <Icon className="w-6 h-6 text-secondary" />
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-medium text-accent-dark bg-accent/10 px-2 py-0.5 rounded-full uppercase">
+                        <span
+                          className="text-[10px] font-semibold px-2.5 py-1 rounded-full uppercase tracking-wide"
+                          style={{
+                            background: integration.status === "live"
+                              ? "rgba(29, 184, 122, 0.12)"
+                              : "rgba(79, 95, 232, 0.12)",
+                            color: integration.status === "live"
+                              ? "var(--color-accent)"
+                              : "var(--color-electric)",
+                            border: `1px solid ${integration.status === "live" ? "rgba(29, 184, 122, 0.2)" : "rgba(79, 95, 232, 0.2)"}`,
+                          }}
+                        >
                           {integration.status}
                         </span>
-                        <span className="text-[10px] font-medium text-foreground-tertiary bg-background-tertiary px-2 py-0.5 rounded-full">
+                        <span
+                          className="text-[10px] font-semibold px-2.5 py-1 rounded-full"
+                          style={{
+                            background: "rgba(79, 95, 232, 0.08)",
+                            color: "var(--color-secondary)",
+                            border: "1px solid rgba(79, 95, 232, 0.12)",
+                          }}
+                        >
                           {integration.minPlan}+
                         </span>
                       </div>
@@ -409,8 +429,20 @@ export default function IntegrationsPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="gradient-bg rounded-3xl p-12 md:p-16 text-white text-center"
+              className="gradient-bg rounded-3xl p-12 md:p-16 text-white text-center relative overflow-hidden"
             >
+              {/* Internal lava lamp */}
+              <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute rounded-full" style={{ width: 350, height: 350, top: "-10%", right: "10%", background: "radial-gradient(circle, rgba(255,255,255,0.10) 0%, transparent 70%)", filter: "blur(40px)", animation: "ctaLava1 20s ease-in-out infinite" }} />
+                <div className="absolute rounded-full" style={{ width: 300, height: 300, bottom: "-15%", left: "5%", background: "radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%)", filter: "blur(50px)", animation: "ctaLava2 25s ease-in-out infinite" }} />
+                <div className="absolute rounded-full" style={{ width: 250, height: 250, top: "40%", left: "50%", background: "radial-gradient(circle, rgba(139,150,200,0.12) 0%, transparent 60%)", filter: "blur(40px)", animation: "ctaLava3 18s ease-in-out infinite" }} />
+              </div>
+              <style jsx>{`
+                @keyframes ctaLava1 { 0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); } 25% { transform: translate(-30px, 25px) scale(1.1) rotate(45deg); } 50% { transform: translate(-15px, 50px) scale(0.95) rotate(90deg); } 75% { transform: translate(25px, 15px) scale(1.1) rotate(135deg); } }
+                @keyframes ctaLava2 { 0%, 100% { transform: translate(0, 0) scale(1); } 30% { transform: translate(30px, -25px) scale(1.1); } 60% { transform: translate(15px, -40px) scale(1.15); } }
+                @keyframes ctaLava3 { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(25px, -15px) scale(1.15); } 66% { transform: translate(-15px, 25px) scale(0.9); } }
+              `}</style>
+              <div className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 Ready to connect your tools?
               </h2>
@@ -432,6 +464,7 @@ export default function IntegrationsPage() {
                 >
                   View Pricing
                 </Link>
+              </div>
               </div>
             </motion.div>
           </div>

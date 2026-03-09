@@ -36,241 +36,259 @@ const agents = [
 ];
 
 export default function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isAgentsOpen, setIsAgentsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showFloatingCta, setShowFloatingCta] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      setShowFloatingCta(window.scrollY > 300);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-white/90 backdrop-blur-xl border-b border-border"
-          : "bg-transparent"
-      }`}
-      style={{
-        boxShadow: isScrolled ? "0 1px 3px rgba(0,0,0,0.04)" : "none",
-      }}
-    >
-      <nav className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-16 md:h-[72px]">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <Image
-              src="/callengo-logo.svg"
-              alt="Callengo Logo"
-              width={36}
-              height={36}
-              className="w-9 h-9 transition-transform group-hover:scale-105"
-            />
-            <span
-              className="text-xl font-semibold tracking-tight text-foreground"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
-              Callengo
-            </span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1">
-            {/* Solutions Dropdown */}
-            <div
-              className="relative"
-              onMouseEnter={() => setIsAgentsOpen(true)}
-              onMouseLeave={() => setIsAgentsOpen(false)}
-            >
-              <button
-                className="flex items-center gap-1 text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium px-4 py-2 rounded-lg hover:bg-background-secondary"
-                onClick={() => setIsAgentsOpen(!isAgentsOpen)}
+    <>
+      {/* Static header - stays at top, doesn't follow scroll */}
+      <header className="absolute top-0 left-0 right-0 z-50 bg-transparent">
+        <nav className="max-w-7xl mx-auto px-6">
+          <div className="flex items-center justify-between h-16 md:h-[72px]">
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-2.5 group">
+              <Image
+                src="/callengo-logo.svg"
+                alt="Callengo Logo"
+                width={36}
+                height={36}
+                className="w-9 h-9 transition-transform group-hover:scale-105"
+              />
+              <span
+                className="text-xl font-semibold tracking-tight text-foreground"
+                style={{ fontFamily: "var(--font-display)" }}
               >
-                Solutions
-                <ChevronDown
-                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    isAgentsOpen ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
+                Callengo
+              </span>
+            </Link>
 
-              <AnimatePresence>
-                {isAgentsOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 6, scale: 0.98 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 6, scale: 0.98 }}
-                    transition={{ duration: 0.15, ease: "easeOut" }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[340px] bg-white rounded-xl border border-border p-2"
-                    style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)" }}
-                  >
-                    {agents.map((agent) => {
-                      const Icon = agent.icon;
-                      return (
-                        <Link
-                          key={agent.name}
-                          href={agent.href}
-                          className="flex items-start gap-3 p-3 rounded-lg hover:bg-background-secondary transition-all group"
-                        >
-                          <div className="w-10 h-10 rounded-lg bg-background-secondary flex items-center justify-center shrink-0 group-hover:bg-background-tertiary transition-colors">
-                            <Icon className="w-5 h-5 text-secondary" />
-                          </div>
-                          <div>
-                            <div className="font-semibold text-foreground text-sm">
-                              {agent.name}
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center gap-1">
+              {/* Solutions Dropdown */}
+              <div
+                className="relative"
+                onMouseEnter={() => setIsAgentsOpen(true)}
+                onMouseLeave={() => setIsAgentsOpen(false)}
+              >
+                <button
+                  className="flex items-center gap-1 text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium px-4 py-2 rounded-lg hover:bg-background-secondary"
+                  onClick={() => setIsAgentsOpen(!isAgentsOpen)}
+                >
+                  Solutions
+                  <ChevronDown
+                    className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                      isAgentsOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                <AnimatePresence>
+                  {isAgentsOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 6, scale: 0.98 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 6, scale: 0.98 }}
+                      transition={{ duration: 0.15, ease: "easeOut" }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[340px] bg-white rounded-xl border border-border p-2"
+                      style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)" }}
+                    >
+                      {agents.map((agent) => {
+                        const Icon = agent.icon;
+                        return (
+                          <Link
+                            key={agent.name}
+                            href={agent.href}
+                            className="flex items-start gap-3 p-3 rounded-lg hover:bg-background-secondary transition-all group"
+                          >
+                            <div className="w-10 h-10 rounded-lg bg-background-secondary flex items-center justify-center shrink-0 group-hover:bg-background-tertiary transition-colors">
+                              <Icon className="w-5 h-5 text-secondary" />
                             </div>
-                            <div className="text-xs text-foreground-tertiary mt-0.5 leading-relaxed">
-                              {agent.description}
+                            <div>
+                              <div className="font-semibold text-foreground text-sm">
+                                {agent.name}
+                              </div>
+                              <div className="text-xs text-foreground-tertiary mt-0.5 leading-relaxed">
+                                {agent.description}
+                              </div>
                             </div>
-                          </div>
-                          <ArrowRight className="w-4 h-4 text-foreground-tertiary opacity-0 group-hover:opacity-100 transition-opacity ml-auto mt-1" />
-                        </Link>
-                      );
-                    })}
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                            <ArrowRight className="w-4 h-4 text-foreground-tertiary opacity-0 group-hover:opacity-100 transition-opacity ml-auto mt-1" />
+                          </Link>
+                        );
+                      })}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              <Link
+                href="/pricing"
+                className="text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium px-4 py-2 rounded-lg hover:bg-background-secondary"
+              >
+                Pricing
+              </Link>
+
+              <Link
+                href="/about"
+                className="text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium px-4 py-2 rounded-lg hover:bg-background-secondary"
+              >
+                About
+              </Link>
+
+              <Link
+                href="/contact"
+                className="text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium px-4 py-2 rounded-lg hover:bg-background-secondary"
+              >
+                Contact
+              </Link>
             </div>
 
-            <Link
-              href="/pricing"
-              className="text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium px-4 py-2 rounded-lg hover:bg-background-secondary"
-            >
-              Pricing
-            </Link>
+            {/* CTA Buttons */}
+            <div className="hidden lg:flex items-center gap-3">
+              <a
+                href="https://app.callengo.com/auth/login"
+                className="text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium px-4 py-2"
+              >
+                Sign in
+              </a>
+              <a
+                href="https://app.callengo.com/auth/signup"
+                className="btn btn-primary text-sm px-5 py-2.5 rounded-lg"
+              >
+                Get Started Free
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
 
-            <Link
-              href="/about"
-              className="text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium px-4 py-2 rounded-lg hover:bg-background-secondary"
+            {/* Mobile Menu Button */}
+            <button
+              className="lg:hidden p-2 rounded-lg hover:bg-background-secondary transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              About
-            </Link>
-
-            <Link
-              href="/contact"
-              className="text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium px-4 py-2 rounded-lg hover:bg-background-secondary"
-            >
-              Contact
-            </Link>
+              {isMobileMenuOpen ? (
+                <X className="w-5 h-5 text-foreground" />
+              ) : (
+                <Menu className="w-5 h-5 text-foreground" />
+              )}
+            </button>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="hidden lg:flex items-center gap-3">
-            <a
-              href="https://app.callengo.com/auth/login"
-              className="text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium px-4 py-2"
-            >
-              Sign in
-            </a>
+          {/* Mobile Menu */}
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.2 }}
+                className="lg:hidden overflow-hidden bg-white border-t border-border"
+              >
+                <div className="py-4 space-y-1">
+                  <div className="px-4 py-2 text-xs font-semibold text-foreground-tertiary uppercase tracking-wider">
+                    Solutions
+                  </div>
+                  {agents.map((agent) => {
+                    const Icon = agent.icon;
+                    return (
+                      <Link
+                        key={agent.name}
+                        href={agent.href}
+                        className="flex items-center gap-3 px-4 py-3 text-foreground hover:bg-background-secondary rounded-lg"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <div className="w-9 h-9 rounded-lg bg-background-secondary flex items-center justify-center shrink-0">
+                          <Icon className="w-4 h-4 text-secondary" />
+                        </div>
+                        <div>
+                          <div className="font-medium text-sm">{agent.name}</div>
+                          <div className="text-xs text-foreground-tertiary">
+                            {agent.description}
+                          </div>
+                        </div>
+                      </Link>
+                    );
+                  })}
+
+                  <div className="h-px bg-border my-2" />
+
+                  <Link
+                    href="/pricing"
+                    className="block px-4 py-3 text-foreground hover:bg-background-secondary rounded-lg font-medium text-sm"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Pricing
+                  </Link>
+                  <Link
+                    href="/about"
+                    className="block px-4 py-3 text-foreground hover:bg-background-secondary rounded-lg font-medium text-sm"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    About
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="block px-4 py-3 text-foreground hover:bg-background-secondary rounded-lg font-medium text-sm"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Contact
+                  </Link>
+
+                  <div className="h-px bg-border my-2" />
+
+                  <div className="px-4 pt-2 space-y-3">
+                    <a
+                      href="https://app.callengo.com/auth/login"
+                      className="block w-full text-center py-2.5 text-foreground-secondary font-medium text-sm hover:text-foreground transition-colors"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Sign in
+                    </a>
+                    <a
+                      href="https://app.callengo.com/auth/signup"
+                      className="block w-full text-center py-2.5 text-white font-semibold text-sm rounded-lg btn-primary"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Get Started Free
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </nav>
+      </header>
+
+      {/* Floating Get Started button - follows scroll */}
+      <AnimatePresence>
+        {showFloatingCta && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="fixed top-4 right-4 md:right-6 z-50"
+          >
             <a
               href="https://app.callengo.com/auth/signup"
-              className="btn btn-primary text-sm px-5 py-2.5 rounded-lg"
+              className="btn btn-primary text-sm px-5 py-2.5 rounded-full shadow-lg"
+              style={{
+                boxShadow: "0 8px 32px rgba(79, 95, 232, 0.3), 0 2px 8px rgba(0, 0, 0, 0.1)",
+              }}
             >
               Get Started Free
               <ArrowRight className="w-4 h-4" />
             </a>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden p-2 rounded-lg hover:bg-background-secondary transition-colors"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? (
-              <X className="w-5 h-5 text-foreground" />
-            ) : (
-              <Menu className="w-5 h-5 text-foreground" />
-            )}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2 }}
-              className="lg:hidden overflow-hidden bg-white border-t border-border"
-            >
-              <div className="py-4 space-y-1">
-                <div className="px-4 py-2 text-xs font-semibold text-foreground-tertiary uppercase tracking-wider">
-                  Solutions
-                </div>
-                {agents.map((agent) => {
-                  const Icon = agent.icon;
-                  return (
-                    <Link
-                      key={agent.name}
-                      href={agent.href}
-                      className="flex items-center gap-3 px-4 py-3 text-foreground hover:bg-background-secondary rounded-lg"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      <div className="w-9 h-9 rounded-lg bg-background-secondary flex items-center justify-center shrink-0">
-                        <Icon className="w-4 h-4 text-secondary" />
-                      </div>
-                      <div>
-                        <div className="font-medium text-sm">{agent.name}</div>
-                        <div className="text-xs text-foreground-tertiary">
-                          {agent.description}
-                        </div>
-                      </div>
-                    </Link>
-                  );
-                })}
-
-                <div className="h-px bg-border my-2" />
-
-                <Link
-                  href="/pricing"
-                  className="block px-4 py-3 text-foreground hover:bg-background-secondary rounded-lg font-medium text-sm"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Pricing
-                </Link>
-                <Link
-                  href="/about"
-                  className="block px-4 py-3 text-foreground hover:bg-background-secondary rounded-lg font-medium text-sm"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  About
-                </Link>
-                <Link
-                  href="/contact"
-                  className="block px-4 py-3 text-foreground hover:bg-background-secondary rounded-lg font-medium text-sm"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Contact
-                </Link>
-
-                <div className="h-px bg-border my-2" />
-
-                <div className="px-4 pt-2 space-y-3">
-                  <a
-                    href="https://app.callengo.com/auth/login"
-                    className="block w-full text-center py-2.5 text-foreground-secondary font-medium text-sm hover:text-foreground transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Sign in
-                  </a>
-                  <a
-                    href="https://app.callengo.com/auth/signup"
-                    className="block w-full text-center py-2.5 text-white font-semibold text-sm rounded-lg btn-primary"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Get Started Free
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
-    </header>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

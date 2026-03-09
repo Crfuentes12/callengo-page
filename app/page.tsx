@@ -12,14 +12,16 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className="relative">
+      <main className="relative overflow-hidden">
         <AnimatedBlobs />
-        <Hero />
-        <Features />
-        <HowItWorks />
-        <Testimonials />
-        <FAQ />
-        <CTA />
+        <div className="relative z-[1]">
+          <Hero />
+          <Features />
+          <HowItWorks />
+          <Testimonials />
+          <FAQ />
+          <CTA />
+        </div>
       </main>
       <Footer />
     </>

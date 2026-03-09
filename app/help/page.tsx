@@ -72,7 +72,7 @@ export default function HelpPage() {
   return (
     <>
       <Header />
-      <main className="pt-24 relative">
+      <main className="pt-24 relative overflow-hidden">
         <AnimatedBlobs />
         <section className="section relative z-10">
           <div className="max-w-7xl mx-auto px-6">

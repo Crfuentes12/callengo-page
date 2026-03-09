@@ -291,10 +291,10 @@ export default function DocsPage() {
   return (
     <>
       <Header />
-      <main className="relative" style={{ fontFamily: "var(--font-body)" }}>
+      <main className="relative overflow-hidden" style={{ fontFamily: "var(--font-body)" }}>
         <AnimatedBlobs />
         {/* ────────── Hero ────────── */}
-        <section className="bg-background pt-32 pb-16 relative">
+        <section className="pt-32 pb-16 relative">
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -323,7 +323,7 @@ export default function DocsPage() {
         <div className="max-w-7xl mx-auto px-6 py-16 flex gap-12">
           {/* Sidebar */}
           <aside className="hidden lg:block w-56 flex-shrink-0">
-            <nav className="sticky top-28 space-y-1">
+            <nav className="sticky top-8 space-y-1">
               {sidebarLinks.map((link) => (
                 <a
                   key={link.href}

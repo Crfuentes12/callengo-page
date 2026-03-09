@@ -40,7 +40,7 @@ export default function ContactPage() {
   return (
     <>
       <Header />
-      <main className="pt-24 relative">
+      <main className="pt-24 relative overflow-hidden">
         <AnimatedBlobs />
         {/* Hero */}
         <section className="relative overflow-hidden bg-transparent py-16 md:py-20">

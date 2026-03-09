@@ -81,11 +81,11 @@ function MockupImportContacts({ active }: { active: boolean }) {
   ];
 
   return (
-    <div className="p-6 md:p-8 h-full flex flex-col" style={uiFont}>
+    <div className="p-4 md:p-5 h-full flex flex-col" style={uiFont}>
       {/* Header */}
       <div className="flex items-center gap-3 mb-2">
         <Upload className="w-5 h-5 text-electric" />
-        <span className="text-foreground text-base font-semibold">Import Contacts</span>
+        <span className="text-foreground text-sm font-semibold">Import Contacts</span>
       </div>
       <p className="text-foreground-tertiary text-xs mb-5">Upload a CSV or Excel file with your contact list</p>
 
@@ -258,10 +258,10 @@ function MockupAgentConfig({ active }: { active: boolean }) {
   const toggleLabels = ["Multi-language (EN/ES/FR)", "Voicemail detection", "Fallback to human agent"];
 
   return (
-    <div className="p-6 md:p-8 h-full flex flex-col gap-5" style={uiFont}>
+    <div className="p-4 md:p-5 h-full flex flex-col gap-3" style={uiFont}>
       <div className="flex items-center gap-3">
         <Bot className="w-5 h-5 text-electric" />
-        <span className="text-foreground text-base font-semibold">Agent Configuration</span>
+        <span className="text-foreground text-sm font-semibold">Agent Configuration</span>
       </div>
 
       {/* Voice selector */}
@@ -397,10 +397,10 @@ function MockupCampaignSetup({ active }: { active: boolean }) {
   const hours = ["9am", "12pm", "3pm"];
 
   return (
-    <div className="p-6 md:p-8 h-full flex flex-col gap-5" style={uiFont}>
+    <div className="p-4 md:p-5 h-full flex flex-col gap-3" style={uiFont}>
       <div className="flex items-center gap-3">
         <Settings2 className="w-5 h-5 text-electric" />
-        <span className="text-foreground text-base font-semibold">Campaign Settings</span>
+        <span className="text-foreground text-sm font-semibold">Campaign Settings</span>
       </div>
 
       {/* Schedule grid */}
@@ -565,12 +565,12 @@ function MockupLaunch({ active }: { active: boolean }) {
   ];
 
   return (
-    <div className="p-6 md:p-8 h-full flex flex-col items-center justify-center gap-6" style={uiFont}>
+    <div className="p-4 md:p-5 h-full flex flex-col items-center justify-center gap-4" style={uiFont}>
       {!launched ? (
         <motion.div className="flex flex-col items-center gap-5">
           <div className="flex items-center gap-3 mb-2">
             <Rocket className="w-5 h-5 text-electric" />
-            <span className="text-foreground text-base font-semibold">Ready to Launch</span>
+            <span className="text-foreground text-sm font-semibold">Ready to Launch</span>
           </div>
           <div className="text-center text-foreground-tertiary text-sm mb-2">
             247 contacts · 3 retries · EST schedule
@@ -692,10 +692,10 @@ function MockupAnalytics({ active }: { active: boolean }) {
   ];
 
   return (
-    <div className="p-6 md:p-8 h-full flex flex-col gap-5" style={uiFont}>
+    <div className="p-4 md:p-5 h-full flex flex-col gap-3" style={uiFont}>
       <div className="flex items-center gap-3">
         <BarChart3 className="w-5 h-5 text-electric" />
-        <span className="text-foreground text-base font-semibold">Analytics</span>
+        <span className="text-foreground text-sm font-semibold">Analytics</span>
       </div>
 
       {/* Stats row */}
@@ -851,10 +851,10 @@ function MockupDashboard({ active }: { active: boolean }) {
   ];
 
   return (
-    <div className="p-6 md:p-8 h-full flex flex-col gap-4" style={uiFont}>
+    <div className="p-4 md:p-5 h-full flex flex-col gap-3" style={uiFont}>
       <div className="flex items-center gap-3">
         <LayoutDashboard className="w-5 h-5 text-electric" />
-        <span className="text-foreground text-base font-semibold">Dashboard</span>
+        <span className="text-foreground text-sm font-semibold">Dashboard</span>
         <span className="text-xs text-foreground-tertiary ml-auto">Last 30 days</span>
       </div>
 
@@ -1110,8 +1110,8 @@ export default function HowItWorks() {
                   </div>
                 </div>
 
-                {/* Mockup area — taller aspect ratio for more space */}
-                <div className="relative bg-white overflow-hidden" style={{ aspectRatio: "4 / 3.5" }}>
+                {/* Mockup area — compact aspect ratio */}
+                <div className="relative bg-white overflow-hidden" style={{ aspectRatio: "4 / 3" }}>
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={activeStep}
@@ -1177,7 +1177,7 @@ export default function HowItWorks() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="lg:col-span-5"
-              style={{ minHeight: "680px" }}
+              style={{ minHeight: "700px" }}
             >
               <div className="space-y-2">
                 {steps.map((s, index) => {
@@ -1218,10 +1218,11 @@ export default function HowItWorks() {
                             </div>
 
                             <div
-                              className="overflow-hidden transition-all duration-300 ease-in-out"
+                              className="overflow-hidden"
                               style={{
-                                maxHeight: isActive ? "200px" : "0px",
+                                maxHeight: isActive ? "220px" : "0px",
                                 opacity: isActive ? 1 : 0,
+                                transition: "max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease",
                               }}
                             >
                               <p className="text-[13px] text-white/55 leading-relaxed mt-2 mb-3" style={{ fontFamily: "var(--font-body)" }}>

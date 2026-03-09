@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import AnimatedBlobs from "../../components/AnimatedBlobs";
 import {
   ArrowRight,
   Check,
@@ -176,10 +177,12 @@ export default function QuickStartPage() {
   return (
     <>
       <Header />
-      <main className="pt-24">
+      <main className="pt-24 relative">
+        <AnimatedBlobs />
+
         {/* Hero Section */}
-        <section className="gradient-bg text-white py-16">
-          <div className="max-w-4xl mx-auto px-6">
+        <section className="gradient-bg text-white py-16 relative overflow-hidden">
+          <div className="max-w-4xl mx-auto px-6 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -192,24 +195,25 @@ export default function QuickStartPage() {
                 <ChevronRight className="w-4 h-4 rotate-180" />
                 Back to Help Center
               </Link>
-              <h1 className="text-display-sm mb-6">Quick Start Guide</h1>
+              <h1 className="text-display-sm mb-6 text-white">Quick Start Guide</h1>
               <p className="text-xl text-white/80 max-w-2xl">
                 Get up and running with Callengo in minutes. This guide walks you through
                 everything you need to launch your first AI-powered calling campaign.
               </p>
             </motion.div>
           </div>
+          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-background pointer-events-none" />
         </section>
 
         {/* Overview */}
-        <section className="section">
+        <section className="section relative z-10">
           <div className="max-w-4xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl font-bold mb-6">What is Callengo?</h2>
+              <h2 className="text-3xl font-semibold mb-6 text-foreground">What is Callengo?</h2>
               <p className="text-lg text-foreground-secondary mb-6 leading-relaxed">
                 Callengo is an AI-powered phone calling platform that automates repetitive
                 business calls at scale. Whether you need to verify contact data, confirm
@@ -220,23 +224,23 @@ export default function QuickStartPage() {
                 Unlike traditional call centers or manual calling, Callengo is:
               </p>
               <div className="grid md:grid-cols-3 gap-6 mb-12">
-                <div className="bg-background-secondary rounded-2xl p-6">
-                  <Clock className="w-8 h-8 text-foreground-secondary mb-4" />
-                  <h3 className="font-semibold mb-2">Always Available</h3>
+                <div className="rounded-2xl p-6" style={{ background: "rgba(244, 245, 250, 0.8)", backdropFilter: "blur(10px)", border: "1px solid rgba(221, 224, 238, 0.5)" }}>
+                  <Clock className="w-8 h-8 text-electric mb-4" />
+                  <h3 className="font-semibold mb-2 text-foreground">Always Available</h3>
                   <p className="text-foreground-secondary text-sm">
                     Works 24/7/365, never takes breaks, never gets tired
                   </p>
                 </div>
-                <div className="bg-background-secondary rounded-2xl p-6">
-                  <Zap className="w-8 h-8 text-foreground-secondary mb-4" />
-                  <h3 className="font-semibold mb-2">Instantly Scalable</h3>
+                <div className="rounded-2xl p-6" style={{ background: "rgba(244, 245, 250, 0.8)", backdropFilter: "blur(10px)", border: "1px solid rgba(221, 224, 238, 0.5)" }}>
+                  <Zap className="w-8 h-8 text-electric mb-4" />
+                  <h3 className="font-semibold mb-2 text-foreground">Instantly Scalable</h3>
                   <p className="text-foreground-secondary text-sm">
                     Go from 10 calls to 10,000 without hiring anyone
                   </p>
                 </div>
-                <div className="bg-background-secondary rounded-2xl p-6">
-                  <Check className="w-8 h-8 text-foreground-secondary mb-4" />
-                  <h3 className="font-semibold mb-2">100% Consistent</h3>
+                <div className="rounded-2xl p-6" style={{ background: "rgba(244, 245, 250, 0.8)", backdropFilter: "blur(10px)", border: "1px solid rgba(221, 224, 238, 0.5)" }}>
+                  <Check className="w-8 h-8 text-electric mb-4" />
+                  <h3 className="font-semibold mb-2 text-foreground">100% Consistent</h3>
                   <p className="text-foreground-secondary text-sm">
                     Same perfect script delivery every single time
                   </p>
@@ -247,7 +251,7 @@ export default function QuickStartPage() {
         </section>
 
         {/* Step by Step */}
-        <section className="section bg-background-secondary">
+        <section className="section relative z-10" style={{ background: "rgba(244, 245, 250, 0.6)" }}>
           <div className="max-w-4xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -255,7 +259,7 @@ export default function QuickStartPage() {
               viewport={{ once: true }}
               className="mb-12"
             >
-              <h2 className="text-3xl font-bold mb-4">Step-by-Step Setup</h2>
+              <h2 className="text-3xl font-semibold mb-4 text-foreground">Step-by-Step Setup</h2>
               <p className="text-lg text-foreground-secondary">
                 Follow these steps to launch your first campaign in under 10 minutes.
               </p>
@@ -269,7 +273,8 @@ export default function QuickStartPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.05 }}
-                  className="bg-white rounded-2xl border border-border p-8"
+                  className="rounded-2xl p-8"
+                  style={{ background: "rgba(255, 255, 255, 0.85)", backdropFilter: "blur(10px)", border: "1px solid rgba(221, 224, 238, 0.5)" }}
                 >
                   <div className="flex items-start gap-6">
                     <div className="flex-shrink-0">
@@ -283,7 +288,7 @@ export default function QuickStartPage() {
                           STEP {step.number}
                         </span>
                       </div>
-                      <h3 className="text-xl font-bold mb-3">{step.title}</h3>
+                      <h3 className="text-xl font-semibold mb-3 text-foreground">{step.title}</h3>
                       <p className="text-foreground-secondary mb-4">{step.description}</p>
                       <ul className="space-y-2">
                         {step.details.map((detail, i) => (
@@ -291,7 +296,7 @@ export default function QuickStartPage() {
                             key={i}
                             className="flex items-start gap-2 text-sm text-foreground-secondary"
                           >
-                            <Check className="w-4 h-4 text-accent-dark flex-shrink-0 mt-0.5" />
+                            <Check className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
                             {detail}
                           </li>
                         ))}
@@ -305,7 +310,7 @@ export default function QuickStartPage() {
         </section>
 
         {/* Choose Your Agent */}
-        <section className="section">
+        <section className="section relative z-10">
           <div className="max-w-4xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -313,7 +318,7 @@ export default function QuickStartPage() {
               viewport={{ once: true }}
               className="mb-12"
             >
-              <h2 className="text-3xl font-bold mb-4">Choose Your Agent</h2>
+              <h2 className="text-3xl font-semibold mb-4 text-foreground">Choose Your Agent</h2>
               <p className="text-lg text-foreground-secondary">
                 Each agent is specialized for a specific use case. Choose the one that
                 matches your primary need.
@@ -331,16 +336,17 @@ export default function QuickStartPage() {
                 >
                   <Link
                     href={`/agents/${agent.slug}`}
-                    className="block bg-white rounded-2xl border border-border p-8 hover:border-slate-300 hover:shadow-lg transition-all group"
+                    className="block rounded-2xl p-8 hover:shadow-lg transition-all group"
+                    style={{ background: "rgba(255, 255, 255, 0.85)", backdropFilter: "blur(10px)", border: "1px solid rgba(221, 224, 238, 0.5)" }}
                   >
                     <div className="flex items-start gap-6">
                       <div className="flex-shrink-0">
-                        <div className="w-14 h-14 rounded-xl bg-background-tertiary flex items-center justify-center group-hover:bg-background-tertiary transition-colors">
-                          <agent.icon className="w-7 h-7 text-foreground-secondary" />
+                        <div className="w-14 h-14 rounded-xl flex items-center justify-center transition-colors" style={{ background: "rgba(79, 95, 232, 0.08)" }}>
+                          <agent.icon className="w-7 h-7 text-electric" />
                         </div>
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-xl font-bold mb-2 group-hover:text-foreground-secondary transition-colors">
+                        <h3 className="text-xl font-semibold mb-2 text-foreground group-hover:text-electric transition-colors">
                           {agent.title}
                         </h3>
                         <p className="text-foreground-secondary mb-3">{agent.description}</p>
@@ -351,7 +357,7 @@ export default function QuickStartPage() {
                           {agent.outcomes.map((outcome, i) => (
                             <span
                               key={i}
-                              className="inline-flex items-center gap-1.5 px-3 py-1 bg-accent/10 text-green-700 text-sm rounded-full"
+                              className="inline-flex items-center gap-1.5 px-3 py-1 bg-accent/10 text-accent text-sm rounded-full"
                             >
                               <Check className="w-3.5 h-3.5" />
                               {outcome}
@@ -369,7 +375,7 @@ export default function QuickStartPage() {
         </section>
 
         {/* Pro Tips */}
-        <section className="section bg-background-secondary">
+        <section className="section relative z-10" style={{ background: "rgba(244, 245, 250, 0.6)" }}>
           <div className="max-w-4xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -377,7 +383,7 @@ export default function QuickStartPage() {
               viewport={{ once: true }}
               className="mb-12"
             >
-              <h2 className="text-3xl font-bold mb-4">Pro Tips for Success</h2>
+              <h2 className="text-3xl font-semibold mb-4 text-foreground">Pro Tips for Success</h2>
               <p className="text-lg text-foreground-secondary">
                 Get the most out of Callengo with these best practices from our
                 top-performing customers.
@@ -392,9 +398,10 @@ export default function QuickStartPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.05 }}
-                  className="bg-white rounded-2xl border border-border p-6"
+                  className="rounded-2xl p-6"
+                  style={{ background: "rgba(255, 255, 255, 0.85)", backdropFilter: "blur(10px)", border: "1px solid rgba(221, 224, 238, 0.5)" }}
                 >
-                  <h3 className="font-semibold mb-2">{tip.title}</h3>
+                  <h3 className="font-semibold mb-2 text-foreground">{tip.title}</h3>
                   <p className="text-foreground-secondary text-sm">{tip.description}</p>
                 </motion.div>
               ))}
@@ -403,15 +410,15 @@ export default function QuickStartPage() {
         </section>
 
         {/* CTA */}
-        <section className="section">
+        <section className="section relative z-10">
           <div className="max-w-4xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="gradient-bg rounded-3xl p-12 text-center text-white"
+              className="gradient-bg rounded-3xl p-12 text-center text-white relative overflow-hidden"
             >
-              <h2 className="text-3xl font-bold mb-4">Ready to get started?</h2>
+              <h2 className="text-3xl font-semibold mb-4 text-white">Ready to get started?</h2>
               <p className="text-white/80 mb-8 max-w-lg mx-auto">
                 Create your free account and get 15 minutes of calling time to test the
                 platform. No credit card required.
@@ -419,7 +426,7 @@ export default function QuickStartPage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="https://app.callengo.com/auth/signup"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary font-semibold rounded-full hover:bg-white/90 transition-colors"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-electric font-semibold rounded-full hover:bg-white/90 transition-colors"
                 >
                   Start Free Trial
                   <ArrowRight className="w-5 h-5" />

@@ -1060,7 +1060,7 @@ export default function HowItWorks() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border border-white/10 text-white/70 bg-white/5 mb-5">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border border-white/20 text-white/80 bg-white/10 mb-5">
                 How it works
               </span>
               <h2 className="text-display-sm text-white mb-5">
@@ -1068,7 +1068,7 @@ export default function HowItWorks() {
                 <br />
                 <span className="text-white font-bold">Results in hours.</span>
               </h2>
-              <p className="text-white/50 text-lg max-w-2xl mx-auto leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>
+              <p className="text-white/60 text-lg max-w-2xl mx-auto leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>
                 Six simple steps, from zero to fully automated calling campaigns.
                 No technical expertise required.
               </p>
@@ -1085,9 +1085,16 @@ export default function HowItWorks() {
               viewport={{ once: true }}
               className="lg:col-span-7 relative"
             >
-              <div className="rounded-2xl bg-white border border-gray-200 shadow-2xl overflow-hidden">
+              <div
+                className="rounded-2xl overflow-hidden"
+                style={{
+                  background: "rgba(255, 255, 255, 0.95)",
+                  border: "1px solid rgba(255, 255, 255, 0.3)",
+                  boxShadow: "0 25px 60px rgba(0, 0, 0, 0.3), 0 0 40px rgba(79, 95, 232, 0.15)",
+                }}
+              >
                 {/* Window chrome */}
-                <div className="flex items-center gap-3 px-5 py-3.5 bg-gray-50 border-b border-gray-200">
+                <div className="flex items-center gap-3 px-5 py-3.5 border-b" style={{ background: "rgba(244, 245, 250, 0.9)", borderColor: "rgba(221, 224, 238, 0.6)" }}>
                   <div className="flex items-center gap-1.5 shrink-0">
                     <span className="w-3 h-3 rounded-full bg-red-400" />
                     <span className="w-3 h-3 rounded-full bg-yellow-400" />
@@ -1164,100 +1171,103 @@ export default function HowItWorks() {
               <div className="absolute -inset-8 bg-white/10 blur-3xl rounded-3xl -z-10" />
             </motion.div>
 
-            {/* RIGHT — Step list */}
+            {/* RIGHT — Step list with fixed height */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="lg:col-span-5 space-y-2"
+              className="lg:col-span-5"
+              style={{ minHeight: "680px" }}
             >
-              {steps.map((s, index) => {
-                const Icon = s.icon;
-                const isActive = index === activeStep;
+              <div className="space-y-2">
+                {steps.map((s, index) => {
+                  const Icon = s.icon;
+                  const isActive = index === activeStep;
 
-                return (
-                  <button
-                    key={s.number}
-                    onClick={() => handleStepClick(index)}
-                    className={`w-full text-left rounded-xl border transition-all duration-300 cursor-pointer group ${
-                      isActive
-                        ? "border-white/12 bg-white/5"
-                        : "border-transparent bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/6"
-                    }`}
-                  >
-                    <div className="px-5 py-4">
-                      <div className="flex items-start gap-3">
-                        <div
-                          className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 mt-0.5 transition-all ${
-                            isActive
-                              ? "bg-secondary shadow-lg"
-                              : "bg-white/5 group-hover:bg-white/8"
-                          }`}
-                        >
-                          <Icon className={`w-5 h-5 ${isActive ? "text-white" : "text-white/40"}`} />
-                        </div>
-
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2 mb-0.5">
-                            <span className={`text-[11px] font-bold tabular-nums ${isActive ? "text-secondary-light" : "text-white/20"}`}>
-                              {s.number}
-                            </span>
-                            <span className={`text-sm font-semibold leading-tight ${isActive ? "text-white" : "text-white/40 group-hover:text-white/50"}`}>
-                              {s.title}
-                            </span>
+                  return (
+                    <button
+                      key={s.number}
+                      onClick={() => handleStepClick(index)}
+                      className={`w-full text-left rounded-xl border transition-all duration-300 cursor-pointer group ${
+                        isActive
+                          ? "border-white/20 bg-white/10"
+                          : "border-transparent bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/10"
+                      }`}
+                    >
+                      <div className="px-5 py-4">
+                        <div className="flex items-start gap-3">
+                          <div
+                            className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 mt-0.5 transition-all ${
+                              isActive
+                                ? "bg-white text-electric shadow-lg"
+                                : "bg-white/10 group-hover:bg-white/15"
+                            }`}
+                            style={isActive ? { boxShadow: "0 4px 16px rgba(79, 95, 232, 0.3)" } : {}}
+                          >
+                            <Icon className={`w-5 h-5 ${isActive ? "text-electric" : "text-white/50"}`} />
                           </div>
 
-                          <AnimatePresence>
-                            {isActive && (
-                              <motion.div
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: "auto", opacity: 1 }}
-                                exit={{ height: 0, opacity: 0 }}
-                                transition={{ duration: 0.3, ease: "easeInOut" }}
-                                className="overflow-hidden"
-                              >
-                                <p className="text-[13px] text-white/45 leading-relaxed mt-2 mb-3" style={{ fontFamily: "var(--font-body)" }}>
-                                  {s.description}
-                                </p>
-                                <div className="flex flex-wrap gap-2 mb-3">
-                                  {s.highlights.map((h) => (
-                                    <span key={h} className="inline-flex items-center gap-1 text-[11px] px-2.5 py-1 rounded-full bg-white/6 text-white/50">
-                                      <CheckCircle2 className="w-3 h-3 text-white/40" />
-                                      {h}
-                                    </span>
-                                  ))}
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 mb-0.5">
+                              <span className={`text-[11px] font-bold tabular-nums ${isActive ? "text-white/80" : "text-white/25"}`}>
+                                {s.number}
+                              </span>
+                              <span className={`text-sm font-semibold leading-tight ${isActive ? "text-white" : "text-white/50 group-hover:text-white/60"}`}>
+                                {s.title}
+                              </span>
+                            </div>
+
+                            <div
+                              className="overflow-hidden transition-all duration-300 ease-in-out"
+                              style={{
+                                maxHeight: isActive ? "200px" : "0px",
+                                opacity: isActive ? 1 : 0,
+                              }}
+                            >
+                              <p className="text-[13px] text-white/55 leading-relaxed mt-2 mb-3" style={{ fontFamily: "var(--font-body)" }}>
+                                {s.description}
+                              </p>
+                              <div className="flex flex-wrap gap-2 mb-3">
+                                {s.highlights.map((h) => (
+                                  <span key={h} className="inline-flex items-center gap-1 text-[11px] px-2.5 py-1 rounded-full bg-white/10 text-white/70 border border-white/10">
+                                    <CheckCircle2 className="w-3 h-3 text-white/50" />
+                                    {h}
+                                  </span>
+                                ))}
+                              </div>
+
+                              {!isPaused && (
+                                <div className="h-1 bg-white/10 rounded-full overflow-hidden">
+                                  <motion.div
+                                    className="h-full rounded-full"
+                                    style={{ width: `${progress}%`, background: "rgba(255, 255, 255, 0.6)" }}
+                                  />
                                 </div>
+                              )}
+                            </div>
+                          </div>
 
-                                {!isPaused && (
-                                  <div className="h-1 bg-white/8 rounded-full overflow-hidden">
-                                    <motion.div
-                                      className="h-full bg-secondary rounded-full"
-                                      style={{ width: `${progress}%` }}
-                                    />
-                                  </div>
-                                )}
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
+                          <ChevronRight className={`w-4 h-4 shrink-0 transition-all mt-1 ${isActive ? "text-white/60 rotate-90" : "text-white/25 group-hover:text-white/40"}`} />
                         </div>
-
-                        <ChevronRight className={`w-4 h-4 shrink-0 transition-all mt-1 ${isActive ? "text-white/40 rotate-90" : "text-white/20 group-hover:text-white/30"}`} />
                       </div>
-                    </div>
-                  </button>
-                );
-              })}
+                    </button>
+                  );
+                })}
+              </div>
 
               <div className="pt-5 space-y-2">
                 <a
                   href="https://app.callengo.com/auth/signup"
-                  className="btn bg-secondary text-white w-full rounded-xl justify-center text-sm py-3.5 hover:-translate-y-0.5 transition-all"
-                  style={{ boxShadow: "var(--shadow-electric)" }}
+                  className="btn w-full rounded-xl justify-center text-sm py-3.5 hover:-translate-y-0.5 transition-all text-electric font-semibold"
+                  style={{
+                    background: "rgba(255, 255, 255, 0.95)",
+                    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.2), 0 0 15px rgba(79, 95, 232, 0.2)",
+                  }}
                 >
                   Start free trial
                   <ChevronRight className="w-4 h-4" />
                 </a>
-                <p className="text-center text-xs text-white/30" style={{ fontFamily: "var(--font-body)" }}>
+                <p className="text-center text-xs text-white/40" style={{ fontFamily: "var(--font-body)" }}>
                   No credit card required · 15 free minutes
                 </p>
               </div>

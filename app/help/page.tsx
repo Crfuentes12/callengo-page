@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { Mail, FileQuestion, ChevronRight, Plus, Minus } from "lucide-react";
+import AnimatedBlobs from "../components/AnimatedBlobs";
+import { Mail, FileQuestion, ChevronRight, Plus, Minus, Search } from "lucide-react";
 
 const faqItems = [
   {
@@ -34,14 +36,45 @@ const faqItems = [
   },
 ];
 
+const searchIndex = [
+  { title: "Quick Start Guide", description: "Get up and running with Callengo in minutes", path: "/help/quick-start", tags: ["setup", "getting started", "account", "tutorial", "guide"] },
+  { title: "Data Validation Agent", description: "Clean and verify your contact database automatically", path: "/agents/data-validation", tags: ["data", "validation", "crm", "contacts", "clean", "verify", "database"] },
+  { title: "Appointment Confirmation Agent", description: "Reduce no-shows with automated confirmations", path: "/agents/appointment-confirmation", tags: ["appointment", "confirmation", "no-show", "scheduling", "calendar", "reminder"] },
+  { title: "Lead Qualification Agent", description: "Score and rank leads so your team focuses on buyers", path: "/agents/lead-qualification", tags: ["lead", "qualification", "scoring", "sales", "bant", "prospect"] },
+  { title: "CRM Integrations", description: "Connect Callengo with HubSpot, Salesforce, and more", path: "/help/crm-integrations", tags: ["crm", "integration", "hubspot", "salesforce", "pipedrive", "zoho"] },
+  { title: "Documentation", description: "Full API reference and technical documentation", path: "/docs", tags: ["docs", "documentation", "api", "reference", "technical"] },
+  { title: "Integrations", description: "All available integrations and connectors", path: "/integrations", tags: ["integration", "connector", "zapier", "webhook", "api"] },
+  { title: "Blog & Articles", description: "Tips, best practices, and industry insights", path: "/blog", tags: ["blog", "articles", "tips", "insights", "best practices"] },
+  { title: "Pricing", description: "Plans and pricing for every team size", path: "/pricing", tags: ["pricing", "plans", "cost", "free", "enterprise", "billing"] },
+  { title: "Contact Us", description: "Get in touch with our support team", path: "/contact", tags: ["contact", "support", "help", "email", "phone"] },
+  { title: "About Callengo", description: "Our mission and team", path: "/about", tags: ["about", "team", "mission", "company"] },
+  { title: "Compliance", description: "TCPA, GDPR, and regulatory compliance", path: "/compliance", tags: ["compliance", "tcpa", "gdpr", "regulatory", "legal", "dnc"] },
+  { title: "Privacy Policy", description: "How we handle your data", path: "/privacy", tags: ["privacy", "data", "policy", "gdpr"] },
+];
+
 export default function HelpPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showResults, setShowResults] = useState(false);
+  const router = useRouter();
+
+  const searchResults = useMemo(() => {
+    if (!searchQuery.trim()) return [];
+    const q = searchQuery.toLowerCase();
+    return searchIndex.filter(
+      (item) =>
+        item.title.toLowerCase().includes(q) ||
+        item.description.toLowerCase().includes(q) ||
+        item.tags.some((tag) => tag.includes(q))
+    );
+  }, [searchQuery]);
 
   return (
     <>
       <Header />
-      <main className="pt-24">
-        <section className="section">
+      <main className="pt-24 relative">
+        <AnimatedBlobs />
+        <section className="section relative z-10">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -49,26 +82,67 @@ export default function HelpPage() {
               transition={{ duration: 0.6 }}
               className="text-center max-w-3xl mx-auto mb-16"
             >
-              <h1 className="text-display-sm mb-6">Help Center</h1>
+              <h1 className="text-display-sm mb-6 text-foreground">Help Center</h1>
               <p className="text-xl text-foreground-secondary">
                 Find answers, get support, and learn how to get the most out of Callengo.
               </p>
             </motion.div>
 
-            {/* Search */}
+            {/* Global Search */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="max-w-2xl mx-auto mb-16"
+              className="max-w-2xl mx-auto mb-16 relative"
             >
               <div className="relative">
+                <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground-tertiary" />
                 <input
                   type="text"
-                  placeholder="Search for help..."
-                  className="w-full px-6 py-4 rounded-2xl border border-border focus:outline-none focus:ring-2 focus:ring-electric focus:border-transparent text-lg"
+                  placeholder="Search integrations, agents, docs, articles..."
+                  value={searchQuery}
+                  onChange={(e) => { setSearchQuery(e.target.value); setShowResults(true); }}
+                  onFocus={() => setShowResults(true)}
+                  onBlur={() => setTimeout(() => setShowResults(false), 200)}
+                  className="w-full pl-14 pr-6 py-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-electric focus:border-transparent text-lg"
+                  style={{ background: "rgba(255, 255, 255, 0.85)", backdropFilter: "blur(10px)", border: "1px solid rgba(221, 224, 238, 0.5)" }}
                 />
               </div>
+
+              {/* Search results dropdown */}
+              <AnimatePresence>
+                {showResults && searchQuery.trim() && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -4 }}
+                    className="absolute top-full mt-2 w-full rounded-xl overflow-hidden shadow-xl z-50"
+                    style={{ background: "rgba(255, 255, 255, 0.95)", backdropFilter: "blur(20px)", border: "1px solid rgba(221, 224, 238, 0.5)" }}
+                  >
+                    {searchResults.length > 0 ? (
+                      <div className="py-2">
+                        {searchResults.map((result) => (
+                          <button
+                            key={result.path}
+                            onMouseDown={() => router.push(result.path)}
+                            className="w-full text-left px-5 py-3 hover:bg-electric/5 transition-colors flex items-center justify-between group cursor-pointer"
+                          >
+                            <div>
+                              <div className="text-sm font-semibold text-foreground group-hover:text-electric transition-colors">{result.title}</div>
+                              <div className="text-xs text-foreground-tertiary">{result.description}</div>
+                            </div>
+                            <ChevronRight className="w-4 h-4 text-foreground-tertiary group-hover:text-electric transition-colors" />
+                          </button>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="px-5 py-4 text-sm text-foreground-tertiary text-center">
+                        No results found for &ldquo;{searchQuery}&rdquo;
+                      </div>
+                    )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
 
             {/* Contact Banner */}
@@ -78,7 +152,7 @@ export default function HelpPage() {
               transition={{ duration: 0.5, delay: 0.15 }}
               className="mb-16"
             >
-              <div className="bg-white rounded-2xl border border-border p-6 md:p-8 flex flex-col md:flex-row items-center justify-center gap-4 text-center md:text-left">
+              <div className="rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-center gap-4 text-center md:text-left" style={{ background: "rgba(255, 255, 255, 0.85)", backdropFilter: "blur(10px)", border: "1px solid rgba(221, 224, 238, 0.5)" }}>
                 <Mail className="w-6 h-6 text-primary flex-shrink-0" />
                 <p className="text-foreground-secondary text-lg">
                   Need help? Contact us at{" "}
@@ -109,7 +183,7 @@ export default function HelpPage() {
             >
               <div className="flex items-center gap-3 mb-8">
                 <FileQuestion className="w-6 h-6 text-foreground-secondary" />
-                <h2 className="text-2xl font-bold">Frequently Asked Questions</h2>
+                <h2 className="text-2xl font-semibold text-foreground">Frequently Asked Questions</h2>
               </div>
 
               <div className="space-y-4">
@@ -122,11 +196,13 @@ export default function HelpPage() {
                     transition={{ delay: index * 0.05 }}
                   >
                     <div
-                      className={`bg-white rounded-2xl border transition-all ${
-                        openFaq === index
-                          ? "border-foreground shadow-[var(--shadow-sm)]"
-                          : "border-border hover:border-border/80"
-                      }`}
+                      className="rounded-2xl transition-all"
+                      style={{
+                        background: "rgba(255, 255, 255, 0.85)",
+                        backdropFilter: "blur(10px)",
+                        border: openFaq === index ? "1px solid rgba(79, 95, 232, 0.3)" : "1px solid rgba(221, 224, 238, 0.5)",
+                        boxShadow: openFaq === index ? "0 4px 16px rgba(79, 95, 232, 0.08)" : "none",
+                      }}
                     >
                       <button
                         onClick={() => setOpenFaq(openFaq === index ? null : index)}

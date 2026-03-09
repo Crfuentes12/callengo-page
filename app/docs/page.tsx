@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import AnimatedBlobs from "../components/AnimatedBlobs";
 import {
   Book,
   Zap,
@@ -290,10 +291,10 @@ export default function DocsPage() {
   return (
     <>
       <Header />
-      <main style={{ fontFamily: "var(--font-body)" }}>
+      <main className="relative" style={{ fontFamily: "var(--font-body)" }}>
+        <AnimatedBlobs />
         {/* ────────── Hero ────────── */}
         <section className="bg-background pt-32 pb-16 relative">
-          <div className="absolute inset-0 bg-grid opacity-50" />
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

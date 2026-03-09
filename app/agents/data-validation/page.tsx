@@ -166,7 +166,6 @@ export default function DataValidationPage() {
         <AnimatedBlobs />
         {/* Hero Section */}
         <section className="section relative overflow-hidden">
-          <div className="absolute inset-0 bg-grid opacity-50" />
           <div className="max-w-7xl mx-auto px-6 relative">
             <div className="max-w-4xl">
               <motion.div

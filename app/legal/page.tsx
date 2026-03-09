@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import AnimatedBlobs from "../components/AnimatedBlobs";
 import { Shield, FileText, Scale } from "lucide-react";
 
 const legalPages = [
@@ -31,7 +32,8 @@ export default function LegalPage() {
   return (
     <>
       <Header />
-      <main className="pt-24">
+      <main className="pt-24 relative">
+        <AnimatedBlobs />
         <section className="section">
           <div className="max-w-3xl mx-auto px-6">
             <motion.div
@@ -79,7 +81,6 @@ export default function LegalPage() {
               transition={{ delay: 0.4 }}
               className="mt-12 p-6 rounded-xl bg-navy relative overflow-hidden"
             >
-              <div className="absolute inset-0 bg-grid-dark opacity-30" />
               <div className="relative z-10">
                 <h3 className="font-semibold text-white text-sm mb-2">Questions?</h3>
                 <p className="text-white/50 text-sm mb-4" style={{ fontFamily: "var(--font-body)" }}>

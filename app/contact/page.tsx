@@ -44,7 +44,6 @@ export default function ContactPage() {
         <AnimatedBlobs />
         {/* Hero */}
         <section className="relative overflow-hidden bg-transparent py-16 md:py-20">
-          <div className="absolute inset-0 bg-grid opacity-50" />
           <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

@@ -258,8 +258,7 @@ export default function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-background min-h-screen flex items-center">
-      {/* Subtle background */}
-      <div className="absolute inset-0 bg-grid opacity-50" />
+      {/* Clean subtle mesh background - no grid */}
       <div className="absolute inset-0 gradient-bg-mesh" />
 
       <audio ref={audioRef} src={scenario.audioSrc} preload="metadata" />
@@ -358,73 +357,73 @@ export default function Hero() {
             <div className="relative w-full max-w-md">
               {/* ── Glassmorphism Card ── */}
               <div
-                className="rounded-3xl overflow-hidden shadow-2xl"
+                className="rounded-3xl overflow-hidden"
                 style={{
-                  background: "rgba(255, 255, 255, 0.75)",
-                  backdropFilter: "blur(24px)",
-                  WebkitBackdropFilter: "blur(24px)",
-                  border: "1px solid rgba(255, 255, 255, 0.5)",
-                  boxShadow: "0 20px 60px rgba(30, 45, 107, 0.12), 0 8px 24px rgba(79, 95, 232, 0.08), inset 0 1px 0 rgba(255,255,255,0.6)",
+                  background: "rgba(255, 255, 255, 0.12)",
+                  backdropFilter: "blur(40px)",
+                  WebkitBackdropFilter: "blur(40px)",
+                  border: "1px solid rgba(255, 255, 255, 0.18)",
+                  boxShadow: "0 24px 80px rgba(30, 45, 107, 0.20), 0 8px 32px rgba(79, 95, 232, 0.12), inset 0 1px 0 rgba(255,255,255,0.2), inset 0 -1px 0 rgba(0,0,0,0.05)",
                 }}
               >
 
-                {/* ── Minimal top bar with scenario name ── */}
-                <div className="px-5 pt-5 pb-3 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
+                {/* ── Compact top bar ── */}
+                <div className="px-4 pt-4 pb-2 flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
                     <div
-                      className="w-10 h-10 rounded-2xl flex items-center justify-center"
+                      className="w-8 h-8 rounded-xl flex items-center justify-center"
                       style={{
-                        background: "linear-gradient(135deg, #4F5FE8 0%, #3347D4 100%)",
-                        boxShadow: "0 4px 12px rgba(79, 95, 232, 0.3)",
+                        background: "rgba(79, 95, 232, 0.15)",
+                        border: "1px solid rgba(79, 95, 232, 0.2)",
                       }}
                     >
-                      <Phone className="w-4 h-4 text-white" />
+                      <Phone className="w-3.5 h-3.5 text-electric" />
                     </div>
                     <div>
-                      <div className="text-sm font-semibold text-foreground leading-tight" style={{ fontFamily: "var(--font-display)" }}>
+                      <div className="text-xs font-semibold text-foreground leading-tight" style={{ fontFamily: "var(--font-display)" }}>
                         {scenario.agentName}
                       </div>
-                      <div className="text-[11px] text-foreground-tertiary font-mono">{scenario.phone}</div>
+                      <div className="text-[10px] text-foreground-tertiary font-mono">{scenario.phone}</div>
                     </div>
                   </div>
                   {isPlaying && (
-                    <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="flex items-center gap-1.5 px-2.5 py-1 rounded-full" style={{ background: "rgba(239, 68, 68, 0.1)" }}>
-                      <span className="relative flex h-2 w-2">
+                    <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="flex items-center gap-1.5 px-2 py-0.5 rounded-full" style={{ background: "rgba(239, 68, 68, 0.1)", border: "1px solid rgba(239, 68, 68, 0.15)" }}>
+                      <span className="relative flex h-1.5 w-1.5">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
+                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500" />
                       </span>
-                      <span className="text-[10px] font-bold tracking-wider text-red-500">LIVE</span>
+                      <span className="text-[9px] font-bold tracking-wider text-red-500">LIVE</span>
                     </motion.div>
                   )}
                 </div>
 
-                {/* ── Transcript area ── */}
-                <div className="h-56 flex flex-col min-h-0 relative">
+                {/* ── Transcript area (compact) ── */}
+                <div className="h-44 flex flex-col min-h-0 relative">
                   {!hasStartedPlaying ? (
-                    <div className="flex-1 flex flex-col items-center justify-center px-6">
-                      <div className="mb-4 text-center">
-                        <p className="text-sm text-foreground-secondary mb-1" style={{ fontFamily: "var(--font-body)" }}>
+                    <div className="flex-1 flex flex-col items-center justify-center px-5">
+                      <div className="mb-3 text-center">
+                        <p className="text-xs text-foreground-secondary mb-1" style={{ fontFamily: "var(--font-body)" }}>
                           {scenario.ctaHeadline}
                         </p>
-                        <p className="text-xs text-foreground-tertiary" style={{ fontFamily: "var(--font-body)" }}>
+                        <p className="text-[10px] text-foreground-tertiary" style={{ fontFamily: "var(--font-body)" }}>
                           {scenario.ctaSub}
                         </p>
                       </div>
                       <button
                         onClick={handlePlayPause}
-                        className="flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold transition-all cursor-pointer hover:scale-105 active:scale-95"
+                        className="flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-semibold transition-all cursor-pointer hover:scale-105 active:scale-95"
                         style={{
-                          background: "linear-gradient(135deg, #4F5FE8 0%, #3347D4 100%)",
-                          color: "white",
-                          boxShadow: "0 4px 16px rgba(79, 95, 232, 0.35)",
+                          background: "rgba(79, 95, 232, 0.15)",
+                          color: "var(--color-electric)",
+                          border: "1px solid rgba(79, 95, 232, 0.25)",
                         }}
                       >
-                        <Play className="w-3.5 h-3.5" />
+                        <Play className="w-3 h-3" />
                         Listen to a live demo
                       </button>
                     </div>
                   ) : (
-                    <div ref={transcriptRef} className="flex-1 overflow-y-auto px-5 py-3 space-y-2 scroll-smooth">
+                    <div ref={transcriptRef} className="flex-1 overflow-y-auto px-4 py-2 space-y-1.5 scroll-smooth">
                       {visibleMessages.length === 0 ? (
                         <div className="h-full flex items-center justify-center">
                           <motion.div animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 1.2, repeat: Infinity }} className="flex items-center gap-1.5 text-foreground-tertiary">
@@ -441,21 +440,22 @@ export default function Hero() {
                             return (
                               <motion.div
                                 key={`${scenario.id}-${idx}`}
-                                initial={{ opacity: 0, y: 6 }}
+                                initial={{ opacity: 0, y: 4 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.2 }}
                                 className={`flex ${isAI ? "justify-start" : "justify-end"}`}
                               >
                                 <div
-                                  className={`max-w-[85%] px-3 py-2 text-[11px] leading-relaxed ${
+                                  className={`max-w-[85%] px-3 py-1.5 text-[10px] leading-relaxed ${
                                     isAI
-                                      ? "rounded-2xl rounded-bl-md text-foreground-secondary"
+                                      ? "rounded-2xl rounded-bl-md"
                                       : "rounded-2xl rounded-br-md text-white"
                                   }`}
                                   style={{
                                     background: isAI
-                                      ? "rgba(236, 237, 245, 0.8)"
+                                      ? "rgba(236, 237, 245, 0.7)"
                                       : "linear-gradient(135deg, #4F5FE8 0%, #3347D4 100%)",
+                                    color: isAI ? "var(--color-foreground-secondary)" : "white",
                                   }}
                                 >
                                   {msg.text}
@@ -465,9 +465,9 @@ export default function Hero() {
                           })}
                           {isPlaying && visibleMessages.length > 0 && (
                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 1.2, repeat: Infinity }} className="flex items-center gap-1 pl-2">
-                              <div className="w-1.5 h-1.5 rounded-full bg-foreground-tertiary" />
-                              <div className="w-1.5 h-1.5 rounded-full bg-foreground-tertiary" />
-                              <div className="w-1.5 h-1.5 rounded-full bg-foreground-tertiary" />
+                              <div className="w-1 h-1 rounded-full bg-foreground-tertiary" />
+                              <div className="w-1 h-1 rounded-full bg-foreground-tertiary" />
+                              <div className="w-1 h-1 rounded-full bg-foreground-tertiary" />
                             </motion.div>
                           )}
                         </>
@@ -486,8 +486,8 @@ export default function Hero() {
                       className="overflow-hidden"
                     >
                       <div
-                        className="px-5 py-3 flex flex-wrap gap-2"
-                        style={{ borderTop: "1px solid rgba(221, 224, 238, 0.5)" }}
+                        className="px-4 py-2 flex flex-wrap gap-1.5"
+                        style={{ borderTop: "1px solid rgba(221, 224, 238, 0.3)" }}
                       >
                         {visibleFields.map((field, idx) => (
                           <motion.div
@@ -495,7 +495,7 @@ export default function Hero() {
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.3, delay: idx * 0.05 }}
-                            className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px]"
+                            className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px]"
                             style={{
                               background: field.status === "confirmed"
                                 ? "rgba(29, 184, 122, 0.08)"
@@ -504,8 +504,8 @@ export default function Hero() {
                             }}
                           >
                             {field.status === "confirmed"
-                              ? <CheckCircle2 className="w-3 h-3 text-accent" />
-                              : <AlertCircle className="w-3 h-3 text-amber-500" />
+                              ? <CheckCircle2 className="w-2.5 h-2.5 text-accent" />
+                              : <AlertCircle className="w-2.5 h-2.5 text-amber-500" />
                             }
                             <span className="font-medium text-foreground-secondary">{field.field}:</span>
                             <span className="font-semibold text-foreground">{field.value}</span>
@@ -516,27 +516,27 @@ export default function Hero() {
                   )}
                 </AnimatePresence>
 
-                {/* ── Player controls: minimal ── */}
+                {/* ── Compact player controls ── */}
                 <div
-                  className="px-5 py-4 flex items-center gap-3"
-                  style={{ borderTop: "1px solid rgba(221, 224, 238, 0.5)" }}
+                  className="px-4 py-3 flex items-center gap-2.5"
+                  style={{ borderTop: "1px solid rgba(221, 224, 238, 0.3)" }}
                 >
                   <button
                     onClick={handlePlayPause}
-                    className="w-10 h-10 rounded-full flex items-center justify-center transition-all cursor-pointer active:scale-90 shrink-0"
+                    className="w-8 h-8 rounded-full flex items-center justify-center transition-all cursor-pointer active:scale-90 shrink-0"
                     style={{
-                      background: "linear-gradient(135deg, #4F5FE8 0%, #3347D4 100%)",
-                      boxShadow: "0 4px 16px rgba(79, 95, 232, 0.3)",
+                      background: "rgba(79, 95, 232, 0.15)",
+                      border: "1px solid rgba(79, 95, 232, 0.25)",
                     }}
                   >
-                    {isPlaying ? <Pause className="w-4 h-4 text-white" /> : <Play className="w-4 h-4 text-white ml-0.5" />}
+                    {isPlaying ? <Pause className="w-3.5 h-3.5 text-electric" /> : <Play className="w-3.5 h-3.5 text-electric ml-0.5" />}
                   </button>
 
-                  <div className="flex-1 space-y-1.5">
+                  <div className="flex-1 space-y-1">
                     {/* Progress bar */}
                     <div
-                      className="h-1.5 rounded-full overflow-hidden cursor-pointer relative group"
-                      style={{ background: "rgba(221, 224, 238, 0.5)" }}
+                      className="h-1 rounded-full overflow-hidden cursor-pointer relative group"
+                      style={{ background: "rgba(221, 224, 238, 0.4)" }}
                       onClick={handleProgressClick}
                     >
                       <div
@@ -548,10 +548,10 @@ export default function Hero() {
                       />
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-[10px] text-foreground-tertiary font-mono tabular-nums">
+                      <span className="text-[9px] text-foreground-tertiary font-mono tabular-nums">
                         {formatTime(currentTime)}
                       </span>
-                      <span className="text-[10px] text-foreground-tertiary font-mono tabular-nums">
+                      <span className="text-[9px] text-foreground-tertiary font-mono tabular-nums">
                         {formatTime(scenario.duration)}
                       </span>
                     </div>
@@ -559,22 +559,22 @@ export default function Hero() {
 
                   <button
                     onClick={nextScenario}
-                    className="w-8 h-8 rounded-full flex items-center justify-center transition-all cursor-pointer hover:bg-background-tertiary active:scale-90 shrink-0"
+                    className="w-7 h-7 rounded-full flex items-center justify-center transition-all cursor-pointer hover:bg-background-tertiary active:scale-90 shrink-0"
                     title="Next demo"
                   >
-                    <SkipForward className="w-3.5 h-3.5 text-foreground-tertiary" />
+                    <SkipForward className="w-3 h-3 text-foreground-tertiary" />
                   </button>
                 </div>
 
-                {/* ── Scenario selector: subtle bottom pills ── */}
+                {/* ── Scenario selector: compact pills ── */}
                 <div
-                  className="px-5 pb-4 flex items-center justify-center gap-2"
+                  className="px-4 pb-3 flex items-center justify-center gap-1.5"
                 >
                   {scenarios.map((s, index) => (
                     <button
                       key={s.id}
                       onClick={() => handleScenarioChange(index)}
-                      className={`px-3 py-1.5 rounded-full text-[11px] font-medium transition-all cursor-pointer ${
+                      className={`px-2.5 py-1 rounded-full text-[10px] font-medium transition-all cursor-pointer ${
                         activeScenario === index
                           ? "text-white"
                           : "text-foreground-tertiary hover:text-foreground-secondary"
@@ -582,7 +582,7 @@ export default function Hero() {
                       style={{
                         background: activeScenario === index
                           ? "linear-gradient(135deg, #4F5FE8 0%, #3347D4 100%)"
-                          : "rgba(236, 237, 245, 0.6)",
+                          : "rgba(236, 237, 245, 0.5)",
                       }}
                     >
                       {s.label}
@@ -594,6 +594,9 @@ export default function Hero() {
           </motion.div>
         </div>
       </div>
+
+      {/* Smooth transition to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-background pointer-events-none z-10" />
 
       {/* Keyframes for hero blobs */}
       <style jsx>{`

@@ -223,18 +223,28 @@ const initialCalSlots: CalendarSlot[] = [
   { id: 1, day: 0, time: "9:00", name: "A. Garcia", status: "pending" },
   { id: 2, day: 0, time: "2:00", name: "B. Taylor", status: "pending" },
   { id: 3, day: 1, time: "10:30", name: "C. Nguyen", status: "no-show" },
-  { id: 4, day: 2, time: "11:00", name: "D. Miller", status: "pending" },
-  { id: 5, day: 3, time: "9:30", name: "E. Brown", status: "pending" },
-  { id: 6, day: 4, time: "1:00", name: "F. Davis", status: "pending" },
+  { id: 4, day: 1, time: "3:00", name: "H. Kim", status: "pending" },
+  { id: 5, day: 2, time: "11:00", name: "D. Miller", status: "pending" },
+  { id: 6, day: 2, time: "4:00", name: "J. Patel", status: "pending" },
+  { id: 7, day: 3, time: "9:30", name: "E. Brown", status: "pending" },
+  { id: 8, day: 3, time: "1:00", name: "K. Lee", status: "pending" },
+  { id: 9, day: 4, time: "10:00", name: "F. Davis", status: "pending" },
+  { id: 10, day: 4, time: "2:30", name: "L. Chen", status: "pending" },
+  { id: 11, day: 0, time: "11:30", name: "M. Russo", status: "pending" },
 ];
 
 const calSequence: { slotId: number; newStatus: SlotStatus; newDay?: number; newTime?: string }[] = [
   { slotId: 1, newStatus: "confirmed" },
+  { slotId: 11, newStatus: "confirmed" },
   { slotId: 2, newStatus: "confirmed" },
   { slotId: 3, newStatus: "rescheduled", newDay: 3, newTime: "3:00" },
   { slotId: 4, newStatus: "confirmed" },
   { slotId: 5, newStatus: "confirmed" },
   { slotId: 6, newStatus: "confirmed" },
+  { slotId: 7, newStatus: "confirmed" },
+  { slotId: 8, newStatus: "confirmed" },
+  { slotId: 9, newStatus: "confirmed" },
+  { slotId: 10, newStatus: "confirmed" },
 ];
 
 function CalSlotBadge({ status }: { status: SlotStatus }) {
@@ -420,7 +430,7 @@ function QualityBadge({ quality }: { quality: LeadQuality }) {
 
 function LeadScoringMockup() {
   const [leads, setLeads] = useState<Lead[]>(initialLeads);
-  const [phase, setPhase] = useState(0); // 0=idle, 1=showScores, 2=showQuality, 3=passToSales, 4=done
+  const [phase, setPhase] = useState(0);
   const [isInView, setIsInView] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -440,13 +450,11 @@ function LeadScoringMockup() {
 
   useEffect(() => {
     if (!isInView) return;
-
     const timers: ReturnType<typeof setTimeout>[] = [];
 
     if (phase === 0) {
       timers.push(setTimeout(() => setPhase(1), 800));
     } else if (phase === 1) {
-      // Reveal scores one by one
       initialLeads.forEach((lead, i) => {
         timers.push(setTimeout(() => {
           setLeads(prev => prev.map(l => l.id === lead.id ? { ...l, showScore: true } : l));
@@ -454,7 +462,6 @@ function LeadScoringMockup() {
       });
       timers.push(setTimeout(() => setPhase(2), initialLeads.length * 500 + 600));
     } else if (phase === 2) {
-      // Assign quality badges
       initialLeads.forEach((lead, i) => {
         const quality: LeadQuality = lead.score >= 85 ? "hot" : lead.score >= 60 ? "warm" : "cold";
         timers.push(setTimeout(() => {
@@ -463,7 +470,6 @@ function LeadScoringMockup() {
       });
       timers.push(setTimeout(() => setPhase(3), initialLeads.length * 450 + 700));
     } else if (phase === 3) {
-      // Pass hot leads to sales
       const hotLeadIds = initialLeads.filter(l => l.score >= 85).map(l => l.id);
       hotLeadIds.forEach((id, i) => {
         timers.push(setTimeout(() => {
@@ -474,100 +480,112 @@ function LeadScoringMockup() {
     } else if (phase === 4) {
       timers.push(setTimeout(resetAndReplay, 3000));
     }
-
     return () => timers.forEach(clearTimeout);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase, isInView, resetAndReplay]);
 
-  const scoreColor = (score: number) => {
-    if (score >= 85) return "text-accent";
-    if (score >= 60) return "text-warning";
-    return "text-slate-indigo";
-  };
-
-  const barColor = (score: number) => {
-    if (score >= 85) return "bg-accent";
-    if (score >= 60) return "bg-warning";
-    return "bg-slate-indigo";
-  };
+  const scoreColor = (score: number) => score >= 85 ? "#1DB87A" : score >= 60 ? "#F59E0B" : "#8B96C8";
+  const qualityLabel = (score: number) => score >= 85 ? "Hot" : score >= 60 ? "Warm" : "Cold";
 
   return (
     <div ref={containerRef} className="relative aspect-video overflow-hidden rounded-2xl border border-border bg-background">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-background-secondary">
+      <div className="flex items-center justify-between px-4 py-2.5 border-b border-border bg-background-secondary">
         <div className="flex items-center gap-2">
           <TrendingUp className="w-3.5 h-3.5 text-electric" />
           <span className="text-[11px] font-semibold text-foreground" style={{ fontFamily: "var(--font-display)" }}>
-            Lead Scoring Pipeline
+            Lead Qualification
           </span>
         </div>
-        <span className="text-[10px] text-foreground-tertiary" style={{ fontFamily: "var(--font-body)" }}>
-          {leads.filter(l => l.quality === "hot").length} qualified
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="text-[10px] text-accent font-medium">{leads.filter(l => l.passedToSales).length} sent to sales</span>
+        </div>
       </div>
 
-      {/* Lead cards */}
-      <div className="p-2.5 space-y-1.5">
-        {leads.map((lead) => (
-          <motion.div
-            key={lead.id}
-            layout
-            className={`relative rounded-lg border p-2.5 transition-colors duration-300 ${
-              lead.passedToSales
-                ? "border-accent/40 bg-accent/5"
-                : "border-border-light bg-background"
-            }`}
-          >
-            <div className="flex items-center justify-between mb-1.5">
-              <div className="min-w-0">
-                <div className="text-[11px] font-semibold text-foreground truncate" style={{ fontFamily: "var(--font-body)" }}>{lead.name}</div>
-                <div className="text-[9px] text-foreground-tertiary truncate" style={{ fontFamily: "var(--font-body)" }}>{lead.company}</div>
+      {/* 3-column funnel layout */}
+      <div className="grid grid-cols-3 h-[calc(100%-72px)]">
+        {/* Column: Incoming */}
+        <div className="border-r border-border-light p-2">
+          <div className="text-[9px] font-semibold text-foreground-tertiary uppercase tracking-wider mb-2 px-1">Incoming</div>
+          {leads.filter(l => !l.showScore).map((lead) => (
+            <motion.div
+              key={`incoming-${lead.id}`}
+              layout
+              className="rounded-lg border border-border-light bg-background p-2 mb-1.5"
+            >
+              <div className="text-[10px] font-semibold text-foreground truncate">{lead.name}</div>
+              <div className="text-[8px] text-foreground-tertiary">{lead.company}</div>
+              <div className="flex items-center gap-1 mt-1">
+                <Clock className="w-2.5 h-2.5 text-foreground-tertiary" />
+                <span className="text-[8px] text-foreground-tertiary">Waiting...</span>
               </div>
-              <div className="flex items-center gap-1.5 shrink-0">
-                <AnimatePresence>
-                  {lead.quality && <QualityBadge quality={lead.quality} />}
-                </AnimatePresence>
-                <AnimatePresence>
-                  {lead.passedToSales && (
-                    <motion.span
-                      initial={{ scale: 0, opacity: 0, x: 10 }}
-                      animate={{ scale: 1, opacity: 1, x: 0 }}
-                      className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[8px] font-semibold bg-electric/10 text-electric"
-                      style={{ fontFamily: "var(--font-display)" }}
-                    >
-                      <Send className="w-2 h-2" />
-                      Sales
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </div>
-            </div>
+            </motion.div>
+          ))}
+        </div>
 
-            {/* Score bar */}
-            <div className="flex items-center gap-2">
-              <div className="flex-1 h-1.5 rounded-full bg-background-tertiary overflow-hidden">
-                <motion.div
-                  className={`h-full rounded-full ${barColor(lead.score)}`}
-                  initial={{ width: "0%" }}
-                  animate={{ width: lead.showScore ? `${lead.score}%` : "0%" }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
-                />
+        {/* Column: Scored */}
+        <div className="border-r border-border-light p-2">
+          <div className="text-[9px] font-semibold text-foreground-tertiary uppercase tracking-wider mb-2 px-1">Scored</div>
+          {leads.filter(l => l.showScore && !l.passedToSales).map((lead) => (
+            <motion.div
+              key={`scored-${lead.id}`}
+              layout
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="rounded-lg border p-2 mb-1.5"
+              style={{
+                borderColor: `${scoreColor(lead.score)}30`,
+                background: `${scoreColor(lead.score)}08`,
+              }}
+            >
+              <div className="flex items-center justify-between mb-1">
+                <div className="text-[10px] font-semibold text-foreground truncate">{lead.name}</div>
+                <motion.span
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  className="text-[10px] font-bold tabular-nums"
+                  style={{ color: scoreColor(lead.score), fontFamily: "var(--font-mono)" }}
+                >
+                  {lead.score}
+                </motion.span>
               </div>
-              <AnimatePresence>
-                {lead.showScore && (
-                  <motion.span
-                    initial={{ opacity: 0, x: -5 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className={`text-[11px] font-bold w-7 text-right ${scoreColor(lead.score)}`}
-                    style={{ fontFamily: "var(--font-mono)" }}
-                  >
-                    {lead.score}
-                  </motion.span>
-                )}
-              </AnimatePresence>
+              <div className="text-[8px] text-foreground-tertiary mb-1.5">{lead.company}</div>
+              {lead.quality && <QualityBadge quality={lead.quality} />}
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Column: Sent to Sales */}
+        <div className="p-2">
+          <div className="text-[9px] font-semibold text-accent uppercase tracking-wider mb-2 px-1 flex items-center gap-1">
+            <Send className="w-2.5 h-2.5" /> Sales Ready
+          </div>
+          {leads.filter(l => l.passedToSales).map((lead) => (
+            <motion.div
+              key={`sales-${lead.id}`}
+              layout
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="rounded-lg border border-accent/30 bg-accent/5 p-2 mb-1.5"
+            >
+              <div className="flex items-center justify-between mb-1">
+                <div className="text-[10px] font-semibold text-foreground truncate">{lead.name}</div>
+                <Flame className="w-3 h-3 text-accent" />
+              </div>
+              <div className="text-[8px] text-foreground-tertiary mb-1">{lead.company}</div>
+              <div className="flex items-center gap-1">
+                <span className="text-[8px] font-bold text-accent">Score: {lead.score}</span>
+                <span className="text-[8px] text-accent">· Priority</span>
+              </div>
+            </motion.div>
+          ))}
+          {leads.filter(l => l.passedToSales).length === 0 && (
+            <div className="flex flex-col items-center justify-center h-20 text-foreground-tertiary">
+              <Send className="w-4 h-4 mb-1 opacity-30" />
+              <span className="text-[9px]">Waiting for hot leads...</span>
             </div>
-          </motion.div>
-        ))}
+          )}
+        </div>
       </div>
 
       {/* Bottom bar */}

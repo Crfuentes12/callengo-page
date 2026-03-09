@@ -652,40 +652,40 @@
    LAVA LAMP — Animated floating gradient blobs
    ============================================================ */
 @keyframes lavaLamp1 {
-  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  20% { transform: translate(120px, -80px) scale(1.2) rotate(30deg); }
-  40% { transform: translate(-60px, 140px) scale(0.85) rotate(-20deg); }
-  60% { transform: translate(80px, 60px) scale(1.15) rotate(15deg); }
-  80% { transform: translate(-100px, -40px) scale(0.95) rotate(-10deg); }
+  0%, 100% { transform: translate(0, 0) scale(1); border-radius: 40% 60% 55% 45% / 55% 40% 60% 45%; }
+  20% { transform: translate(80px, -60px) scale(1.12); border-radius: 55% 45% 40% 60% / 45% 55% 50% 50%; }
+  40% { transform: translate(-40px, 100px) scale(0.92); border-radius: 45% 55% 60% 40% / 60% 45% 40% 55%; }
+  60% { transform: translate(60px, 40px) scale(1.08); border-radius: 50% 50% 45% 55% / 40% 60% 55% 45%; }
+  80% { transform: translate(-70px, -30px) scale(0.96); border-radius: 60% 40% 50% 50% / 50% 45% 55% 50%; }
 }
 
 @keyframes lavaLamp2 {
-  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  15% { transform: translate(-140px, 100px) scale(1.1) rotate(-25deg); }
-  35% { transform: translate(90px, -120px) scale(0.9) rotate(20deg); }
-  55% { transform: translate(-50px, -60px) scale(1.2) rotate(-15deg); }
-  75% { transform: translate(110px, 80px) scale(0.85) rotate(30deg); }
+  0%, 100% { transform: translate(0, 0) scale(1); border-radius: 55% 45% 40% 60% / 40% 55% 45% 60%; }
+  15% { transform: translate(-100px, 70px) scale(1.08); border-radius: 40% 60% 55% 45% / 55% 40% 60% 45%; }
+  35% { transform: translate(60px, -80px) scale(0.94); border-radius: 50% 50% 45% 55% / 60% 40% 50% 50%; }
+  55% { transform: translate(-30px, -40px) scale(1.14); border-radius: 45% 55% 60% 40% / 45% 55% 40% 60%; }
+  75% { transform: translate(80px, 50px) scale(0.90); border-radius: 60% 40% 50% 50% / 50% 60% 45% 55%; }
 }
 
 @keyframes lavaLamp3 {
-  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  25% { transform: translate(80px, 120px) scale(1.15) rotate(20deg); }
-  50% { transform: translate(-120px, -50px) scale(0.9) rotate(-30deg); }
-  75% { transform: translate(60px, -100px) scale(1.1) rotate(10deg); }
+  0%, 100% { transform: translate(0, 0) scale(1); border-radius: 45% 55% 50% 50% / 60% 40% 55% 45%; }
+  25% { transform: translate(50px, 80px) scale(1.10); border-radius: 55% 45% 40% 60% / 45% 55% 50% 50%; }
+  50% { transform: translate(-80px, -30px) scale(0.92); border-radius: 40% 60% 55% 45% / 55% 40% 60% 45%; }
+  75% { transform: translate(40px, -60px) scale(1.06); border-radius: 50% 50% 60% 40% / 40% 60% 45% 55%; }
 }
 
 @keyframes lavaLamp4 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  30% { transform: translate(-80px, -100px) scale(1.2); }
-  60% { transform: translate(100px, 60px) scale(0.85); }
-  85% { transform: translate(-40px, 120px) scale(1.1); }
+  0%, 100% { transform: translate(0, 0) scale(1); border-radius: 60% 40% 45% 55% / 50% 60% 40% 50%; }
+  30% { transform: translate(-50px, -70px) scale(1.15); border-radius: 45% 55% 50% 50% / 60% 40% 55% 45%; }
+  60% { transform: translate(70px, 40px) scale(0.88); border-radius: 55% 45% 60% 40% / 45% 55% 40% 60%; }
+  85% { transform: translate(-25px, 80px) scale(1.05); border-radius: 40% 60% 45% 55% / 50% 50% 55% 45%; }
 }
 
 @keyframes lavaLamp5 {
-  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  20% { transform: translate(100px, 60px) scale(0.9) rotate(-20deg); }
-  45% { transform: translate(-70px, -90px) scale(1.2) rotate(25deg); }
-  70% { transform: translate(50px, 100px) scale(0.95) rotate(-15deg); }
+  0%, 100% { transform: translate(0, 0) scale(1); border-radius: 50% 50% 60% 40% / 45% 55% 50% 50%; }
+  20% { transform: translate(60px, 40px) scale(0.93); border-radius: 60% 40% 45% 55% / 55% 45% 50% 50%; }
+  45% { transform: translate(-50px, -60px) scale(1.12); border-radius: 40% 60% 50% 50% / 40% 60% 55% 45%; }
+  70% { transform: translate(30px, 70px) scale(0.97); border-radius: 55% 45% 55% 45% / 50% 50% 45% 55%; }
 }
 
 /* ── Global dark text contrast on dark backgrounds ── */

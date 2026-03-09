@@ -13,71 +13,58 @@ export default function CTA() {
           viewport={{ once: true }}
           className="relative overflow-hidden rounded-3xl gradient-bg p-12 md:p-20"
         >
-          {/* Internal lava lamp — vivid and visible */}
+          {/* Internal lava lamp — bold and alive */}
           <div className="absolute inset-0 overflow-hidden">
-            {/* Big white/electric glow, top-right */}
             <div
-              className="absolute rounded-full"
+              className="absolute"
               style={{
-                width: 500,
-                height: 500,
-                top: "-25%",
-                right: "-10%",
-                background: "radial-gradient(circle, rgba(255,255,255,0.22) 0%, rgba(139,150,200,0.10) 35%, transparent 65%)",
-                filter: "blur(30px)",
+                width: "60%",
+                height: "120%",
+                top: "-30%",
+                right: "-15%",
+                background: "conic-gradient(from 200deg, rgba(255,255,255,0.25), rgba(139,150,200,0.20), rgba(255,255,255,0.10), rgba(255,255,255,0.25))",
+                filter: "blur(60px)",
+                borderRadius: "40% 60% 55% 45% / 55% 40% 60% 45%",
                 animation: "ctaLava1 16s ease-in-out infinite",
               }}
             />
-            {/* Warm slate glow, bottom-left */}
             <div
-              className="absolute rounded-full"
+              className="absolute"
               style={{
-                width: 450,
-                height: 450,
-                bottom: "-30%",
-                left: "-8%",
-                background: "radial-gradient(circle, rgba(139,150,200,0.25) 0%, rgba(255,255,255,0.08) 40%, transparent 65%)",
-                filter: "blur(25px)",
+                width: "55%",
+                height: "100%",
+                bottom: "-35%",
+                left: "-10%",
+                background: "conic-gradient(from 60deg, rgba(139,150,200,0.28), rgba(255,255,255,0.15), rgba(79,95,232,0.12), rgba(139,150,200,0.28))",
+                filter: "blur(55px)",
+                borderRadius: "55% 45% 40% 60% / 40% 55% 45% 60%",
                 animation: "ctaLava2 20s ease-in-out infinite",
               }}
             />
-            {/* Electric accent center blob */}
             <div
-              className="absolute rounded-full"
+              className="absolute"
               style={{
-                width: 350,
-                height: 350,
-                top: "20%",
-                left: "45%",
-                background: "radial-gradient(circle, rgba(255,255,255,0.18) 0%, rgba(79,95,232,0.10) 40%, transparent 65%)",
-                filter: "blur(25px)",
+                width: "40%",
+                height: "80%",
+                top: "10%",
+                left: "35%",
+                background: "conic-gradient(from 140deg, rgba(255,255,255,0.20), rgba(29,184,122,0.08), rgba(255,255,255,0.12), rgba(255,255,255,0.20))",
+                filter: "blur(50px)",
+                borderRadius: "45% 55% 50% 50% / 60% 40% 55% 45%",
                 animation: "ctaLava3 14s ease-in-out infinite",
               }}
             />
-            {/* Small bright accent, top-left */}
             <div
-              className="absolute rounded-full"
+              className="absolute"
               style={{
-                width: 280,
-                height: 280,
-                top: "5%",
-                left: "15%",
-                background: "radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(37,56,184,0.08) 40%, transparent 65%)",
-                filter: "blur(20px)",
-                animation: "ctaLava1 18s ease-in-out infinite reverse",
-              }}
-            />
-            {/* Green/teal accent shimmer, right side */}
-            <div
-              className="absolute rounded-full"
-              style={{
-                width: 300,
-                height: 300,
-                top: "50%",
-                right: "20%",
-                background: "radial-gradient(circle, rgba(29,184,122,0.12) 0%, rgba(255,255,255,0.06) 40%, transparent 65%)",
-                filter: "blur(25px)",
-                animation: "ctaLava2 22s ease-in-out infinite reverse",
+                width: "35%",
+                height: "70%",
+                top: "-10%",
+                left: "10%",
+                background: "conic-gradient(from 300deg, rgba(255,255,255,0.18), rgba(37,56,184,0.10), rgba(255,255,255,0.08), rgba(255,255,255,0.18))",
+                filter: "blur(45px)",
+                borderRadius: "50% 50% 45% 55% / 40% 60% 55% 45%",
+                animation: "ctaLava1 22s ease-in-out infinite reverse",
               }}
             />
           </div>
@@ -129,20 +116,20 @@ export default function CTA() {
           {/* CTA lava lamp keyframes */}
           <style jsx>{`
             @keyframes ctaLava1 {
-              0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-              25% { transform: translate(-50px, 40px) scale(1.2) rotate(60deg); }
-              50% { transform: translate(-25px, 80px) scale(0.9) rotate(120deg); }
-              75% { transform: translate(40px, 25px) scale(1.15) rotate(180deg); }
+              0%, 100% { transform: translate(0, 0) scale(1); border-radius: 40% 60% 55% 45% / 55% 40% 60% 45%; }
+              25% { transform: translate(-50px, 40px) scale(1.15); border-radius: 55% 45% 40% 60% / 45% 55% 50% 50%; }
+              50% { transform: translate(-25px, 80px) scale(0.92); border-radius: 45% 55% 60% 40% / 60% 45% 40% 55%; }
+              75% { transform: translate(40px, 25px) scale(1.08); border-radius: 50% 50% 45% 55% / 40% 60% 55% 45%; }
             }
             @keyframes ctaLava2 {
-              0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-              30% { transform: translate(50px, -40px) scale(1.15) rotate(-70deg); }
-              60% { transform: translate(25px, -60px) scale(1.25) rotate(-140deg); }
+              0%, 100% { transform: translate(0, 0) scale(1); border-radius: 55% 45% 40% 60% / 40% 55% 45% 60%; }
+              30% { transform: translate(50px, -40px) scale(1.12); border-radius: 40% 60% 55% 45% / 55% 40% 60% 45%; }
+              60% { transform: translate(25px, -60px) scale(1.20); border-radius: 50% 50% 45% 55% / 60% 40% 50% 50%; }
             }
             @keyframes ctaLava3 {
-              0%, 100% { transform: translate(0, 0) scale(1); }
-              33% { transform: translate(40px, -30px) scale(1.25); }
-              66% { transform: translate(-30px, 40px) scale(0.85); }
+              0%, 100% { transform: translate(0, 0) scale(1); border-radius: 45% 55% 50% 50% / 60% 40% 55% 45%; }
+              33% { transform: translate(40px, -30px) scale(1.20); border-radius: 55% 45% 40% 60% / 45% 55% 50% 50%; }
+              66% { transform: translate(-30px, 40px) scale(0.88); border-radius: 40% 60% 55% 45% / 55% 40% 60% 45%; }
             }
           `}</style>
         </motion.div>

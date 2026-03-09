@@ -9,122 +9,146 @@ export default function AnimatedBlobs({ className = "" }: AnimatedBlobsProps) {
     <div
       className={`absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0 ${className}`}
     >
-      {/* Blob 1 — Big electric blue, top-left */}
+      {/* ── Blob 1: Electric + Indigo mega wash, top-left ── */}
       <div
-        className="absolute rounded-full"
+        className="absolute"
         style={{
-          width: 650,
-          height: 650,
-          top: "0%",
-          left: "-5%",
+          width: "70vw",
+          height: "70vw",
+          maxWidth: 1200,
+          maxHeight: 1200,
+          top: "-10%",
+          left: "-20%",
           background:
-            "radial-gradient(circle, rgba(79, 95, 232, 0.35) 0%, rgba(79, 95, 232, 0.15) 35%, rgba(79, 95, 232, 0.04) 60%, transparent 75%)",
-          filter: "blur(50px)",
+            "conic-gradient(from 120deg, rgba(79, 95, 232, 0.55), rgba(30, 45, 107, 0.45), rgba(139, 150, 200, 0.35), rgba(79, 95, 232, 0.55))",
+          filter: "blur(120px)",
+          borderRadius: "40% 60% 55% 45% / 55% 40% 60% 45%",
           animation: "lavaLamp1 30s ease-in-out infinite",
         }}
       />
 
-      {/* Blob 2 — Deep indigo, top-right corner */}
+      {/* ── Blob 2: Indigo + Slate sweep, top-right ── */}
       <div
-        className="absolute rounded-full"
+        className="absolute"
         style={{
-          width: 550,
-          height: 550,
-          top: "5%",
-          right: "-8%",
+          width: "55vw",
+          height: "55vw",
+          maxWidth: 900,
+          maxHeight: 900,
+          top: "-5%",
+          right: "-15%",
           background:
-            "radial-gradient(circle, rgba(30, 45, 107, 0.40) 0%, rgba(30, 45, 107, 0.18) 35%, rgba(30, 45, 107, 0.05) 60%, transparent 75%)",
-          filter: "blur(45px)",
+            "conic-gradient(from 240deg, rgba(30, 45, 107, 0.50), rgba(139, 150, 200, 0.40), rgba(51, 71, 212, 0.35), rgba(30, 45, 107, 0.50))",
+          filter: "blur(110px)",
+          borderRadius: "55% 45% 40% 60% / 40% 55% 45% 60%",
           animation: "lavaLamp2 35s ease-in-out infinite",
         }}
       />
 
-      {/* Blob 3 — Slate indigo, large mid-page presence */}
+      {/* ── Blob 3: Big mid-page presence, electric + teal ── */}
       <div
-        className="absolute rounded-full"
+        className="absolute"
         style={{
-          width: 800,
-          height: 800,
-          top: "22%",
-          left: "20%",
+          width: "80vw",
+          height: "60vw",
+          maxWidth: 1400,
+          maxHeight: 1000,
+          top: "20%",
+          left: "10%",
           background:
-            "radial-gradient(circle, rgba(139, 150, 200, 0.30) 0%, rgba(139, 150, 200, 0.12) 35%, rgba(139, 150, 200, 0.03) 60%, transparent 75%)",
-          filter: "blur(55px)",
+            "conic-gradient(from 60deg, rgba(79, 95, 232, 0.40), rgba(29, 184, 122, 0.15), rgba(139, 150, 200, 0.35), rgba(51, 71, 212, 0.40), rgba(79, 95, 232, 0.40))",
+          filter: "blur(140px)",
+          borderRadius: "45% 55% 50% 50% / 60% 40% 55% 45%",
           animation: "lavaLamp3 40s ease-in-out infinite",
         }}
       />
 
-      {/* Blob 4 — Electric purple, mid-left, warm accent */}
+      {/* ── Blob 4: Deep navy glow, mid-left ── */}
       <div
-        className="absolute rounded-full"
+        className="absolute"
         style={{
-          width: 500,
-          height: 500,
+          width: "50vw",
+          height: "45vw",
+          maxWidth: 800,
+          maxHeight: 700,
           top: "40%",
-          left: "-10%",
+          left: "-15%",
           background:
-            "radial-gradient(circle, rgba(79, 95, 232, 0.32) 0%, rgba(51, 71, 212, 0.14) 35%, transparent 70%)",
-          filter: "blur(40px)",
+            "conic-gradient(from 180deg, rgba(30, 45, 107, 0.50), rgba(79, 95, 232, 0.40), rgba(37, 56, 184, 0.45), rgba(30, 45, 107, 0.50))",
+          filter: "blur(100px)",
+          borderRadius: "60% 40% 45% 55% / 50% 60% 40% 50%",
           animation: "lavaLamp4 28s ease-in-out infinite",
         }}
       />
 
-      {/* Blob 5 — Navy glow, mid-right */}
+      {/* ── Blob 5: Electric vivid, mid-right ── */}
       <div
-        className="absolute rounded-full"
+        className="absolute"
         style={{
-          width: 600,
-          height: 600,
-          top: "48%",
-          right: "-2%",
+          width: "55vw",
+          height: "50vw",
+          maxWidth: 900,
+          maxHeight: 800,
+          top: "45%",
+          right: "-10%",
           background:
-            "radial-gradient(circle, rgba(37, 56, 184, 0.28) 0%, rgba(37, 56, 184, 0.10) 40%, transparent 70%)",
-          filter: "blur(50px)",
+            "conic-gradient(from 300deg, rgba(79, 95, 232, 0.45), rgba(139, 150, 200, 0.35), rgba(30, 45, 107, 0.40), rgba(79, 95, 232, 0.45))",
+          filter: "blur(120px)",
+          borderRadius: "50% 50% 60% 40% / 45% 55% 50% 50%",
           animation: "lavaLamp5 33s ease-in-out infinite",
         }}
       />
 
-      {/* Blob 6 — Electric teal accent, lower area */}
+      {/* ── Blob 6: Warm electric + green accent, lower ── */}
       <div
-        className="absolute rounded-full"
+        className="absolute"
         style={{
-          width: 550,
-          height: 550,
-          top: "65%",
-          left: "10%",
+          width: "65vw",
+          height: "55vw",
+          maxWidth: 1100,
+          maxHeight: 900,
+          top: "60%",
+          left: "5%",
           background:
-            "radial-gradient(circle, rgba(79, 95, 232, 0.30) 0%, rgba(29, 184, 122, 0.10) 40%, transparent 70%)",
-          filter: "blur(45px)",
+            "conic-gradient(from 150deg, rgba(79, 95, 232, 0.42), rgba(29, 184, 122, 0.18), rgba(51, 71, 212, 0.38), rgba(139, 150, 200, 0.30), rgba(79, 95, 232, 0.42))",
+          filter: "blur(130px)",
+          borderRadius: "40% 60% 50% 50% / 55% 45% 55% 45%",
           animation: "lavaLamp1 36s ease-in-out infinite reverse",
         }}
       />
 
-      {/* Blob 7 — Deep indigo, bottom-right */}
+      {/* ── Blob 7: Deep indigo mass, bottom-right ── */}
       <div
-        className="absolute rounded-full"
+        className="absolute"
         style={{
-          width: 500,
-          height: 500,
-          top: "78%",
-          right: "5%",
+          width: "50vw",
+          height: "50vw",
+          maxWidth: 800,
+          maxHeight: 800,
+          top: "75%",
+          right: "0%",
           background:
-            "radial-gradient(circle, rgba(30, 45, 107, 0.35) 0%, rgba(30, 45, 107, 0.12) 40%, transparent 70%)",
-          filter: "blur(40px)",
+            "conic-gradient(from 0deg, rgba(30, 45, 107, 0.55), rgba(79, 95, 232, 0.40), rgba(37, 56, 184, 0.45), rgba(30, 45, 107, 0.55))",
+          filter: "blur(110px)",
+          borderRadius: "55% 45% 50% 50% / 45% 55% 45% 55%",
           animation: "lavaLamp2 32s ease-in-out infinite reverse",
         }}
       />
 
-      {/* Blob 8 — Subtle slate shimmer, very bottom */}
+      {/* ── Blob 8: Slate shimmer, bottom center ── */}
       <div
-        className="absolute rounded-full"
+        className="absolute"
         style={{
-          width: 700,
-          height: 700,
-          top: "88%",
-          left: "30%",
+          width: "70vw",
+          height: "50vw",
+          maxWidth: 1200,
+          maxHeight: 800,
+          top: "85%",
+          left: "15%",
           background:
-            "radial-gradient(circle, rgba(139, 150, 200, 0.25) 0%, rgba(79, 95, 232, 0.08) 40%, transparent 70%)",
-          filter: "blur(55px)",
+            "conic-gradient(from 90deg, rgba(139, 150, 200, 0.40), rgba(79, 95, 232, 0.35), rgba(30, 45, 107, 0.30), rgba(139, 150, 200, 0.40))",
+          filter: "blur(130px)",
+          borderRadius: "45% 55% 45% 55% / 50% 50% 50% 50%",
           animation: "lavaLamp3 38s ease-in-out infinite reverse",
         }}
       />

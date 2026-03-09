@@ -212,8 +212,8 @@ export default function WebhooksPage() {
 
               {/* Title block */}
               <div className="flex items-start gap-5 mb-6">
-                <div className="w-16 h-16 rounded-2xl bg-foreground flex items-center justify-center flex-shrink-0">
-                  <Workflow className="w-8 h-8 text-white" />
+                <div className="w-16 h-16 rounded-2xl bg-background-secondary flex items-center justify-center flex-shrink-0 overflow-hidden">
+                  <img src="/integrations/webhooks.png" alt="Webhooks" width={52} height={52} className="object-contain" />
                 </div>
                 <div>
                   <div className="flex items-center gap-3 mb-2">

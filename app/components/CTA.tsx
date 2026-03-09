@@ -14,10 +14,11 @@ export default function CTA() {
           className="relative overflow-hidden rounded-3xl gradient-bg p-12 md:p-20"
         >
           {/* Internal lava lamp blobs */}
-          <div className="absolute inset-0 overflow-hidden opacity-70">
-            <div className="absolute -top-1/4 right-[-10%] w-3/5 h-[120%] bg-gradient-to-br from-white/25 via-[#8B96C8]/20 to-[#6070E0]/15 rounded-full blur-3xl animate-[ctaLava1_40s_ease-in-out_infinite]" />
-            <div className="absolute -bottom-1/3 left-[-10%] w-1/2 h-full bg-gradient-to-br from-[#8B96C8]/25 via-white/15 to-[#4F5FE8]/15 rounded-full blur-3xl animate-[ctaLava2_50s_ease-in-out_infinite]" />
-            <div className="absolute top-[10%] left-[30%] w-2/5 h-4/5 bg-gradient-to-br from-white/20 via-[#1DB87A]/10 to-[#8B96C8]/12 rounded-full blur-2xl animate-[ctaLava3_45s_ease-in-out_infinite]" />
+          <div className="absolute inset-0 overflow-hidden opacity-90">
+            <div className="absolute -top-1/4 right-[-10%] w-3/5 h-[120%] bg-gradient-to-br from-white/40 via-[#8B96C8]/35 to-[#6070E0]/25 rounded-full blur-2xl animate-[ctaLava1_35s_ease-in-out_infinite]" />
+            <div className="absolute -bottom-1/3 left-[-10%] w-1/2 h-full bg-gradient-to-br from-[#8B96C8]/40 via-white/25 to-[#4F5FE8]/25 rounded-full blur-2xl animate-[ctaLava2_42s_ease-in-out_infinite]" />
+            <div className="absolute top-[10%] left-[30%] w-2/5 h-4/5 bg-gradient-to-br from-white/30 via-[#1DB87A]/18 to-[#8B96C8]/20 rounded-full blur-2xl animate-[ctaLava3_38s_ease-in-out_infinite]" />
+            <div className="absolute top-[-15%] left-[50%] w-1/3 h-[90%] bg-gradient-to-br from-[#6070E0]/30 via-white/20 to-[#8B96C8]/25 rounded-full blur-2xl animate-[ctaLava4_48s_ease-in-out_infinite]" />
           </div>
 
           {/* Dark gradient overlay protecting text on the left */}
@@ -70,17 +71,22 @@ export default function CTA() {
           <style jsx>{`
             @keyframes ctaLava1 {
               0%, 100% { transform: translate(0, 0) scale(1); }
-              33% { transform: translate(-30px, 25px) scale(1.06); }
-              66% { transform: translate(20px, -20px) scale(0.95); }
+              33% { transform: translate(-35px, 30px) scale(1.08); }
+              66% { transform: translate(25px, -25px) scale(0.93); }
             }
             @keyframes ctaLava2 {
               0%, 100% { transform: translate(0, 0) scale(1); }
-              40% { transform: translate(30px, -25px) scale(1.08); }
-              70% { transform: translate(-20px, 30px) scale(0.94); }
+              40% { transform: translate(35px, -30px) scale(1.1); }
+              70% { transform: translate(-25px, 35px) scale(0.92); }
             }
             @keyframes ctaLava3 {
               0%, 100% { transform: translate(0, 0) scale(1); }
-              50% { transform: translate(25px, -15px) scale(1.05); }
+              50% { transform: translate(30px, -20px) scale(1.07); }
+            }
+            @keyframes ctaLava4 {
+              0%, 100% { transform: translate(0, 0) scale(1); }
+              35% { transform: translate(-20px, 30px) scale(1.06); }
+              65% { transform: translate(30px, -15px) scale(0.95); }
             }
           `}</style>
         </motion.div>

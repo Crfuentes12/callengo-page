@@ -640,7 +640,10 @@ export default function DocsPage() {
                 <p className="text-foreground-secondary text-lg mb-8 max-w-2xl">
                   Connect Callengo to the tools you already use. All 16
                   integrations are configured directly from your dashboard —
-                  no coding required.
+                  no coding required.{" "}
+                  <Link href="/integrations" className="text-electric hover:underline font-medium">
+                    Explore all integrations &rarr;
+                  </Link>
                 </p>
               </motion.div>
 
@@ -829,7 +832,7 @@ export default function DocsPage() {
                 </div>
               </motion.div>
 
-              <div className="mt-8">
+              <div className="mt-8 flex flex-wrap gap-4">
                 <a
                   href="https://app.callengo.com/auth/signup"
                   target="_blank"
@@ -839,6 +842,13 @@ export default function DocsPage() {
                   Start for free
                   <ArrowRight className="w-4 h-4" />
                 </a>
+                <Link
+                  href="/pricing"
+                  className="btn btn-secondary rounded-full"
+                >
+                  View full pricing comparison
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
               </div>
             </section>
 

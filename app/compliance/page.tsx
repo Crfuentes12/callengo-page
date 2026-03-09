@@ -82,7 +82,7 @@ export default function CompliancePage() {
       <Header />
       <main className="pt-24">
         {/* Hero Section */}
-        <section className="gradient-bg text-white py-20">
+        <section className="bg-deep-indigo text-white py-20">
           <div className="max-w-4xl mx-auto px-6 text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

@@ -6,6 +6,7 @@ import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Check, X, ArrowRight, Plus, Building2, Sparkles } from "lucide-react";
+import AnimatedBlobs from "../components/AnimatedBlobs";
 
 const plans = [
   {
@@ -152,7 +153,8 @@ export default function PricingPage() {
   return (
     <>
       <Header />
-      <main className="pt-24">
+      <main className="pt-24 relative">
+        <AnimatedBlobs />
         {/* Hero Section */}
         <section className="section bg-background">
           <div className="max-w-7xl mx-auto px-6">

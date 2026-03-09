@@ -1,10 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { MessageCircle, Mail, Phone, FileQuestion, Clock, ChevronRight } from "lucide-react";
+import { Mail, FileQuestion, ChevronRight, Plus, Minus } from "lucide-react";
 
 const faqItems = [
   {
@@ -33,31 +34,9 @@ const faqItems = [
   },
 ];
 
-const supportChannels = [
-  {
-    title: "Live Chat",
-    description: "Chat with our support team in real-time",
-    icon: MessageCircle,
-    action: "Start Chat",
-    availability: "Mon-Fri, 9am-6pm EST",
-  },
-  {
-    title: "Email Support",
-    description: "Get a response within 24 hours",
-    icon: Mail,
-    action: "Send Email",
-    href: "mailto:support@callengo.com",
-  },
-  {
-    title: "Phone Support",
-    description: "Available for Business and Teams plans",
-    icon: Phone,
-    action: "Call Us",
-    href: "tel:+1-800-CALLENGO",
-  },
-];
-
 export default function HelpPage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+
   return (
     <>
       <Header />
@@ -92,43 +71,33 @@ export default function HelpPage() {
               </div>
             </motion.div>
 
-            {/* Support Channels */}
+            {/* Contact Banner */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15 }}
-              className="grid md:grid-cols-3 gap-6 mb-16"
+              className="mb-16"
             >
-              {supportChannels.map((channel) => (
-                <div
-                  key={channel.title}
-                  className="bg-white rounded-2xl border border-border p-6 text-center"
-                >
-                  <div className="w-12 h-12 rounded-xl gradient-bg-subtle flex items-center justify-center mx-auto mb-4">
-                    <channel.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="text-lg font-semibold mb-2">{channel.title}</h3>
-                  <p className="text-foreground-secondary text-sm mb-4">{channel.description}</p>
-                  {channel.availability && (
-                    <div className="flex items-center justify-center gap-1 text-sm text-foreground-tertiary mb-4">
-                      <Clock className="w-4 h-4" />
-                      {channel.availability}
-                    </div>
-                  )}
-                  {channel.href ? (
-                    <a
-                      href={channel.href}
-                      className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold bg-electric text-white rounded-full hover:-translate-y-0.5 transition-all"
-                    >
-                      {channel.action}
-                    </a>
-                  ) : (
-                    <button className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold bg-electric text-white rounded-full hover:-translate-y-0.5 transition-all">
-                      {channel.action}
-                    </button>
-                  )}
-                </div>
-              ))}
+              <div className="bg-white rounded-2xl border border-border p-6 md:p-8 flex flex-col md:flex-row items-center justify-center gap-4 text-center md:text-left">
+                <Mail className="w-6 h-6 text-primary flex-shrink-0" />
+                <p className="text-foreground-secondary text-lg">
+                  Need help? Contact us at{" "}
+                  <a
+                    href="mailto:support@callengo.com"
+                    className="text-electric font-semibold hover:underline"
+                  >
+                    support@callengo.com
+                  </a>{" "}
+                  or visit our{" "}
+                  <Link
+                    href="/contact"
+                    className="text-electric font-semibold hover:underline"
+                  >
+                    contact page
+                  </Link>
+                  .
+                </p>
+              </div>
             </motion.div>
 
             {/* FAQ Section */}
@@ -151,10 +120,42 @@ export default function HelpPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.05 }}
-                    className="bg-white rounded-2xl border border-border p-6"
                   >
-                    <h3 className="font-semibold mb-2">{item.question}</h3>
-                    <p className="text-foreground-secondary">{item.answer}</p>
+                    <div
+                      className={`bg-white rounded-2xl border transition-all ${
+                        openFaq === index
+                          ? "border-foreground shadow-[var(--shadow-sm)]"
+                          : "border-border hover:border-border/80"
+                      }`}
+                    >
+                      <button
+                        onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                        className="w-full p-6 text-left flex items-center justify-between gap-4"
+                      >
+                        <span className="font-medium">{item.question}</span>
+                        <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
+                          openFaq === index ? "gradient-bg text-white" : "bg-background-tertiary text-foreground-secondary"
+                        }`}>
+                          {openFaq === index ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                        </div>
+                      </button>
+
+                      <AnimatePresence>
+                        {openFaq === index && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3, ease: "easeInOut" }}
+                            className="overflow-hidden"
+                          >
+                            <div className="px-6 pb-6 text-foreground-secondary">
+                              {item.answer}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
                   </motion.div>
                 ))}
               </div>
@@ -171,7 +172,7 @@ export default function HelpPage() {
                 <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
                 <div className="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
               </div>
-              <h3 className="text-2xl font-semibold mb-6 relative z-10">Quick Links</h3>
+              <h3 className="text-2xl font-semibold mb-6 relative z-10 text-white">Quick Links</h3>
               <div className="grid md:grid-cols-2 gap-4 relative z-10">
                 <Link
                   href="/help/quick-start"

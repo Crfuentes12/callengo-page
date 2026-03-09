@@ -13,10 +13,29 @@ export default function CTA() {
           viewport={{ once: true }}
           className="relative overflow-hidden rounded-3xl gradient-bg p-12 md:p-20"
         >
-          {/* Background decorations */}
-          <div className="absolute inset-0 opacity-20">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+          {/* Animated blob decorations */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div
+              className="absolute -top-20 -right-20 w-[400px] h-[400px] rounded-full opacity-20"
+              style={{
+                background: "radial-gradient(circle, rgba(255,255,255,0.6) 0%, transparent 70%)",
+                animation: "ctaBlob1 20s ease-in-out infinite",
+              }}
+            />
+            <div
+              className="absolute -bottom-24 -left-24 w-[350px] h-[350px] rounded-full opacity-15"
+              style={{
+                background: "radial-gradient(circle, rgba(255,255,255,0.5) 0%, transparent 70%)",
+                animation: "ctaBlob2 25s ease-in-out infinite",
+              }}
+            />
+            <div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full opacity-10"
+              style={{
+                background: "radial-gradient(circle, rgba(139,150,200,0.4) 0%, transparent 60%)",
+                animation: "ctaBlob3 18s ease-in-out infinite",
+              }}
+            />
           </div>
 
           {/* Content */}
@@ -62,6 +81,26 @@ export default function CTA() {
               <span>Cancel anytime</span>
             </div>
           </div>
+
+          {/* CTA blob keyframes */}
+          <style jsx>{`
+            @keyframes ctaBlob1 {
+              0%, 100% { transform: translate(0, 0) scale(1); }
+              25% { transform: translate(-40px, 30px) scale(1.15); }
+              50% { transform: translate(-20px, 60px) scale(0.95); }
+              75% { transform: translate(30px, 20px) scale(1.1); }
+            }
+            @keyframes ctaBlob2 {
+              0%, 100% { transform: translate(0, 0) scale(1); }
+              30% { transform: translate(40px, -30px) scale(1.1); }
+              60% { transform: translate(20px, -50px) scale(1.2); }
+            }
+            @keyframes ctaBlob3 {
+              0%, 100% { transform: translate(-50%, -50%) scale(1); }
+              33% { transform: translate(-45%, -55%) scale(1.2); }
+              66% { transform: translate(-55%, -45%) scale(0.9); }
+            }
+          `}</style>
         </motion.div>
       </div>
     </section>

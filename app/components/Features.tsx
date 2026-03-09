@@ -492,7 +492,7 @@ function LeadScoringMockup() {
   };
 
   return (
-    <div ref={containerRef} className="relative overflow-hidden rounded-2xl border border-border bg-background pb-9">
+    <div ref={containerRef} className="relative aspect-video overflow-hidden rounded-2xl border border-border bg-background">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-background-secondary">
         <div className="flex items-center gap-2">

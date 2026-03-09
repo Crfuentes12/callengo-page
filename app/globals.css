@@ -623,3 +623,34 @@
   scrollbar-width: thin;
   scrollbar-color: var(--color-border-dark) transparent;
 }
+
+/* Hide scrollbar utility */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ============================================================
+   ANIMATED GRADIENT BLOBS — Page-level ambient decoration
+   ============================================================ */
+@keyframes ambientBlob1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(60px, -40px) scale(1.15); }
+  50% { transform: translate(-30px, 50px) scale(0.9); }
+  75% { transform: translate(40px, 30px) scale(1.1); }
+}
+
+@keyframes ambientBlob2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  30% { transform: translate(-50px, 30px) scale(1.1); }
+  60% { transform: translate(40px, -40px) scale(1.2); }
+}
+
+@keyframes ambientBlob3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40% { transform: translate(30px, 50px) scale(1.15); }
+  70% { transform: translate(-40px, -30px) scale(0.95); }
+}

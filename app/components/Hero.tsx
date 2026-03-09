@@ -12,8 +12,8 @@ import {
   CheckCircle2,
   AlertCircle,
   Phone,
-  Volume2,
   Zap,
+  SkipForward,
 } from "lucide-react";
 
 /* ──────────────────────────────────────────
@@ -34,12 +34,6 @@ interface ValidatedField {
   revealAt: number;
 }
 
-interface ExtractedData {
-  field: string;
-  value: string;
-  revealAt: number;
-}
-
 interface Scenario {
   id: string;
   label: string;
@@ -51,7 +45,6 @@ interface Scenario {
   phone: string;
   transcript: TranscriptLine[];
   validatedFields: ValidatedField[];
-  extractedData: ExtractedData[];
   ctaHeadline: string;
   ctaSub: string;
 }
@@ -81,13 +74,9 @@ const scenarios: Scenario[] = [
       { speaker: "ai", text: "Goodbye!", time: 44 },
     ],
     validatedFields: [
-      { field: "Company Name", status: "confirmed", value: "TechCorp Solutions", revealAt: 15 },
+      { field: "Company", status: "confirmed", value: "TechCorp Solutions", revealAt: 15 },
       { field: "Contact Name", status: "updated", original: "John Smith", value: "Mike Marshall", revealAt: 22 },
       { field: "Email", status: "updated", original: "john.smith@example.com", value: "mike.marshall@example.com", revealAt: 34 },
-    ],
-    extractedData: [
-      { field: "Name", value: "Mike Marshall", revealAt: 22 },
-      { field: "Email", value: "mike.marshall@example.com", revealAt: 34 },
     ],
   },
   {
@@ -111,13 +100,9 @@ const scenarios: Scenario[] = [
       { speaker: "ai", text: "Great, you're all set. Thanks for letting us know, and have a wonderful day. Goodbye!", time: 45 },
     ],
     validatedFields: [
-      { field: "Company Name", status: "confirmed", value: "Healthcare Clinic", revealAt: 4 },
-      { field: "Appointment Type", status: "confirmed", value: "Consultation", revealAt: 4 },
-      { field: "Appointment Date", status: "updated", original: "Tomorrow at 2:00 PM", value: "Next Monday at 10:00 AM", revealAt: 36 },
-    ],
-    extractedData: [
-      { field: "Contact Name", value: "Robert Taylor", revealAt: 4 },
-      { field: "Appointment Date", value: "Next Monday at 10:00 AM", revealAt: 36 },
+      { field: "Patient", status: "confirmed", value: "Robert Taylor", revealAt: 4 },
+      { field: "Appointment", status: "confirmed", value: "Consultation", revealAt: 4 },
+      { field: "Date", status: "updated", original: "Tomorrow 2:00 PM", value: "Monday 10:00 AM", revealAt: 36 },
     ],
   },
   {
@@ -148,122 +133,24 @@ const scenarios: Scenario[] = [
       { speaker: "ai", text: "Okay, so about one month. Thanks for the information. Based on your budget, authority, and timeline, it sounds like you could be a good fit. I'll pass this along to our sales team for follow-up. Thanks for your time, have a great day!", time: 70 },
     ],
     validatedFields: [
-      { field: "Company Name", status: "confirmed", value: "Sales Pro Inc", revealAt: 6 },
-      { field: "Contact Name", status: "confirmed", value: "Alex Martinez", revealAt: 6 },
       { field: "Interest", status: "confirmed", value: "Enterprise Plan", revealAt: 18 },
-    ],
-    extractedData: [
-      { field: "Budget", value: "Under $200/mo", revealAt: 43 },
-      { field: "Decision Maker", value: "Yes", revealAt: 60 },
-      { field: "Timeline", value: "~1 month", revealAt: 67 },
+      { field: "Budget", status: "confirmed", value: "Under $200/mo", revealAt: 43 },
+      { field: "Decision Maker", status: "confirmed", value: "Yes", revealAt: 60 },
+      { field: "Timeline", status: "confirmed", value: "~1 month", revealAt: 67 },
     ],
   },
 ];
-
-/* ── Sub-components ── */
-
-interface FloatingBubble {
-  id: string;
-  label: string;
-  value: string;
-  status: "confirmed" | "updated" | "new";
-  position: "left" | "right";
-  yOffset: number;
-}
-
-/* Bubble positions: close to / overlapping the card edges */
-const bubblePositions = [
-  { top: "top-[16px]", side: "-right-[24px]" },
-  { top: "top-[90px]", side: "-left-[28px]" },
-  { top: "top-[160px]", side: "-right-[20px]" },
-  { top: "top-[230px]", side: "-left-[24px]" },
-  { top: "bottom-[80px]", side: "-right-[26px]" },
-  { top: "bottom-[20px]", side: "-left-[20px]" },
-];
-
-function FloatingDataBubble({ bubble, index }: { bubble: FloatingBubble; index: number }) {
-  const statusConfig = {
-    confirmed: { icon: <CheckCircle2 className="w-3 h-3 text-accent" />, borderColor: "border-accent/30", bgColor: "bg-accent/5" },
-    updated: { icon: <AlertCircle className="w-3 h-3 text-amber-500" />, borderColor: "border-amber-300/40", bgColor: "bg-amber-50" },
-    new: { icon: <Zap className="w-3 h-3 text-electric" />, borderColor: "border-electric/30", bgColor: "bg-electric/5" },
-  };
-  const cfg = statusConfig[bubble.status];
-  const pos = bubblePositions[index % bubblePositions.length];
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.7, y: 10 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.85, y: -5 }}
-      transition={{ duration: 0.35, ease: "easeOut" }}
-      className={`absolute z-30 ${pos.top} ${pos.side}`}
-    >
-      <div className={`flex items-center gap-2 px-2.5 py-1.5 rounded-xl ${cfg.bgColor} border ${cfg.borderColor} shadow-lg backdrop-blur-md bg-white/85 max-w-[180px]`}>
-        {cfg.icon}
-        <div className="min-w-0">
-          <div className="text-[8px] font-medium text-foreground-tertiary uppercase tracking-wider leading-tight">{bubble.label}</div>
-          <div className="text-[10px] font-semibold text-foreground truncate leading-tight">{bubble.value}</div>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-function seededRandom(seed: number) {
-  const x = Math.sin(seed * 9301 + 49297) * 49297;
-  return x - Math.floor(x);
-}
-
-function WaveformVisualizer({ isPlaying }: { isPlaying: boolean }) {
-  const bars = 40;
-  const barData = useMemo(() => {
-    return Array.from({ length: bars }).map((_, i) => {
-      const r1 = seededRandom(i);
-      const r2 = seededRandom(i + 100);
-      const r3 = seededRandom(i + 200);
-      const r4 = seededRandom(i + 300);
-      const baseHeight = 15 + Math.sin(i * 0.5) * 10 + r1 * 5;
-      return {
-        baseHeight,
-        peakA: Math.min(100, baseHeight + 30 + r2 * 40),
-        midA: baseHeight + 10,
-        peakB: Math.min(100, baseHeight + 20 + r3 * 30),
-        duration: 0.8 + r4 * 0.5,
-      };
-    });
-  }, []);
-
-  return (
-    <div className="flex items-end gap-px h-6 w-full">
-      {barData.map((b, i) => (
-        <motion.div
-          key={i}
-          className="flex-1 rounded-full bg-electric"
-          animate={
-            isPlaying
-              ? { height: [`${b.baseHeight}%`, `${b.peakA}%`, `${b.midA}%`, `${b.peakB}%`, `${b.baseHeight}%`], opacity: [0.3, 0.7, 0.4, 0.65, 0.3] }
-              : { height: `${b.baseHeight}%`, opacity: 0.15 }
-          }
-          transition={isPlaying ? { duration: b.duration, repeat: Infinity, ease: "easeInOut", delay: i * 0.02 } : { duration: 0.4 }}
-        />
-      ))}
-    </div>
-  );
-}
 
 /* ── HERO COMPONENT ── */
 export default function Hero() {
   const [activeScenario, setActiveScenario] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
-  const [floatingBubbles, setFloatingBubbles] = useState<FloatingBubble[]>([]);
-  const [revealedValidated, setRevealedValidated] = useState<number[]>([]);
-  const [revealedExtracted, setRevealedExtracted] = useState<number[]>([]);
+  const [revealedFields, setRevealedFields] = useState<number[]>([]);
   const [hasStartedPlaying, setHasStartedPlaying] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement>(null);
   const transcriptRef = useRef<HTMLDivElement>(null);
-  const flyIdCounter = useRef(0);
   const [audioAvailable, setAudioAvailable] = useState(true);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -311,35 +198,14 @@ export default function Hero() {
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, [isPlaying, audioAvailable, scenario.duration]);
 
-  /* ── Reveal validated fields as floating bubbles ── */
+  /* ── Reveal validated fields ── */
   useEffect(() => {
     scenario.validatedFields.forEach((f, i) => {
-      if (currentTime >= f.revealAt && !revealedValidated.includes(i)) {
-        setRevealedValidated((prev) => [...prev, i]);
-        flyIdCounter.current += 1;
-        const id = `fly-${flyIdCounter.current}`;
-        const position: "left" | "right" = flyIdCounter.current % 2 === 0 ? "left" : "right";
-        const yOffset = 80 + (flyIdCounter.current % 4) * 70;
-        setFloatingBubbles((prev) => [...prev, { id, label: f.field, value: f.value, status: f.status, position, yOffset }]);
-        setTimeout(() => { setFloatingBubbles((prev) => prev.filter((d) => d.id !== id)); }, 4000);
+      if (currentTime >= f.revealAt && !revealedFields.includes(i)) {
+        setRevealedFields((prev) => [...prev, i]);
       }
     });
-  }, [currentTime, revealedValidated, scenario.validatedFields]);
-
-  /* ── Reveal extracted data as floating bubbles ── */
-  useEffect(() => {
-    scenario.extractedData.forEach((f, i) => {
-      if (currentTime >= f.revealAt && !revealedExtracted.includes(i)) {
-        setRevealedExtracted((prev) => [...prev, i]);
-        flyIdCounter.current += 1;
-        const id = `fly-ext-${flyIdCounter.current}`;
-        const position: "left" | "right" = flyIdCounter.current % 2 === 0 ? "right" : "left";
-        const yOffset = 100 + (flyIdCounter.current % 3) * 80;
-        setFloatingBubbles((prev) => [...prev, { id, label: f.field, value: f.value, status: "new", position, yOffset }]);
-        setTimeout(() => { setFloatingBubbles((prev) => prev.filter((d) => d.id !== id)); }, 4000);
-      }
-    });
-  }, [currentTime, revealedExtracted, scenario.extractedData]);
+  }, [currentTime, revealedFields, scenario.validatedFields]);
 
   /* ── Auto-scroll transcript ── */
   useEffect(() => {
@@ -347,6 +213,7 @@ export default function Hero() {
   }, [currentTime]);
 
   const visibleMessages = scenario.transcript.filter((m) => currentTime >= m.time);
+  const visibleFields = scenario.validatedFields.filter((_, i) => revealedFields.includes(i));
 
   const handlePlayPause = useCallback(() => {
     if (isPlaying) {
@@ -356,8 +223,7 @@ export default function Hero() {
       if (!hasStartedPlaying) setHasStartedPlaying(true);
       if (currentTime >= scenario.duration - 0.5) {
         if (audioAvailable && audioRef.current) audioRef.current.currentTime = 0;
-        setCurrentTime(0); setRevealedValidated([]); setRevealedExtracted([]);
-        setFloatingBubbles([]);
+        setCurrentTime(0); setRevealedFields([]);
       }
       if (audioAvailable && audioRef.current) { audioRef.current.play().catch(() => {}); }
       setIsPlaying(true);
@@ -370,8 +236,7 @@ export default function Hero() {
     const audio = audioRef.current;
     if (audio) { audio.pause(); audio.currentTime = 0; }
     setActiveScenario(index); setIsPlaying(false); setCurrentTime(0);
-    setRevealedValidated([]); setRevealedExtracted([]);
-    setFloatingBubbles([]); setHasStartedPlaying(false);
+    setRevealedFields([]); setHasStartedPlaying(false);
   }, [activeScenario]);
 
   const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -380,13 +245,16 @@ export default function Hero() {
     const newTime = pct * scenario.duration;
     if (audioAvailable && audioRef.current) { audioRef.current.currentTime = newTime; }
     setCurrentTime(newTime);
-    setRevealedValidated(scenario.validatedFields.map((_, i) => i).filter((i) => scenario.validatedFields[i].revealAt <= newTime));
-    setRevealedExtracted(scenario.extractedData.map((_, i) => i).filter((i) => scenario.extractedData[i].revealAt <= newTime));
+    setRevealedFields(scenario.validatedFields.map((_, i) => i).filter((i) => scenario.validatedFields[i].revealAt <= newTime));
+  };
+
+  const nextScenario = () => {
+    const next = (activeScenario + 1) % scenarios.length;
+    handleScenarioChange(next);
   };
 
   const progress = (currentTime / scenario.duration) * 100;
   const formatTime = (s: number) => { const m = Math.floor(s / 60); const sec = Math.floor(s % 60); return `${m}:${sec.toString().padStart(2, "0")}`; };
-  const totalDataFields = revealedValidated.length + revealedExtracted.length;
 
   return (
     <section className="relative overflow-hidden bg-background min-h-screen flex items-center">
@@ -452,119 +320,111 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* ─── RIGHT COLUMN: Call Demo (Redesigned) ─── */}
+          {/* ─── RIGHT COLUMN: Glassmorphism Audio Player ─── */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="relative flex justify-center"
           >
-            {/* Gradient glow behind card */}
-            <div className="absolute -inset-6 rounded-[3rem] bg-gradient-to-br from-electric/10 via-electric/5 to-transparent blur-2xl -z-10" />
-            <div className="absolute -inset-4 rounded-[2.5rem] bg-electric/[0.03] blur-xl -z-10" />
+            {/* Animated gradient blobs behind the player */}
+            <div className="absolute -inset-12 -z-10">
+              <div
+                className="absolute top-0 left-1/4 w-64 h-64 rounded-full opacity-60"
+                style={{
+                  background: "rgba(79, 95, 232, 0.25)",
+                  filter: "blur(80px)",
+                  animation: "heroBlob1 18s ease-in-out infinite",
+                }}
+              />
+              <div
+                className="absolute bottom-0 right-1/4 w-72 h-72 rounded-full opacity-50"
+                style={{
+                  background: "rgba(30, 45, 107, 0.2)",
+                  filter: "blur(90px)",
+                  animation: "heroBlob2 22s ease-in-out infinite",
+                }}
+              />
+              <div
+                className="absolute top-1/2 right-0 w-48 h-48 rounded-full opacity-40"
+                style={{
+                  background: "rgba(139, 150, 200, 0.2)",
+                  filter: "blur(70px)",
+                  animation: "heroBlob3 15s ease-in-out infinite",
+                }}
+              />
+            </div>
 
             <div className="relative w-full max-w-md">
-              {/* Floating data bubbles - positioned close to / overlapping card */}
-              <AnimatePresence>
-                {floatingBubbles.map((bubble, idx) => (
-                  <FloatingDataBubble key={bubble.id} bubble={bubble} index={idx} />
-                ))}
-              </AnimatePresence>
+              {/* ── Glassmorphism Card ── */}
+              <div
+                className="rounded-3xl overflow-hidden shadow-2xl"
+                style={{
+                  background: "rgba(255, 255, 255, 0.75)",
+                  backdropFilter: "blur(24px)",
+                  WebkitBackdropFilter: "blur(24px)",
+                  border: "1px solid rgba(255, 255, 255, 0.5)",
+                  boxShadow: "0 20px 60px rgba(30, 45, 107, 0.12), 0 8px 24px rgba(79, 95, 232, 0.08), inset 0 1px 0 rgba(255,255,255,0.6)",
+                }}
+              >
 
-              {/* ── Card ── */}
-              <div className="rounded-3xl bg-white shadow-2xl ring-1 ring-border/60 overflow-hidden">
-
-                {/* ── Header: agent info + tabs ── */}
-                <div className="bg-deep-indigo px-4 py-3">
-                  <div className="flex items-center justify-between mb-2.5">
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center">
-                        <Phone className="w-3.5 h-3.5 text-white" />
-                      </div>
-                      <div>
-                        <div className="text-white font-semibold text-xs leading-tight">{scenario.agentName}</div>
-                        <div className="text-white/40 text-[10px] font-mono">{scenario.phone}</div>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      {isPlaying && (
-                        <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="flex items-center gap-1 bg-red-500/20 px-2 py-0.5 rounded-full">
-                          <span className="relative flex h-1.5 w-1.5">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
-                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500" />
-                          </span>
-                          <span className="text-white/90 text-[9px] font-bold tracking-wider">LIVE</span>
-                        </motion.div>
-                      )}
-                      {totalDataFields > 0 && (
-                        <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className="text-[9px] font-bold text-white/80 bg-white/10 px-2 py-0.5 rounded-full flex items-center gap-1">
-                          <Zap className="w-2.5 h-2.5 text-accent" />{totalDataFields}
-                        </motion.span>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Scenario tabs */}
-                  <div className="flex gap-1">
-                    {scenarios.map((s, index) => {
-                      const Icon = s.icon;
-                      return (
-                        <button
-                          key={s.id}
-                          onClick={() => handleScenarioChange(index)}
-                          className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-medium transition-all cursor-pointer whitespace-nowrap ${
-                            activeScenario === index
-                              ? "bg-white text-deep-indigo shadow-sm"
-                              : "bg-white/10 text-white/60 hover:bg-white/20 hover:text-white/80"
-                          }`}
-                        >
-                          <Icon className="w-2.5 h-2.5" />
-                          {s.label}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* ── Player controls: waveform + play/pause + progress ── */}
-                <div className="px-4 py-3 bg-background border-b border-border">
+                {/* ── Minimal top bar with scenario name ── */}
+                <div className="px-5 pt-5 pb-3 flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <button
-                      onClick={handlePlayPause}
-                      className="w-9 h-9 rounded-full bg-electric text-white flex items-center justify-center hover:brightness-110 transition-all shadow-md shadow-electric/20 shrink-0 cursor-pointer active:scale-95"
+                    <div
+                      className="w-10 h-10 rounded-2xl flex items-center justify-center"
+                      style={{
+                        background: "linear-gradient(135deg, #4F5FE8 0%, #3347D4 100%)",
+                        boxShadow: "0 4px 12px rgba(79, 95, 232, 0.3)",
+                      }}
                     >
-                      {isPlaying ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3 ml-0.5" />}
-                    </button>
-                    <div className="flex-1 space-y-1">
-                      <WaveformVisualizer isPlaying={isPlaying} />
-                      <div className="h-1 bg-border rounded-full overflow-hidden cursor-pointer relative group" onClick={handleProgressClick}>
-                        <div className="h-full bg-electric rounded-full transition-all duration-200" style={{ width: `${Math.min(progress, 100)}%` }} />
-                      </div>
+                      <Phone className="w-4 h-4 text-white" />
                     </div>
-                    <span className="text-[10px] text-foreground-tertiary font-mono tabular-nums shrink-0">
-                      {formatTime(currentTime)}/{formatTime(scenario.duration)}
-                    </span>
+                    <div>
+                      <div className="text-sm font-semibold text-foreground leading-tight" style={{ fontFamily: "var(--font-display)" }}>
+                        {scenario.agentName}
+                      </div>
+                      <div className="text-[11px] text-foreground-tertiary font-mono">{scenario.phone}</div>
+                    </div>
                   </div>
+                  {isPlaying && (
+                    <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="flex items-center gap-1.5 px-2.5 py-1 rounded-full" style={{ background: "rgba(239, 68, 68, 0.1)" }}>
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
+                      </span>
+                      <span className="text-[10px] font-bold tracking-wider text-red-500">LIVE</span>
+                    </motion.div>
+                  )}
                 </div>
 
                 {/* ── Transcript area ── */}
-                <div className="h-64 flex flex-col min-h-0 relative">
+                <div className="h-56 flex flex-col min-h-0 relative">
                   {!hasStartedPlaying ? (
-                    /* ── Compact idle state ── */
                     <div className="flex-1 flex flex-col items-center justify-center px-6">
-                      <div className="w-full max-w-[220px] mb-3 opacity-30">
-                        <WaveformVisualizer isPlaying={false} />
+                      <div className="mb-4 text-center">
+                        <p className="text-sm text-foreground-secondary mb-1" style={{ fontFamily: "var(--font-body)" }}>
+                          {scenario.ctaHeadline}
+                        </p>
+                        <p className="text-xs text-foreground-tertiary" style={{ fontFamily: "var(--font-body)" }}>
+                          {scenario.ctaSub}
+                        </p>
                       </div>
                       <button
                         onClick={handlePlayPause}
-                        className="flex items-center gap-2 px-4 py-2 rounded-full bg-electric/10 text-electric text-xs font-medium hover:bg-electric/15 transition-colors cursor-pointer"
+                        className="flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold transition-all cursor-pointer hover:scale-105 active:scale-95"
+                        style={{
+                          background: "linear-gradient(135deg, #4F5FE8 0%, #3347D4 100%)",
+                          color: "white",
+                          boxShadow: "0 4px 16px rgba(79, 95, 232, 0.35)",
+                        }}
                       >
-                        <Play className="w-3 h-3" />
-                        Press play to hear a live demo
+                        <Play className="w-3.5 h-3.5" />
+                        Listen to a live demo
                       </button>
                     </div>
                   ) : (
-                    <div ref={transcriptRef} className="flex-1 overflow-y-auto p-3 space-y-1.5 scroll-smooth">
+                    <div ref={transcriptRef} className="flex-1 overflow-y-auto px-5 py-3 space-y-2 scroll-smooth">
                       {visibleMessages.length === 0 ? (
                         <div className="h-full flex items-center justify-center">
                           <motion.div animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 1.2, repeat: Infinity }} className="flex items-center gap-1.5 text-foreground-tertiary">
@@ -586,7 +446,18 @@ export default function Hero() {
                                 transition={{ duration: 0.2 }}
                                 className={`flex ${isAI ? "justify-start" : "justify-end"}`}
                               >
-                                <div className={`max-w-[85%] px-2.5 py-1.5 rounded-xl text-[10px] leading-relaxed ${isAI ? "bg-background-tertiary text-foreground-secondary rounded-bl-sm" : "bg-electric text-white rounded-br-sm"}`}>
+                                <div
+                                  className={`max-w-[85%] px-3 py-2 text-[11px] leading-relaxed ${
+                                    isAI
+                                      ? "rounded-2xl rounded-bl-md text-foreground-secondary"
+                                      : "rounded-2xl rounded-br-md text-white"
+                                  }`}
+                                  style={{
+                                    background: isAI
+                                      ? "rgba(236, 237, 245, 0.8)"
+                                      : "linear-gradient(135deg, #4F5FE8 0%, #3347D4 100%)",
+                                  }}
+                                >
                                   {msg.text}
                                 </div>
                               </motion.div>
@@ -604,11 +475,143 @@ export default function Hero() {
                     </div>
                   )}
                 </div>
+
+                {/* ── Extracted data pills ── */}
+                <AnimatePresence>
+                  {visibleFields.length > 0 && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      className="overflow-hidden"
+                    >
+                      <div
+                        className="px-5 py-3 flex flex-wrap gap-2"
+                        style={{ borderTop: "1px solid rgba(221, 224, 238, 0.5)" }}
+                      >
+                        {visibleFields.map((field, idx) => (
+                          <motion.div
+                            key={field.field}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.3, delay: idx * 0.05 }}
+                            className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px]"
+                            style={{
+                              background: field.status === "confirmed"
+                                ? "rgba(29, 184, 122, 0.08)"
+                                : "rgba(245, 158, 11, 0.08)",
+                              border: `1px solid ${field.status === "confirmed" ? "rgba(29, 184, 122, 0.2)" : "rgba(245, 158, 11, 0.2)"}`,
+                            }}
+                          >
+                            {field.status === "confirmed"
+                              ? <CheckCircle2 className="w-3 h-3 text-accent" />
+                              : <AlertCircle className="w-3 h-3 text-amber-500" />
+                            }
+                            <span className="font-medium text-foreground-secondary">{field.field}:</span>
+                            <span className="font-semibold text-foreground">{field.value}</span>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* ── Player controls: minimal ── */}
+                <div
+                  className="px-5 py-4 flex items-center gap-3"
+                  style={{ borderTop: "1px solid rgba(221, 224, 238, 0.5)" }}
+                >
+                  <button
+                    onClick={handlePlayPause}
+                    className="w-10 h-10 rounded-full flex items-center justify-center transition-all cursor-pointer active:scale-90 shrink-0"
+                    style={{
+                      background: "linear-gradient(135deg, #4F5FE8 0%, #3347D4 100%)",
+                      boxShadow: "0 4px 16px rgba(79, 95, 232, 0.3)",
+                    }}
+                  >
+                    {isPlaying ? <Pause className="w-4 h-4 text-white" /> : <Play className="w-4 h-4 text-white ml-0.5" />}
+                  </button>
+
+                  <div className="flex-1 space-y-1.5">
+                    {/* Progress bar */}
+                    <div
+                      className="h-1.5 rounded-full overflow-hidden cursor-pointer relative group"
+                      style={{ background: "rgba(221, 224, 238, 0.5)" }}
+                      onClick={handleProgressClick}
+                    >
+                      <div
+                        className="h-full rounded-full transition-all duration-200"
+                        style={{
+                          width: `${Math.min(progress, 100)}%`,
+                          background: "linear-gradient(90deg, #4F5FE8 0%, #3347D4 100%)",
+                        }}
+                      />
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-[10px] text-foreground-tertiary font-mono tabular-nums">
+                        {formatTime(currentTime)}
+                      </span>
+                      <span className="text-[10px] text-foreground-tertiary font-mono tabular-nums">
+                        {formatTime(scenario.duration)}
+                      </span>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={nextScenario}
+                    className="w-8 h-8 rounded-full flex items-center justify-center transition-all cursor-pointer hover:bg-background-tertiary active:scale-90 shrink-0"
+                    title="Next demo"
+                  >
+                    <SkipForward className="w-3.5 h-3.5 text-foreground-tertiary" />
+                  </button>
+                </div>
+
+                {/* ── Scenario selector: subtle bottom pills ── */}
+                <div
+                  className="px-5 pb-4 flex items-center justify-center gap-2"
+                >
+                  {scenarios.map((s, index) => (
+                    <button
+                      key={s.id}
+                      onClick={() => handleScenarioChange(index)}
+                      className={`px-3 py-1.5 rounded-full text-[11px] font-medium transition-all cursor-pointer ${
+                        activeScenario === index
+                          ? "text-white"
+                          : "text-foreground-tertiary hover:text-foreground-secondary"
+                      }`}
+                      style={{
+                        background: activeScenario === index
+                          ? "linear-gradient(135deg, #4F5FE8 0%, #3347D4 100%)"
+                          : "rgba(236, 237, 245, 0.6)",
+                      }}
+                    >
+                      {s.label}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           </motion.div>
         </div>
       </div>
+
+      {/* Keyframes for hero blobs */}
+      <style jsx>{`
+        @keyframes heroBlob1 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(30px, -20px) scale(1.1); }
+          66% { transform: translate(-20px, 15px) scale(0.95); }
+        }
+        @keyframes heroBlob2 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(-25px, 20px) scale(1.05); }
+          66% { transform: translate(20px, -15px) scale(1.1); }
+        }
+        @keyframes heroBlob3 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          50% { transform: translate(-15px, -25px) scale(1.15); }
+        }
+      `}</style>
     </section>
   );
 }

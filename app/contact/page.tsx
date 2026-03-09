@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Mail, Send, CheckCircle, ArrowRight } from "lucide-react";
+import AnimatedBlobs from "../components/AnimatedBlobs";
 
 export default function ContactPage() {
   const [formState, setFormState] = useState({
@@ -39,9 +40,10 @@ export default function ContactPage() {
   return (
     <>
       <Header />
-      <main className="pt-24">
+      <main className="pt-24 relative">
+        <AnimatedBlobs />
         {/* Hero */}
-        <section className="relative overflow-hidden bg-background py-16 md:py-20">
+        <section className="relative overflow-hidden bg-transparent py-16 md:py-20">
           <div className="absolute inset-0 bg-grid opacity-50" />
           <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
             <motion.div

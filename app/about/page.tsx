@@ -5,6 +5,7 @@ import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { ArrowRight } from "lucide-react";
+import AnimatedBlobs from "../components/AnimatedBlobs";
 
 const stats = [
   { label: "Revenue Recovered", value: "$50M+" },
@@ -63,7 +64,8 @@ export default function AboutPage() {
   return (
     <>
       <Header />
-      <main className="pt-24">
+      <main className="pt-24 relative">
+        <AnimatedBlobs />
         {/* Hero Section */}
         <section className="section">
           <div className="max-w-7xl mx-auto px-6">
@@ -251,10 +253,22 @@ export default function AboutPage() {
               viewport={{ once: true }}
               className="relative overflow-hidden rounded-3xl gradient-bg p-12 md:p-20"
             >
-              {/* Background decorations */}
-              <div className="absolute inset-0 opacity-20">
-                <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-                <div className="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+              {/* Animated blob decorations */}
+              <div className="absolute inset-0 overflow-hidden">
+                <div
+                  className="absolute -top-20 -right-20 w-[400px] h-[400px] rounded-full opacity-20"
+                  style={{
+                    background: "radial-gradient(circle, rgba(255,255,255,0.6) 0%, transparent 70%)",
+                    animation: "ctaBlobA 20s ease-in-out infinite",
+                  }}
+                />
+                <div
+                  className="absolute -bottom-24 -left-24 w-[350px] h-[350px] rounded-full opacity-15"
+                  style={{
+                    background: "radial-gradient(circle, rgba(255,255,255,0.5) 0%, transparent 70%)",
+                    animation: "ctaBlobB 25s ease-in-out infinite",
+                  }}
+                />
               </div>
 
               {/* Content */}
@@ -281,6 +295,19 @@ export default function AboutPage() {
                   </a>
                 </div>
               </div>
+              <style jsx>{`
+                @keyframes ctaBlobA {
+                  0%, 100% { transform: translate(0, 0) scale(1); }
+                  25% { transform: translate(-40px, 30px) scale(1.15); }
+                  50% { transform: translate(-20px, 60px) scale(0.95); }
+                  75% { transform: translate(30px, 20px) scale(1.1); }
+                }
+                @keyframes ctaBlobB {
+                  0%, 100% { transform: translate(0, 0) scale(1); }
+                  30% { transform: translate(40px, -30px) scale(1.1); }
+                  60% { transform: translate(20px, -50px) scale(1.2); }
+                }
+              `}</style>
             </motion.div>
           </div>
         </section>

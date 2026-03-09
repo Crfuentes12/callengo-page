@@ -15,12 +15,13 @@ const footerLinks = {
     { name: "Integrations", href: "/docs/integrations" },
     { name: "Help Center", href: "/help" },
     { name: "Blog", href: "/blog" },
+    { name: "Free Tools", href: "/free-tools" },
   ],
   Company: [
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
-    { name: "Privacy Policy", href: "/privacy" },
-    { name: "Terms of Service", href: "/terms" },
+    { name: "Privacy", href: "/privacy" },
+    { name: "Terms", href: "/terms" },
     { name: "Compliance", href: "/compliance" },
   ],
   Comparison: [

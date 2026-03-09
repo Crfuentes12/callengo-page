@@ -6,12 +6,14 @@ import Testimonials from "./components/Testimonials";
 import FAQ from "./components/FAQ";
 import CTA from "./components/CTA";
 import Footer from "./components/Footer";
+import AnimatedBlobs from "./components/AnimatedBlobs";
 
 export default function Home() {
   return (
     <>
       <Header />
-      <main>
+      <main className="relative">
+        <AnimatedBlobs />
         <Hero />
         <Features />
         <HowItWorks />

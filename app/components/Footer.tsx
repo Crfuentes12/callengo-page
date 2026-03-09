@@ -57,6 +57,28 @@ export default function Footer() {
 
   return (
     <footer className="bg-deep-indigo text-white relative overflow-hidden">
+      {/* Subtle lava lamp background */}
+      <div className="absolute inset-0 overflow-hidden opacity-15 pointer-events-none">
+        <div className="absolute -top-1/3 right-[-15%] w-1/2 h-[80%] bg-gradient-to-br from-[#4F5FE8]/40 via-[#8B96C8]/25 to-transparent rounded-full blur-3xl animate-[footerLava1_50s_ease-in-out_infinite]" />
+        <div className="absolute -bottom-1/4 left-[-10%] w-2/5 h-[70%] bg-gradient-to-br from-[#8B96C8]/35 via-[#6070E0]/20 to-transparent rounded-full blur-3xl animate-[footerLava2_60s_ease-in-out_infinite]" />
+        <div className="absolute top-[20%] left-[40%] w-1/3 h-[60%] bg-gradient-to-br from-[#1DB87A]/15 via-[#4F5FE8]/20 to-transparent rounded-full blur-3xl animate-[footerLava3_55s_ease-in-out_infinite]" />
+      </div>
+      <style jsx>{`
+        @keyframes footerLava1 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(-25px, 20px) scale(1.05); }
+          66% { transform: translate(15px, -15px) scale(0.96); }
+        }
+        @keyframes footerLava2 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          40% { transform: translate(20px, -20px) scale(1.06); }
+          70% { transform: translate(-15px, 25px) scale(0.95); }
+        }
+        @keyframes footerLava3 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          50% { transform: translate(20px, -10px) scale(1.04); }
+        }
+      `}</style>
       <div className="max-w-7xl mx-auto px-6 relative z-10">
 
         {/* Top: Newsletter centered */}

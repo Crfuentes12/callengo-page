@@ -5,7 +5,6 @@ import Link from "next/link";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { Check, ArrowRight, Calendar, TrendingDown, HeartPulse, Scissors, Briefcase, Home, Plus, Minus, DollarSign, Clock, Users, Phone, CalendarDays, Bell, RefreshCw, BarChart3, PenTool, LucideIcon } from "lucide-react";
-import AnimatedBlobs from "../../components/AnimatedBlobs";
 import { useState } from "react";
 
 const painStats = [
@@ -177,7 +176,6 @@ export default function AppointmentConfirmationPage() {
     <>
       <Header />
       <main className="pt-24 relative overflow-hidden">
-        <AnimatedBlobs />
         {/* Hero Section */}
         <section className="section relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 relative">
@@ -684,22 +682,12 @@ export default function AppointmentConfirmationPage() {
               viewport={{ once: true }}
               className="relative overflow-hidden rounded-3xl gradient-bg p-12 md:p-20"
             >
-              <div className="absolute inset-0 overflow-hidden">
-                <div
-                  className="absolute -top-20 -right-20 w-[400px] h-[400px] rounded-full opacity-20"
-                  style={{
-                    background: "radial-gradient(circle, rgba(255,255,255,0.6) 0%, transparent 70%)",
-                    animation: "ctaBlobAc1 20s ease-in-out infinite",
-                  }}
-                />
-                <div
-                  className="absolute -bottom-24 -left-24 w-[350px] h-[350px] rounded-full opacity-15"
-                  style={{
-                    background: "radial-gradient(circle, rgba(255,255,255,0.5) 0%, transparent 70%)",
-                    animation: "ctaBlobAc2 25s ease-in-out infinite",
-                  }}
-                />
+              {/* Subtle internal lava lamp */}
+              <div className="absolute inset-0 overflow-hidden opacity-40">
+                <div className="absolute -top-1/4 right-[-10%] w-3/5 h-[120%] bg-gradient-to-br from-white/20 via-[#8B96C8]/15 to-white/10 rounded-full blur-3xl animate-[agentCta1_40s_ease-in-out_infinite]" />
+                <div className="absolute -bottom-1/3 left-[-10%] w-1/2 h-full bg-gradient-to-br from-[#8B96C8]/20 via-white/12 to-[#4F5FE8]/10 rounded-full blur-3xl animate-[agentCta2_50s_ease-in-out_infinite]" />
               </div>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#1E2D6B]/40 via-[#1E2D6B]/15 to-transparent" />
 
               <div className="relative z-10 max-w-3xl">
                 <h2 className="text-4xl md:text-5xl font-semibold text-white mb-6 leading-tight">
@@ -726,17 +714,6 @@ export default function AppointmentConfirmationPage() {
                 </div>
               </div>
               <style jsx>{`
-                @keyframes ctaBlobAc1 {
-                  0%, 100% { transform: translate(0, 0) scale(1); }
-                  25% { transform: translate(-40px, 30px) scale(1.15); }
-                  50% { transform: translate(-20px, 60px) scale(0.95); }
-                  75% { transform: translate(30px, 20px) scale(1.1); }
-                }
-                @keyframes ctaBlobAc2 {
-                  0%, 100% { transform: translate(0, 0) scale(1); }
-                  30% { transform: translate(40px, -30px) scale(1.1); }
-                  60% { transform: translate(20px, -50px) scale(1.2); }
-                }
               `}</style>
             </motion.div>
           </div>

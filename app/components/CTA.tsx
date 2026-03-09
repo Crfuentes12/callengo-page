@@ -13,61 +13,15 @@ export default function CTA() {
           viewport={{ once: true }}
           className="relative overflow-hidden rounded-3xl gradient-bg p-12 md:p-20"
         >
-          {/* Internal lava lamp — bold and alive */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div
-              className="absolute"
-              style={{
-                width: "60%",
-                height: "120%",
-                top: "-30%",
-                right: "-15%",
-                background: "conic-gradient(from 200deg, rgba(255,255,255,0.25), rgba(139,150,200,0.20), rgba(255,255,255,0.10), rgba(255,255,255,0.25))",
-                filter: "blur(60px)",
-                borderRadius: "40% 60% 55% 45% / 55% 40% 60% 45%",
-                animation: "ctaLava1 16s ease-in-out infinite",
-              }}
-            />
-            <div
-              className="absolute"
-              style={{
-                width: "55%",
-                height: "100%",
-                bottom: "-35%",
-                left: "-10%",
-                background: "conic-gradient(from 60deg, rgba(139,150,200,0.28), rgba(255,255,255,0.15), rgba(79,95,232,0.12), rgba(139,150,200,0.28))",
-                filter: "blur(55px)",
-                borderRadius: "55% 45% 40% 60% / 40% 55% 45% 60%",
-                animation: "ctaLava2 20s ease-in-out infinite",
-              }}
-            />
-            <div
-              className="absolute"
-              style={{
-                width: "40%",
-                height: "80%",
-                top: "10%",
-                left: "35%",
-                background: "conic-gradient(from 140deg, rgba(255,255,255,0.20), rgba(29,184,122,0.08), rgba(255,255,255,0.12), rgba(255,255,255,0.20))",
-                filter: "blur(50px)",
-                borderRadius: "45% 55% 50% 50% / 60% 40% 55% 45%",
-                animation: "ctaLava3 14s ease-in-out infinite",
-              }}
-            />
-            <div
-              className="absolute"
-              style={{
-                width: "35%",
-                height: "70%",
-                top: "-10%",
-                left: "10%",
-                background: "conic-gradient(from 300deg, rgba(255,255,255,0.18), rgba(37,56,184,0.10), rgba(255,255,255,0.08), rgba(255,255,255,0.18))",
-                filter: "blur(45px)",
-                borderRadius: "50% 50% 45% 55% / 40% 60% 55% 45%",
-                animation: "ctaLava1 22s ease-in-out infinite reverse",
-              }}
-            />
+          {/* Internal subtle lava lamp blobs */}
+          <div className="absolute inset-0 overflow-hidden opacity-40">
+            <div className="absolute -top-1/4 right-[-10%] w-3/5 h-[120%] bg-gradient-to-br from-white/20 via-[#8B96C8]/15 to-white/10 rounded-full blur-3xl animate-[ctaLava1_40s_ease-in-out_infinite]" />
+            <div className="absolute -bottom-1/3 left-[-10%] w-1/2 h-full bg-gradient-to-br from-[#8B96C8]/20 via-white/12 to-[#4F5FE8]/10 rounded-full blur-3xl animate-[ctaLava2_50s_ease-in-out_infinite]" />
+            <div className="absolute top-[10%] left-[30%] w-2/5 h-4/5 bg-gradient-to-br from-white/15 via-[#1DB87A]/06 to-white/10 rounded-full blur-2xl animate-[ctaLava3_45s_ease-in-out_infinite]" />
           </div>
+
+          {/* Dark gradient overlay protecting text on the left */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1E2D6B]/40 via-[#1E2D6B]/15 to-transparent" />
 
           {/* Content */}
           <div className="relative z-10 max-w-3xl">
@@ -113,23 +67,20 @@ export default function CTA() {
             </div>
           </div>
 
-          {/* CTA lava lamp keyframes */}
           <style jsx>{`
             @keyframes ctaLava1 {
-              0%, 100% { transform: translate(0, 0) scale(1); border-radius: 40% 60% 55% 45% / 55% 40% 60% 45%; }
-              25% { transform: translate(-50px, 40px) scale(1.15); border-radius: 55% 45% 40% 60% / 45% 55% 50% 50%; }
-              50% { transform: translate(-25px, 80px) scale(0.92); border-radius: 45% 55% 60% 40% / 60% 45% 40% 55%; }
-              75% { transform: translate(40px, 25px) scale(1.08); border-radius: 50% 50% 45% 55% / 40% 60% 55% 45%; }
+              0%, 100% { transform: translate(0, 0) scale(1); }
+              33% { transform: translate(-30px, 25px) scale(1.06); }
+              66% { transform: translate(20px, -20px) scale(0.95); }
             }
             @keyframes ctaLava2 {
-              0%, 100% { transform: translate(0, 0) scale(1); border-radius: 55% 45% 40% 60% / 40% 55% 45% 60%; }
-              30% { transform: translate(50px, -40px) scale(1.12); border-radius: 40% 60% 55% 45% / 55% 40% 60% 45%; }
-              60% { transform: translate(25px, -60px) scale(1.20); border-radius: 50% 50% 45% 55% / 60% 40% 50% 50%; }
+              0%, 100% { transform: translate(0, 0) scale(1); }
+              40% { transform: translate(30px, -25px) scale(1.08); }
+              70% { transform: translate(-20px, 30px) scale(0.94); }
             }
             @keyframes ctaLava3 {
-              0%, 100% { transform: translate(0, 0) scale(1); border-radius: 45% 55% 50% 50% / 60% 40% 55% 45%; }
-              33% { transform: translate(40px, -30px) scale(1.20); border-radius: 55% 45% 40% 60% / 45% 55% 50% 50%; }
-              66% { transform: translate(-30px, 40px) scale(0.88); border-radius: 40% 60% 55% 45% / 55% 40% 60% 45%; }
+              0%, 100% { transform: translate(0, 0) scale(1); }
+              50% { transform: translate(25px, -15px) scale(1.05); }
             }
           `}</style>
         </motion.div>

@@ -4,14 +4,12 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import AnimatedBlobs from "../components/AnimatedBlobs";
 
 export default function TermsPage() {
   return (
     <>
       <Header />
       <main className="pt-24 relative overflow-hidden">
-        <AnimatedBlobs />
         <section className="bg-navy py-16 relative overflow-hidden">
           <div className="max-w-3xl mx-auto px-6 relative z-10">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>

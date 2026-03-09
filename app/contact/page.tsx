@@ -43,7 +43,7 @@ export default function ContactPage() {
       <main className="pt-24 relative overflow-hidden">
         <AnimatedBlobs />
         {/* Hero */}
-        <section className="relative overflow-hidden bg-transparent py-16 md:py-20">
+        <section className="relative overflow-hidden bg-transparent py-16 md:py-20 z-10">
           <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -62,7 +62,7 @@ export default function ContactPage() {
         </section>
 
         {/* Contact form + info */}
-        <section className="section bg-background">
+        <section className="section bg-background relative z-10">
           <div className="max-w-4xl mx-auto px-6">
             <div className="grid md:grid-cols-5 gap-12">
               {/* Form */}

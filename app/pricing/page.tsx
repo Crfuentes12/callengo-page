@@ -156,7 +156,7 @@ export default function PricingPage() {
       <main className="pt-24 relative overflow-hidden">
         <AnimatedBlobs />
         {/* Hero Section */}
-        <section className="section bg-background">
+        <section className="section bg-background relative z-10">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -278,9 +278,23 @@ export default function PricingPage() {
               viewport={{ once: true }}
               className="gradient-bg rounded-3xl p-8 md:p-12 text-white mb-12 relative overflow-hidden"
             >
-              <div className="absolute inset-0 opacity-20">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+              {/* Subtle internal lava lamp */}
+              <div className="absolute inset-0 overflow-hidden opacity-40">
+                <div className="absolute -top-1/4 right-[-10%] w-3/5 h-[120%] bg-gradient-to-br from-white/20 via-[#8B96C8]/15 to-white/10 rounded-full blur-3xl animate-[priceCta1_40s_ease-in-out_infinite]" />
+                <div className="absolute -bottom-1/3 left-[-10%] w-1/2 h-full bg-gradient-to-br from-[#8B96C8]/20 via-white/12 to-[#4F5FE8]/10 rounded-full blur-3xl animate-[priceCta2_50s_ease-in-out_infinite]" />
               </div>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#1E2D6B]/30 via-transparent to-transparent" />
+              <style jsx>{`
+                @keyframes priceCta1 {
+                  0%, 100% { transform: translate(0, 0) scale(1); }
+                  33% { transform: translate(-20px, 15px) scale(1.04); }
+                  66% { transform: translate(15px, -15px) scale(0.97); }
+                }
+                @keyframes priceCta2 {
+                  0%, 100% { transform: translate(0, 0) scale(1); }
+                  50% { transform: translate(20px, -15px) scale(1.06); }
+                }
+              `}</style>
               <div className="flex flex-col lg:flex-row items-center justify-between gap-8 relative z-10">
                 <div className="flex items-center gap-6">
                   <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
@@ -341,7 +355,7 @@ export default function PricingPage() {
         </section>
 
         {/* Feature Comparison */}
-        <section className="section bg-background-secondary">
+        <section className="section bg-background-secondary relative z-10">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -400,7 +414,7 @@ export default function PricingPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="section bg-background">
+        <section className="section bg-background relative z-10">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -408,10 +422,24 @@ export default function PricingPage() {
               viewport={{ once: true }}
               className="relative overflow-hidden rounded-3xl gradient-bg p-12 md:p-20"
             >
-              <div className="absolute inset-0 opacity-20">
-                <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-                <div className="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+              {/* Subtle internal lava lamp */}
+              <div className="absolute inset-0 overflow-hidden opacity-40">
+                <div className="absolute -top-1/4 right-[-10%] w-3/5 h-[120%] bg-gradient-to-br from-white/20 via-[#8B96C8]/15 to-white/10 rounded-full blur-3xl animate-[priceBotCta1_40s_ease-in-out_infinite]" />
+                <div className="absolute -bottom-1/3 left-[-10%] w-1/2 h-full bg-gradient-to-br from-[#8B96C8]/20 via-white/12 to-[#4F5FE8]/10 rounded-full blur-3xl animate-[priceBotCta2_50s_ease-in-out_infinite]" />
               </div>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#1E2D6B]/40 via-[#1E2D6B]/15 to-transparent" />
+              <style jsx>{`
+                @keyframes priceBotCta1 {
+                  0%, 100% { transform: translate(0, 0) scale(1); }
+                  33% { transform: translate(-30px, 25px) scale(1.06); }
+                  66% { transform: translate(20px, -20px) scale(0.95); }
+                }
+                @keyframes priceBotCta2 {
+                  0%, 100% { transform: translate(0, 0) scale(1); }
+                  40% { transform: translate(30px, -25px) scale(1.08); }
+                  70% { transform: translate(-20px, 30px) scale(0.94); }
+                }
+              `}</style>
 
               <div className="relative z-10 max-w-3xl">
                 <h2 className="text-4xl md:text-5xl font-semibold text-white mb-6 leading-tight">

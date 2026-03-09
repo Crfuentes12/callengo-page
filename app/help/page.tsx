@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import AnimatedBlobs from "../components/AnimatedBlobs";
 import { Mail, FileQuestion, ChevronRight, Plus, Minus, Search } from "lucide-react";
 
 const faqItems = [
@@ -73,7 +72,6 @@ export default function HelpPage() {
     <>
       <Header />
       <main className="pt-24 relative overflow-hidden">
-        <AnimatedBlobs />
         <section className="section relative z-10">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div

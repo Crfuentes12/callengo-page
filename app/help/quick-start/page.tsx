@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import AnimatedBlobs from "../../components/AnimatedBlobs";
 import {
   ArrowRight,
   Check,
@@ -178,7 +177,6 @@ export default function QuickStartPage() {
     <>
       <Header />
       <main className="pt-24 relative overflow-hidden">
-        <AnimatedBlobs />
 
         {/* Hero Section */}
         <section className="gradient-bg text-white py-16 relative overflow-hidden">

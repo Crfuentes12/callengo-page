@@ -257,8 +257,8 @@ export default function Hero() {
   const formatTime = (s: number) => { const m = Math.floor(s / 60); const sec = Math.floor(s % 60); return `${m}:${sec.toString().padStart(2, "0")}`; };
 
   return (
-    <section className="relative overflow-hidden bg-background min-h-screen flex items-center" style={{ marginBottom: "-1px" }}>
-      {/* Clean subtle mesh background - no grid */}
+    <section className="relative overflow-hidden min-h-screen flex items-center" style={{ marginBottom: "-1px" }}>
+      {/* Clean subtle mesh background - transparent so lava lamp blobs show through */}
       <div className="absolute inset-0 gradient-bg-mesh" />
 
       <audio ref={audioRef} src={scenario.audioSrc} preload="metadata" />

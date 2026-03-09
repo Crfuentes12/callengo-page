@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 
@@ -52,37 +52,34 @@ const testimonials = [
   },
 ];
 
+const slideVariants = {
+  enterFromRight: { x: 300, opacity: 0 },
+  enterFromLeft: { x: -300, opacity: 0 },
+  center: { x: 0, opacity: 1 },
+  exitToLeft: { x: -300, opacity: 0 },
+  exitToRight: { x: 300, opacity: 0 },
+};
+
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
+  const [direction, setDirection] = useState<"left" | "right">("right");
 
-  const nextSlide = useCallback(() => {
-    setDirection(1);
+  const goNext = () => {
+    setDirection("right");
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  }, []);
-
-  const prevSlide = useCallback(() => {
-    setDirection(-1);
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  }, []);
-
-  // Auto-advance
-  useEffect(() => {
-    const interval = setInterval(nextSlide, 6000);
-    return () => clearInterval(interval);
-  }, [nextSlide]);
-
-  // Get 3 visible cards (prev, current, next)
-  const getVisibleIndices = () => {
-    const prev = (currentIndex - 1 + testimonials.length) % testimonials.length;
-    const next = (currentIndex + 1) % testimonials.length;
-    return [prev, currentIndex, next];
   };
 
-  const visibleIndices = getVisibleIndices();
+  const goPrev = () => {
+    setDirection("left");
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
+  // Get visible cards: prev, current, next
+  const prevIdx = (currentIndex - 1 + testimonials.length) % testimonials.length;
+  const nextIdx = (currentIndex + 1) % testimonials.length;
 
   return (
-    <section className="section bg-background" id="testimonials">
+    <section className="section bg-white/80" id="testimonials">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <motion.div
@@ -102,119 +99,108 @@ export default function Testimonials() {
           </p>
         </motion.div>
 
-        {/* Carousel */}
-        <div className="relative">
+        {/* Carousel with side arrows */}
+        <div className="relative flex items-center gap-4 md:gap-6">
+          {/* Left arrow */}
+          <button
+            onClick={goPrev}
+            className="w-11 h-11 rounded-full border border-border hover:border-electric/30 hover:bg-electric/5 flex items-center justify-center transition-all cursor-pointer shrink-0"
+          >
+            <ChevronLeft className="w-5 h-5 text-foreground-secondary" />
+          </button>
+
           {/* Cards container */}
-          <div className="flex gap-6 justify-center items-stretch">
-            {visibleIndices.map((idx, pos) => {
-              const t = testimonials[idx];
-              const isCenter = pos === 1;
-              return (
-                <motion.div
-                  key={t.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{
-                    opacity: isCenter ? 1 : 0.5,
-                    scale: isCenter ? 1 : 0.92,
-                  }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                  className={`flex-shrink-0 w-full max-w-sm rounded-2xl border p-8 flex flex-col transition-all ${
-                    isCenter
-                      ? "border-electric/20 bg-white shadow-lg"
-                      : "border-border bg-background-secondary hidden md:flex"
-                  }`}
-                  style={isCenter ? {
-                    boxShadow: "0 8px 40px rgba(79, 95, 232, 0.10), 0 2px 12px rgba(0,0,0,0.04)",
-                  } : {}}
-                >
-                  {/* Stars */}
-                  <div className="flex gap-0.5 mb-5">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-4 h-4 fill-electric text-electric"
-                      />
-                    ))}
-                  </div>
-
-                  {/* Quote */}
-                  <p className="text-foreground text-base leading-relaxed mb-6 flex-1" style={{ fontFamily: "var(--font-body)" }}>
-                    &ldquo;{t.quote}&rdquo;
-                  </p>
-
-                  {/* Metric */}
-                  <div
-                    className="rounded-xl p-4 mb-6 text-center relative overflow-hidden gradient-bg"
-                  >
-                    <div className="relative z-10">
-                      <div className="text-3xl font-bold text-white mb-1">
-                        {t.metric.value}
-                      </div>
-                      <div className="text-xs text-white/60" style={{ fontFamily: "var(--font-body)" }}>
-                        {t.metric.label}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Author */}
-                  <div className="flex items-center gap-3">
+          <div className="flex-1 overflow-hidden">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={currentIndex}
+                initial={direction === "right" ? "enterFromRight" : "enterFromLeft"}
+                animate="center"
+                exit={direction === "right" ? "exitToLeft" : "exitToRight"}
+                variants={slideVariants}
+                transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
+                className="grid grid-cols-1 md:grid-cols-3 gap-5"
+              >
+                {[prevIdx, currentIndex, nextIdx].map((idx, pos) => {
+                  const t = testimonials[idx];
+                  const isCenter = pos === 1;
+                  return (
                     <div
-                      className="w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold text-sm"
-                      style={{
-                        background: "linear-gradient(135deg, #4F5FE8 0%, #1E2D6B 100%)",
-                      }}
+                      key={`${currentIndex}-${pos}`}
+                      className={`rounded-2xl border p-7 flex flex-col transition-all ${
+                        isCenter
+                          ? "border-electric/20 bg-white shadow-lg"
+                          : "border-border bg-background-secondary hidden md:flex opacity-60"
+                      }`}
+                      style={isCenter ? {
+                        boxShadow: "0 8px 40px rgba(79, 95, 232, 0.10), 0 2px 12px rgba(0,0,0,0.04)",
+                      } : {}}
                     >
-                      {t.author.split(" ").map((n) => n[0]).join("")}
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground text-sm">
-                        {t.author}
+                      {/* Stars */}
+                      <div className="flex gap-0.5 mb-4">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="w-3.5 h-3.5 fill-electric text-electric" />
+                        ))}
                       </div>
-                      <div className="text-foreground-tertiary text-xs" style={{ fontFamily: "var(--font-body)" }}>
-                        {t.role} · {t.company}
+
+                      {/* Quote */}
+                      <p className="text-foreground text-sm leading-relaxed mb-5 flex-1" style={{ fontFamily: "var(--font-body)" }}>
+                        &ldquo;{t.quote}&rdquo;
+                      </p>
+
+                      {/* Metric pill */}
+                      <div className="rounded-lg p-3 mb-5 text-center gradient-bg">
+                        <span className="text-2xl font-bold text-white">{t.metric.value}</span>
+                        <span className="text-xs text-white/60 ml-2" style={{ fontFamily: "var(--font-body)" }}>{t.metric.label}</span>
+                      </div>
+
+                      {/* Author */}
+                      <div className="flex items-center gap-3">
+                        <div
+                          className="w-9 h-9 rounded-full flex items-center justify-center text-white font-semibold text-xs"
+                          style={{ background: "linear-gradient(135deg, #4F5FE8 0%, #1E2D6B 100%)" }}
+                        >
+                          {t.author.split(" ").map((n) => n[0]).join("")}
+                        </div>
+                        <div>
+                          <div className="font-semibold text-foreground text-sm">{t.author}</div>
+                          <div className="text-foreground-tertiary text-xs" style={{ fontFamily: "var(--font-body)" }}>
+                            {t.role} · {t.company}
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </motion.div>
-              );
-            })}
+                  );
+                })}
+              </motion.div>
+            </AnimatePresence>
           </div>
 
-          {/* Navigation */}
-          <div className="flex items-center justify-center gap-4 mt-10">
-            <button
-              onClick={prevSlide}
-              className="w-10 h-10 rounded-full border border-border hover:border-foreground-tertiary flex items-center justify-center transition-colors cursor-pointer hover:bg-background-secondary"
-            >
-              <ChevronLeft className="w-4 h-4 text-foreground-secondary" />
-            </button>
+          {/* Right arrow */}
+          <button
+            onClick={goNext}
+            className="w-11 h-11 rounded-full border border-border hover:border-electric/30 hover:bg-electric/5 flex items-center justify-center transition-all cursor-pointer shrink-0"
+          >
+            <ChevronRight className="w-5 h-5 text-foreground-secondary" />
+          </button>
+        </div>
 
-            {/* Dots */}
-            <div className="flex items-center gap-2">
-              {testimonials.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => {
-                    setDirection(i > currentIndex ? 1 : -1);
-                    setCurrentIndex(i);
-                  }}
-                  className={`rounded-full transition-all duration-300 cursor-pointer ${
-                    i === currentIndex
-                      ? "w-6 h-2 bg-electric"
-                      : "w-2 h-2 bg-border hover:bg-foreground-tertiary"
-                  }`}
-                />
-              ))}
-            </div>
-
+        {/* Dots */}
+        <div className="flex items-center justify-center gap-2 mt-8">
+          {testimonials.map((_, i) => (
             <button
-              onClick={nextSlide}
-              className="w-10 h-10 rounded-full border border-border hover:border-foreground-tertiary flex items-center justify-center transition-colors cursor-pointer hover:bg-background-secondary"
-            >
-              <ChevronRight className="w-4 h-4 text-foreground-secondary" />
-            </button>
-          </div>
+              key={i}
+              onClick={() => {
+                setDirection(i > currentIndex ? "right" : "left");
+                setCurrentIndex(i);
+              }}
+              className={`rounded-full transition-all duration-300 cursor-pointer ${
+                i === currentIndex
+                  ? "w-6 h-2 bg-electric"
+                  : "w-2 h-2 bg-border hover:bg-foreground-tertiary"
+              }`}
+            />
+          ))}
         </div>
       </div>
     </section>

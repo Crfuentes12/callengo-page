@@ -359,7 +359,7 @@ export default function IntegrationsPage() {
                   </div>
                 ) : (
                   <Link
-                    href={`/docs/integrations/${intg.slug}`}
+                    href={`/integrations/${intg.slug}`}
                     className="group bg-white border border-border rounded-xl p-6 h-full flex flex-col hover:shadow-lg hover:border-electric/30 transition-all duration-200"
                   >
                     <div className="flex items-start justify-between mb-3">
@@ -420,7 +420,7 @@ export default function IntegrationsPage() {
               className={activeCategory !== "All" && activeCategory !== "Automation" ? "hidden" : ""}
             >
               <Link
-                href="/docs/integrations/webhooks"
+                href="/integrations/webhooks"
                 className="group bg-white border border-border rounded-xl p-6 h-full flex flex-col hover:shadow-lg hover:border-electric/30 transition-all duration-200"
               >
                 <div className="w-12 h-12 rounded-xl bg-background-secondary flex items-center justify-center mb-4 group-hover:scale-105 transition-transform overflow-hidden">

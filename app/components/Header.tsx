@@ -11,7 +11,6 @@ import {
   Database,
   Calendar,
   Users,
-  Plug,
   ArrowRight,
 } from "lucide-react";
 
@@ -34,12 +33,17 @@ const agents = [
     href: "/agents/lead-qualification",
     icon: Users,
   },
-  {
-    name: "Integrations",
-    description: "Connect with your CRM, calendar & tools",
-    href: "/integrations",
-    icon: Plug,
-  },
+];
+
+const headerIntegrations = [
+  { name: "HubSpot", logo: "/integrations/hubspot.png", href: "/integrations/hubspot" },
+  { name: "Salesforce", logo: "/integrations/salesforce.png", href: "/integrations/salesforce" },
+  { name: "Google Calendar", logo: "/integrations/calendar.png", href: "/integrations/google-calendar" },
+  { name: "Zoom", logo: "/integrations/zoom.png", href: "/integrations/zoom" },
+  { name: "Slack", logo: "/integrations/slack.png", href: "/integrations/slack" },
+  { name: "Stripe", logo: "/integrations/stripe.png", href: "/integrations/stripe" },
+  { name: "Pipedrive", logo: "/integrations/pipedrive.png", href: "/integrations/pipedrive" },
+  { name: "Google Sheets", logo: "/integrations/sheets.png", href: "/integrations/google-sheets" },
 ];
 
 export default function Header() {
@@ -105,32 +109,75 @@ export default function Header() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 6, scale: 0.98 }}
                       transition={{ duration: 0.15, ease: "easeOut" }}
-                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[360px] bg-white rounded-xl border border-border p-2"
-                      style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)" }}
+                      className="absolute top-full left-0 pt-2 w-[620px]"
                     >
-                      {agents.map((agent) => {
-                        const Icon = agent.icon;
-                        return (
-                          <Link
-                            key={agent.name}
-                            href={agent.href}
-                            className="flex items-start gap-3 p-3 rounded-lg hover:bg-background-secondary transition-all group"
-                          >
-                            <div className="w-10 h-10 rounded-lg bg-background-secondary flex items-center justify-center shrink-0 group-hover:bg-background-tertiary transition-colors">
-                              <Icon className="w-5 h-5 text-secondary" />
+                      <div
+                        className="bg-white rounded-xl border border-border overflow-hidden"
+                        style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)" }}
+                      >
+                        <div className="flex">
+                          {/* Left: Agents */}
+                          <div className="flex-1 p-3 border-r border-border">
+                            <div className="px-3 py-2 text-[10px] font-semibold text-foreground-tertiary uppercase tracking-wider">
+                              AI Agents
                             </div>
-                            <div>
-                              <div className="font-semibold text-foreground text-sm">
-                                {agent.name}
-                              </div>
-                              <div className="text-xs text-foreground-tertiary mt-0.5 leading-relaxed">
-                                {agent.description}
-                              </div>
+                            {agents.map((agent) => {
+                              const Icon = agent.icon;
+                              return (
+                                <Link
+                                  key={agent.name}
+                                  href={agent.href}
+                                  className="flex items-start gap-3 p-3 rounded-lg hover:bg-background-secondary transition-all group"
+                                >
+                                  <div className="w-10 h-10 rounded-lg bg-background-secondary flex items-center justify-center shrink-0 group-hover:bg-background-tertiary transition-colors">
+                                    <Icon className="w-5 h-5 text-secondary" />
+                                  </div>
+                                  <div>
+                                    <div className="font-semibold text-foreground text-sm">
+                                      {agent.name}
+                                    </div>
+                                    <div className="text-xs text-foreground-tertiary mt-0.5 leading-relaxed">
+                                      {agent.description}
+                                    </div>
+                                  </div>
+                                  <ArrowRight className="w-4 h-4 text-foreground-tertiary opacity-0 group-hover:opacity-100 transition-opacity ml-auto mt-1" />
+                                </Link>
+                              );
+                            })}
+                          </div>
+
+                          {/* Right: Integrations */}
+                          <div className="w-[240px] p-3 bg-background-secondary/50">
+                            <div className="px-3 py-2 text-[10px] font-semibold text-foreground-tertiary uppercase tracking-wider">
+                              Integrations
                             </div>
-                            <ArrowRight className="w-4 h-4 text-foreground-tertiary opacity-0 group-hover:opacity-100 transition-opacity ml-auto mt-1" />
-                          </Link>
-                        );
-                      })}
+                            <div className="grid grid-cols-4 gap-2 px-2 py-2">
+                              {headerIntegrations.map((intg) => (
+                                <Link
+                                  key={intg.name}
+                                  href={intg.href}
+                                  className="group flex flex-col items-center gap-1.5 p-2 rounded-lg hover:bg-white transition-colors"
+                                  title={intg.name}
+                                >
+                                  <div className="w-9 h-9 rounded-lg bg-white border border-border/50 flex items-center justify-center group-hover:shadow-sm transition-shadow overflow-hidden">
+                                    <Image src={intg.logo} alt={intg.name} width={28} height={28} className="object-contain" />
+                                  </div>
+                                  <span className="text-[9px] text-foreground-tertiary text-center leading-tight truncate w-full group-hover:text-foreground transition-colors">
+                                    {intg.name}
+                                  </span>
+                                </Link>
+                              ))}
+                            </div>
+                            <Link
+                              href="/integrations"
+                              className="flex items-center justify-center gap-1.5 mx-2 mt-1 px-3 py-2 rounded-lg text-xs font-medium text-electric hover:bg-white transition-colors"
+                            >
+                              View all 16+ integrations
+                              <ArrowRight className="w-3.5 h-3.5" />
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -223,6 +270,30 @@ export default function Header() {
                       </Link>
                     );
                   })}
+
+                  <div className="px-4 py-2 text-xs font-semibold text-foreground-tertiary uppercase tracking-wider">
+                    Integrations
+                  </div>
+                  <div className="px-4 flex flex-wrap gap-2 pb-2">
+                    {headerIntegrations.slice(0, 6).map((intg) => (
+                      <Link
+                        key={intg.name}
+                        href={intg.href}
+                        className="flex items-center gap-2 px-3 py-2 rounded-lg bg-background-secondary hover:bg-background-tertiary transition-colors"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <Image src={intg.logo} alt={intg.name} width={20} height={20} className="object-contain" />
+                        <span className="text-xs font-medium text-foreground">{intg.name}</span>
+                      </Link>
+                    ))}
+                  </div>
+                  <Link
+                    href="/integrations"
+                    className="block px-4 py-2 text-xs font-medium text-electric hover:underline"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    View all integrations →
+                  </Link>
 
                   <div className="h-px bg-border my-2" />
 

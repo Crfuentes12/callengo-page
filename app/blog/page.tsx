@@ -146,25 +146,49 @@ export default function BlogPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mt-16 gradient-bg rounded-3xl p-8 md:p-12 text-center text-white"
+              className="mt-16 gradient-bg rounded-3xl p-12 md:p-20 relative overflow-hidden"
             >
-              <h3 className="text-2xl font-bold mb-4 text-white">Stay updated</h3>
-              <p className="text-white/70 mb-6 max-w-md mx-auto">
-                Get the latest insights on reducing no-shows and improving business efficiency delivered to your inbox.
-              </p>
-              <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 px-4 py-3 rounded-full border border-white/20 bg-white/10 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent"
-                />
-                <button
-                  type="submit"
-                  className="px-6 py-3 bg-white text-primary text-sm font-semibold rounded-full hover:bg-white/90 transition-colors"
-                >
-                  Subscribe
-                </button>
-              </form>
+              <div className="absolute inset-0 overflow-hidden opacity-70">
+                <div className="absolute -top-1/4 right-[-10%] w-3/5 h-[120%] bg-gradient-to-br from-white/25 via-[#8B96C8]/20 to-[#6070E0]/15 rounded-full blur-3xl animate-[ctaLava1_40s_ease-in-out_infinite]" />
+                <div className="absolute -bottom-1/3 left-[-10%] w-1/2 h-full bg-gradient-to-br from-[#8B96C8]/25 via-white/15 to-[#4F5FE8]/15 rounded-full blur-3xl animate-[ctaLava2_50s_ease-in-out_infinite]" />
+                <div className="absolute top-[10%] left-[30%] w-2/5 h-4/5 bg-gradient-to-br from-white/20 via-[#1DB87A]/10 to-[#8B96C8]/12 rounded-full blur-2xl animate-[ctaLava3_45s_ease-in-out_infinite]" />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#1E2D6B]/40 via-[#1E2D6B]/15 to-transparent" />
+              <div className="relative z-10 max-w-3xl">
+                <h3 className="text-2xl md:text-3xl font-semibold mb-4 text-white">Stay updated</h3>
+                <p className="text-xl text-white/70 mb-8 max-w-xl">
+                  Get the latest insights on reducing no-shows and improving business efficiency delivered to your inbox.
+                </p>
+                <form className="flex flex-col sm:flex-row gap-3 max-w-md">
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="flex-1 px-4 py-3 rounded-xl border border-white/20 bg-white/10 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent"
+                  />
+                  <button
+                    type="submit"
+                    className="px-6 py-3 bg-white text-primary text-sm font-semibold rounded-xl hover:bg-white/90 transition-colors"
+                  >
+                    Subscribe
+                  </button>
+                </form>
+              </div>
+              <style jsx>{`
+                @keyframes ctaLava1 {
+                  0%, 100% { transform: translate(0, 0) scale(1); }
+                  33% { transform: translate(-30px, 25px) scale(1.06); }
+                  66% { transform: translate(20px, -20px) scale(0.95); }
+                }
+                @keyframes ctaLava2 {
+                  0%, 100% { transform: translate(0, 0) scale(1); }
+                  40% { transform: translate(30px, -25px) scale(1.08); }
+                  70% { transform: translate(-20px, 30px) scale(0.94); }
+                }
+                @keyframes ctaLava3 {
+                  0%, 100% { transform: translate(0, 0) scale(1); }
+                  50% { transform: translate(25px, -15px) scale(1.05); }
+                }
+              `}</style>
             </motion.div>
           </div>
         </section>

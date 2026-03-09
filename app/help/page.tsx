@@ -242,10 +242,12 @@ export default function HelpPage() {
               viewport={{ once: true }}
               className="rounded-3xl p-8 md:p-12 text-white relative overflow-hidden gradient-bg"
             >
-              <div className="absolute inset-0 opacity-20">
-                <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-                <div className="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+              <div className="absolute inset-0 overflow-hidden opacity-70">
+                <div className="absolute -top-1/4 right-[-10%] w-3/5 h-[120%] bg-gradient-to-br from-white/25 via-[#8B96C8]/20 to-[#6070E0]/15 rounded-full blur-3xl animate-[ctaLava1_40s_ease-in-out_infinite]" />
+                <div className="absolute -bottom-1/3 left-[-10%] w-1/2 h-full bg-gradient-to-br from-[#8B96C8]/25 via-white/15 to-[#4F5FE8]/15 rounded-full blur-3xl animate-[ctaLava2_50s_ease-in-out_infinite]" />
+                <div className="absolute top-[10%] left-[30%] w-2/5 h-4/5 bg-gradient-to-br from-white/20 via-[#1DB87A]/10 to-[#8B96C8]/12 rounded-full blur-2xl animate-[ctaLava3_45s_ease-in-out_infinite]" />
               </div>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#1E2D6B]/40 via-[#1E2D6B]/15 to-transparent" />
               <h3 className="text-2xl font-semibold mb-6 relative z-10 text-white">Quick Links</h3>
               <div className="grid md:grid-cols-2 gap-4 relative z-10">
                 <Link
@@ -256,7 +258,7 @@ export default function HelpPage() {
                   <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </Link>
                 <Link
-                  href="/docs/integrations"
+                  href="/integrations"
                   className="flex items-center justify-between p-4 bg-white/10 rounded-xl border border-white/15 hover:bg-white/20 transition-all group"
                 >
                   <span className="font-medium text-white">Integrations</span>
@@ -277,6 +279,22 @@ export default function HelpPage() {
                   <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </Link>
               </div>
+              <style jsx>{`
+                @keyframes ctaLava1 {
+                  0%, 100% { transform: translate(0, 0) scale(1); }
+                  33% { transform: translate(-30px, 25px) scale(1.06); }
+                  66% { transform: translate(20px, -20px) scale(0.95); }
+                }
+                @keyframes ctaLava2 {
+                  0%, 100% { transform: translate(0, 0) scale(1); }
+                  40% { transform: translate(30px, -25px) scale(1.08); }
+                  70% { transform: translate(-20px, 30px) scale(0.94); }
+                }
+                @keyframes ctaLava3 {
+                  0%, 100% { transform: translate(0, 0) scale(1); }
+                  50% { transform: translate(25px, -15px) scale(1.05); }
+                }
+              `}</style>
             </motion.div>
           </div>
         </section>

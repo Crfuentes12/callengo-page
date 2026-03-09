@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 
 const footerLinks = {
   Product: [
@@ -60,32 +59,9 @@ export default function Footer() {
     <footer className="bg-deep-indigo text-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
 
-        {/* Top row: Slogan | Newsletter | Social */}
-        <div className="pt-16 pb-10 grid grid-cols-1 md:grid-cols-3 gap-8 items-start border-b border-white/10">
-          {/* Left: branding + slogan */}
-          <div>
-            <Link href="/" className="flex items-center gap-2.5 mb-3">
-              <Image
-                src="/callengo-logo.svg"
-                alt="Callengo"
-                width={28}
-                height={28}
-                className="w-7 h-7 brightness-0 invert opacity-60"
-              />
-              <span
-                className="text-lg font-medium tracking-tight text-white/80"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                Callengo
-              </span>
-            </Link>
-            <p className="text-sm text-white/40 max-w-xs leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>
-              Automate your outbound calls with AI. Less time dialing, more time closing.
-            </p>
-          </div>
-
-          {/* Center: Newsletter */}
-          <div>
+        {/* Top: Newsletter centered */}
+        <div className="pt-16 pb-10 flex justify-center border-b border-white/10">
+          <div className="w-full max-w-md text-center">
             <h4 className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-3">Stay Updated</h4>
             {subscribed ? (
               <p className="text-sm text-accent" style={{ fontFamily: "var(--font-body)" }}>
@@ -112,34 +88,9 @@ export default function Footer() {
               </form>
             )}
           </div>
-
-          {/* Right: Social links */}
-          <div className="flex flex-col items-start md:items-end gap-3">
-            <div className="flex items-center gap-4">
-              <a
-                href="https://linkedin.com/company/callengo"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-white/40 hover:text-white/70 transition-colors text-sm"
-                style={{ fontFamily: "var(--font-body)" }}
-              >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z" />
-                </svg>
-                LinkedIn
-              </a>
-              <a
-                href="mailto:support@callengo.com"
-                className="text-white/40 hover:text-white/70 transition-colors text-sm"
-                style={{ fontFamily: "var(--font-body)" }}
-              >
-                support@callengo.com
-              </a>
-            </div>
-          </div>
         </div>
 
-        {/* Link columns — 5 columns: Product, Resources, Company, Comparisons x2 */}
+        {/* Link columns */}
         <div className="py-12 grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12">
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
@@ -203,7 +154,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Giant brand name — font-normal for cleaner look */}
+        {/* Giant brand name */}
         <div className="border-t border-white/10 pt-10 pb-4">
           <div
             className="text-[clamp(4rem,14vw,12rem)] font-normal leading-none tracking-tighter text-white/[0.12] select-none"
@@ -221,6 +172,17 @@ export default function Footer() {
           <div className="flex items-center gap-4 text-xs text-white/25" style={{ fontFamily: "var(--font-body)" }}>
             <Link href="/privacy" className="hover:text-white/50 transition-colors">Privacy</Link>
             <Link href="/terms" className="hover:text-white/50 transition-colors">Terms</Link>
+            <a
+              href="https://linkedin.com/company/callengo"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white/50 transition-colors flex items-center gap-1"
+            >
+              <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z" />
+              </svg>
+              LinkedIn
+            </a>
           </div>
         </div>
       </div>

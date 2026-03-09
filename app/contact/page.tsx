@@ -62,7 +62,7 @@ export default function ContactPage() {
         </section>
 
         {/* Contact form + info */}
-        <section className="section bg-background relative z-10">
+        <section className="section relative z-10">
           <div className="max-w-4xl mx-auto px-6">
             <div className="grid md:grid-cols-5 gap-12">
               {/* Form */}

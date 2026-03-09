@@ -13,11 +13,11 @@ export default function CTA() {
           viewport={{ once: true }}
           className="relative overflow-hidden rounded-3xl gradient-bg p-12 md:p-20"
         >
-          {/* Internal subtle lava lamp blobs */}
-          <div className="absolute inset-0 overflow-hidden opacity-40">
-            <div className="absolute -top-1/4 right-[-10%] w-3/5 h-[120%] bg-gradient-to-br from-white/20 via-[#8B96C8]/15 to-white/10 rounded-full blur-3xl animate-[ctaLava1_40s_ease-in-out_infinite]" />
-            <div className="absolute -bottom-1/3 left-[-10%] w-1/2 h-full bg-gradient-to-br from-[#8B96C8]/20 via-white/12 to-[#4F5FE8]/10 rounded-full blur-3xl animate-[ctaLava2_50s_ease-in-out_infinite]" />
-            <div className="absolute top-[10%] left-[30%] w-2/5 h-4/5 bg-gradient-to-br from-white/15 via-[#1DB87A]/06 to-white/10 rounded-full blur-2xl animate-[ctaLava3_45s_ease-in-out_infinite]" />
+          {/* Internal lava lamp blobs */}
+          <div className="absolute inset-0 overflow-hidden opacity-70">
+            <div className="absolute -top-1/4 right-[-10%] w-3/5 h-[120%] bg-gradient-to-br from-white/25 via-[#8B96C8]/20 to-[#6070E0]/15 rounded-full blur-3xl animate-[ctaLava1_40s_ease-in-out_infinite]" />
+            <div className="absolute -bottom-1/3 left-[-10%] w-1/2 h-full bg-gradient-to-br from-[#8B96C8]/25 via-white/15 to-[#4F5FE8]/15 rounded-full blur-3xl animate-[ctaLava2_50s_ease-in-out_infinite]" />
+            <div className="absolute top-[10%] left-[30%] w-2/5 h-4/5 bg-gradient-to-br from-white/20 via-[#1DB87A]/10 to-[#8B96C8]/12 rounded-full blur-2xl animate-[ctaLava3_45s_ease-in-out_infinite]" />
           </div>
 
           {/* Dark gradient overlay protecting text on the left */}

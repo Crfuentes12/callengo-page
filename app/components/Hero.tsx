@@ -262,7 +262,7 @@ export default function Hero() {
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50/60 to-slate-50" />
 
-        <div className="absolute inset-0 opacity-45">
+        <div className="absolute inset-0 opacity-20">
           <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-to-br from-[#4F5FE8]/20 via-[#1E2D6B]/30 to-[#8B96C8]/20 rounded-full blur-3xl animate-[hero-lava-1_45s_ease-in-out_infinite]" />
           <div className="absolute -top-1/4 -right-1/3 w-4/5 h-4/5 bg-gradient-to-br from-[#1E2D6B]/35 via-[#8B96C8]/25 to-[#3347D4]/25 rounded-full blur-3xl animate-[hero-lava-2_55s_ease-in-out_infinite_-8s]" />
           <div className="absolute top-1/4 -left-1/4 w-3/4 h-3/4 bg-gradient-to-br from-[#3347D4]/20 via-[#4F5FE8]/30 to-[#1DB87A]/15 rounded-full blur-3xl animate-[hero-lava-3_60s_ease-in-out_infinite_-15s]" />

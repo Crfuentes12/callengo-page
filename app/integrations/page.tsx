@@ -430,7 +430,7 @@ export default function IntegrationsPage() {
               className="gradient-bg rounded-3xl p-12 md:p-16 text-white text-center relative overflow-hidden"
             >
               {/* Subtle internal lava lamp */}
-              <div className="absolute inset-0 overflow-hidden opacity-40">
+              <div className="absolute inset-0 overflow-hidden opacity-70">
                 <div className="absolute -top-1/4 right-[-10%] w-3/5 h-[120%] bg-gradient-to-br from-white/20 via-[#8B96C8]/15 to-white/10 rounded-full blur-3xl animate-[intCta1_40s_ease-in-out_infinite]" />
                 <div className="absolute -bottom-1/3 left-[-10%] w-1/2 h-full bg-gradient-to-br from-[#8B96C8]/20 via-white/12 to-[#4F5FE8]/10 rounded-full blur-3xl animate-[intCta2_50s_ease-in-out_infinite]" />
               </div>

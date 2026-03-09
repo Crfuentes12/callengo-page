@@ -964,27 +964,6 @@ export default function DocsPage() {
               </div>
             </section>
 
-            {/* ────────── Integrations CTA ────────── */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="rounded-2xl border border-border bg-background-secondary p-8 md:p-10 flex flex-col md:flex-row items-center gap-6"
-            >
-              <div className="flex-1">
-                <h3 className="text-xl font-semibold text-foreground mb-2">Explore all integrations</h3>
-                <p className="text-sm text-foreground-secondary leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>
-                  Connect Callengo with your CRM, calendar, and business tools. See the full list of supported integrations.
-                </p>
-              </div>
-              <a
-                href="/docs/integrations"
-                className="btn btn-primary rounded-full whitespace-nowrap"
-              >
-                View Integrations
-              </a>
-            </motion.div>
-
             {/* ────────── CTA ────────── */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -992,32 +971,50 @@ export default function DocsPage() {
               viewport={{ once: true }}
               className="relative overflow-hidden rounded-3xl gradient-bg p-12 md:p-20"
             >
-              <div className="absolute inset-0 opacity-20">
-                <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-                <div className="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+              <div className="absolute inset-0 overflow-hidden opacity-70">
+                <div className="absolute -top-1/4 right-[-10%] w-3/5 h-[120%] bg-gradient-to-br from-white/25 via-[#8B96C8]/20 to-[#6070E0]/15 rounded-full blur-3xl animate-[ctaLava1_40s_ease-in-out_infinite]" />
+                <div className="absolute -bottom-1/3 left-[-10%] w-1/2 h-full bg-gradient-to-br from-[#8B96C8]/25 via-white/15 to-[#4F5FE8]/15 rounded-full blur-3xl animate-[ctaLava2_50s_ease-in-out_infinite]" />
+                <div className="absolute top-[10%] left-[30%] w-2/5 h-4/5 bg-gradient-to-br from-white/20 via-[#1DB87A]/10 to-[#8B96C8]/12 rounded-full blur-2xl animate-[ctaLava3_45s_ease-in-out_infinite]" />
               </div>
-              <div className="relative z-10 text-center">
+              <div className="absolute inset-0 bg-gradient-to-r from-[#1E2D6B]/40 via-[#1E2D6B]/15 to-transparent" />
+              <div className="relative z-10 max-w-3xl">
                 <h3 className="text-2xl font-semibold mb-3 text-white">Need more help?</h3>
-                <p className="text-white/70 mb-6 max-w-md mx-auto" style={{ fontFamily: "var(--font-body)" }}>
+                <p className="text-white/70 mb-6 max-w-md" style={{ fontFamily: "var(--font-body)" }}>
                   Our support team is ready to assist you with any questions.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <div className="flex flex-col sm:flex-row gap-4">
                   <a
                     href="https://app.callengo.com/auth/signup"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn bg-white text-primary hover:bg-white/90 px-8 py-4 font-semibold"
+                    className="btn bg-white text-primary hover:bg-white/90 px-8 py-4 font-semibold rounded-xl"
                   >
                     Get Started Free
                   </a>
                   <a
                     href="mailto:support@callengo.com"
-                    className="btn border border-white/20 text-white hover:bg-white/10 px-8 py-4 font-semibold"
+                    className="btn border border-white/30 text-white hover:bg-white/10 px-8 py-4 rounded-xl"
                   >
                     Contact Support
                   </a>
                 </div>
               </div>
+              <style jsx>{`
+                @keyframes ctaLava1 {
+                  0%, 100% { transform: translate(0, 0) scale(1); }
+                  33% { transform: translate(-30px, 25px) scale(1.06); }
+                  66% { transform: translate(20px, -20px) scale(0.95); }
+                }
+                @keyframes ctaLava2 {
+                  0%, 100% { transform: translate(0, 0) scale(1); }
+                  40% { transform: translate(30px, -25px) scale(1.08); }
+                  70% { transform: translate(-20px, 30px) scale(0.94); }
+                }
+                @keyframes ctaLava3 {
+                  0%, 100% { transform: translate(0, 0) scale(1); }
+                  50% { transform: translate(25px, -15px) scale(1.05); }
+                }
+              `}</style>
             </motion.div>
           </div>
         </div>

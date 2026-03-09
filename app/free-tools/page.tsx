@@ -83,35 +83,59 @@ export default function FreeToolsPage() {
         </section>
 
         {/* Bottom CTA */}
-        <section className="section bg-background-secondary">
+        <section className="section">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="gradient-bg rounded-3xl p-8 md:p-12 text-center text-white"
+              className="gradient-bg rounded-3xl p-12 md:p-20 relative overflow-hidden"
             >
-              <h3 className="text-2xl font-bold mb-4 text-white font-display">
-                Get notified when these tools launch
-              </h3>
-              <p className="text-white/70 mb-6 max-w-lg mx-auto font-body">
-                Sign up for early access to our free tools and be the first to
-                know when new resources are available.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Link
-                  href="/contact"
-                  className="btn btn-primary bg-white text-primary hover:bg-white/90 px-8 py-3 rounded-full font-semibold text-sm transition-colors"
-                >
-                  Join the waitlist
-                </Link>
-                <Link
-                  href="/pricing"
-                  className="btn px-8 py-3 rounded-full font-semibold text-sm border border-white/30 text-white hover:bg-white/10 transition-colors"
-                >
-                  Explore pricing
-                </Link>
+              <div className="absolute inset-0 overflow-hidden opacity-70">
+                <div className="absolute -top-1/4 right-[-10%] w-3/5 h-[120%] bg-gradient-to-br from-white/25 via-[#8B96C8]/20 to-[#6070E0]/15 rounded-full blur-3xl animate-[ctaLava1_40s_ease-in-out_infinite]" />
+                <div className="absolute -bottom-1/3 left-[-10%] w-1/2 h-full bg-gradient-to-br from-[#8B96C8]/25 via-white/15 to-[#4F5FE8]/15 rounded-full blur-3xl animate-[ctaLava2_50s_ease-in-out_infinite]" />
+                <div className="absolute top-[10%] left-[30%] w-2/5 h-4/5 bg-gradient-to-br from-white/20 via-[#1DB87A]/10 to-[#8B96C8]/12 rounded-full blur-2xl animate-[ctaLava3_45s_ease-in-out_infinite]" />
               </div>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#1E2D6B]/40 via-[#1E2D6B]/15 to-transparent" />
+              <div className="relative z-10 max-w-3xl">
+                <h3 className="text-2xl md:text-3xl font-semibold mb-4 text-white">
+                  Get notified when these tools launch
+                </h3>
+                <p className="text-xl text-white/70 mb-10 max-w-xl">
+                  Sign up for early access to our free tools and be the first to
+                  know when new resources are available.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Link
+                    href="/contact"
+                    className="btn bg-white text-primary hover:bg-white/90 px-8 py-4 font-semibold rounded-xl"
+                  >
+                    Join the waitlist
+                  </Link>
+                  <Link
+                    href="/pricing"
+                    className="btn border border-white/30 text-white hover:bg-white/10 px-8 py-4 rounded-xl"
+                  >
+                    Explore pricing
+                  </Link>
+                </div>
+              </div>
+              <style jsx>{`
+                @keyframes ctaLava1 {
+                  0%, 100% { transform: translate(0, 0) scale(1); }
+                  33% { transform: translate(-30px, 25px) scale(1.06); }
+                  66% { transform: translate(20px, -20px) scale(0.95); }
+                }
+                @keyframes ctaLava2 {
+                  0%, 100% { transform: translate(0, 0) scale(1); }
+                  40% { transform: translate(30px, -25px) scale(1.08); }
+                  70% { transform: translate(-20px, 30px) scale(0.94); }
+                }
+                @keyframes ctaLava3 {
+                  0%, 100% { transform: translate(0, 0) scale(1); }
+                  50% { transform: translate(25px, -15px) scale(1.05); }
+                }
+              `}</style>
             </motion.div>
           </div>
         </section>

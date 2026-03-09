@@ -11,6 +11,7 @@ import {
   Database,
   Calendar,
   Users,
+  Plug,
   ArrowRight,
 } from "lucide-react";
 
@@ -32,6 +33,12 @@ const agents = [
     description: "Qualify leads before sales touches them",
     href: "/agents/lead-qualification",
     icon: Users,
+  },
+  {
+    name: "Integrations",
+    description: "Connect with your CRM, calendar & tools",
+    href: "/integrations",
+    icon: Plug,
   },
 ];
 
@@ -83,7 +90,7 @@ export default function Header() {
                   className="flex items-center gap-1 text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium px-4 py-2 rounded-lg hover:bg-background-secondary"
                   onClick={() => setIsAgentsOpen(!isAgentsOpen)}
                 >
-                  Solutions
+                  Product
                   <ChevronDown
                     className={`w-3.5 h-3.5 transition-transform duration-200 ${
                       isAgentsOpen ? "rotate-180" : ""
@@ -98,7 +105,7 @@ export default function Header() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 6, scale: 0.98 }}
                       transition={{ duration: 0.15, ease: "easeOut" }}
-                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[340px] bg-white rounded-xl border border-border p-2"
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[360px] bg-white rounded-xl border border-border p-2"
                       style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)" }}
                     >
                       {agents.map((agent) => {
@@ -193,7 +200,7 @@ export default function Header() {
               >
                 <div className="py-4 space-y-1">
                   <div className="px-4 py-2 text-xs font-semibold text-foreground-tertiary uppercase tracking-wider">
-                    Solutions
+                    Product
                   </div>
                   {agents.map((agent) => {
                     const Icon = agent.icon;

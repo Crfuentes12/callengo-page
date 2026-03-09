@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import {
@@ -163,31 +164,32 @@ type Integration = {
   description: string;
   category: string;
   minPlan: string;
+  logo: string;
 };
 
 const integrations: Integration[] = [
   // Calendar
-  { name: "Google Calendar", description: "Sync appointments and availability in real time", category: "Calendar", minPlan: "Starter" },
-  { name: "Outlook Calendar", description: "Two-way calendar sync with Microsoft 365", category: "Calendar", minPlan: "Starter" },
+  { name: "Google Calendar", description: "Sync appointments and availability in real time", category: "Calendar", minPlan: "Starter", logo: "/integrations/calendar.png" },
+  { name: "Outlook Calendar", description: "Two-way calendar sync with Microsoft 365", category: "Calendar", minPlan: "Starter", logo: "/integrations/outlook.png" },
   // Video
-  { name: "Google Meet", description: "Auto-generate Meet links for confirmed appointments", category: "Video", minPlan: "Starter" },
-  { name: "Zoom", description: "Create Zoom meetings when appointments are confirmed", category: "Video", minPlan: "Starter" },
-  { name: "Microsoft Teams", description: "Schedule Teams meetings from call outcomes", category: "Video", minPlan: "Business" },
+  { name: "Google Meet", description: "Auto-generate Meet links for confirmed appointments", category: "Video", minPlan: "Starter", logo: "/integrations/meets.png" },
+  { name: "Zoom", description: "Create Zoom meetings when appointments are confirmed", category: "Video", minPlan: "Starter", logo: "/integrations/zoom.png" },
+  { name: "Microsoft Teams", description: "Schedule Teams meetings from call outcomes", category: "Video", minPlan: "Business", logo: "/integrations/teams.png" },
   // CRM
-  { name: "HubSpot", description: "Push call outcomes and lead scores to HubSpot contacts", category: "CRM", minPlan: "Business" },
-  { name: "Pipedrive", description: "Update deals and contacts in Pipedrive automatically", category: "CRM", minPlan: "Business" },
-  { name: "Zoho CRM", description: "Sync call data and lead status with Zoho CRM", category: "CRM", minPlan: "Business" },
-  { name: "Salesforce", description: "Enterprise-grade Salesforce integration with custom field mapping", category: "CRM", minPlan: "Teams" },
-  { name: "Microsoft Dynamics 365", description: "Bi-directional sync with Dynamics 365 entities", category: "CRM", minPlan: "Teams" },
-  { name: "Clio", description: "Legal practice management — sync client and matter data", category: "CRM", minPlan: "Teams" },
+  { name: "HubSpot", description: "Push call outcomes and lead scores to HubSpot contacts", category: "CRM", minPlan: "Business", logo: "/integrations/hubspot.png" },
+  { name: "Pipedrive", description: "Update deals and contacts in Pipedrive automatically", category: "CRM", minPlan: "Business", logo: "/integrations/pipedrive.png" },
+  { name: "Zoho CRM", description: "Sync call data and lead status with Zoho CRM", category: "CRM", minPlan: "Business", logo: "/integrations/zoho.png" },
+  { name: "Salesforce", description: "Enterprise-grade Salesforce integration with custom field mapping", category: "CRM", minPlan: "Teams", logo: "/integrations/salesforce.png" },
+  { name: "Microsoft Dynamics 365", description: "Bi-directional sync with Dynamics 365 entities", category: "CRM", minPlan: "Teams", logo: "/integrations/dynamics.png" },
+  { name: "Clio", description: "Legal practice management — sync client and matter data", category: "CRM", minPlan: "Teams", logo: "/integrations/clio.png" },
   // Communication
-  { name: "Slack", description: "Get real-time call notifications and summaries in Slack channels", category: "Communication", minPlan: "Starter" },
+  { name: "Slack", description: "Get real-time call notifications and summaries in Slack channels", category: "Communication", minPlan: "Starter", logo: "/integrations/slack.png" },
   // Productivity
-  { name: "Google Sheets", description: "Export call results directly to Google Sheets", category: "Productivity", minPlan: "Starter" },
-  { name: "SimplyBook.me", description: "Sync bookings and availability with SimplyBook.me", category: "Productivity", minPlan: "Business" },
-  { name: "Stripe", description: "Trigger calls based on Stripe payment events", category: "Productivity", minPlan: "Business" },
+  { name: "Google Sheets", description: "Export call results directly to Google Sheets", category: "Productivity", minPlan: "Starter", logo: "/integrations/sheets.png" },
+  { name: "SimplyBook.me", description: "Sync bookings and availability with SimplyBook.me", category: "Productivity", minPlan: "Business", logo: "/integrations/simplybook.png" },
+  { name: "Stripe", description: "Trigger calls based on Stripe payment events", category: "Productivity", minPlan: "Business", logo: "/integrations/stripe.png" },
   // Automation
-  { name: "Webhooks", description: "Send real-time POST requests to any URL when calls complete", category: "Automation", minPlan: "Business" },
+  { name: "Webhooks", description: "Send real-time POST requests to any URL when calls complete", category: "Automation", minPlan: "Business", logo: "/integrations/webhooks.png" },
 ];
 
 const integrationCategoryOrder = ["Calendar", "Video", "CRM", "Communication", "Productivity", "Automation"];
@@ -675,7 +677,12 @@ export default function DocsPage() {
                     className="border border-border rounded-xl p-5 hover:shadow-sm transition-shadow"
                   >
                     <div className="flex items-start justify-between mb-3">
-                      <h4 className="font-semibold text-sm">{intg.name}</h4>
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-lg bg-background-secondary flex items-center justify-center overflow-hidden flex-shrink-0">
+                          <Image src={intg.logo} alt={intg.name} width={28} height={28} className="object-contain" />
+                        </div>
+                        <h4 className="font-semibold text-sm">{intg.name}</h4>
+                      </div>
                       <span className="flex items-center gap-1 text-[10px] font-medium text-green-700">
                         <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />
                         Active
@@ -730,7 +737,7 @@ export default function DocsPage() {
 
               <div className="mt-8">
                 <Link
-                  href="/docs/integrations"
+                  href="/integrations"
                   className="btn btn-primary rounded-full"
                 >
                   View full integrations documentation

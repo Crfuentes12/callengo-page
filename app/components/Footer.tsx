@@ -192,8 +192,6 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Callengo. All rights reserved. &middot; US-based company
           </p>
           <div className="flex items-center gap-4 text-xs text-white/25" style={{ fontFamily: "var(--font-body)" }}>
-            <Link href="/privacy" className="hover:text-white/50 transition-colors">Privacy</Link>
-            <Link href="/terms" className="hover:text-white/50 transition-colors">Terms</Link>
             <a
               href="https://linkedin.com/company/callengo"
               target="_blank"

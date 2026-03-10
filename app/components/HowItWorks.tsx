@@ -1165,14 +1165,14 @@ export default function HowItWorks() {
           </div>
 
           {/* Main interactive area */}
-          <div className="grid lg:grid-cols-12 gap-10 xl:gap-14 items-start">
+          <div className="grid lg:grid-cols-2 gap-8 xl:gap-12 items-start">
 
-            {/* LEFT — Interactive mockup viewer (larger) */}
+            {/* LEFT — Interactive mockup viewer */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="lg:col-span-7 relative"
+              className="relative"
             >
               <div
                 className="rounded-2xl overflow-hidden"
@@ -1216,53 +1216,18 @@ export default function HowItWorks() {
                 </div>
               </div>
 
-              {/* Step info card — below the mockup */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeStep}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.35, delay: 0.1 }}
-                  className="mt-5 rounded-xl border border-white/20 bg-white/[0.10] backdrop-blur-sm px-5 py-4"
-                >
-                  <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-white/15 flex items-center justify-center shrink-0 mt-0.5">
-                      <StepIcon className="w-5 h-5 text-white/80" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-[10px] text-white/50 font-bold uppercase tracking-wider">Step {step.number}</span>
-                        <span className="text-white font-semibold text-sm">{step.title}</span>
-                      </div>
-                      <p className="text-[12px] text-white/65 leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>
-                        {step.description}
-                      </p>
-                    </div>
-                  </div>
-                  {!isPaused && (
-                    <div className="h-1 bg-white/10 rounded-full overflow-hidden mt-3">
-                      <motion.div
-                        className="h-full rounded-full"
-                        style={{ width: `${progress}%`, background: "rgba(255, 255, 255, 0.5)" }}
-                      />
-                    </div>
-                  )}
-                </motion.div>
-              </AnimatePresence>
-
               <div className="absolute -inset-8 bg-white/10 blur-3xl rounded-3xl -z-10" />
             </motion.div>
 
-            {/* RIGHT — Step selector + details */}
+            {/* RIGHT — Step selector with integrated details */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="lg:col-span-5"
+              className="flex flex-col"
             >
-              {/* Step buttons */}
-              <div className="space-y-1.5">
+              {/* Step buttons with expandable active state */}
+              <div className="space-y-2">
                 {steps.map((s, index) => {
                   const Icon = s.icon;
                   const isActive = index === activeStep;
@@ -1271,13 +1236,13 @@ export default function HowItWorks() {
                     <button
                       key={s.number}
                       onClick={() => handleStepClick(index)}
-                      className={`w-full text-left rounded-xl border transition-all duration-300 cursor-pointer group ${
+                      className={`w-full text-left rounded-xl border transition-all duration-300 cursor-pointer group overflow-hidden ${
                         isActive
                           ? "border-white/25 bg-white/15 backdrop-blur-sm"
                           : "border-white/8 bg-white/[0.06] hover:bg-white/[0.10] hover:border-white/15 backdrop-blur-sm"
                       }`}
                     >
-                      <div className="px-4 py-3">
+                      <div className={`px-4 ${isActive ? "pt-3.5 pb-1.5" : "py-3"}`}>
                         <div className="flex items-center gap-3">
                           <div
                             className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-all ${
@@ -1299,15 +1264,48 @@ export default function HowItWorks() {
                             </span>
                           </div>
 
-                          <ChevronRight className={`w-4 h-4 shrink-0 transition-all ${isActive ? "text-white/70 rotate-90" : "text-white/35 group-hover:text-white/50"}`} />
+                          <ChevronRight className={`w-4 h-4 shrink-0 transition-all duration-300 ${isActive ? "text-white/70 rotate-90" : "text-white/35 group-hover:text-white/50"}`} />
                         </div>
                       </div>
+
+                      {/* Expanded content for active step */}
+                      {isActive && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          transition={{ duration: 0.3 }}
+                          className="px-4 pb-3.5"
+                        >
+                          <p className="text-[12px] text-white/60 leading-relaxed mt-1.5 pl-12" style={{ fontFamily: "var(--font-body)" }}>
+                            {s.description}
+                          </p>
+                          <div className="flex flex-wrap gap-1.5 mt-2.5 pl-12">
+                            {s.highlights.map((h) => (
+                              <span
+                                key={h}
+                                className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium text-white/70 border border-white/15 bg-white/[0.08]"
+                              >
+                                <CheckCircle2 className="w-2.5 h-2.5 text-accent/70" />
+                                {h}
+                              </span>
+                            ))}
+                          </div>
+                          {!isPaused && (
+                            <div className="h-1 bg-white/10 rounded-full overflow-hidden mt-3 ml-12">
+                              <motion.div
+                                className="h-full rounded-full"
+                                style={{ width: `${progress}%`, background: "rgba(255, 255, 255, 0.5)" }}
+                              />
+                            </div>
+                          )}
+                        </motion.div>
+                      )}
                     </button>
                   );
                 })}
               </div>
 
-              <div className="pt-5 space-y-2">
+              <div className="pt-6 space-y-2.5">
                 <a
                   href="https://app.callengo.com/auth/signup"
                   className="btn w-full rounded-xl justify-center text-sm py-3.5 hover:-translate-y-0.5 transition-all text-electric font-semibold"

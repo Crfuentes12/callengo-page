@@ -50,7 +50,7 @@ export default function FreeToolsPage() {
               <h1 className="text-display-sm mb-6">Free Tools</h1>
               <p className="text-xl text-foreground-secondary">
                 Free resources to help your business optimize outbound calls,
-                qualify leads faster, and stay compliant — no account required.
+                qualify leads faster, and stay compliant. No account required.
               </p>
             </motion.div>
 

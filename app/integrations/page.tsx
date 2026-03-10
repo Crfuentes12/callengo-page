@@ -170,7 +170,7 @@ const integrations: IntegrationCard[] = [
     name: "Clio",
     slug: "clio",
     category: "CRM",
-    tagline: "Legal practice management — sync client and matter data",
+    tagline: "Legal practice management. Sync client and matter data",
     logo: "/integrations/clio.png",
     minPlan: "Enterprise",
     features: ["Client sync", "Matter linking", "Activity logging", "Billing integration"],
@@ -500,7 +500,7 @@ export default function IntegrationsPage() {
                             {included ? (
                               <Check className="w-4 h-4 text-accent-dark mx-auto" />
                             ) : (
-                              <span className="text-foreground-tertiary/30">—</span>
+                              <span className="text-foreground-tertiary/30">-</span>
                             )}
                           </td>
                         );
@@ -584,7 +584,7 @@ export default function IntegrationsPage() {
                 </h2>
                 <p className="text-xl text-white/70 mb-10 max-w-xl">
                   Start your free trial and configure integrations in minutes. No
-                  coding required — everything is set up from your dashboard.
+                  coding required. Everything is set up from your dashboard.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <a

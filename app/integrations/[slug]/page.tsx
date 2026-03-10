@@ -77,7 +77,7 @@ const integrations: IntegrationDetail[] = [
       "Maximum of 10 calendars per Callengo account.",
       "Sync latency is typically under 5 seconds but may take up to 30 seconds during peak usage.",
       "All-day events are not created automatically; only timed events are supported.",
-      "Recurring event creation is not supported — each appointment is a standalone event.",
+      "Recurring event creation is not supported. Each appointment is a standalone event.",
     ],
   },
   {
@@ -98,7 +98,7 @@ const integrations: IntegrationDetail[] = [
       "Grant Callengo the required permissions (Calendars.ReadWrite).",
       "Choose the Outlook calendar(s) to sync. Shared calendars are supported if you have write access.",
       "Set event defaults: duration, color category, reminder minutes.",
-      "Click Test Connection — a sample event will appear in your Outlook.",
+      "Click Test Connection. A sample event will appear in your Outlook.",
     ],
     syncedData: [
       "Event subject (campaign name + contact name)",
@@ -120,7 +120,7 @@ const integrations: IntegrationDetail[] = [
       "Requires Microsoft 365 Business, Enterprise, or a personal Outlook.com account.",
       "Shared mailbox calendars require the user to have explicit write permissions.",
       "Sync interval is near real-time (under 10 seconds) for single events; bulk sync may take up to 60 seconds.",
-      "On-premises Exchange servers are not supported — only cloud-based Microsoft 365.",
+      "On-premises Exchange servers are not supported. Only cloud-based Microsoft 365.",
       "Maximum of 10 calendars per Callengo account.",
     ],
   },
@@ -162,7 +162,7 @@ const integrations: IntegrationDetail[] = [
     limitations: [
       "Requires SimplyBook.me Premium plan or above for API access.",
       "SimplyBook.me API rate limits: 100 requests per minute.",
-      "Group bookings and recurring bookings are not supported — only single bookings.",
+      "Group bookings and recurring bookings are not supported. Only single bookings.",
       "Custom SimplyBook.me forms beyond basic fields require manual mapping.",
       "SimplyBook.me promotions, coupons, and membership features are not managed by Callengo.",
     ],
@@ -243,9 +243,9 @@ const integrations: IntegrationDetail[] = [
       "Real estate agents scheduling virtual property tours.",
     ],
     limitations: [
-      "Requires Zoom Pro, Business, or Enterprise — Zoom Basic (free) does not support API meeting creation.",
+      "Requires Zoom Pro, Business, or Enterprise. Zoom Basic (free) does not support API meeting creation.",
       "Meeting duration limits apply based on your Zoom plan.",
-      "Callengo does not manage Zoom webinars — only standard meetings.",
+      "Callengo does not manage Zoom webinars. Only standard meetings are supported.",
       "If Zoom rate limits are hit (100 meetings/day for Pro), meeting creation may be delayed.",
       "Zoom cloud recording settings must be configured in your Zoom admin, not in Callengo.",
     ],
@@ -381,7 +381,7 @@ const integrations: IntegrationDetail[] = [
       "Requires Salesforce Professional edition or above. Essentials edition has limited API access.",
       "Salesforce API daily limits apply: 15,000 (Professional) to 100,000+ (Unlimited). Monitor usage in Salesforce Setup.",
       "Salesforce Connected App must be approved by a Salesforce admin.",
-      "Complex validation rules in Salesforce may block Callengo updates — test thoroughly in sandbox first.",
+      "Complex validation rules in Salesforce may block Callengo updates. Test thoroughly in sandbox first.",
       "Person Accounts are supported but require additional field mapping configuration.",
       "Available on Teams plan and above due to the complexity of the integration.",
     ],
@@ -467,9 +467,9 @@ const integrations: IntegrationDetail[] = [
     limitations: [
       "Requires Zoho CRM Standard edition or above. Zoho Free edition has limited API access.",
       "Zoho API rate limits: 15,000 requests per day (Standard) to 50,000 (Enterprise). Plan campaigns accordingly.",
-      "Custom modules are not supported — only standard Leads, Contacts, Accounts, Activities, and Notes.",
+      "Custom modules are not supported. Only standard Leads, Contacts, Accounts, Activities, and Notes.",
       "Zoho CRM Plus or Zoho One may require separate authorization for each app in the suite.",
-      "Blueprint (Zoho process automation) transitions are not directly triggered — use workflow rules instead.",
+      "Blueprint (Zoho process automation) transitions are not directly triggered. Use workflow rules instead.",
     ],
   },
   {
@@ -607,7 +607,7 @@ const integrations: IntegrationDetail[] = [
     limitations: [
       "Google Sheets has a limit of 10 million cells per spreadsheet. Very large campaigns should use multiple sheets.",
       "Real-time append has a slight delay (1-3 seconds) per row.",
-      "Formatting (colors, fonts) is not applied automatically — only raw data is written.",
+      "Formatting (colors, fonts) is not applied automatically. Only raw data is written.",
       "Google Sheets API rate limit: 100 requests per 100 seconds per user.",
       "Formulas in existing cells are not overwritten, but adjacent data may shift if column mapping changes.",
     ],
@@ -617,7 +617,7 @@ const integrations: IntegrationDetail[] = [
     slug: "clio",
     category: "Productivity",
     minPlan: "Teams",
-    tagline: "Legal practice management — sync client and matter data",
+    tagline: "Legal practice management. Sync client and matter data",
     initial: "C",
     logo: "/integrations/clio.png",
     color: "bg-pink-500",
@@ -648,7 +648,7 @@ const integrations: IntegrationDetail[] = [
       "Automated follow-up task creation in Clio when calls result in action items.",
     ],
     limitations: [
-      "Requires Clio Manage (Boutique, Solo, or Elite). Clio Grow (standalone) is not supported — only Clio Manage.",
+      "Requires Clio Manage (Boutique, Solo, or Elite). Clio Grow (standalone) is not supported, only Clio Manage.",
       "Time entry auto-logging requires the firm to configure billing rates in Clio first.",
       "Clio API rate limits: 60 requests per minute. Large batch operations are queued.",
       "Document management features in Clio are not accessible from Callengo.",
@@ -699,7 +699,7 @@ const integrations: IntegrationDetail[] = [
       "The customer record in Stripe must include a phone number for Callengo to place a call.",
       "Stripe webhooks have a retry policy; duplicate events are deduplicated by Callengo.",
       "Refund events are not currently supported as triggers.",
-      "Payment amounts and currency data are read-only in Callengo — no payment processing is done.",
+      "Payment amounts and currency data are read-only in Callengo. No payment processing is done.",
     ],
   },
   {
@@ -712,7 +712,7 @@ const integrations: IntegrationDetail[] = [
     logo: "/integrations/webhooks.png",
     color: "bg-slate-600",
     whatItDoes:
-      "Callengo sends a JSON POST request to your configured URL every time a call completes. This lets you build custom integrations with any system that can receive HTTP requests — your own backend, Zapier, Make.com, or any other automation tool. The payload includes all call data: outcome, sentiment, transcript, recording URL, extracted fields, and more.",
+      "Callengo sends a JSON POST request to your configured URL every time a call completes. This lets you build custom integrations with any system that can receive HTTP requests: your own backend, Zapier, Make.com, or any other automation tool. The payload includes all call data: outcome, sentiment, transcript, recording URL, extracted fields, and more.",
     setup: [
       "Go to Settings > Integrations and click Connect next to Webhooks.",
       "Enter your webhook endpoint URL (must be HTTPS).",
@@ -743,7 +743,7 @@ const integrations: IntegrationDetail[] = [
     limitations: [
       "Your endpoint must return a 2xx HTTP status code within 10 seconds or the delivery is considered failed.",
       "Maximum payload size is 1 MB per webhook event.",
-      "Webhooks are sent asynchronously — there is no guaranteed ordering of events.",
+      "Webhooks are sent asynchronously. There is no guaranteed ordering of events.",
       "If your endpoint is down, Callengo retries 3 times over 15 minutes before marking the delivery as failed.",
       "Webhook logs are retained for 30 days in the Callengo dashboard.",
       "Available on Business plan and above.",

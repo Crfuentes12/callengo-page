@@ -13,7 +13,7 @@ const faqs = [
   {
     question: "Can I customize what the agent says?",
     answer:
-      "Absolutely. You write the script, define objectives, and set conditional logic using our guided editor — no coding required. The agent follows your script while handling unexpected questions intelligently.",
+      "Absolutely. You write the script, define objectives, and set conditional logic using our guided editor. No coding required. The agent follows your script while handling unexpected questions intelligently.",
   },
   {
     question: "What happens when someone asks an unexpected question?",
@@ -28,12 +28,12 @@ const faqs = [
   {
     question: "Is there a free trial?",
     answer:
-      "Yes. The Free plan gives you 15 minutes to test with up to 20 contacts — no credit card required. You can launch a real campaign and see results before committing to a paid plan.",
+      "Yes. The Free plan gives you 15 minutes to test with up to 20 contacts, no credit card required. You can launch a real campaign and see results before committing to a paid plan.",
   },
   {
     question: "Do you integrate with CRM systems?",
     answer:
-      "Yes! We offer native integrations with HubSpot, Salesforce, Pipedrive, Zoho CRM, Microsoft Dynamics 365, and Clio. Data syncs automatically after each call — no manual export needed.",
+      "Yes! We offer native integrations with HubSpot, Salesforce, Pipedrive, Zoho CRM, Microsoft Dynamics 365, and Clio. Data syncs automatically after each call, no manual export needed.",
   },
   {
     question: "What other integrations do you support?",

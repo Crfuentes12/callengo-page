@@ -262,14 +262,14 @@ export default function Hero() {
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50/60 to-slate-50" />
 
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-to-br from-[#4F5FE8]/20 via-[#1E2D6B]/30 to-[#8B96C8]/20 rounded-full blur-3xl animate-[hero-lava-1_45s_ease-in-out_infinite]" />
-          <div className="absolute -top-1/4 -right-1/3 w-4/5 h-4/5 bg-gradient-to-br from-[#1E2D6B]/35 via-[#8B96C8]/25 to-[#3347D4]/25 rounded-full blur-3xl animate-[hero-lava-2_55s_ease-in-out_infinite_-8s]" />
-          <div className="absolute top-1/4 -left-1/4 w-3/4 h-3/4 bg-gradient-to-br from-[#3347D4]/20 via-[#4F5FE8]/30 to-[#1DB87A]/15 rounded-full blur-3xl animate-[hero-lava-3_60s_ease-in-out_infinite_-15s]" />
-          <div className="absolute -bottom-1/3 right-1/4 w-full h-3/4 bg-gradient-to-br from-[#8B96C8]/30 via-[#1E2D6B]/40 to-[#4F5FE8]/25 rounded-full blur-3xl animate-[hero-lava-4_50s_ease-in-out_infinite_-22s]" />
-          <div className="absolute bottom-1/4 -left-1/3 w-4/5 h-4/5 bg-gradient-to-br from-[#4F5FE8]/25 via-[#3347D4]/20 to-[#1E2D6B]/20 rounded-full blur-3xl animate-[hero-lava-5_58s_ease-in-out_infinite_-30s]" />
-          <div className="absolute top-1/3 right-[20%] w-1/2 h-1/2 bg-gradient-to-br from-[#1DB87A]/15 via-[#4F5FE8]/25 to-[#3347D4]/30 rounded-full blur-2xl animate-[hero-lava-6_48s_ease-in-out_infinite_-12s]" />
-          <div className="absolute bottom-[20%] left-1/3 w-3/5 h-3/5 bg-gradient-to-br from-[#1E2D6B]/30 via-[#8B96C8]/25 to-[#4F5FE8]/35 rounded-full blur-2xl animate-[hero-lava-7_52s_ease-in-out_infinite_-18s]" />
+        <div className="absolute inset-0 opacity-50">
+          <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-to-br from-[#7C3AED]/30 via-[#4F5FE8]/35 to-[#06B6D4]/20 rounded-full blur-3xl animate-[hero-lava-1_45s_ease-in-out_infinite]" />
+          <div className="absolute -top-1/4 -right-1/3 w-4/5 h-4/5 bg-gradient-to-br from-[#1E2D6B]/40 via-[#EC4899]/20 to-[#3347D4]/30 rounded-full blur-3xl animate-[hero-lava-2_55s_ease-in-out_infinite_-8s]" />
+          <div className="absolute top-1/4 -left-1/4 w-3/4 h-3/4 bg-gradient-to-br from-[#06B6D4]/25 via-[#4F5FE8]/35 to-[#1DB87A]/20 rounded-full blur-3xl animate-[hero-lava-3_60s_ease-in-out_infinite_-15s]" />
+          <div className="absolute -bottom-1/3 right-1/4 w-full h-3/4 bg-gradient-to-br from-[#8B5CF6]/30 via-[#1E2D6B]/45 to-[#4F5FE8]/30 rounded-full blur-3xl animate-[hero-lava-4_50s_ease-in-out_infinite_-22s]" />
+          <div className="absolute bottom-1/4 -left-1/3 w-4/5 h-4/5 bg-gradient-to-br from-[#4F5FE8]/30 via-[#EC4899]/15 to-[#7C3AED]/25 rounded-full blur-3xl animate-[hero-lava-5_58s_ease-in-out_infinite_-30s]" />
+          <div className="absolute top-1/3 right-[20%] w-1/2 h-1/2 bg-gradient-to-br from-[#1DB87A]/20 via-[#06B6D4]/30 to-[#3347D4]/35 rounded-full blur-2xl animate-[hero-lava-6_48s_ease-in-out_infinite_-12s]" />
+          <div className="absolute bottom-[20%] left-1/3 w-3/5 h-3/5 bg-gradient-to-br from-[#1E2D6B]/35 via-[#8B5CF6]/25 to-[#4F5FE8]/40 rounded-full blur-2xl animate-[hero-lava-7_52s_ease-in-out_infinite_-18s]" />
         </div>
 
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white/30" />

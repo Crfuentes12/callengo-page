@@ -29,7 +29,7 @@ const testimonials = [
   {
     id: 3,
     quote:
-      "Callengo verified 50,000 contacts in a week — something that would have taken our team months. The data quality is now at 95%+.",
+      "Callengo verified 50,000 contacts in a week, something that would have taken our team months. The data quality is now at 95%+.",
     author: "Michael Torres",
     role: "Director of Operations",
     company: "DataForce Global",

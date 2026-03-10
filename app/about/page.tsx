@@ -31,19 +31,19 @@ const qualityPillars = [
   {
     title: "Continuous Improvement",
     description:
-      "We measure, analyze, and iterate relentlessly. Every call generates data that makes the next one better. Kaizen is not a buzzword — it's how we ship.",
+      "We measure, analyze, and iterate relentlessly. Every call generates data that makes the next one better. Kaizen is not a buzzword; it's how we ship.",
     icon: TrendingUp,
   },
   {
     title: "Process Excellence",
     description:
-      "Reliable outcomes come from reliable processes. Our AI agents follow structured, tested workflows — not guesswork. Consistency at scale.",
+      "Reliable outcomes come from reliable processes. Our AI agents follow structured, tested workflows, not guesswork. Consistency at scale.",
     icon: Zap,
   },
   {
     title: "Evidence-Based Decisions",
     description:
-      "We don't assume — we verify. Call analytics, conversion rates, and quality scores drive every product decision and every campaign optimization.",
+      "We don't assume, we verify. Call analytics, conversion rates, and quality scores drive every product decision and every campaign optimization.",
     icon: BarChart3,
   },
 ];
@@ -59,7 +59,7 @@ const values = [
   {
     title: "Impact Over Features",
     description:
-      "We measure success by the hours you save and the revenue you recover — not by the features we ship.",
+      "We measure success by the hours you save and the revenue you recover, not by the features we ship.",
     icon: Target,
   },
   {
@@ -127,8 +127,8 @@ export default function AboutPage() {
                   style={{ fontFamily: "var(--font-body)" }}
                 >
                   Callengo is an AI-powered phone automation platform that handles
-                  the repetitive calls your team shouldn&apos;t be making — verifying data,
-                  confirming appointments, and qualifying leads — so your people can
+                  the repetitive calls your team shouldn&apos;t be making: verifying data,
+                  confirming appointments, and qualifying leads. Your people can
                   focus on what actually drives revenue.
                 </p>
               </motion.div>
@@ -157,8 +157,8 @@ export default function AboutPage() {
               >
                 Sales teams spend hours on repetitive outreach. Clinics lose revenue
                 to patients who forget appointments. Marketing wastes budgets on
-                outdated contact databases. These are solvable problems — with the
-                right automation.
+                outdated contact databases. These are solvable problems, and the
+                right automation makes all the difference.
               </p>
             </motion.div>
 
@@ -222,8 +222,8 @@ export default function AboutPage() {
                   >
                     To free businesses from repetitive phone calls that drain time
                     and revenue, replacing them with intelligent AI agents that
-                    verify data, confirm appointments, and qualify leads —
-                    automatically, accurately, and at scale.
+                    verify data, confirm appointments, and qualify leads.
+                    Automatically, accurately, and at scale.
                   </p>
                 </div>
               </motion.div>
@@ -246,7 +246,7 @@ export default function AboutPage() {
                     className="text-foreground-secondary text-base leading-relaxed"
                     style={{ fontFamily: "var(--font-body)" }}
                   >
-                    A world where every business — regardless of size — has access
+                    A world where every business, regardless of size, has access
                     to enterprise-grade phone automation. Where no revenue is lost
                     to a missed call, outdated record, or unqualified lead. Where
                     human teams focus exclusively on high-value work.
@@ -276,7 +276,7 @@ export default function AboutPage() {
                 className="text-lg text-foreground-secondary leading-relaxed"
                 style={{ fontFamily: "var(--font-body)" }}
               >
-                Callengo is built around the principles of Total Quality Management —
+                Callengo is built around the principles of Total Quality Management:
                 customer focus, continuous improvement, process excellence, and
                 evidence-based decision making. Inspired by the quality-first mindset
                 championed at Lanzadera, we believe that sustainable growth comes from
@@ -439,7 +439,7 @@ export default function AboutPage() {
                 >
                   Callengo isn&apos;t built by a single discipline. We&apos;re a
                   collaborative team of engineers, product designers, AI specialists,
-                  and business strategists — each bringing a different lens to the
+                  and business strategists, each bringing a different lens to the
                   same problem: how to make outbound calling intelligent, reliable,
                   and effortless.
                 </p>
@@ -450,7 +450,7 @@ export default function AboutPage() {
                   We work with a flat, agile structure where ideas move fast and
                   quality is everyone&apos;s responsibility. Whether it&apos;s voice AI
                   optimization, CRM integration architecture, or call script
-                  design — we bring the same rigor and attention to detail.
+                  design, we bring the same rigor and attention to detail.
                 </p>
 
                 <div className="grid grid-cols-2 gap-4">
@@ -496,7 +496,7 @@ export default function AboutPage() {
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 Every business with a contact list faces the same problem: there are
-                calls that need to happen — confirmations, verifications, follow-ups —
+                calls that need to happen (confirmations, verifications, follow-ups)
                 but nobody has the time or bandwidth to make them consistently. The
                 result? No-shows pile up, CRM data decays, and sales teams waste
                 hours on leads that were never going to convert.
@@ -506,7 +506,7 @@ export default function AboutPage() {
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 Callengo exists because we believe AI voice agents can solve this at
-                scale — not by replacing human connection, but by handling the
+                scale. Not by replacing human connection, but by handling the
                 repetitive calls that don&apos;t require it. Three purpose-built agents,
                 deep CRM integration, and a setup flow that takes minutes instead of
                 weeks.

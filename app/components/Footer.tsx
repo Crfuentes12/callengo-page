@@ -96,7 +96,7 @@ export default function Footer() {
                 <div className="flex-1 min-w-0">
                   <h4 className="text-sm font-semibold text-white" style={{ fontFamily: "var(--font-display)" }}>Stay in the loop</h4>
                   <p className="text-xs text-white/40 mt-0.5" style={{ fontFamily: "var(--font-body)" }}>
-                    Product updates, AI calling tips & growth strategies — no spam.
+                    Product updates, AI calling tips & growth strategies. No spam.
                   </p>
                 </div>
                 <div className="flex gap-2 w-full sm:w-auto shrink-0">

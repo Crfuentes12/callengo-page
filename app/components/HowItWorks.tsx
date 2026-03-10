@@ -567,9 +567,9 @@ function MockupLaunch({ active }: { active: boolean }) {
 
   const callLogs = [
     { name: "Sarah Chen", duration: "2:34", status: "connected", sentiment: "Positive", score: "Hot" },
-    { name: "James Wilson", duration: "0:45", status: "voicemail", sentiment: "—", score: "—" },
+    { name: "James Wilson", duration: "0:45", status: "voicemail", sentiment: "-", score: "-" },
     { name: "Maria Lopez", duration: "3:12", status: "connected", sentiment: "Neutral", score: "Warm" },
-    { name: "Alex Petrov", duration: "0:08", status: "no-answer", sentiment: "—", score: "—" },
+    { name: "Alex Petrov", duration: "0:08", status: "no-answer", sentiment: "-", score: "-" },
     { name: "Lisa Kim", duration: "1:58", status: "connected", sentiment: "Positive", score: "Hot" },
   ];
 
@@ -674,7 +674,7 @@ function MockupLaunch({ active }: { active: boolean }) {
             {statusIcon(log.status)}
             <span className="text-foreground font-medium flex-1 truncate">{log.name}</span>
             <span className="text-foreground-tertiary tabular-nums w-10">{log.duration}</span>
-            {log.score !== "—" && (
+            {log.score !== "-" && (
               <span className={`px-1.5 py-0.5 rounded text-[9px] font-semibold ${
                 log.score === "Hot" ? "bg-accent/10 text-accent" : "bg-yellow-500/10 text-yellow-500"
               }`}>{log.score}</span>
@@ -709,7 +709,7 @@ function MockupCallResults({ active }: { active: boolean }) {
   const transcript = [
     { speaker: "AI Agent", text: "Hi Sarah, this is Maya from Callengo. I'm calling about your interest in our Growth plan.", isAI: true },
     { speaker: "Sarah", text: "Oh yes! I was looking at that. We need about 400 calls per month.", isAI: false },
-    { speaker: "AI Agent", text: "Perfect. And what's your main use case — lead qualification, data validation, or appointment confirmation?", isAI: true },
+    { speaker: "AI Agent", text: "Perfect. And what's your main use case? Lead qualification, data validation, or appointment confirmation?", isAI: true },
     { speaker: "Sarah", text: "Lead qualification mostly. We have a sales team of 8 and too many inbound leads to call.", isAI: false },
   ];
 
@@ -727,7 +727,7 @@ function MockupCallResults({ active }: { active: boolean }) {
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <PhoneCall className="w-4.5 h-4.5 text-accent" />
-          <span className="text-foreground text-sm font-semibold">Call Detail — Sarah Chen</span>
+          <span className="text-foreground text-sm font-semibold">Call Detail: Sarah Chen</span>
         </div>
         <div className="flex items-center gap-1.5">
           <span className="text-[10px] px-2 py-0.5 rounded-full bg-accent/10 text-accent font-semibold">Connected</span>
@@ -1036,7 +1036,7 @@ const steps = [
     icon: Upload,
     title: "Import your contacts",
     description:
-      "Upload via CSV, Excel, Google Sheets, or JSON — or sync directly from HubSpot, Salesforce, Pipedrive, Zoho, Clio, or Dynamics 365. Auto field mapping, deduplication, and validation included.",
+      "Upload via CSV, Excel, Google Sheets, or JSON. You can also sync directly from HubSpot, Salesforce, Pipedrive, Zoho, Clio, or Dynamics 365. Auto field mapping, deduplication, and validation included.",
     highlights: ["CSV / Excel / JSON", "6 native CRM syncs", "Auto deduplication", "Smart field mapping"],
     Mockup: MockupContacts,
   },
@@ -1054,7 +1054,7 @@ const steps = [
     icon: Settings2,
     title: "Set up your campaign",
     description:
-      "Pick your contact list, define calling windows by timezone, connect Google Calendar, Zoom, Slack, and Outlook. Set retry logic, TCPA compliance, and working hours — all per-campaign.",
+      "Pick your contact list, define calling windows by timezone, connect Google Calendar, Zoom, Slack, and Outlook. Set retry logic, TCPA compliance, and working hours, all configurable per campaign.",
     highlights: ["Calendar integration", "Timezone handling", "Retry logic", "TCPA compliance"],
     Mockup: MockupCampaignSetup,
   },
@@ -1072,7 +1072,7 @@ const steps = [
     icon: BarChart3,
     title: "Review call results",
     description:
-      "Dive into each call: full AI-vs-human transcripts, extracted data fields, quality scores, and sentiment. Verified data syncs to your CRM automatically — no manual entry.",
+      "Dive into each call with full transcripts, extracted data fields, quality scores, and sentiment analysis. Verified data syncs to your CRM automatically, no manual entry needed.",
     highlights: ["Full transcripts", "Data extraction", "Quality scoring", "Auto CRM sync"],
     Mockup: MockupCallResults,
   },
@@ -1199,7 +1199,7 @@ export default function HowItWorks() {
                   </div>
                 </div>
 
-                {/* Mockup area — compact aspect ratio */}
+                {/* Mockup area */}
                 <div className="relative bg-white overflow-hidden" style={{ aspectRatio: "4 / 3" }}>
                   <AnimatePresence mode="wait">
                     <motion.div
@@ -1208,54 +1208,48 @@ export default function HowItWorks() {
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.98 }}
                       transition={{ duration: 0.5, ease: "easeInOut" }}
-                      className="absolute inset-0"
+                      className="absolute inset-0 overflow-hidden"
                     >
                       <ActiveMockup active={true} />
                     </motion.div>
                   </AnimatePresence>
-
-                  {/* Step label overlay */}
-                  <div className="absolute bottom-5 left-5 right-5">
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={activeStep}
-                        initial={{ opacity: 0, y: 12 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -8 }}
-                        transition={{ duration: 0.4, delay: 0.15 }}
-                        className="bg-white/90 backdrop-blur-md border border-gray-200 rounded-xl px-5 py-4 shadow-sm"
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-lg bg-electric/10 flex items-center justify-center shrink-0">
-                            <StepIcon className="w-5 h-5 text-electric" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="text-[11px] text-foreground-tertiary font-semibold uppercase tracking-wider">
-                              Step {step.number}
-                            </div>
-                            <div className="text-foreground font-semibold text-base leading-tight">
-                              {step.title}
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-2 shrink-0">
-                            {steps.map((_, i) => (
-                              <button
-                                key={i}
-                                onClick={() => handleStepClick(i)}
-                                className={`rounded-full transition-all duration-300 cursor-pointer ${
-                                  i === activeStep
-                                    ? "w-6 h-2 bg-electric"
-                                    : "w-2 h-2 bg-gray-300 hover:bg-gray-400"
-                                }`}
-                              />
-                            ))}
-                          </div>
-                        </div>
-                      </motion.div>
-                    </AnimatePresence>
-                  </div>
                 </div>
               </div>
+
+              {/* Step info card — below the mockup */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeStep}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.35, delay: 0.1 }}
+                  className="mt-5 rounded-xl border border-white/20 bg-white/[0.10] backdrop-blur-sm px-5 py-4"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-white/15 flex items-center justify-center shrink-0 mt-0.5">
+                      <StepIcon className="w-5 h-5 text-white/80" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-[10px] text-white/50 font-bold uppercase tracking-wider">Step {step.number}</span>
+                        <span className="text-white font-semibold text-sm">{step.title}</span>
+                      </div>
+                      <p className="text-[12px] text-white/65 leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>
+                        {step.description}
+                      </p>
+                    </div>
+                  </div>
+                  {!isPaused && (
+                    <div className="h-1 bg-white/10 rounded-full overflow-hidden mt-3">
+                      <motion.div
+                        className="h-full rounded-full"
+                        style={{ width: `${progress}%`, background: "rgba(255, 255, 255, 0.5)" }}
+                      />
+                    </div>
+                  )}
+                </motion.div>
+              </AnimatePresence>
 
               <div className="absolute -inset-8 bg-white/10 blur-3xl rounded-3xl -z-10" />
             </motion.div>
@@ -1311,40 +1305,6 @@ export default function HowItWorks() {
                     </button>
                   );
                 })}
-              </div>
-
-              {/* Active step details */}
-              <div className="mt-4 rounded-xl border border-white/20 bg-white/[0.10] backdrop-blur-sm px-5 py-4" style={{ minHeight: "160px" }}>
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeStep}
-                    initial={{ opacity: 0, y: 6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -6 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <p className="text-[13px] text-white/75 leading-relaxed mb-3" style={{ fontFamily: "var(--font-body)" }}>
-                      {step.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      {step.highlights.map((h) => (
-                        <span key={h} className="inline-flex items-center gap-1 text-[11px] px-2.5 py-1 rounded-full bg-white/15 text-white/80 border border-white/15">
-                          <CheckCircle2 className="w-3 h-3 text-white/60" />
-                          {h}
-                        </span>
-                      ))}
-                    </div>
-
-                    {!isPaused && (
-                      <div className="h-1 bg-white/10 rounded-full overflow-hidden">
-                        <motion.div
-                          className="h-full rounded-full"
-                          style={{ width: `${progress}%`, background: "rgba(255, 255, 255, 0.6)" }}
-                        />
-                      </div>
-                    )}
-                  </motion.div>
-                </AnimatePresence>
               </div>
 
               <div className="pt-5 space-y-2">

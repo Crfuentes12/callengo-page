@@ -184,34 +184,40 @@ export default function Header() {
                             })}
                           </div>
 
-                          {/* Right: Integrations */}
+                          {/* Right: Integrations featured card */}
                           <div className="p-3 bg-background-secondary/30">
-                            <div className="px-3 py-2 text-[10px] font-semibold text-foreground-tertiary uppercase tracking-wider">
-                              Top Integrations
-                            </div>
-                            <div className="grid grid-cols-3 gap-2 px-2 py-2">
-                              {headerIntegrations.map((intg) => (
-                                <Link
-                                  key={intg.name}
-                                  href={intg.href}
-                                  className="group flex flex-col items-center gap-1.5 p-2.5 rounded-lg hover:bg-white transition-colors"
-                                  title={intg.name}
-                                >
-                                  <div className="w-10 h-10 rounded-lg bg-white border border-border/50 flex items-center justify-center group-hover:shadow-sm transition-shadow overflow-hidden">
-                                    <Image src={intg.logo} alt={intg.name} width={30} height={30} className="object-contain" />
-                                  </div>
-                                  <span className="text-[10px] text-foreground-tertiary text-center leading-tight group-hover:text-foreground transition-colors">
-                                    {intg.name}
-                                  </span>
-                                </Link>
-                              ))}
-                            </div>
                             <Link
                               href="/integrations"
-                              className="flex items-center justify-center gap-1.5 mx-2 mt-2 px-3 py-2 rounded-lg text-xs font-medium text-electric hover:bg-white transition-colors"
+                              className="group block h-full rounded-xl bg-electric/[0.06] border border-electric/15 p-5 relative overflow-hidden hover:bg-electric/[0.1] transition-colors"
                             >
-                              View all 16+ integrations
-                              <ArrowRight className="w-3.5 h-3.5" />
+                              {/* Background grid icon */}
+                              <svg className="absolute bottom-2 right-2 w-20 h-20 text-electric/[0.06]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1}>
+                                <rect x="3" y="3" width="7" height="7" rx="1.5" />
+                                <rect x="14" y="3" width="7" height="7" rx="1.5" />
+                                <rect x="3" y="14" width="7" height="7" rx="1.5" />
+                                <rect x="14" y="14" width="7" height="7" rx="1.5" />
+                              </svg>
+                              <div className="relative z-10">
+                                <div className="grid grid-cols-3 gap-2 mb-4">
+                                  {headerIntegrations.map((intg) => (
+                                    <div
+                                      key={intg.name}
+                                      className="w-10 h-10 rounded-lg bg-white border border-border/50 flex items-center justify-center overflow-hidden shadow-sm"
+                                      title={intg.name}
+                                    >
+                                      <Image src={intg.logo} alt={intg.name} width={26} height={26} className="object-contain" />
+                                    </div>
+                                  ))}
+                                </div>
+                                <div className="font-semibold text-electric text-base mb-1">Integrations</div>
+                                <p className="text-xs text-foreground-secondary leading-relaxed mb-3">
+                                  Connect with your favorite CRM, calendar & communication tools.
+                                </p>
+                                <span className="inline-flex items-center gap-1.5 text-xs font-medium text-electric group-hover:gap-2.5 transition-all">
+                                  View all 16+ integrations
+                                  <ArrowRight className="w-3.5 h-3.5" />
+                                </span>
+                              </div>
                             </Link>
                           </div>
                         </div>

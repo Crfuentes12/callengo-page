@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard,
@@ -11,18 +11,29 @@ import {
   BarChart3,
   ChevronRight,
   CheckCircle2,
-  FileSpreadsheet,
   Check,
   Phone,
   Download,
   Globe,
   ShieldCheck,
-  RotateCcw,
   Clock,
   Play,
   Users,
   TrendingUp,
   Mic,
+  Calendar,
+  Search,
+  Filter,
+  MoreHorizontal,
+  PhoneCall,
+  PhoneOff,
+  Voicemail,
+  Star,
+  MessageSquare,
+  ArrowUpRight,
+  Video,
+  Slack,
+  Mail,
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
@@ -31,390 +42,417 @@ import {
 
 const uiFont: React.CSSProperties = { fontFamily: "var(--font-body)" };
 
+/* Small reusable toggle */
+function Toggle({ on }: { on: boolean }) {
+  return (
+    <motion.div
+      animate={{ backgroundColor: on ? "rgba(79,95,232,1)" : "rgba(0,0,0,0.1)" }}
+      transition={{ duration: 0.3 }}
+      className="w-8 h-[18px] rounded-full p-0.5 shrink-0"
+    >
+      <motion.div
+        animate={{ x: on ? 14 : 0 }}
+        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+        className="w-3.5 h-3.5 rounded-full bg-white"
+      />
+    </motion.div>
+  );
+}
+
 /* ------------------------------------------------------------------ */
-/*  Step 1 – Import Contacts                                           */
+/*  Step 1 – Contacts Manager (matches ContactsManager.tsx)            */
 /* ------------------------------------------------------------------ */
 
-function MockupImportContacts({ active }: { active: boolean }) {
-  const [phase, setPhase] = useState<"idle" | "dropping" | "progress" | "table">("idle");
-  const [progressVal, setProgressVal] = useState(0);
-  const [visibleRows, setVisibleRows] = useState(0);
+function MockupContacts({ active }: { active: boolean }) {
+  const [phase, setPhase] = useState(0);
 
   useEffect(() => {
-    if (!active) {
-      setPhase("idle");
-      setProgressVal(0);
-      setVisibleRows(0);
-      return;
-    }
-
-    setPhase("dropping");
-    const t1 = setTimeout(() => setPhase("progress"), 1400);
-    const t2 = setTimeout(() => setPhase("table"), 4200);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
+    if (!active) { setPhase(0); return; }
+    const timers = [
+      setTimeout(() => setPhase(1), 600),
+      setTimeout(() => setPhase(2), 2000),
+      setTimeout(() => setPhase(3), 3500),
+      setTimeout(() => setPhase(4), 5500),
+    ];
+    return () => timers.forEach(clearTimeout);
   }, [active]);
 
-  useEffect(() => {
-    if (phase !== "progress") return;
-    setProgressVal(0);
-    const iv = setInterval(() => setProgressVal((p) => Math.min(p + 2, 100)), 50);
-    return () => clearInterval(iv);
-  }, [phase]);
+  const contacts = [
+    { name: "Sarah Chen", email: "sarah@acme.co", phone: "+1 415-555-0142", list: "Q1 Leads", status: "verified" },
+    { name: "James Wilson", email: "jwilson@corp.io", phone: "+1 212-555-0198", list: "Q1 Leads", status: "verified" },
+    { name: "Maria Lopez", email: "maria@startup.dev", phone: "+44 20-7946-0958", list: "EU Prospects", status: "pending" },
+    { name: "Alex Petrov", email: "alex@global.com", phone: "+49 30-1234-5678", list: "EU Prospects", status: "outdated" },
+    { name: "Lisa Kim", email: "lisa@techco.io", phone: "+1 650-555-0321", list: "Q1 Leads", status: "verified" },
+  ];
 
-  useEffect(() => {
-    if (phase !== "table") return;
-    setVisibleRows(0);
-    let row = 0;
-    const iv = setInterval(() => {
-      row++;
-      setVisibleRows(row);
-      if (row >= 4) clearInterval(iv);
-    }, 600);
-    return () => clearInterval(iv);
-  }, [phase]);
-
-  const rows = [
-    { name: "Sarah Chen", email: "sarah@acme.co", phone: "+1 415-555-0142", status: "Mapped" },
-    { name: "James Wilson", email: "jwilson@corp.io", phone: "+1 212-555-0198", status: "Mapped" },
-    { name: "Maria Lopez", email: "maria@startup.dev", phone: "+44 20-7946-0958", status: "Mapped" },
-    { name: "Alex Petrov", email: "alex@global.com", phone: "+49 30-1234-5678", status: "Review" },
+  const statCards = [
+    { label: "Total Contacts", value: "2,847", icon: Users, color: "text-electric", bg: "bg-electric/10" },
+    { label: "Verified", value: "1,923", icon: CheckCircle2, color: "text-accent", bg: "bg-accent/10" },
+    { label: "Pending", value: "612", icon: Clock, color: "text-yellow-500", bg: "bg-yellow-500/10" },
+    { label: "Outdated", value: "312", icon: PhoneOff, color: "text-red-400", bg: "bg-red-400/10" },
   ];
 
   return (
     <div className="p-4 md:p-5 h-full flex flex-col" style={uiFont}>
       {/* Header */}
-      <div className="flex items-center gap-3 mb-2">
-        <Upload className="w-5 h-5 text-electric" />
-        <span className="text-foreground text-sm font-semibold">Import Contacts</span>
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <Users className="w-4.5 h-4.5 text-electric" />
+          <span className="text-foreground text-sm font-semibold">Contacts</span>
+          <span className="text-[10px] bg-electric/10 text-electric px-2 py-0.5 rounded-full font-medium">2,847</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-7 h-7 rounded-lg bg-electric/10 flex items-center justify-center">
+            <Upload className="w-3.5 h-3.5 text-electric" />
+          </div>
+          <div className="w-7 h-7 rounded-lg bg-gray-100 flex items-center justify-center">
+            <Filter className="w-3.5 h-3.5 text-foreground-tertiary" />
+          </div>
+        </div>
       </div>
-      <p className="text-foreground-tertiary text-xs mb-5">Upload a CSV or Excel file with your contact list</p>
 
-      {/* Drop zone */}
-      <AnimatePresence mode="wait">
-        {(phase === "idle" || phase === "dropping") && (
-          <motion.div
-            key="dropzone"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex-1 flex items-center justify-center"
-          >
+      {/* Stat cards */}
+      <div className="grid grid-cols-4 gap-2 mb-3">
+        {statCards.map((s, i) => {
+          const Icon = s.icon;
+          return (
             <motion.div
-              className="border-2 border-dashed border-gray-200 rounded-xl w-full py-14 flex flex-col items-center gap-4"
-              animate={phase === "dropping" ? { borderColor: "rgba(79,95,232,0.6)", scale: 1.02 } : {}}
-              transition={{ duration: 0.5 }}
+              key={s.label}
+              initial={{ opacity: 0, y: 8 }}
+              animate={phase >= 1 ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: i * 0.1, duration: 0.35 }}
+              className="rounded-lg border border-gray-100 p-2 text-center"
             >
-              <motion.div
-                animate={phase === "dropping" ? { y: [-50, 0], opacity: [0, 1] } : { y: 0, opacity: 0.5 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-              >
-                <FileSpreadsheet className="w-12 h-12 text-electric" />
-              </motion.div>
-              <p className="text-foreground-secondary text-sm font-medium">
-                {phase === "dropping" ? "contacts_list.csv" : "Drop CSV or Excel file here"}
-              </p>
-              {phase === "dropping" && (
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="text-electric text-xs"
-                >
-                  File detected — processing...
-                </motion.p>
-              )}
+              <div className={`w-6 h-6 rounded-md ${s.bg} flex items-center justify-center mx-auto mb-1`}>
+                <Icon className={`w-3 h-3 ${s.color}`} />
+              </div>
+              <div className="text-sm font-bold text-foreground tabular-nums">{s.value}</div>
+              <div className="text-[9px] text-foreground-tertiary">{s.label}</div>
             </motion.div>
-          </motion.div>
-        )}
+          );
+        })}
+      </div>
 
-        {phase === "progress" && (
+      {/* Search bar */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={phase >= 2 ? { opacity: 1 } : {}}
+        transition={{ duration: 0.3 }}
+        className="flex items-center gap-2 mb-3"
+      >
+        <div className="flex-1 flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2">
+          <Search className="w-3.5 h-3.5 text-foreground-tertiary" />
+          <span className="text-xs text-foreground-tertiary">Search contacts...</span>
+        </div>
+        <div className="flex gap-1.5">
+          {["Q1 Leads", "EU Prospects"].map((list) => (
+            <span key={list} className="text-[10px] px-2 py-1 rounded-full bg-electric/10 text-electric font-medium whitespace-nowrap">
+              {list}
+            </span>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Table header */}
+      <div className="grid grid-cols-12 text-[10px] text-foreground-tertiary uppercase tracking-wider px-3 pb-2 border-b border-gray-200 bg-gray-50 rounded-t-lg py-1.5 font-medium">
+        <span className="col-span-3">Name</span>
+        <span className="col-span-3">Email</span>
+        <span className="col-span-2">Phone</span>
+        <span className="col-span-2">List</span>
+        <span className="col-span-2 text-right">Status</span>
+      </div>
+
+      {/* Rows */}
+      <div className="flex-1 overflow-hidden">
+        {contacts.map((c, i) => (
           <motion.div
-            key="progress"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex-1 flex flex-col items-center justify-center gap-4"
+            key={c.name}
+            initial={{ opacity: 0, x: -12 }}
+            animate={phase >= 3 ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: i * 0.15, duration: 0.35 }}
+            className="grid grid-cols-12 text-[11px] text-foreground-secondary px-3 py-2.5 border-b border-gray-50 items-center hover:bg-gray-50/50"
           >
-            <FileSpreadsheet className="w-10 h-10 text-electric" />
-            <p className="text-foreground-secondary text-sm font-medium">Processing contacts_list.csv</p>
-            <div className="w-64 h-2 bg-gray-100 rounded-full overflow-hidden">
-              <motion.div
-                className="h-full bg-electric rounded-full"
-                style={{ width: `${progressVal}%` }}
-              />
+            <div className="col-span-3 flex items-center gap-2">
+              <div className="w-6 h-6 rounded-full bg-electric/10 flex items-center justify-center text-[9px] font-bold text-electric shrink-0">
+                {c.name.split(" ").map(n => n[0]).join("")}
+              </div>
+              <span className="text-foreground font-medium truncate">{c.name}</span>
             </div>
-            <p className="text-foreground-tertiary text-xs">{Math.round(progressVal)}% — Validating fields and mapping columns</p>
+            <span className="col-span-3 truncate">{c.email}</span>
+            <span className="col-span-2 text-foreground-tertiary">{c.phone}</span>
+            <span className="col-span-2">
+              <span className="text-[9px] px-1.5 py-0.5 rounded bg-gray-100 text-foreground-tertiary">{c.list}</span>
+            </span>
+            <span className="col-span-2 text-right">
+              <span className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-[9px] font-semibold ${
+                c.status === "verified" ? "bg-accent/10 text-accent" :
+                c.status === "pending" ? "bg-yellow-500/10 text-yellow-500" :
+                "bg-red-400/10 text-red-400"
+              }`}>
+                {c.status === "verified" && <Check className="w-2.5 h-2.5" />}
+                {c.status.charAt(0).toUpperCase() + c.status.slice(1)}
+              </span>
+            </span>
           </motion.div>
-        )}
+        ))}
+      </div>
 
-        {phase === "table" && (
-          <motion.div
-            key="table"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex-1 flex flex-col"
-          >
-            {/* field mapping */}
-            <p className="text-foreground-tertiary text-[10px] uppercase tracking-wider mb-2">Auto-mapped fields</p>
-            <div className="flex gap-2 mb-4 flex-wrap">
-              {["Name → Full Name", "Email → Email", "Phone → Mobile"].map((m, i) => (
-                <motion.span
-                  key={m}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: i * 0.25, duration: 0.4 }}
-                  className="text-[11px] bg-electric/15 text-electric px-3 py-1 rounded-full flex items-center gap-1.5"
-                >
-                  <Check className="w-3 h-3" /> {m}
-                </motion.span>
-              ))}
-            </div>
-
-            {/* table header */}
-            <div className="grid grid-cols-4 text-[11px] text-foreground-tertiary uppercase tracking-wider px-3 pb-2 border-b border-gray-200 bg-gray-50 rounded-t-lg py-2">
-              <span>Name</span><span>Email</span><span>Phone</span><span>Status</span>
-            </div>
-
-            {/* rows */}
-            <div className="flex-1 overflow-hidden">
-              {rows.map((r, i) => (
-                <motion.div
-                  key={r.name}
-                  initial={{ opacity: 0, x: -16 }}
-                  animate={i < visibleRows ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
-                  transition={{ duration: 0.45 }}
-                  className="grid grid-cols-4 text-xs text-foreground-secondary px-3 py-3 border-b border-gray-100"
-                >
-                  <span className="text-foreground font-medium">{r.name}</span>
-                  <span className="truncate">{r.email}</span>
-                  <span>{r.phone}</span>
-                  <span>
-                    <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold ${
-                      r.status === "Mapped" ? "bg-accent/15 text-accent" : "bg-yellow-500/15 text-yellow-400"
-                    }`}>
-                      {r.status === "Mapped" && <Check className="w-2.5 h-2.5" />}
-                      {r.status}
-                    </span>
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* summary */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 2.5, duration: 0.5 }}
-              className="mt-auto pt-3 flex items-center justify-between text-xs"
-            >
-              <span className="text-foreground-tertiary">4 contacts imported successfully</span>
-              <span className="text-accent flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4" /> Ready to use</span>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* CRM integrations row */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={phase >= 4 ? { opacity: 1 } : {}}
+        transition={{ duration: 0.4 }}
+        className="mt-auto pt-2 flex items-center justify-between"
+      >
+        <div className="flex items-center gap-1.5">
+          <span className="text-[9px] text-foreground-tertiary">Connected:</span>
+          {["HubSpot", "Salesforce", "Google Sheets"].map((crm) => (
+            <span key={crm} className="text-[9px] px-1.5 py-0.5 rounded bg-accent/10 text-accent font-medium flex items-center gap-0.5">
+              <Check className="w-2 h-2" />{crm}
+            </span>
+          ))}
+        </div>
+        <span className="text-[9px] text-electric font-medium">+ Import CSV</span>
+      </motion.div>
     </div>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/*  Step 2 – Configure AI Agent                                        */
+/*  Step 2 – Agent Selection & Config (matches AgentConfigModal.tsx)    */
 /* ------------------------------------------------------------------ */
 
 function MockupAgentConfig({ active }: { active: boolean }) {
-  const [showVoice, setShowVoice] = useState(false);
-  const [selectedVoice, setSelectedVoice] = useState<string | null>(null);
-  const [scriptLines, setScriptLines] = useState(0);
-  const [toggles, setToggles] = useState([false, false, false]);
+  const [phase, setPhase] = useState(0);
+  const [selectedAgent, setSelectedAgent] = useState<number | null>(null);
+  const [selectedVoice, setSelectedVoice] = useState<number | null>(null);
 
   useEffect(() => {
-    if (!active) {
-      setShowVoice(false);
-      setSelectedVoice(null);
-      setScriptLines(0);
-      setToggles([false, false, false]);
-      return;
-    }
-
-    const t1 = setTimeout(() => setShowVoice(true), 800);
-    const t2 = setTimeout(() => { setSelectedVoice("Elena – Professional"); setShowVoice(false); }, 2800);
-    const t3 = setTimeout(() => setScriptLines(1), 3600);
-    const t4 = setTimeout(() => setScriptLines(2), 4400);
-    const t5 = setTimeout(() => setScriptLines(3), 5200);
-    const t6 = setTimeout(() => setToggles([true, false, false]), 6000);
-    const t7 = setTimeout(() => setToggles([true, true, false]), 6800);
-    const t8 = setTimeout(() => setToggles([true, true, true]), 7600);
-    return () => { [t1,t2,t3,t4,t5,t6,t7,t8].forEach(clearTimeout); };
+    if (!active) { setPhase(0); setSelectedAgent(null); setSelectedVoice(null); return; }
+    const timers = [
+      setTimeout(() => setPhase(1), 500),
+      setTimeout(() => setSelectedAgent(0), 1800),
+      setTimeout(() => setPhase(2), 2800),
+      setTimeout(() => setSelectedVoice(1), 4000),
+      setTimeout(() => setPhase(3), 5200),
+      setTimeout(() => setPhase(4), 7000),
+    ];
+    return () => timers.forEach(clearTimeout);
   }, [active]);
 
-  const voices = ["Elena – Professional", "Marcus – Friendly", "Aiko – Multilingual"];
-  const script = [
-    "Hello {{name}}, this is calling from Callengo.",
-    "I'd like to discuss how we can help with {{topic}}.",
-    "Would you have a few minutes to chat?",
+  const agents = [
+    { name: "Lead Qualification", desc: "BANT framework scoring", icon: Star, gradient: "from-electric to-[#3347D4]" },
+    { name: "Data Validation", desc: "Verify contact records", icon: ShieldCheck, gradient: "from-accent to-[#128055]" },
+    { name: "Appointment Confirm", desc: "Reduce no-shows", icon: Calendar, gradient: "from-[#F59E0B] to-[#D97706]" },
   ];
-  const toggleLabels = ["Multi-language (EN/ES/FR)", "Voicemail detection", "Fallback to human agent"];
+
+  const voices = [
+    { name: "Maya", gender: "Female", style: "Professional" },
+    { name: "Josh", gender: "Male", style: "Friendly" },
+    { name: "Natalie", gender: "Female", style: "Warm" },
+  ];
+
+  const settings = [
+    { label: "AI Disclosure", on: true },
+    { label: "Voicemail Detection", on: phase >= 3 },
+    { label: "Smart Follow-ups", on: phase >= 4 },
+  ];
 
   return (
     <div className="p-4 md:p-5 h-full flex flex-col gap-3" style={uiFont}>
-      <div className="flex items-center gap-3">
-        <Bot className="w-5 h-5 text-electric" />
-        <span className="text-foreground text-sm font-semibold">Agent Configuration</span>
+      {/* Header - wizard step indicator */}
+      <div className="flex items-center gap-2 mb-1">
+        <Bot className="w-4.5 h-4.5 text-electric" />
+        <span className="text-foreground text-sm font-semibold">Configure Agent</span>
+        <div className="ml-auto flex items-center gap-1">
+          {["Agent", "Voice", "Settings"].map((s, i) => (
+            <div key={s} className="flex items-center gap-1">
+              <div className={`w-5 h-5 rounded-full text-[9px] font-bold flex items-center justify-center ${
+                phase >= i + 1 ? "bg-electric text-white" : "bg-gray-100 text-foreground-tertiary"
+              }`}>{i + 1}</div>
+              {i < 2 && <div className={`w-4 h-px ${phase > i + 1 ? "bg-electric" : "bg-gray-200"}`} />}
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Voice selector */}
+      {/* Agent selection cards */}
       <div>
-        <label className="text-[11px] text-foreground-tertiary uppercase tracking-wider mb-2 block">Choose a Voice</label>
-        <div className="relative">
-          <div className="bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm text-foreground-secondary flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Mic className="w-4 h-4 text-electric" />
-              {selectedVoice || "Select a voice..."}
-            </div>
-            <ChevronRight className={`w-4 h-4 text-foreground-tertiary transition-transform duration-300 ${showVoice ? "rotate-90" : ""}`} />
-          </div>
-          <AnimatePresence>
-            {showVoice && (
+        <label className="text-[10px] text-foreground-tertiary uppercase tracking-wider mb-2 block">Select Agent Type</label>
+        <div className="grid grid-cols-3 gap-2">
+          {agents.map((a, i) => {
+            const Icon = a.icon;
+            const isSelected = selectedAgent === i;
+            return (
               <motion.div
-                initial={{ opacity: 0, y: -4, height: 0 }}
-                animate={{ opacity: 1, y: 0, height: "auto" }}
-                exit={{ opacity: 0, y: -4, height: 0 }}
-                transition={{ duration: 0.4 }}
-                className="absolute z-10 top-full mt-1 w-full bg-white border border-gray-200 rounded-lg overflow-hidden shadow-lg"
+                key={a.name}
+                initial={{ opacity: 0, y: 8 }}
+                animate={phase >= 1 ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: i * 0.15, duration: 0.35 }}
+                className={`rounded-xl p-3 border-2 transition-all cursor-pointer ${
+                  isSelected ? "border-electric bg-electric/5 shadow-sm" : "border-gray-100 bg-white hover:border-gray-200"
+                }`}
               >
-                {voices.map((v, i) => (
+                <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${a.gradient} flex items-center justify-center mb-2`}>
+                  <Icon className="w-4 h-4 text-white" />
+                </div>
+                <div className="text-[11px] font-semibold text-foreground leading-tight">{a.name}</div>
+                <div className="text-[9px] text-foreground-tertiary mt-0.5">{a.desc}</div>
+                {isSelected && (
                   <motion.div
-                    key={v}
-                    initial={{ opacity: 0, x: -12 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.2, duration: 0.35 }}
-                    className={`px-4 py-3 text-sm text-foreground-secondary hover:bg-gray-50 cursor-pointer flex items-center gap-3 ${
-                      v === "Elena – Professional" ? "bg-electric/10 text-electric" : ""
-                    }`}
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="w-4 h-4 rounded-full bg-electric flex items-center justify-center mt-1.5"
                   >
-                    <Mic className="w-4 h-4" />
-                    {v}
+                    <Check className="w-2.5 h-2.5 text-white" />
                   </motion.div>
-                ))}
+                )}
               </motion.div>
-            )}
-          </AnimatePresence>
+            );
+          })}
         </div>
       </div>
 
-      {/* Script editor */}
-      <div className="flex-1">
-        <label className="text-[11px] text-foreground-tertiary uppercase tracking-wider mb-2 block">Call Script</label>
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 min-h-[100px]">
-          {script.map((line, i) => (
-            <motion.p
-              key={i}
-              initial={{ opacity: 0 }}
-              animate={i < scriptLines ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-sm text-foreground-secondary mb-2 leading-relaxed"
+      {/* Voice selection */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={phase >= 2 ? { opacity: 1 } : {}}
+        transition={{ duration: 0.4 }}
+      >
+        <label className="text-[10px] text-foreground-tertiary uppercase tracking-wider mb-2 block">Choose Voice</label>
+        <div className="flex gap-2">
+          {voices.map((v, i) => (
+            <motion.div
+              key={v.name}
+              initial={{ opacity: 0, x: -8 }}
+              animate={phase >= 2 ? { opacity: 1, x: 0 } : {}}
+              transition={{ delay: i * 0.15, duration: 0.3 }}
+              className={`flex-1 rounded-lg p-2.5 border transition-all cursor-pointer ${
+                selectedVoice === i ? "border-electric bg-electric/5" : "border-gray-100"
+              }`}
             >
-              {line.split(/(\{\{.*?\}\})/).map((part, j) =>
-                part.startsWith("{{") ? (
-                  <span key={j} className="text-electric bg-electric/10 px-1.5 rounded font-medium">{part}</span>
-                ) : (
-                  <span key={j}>{part}</span>
-                )
-              )}
-            </motion.p>
+              <div className="flex items-center gap-2">
+                <div className={`w-7 h-7 rounded-full flex items-center justify-center ${
+                  selectedVoice === i ? "bg-electric" : "bg-gray-100"
+                }`}>
+                  <Mic className={`w-3 h-3 ${selectedVoice === i ? "text-white" : "text-foreground-tertiary"}`} />
+                </div>
+                <div>
+                  <div className="text-[11px] font-semibold text-foreground">{v.name}</div>
+                  <div className="text-[9px] text-foreground-tertiary">{v.gender} · {v.style}</div>
+                </div>
+              </div>
+            </motion.div>
           ))}
-          {scriptLines === 0 && (
-            <p className="text-foreground-tertiary text-sm italic">Script lines will appear here...</p>
-          )}
         </div>
-      </div>
+      </motion.div>
 
-      {/* Toggles */}
-      <div>
-        <label className="text-[11px] text-foreground-tertiary uppercase tracking-wider mb-3 block">Features</label>
-        <div className="space-y-3">
-          {toggleLabels.map((label, i) => (
-            <div key={label} className="flex items-center justify-between">
-              <span className="text-xs text-foreground-secondary">{label}</span>
-              <motion.div
-                animate={{
-                  backgroundColor: toggles[i] ? "rgba(79,95,232,1)" : "rgba(0,0,0,0.1)",
-                }}
-                transition={{ duration: 0.3 }}
-                className="w-9 h-5 rounded-full p-0.5 cursor-pointer"
-              >
-                <motion.div
-                  animate={{ x: toggles[i] ? 16 : 0 }}
-                  transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                  className="w-4 h-4 rounded-full bg-white"
-                />
-              </motion.div>
+      {/* Call settings */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={phase >= 3 ? { opacity: 1 } : {}}
+        transition={{ duration: 0.4 }}
+      >
+        <label className="text-[10px] text-foreground-tertiary uppercase tracking-wider mb-2 block">Call Settings</label>
+        <div className="space-y-2 bg-gray-50 rounded-lg p-3 border border-gray-100">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] text-foreground-secondary">Max call duration</span>
+            <span className="text-[11px] font-semibold text-foreground">3 min</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] text-foreground-secondary">Calls per day</span>
+            <span className="text-[11px] font-semibold text-foreground">200</span>
+          </div>
+          {settings.map((s) => (
+            <div key={s.label} className="flex items-center justify-between">
+              <span className="text-[11px] text-foreground-secondary">{s.label}</span>
+              <Toggle on={s.on} />
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
+
+      {/* Test agent button */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={phase >= 4 ? { opacity: 1 } : {}}
+        transition={{ duration: 0.4 }}
+        className="mt-auto"
+      >
+        <motion.div
+          animate={{ scale: [1, 1.02, 1] }}
+          transition={{ repeat: Infinity, duration: 2.5 }}
+          className="flex items-center justify-center gap-2 bg-electric text-white text-xs font-semibold py-2.5 rounded-lg"
+          style={{ boxShadow: "0 4px 16px rgba(79,95,232,0.3)" }}
+        >
+          <Phone className="w-3.5 h-3.5" /> Test Agent with Live Call
+        </motion.div>
+      </motion.div>
     </div>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/*  Step 3 – Campaign Setup                                            */
+/*  Step 3 – Calendar & Campaign Setup (matches CalendarConfigStep)    */
 /* ------------------------------------------------------------------ */
 
 function MockupCampaignSetup({ active }: { active: boolean }) {
+  const [phase, setPhase] = useState(0);
   const [selectedSlots, setSelectedSlots] = useState<number[]>([]);
-  const [retryCount, setRetryCount] = useState(0);
-  const [complianceToggles, setComplianceToggles] = useState([false, false]);
-  const [tzOpen, setTzOpen] = useState(false);
 
   useEffect(() => {
-    if (!active) {
-      setSelectedSlots([]);
-      setRetryCount(0);
-      setComplianceToggles([false, false]);
-      setTzOpen(false);
-      return;
-    }
-
-    const slots = [2, 3, 4, 7, 8, 9, 12, 13, 14];
+    if (!active) { setPhase(0); setSelectedSlots([]); return; }
+    const slots = [0, 1, 2, 5, 6, 7, 10, 11, 12, 15, 16];
     const timers: ReturnType<typeof setTimeout>[] = [];
+    timers.push(setTimeout(() => setPhase(1), 500));
     slots.forEach((s, i) => {
-      timers.push(setTimeout(() => setSelectedSlots((prev) => [...prev, s]), 600 + i * 250));
+      timers.push(setTimeout(() => setSelectedSlots((prev) => [...prev, s]), 800 + i * 200));
     });
-    timers.push(setTimeout(() => setTzOpen(true), 3200));
-    timers.push(setTimeout(() => setTzOpen(false), 4800));
-    timers.push(setTimeout(() => setRetryCount(1), 5200));
-    timers.push(setTimeout(() => setRetryCount(2), 5800));
-    timers.push(setTimeout(() => setRetryCount(3), 6400));
-    timers.push(setTimeout(() => setComplianceToggles([true, false]), 7000));
-    timers.push(setTimeout(() => setComplianceToggles([true, true]), 7600));
+    timers.push(setTimeout(() => setPhase(2), 3500));
+    timers.push(setTimeout(() => setPhase(3), 5500));
+    timers.push(setTimeout(() => setPhase(4), 7000));
     return () => timers.forEach(clearTimeout);
   }, [active]);
 
   const days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
-  const hours = ["9am", "12pm", "3pm"];
+  const hours = ["9 AM", "11 AM", "2 PM", "4 PM"];
 
   return (
     <div className="p-4 md:p-5 h-full flex flex-col gap-3" style={uiFont}>
-      <div className="flex items-center gap-3">
-        <Settings2 className="w-5 h-5 text-electric" />
-        <span className="text-foreground text-sm font-semibold">Campaign Settings</span>
+      <div className="flex items-center justify-between mb-1">
+        <div className="flex items-center gap-2">
+          <Calendar className="w-4.5 h-4.5 text-electric" />
+          <span className="text-foreground text-sm font-semibold">Campaign Setup</span>
+        </div>
+        <span className="text-[10px] text-foreground-tertiary bg-gray-100 px-2 py-0.5 rounded">Step 3 of 4</span>
       </div>
+
+      {/* Contact list selection */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={phase >= 1 ? { opacity: 1 } : {}}
+        transition={{ duration: 0.3 }}
+      >
+        <label className="text-[10px] text-foreground-tertiary uppercase tracking-wider mb-2 block">Contact List</label>
+        <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5">
+          <Users className="w-3.5 h-3.5 text-electric" />
+          <span className="text-xs text-foreground font-medium">Q1 Leads</span>
+          <span className="text-[10px] text-foreground-tertiary ml-1">· 247 contacts</span>
+          <ChevronRight className="w-3 h-3 text-foreground-tertiary ml-auto" />
+        </div>
+      </motion.div>
 
       {/* Schedule grid */}
       <div>
-        <label className="text-[11px] text-foreground-tertiary uppercase tracking-wider mb-3 block">Calling Schedule</label>
-        <p className="text-foreground-tertiary text-xs mb-3">Select time slots when calls should be made</p>
-        <div className="grid grid-cols-6 gap-1.5 text-xs">
+        <label className="text-[10px] text-foreground-tertiary uppercase tracking-wider mb-2 block">Calling Schedule</label>
+        <div className="grid grid-cols-6 gap-1 text-[10px]">
           <div />
           {days.map((d) => (
-            <div key={d} className="text-center text-foreground-tertiary py-1 font-medium">{d}</div>
+            <div key={d} className="text-center text-foreground-tertiary py-0.5 font-medium">{d}</div>
           ))}
           {hours.map((h, hi) => (
             <div key={`row-${hi}`} className="contents">
-              <div className="text-foreground-tertiary py-2 text-right pr-2">{h}</div>
+              <div className="text-foreground-tertiary py-1.5 text-right pr-1 text-[9px]">{h}</div>
               {days.map((_, di) => {
                 const idx = hi * 5 + di;
                 const isSelected = selectedSlots.includes(idx);
@@ -422,18 +460,17 @@ function MockupCampaignSetup({ active }: { active: boolean }) {
                   <motion.div
                     key={idx}
                     animate={{
-                      backgroundColor: isSelected ? "rgba(79,95,232,0.15)" : "rgba(0,0,0,0.02)",
-                      borderColor: isSelected ? "rgba(79,95,232,0.4)" : "rgba(0,0,0,0.08)",
+                      backgroundColor: isSelected ? "rgba(79,95,232,0.12)" : "rgba(0,0,0,0.02)",
+                      borderColor: isSelected ? "rgba(79,95,232,0.35)" : "rgba(0,0,0,0.06)",
                     }}
-                    transition={{ duration: 0.35 }}
-                    className="h-9 rounded-lg border flex items-center justify-center"
+                    transition={{ duration: 0.3 }}
+                    className="h-7 rounded border flex items-center justify-center"
                   >
                     {isSelected && (
                       <motion.div
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
-                        transition={{ duration: 0.3 }}
-                        className="w-2 h-2 rounded-full bg-electric"
+                        className="w-1.5 h-1.5 rounded-full bg-electric"
                       />
                     )}
                   </motion.div>
@@ -444,345 +481,371 @@ function MockupCampaignSetup({ active }: { active: boolean }) {
         </div>
       </div>
 
-      {/* Timezone */}
-      <div className="relative">
-        <label className="text-[11px] text-foreground-tertiary uppercase tracking-wider mb-2 block">Timezone</label>
-        <div className="bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-foreground-secondary flex items-center gap-3">
-          <Globe className="w-4 h-4 text-electric" />
-          <span>America/New_York (EST)</span>
+      {/* Integrations */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={phase >= 2 ? { opacity: 1 } : {}}
+        transition={{ duration: 0.4 }}
+      >
+        <label className="text-[10px] text-foreground-tertiary uppercase tracking-wider mb-2 block">Connected Integrations</label>
+        <div className="grid grid-cols-2 gap-2">
+          {[
+            { name: "Google Calendar", icon: Calendar, connected: true },
+            { name: "Zoom", icon: Video, connected: true },
+            { name: "Slack", icon: Slack, connected: phase >= 3 },
+            { name: "Outlook", icon: Mail, connected: false },
+          ].map((int) => {
+            const Icon = int.icon;
+            return (
+              <div key={int.name} className={`flex items-center gap-2 rounded-lg p-2 border ${
+                int.connected ? "border-accent/20 bg-accent/5" : "border-gray-100"
+              }`}>
+                <Icon className={`w-3.5 h-3.5 ${int.connected ? "text-accent" : "text-foreground-tertiary"}`} />
+                <span className="text-[10px] text-foreground-secondary">{int.name}</span>
+                {int.connected && <Check className="w-3 h-3 text-accent ml-auto" />}
+              </div>
+            );
+          })}
         </div>
-        <AnimatePresence>
-          {tzOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.4 }}
-              className="absolute z-10 top-full mt-1 w-full bg-white border border-gray-200 rounded-lg overflow-hidden shadow-lg"
-            >
-              {["America/New_York (EST)", "Europe/London (GMT)", "Asia/Tokyo (JST)"].map((tz) => (
-                <div key={tz} className="px-4 py-2.5 text-xs text-foreground-secondary hover:bg-gray-50">{tz}</div>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+      </motion.div>
 
-      {/* Retry count */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <RotateCcw className="w-4 h-4 text-foreground-tertiary" />
-          <span className="text-xs text-foreground-secondary">Max retries per contact</span>
+      {/* Timezone + features */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={phase >= 3 ? { opacity: 1 } : {}}
+        transition={{ duration: 0.4 }}
+        className="space-y-2 bg-gray-50 rounded-lg p-3 border border-gray-100"
+      >
+        <div className="flex items-center justify-between">
+          <span className="text-[11px] text-foreground-secondary flex items-center gap-1.5">
+            <Globe className="w-3 h-3 text-foreground-tertiary" /> Timezone
+          </span>
+          <span className="text-[11px] font-medium text-foreground">America/New_York</span>
         </div>
-        <motion.span
-          key={retryCount}
-          initial={{ scale: 1.4, color: "#4F5FE8" }}
-          animate={{ scale: 1, color: "rgba(0,0,0,0.8)" }}
-          transition={{ duration: 0.4 }}
-          className="text-lg font-bold"
-        >
-          {retryCount}
-        </motion.span>
-      </div>
-
-      {/* Compliance */}
-      <div>
-        <label className="text-[11px] text-foreground-tertiary uppercase tracking-wider mb-3 block">Compliance</label>
-        <div className="space-y-3">
-          {["DNC list check", "TCPA compliance"].map((label, i) => (
-            <div key={label} className="flex items-center justify-between">
-              <span className="text-xs text-foreground-secondary flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-foreground-tertiary" />
-                {label}
-              </span>
-              <motion.div
-                animate={{ backgroundColor: complianceToggles[i] ? "rgba(29,184,122,1)" : "rgba(0,0,0,0.1)" }}
-                transition={{ duration: 0.3 }}
-                className="w-9 h-5 rounded-full p-0.5"
-              >
-                <motion.div
-                  animate={{ x: complianceToggles[i] ? 16 : 0 }}
-                  transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                  className="w-4 h-4 rounded-full bg-white"
-                />
-              </motion.div>
-            </div>
-          ))}
+        <div className="flex items-center justify-between">
+          <span className="text-[11px] text-foreground-secondary">Max retries</span>
+          <span className="text-[11px] font-bold text-electric">3</span>
         </div>
-      </div>
+        <div className="flex items-center justify-between">
+          <span className="text-[11px] text-foreground-secondary flex items-center gap-1.5">
+            <ShieldCheck className="w-3 h-3 text-foreground-tertiary" /> TCPA Compliance
+          </span>
+          <Toggle on={phase >= 4} />
+        </div>
+      </motion.div>
     </div>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/*  Step 4 – Launch & Scale                                            */
+/*  Step 4 – Launch Campaign (matches CampaignDetail.tsx)              */
 /* ------------------------------------------------------------------ */
 
 function MockupLaunch({ active }: { active: boolean }) {
-  const [launched, setLaunched] = useState(false);
+  const [phase, setPhase] = useState(0);
   const [callCount, setCallCount] = useState(0);
-  const [activeCalls, setActiveCalls] = useState<number[]>([]);
 
   useEffect(() => {
-    if (!active) {
-      setLaunched(false);
-      setCallCount(0);
-      setActiveCalls([]);
-      return;
-    }
-
-    const t1 = setTimeout(() => setLaunched(true), 1600);
-    return () => clearTimeout(t1);
+    if (!active) { setPhase(0); setCallCount(0); return; }
+    const timers = [
+      setTimeout(() => setPhase(1), 800),
+      setTimeout(() => setPhase(2), 2200),
+    ];
+    return () => timers.forEach(clearTimeout);
   }, [active]);
 
   useEffect(() => {
-    if (!launched) return;
-    const timers: ReturnType<typeof setTimeout>[] = [];
-    for (let i = 0; i < 6; i++) {
-      timers.push(setTimeout(() => setActiveCalls((p) => [...p, i]), 800 + i * 500));
-    }
-    return () => timers.forEach(clearTimeout);
-  }, [launched]);
-
-  useEffect(() => {
-    if (!launched) return;
+    if (phase < 2) return;
     const iv = setInterval(() => {
       setCallCount((p) => {
-        if (p >= 247) { clearInterval(iv); return 247; }
-        return p + Math.floor(Math.random() * 3) + 1;
+        if (p >= 186) { clearInterval(iv); return 186; }
+        return p + Math.floor(Math.random() * 4) + 1;
       });
-    }, 200);
+    }, 150);
     return () => clearInterval(iv);
-  }, [launched]);
+  }, [phase]);
 
-  const contacts = [
-    { name: "S. Chen", status: "Connected" },
-    { name: "J. Wilson", status: "Ringing" },
-    { name: "M. Lopez", status: "Connected" },
-    { name: "A. Petrov", status: "Ringing" },
-    { name: "L. Kim", status: "Connected" },
-    { name: "R. Davis", status: "Queued" },
+  const callLogs = [
+    { name: "Sarah Chen", duration: "2:34", status: "connected", sentiment: "Positive", score: "Hot" },
+    { name: "James Wilson", duration: "0:45", status: "voicemail", sentiment: "—", score: "—" },
+    { name: "Maria Lopez", duration: "3:12", status: "connected", sentiment: "Neutral", score: "Warm" },
+    { name: "Alex Petrov", duration: "0:08", status: "no-answer", sentiment: "—", score: "—" },
+    { name: "Lisa Kim", duration: "1:58", status: "connected", sentiment: "Positive", score: "Hot" },
   ];
 
+  const statusIcon = (s: string) => {
+    if (s === "connected") return <PhoneCall className="w-3 h-3 text-accent" />;
+    if (s === "voicemail") return <Voicemail className="w-3 h-3 text-yellow-500" />;
+    return <PhoneOff className="w-3 h-3 text-red-400" />;
+  };
+
+  const progress = Math.min(callCount, 186);
+  const pct = Math.round((progress / 247) * 100);
+
   return (
-    <div className="p-4 md:p-5 h-full flex flex-col items-center justify-center gap-4" style={uiFont}>
-      {!launched ? (
-        <motion.div className="flex flex-col items-center gap-5">
-          <div className="flex items-center gap-3 mb-2">
-            <Rocket className="w-5 h-5 text-electric" />
-            <span className="text-foreground text-sm font-semibold">Ready to Launch</span>
-          </div>
-          <div className="text-center text-foreground-tertiary text-sm mb-2">
-            247 contacts · 3 retries · EST schedule
-          </div>
-          <p className="text-foreground-tertiary text-xs text-center max-w-xs">
-            One click to start calling all contacts simultaneously
-          </p>
-          <motion.button
-            animate={{ scale: [1, 1.04, 1] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-            className="bg-electric text-white font-semibold text-base px-10 py-4 rounded-xl flex items-center gap-3 shadow-lg"
-            style={{ boxShadow: "0 0 30px rgba(79,95,232,0.4)" }}
-          >
-            <Play className="w-5 h-5" /> Launch Campaign
-          </motion.button>
-        </motion.div>
-      ) : (
-        <motion.div
+    <div className="p-4 md:p-5 h-full flex flex-col" style={uiFont}>
+      {/* Campaign header */}
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <Rocket className="w-4.5 h-4.5 text-electric" />
+          <span className="text-foreground text-sm font-semibold">Q1 Lead Qualification</span>
+        </div>
+        <motion.span
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="w-full flex flex-col gap-5"
+          animate={phase >= 2 ? { opacity: 1 } : {}}
+          className="text-[10px] px-2 py-0.5 rounded-full bg-accent/10 text-accent font-semibold flex items-center gap-1"
         >
-          {/* Live counter */}
-          <div className="text-center">
-            <div className="text-xs text-foreground-tertiary uppercase tracking-wider mb-2">Calls in progress</div>
-            <motion.div
-              key={callCount}
-              className="text-4xl font-bold text-electric tabular-nums"
-            >
-              {Math.min(callCount, 247)}
-            </motion.div>
-            <div className="text-xs text-foreground-tertiary mt-2">of 247 contacts</div>
-          </div>
-
-          {/* Active call indicators */}
-          <div className="grid grid-cols-3 gap-3">
-            {contacts.map((c, i) => (
-              <motion.div
-                key={c.name}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={activeCalls.includes(i) ? { opacity: 1, scale: 1 } : {}}
-                transition={{ type: "spring", stiffness: 300, duration: 0.5 }}
-                className="bg-gray-50 border border-gray-200 rounded-xl p-3 text-center"
-              >
-                <motion.div
-                  animate={c.status === "Connected" ? { scale: [1, 1.15, 1] } : {}}
-                  transition={{ repeat: Infinity, duration: 2, delay: i * 0.3 }}
-                  className="mx-auto mb-2"
-                >
-                  <Phone className={`w-5 h-5 mx-auto ${
-                    c.status === "Connected" ? "text-accent" : c.status === "Ringing" ? "text-electric" : "text-gray-300"
-                  }`} />
-                </motion.div>
-                <div className="text-xs text-foreground-secondary font-medium">{c.name}</div>
-                <div className={`text-[10px] mt-1 font-medium ${
-                  c.status === "Connected" ? "text-accent" : c.status === "Ringing" ? "text-electric" : "text-foreground-tertiary"
-                }`}>
-                  {c.status}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Progress bar */}
-          <div>
-            <div className="flex justify-between text-xs text-foreground-tertiary mb-2">
-              <span>Campaign progress</span>
-              <span>{Math.round(Math.min(callCount, 247) / 247 * 100)}%</span>
-            </div>
-            <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-              <motion.div
-                className="h-full bg-electric rounded-full"
-                animate={{ width: `${Math.min(callCount, 247) / 247 * 100}%` }}
-                transition={{ duration: 0.3 }}
-              />
-            </div>
-          </div>
-        </motion.div>
-      )}
-    </div>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  Step 5 – Analyze & Export                                          */
-/* ------------------------------------------------------------------ */
-
-function MockupAnalytics({ active }: { active: boolean }) {
-  const [barHeights, setBarHeights] = useState([0, 0, 0, 0, 0]);
-  const [showTranscript, setShowTranscript] = useState(false);
-  const [showExport, setShowExport] = useState(false);
-  const [downloading, setDownloading] = useState(false);
-
-  useEffect(() => {
-    if (!active) {
-      setBarHeights([0, 0, 0, 0, 0]);
-      setShowTranscript(false);
-      setShowExport(false);
-      setDownloading(false);
-      return;
-    }
-
-    const targets = [72, 85, 64, 91, 78];
-    const t1 = setTimeout(() => setBarHeights(targets), 600);
-    const t2 = setTimeout(() => setShowTranscript(true), 2400);
-    const t3 = setTimeout(() => setShowExport(true), 5000);
-    const t4 = setTimeout(() => setDownloading(true), 6400);
-    const t5 = setTimeout(() => setDownloading(false), 8000);
-    return () => { [t1,t2,t3,t4,t5].forEach(clearTimeout); };
-  }, [active]);
-
-  const labels = ["Mon", "Tue", "Wed", "Thu", "Fri"];
-
-  const transcriptLines = [
-    { speaker: "Agent", text: "Hi Sarah, this is Elena from Callengo." },
-    { speaker: "Sarah", text: "Oh hi, yes I was expecting your call." },
-    { speaker: "Agent", text: "Great! I'd love to walk you through our solution." },
-  ];
-
-  return (
-    <div className="p-4 md:p-5 h-full flex flex-col gap-3" style={uiFont}>
-      <div className="flex items-center gap-3">
-        <BarChart3 className="w-5 h-5 text-electric" />
-        <span className="text-foreground text-sm font-semibold">Analytics</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" /> Active
+        </motion.span>
       </div>
 
       {/* Stats row */}
-      <div className="grid grid-cols-3 gap-3">
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        animate={phase >= 1 ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.4 }}
+        className="grid grid-cols-5 gap-2 mb-3"
+      >
         {[
-          { label: "Connected", value: "82%", color: "text-accent" },
-          { label: "Avg Duration", value: "3:24", color: "text-electric" },
-          { label: "Positive", value: "64%", color: "text-accent" },
+          { label: "Total", value: "247", color: "text-foreground" },
+          { label: "Called", value: progress.toString(), color: "text-electric" },
+          { label: "Connected", value: Math.round(progress * 0.45).toString(), color: "text-accent" },
+          { label: "Voicemail", value: Math.round(progress * 0.25).toString(), color: "text-yellow-500" },
+          { label: "No Answer", value: Math.round(progress * 0.3).toString(), color: "text-red-400" },
         ].map((s) => (
-          <div key={s.label} className="bg-gray-50 rounded-xl p-3 text-center border border-gray-200">
-            <div className={`text-xl font-bold ${s.color}`}>{s.value}</div>
-            <div className="text-[10px] text-foreground-tertiary mt-1">{s.label}</div>
+          <div key={s.label} className="text-center">
+            <div className={`text-base font-bold ${s.color} tabular-nums`}>{s.value}</div>
+            <div className="text-[9px] text-foreground-tertiary">{s.label}</div>
           </div>
         ))}
-      </div>
+      </motion.div>
 
-      {/* Bar chart */}
-      <div>
-        <div className="text-xs text-foreground-tertiary mb-3">Calls per day</div>
-        <div className="flex items-end gap-3 h-24">
-          {barHeights.map((h, i) => (
-            <div key={i} className="flex-1 flex flex-col items-center gap-2">
-              <motion.div
-                className="w-full bg-electric/60 rounded-t-md"
-                initial={{ height: 0 }}
-                animate={{ height: `${h}%` }}
-                transition={{ duration: 1.2, delay: i * 0.2, ease: "easeOut" }}
-              />
-              <span className="text-[10px] text-foreground-tertiary">{labels[i]}</span>
-            </div>
+      {/* Progress bar */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={phase >= 1 ? { opacity: 1 } : {}}
+        className="mb-3"
+      >
+        <div className="flex justify-between text-[10px] text-foreground-tertiary mb-1">
+          <span>Campaign Progress</span>
+          <span className="font-semibold text-foreground">{pct}%</span>
+        </div>
+        <div className="h-2 bg-gray-100 rounded-full overflow-hidden flex">
+          <motion.div
+            className="h-full bg-accent rounded-full"
+            animate={{ width: `${pct * 0.45}%` }}
+            transition={{ duration: 0.3 }}
+          />
+          <motion.div
+            className="h-full bg-yellow-400"
+            animate={{ width: `${pct * 0.25}%` }}
+            transition={{ duration: 0.3 }}
+          />
+          <motion.div
+            className="h-full bg-red-300"
+            animate={{ width: `${pct * 0.3}%` }}
+            transition={{ duration: 0.3 }}
+          />
+        </div>
+        <div className="flex gap-3 mt-1">
+          {[
+            { label: "Connected", color: "bg-accent" },
+            { label: "Voicemail", color: "bg-yellow-400" },
+            { label: "No Answer", color: "bg-red-300" },
+          ].map((l) => (
+            <span key={l.label} className="flex items-center gap-1 text-[9px] text-foreground-tertiary">
+              <span className={`w-1.5 h-1.5 rounded-full ${l.color}`} />{l.label}
+            </span>
           ))}
+        </div>
+      </motion.div>
+
+      {/* Call log table */}
+      <div className="text-[10px] text-foreground-tertiary uppercase tracking-wider mb-1 font-medium">Recent Calls</div>
+      <div className="flex-1 overflow-hidden">
+        {callLogs.map((log, i) => (
+          <motion.div
+            key={log.name}
+            initial={{ opacity: 0, x: -8 }}
+            animate={phase >= 2 ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: i * 0.2, duration: 0.3 }}
+            className="flex items-center gap-2 py-2 border-b border-gray-50 text-[11px]"
+          >
+            {statusIcon(log.status)}
+            <span className="text-foreground font-medium flex-1 truncate">{log.name}</span>
+            <span className="text-foreground-tertiary tabular-nums w-10">{log.duration}</span>
+            {log.score !== "—" && (
+              <span className={`px-1.5 py-0.5 rounded text-[9px] font-semibold ${
+                log.score === "Hot" ? "bg-accent/10 text-accent" : "bg-yellow-500/10 text-yellow-500"
+              }`}>{log.score}</span>
+            )}
+            <MoreHorizontal className="w-3 h-3 text-foreground-tertiary shrink-0" />
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Step 5 – Call Results & Analysis (matches CallDetailModal.tsx)      */
+/* ------------------------------------------------------------------ */
+
+function MockupCallResults({ active }: { active: boolean }) {
+  const [phase, setPhase] = useState(0);
+
+  useEffect(() => {
+    if (!active) { setPhase(0); return; }
+    const timers = [
+      setTimeout(() => setPhase(1), 500),
+      setTimeout(() => setPhase(2), 2000),
+      setTimeout(() => setPhase(3), 3800),
+      setTimeout(() => setPhase(4), 5500),
+      setTimeout(() => setPhase(5), 7000),
+    ];
+    return () => timers.forEach(clearTimeout);
+  }, [active]);
+
+  const transcript = [
+    { speaker: "AI Agent", text: "Hi Sarah, this is Maya from Callengo. I'm calling about your interest in our Growth plan.", isAI: true },
+    { speaker: "Sarah", text: "Oh yes! I was looking at that. We need about 400 calls per month.", isAI: false },
+    { speaker: "AI Agent", text: "Perfect. And what's your main use case — lead qualification, data validation, or appointment confirmation?", isAI: true },
+    { speaker: "Sarah", text: "Lead qualification mostly. We have a sales team of 8 and too many inbound leads to call.", isAI: false },
+  ];
+
+  const extractedData = [
+    { field: "Interest Level", value: "High", status: "confirmed" },
+    { field: "Plan Interest", value: "Growth ($179/mo)", status: "confirmed" },
+    { field: "Team Size", value: "8 reps", status: "confirmed" },
+    { field: "Use Case", value: "Lead Qualification", status: "confirmed" },
+    { field: "Monthly Volume", value: "~400 calls", status: "confirmed" },
+  ];
+
+  return (
+    <div className="p-4 md:p-5 h-full flex flex-col" style={uiFont}>
+      {/* Header */}
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <PhoneCall className="w-4.5 h-4.5 text-accent" />
+          <span className="text-foreground text-sm font-semibold">Call Detail — Sarah Chen</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="text-[10px] px-2 py-0.5 rounded-full bg-accent/10 text-accent font-semibold">Connected</span>
+          <span className="text-[10px] text-foreground-tertiary">2:34</span>
         </div>
       </div>
 
-      {/* Transcript snippet */}
-      <AnimatePresence>
-        {showTranscript && (
+      {/* Tabs */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={phase >= 1 ? { opacity: 1 } : {}}
+        className="flex gap-1 mb-3 border-b border-gray-100 pb-2"
+      >
+        {["Overview", "Transcript", "Analysis", "Recording"].map((tab, i) => (
+          <span key={tab} className={`text-[10px] px-2.5 py-1 rounded-md font-medium cursor-pointer ${
+            (i === 0 && phase < 2) || (i === 1 && phase >= 2 && phase < 4) || (i === 2 && phase >= 4)
+              ? "bg-electric/10 text-electric" : "text-foreground-tertiary hover:bg-gray-50"
+          }`}>{tab}</span>
+        ))}
+      </motion.div>
+
+      {/* Overview metrics */}
+      <AnimatePresence mode="wait">
+        {phase >= 1 && phase < 2 && (
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="bg-gray-50 border border-gray-200 rounded-xl p-4"
+            key="overview"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="grid grid-cols-3 gap-2 mb-3"
           >
-            <div className="text-xs text-foreground-tertiary mb-2">Transcript Preview</div>
-            {transcriptLines.map((l, i) => (
+            {[
+              { label: "Quality Score", value: "9.2/10", color: "text-accent" },
+              { label: "Sentiment", value: "Positive", color: "text-accent" },
+              { label: "Lead Score", value: "Hot", color: "text-electric" },
+            ].map((m) => (
+              <div key={m.label} className="bg-gray-50 rounded-lg p-2.5 text-center border border-gray-100">
+                <div className={`text-sm font-bold ${m.color}`}>{m.value}</div>
+                <div className="text-[9px] text-foreground-tertiary mt-0.5">{m.label}</div>
+              </div>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Transcript */}
+      <AnimatePresence mode="wait">
+        {phase >= 2 && phase < 4 && (
+          <motion.div
+            key="transcript"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            className="flex-1 overflow-hidden space-y-2"
+          >
+            {transcript.map((line, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: i * 0.5, duration: 0.4 }}
-                className="mb-2 last:mb-0"
+                initial={{ opacity: 0, x: line.isAI ? -8 : 8 }}
+                animate={phase >= 2 ? { opacity: 1, x: 0 } : {}}
+                transition={{ delay: i * 0.4, duration: 0.4 }}
+                className={`flex ${line.isAI ? "justify-start" : "justify-end"}`}
               >
-                <span className={`text-xs font-semibold ${l.speaker === "Agent" ? "text-electric" : "text-foreground-secondary"}`}>
-                  {l.speaker}:
-                </span>
-                <span className="text-xs text-foreground-tertiary ml-2">{l.text}</span>
+                <div className={`max-w-[85%] rounded-xl px-3 py-2 ${
+                  line.isAI ? "bg-electric/10 border border-electric/20" : "bg-gray-50 border border-gray-200"
+                }`}>
+                  <div className={`text-[9px] font-semibold mb-0.5 ${line.isAI ? "text-electric" : "text-foreground-secondary"}`}>
+                    {line.speaker}
+                  </div>
+                  <div className="text-[11px] text-foreground-secondary leading-relaxed">{line.text}</div>
+                </div>
               </motion.div>
             ))}
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Export */}
-      <AnimatePresence>
-        {showExport && (
+      {/* Extracted data / Analysis */}
+      <AnimatePresence mode="wait">
+        {phase >= 4 && (
           <motion.div
+            key="analysis"
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mt-auto"
+            className="flex-1 overflow-hidden"
           >
-            <motion.div
-              animate={downloading ? { scale: [1, 0.97, 1] } : {}}
-              transition={{ duration: 0.4 }}
-              className={`flex items-center justify-center gap-3 py-3 rounded-xl text-sm font-medium ${
-                downloading ? "bg-accent/20 text-accent" : "bg-electric/15 text-electric"
-              }`}
-            >
-              <Download className="w-4 h-4" />
-              {downloading ? "Downloading report..." : "Export Results"}
-              {downloading && (
+            <div className="text-[10px] text-foreground-tertiary uppercase tracking-wider mb-2 font-medium">Extracted Data</div>
+            <div className="space-y-1.5">
+              {extractedData.map((d, i) => (
                 <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
-                  className="w-4 h-4 border-2 border-accent border-t-transparent rounded-full"
-                />
-              )}
+                  key={d.field}
+                  initial={{ opacity: 0, x: -8 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.15, duration: 0.3 }}
+                  className="flex items-center justify-between bg-gray-50 rounded-lg px-3 py-2 border border-gray-100"
+                >
+                  <span className="text-[11px] text-foreground-secondary">{d.field}</span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] font-semibold text-foreground">{d.value}</span>
+                    <span className="flex items-center gap-0.5 text-[9px] text-accent font-medium">
+                      <CheckCircle2 className="w-3 h-3" />Confirmed
+                    </span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* CRM sync */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={phase >= 5 ? { opacity: 1 } : {}}
+              transition={{ duration: 0.4 }}
+              className="mt-3 flex items-center justify-between bg-accent/5 border border-accent/20 rounded-lg px-3 py-2"
+            >
+              <span className="text-[11px] text-accent font-medium flex items-center gap-1.5">
+                <ArrowUpRight className="w-3.5 h-3.5" /> Synced to HubSpot
+              </span>
+              <span className="text-[9px] text-foreground-tertiary">2 seconds ago</span>
             </motion.div>
           </motion.div>
         )}
@@ -792,147 +855,173 @@ function MockupAnalytics({ active }: { active: boolean }) {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Step 6 – Unified Dashboard                                         */
+/*  Step 6 – Dashboard (matches DashboardOverview.tsx)                  */
 /* ------------------------------------------------------------------ */
 
 function MockupDashboard({ active }: { active: boolean }) {
-  const [counters, setCounters] = useState({ calls: 0, connected: 0, conversion: 0, campaigns: 0 });
-  const [showCards, setShowCards] = useState(false);
-  const [showBadges, setShowBadges] = useState(false);
+  const [phase, setPhase] = useState(0);
+  const [counters, setCounters] = useState({ contacts: 0, verified: 0, avgDuration: 0, minutesLeft: 0 });
 
   useEffect(() => {
     if (!active) {
-      setCounters({ calls: 0, connected: 0, conversion: 0, campaigns: 0 });
-      setShowCards(false);
-      setShowBadges(false);
+      setPhase(0);
+      setCounters({ contacts: 0, verified: 0, avgDuration: 0, minutesLeft: 0 });
       return;
     }
 
-    setShowCards(true);
-    const t1 = setTimeout(() => setShowBadges(true), 3500);
+    setPhase(1);
+    const t1 = setTimeout(() => setPhase(2), 2500);
+    const t2 = setTimeout(() => setPhase(3), 4500);
+    const t3 = setTimeout(() => setPhase(4), 6500);
 
-    const targets = { calls: 12847, connected: 8934, conversion: 68, campaigns: 12 };
-    const duration = 2500;
-    const steps = 40;
+    const targets = { contacts: 2847, verified: 1923, avgDuration: 2.4, minutesLeft: 142 };
+    const steps = 35;
     let step = 0;
     const iv = setInterval(() => {
       step++;
-      const progress = step / steps;
-      const eased = 1 - Math.pow(1 - progress, 3);
+      const p = step / steps;
+      const e = 1 - Math.pow(1 - p, 3);
       setCounters({
-        calls: Math.round(targets.calls * eased),
-        connected: Math.round(targets.connected * eased),
-        conversion: Math.round(targets.conversion * eased),
-        campaigns: Math.round(targets.campaigns * eased),
+        contacts: Math.round(targets.contacts * e),
+        verified: Math.round(targets.verified * e),
+        avgDuration: Math.round(targets.avgDuration * e * 10) / 10,
+        minutesLeft: Math.round(targets.minutesLeft * e),
       });
       if (step >= steps) clearInterval(iv);
-    }, duration / steps);
+    }, 2000 / steps);
 
-    return () => { clearInterval(iv); clearTimeout(t1); };
+    return () => { clearInterval(iv); [t1, t2, t3].forEach(clearTimeout); };
   }, [active]);
 
-  const cards = [
-    { label: "Total Calls", value: counters.calls.toLocaleString(), icon: Phone, color: "text-electric" },
-    { label: "Connected", value: counters.connected.toLocaleString(), icon: Users, color: "text-accent" },
-    { label: "Conversion", value: `${counters.conversion}%`, icon: TrendingUp, color: "text-electric" },
-    { label: "Campaigns", value: counters.campaigns.toString(), icon: Rocket, color: "text-foreground-secondary" },
+  const agents = [
+    { name: "Lead Qualification", status: "Active", calls: 145, gradient: "from-electric to-[#3347D4]" },
+    { name: "Data Validation", status: "Active", calls: 89, gradient: "from-accent to-[#128055]" },
+    { name: "Apt. Confirmation", status: "Paused", calls: 0, gradient: "from-[#F59E0B] to-[#D97706]" },
   ];
 
   const campaigns = [
-    { name: "Q1 Outreach", status: "Active", progress: 78, color: "bg-accent" },
-    { name: "Product Launch", status: "Active", progress: 45, color: "bg-electric" },
-    { name: "Re-engagement", status: "Scheduled", progress: 0, color: "bg-gray-300" },
+    { name: "Q1 Lead Outreach", status: "Active", progress: 75, calls: "186/247" },
+    { name: "CRM Data Cleanup", status: "Active", progress: 42, calls: "523/1,240" },
+    { name: "March Appointments", status: "Scheduled", progress: 0, calls: "0/89" },
   ];
 
-  // Mini sparkline data
-  const sparklines = [
-    [30, 45, 38, 52, 48, 65, 72],
-    [20, 35, 42, 38, 55, 60, 58],
+  const recentCalls = [
+    { name: "Sarah Chen", agent: "Lead Qual.", result: "Hot Lead", time: "2m ago" },
+    { name: "James Wilson", agent: "Data Val.", result: "Verified", time: "4m ago" },
+    { name: "Maria Lopez", agent: "Lead Qual.", result: "Warm Lead", time: "6m ago" },
   ];
 
   return (
-    <div className="p-4 md:p-5 h-full flex flex-col gap-3" style={uiFont}>
-      <div className="flex items-center gap-3">
-        <LayoutDashboard className="w-5 h-5 text-electric" />
-        <span className="text-foreground text-sm font-semibold">Dashboard</span>
-        <span className="text-xs text-foreground-tertiary ml-auto">Last 30 days</span>
+    <div className="p-4 md:p-5 h-full flex flex-col gap-2.5" style={uiFont}>
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <LayoutDashboard className="w-4.5 h-4.5 text-electric" />
+          <span className="text-foreground text-sm font-semibold">Dashboard</span>
+        </div>
+        <span className="text-[10px] text-foreground-tertiary bg-gray-100 px-2 py-0.5 rounded">Last 30 days</span>
       </div>
 
-      {/* Metric cards */}
-      <div className="grid grid-cols-2 gap-3">
-        {cards.map((c, i) => {
-          const Icon = c.icon;
+      {/* Key metrics */}
+      <div className="grid grid-cols-4 gap-2">
+        {[
+          { label: "Total Contacts", value: counters.contacts.toLocaleString(), icon: Users, color: "text-electric", bg: "bg-electric/10" },
+          { label: "Verified", value: counters.verified.toLocaleString(), icon: CheckCircle2, color: "text-accent", bg: "bg-accent/10" },
+          { label: "Avg Duration", value: `${counters.avgDuration}m`, icon: Clock, color: "text-electric", bg: "bg-electric/10" },
+          { label: "Min. Remaining", value: counters.minutesLeft.toString(), icon: BarChart3, color: "text-foreground-secondary", bg: "bg-gray-100" },
+        ].map((m, i) => {
+          const Icon = m.icon;
           return (
             <motion.div
-              key={c.label}
-              initial={{ opacity: 0, y: 12 }}
-              animate={showCards ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.2, duration: 0.4 }}
-              className="bg-gray-50 border border-gray-200 rounded-xl p-4"
+              key={m.label}
+              initial={{ opacity: 0, y: 8 }}
+              animate={phase >= 1 ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: i * 0.12, duration: 0.35 }}
+              className="rounded-lg border border-gray-100 p-2.5"
             >
-              <div className="flex items-center justify-between mb-2">
-                <Icon className={`w-4 h-4 ${c.color}`} />
-                {i < 2 && (
-                  <svg width="48" height="20" className="opacity-60">
-                    <polyline
-                      fill="none"
-                      stroke={i === 0 ? "#4F5FE8" : "#1DB87A"}
-                      strokeWidth="1.5"
-                      points={sparklines[i]
-                        .map((v, j) => `${(j / 6) * 48},${20 - (v / 80) * 20}`)
-                        .join(" ")}
-                    />
-                  </svg>
-                )}
+              <div className={`w-6 h-6 rounded-md ${m.bg} flex items-center justify-center mb-1`}>
+                <Icon className={`w-3 h-3 ${m.color}`} />
               </div>
-              <div className="text-xl font-bold text-foreground tabular-nums">{c.value}</div>
-              <div className="text-[10px] text-foreground-tertiary mt-1">{c.label}</div>
+              <div className="text-sm font-bold text-foreground tabular-nums">{m.value}</div>
+              <div className="text-[9px] text-foreground-tertiary">{m.label}</div>
             </motion.div>
           );
         })}
       </div>
 
-      {/* Campaign list */}
-      <div>
-        <div className="text-xs text-foreground-tertiary uppercase tracking-wider mb-3">Active Campaigns</div>
-        {campaigns.map((camp, i) => (
-          <motion.div
-            key={camp.name}
-            initial={{ opacity: 0, x: -12 }}
-            animate={showCards ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 1 + i * 0.25, duration: 0.4 }}
-            className="flex items-center gap-3 py-3 border-b border-gray-100 last:border-0"
-          >
+      {/* Active agents */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={phase >= 2 ? { opacity: 1 } : {}}
+        transition={{ duration: 0.4 }}
+      >
+        <div className="text-[10px] text-foreground-tertiary uppercase tracking-wider mb-1.5 font-medium">Active Agents</div>
+        <div className="grid grid-cols-3 gap-2">
+          {agents.map((a) => (
+            <div key={a.name} className="rounded-lg border border-gray-100 p-2.5">
+              <div className={`w-6 h-6 rounded-md bg-gradient-to-br ${a.gradient} flex items-center justify-center mb-1.5`}>
+                <Bot className="w-3 h-3 text-white" />
+              </div>
+              <div className="text-[10px] font-semibold text-foreground leading-tight">{a.name}</div>
+              <div className="flex items-center gap-1 mt-1">
+                <span className={`w-1.5 h-1.5 rounded-full ${a.status === "Active" ? "bg-accent" : "bg-gray-300"}`} />
+                <span className="text-[9px] text-foreground-tertiary">{a.status}</span>
+                {a.calls > 0 && <span className="text-[9px] text-foreground-tertiary ml-auto">{a.calls} calls</span>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Campaigns */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={phase >= 3 ? { opacity: 1 } : {}}
+        transition={{ duration: 0.4 }}
+      >
+        <div className="text-[10px] text-foreground-tertiary uppercase tracking-wider mb-1.5 font-medium">Campaigns</div>
+        {campaigns.map((c) => (
+          <div key={c.name} className="flex items-center gap-2 py-1.5 border-b border-gray-50 last:border-0">
             <div className="flex-1 min-w-0">
-              <div className="text-xs text-foreground font-medium">{camp.name}</div>
-              <div className="h-1.5 bg-gray-100 rounded-full mt-2 overflow-hidden">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] text-foreground font-medium">{c.name}</span>
+                <span className="text-[9px] text-foreground-tertiary tabular-nums">{c.calls}</span>
+              </div>
+              <div className="h-1 bg-gray-100 rounded-full mt-1 overflow-hidden">
                 <motion.div
-                  className={`h-full rounded-full ${camp.color}`}
+                  className={`h-full rounded-full ${c.status === "Active" ? "bg-electric" : "bg-gray-200"}`}
                   initial={{ width: 0 }}
-                  animate={showCards ? { width: `${camp.progress}%` } : {}}
-                  transition={{ delay: 1.5 + i * 0.3, duration: 1 }}
+                  animate={phase >= 3 ? { width: `${c.progress}%` } : {}}
+                  transition={{ duration: 1, delay: 0.3 }}
                 />
               </div>
             </div>
-            <AnimatePresence>
-              {showBadges && (
-                <motion.span
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3 }}
-                  className={`text-[10px] px-2 py-1 rounded-full font-medium ${
-                    camp.status === "Active"
-                      ? "bg-accent/10 text-accent"
-                      : "bg-gray-100 text-foreground-tertiary"
-                  }`}
-                >
-                  {camp.status}
-                </motion.span>
-              )}
-            </AnimatePresence>
-          </motion.div>
+          </div>
         ))}
-      </div>
+      </motion.div>
+
+      {/* Recent calls */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={phase >= 4 ? { opacity: 1 } : {}}
+        transition={{ duration: 0.4 }}
+        className="mt-auto"
+      >
+        <div className="text-[10px] text-foreground-tertiary uppercase tracking-wider mb-1.5 font-medium">Recent Calls</div>
+        {recentCalls.map((call) => (
+          <div key={call.name} className="flex items-center gap-2 py-1.5 text-[11px]">
+            <PhoneCall className="w-3 h-3 text-accent shrink-0" />
+            <span className="text-foreground font-medium">{call.name}</span>
+            <span className="text-foreground-tertiary text-[9px]">{call.agent}</span>
+            <span className={`ml-auto text-[9px] px-1.5 py-0.5 rounded font-medium ${
+              call.result.includes("Hot") ? "bg-accent/10 text-accent" :
+              call.result.includes("Warm") ? "bg-yellow-500/10 text-yellow-500" :
+              "bg-electric/10 text-electric"
+            }`}>{call.result}</span>
+            <span className="text-[9px] text-foreground-tertiary">{call.time}</span>
+          </div>
+        ))}
+      </motion.div>
     </div>
   );
 }
@@ -947,17 +1036,17 @@ const steps = [
     icon: Upload,
     title: "Import your contacts",
     description:
-      "Upload via CSV or Excel, or connect your CRM directly. Field mapping, deduplication and validation happen automatically.",
-    highlights: ["CSV & Excel upload", "CRM integration", "Auto deduplication", "Smart field mapping"],
-    Mockup: MockupImportContacts,
+      "Upload via CSV, Excel, Google Sheets, or JSON — or sync directly from HubSpot, Salesforce, Pipedrive, Zoho, Clio, or Dynamics 365. Auto field mapping, deduplication, and validation included.",
+    highlights: ["CSV / Excel / JSON", "6 native CRM syncs", "Auto deduplication", "Smart field mapping"],
+    Mockup: MockupContacts,
   },
   {
     number: "02",
     icon: Bot,
     title: "Configure your AI agent",
     description:
-      "Choose a voice, define objectives and write the script using our guided editor. Set fallback behaviors and language preferences without any code.",
-    highlights: ["Natural voice selection", "Script editor", "Conditional logic", "Multi-language support"],
+      "Select from 3 specialized agents (Lead Qualification, Data Validation, Appointment Confirmation). Choose a voice, set call parameters, toggle voicemail detection and follow-ups. Test with a live call before launching.",
+    highlights: ["3 agent templates", "Voice selection", "Live test call", "Voicemail detection"],
     Mockup: MockupAgentConfig,
   },
   {
@@ -965,35 +1054,35 @@ const steps = [
     icon: Settings2,
     title: "Set up your campaign",
     description:
-      "Define calling windows, time zones, retry rules and compliance controls. Every detail is configurable per campaign.",
-    highlights: ["Calling schedules", "Timezone handling", "Retry logic", "Compliance controls"],
+      "Pick your contact list, define calling windows by timezone, connect Google Calendar, Zoom, Slack, and Outlook. Set retry logic, TCPA compliance, and working hours — all per-campaign.",
+    highlights: ["Calendar integration", "Timezone handling", "Retry logic", "TCPA compliance"],
     Mockup: MockupCampaignSetup,
   },
   {
     number: "04",
     icon: Rocket,
-    title: "Launch and scale instantly",
+    title: "Launch and monitor live",
     description:
-      "Start calling hundreds of contacts simultaneously. Monitor live progress, pause or adjust in real-time from your dashboard.",
-    highlights: ["Parallel dialing", "Live monitoring", "Instant pause/resume", "Real-time transcripts"],
+      "Start calling hundreds of contacts in parallel. Watch real-time call logs with status breakdowns (connected, voicemail, no-answer), lead scores, and sentiment analysis as calls complete.",
+    highlights: ["Parallel dialing", "Live call logs", "Lead scoring", "Sentiment analysis"],
     Mockup: MockupLaunch,
   },
   {
     number: "05",
     icon: BarChart3,
-    title: "Analyze results and export",
+    title: "Review call results",
     description:
-      "Review full transcripts, extracted data points and call outcomes. Push results to your CRM automatically or export detailed reports.",
-    highlights: ["Full transcripts", "Data extraction", "CRM auto-sync", "Custom reports"],
-    Mockup: MockupAnalytics,
+      "Dive into each call: full AI-vs-human transcripts, extracted data fields, quality scores, and sentiment. Verified data syncs to your CRM automatically — no manual entry.",
+    highlights: ["Full transcripts", "Data extraction", "Quality scoring", "Auto CRM sync"],
+    Mockup: MockupCallResults,
   },
   {
     number: "06",
     icon: LayoutDashboard,
     title: "Everything in one dashboard",
     description:
-      "Get a bird's-eye view of all your campaigns, agents and performance metrics in one place. Your team stays aligned, always.",
-    highlights: ["Unified dashboard", "Team collaboration", "Performance metrics", "Multi-campaign view"],
+      "See all contacts, agents, campaigns, and call results in one place. Track verified contacts, active agents, campaign progress, minutes remaining, and recent call outcomes at a glance.",
+    highlights: ["Unified dashboard", "Agent monitoring", "Usage tracking", "Campaign overview"],
     Mockup: MockupDashboard,
   },
 ];
@@ -1171,14 +1260,14 @@ export default function HowItWorks() {
               <div className="absolute -inset-8 bg-white/10 blur-3xl rounded-3xl -z-10" />
             </motion.div>
 
-            {/* RIGHT — Step selector + details (separated to prevent layout shift) */}
+            {/* RIGHT — Step selector + details */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="lg:col-span-5"
             >
-              {/* Step buttons — always same height */}
+              {/* Step buttons */}
               <div className="space-y-1.5">
                 {steps.map((s, index) => {
                   const Icon = s.icon;
@@ -1224,7 +1313,7 @@ export default function HowItWorks() {
                 })}
               </div>
 
-              {/* Active step details — fixed-height container, no layout shift */}
+              {/* Active step details */}
               <div className="mt-4 rounded-xl border border-white/20 bg-white/[0.10] backdrop-blur-sm px-5 py-4" style={{ minHeight: "160px" }}>
                 <AnimatePresence mode="wait">
                   <motion.div

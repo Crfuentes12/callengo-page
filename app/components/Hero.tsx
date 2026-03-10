@@ -348,7 +348,13 @@ export default function Hero() {
               </a>
               <a
                 href="mailto:sales@callengo.com"
-                className="btn btn-secondary text-sm px-7 py-3.5 rounded-xl"
+                className="btn text-sm px-7 py-3.5 rounded-xl font-medium text-foreground"
+                style={{
+                  background: "rgba(255, 255, 255, 0.85)",
+                  backdropFilter: "blur(12px)",
+                  border: "1px solid rgba(221, 224, 238, 0.8)",
+                  boxShadow: "0 2px 8px rgba(26, 27, 46, 0.08)",
+                }}
               >
                 Talk to sales
               </a>

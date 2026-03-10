@@ -394,7 +394,7 @@ export default function Hero() {
                 <div className="h-36 flex flex-col min-h-0 relative">
                   {!hasStartedPlaying ? (
                     <div className="flex-1 flex flex-col items-center justify-center px-5">
-                      <p className="text-[11px] text-foreground-secondary mb-3 text-center" style={{ fontFamily: "var(--font-body)" }}>
+                      <p className="text-sm font-medium text-foreground mb-3 text-center" style={{ fontFamily: "var(--font-display)" }}>
                         {scenario.ctaHeadline}
                       </p>
                       <button
@@ -551,21 +551,25 @@ export default function Hero() {
                   </button>
                 </div>
 
-                {/* ── Scenario dots ── */}
+                {/* ── Scenario selector pills ── */}
                 <div className="px-3 pb-2.5 flex items-center justify-center gap-1.5">
                   {scenarios.map((s, index) => (
                     <button
                       key={s.id}
                       onClick={() => handleScenarioChange(index)}
-                      className="w-1.5 h-1.5 rounded-full transition-all cursor-pointer"
+                      className={`px-2.5 py-1 rounded-full text-[10px] font-medium transition-all cursor-pointer ${
+                        activeScenario === index
+                          ? "text-white"
+                          : "text-foreground-tertiary hover:text-foreground-secondary"
+                      }`}
                       style={{
                         background: activeScenario === index
-                          ? "var(--color-electric)"
-                          : "rgba(221, 224, 238, 0.5)",
-                        transform: activeScenario === index ? "scale(1.3)" : "scale(1)",
+                          ? "linear-gradient(135deg, #4F5FE8 0%, #3347D4 100%)"
+                          : "rgba(236, 237, 245, 0.4)",
                       }}
-                      title={s.label}
-                    />
+                    >
+                      {s.label}
+                    </button>
                   ))}
                 </div>
               </div>

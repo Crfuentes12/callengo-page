@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import {
@@ -384,11 +385,17 @@ export default function AboutPage() {
                   <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-deep-indigo via-electric to-accent" />
 
                   {/* Founder avatar */}
-                  <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-deep-indigo to-electric flex items-center justify-center mb-6">
-                    <span className="text-3xl font-bold text-white">CF</span>
+                  <div className="w-24 h-24 rounded-2xl overflow-hidden mb-6">
+                    <Image
+                      src="/chris-picture.png"
+                      alt="Chris Fuentes — CEO & Founder of Callengo"
+                      width={96}
+                      height={96}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
 
-                  <h3 className="text-2xl font-semibold mb-1">Christopher Fuentes</h3>
+                  <h3 className="text-2xl font-semibold mb-1">Chris Fuentes</h3>
                   <p className="text-electric font-medium text-sm mb-4" style={{ fontFamily: "var(--font-body)" }}>
                     CEO & Founder
                   </p>
@@ -406,7 +413,7 @@ export default function AboutPage() {
                   </p>
 
                   <a
-                    href="https://linkedin.com/in/christopherfuentes"
+                    href="https://www.linkedin.com/in/cristopher-fuentes/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 text-sm font-medium text-electric hover:text-electric/80 transition-colors"

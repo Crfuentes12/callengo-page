@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import {
@@ -14,11 +15,14 @@ import {
   Zap,
   AlertTriangle,
   CreditCard,
+  HelpCircle,
 } from "lucide-react";
 
 /* ═══════════════════════════════════════════════════════════════════
    INTEGRATION DATA — FULL & COMPLETE
    ═══════════════════════════════════════════════════════════════════ */
+
+type FAQ = { question: string; answer: string };
 
 type IntegrationDetail = {
   name: string;
@@ -34,6 +38,9 @@ type IntegrationDetail = {
   syncedData: string[];
   useCases: string[];
   limitations: string[];
+  seoTitle?: string;
+  seoDescription?: string;
+  faqs?: FAQ[];
 };
 
 const integrations: IntegrationDetail[] = [
@@ -752,11 +759,160 @@ const integrations: IntegrationDetail[] = [
 ];
 
 /* ═══════════════════════════════════════════════════════════════════
+   SEO DATA PER INTEGRATION
+   ═══════════════════════════════════════════════════════════════════ */
+
+const seoData: Record<string, { title: string; description: string; correctPlan: string }> = {
+  "google-calendar": {
+    title: "Callengo and Google Calendar Integration — Real-Time Appointment Sync",
+    description: "Connect Callengo AI phone agents with Google Calendar. Bidirectional sync for appointments, availability checking, and automatic event creation. Free plan.",
+    correctPlan: "Free",
+  },
+  "outlook-calendar": {
+    title: "Callengo and Microsoft Outlook Integration — Calendar Sync via Microsoft 365",
+    description: "Connect Callengo with Microsoft Outlook for bidirectional calendar sync via Microsoft Graph API. Auto-create events and check availability. Business plan.",
+    correctPlan: "Business",
+  },
+  "simplybook-me": {
+    title: "Callengo and SimplyBook.me Integration — Booking Confirmation Automation",
+    description: "Connect Callengo AI agents with SimplyBook.me to sync bookings, confirm appointments, and manage client data for service businesses. Starter plan.",
+    correctPlan: "Starter",
+  },
+  "google-meet": {
+    title: "Callengo and Google Meet Integration — Auto-Generate Video Meeting Links",
+    description: "Automatically generate Google Meet links when Callengo AI agents confirm appointments. No separate setup needed — works with Google Calendar. Free plan.",
+    correctPlan: "Free",
+  },
+  zoom: {
+    title: "Callengo and Zoom Integration — Automatic Meeting Link Creation",
+    description: "Callengo automatically creates Zoom meetings when AI agents confirm appointments. Server-to-server integration, no per-user setup required. Free plan.",
+    correctPlan: "Free",
+  },
+  "microsoft-teams": {
+    title: "Callengo and Microsoft Teams Integration — Enterprise Video Meeting Links",
+    description: "Auto-generate Microsoft Teams meeting links from Callengo AI call confirmations. Works with Microsoft Outlook integration. Business plan.",
+    correctPlan: "Business",
+  },
+  hubspot: {
+    title: "Callengo and HubSpot Integration — Sync AI Call Results to Your CRM",
+    description: "Push Callengo AI call outcomes, lead scores, and transcripts directly into HubSpot CRM. Import contacts, create activities, and automate pipelines. Business plan.",
+    correctPlan: "Business",
+  },
+  salesforce: {
+    title: "Callengo and Salesforce Integration — Enterprise AI Calling for Salesforce CRM",
+    description: "Deep Salesforce integration with custom field mapping, activity logging, and pipeline automation from Callengo AI phone agents. Teams plan.",
+    correctPlan: "Teams",
+  },
+  pipedrive: {
+    title: "Callengo and Pipedrive Integration — AI Call Results in Your Sales Pipeline",
+    description: "Sync Callengo AI call outcomes with Pipedrive CRM. Auto-create deals, log activities, and update contacts from AI phone campaigns. Business plan.",
+    correctPlan: "Business",
+  },
+  "zoho-crm": {
+    title: "Callengo and Zoho CRM Integration — Automated Call Data Sync",
+    description: "Connect Callengo AI agents with Zoho CRM to sync call results, update lead statuses, and trigger Zoho workflows automatically. Business plan.",
+    correctPlan: "Business",
+  },
+  "microsoft-dynamics-365": {
+    title: "Callengo and Microsoft Dynamics 365 Integration — Enterprise CRM Automation",
+    description: "Bidirectional sync between Callengo AI phone agents and Dynamics 365. Push call activities, update leads, and advance pipeline stages. Teams plan.",
+    correctPlan: "Teams",
+  },
+  slack: {
+    title: "Callengo and Slack Integration — Real-Time AI Call Notifications",
+    description: "Get instant Slack notifications when Callengo AI agents complete calls. Configure per-channel alerts for call outcomes, appointments, and no-shows. Starter plan.",
+    correctPlan: "Starter",
+  },
+  "google-sheets": {
+    title: "Callengo and Google Sheets Integration — Import Contacts and Export Call Data",
+    description: "Import contacts from Google Sheets into Callengo with auto-column mapping. Export AI call results to spreadsheets for reporting and analysis. Free plan.",
+    correctPlan: "Free",
+  },
+  clio: {
+    title: "Callengo and Clio Integration — AI Phone Agents for Law Firms",
+    description: "Purpose-built integration for law firms. Sync Clio clients, matters, and calendar entries with Callengo AI appointment confirmation and data validation. Business plan.",
+    correctPlan: "Business",
+  },
+  stripe: {
+    title: "Callengo and Stripe Integration — Payment-Triggered AI Phone Campaigns",
+    description: "Trigger Callengo AI calls based on Stripe payment events. Automate customer outreach after failed payments, new subscriptions, and more. Business plan.",
+    correctPlan: "Free",
+  },
+  webhooks: {
+    title: "Callengo Webhooks Integration — Connect Any System via HTTP",
+    description: "Send real-time webhook notifications from Callengo to any URL. 12 event types, HMAC-SHA256 signing, compatible with Zapier, Make, and n8n. Starter plan.",
+    correctPlan: "Starter",
+  },
+};
+
+function getFaqs(integration: IntegrationDetail): FAQ[] {
+  return [
+    {
+      question: `How do I connect ${integration.name} to Callengo?`,
+      answer: `To connect ${integration.name}, navigate to Settings > Integrations in your Callengo dashboard and click "Connect" next to ${integration.name}. ${integration.setup[0] || ""} The setup takes just a few minutes and requires no coding.`,
+    },
+    {
+      question: `What data syncs between Callengo and ${integration.name}?`,
+      answer: `Callengo syncs the following data with ${integration.name}: ${integration.syncedData.slice(0, 4).join(", ")}, and more. All data flows are automatic after the initial setup.`,
+    },
+    {
+      question: `Which Callengo plan do I need for the ${integration.name} integration?`,
+      answer: `The ${integration.name} integration is available on the ${seoData[integration.slug]?.correctPlan || integration.minPlan} plan and above. You can start with a free trial that includes 15 minutes of AI calling to test the integration before committing.`,
+    },
+    {
+      question: `Can I use ${integration.name} with all three Callengo AI agents?`,
+      answer: `Yes, the ${integration.name} integration works with all three Callengo AI agents: Data Validation, Appointment Confirmation, and Lead Qualification. Each agent type syncs relevant data to ${integration.name} based on the call outcomes.`,
+    },
+  ];
+}
+
+/* ═══════════════════════════════════════════════════════════════════
    generateStaticParams
    ═══════════════════════════════════════════════════════════════════ */
 
 export function generateStaticParams() {
   return integrations.map((intg) => ({ slug: intg.slug }));
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   generateMetadata — SEO
+   ═══════════════════════════════════════════════════════════════════ */
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const integration = integrations.find((i) => i.slug === slug);
+  if (!integration) return {};
+
+  const seo = seoData[slug];
+  const title = seo?.title || `Callengo and ${integration.name} Integration`;
+  const description = seo?.description || `Connect Callengo AI phone agents with ${integration.name}. ${integration.tagline}. Set up in minutes.`;
+
+  return {
+    title,
+    description,
+    keywords: [
+      `Callengo ${integration.name} integration`,
+      `${integration.name} AI phone agent`,
+      `${integration.name} automation`,
+      `Callengo ${integration.category.toLowerCase()} integration`,
+      "AI phone agents",
+      "automated phone calls",
+      integration.category === "CRM" ? "CRM integration" : `${integration.category} integration`,
+    ],
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      url: `https://callengo.com/integrations/${slug}`,
+    },
+    alternates: {
+      canonical: `https://callengo.com/integrations/${slug}`,
+    },
+  };
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -775,11 +931,48 @@ export default async function IntegrationDetailPage({
     notFound();
   }
 
+  // Override minPlan with correct values from seoData
+  const correctPlan = seoData[slug]?.correctPlan || integration.minPlan;
+  const faqs = getFaqs(integration);
+
   const planBadgeColors: Record<string, string> = {
+    Free: "bg-green-50 text-green-700",
     Starter: "bg-gray-100 text-gray-700",
     Business: "bg-blue-50 text-blue-700",
     Teams: "bg-indigo-50 text-indigo-700",
     Enterprise: "bg-violet-50 text-violet-700",
+  };
+
+  /* JSON-LD Structured Data */
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://callengo.com" },
+      { "@type": "ListItem", position: 2, name: "Integrations", item: "https://callengo.com/integrations" },
+      { "@type": "ListItem", position: 3, name: integration.name, item: `https://callengo.com/integrations/${slug}` },
+    ],
+  };
+
+  const softwareSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Callengo",
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    description: `Callengo AI phone agents integrate with ${integration.name} for automated ${integration.category.toLowerCase()} workflows.`,
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD", description: "Free plan available" },
+    featureList: integration.syncedData.slice(0, 5),
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
   };
 
   const categoryBadgeColors: Record<string, string> = {
@@ -798,7 +991,11 @@ export default async function IntegrationDetailPage({
   return (
     <>
       <Header />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <main style={{ fontFamily: "var(--font-body)" }} className="bg-background">
+        <article>
         {/* Hero */}
         <section className="pt-32 pb-16">
           <div className="max-w-4xl mx-auto px-6">
@@ -831,9 +1028,9 @@ export default async function IntegrationDetailPage({
                       {integration.category}
                     </span>
                     <span
-                      className={`text-xs font-semibold px-2.5 py-1 rounded-full ${planBadgeColors[integration.minPlan]}`}
+                      className={`text-xs font-semibold px-2.5 py-1 rounded-full ${planBadgeColors[correctPlan]}`}
                     >
-                      {integration.minPlan}+ plan
+                      {correctPlan}+ plan
                     </span>
                   </div>
                   <h1
@@ -924,7 +1121,7 @@ export default async function IntegrationDetailPage({
                   <p className="text-sm text-foreground-secondary mt-1">
                     This integration is available on the{" "}
                     <span className="font-semibold text-electric">
-                      {integration.minPlan}
+                      {correctPlan}
                     </span>{" "}
                     plan and above.{" "}
                     <Link
@@ -982,6 +1179,29 @@ export default async function IntegrationDetailPage({
               </ul>
             </div>
 
+            {/* FAQ Section */}
+            <div className="border border-border rounded-xl p-8 bg-white">
+              <h2
+                className="text-xl font-bold text-foreground mb-6 flex items-center gap-3"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                <HelpCircle className="w-5 h-5 text-electric" />
+                Frequently Asked Questions
+              </h2>
+              <dl className="space-y-6">
+                {faqs.map((faq, i) => (
+                  <div key={i}>
+                    <dt className="text-base font-semibold text-foreground mb-2">
+                      {faq.question}
+                    </dt>
+                    <dd className="text-foreground-secondary text-sm leading-relaxed pl-0">
+                      {faq.answer}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+
             {/* Related integrations */}
             {relatedIntegrations.length > 0 && (
               <div>
@@ -1004,8 +1224,8 @@ export default async function IntegrationDetailPage({
                         </div>
                         <div>
                           <h3 className="font-semibold text-sm text-foreground">{rel.name}</h3>
-                          <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${planBadgeColors[rel.minPlan]}`}>
-                            {rel.minPlan}+
+                          <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${planBadgeColors[seoData[rel.slug]?.correctPlan || rel.minPlan]}`}>
+                            {seoData[rel.slug]?.correctPlan || rel.minPlan}+
                           </span>
                         </div>
                       </div>
@@ -1085,6 +1305,7 @@ export default async function IntegrationDetailPage({
             </div>
           </div>
         </section>
+        </article>
       </main>
       <Footer />
     </>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const footerLinks = {
   Product: [
@@ -82,44 +82,43 @@ export default function Footer() {
       `}</style>
       <div className="max-w-7xl mx-auto px-6 relative z-10">
 
-        {/* Top: Newsletter */}
+        {/* Top: Newsletter Banner */}
         <div className="pt-16 pb-10 border-b border-white/10">
-          <div className="max-w-xl mx-auto">
-            <div className="relative rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm p-6 md:p-8 overflow-hidden">
-              <div className="absolute top-3 right-3 w-10 h-10 rounded-xl bg-electric/15 flex items-center justify-center">
-                <Mail className="w-5 h-5 text-electric" />
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm px-6 md:px-8 py-5">
+            {subscribed ? (
+              <div className="flex items-center justify-center gap-2 text-accent">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                <span className="text-sm font-medium">You&apos;re subscribed! Check your inbox.</span>
               </div>
-              <h4 className="text-lg font-semibold text-white mb-1" style={{ fontFamily: "var(--font-display)" }}>Stay in the loop</h4>
-              <p className="text-sm text-white/50 mb-5" style={{ fontFamily: "var(--font-body)" }}>
-                Get product updates, AI calling tips, and growth strategies — no spam.
-              </p>
-              {subscribed ? (
-                <div className="flex items-center gap-2 text-accent">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                  <span className="text-sm font-medium">You&apos;re subscribed! Check your inbox.</span>
+            ) : (
+              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row items-center gap-4">
+                <div className="flex-1 min-w-0">
+                  <h4 className="text-sm font-semibold text-white" style={{ fontFamily: "var(--font-display)" }}>Stay in the loop</h4>
+                  <p className="text-xs text-white/40 mt-0.5" style={{ fontFamily: "var(--font-body)" }}>
+                    Product updates, AI calling tips & growth strategies — no spam.
+                  </p>
                 </div>
-              ) : (
-                <form onSubmit={handleSubscribe} className="flex gap-2">
+                <div className="flex gap-2 w-full sm:w-auto shrink-0">
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="your@email.com"
                     required
-                    className="flex-1 px-4 py-2.5 rounded-xl bg-white/8 border border-white/15 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-electric/50 focus:ring-1 focus:ring-electric/30 transition-all"
+                    className="flex-1 sm:w-56 px-4 py-2.5 rounded-xl bg-white/8 border border-white/15 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-electric/50 focus:ring-1 focus:ring-electric/30 transition-all"
                     style={{ fontFamily: "var(--font-body)" }}
                   />
                   <button
                     type="submit"
-                    className="px-5 py-2.5 rounded-xl bg-electric text-white text-sm font-semibold hover:bg-electric/90 transition-colors cursor-pointer flex items-center gap-1.5"
+                    className="px-5 py-2.5 rounded-xl bg-electric text-white text-sm font-semibold hover:bg-electric/90 transition-colors cursor-pointer flex items-center gap-1.5 shrink-0"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
                     Subscribe
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
-                </form>
-              )}
-            </div>
+                </div>
+              </form>
+            )}
           </div>
         </div>
 

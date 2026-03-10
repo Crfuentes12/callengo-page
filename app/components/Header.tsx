@@ -253,41 +253,62 @@ export default function Header() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 6, scale: 0.98 }}
                       transition={{ duration: 0.15, ease: "easeOut" }}
-                      className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-[340px]"
+                      className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-[520px]"
                     >
                       <div
-                        className="bg-white rounded-xl border border-border overflow-hidden p-2"
+                        className="bg-white rounded-xl border border-border overflow-hidden"
                         style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)" }}
                       >
-                        {resourceLinks.map((item) => {
-                          const Icon = item.icon;
-                          return (
+                        <div className="grid grid-cols-2">
+                          {/* Left: Resource links */}
+                          <div className="p-3">
+                            <div className="px-3 py-2 text-[10px] font-semibold text-foreground-tertiary uppercase tracking-wider">
+                              Resources
+                            </div>
+                            {resourceLinks.filter((item) => !item.featured).map((item) => {
+                              const Icon = item.icon;
+                              return (
+                                <Link
+                                  key={item.name}
+                                  href={item.href}
+                                  className="flex items-start gap-3 p-3 rounded-lg hover:bg-background-secondary transition-all group"
+                                >
+                                  <div className="w-9 h-9 rounded-lg bg-background-secondary flex items-center justify-center shrink-0 group-hover:bg-background-tertiary transition-colors">
+                                    <Icon className="w-4.5 h-4.5 text-secondary" />
+                                  </div>
+                                  <div>
+                                    <div className="font-semibold text-foreground text-sm">{item.name}</div>
+                                    <div className="text-xs text-foreground-tertiary mt-0.5 leading-relaxed">{item.description}</div>
+                                  </div>
+                                </Link>
+                              );
+                            })}
+                          </div>
+
+                          {/* Right: Documentation featured card */}
+                          <div className="p-3 bg-background-secondary/30">
                             <Link
-                              key={item.name}
-                              href={item.href}
-                              className={`flex items-start gap-3 p-3 rounded-lg hover:bg-background-secondary transition-all group ${
-                                item.featured ? "bg-electric/[0.03] border border-electric/10 mb-1" : ""
-                              }`}
+                              href="/docs"
+                              className="group block h-full rounded-xl bg-electric/[0.06] border border-electric/15 p-5 relative overflow-hidden hover:bg-electric/[0.1] transition-colors"
                             >
-                              <div className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
-                                item.featured
-                                  ? "bg-electric/10 group-hover:bg-electric/15"
-                                  : "bg-background-secondary group-hover:bg-background-tertiary"
-                              }`}>
-                                <Icon className={`w-4.5 h-4.5 ${item.featured ? "text-electric" : "text-secondary"}`} />
-                              </div>
-                              <div>
-                                <div className={`font-semibold text-sm ${item.featured ? "text-electric" : "text-foreground"}`}>
-                                  {item.name}
-                                  {item.featured && <Lightbulb className="w-3.5 h-3.5 text-electric inline ml-1.5 -mt-0.5" />}
+                              {/* Background lightbulb icon */}
+                              <Lightbulb className="absolute bottom-3 right-3 w-16 h-16 text-electric/[0.08]" strokeWidth={1} />
+                              <div className="relative z-10">
+                                <div className="w-10 h-10 rounded-xl bg-electric/15 flex items-center justify-center mb-4">
+                                  <BookOpen className="w-5 h-5 text-electric" />
                                 </div>
-                                <div className="text-xs text-foreground-tertiary mt-0.5 leading-relaxed">
-                                  {item.description}
-                                </div>
+                                <div className="font-semibold text-electric text-base mb-1">Documentation</div>
+                                <p className="text-xs text-foreground-secondary leading-relaxed mb-4">
+                                  Setup guides, API reference & tutorials to get the most out of Callengo.
+                                </p>
+                                <span className="inline-flex items-center gap-1.5 text-xs font-medium text-electric group-hover:gap-2.5 transition-all">
+                                  Browse docs
+                                  <ArrowRight className="w-3.5 h-3.5" />
+                                </span>
                               </div>
                             </Link>
-                          );
-                        })}
+                          </div>
+                        </div>
                       </div>
                     </motion.div>
                   )}

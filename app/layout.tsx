@@ -75,13 +75,17 @@ export default function RootLayout({
                   "@type": "Organization",
                   "@id": "https://callengo.com/#organization",
                   name: "Callengo",
+                  legalName: "Callengo",
                   url: "https://callengo.com",
                   logo: {
                     "@type": "ImageObject",
                     url: "https://callengo.com/callengo-logo.svg",
+                    width: 512,
+                    height: 512,
                   },
+                  image: "https://callengo.com/callengo-logo.svg",
                   description:
-                    "AI phone agents that automate appointment confirmations, data validation, and lead qualification for businesses.",
+                    "Callengo is an AI-powered phone automation platform that automates appointment confirmations, CRM data validation, and lead qualification for businesses. Three purpose-built voice agents that call your contacts, verify data, confirm appointments, and qualify leads at scale.",
                   foundingDate: "2025",
                   founder: {
                     "@type": "Person",
@@ -89,8 +93,35 @@ export default function RootLayout({
                     jobTitle: "CEO & Founder",
                     sameAs: "https://www.linkedin.com/in/cristopher-fuentes/",
                   },
+                  numberOfEmployees: {
+                    "@type": "QuantitativeValue",
+                    minValue: 2,
+                    maxValue: 10,
+                  },
+                  contactPoint: [
+                    {
+                      "@type": "ContactPoint",
+                      contactType: "sales",
+                      email: "sales@callengo.com",
+                      availableLanguage: ["English", "Spanish"],
+                    },
+                    {
+                      "@type": "ContactPoint",
+                      contactType: "customer support",
+                      email: "support@callengo.com",
+                      availableLanguage: ["English", "Spanish"],
+                    },
+                  ],
                   sameAs: [
                     "https://www.linkedin.com/company/callengo",
+                  ],
+                  knowsAbout: [
+                    "AI Phone Agents",
+                    "Appointment Confirmation Automation",
+                    "CRM Data Validation",
+                    "Lead Qualification",
+                    "Voice AI Technology",
+                    "Business Process Automation",
                   ],
                 },
                 {
@@ -98,8 +129,18 @@ export default function RootLayout({
                   "@id": "https://callengo.com/#website",
                   url: "https://callengo.com",
                   name: "Callengo",
+                  description:
+                    "AI-powered phone agents for appointment confirmations, data validation, and lead qualification.",
                   publisher: {
                     "@id": "https://callengo.com/#organization",
+                  },
+                  potentialAction: {
+                    "@type": "SearchAction",
+                    target: {
+                      "@type": "EntryPoint",
+                      urlTemplate: "https://callengo.com/help?q={search_term_string}",
+                    },
+                    "query-input": "required name=search_term_string",
                   },
                 },
                 {

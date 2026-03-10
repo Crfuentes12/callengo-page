@@ -1165,7 +1165,7 @@ export default function HowItWorks() {
           </div>
 
           {/* Main interactive area — fixed height prevents accordion from pushing page */}
-          <div className="grid lg:grid-cols-2 gap-8 xl:gap-12 items-start lg:min-h-[600px]">
+          <div className="grid lg:grid-cols-2 gap-8 xl:gap-12 items-start">
 
             {/* LEFT — Interactive mockup viewer */}
             <motion.div
@@ -1224,10 +1224,10 @@ export default function HowItWorks() {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="flex flex-col lg:h-[600px]"
+              className="flex flex-col"
             >
               {/* Step buttons with expandable active state — overflow auto keeps page stable */}
-              <div className="space-y-2 flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide">
+              <div className="space-y-2">
                 {steps.map((s, index) => {
                   const Icon = s.icon;
                   const isActive = index === activeStep;

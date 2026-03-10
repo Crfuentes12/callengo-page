@@ -153,6 +153,41 @@ const jsonLd = {
         },
       ],
     },
+    {
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "How does the Callengo free plan work?",
+          acceptedAnswer: { "@type": "Answer", text: "You get 15 one-time minutes to test Callengo with no credit card required. This includes full access to 1 AI agent, basic analytics, CSV import, and core integrations." },
+        },
+        {
+          "@type": "Question",
+          name: "What counts as a call minute in Callengo?",
+          acceptedAnswer: { "@type": "Answer", text: "Only the actual connected call duration counts toward your minutes. Failed connections, busy signals, and voicemails under 30 seconds are not billed." },
+        },
+        {
+          "@type": "Question",
+          name: "Can I upgrade or downgrade my Callengo plan anytime?",
+          acceptedAnswer: { "@type": "Answer", text: "Yes, you can change your plan at any time. Upgrades take effect immediately with prorated billing. Downgrades take effect at the end of your current billing cycle." },
+        },
+        {
+          "@type": "Question",
+          name: "What happens if I exceed my monthly call minutes?",
+          acceptedAnswer: { "@type": "Answer", text: "You'll be charged the per-minute overage rate for your plan: $0.29/min (Starter), $0.26/min (Growth), $0.23/min (Business), $0.20/min (Teams), $0.17/min (Enterprise)." },
+        },
+        {
+          "@type": "Question",
+          name: "Does Callengo offer annual billing discounts?",
+          acceptedAnswer: { "@type": "Answer", text: "Yes! Annual billing saves 12%, equivalent to 2 months free. For example, the Business plan goes from $299/mo to $263/mo when billed annually." },
+        },
+        {
+          "@type": "Question",
+          name: "Which CRM integrations are included in Callengo?",
+          acceptedAnswer: { "@type": "Answer", text: "Core integrations (Google Calendar, Meet, Zoom, Stripe, Sheets) are included on all plans. CRM integrations like HubSpot, Pipedrive, Salesforce, Zoho, and Dynamics 365 are available on higher-tier plans." },
+        },
+      ],
+    },
   ],
 };
 

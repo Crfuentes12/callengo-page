@@ -19,6 +19,9 @@ import {
   Shield,
   Globe,
   Search,
+  Plus,
+  Minus,
+  HelpCircle,
 } from "lucide-react";
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -562,6 +565,9 @@ export default function IntegrationsPage() {
           </div>
         </section>
 
+        {/* ────────── Integration FAQ ────────── */}
+        <IntegrationFAQ />
+
         {/* ────────── CTA ────────── */}
         <section className="section bg-background-secondary">
           <div className="max-w-7xl mx-auto px-6">
@@ -631,5 +637,119 @@ export default function IntegrationsPage() {
       </main>
       <Footer />
     </>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   INTEGRATION FAQ
+   ═══════════════════════════════════════════════════════════════════ */
+
+const integrationFaqs = [
+  {
+    q: "How do Callengo integrations work?",
+    a: "Callengo connects to your existing tools through secure OAuth or API key authentication. Once connected, data flows automatically between Callengo and your CRM, calendar, or communication tools. When an AI agent completes a call, the results — contact updates, appointment confirmations, lead scores — are synced to your connected tools in real time.",
+  },
+  {
+    q: "Can I integrate Callengo with my CRM?",
+    a: "Yes! Callengo integrates natively with 6 CRMs: HubSpot and Pipedrive (Business+), Salesforce, Zoho CRM, and Microsoft Dynamics 365 (Teams+), and Clio for legal practices (Enterprise). For other CRMs, you can use webhooks with Zapier, Make, or n8n to connect Callengo to virtually any system.",
+  },
+  {
+    q: "Which integrations are available on the free plan?",
+    a: "The free plan includes Google Calendar, Google Meet, Zoom, Stripe, and Google Sheets. These core integrations let you sync calendars, generate video meeting links, and export call results without upgrading.",
+  },
+  {
+    q: "How do I connect Callengo with Salesforce?",
+    a: "Salesforce integration is available on Teams and Enterprise plans. Go to Settings > Integrations in your Callengo dashboard, click Connect next to Salesforce, authenticate with your Salesforce admin account, and map your Salesforce objects (Contacts, Leads, Accounts, Tasks) to Callengo fields. Call outcomes, lead scores, and activity logs sync automatically.",
+  },
+  {
+    q: "Can Callengo sync with Google Calendar and Outlook?",
+    a: "Yes. Google Calendar is available on all plans, and Outlook Calendar is available on Business+ plans. Both support two-way sync: confirmed, rescheduled, or cancelled appointments update your calendar automatically. Callengo also reads your calendar availability to avoid double-booking during calls.",
+  },
+  {
+    q: "Does Callengo support webhooks?",
+    a: "Yes, webhooks are available on Starter+ plans. Callengo sends real-time POST requests to any URL when events occur (call completed, contact updated, appointment confirmed). You can use webhooks with Zapier, Make (Integromat), or n8n to connect Callengo to 5,000+ apps.",
+  },
+  {
+    q: "How does the Slack integration work?",
+    a: "The Slack integration (Starter+) sends real-time notifications to your Slack channels when calls are completed. You can configure which events trigger notifications, route different campaigns to different channels, and set up custom alert formats. Great for sales teams who want instant visibility into call outcomes.",
+  },
+  {
+    q: "Can I use Callengo with HubSpot?",
+    a: "HubSpot integration is available on Business+ plans. Callengo syncs contact records, logs call activities, updates deal stages, and can trigger HubSpot workflows based on call outcomes. For example, when a lead is qualified as 'hot', Callengo can automatically update the deal stage and notify the assigned sales rep in HubSpot.",
+  },
+  {
+    q: "What happens if an integration disconnects?",
+    a: "If an integration loses its connection, Callengo queues all data locally and alerts you via email and dashboard notification. Once you reconnect, all queued data syncs automatically. No data is lost during disconnection periods.",
+  },
+  {
+    q: "Can I build custom integrations with the Callengo API?",
+    a: "Yes! Beyond native integrations, Callengo provides webhooks for real-time event streaming and CSV/JSON export capabilities. You can build custom integrations using Zapier, Make, n8n, or directly via webhook endpoints. Enterprise customers can work with our team on custom integration development.",
+  },
+];
+
+function IntegrationFAQ() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  return (
+    <section className="section bg-background">
+      <div className="max-w-4xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-electric/10 border border-electric/20 text-electric text-xs font-medium mb-4">
+            <HelpCircle className="w-3.5 h-3.5" />
+            Integration FAQ
+          </div>
+          <h2 className="text-3xl font-semibold mb-4" style={{ fontFamily: "var(--font-display)" }}>
+            Integration questions answered
+          </h2>
+          <p className="text-foreground-secondary">
+            Common questions about connecting Callengo with your CRM, calendar, and business tools.
+          </p>
+        </motion.div>
+
+        <div className="space-y-3">
+          {integrationFaqs.map((faq, i) => {
+            const isOpen = openIndex === i;
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.03 }}
+                className="border border-border rounded-xl overflow-hidden bg-white"
+                style={{ boxShadow: isOpen ? "var(--shadow-sm)" : "none" }}
+              >
+                <button
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                  className="w-full flex items-center justify-between gap-4 px-6 py-4 text-left cursor-pointer"
+                >
+                  <span className="text-sm font-semibold text-foreground" style={{ fontFamily: "var(--font-display)" }}>
+                    {faq.q}
+                  </span>
+                  <span className="shrink-0 w-6 h-6 rounded-full bg-background-secondary flex items-center justify-center">
+                    {isOpen ? <Minus className="w-3.5 h-3.5 text-electric" /> : <Plus className="w-3.5 h-3.5 text-foreground-tertiary" />}
+                  </span>
+                </button>
+                <div
+                  className="grid transition-[grid-template-rows] duration-300 ease-in-out"
+                  style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
+                >
+                  <div className="overflow-hidden">
+                    <p className="px-6 pb-5 text-sm text-foreground-secondary leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>
+                      {faq.a}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
   );
 }

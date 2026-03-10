@@ -846,22 +846,39 @@ const seoData: Record<string, { title: string; description: string; correctPlan:
 };
 
 function getFaqs(integration: IntegrationDetail): FAQ[] {
+  const plan = seoData[integration.slug]?.correctPlan || integration.minPlan;
   return [
     {
       question: `How do I connect ${integration.name} to Callengo?`,
-      answer: `To connect ${integration.name}, navigate to Settings > Integrations in your Callengo dashboard and click "Connect" next to ${integration.name}. ${integration.setup[0] || ""} The setup takes just a few minutes and requires no coding.`,
+      answer: `To connect ${integration.name}, navigate to Settings > Integrations in your Callengo dashboard and click "Connect" next to ${integration.name}. ${integration.setup[0] || ""} The setup takes just a few minutes and requires no coding. Once connected, data syncs automatically after every AI call.`,
     },
     {
       question: `What data syncs between Callengo and ${integration.name}?`,
-      answer: `Callengo syncs the following data with ${integration.name}: ${integration.syncedData.slice(0, 4).join(", ")}, and more. All data flows are automatic after the initial setup.`,
+      answer: `Callengo syncs the following data with ${integration.name}: ${integration.syncedData.slice(0, 5).join(", ")}, and more. All data flows are automatic and happen in real time after each call completes. You can customize which fields sync in your integration settings.`,
     },
     {
       question: `Which Callengo plan do I need for the ${integration.name} integration?`,
-      answer: `The ${integration.name} integration is available on the ${seoData[integration.slug]?.correctPlan || integration.minPlan} plan and above. You can start with a free trial that includes 15 minutes of AI calling to test the integration before committing.`,
+      answer: `The ${integration.name} integration is available on the ${plan} plan and above. You can start with a free trial that includes 15 minutes of AI calling to test the integration. No credit card required. If you need ${integration.name}, choose the ${plan} plan ($${plan === "Free" ? "0" : plan === "Starter" ? "99" : plan === "Business" ? "299" : plan === "Teams" ? "649" : "1,499"}/mo) or higher.`,
     },
     {
       question: `Can I use ${integration.name} with all three Callengo AI agents?`,
-      answer: `Yes, the ${integration.name} integration works with all three Callengo AI agents: Data Validation, Appointment Confirmation, and Lead Qualification. Each agent type syncs relevant data to ${integration.name} based on the call outcomes.`,
+      answer: `Yes, the ${integration.name} integration works with all three Callengo AI agents: Data Validation (verify contact information), Appointment Confirmation (confirm, reschedule, or cancel appointments), and Lead Qualification (score leads using BANT framework). Each agent type syncs relevant data to ${integration.name} based on call outcomes.`,
+    },
+    {
+      question: `Is the Callengo and ${integration.name} integration secure?`,
+      answer: `Yes. Callengo uses OAuth 2.0 or secure API key authentication to connect with ${integration.name}. All data is encrypted in transit (TLS 1.2+) and at rest. Callengo is SOC 2 aligned, GDPR compliant, and follows TCPA regulations. You can revoke access to ${integration.name} at any time from your dashboard.`,
+    },
+    {
+      question: `How long does it take to set up Callengo with ${integration.name}?`,
+      answer: `Most users connect Callengo with ${integration.name} in under 5 minutes. The setup involves authenticating your ${integration.name} account, mapping a few data fields, and running a test. No coding or IT involvement is required. Our step-by-step guide walks you through every click.`,
+    },
+    {
+      question: `What happens if the ${integration.name} connection is lost?`,
+      answer: `If the connection to ${integration.name} is temporarily lost, Callengo queues all data locally and alerts you via email and dashboard notification. Once reconnected, all queued data syncs automatically. No call data is ever lost during disconnection periods. You can also manually trigger a resync from your dashboard.`,
+    },
+    {
+      question: `Can I customize which data Callengo sends to ${integration.name}?`,
+      answer: `Yes. Callengo's integration settings allow you to map specific data fields, choose which call outcomes trigger syncs, and configure filters. For example, you can choose to only sync "hot" lead scores to ${integration.name}, or only create records when appointments are confirmed. Field mapping is fully customizable.`,
     },
   ];
 }
@@ -891,23 +908,43 @@ export async function generateMetadata({
   const title = seo?.title || `Callengo and ${integration.name} Integration`;
   const description = seo?.description || `Connect Callengo AI phone agents with ${integration.name}. ${integration.tagline}. Set up in minutes.`;
 
+  const categoryKeywords: Record<string, string[]> = {
+    Calendar: ["calendar sync AI", "automated appointment sync", "AI calendar integration", "two-way calendar sync"],
+    Video: ["AI video meeting link", "automated meeting scheduling", "video conferencing automation", "AI appointment video link"],
+    CRM: ["CRM AI integration", "AI voice with your CRM", "automated CRM sync", "CRM data automation", "AI calling CRM"],
+    Communication: ["AI call notifications", "automated call alerts", "real-time call updates"],
+    Productivity: ["AI data export", "automated reporting", "call data sync"],
+    Automation: ["AI workflow automation", "automated triggers", "webhook automation", "API integration"],
+  };
+
   return {
     title,
     description,
     keywords: [
+      `Callengo integrate with ${integration.name}`,
+      `Callengo and ${integration.name}`,
       `Callengo ${integration.name} integration`,
       `${integration.name} AI phone agent`,
-      `${integration.name} automation`,
+      `${integration.name} AI voice integration`,
+      `AI voice with ${integration.name}`,
+      `connect Callengo to ${integration.name}`,
       `Callengo ${integration.category.toLowerCase()} integration`,
       "AI phone agents",
       "automated phone calls",
-      integration.category === "CRM" ? "CRM integration" : `${integration.category} integration`,
+      "AI voice agents",
+      "business automation",
+      ...(categoryKeywords[integration.category] || []),
     ],
     openGraph: {
       title,
       description,
       type: "website",
       url: `https://callengo.com/integrations/${slug}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
     },
     alternates: {
       canonical: `https://callengo.com/integrations/${slug}`,
@@ -1065,6 +1102,54 @@ export default async function IntegrationDetailPage({
               </p>
             </div>
 
+            {/* Why connect — SEO rich */}
+            <div className="border border-border rounded-xl p-8 bg-white">
+              <h2
+                className="text-xl font-bold text-foreground mb-4 flex items-center gap-3"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                <Zap className="w-5 h-5 text-electric" />
+                Why Connect Callengo with {integration.name}
+              </h2>
+              <div className="text-foreground-secondary leading-relaxed space-y-4">
+                <p>
+                  Connecting Callengo AI voice agents with {integration.name} eliminates manual data entry and ensures your {integration.category === "CRM" ? "CRM stays up to date" : integration.category === "Calendar" ? "calendar is always current" : integration.category === "Video" ? "video meetings are automatically scheduled" : integration.category === "Communication" ? "team stays informed in real time" : "workflows run automatically"} after every AI phone call. Instead of copying call results between systems, the Callengo and {integration.name} integration handles it instantly.
+                </p>
+                <p>
+                  When a Callengo AI agent completes a call — whether it&apos;s confirming an appointment, validating contact data, or qualifying a lead — the results flow directly into {integration.name}. This means your team always has the latest information without lifting a finger. No more stale data, missed updates, or manual reconciliation between systems.
+                </p>
+                <p>
+                  Businesses using Callengo with {integration.name} report saving 15-20 hours per week on manual data entry and see a 40-60% improvement in data accuracy. The integration supports all three Callengo AI agents and works with your existing {integration.name} configuration — no changes to your current setup required.
+                </p>
+              </div>
+            </div>
+
+            {/* How AI voice works with this integration */}
+            <div className="border border-border rounded-xl p-8 bg-white">
+              <h2
+                className="text-xl font-bold text-foreground mb-4 flex items-center gap-3"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                <ArrowRight className="w-5 h-5 text-electric" />
+                How Callengo AI Voice Agents Work with {integration.name}
+              </h2>
+              <div className="text-foreground-secondary leading-relaxed space-y-4">
+                <p>
+                  Here&apos;s the end-to-end flow when you use Callengo with {integration.name}:
+                </p>
+                <ol className="list-decimal list-inside space-y-2 pl-2">
+                  <li><strong>Import contacts</strong> — Upload contacts via CSV, Google Sheets, or sync from your {integration.category === "CRM" ? "CRM" : "existing tools"}.</li>
+                  <li><strong>Configure your AI agent</strong> — Choose Data Validation, Appointment Confirmation, or Lead Qualification. Customize the call script and voice.</li>
+                  <li><strong>Launch the campaign</strong> — Callengo&apos;s AI agents call your contacts automatically, handling conversations naturally.</li>
+                  <li><strong>Automatic {integration.name} sync</strong> — Call results (outcomes, verified data, lead scores, appointment statuses) are pushed to {integration.name} in real time.</li>
+                  <li><strong>Review and act</strong> — Your team sees updated records in {integration.name} immediately, ready to follow up on hot leads, confirmed appointments, or updated contacts.</li>
+                </ol>
+                <p>
+                  The entire process is hands-off after initial setup. Callengo handles the calling, the conversation, the data extraction, and the {integration.name} sync. Your team focuses on the outcomes, not the process.
+                </p>
+              </div>
+            </div>
+
             {/* Setup instructions */}
             <div className="border border-border rounded-xl p-8 bg-white">
               <h2
@@ -1072,7 +1157,7 @@ export default async function IntegrationDetailPage({
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 <Settings className="w-5 h-5 text-electric" />
-                Setup Instructions
+                Step-by-Step Setup Instructions
               </h2>
               <ol className="space-y-4">
                 {integration.setup.map((step, i) => (
@@ -1155,6 +1240,47 @@ export default async function IntegrationDetailPage({
                   </li>
                 ))}
               </ul>
+            </div>
+
+            {/* Key Benefits */}
+            <div className="border border-border rounded-xl p-8 bg-white">
+              <h2
+                className="text-xl font-bold text-foreground mb-6 flex items-center gap-3"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                <Check className="w-5 h-5 text-accent-dark" />
+                Key Benefits of the Callengo + {integration.name} Integration
+              </h2>
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-sm text-foreground">Zero Manual Data Entry</p>
+                    <p className="text-xs text-foreground-secondary mt-1">Call results sync to {integration.name} automatically after every AI call.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-sm text-foreground">Real-Time Updates</p>
+                    <p className="text-xs text-foreground-secondary mt-1">Data flows in seconds, not hours. Your team always has the latest information.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-sm text-foreground">No Code Required</p>
+                    <p className="text-xs text-foreground-secondary mt-1">Connect in minutes with guided setup. No developers or IT team needed.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-sm text-foreground">Works With All 3 Agents</p>
+                    <p className="text-xs text-foreground-secondary mt-1">Data Validation, Appointment Confirmation, and Lead Qualification all sync with {integration.name}.</p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Limitations */}

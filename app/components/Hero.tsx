@@ -372,70 +372,31 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* ─── RIGHT COLUMN: Glassmorphism Audio Player ─── */}
+          {/* ─── RIGHT COLUMN: Minimal Audio Player ─── */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="relative flex justify-center"
+            className="relative flex items-center justify-center"
           >
-            {/* No shadow blobs - let the page lava lamp handle the background */}
-
-            <div className="relative w-full max-w-md">
-              {/* ── Glassmorphism Card ── */}
+            <div className="relative w-full max-w-sm">
               <div
-                className="rounded-3xl overflow-hidden"
+                className="rounded-2xl overflow-hidden"
                 style={{
                   background: "rgba(255, 255, 255, 0.12)",
                   backdropFilter: "blur(40px)",
                   WebkitBackdropFilter: "blur(40px)",
                   border: "1px solid rgba(255, 255, 255, 0.18)",
-                  boxShadow: "0 16px 48px rgba(30, 45, 107, 0.10), 0 4px 16px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255,255,255,0.2)",
+                  boxShadow: "0 8px 32px rgba(30, 45, 107, 0.08), inset 0 1px 0 rgba(255,255,255,0.2)",
                 }}
               >
-
-                {/* ── Compact top bar ── */}
-                <div className="px-4 pt-4 pb-2 flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <div
-                      className="w-8 h-8 rounded-xl flex items-center justify-center"
-                      style={{
-                        background: "rgba(79, 95, 232, 0.15)",
-                        border: "1px solid rgba(79, 95, 232, 0.2)",
-                      }}
-                    >
-                      <Phone className="w-3.5 h-3.5 text-electric" />
-                    </div>
-                    <div>
-                      <div className="text-xs font-semibold text-foreground leading-tight" style={{ fontFamily: "var(--font-display)" }}>
-                        {scenario.agentName}
-                      </div>
-                      <div className="text-[10px] text-foreground-tertiary font-mono">{scenario.phone}</div>
-                    </div>
-                  </div>
-                  {isPlaying && (
-                    <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="flex items-center gap-1.5 px-2 py-0.5 rounded-full" style={{ background: "rgba(239, 68, 68, 0.1)", border: "1px solid rgba(239, 68, 68, 0.15)" }}>
-                      <span className="relative flex h-1.5 w-1.5">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
-                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500" />
-                      </span>
-                      <span className="text-[9px] font-bold tracking-wider text-red-500">LIVE</span>
-                    </motion.div>
-                  )}
-                </div>
-
-                {/* ── Transcript area (compact) ── */}
-                <div className="h-44 flex flex-col min-h-0 relative">
+                {/* ── Transcript area ── */}
+                <div className="h-36 flex flex-col min-h-0 relative">
                   {!hasStartedPlaying ? (
                     <div className="flex-1 flex flex-col items-center justify-center px-5">
-                      <div className="mb-3 text-center">
-                        <p className="text-xs text-foreground-secondary mb-1" style={{ fontFamily: "var(--font-body)" }}>
-                          {scenario.ctaHeadline}
-                        </p>
-                        <p className="text-[10px] text-foreground-tertiary" style={{ fontFamily: "var(--font-body)" }}>
-                          {scenario.ctaSub}
-                        </p>
-                      </div>
+                      <p className="text-[11px] text-foreground-secondary mb-3 text-center" style={{ fontFamily: "var(--font-body)" }}>
+                        {scenario.ctaHeadline}
+                      </p>
                       <button
                         onClick={handlePlayPause}
                         className="flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-semibold transition-all cursor-pointer hover:scale-105 active:scale-95"
@@ -513,8 +474,8 @@ export default function Hero() {
                       className="overflow-hidden"
                     >
                       <div
-                        className="px-4 py-2 flex flex-wrap gap-1.5"
-                        style={{ borderTop: "1px solid rgba(221, 224, 238, 0.3)" }}
+                        className="px-3 py-2 flex flex-wrap gap-1.5"
+                        style={{ borderTop: "1px solid rgba(221, 224, 238, 0.2)" }}
                       >
                         {visibleFields.map((field, idx) => (
                           <motion.div
@@ -543,26 +504,28 @@ export default function Hero() {
                   )}
                 </AnimatePresence>
 
-                {/* ── Compact player controls ── */}
+                {/* ── Minimal player controls ── */}
                 <div
-                  className="px-4 py-3 flex items-center gap-2.5"
-                  style={{ borderTop: "1px solid rgba(221, 224, 238, 0.3)" }}
+                  className="px-3 py-2.5 flex items-center gap-2"
+                  style={{ borderTop: "1px solid rgba(221, 224, 238, 0.2)" }}
                 >
                   <button
                     onClick={handlePlayPause}
-                    className="w-8 h-8 rounded-full flex items-center justify-center transition-all cursor-pointer active:scale-90 shrink-0"
+                    className="w-7 h-7 rounded-full flex items-center justify-center transition-all cursor-pointer active:scale-90 shrink-0"
                     style={{
                       background: "rgba(79, 95, 232, 0.15)",
                       border: "1px solid rgba(79, 95, 232, 0.25)",
                     }}
                   >
-                    {isPlaying ? <Pause className="w-3.5 h-3.5 text-electric" /> : <Play className="w-3.5 h-3.5 text-electric ml-0.5" />}
+                    {isPlaying ? <Pause className="w-3 h-3 text-electric" /> : <Play className="w-3 h-3 text-electric ml-0.5" />}
                   </button>
 
-                  <div className="flex-1 space-y-1">
-                    {/* Progress bar */}
+                  <div className="flex-1 flex items-center gap-2">
+                    <span className="text-[9px] text-foreground-tertiary font-mono tabular-nums w-7 text-right">
+                      {formatTime(currentTime)}
+                    </span>
                     <div
-                      className="h-1 rounded-full overflow-hidden cursor-pointer relative group"
+                      className="flex-1 h-1 rounded-full overflow-hidden cursor-pointer"
                       style={{ background: "rgba(221, 224, 238, 0.4)" }}
                       onClick={handleProgressClick}
                     >
@@ -574,46 +537,35 @@ export default function Hero() {
                         }}
                       />
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-[9px] text-foreground-tertiary font-mono tabular-nums">
-                        {formatTime(currentTime)}
-                      </span>
-                      <span className="text-[9px] text-foreground-tertiary font-mono tabular-nums">
-                        {formatTime(scenario.duration)}
-                      </span>
-                    </div>
+                    <span className="text-[9px] text-foreground-tertiary font-mono tabular-nums w-7">
+                      {formatTime(scenario.duration)}
+                    </span>
                   </div>
 
                   <button
                     onClick={nextScenario}
-                    className="w-7 h-7 rounded-full flex items-center justify-center transition-all cursor-pointer hover:bg-background-tertiary active:scale-90 shrink-0"
+                    className="w-6 h-6 rounded-full flex items-center justify-center transition-all cursor-pointer hover:bg-white/10 active:scale-90 shrink-0"
                     title="Next demo"
                   >
                     <SkipForward className="w-3 h-3 text-foreground-tertiary" />
                   </button>
                 </div>
 
-                {/* ── Scenario selector: compact pills ── */}
-                <div
-                  className="px-4 pb-3 flex items-center justify-center gap-1.5"
-                >
+                {/* ── Scenario dots ── */}
+                <div className="px-3 pb-2.5 flex items-center justify-center gap-1.5">
                   {scenarios.map((s, index) => (
                     <button
                       key={s.id}
                       onClick={() => handleScenarioChange(index)}
-                      className={`px-2.5 py-1 rounded-full text-[10px] font-medium transition-all cursor-pointer ${
-                        activeScenario === index
-                          ? "text-white"
-                          : "text-foreground-tertiary hover:text-foreground-secondary"
-                      }`}
+                      className="w-1.5 h-1.5 rounded-full transition-all cursor-pointer"
                       style={{
                         background: activeScenario === index
-                          ? "linear-gradient(135deg, #4F5FE8 0%, #3347D4 100%)"
-                          : "rgba(236, 237, 245, 0.5)",
+                          ? "var(--color-electric)"
+                          : "rgba(221, 224, 238, 0.5)",
+                        transform: activeScenario === index ? "scale(1.3)" : "scale(1)",
                       }}
-                    >
-                      {s.label}
-                    </button>
+                      title={s.label}
+                    />
                   ))}
                 </div>
               </div>

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Star } from "lucide-react";
 
 const testimonials = [
@@ -12,6 +13,7 @@ const testimonials = [
     author: "Sarah Mitchell",
     role: "VP of Sales",
     company: "TechScale Inc.",
+    avatar: "/testimonials/sarah.png",
     metric: { value: "3x", label: "conversion rate" },
   },
   {
@@ -21,6 +23,7 @@ const testimonials = [
     author: "Dr. James Chen",
     role: "Practice Owner",
     company: "ChenMed Clinic",
+    avatar: "/testimonials/james.png",
     metric: { value: "68%", label: "fewer no-shows" },
   },
   {
@@ -30,6 +33,7 @@ const testimonials = [
     author: "Michael Torres",
     role: "Director of Operations",
     company: "DataForce Global",
+    avatar: "/testimonials/michael.png",
     metric: { value: "50K", label: "contacts verified" },
   },
   {
@@ -39,6 +43,7 @@ const testimonials = [
     author: "Emma Rodriguez",
     role: "Head of Growth",
     company: "Launchpad.io",
+    avatar: "/testimonials/emma.png",
     metric: { value: "<60s", label: "response time" },
   },
   {
@@ -68,12 +73,22 @@ function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
         <span className="text-xs text-white/60 ml-2" style={{ fontFamily: "var(--font-body)" }}>{t.metric.label}</span>
       </div>
       <div className="flex items-center gap-3">
-        <div
-          className="w-9 h-9 rounded-full flex items-center justify-center text-white font-semibold text-xs shrink-0"
-          style={{ background: "linear-gradient(135deg, #4F5FE8 0%, #1E2D6B 100%)" }}
-        >
-          {t.author.split(" ").map((n) => n[0]).join("")}
-        </div>
+        {t.avatar ? (
+          <Image
+            src={t.avatar}
+            alt={t.author}
+            width={36}
+            height={36}
+            className="w-9 h-9 rounded-full object-cover shrink-0"
+          />
+        ) : (
+          <div
+            className="w-9 h-9 rounded-full flex items-center justify-center text-white font-semibold text-xs shrink-0"
+            style={{ background: "linear-gradient(135deg, #4F5FE8 0%, #1E2D6B 100%)" }}
+          >
+            {t.author.split(" ").map((n) => n[0]).join("")}
+          </div>
+        )}
         <div>
           <div className="font-semibold text-foreground text-sm">{t.author}</div>
           <div className="text-foreground-tertiary text-xs" style={{ fontFamily: "var(--font-body)" }}>

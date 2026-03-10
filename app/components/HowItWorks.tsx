@@ -1199,8 +1199,8 @@ export default function HowItWorks() {
                   </div>
                 </div>
 
-                {/* Mockup area */}
-                <div className="relative bg-white overflow-hidden" style={{ aspectRatio: "4 / 3" }}>
+                {/* Mockup area — slightly taller ratio to prevent content clipping */}
+                <div className="relative bg-white overflow-y-auto overflow-x-hidden" style={{ aspectRatio: "4 / 3.2" }}>
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={activeStep}
@@ -1208,7 +1208,7 @@ export default function HowItWorks() {
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.98 }}
                       transition={{ duration: 0.5, ease: "easeInOut" }}
-                      className="absolute inset-0 overflow-hidden"
+                      className="absolute inset-0 overflow-y-auto overflow-x-hidden"
                     >
                       <ActiveMockup active={true} />
                     </motion.div>
@@ -1225,9 +1225,10 @@ export default function HowItWorks() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="flex flex-col"
+              style={{ minHeight: 540 }}
             >
-              {/* Step buttons with expandable active state — overflow auto keeps page stable */}
-              <div className="space-y-2">
+              {/* Step buttons — fixed min-height prevents accordion from shifting page */}
+              <div className="space-y-2 flex-1">
                 {steps.map((s, index) => {
                   const Icon = s.icon;
                   const isActive = index === activeStep;
@@ -1268,44 +1269,44 @@ export default function HowItWorks() {
                         </div>
                       </div>
 
-                      {/* Expanded content for active step */}
-                      {isActive && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          transition={{ duration: 0.3 }}
-                          className="px-4 pb-3.5"
-                        >
-                          <p className="text-[12px] text-white/60 leading-relaxed mt-1.5 pl-12" style={{ fontFamily: "var(--font-body)" }}>
-                            {s.description}
-                          </p>
-                          <div className="flex flex-wrap gap-1.5 mt-2.5 pl-12">
-                            {s.highlights.map((h) => (
-                              <span
-                                key={h}
-                                className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium text-white/70 border border-white/15 bg-white/[0.08]"
-                              >
-                                <CheckCircle2 className="w-2.5 h-2.5 text-accent/70" />
-                                {h}
-                              </span>
-                            ))}
-                          </div>
-                          {!isPaused && (
-                            <div className="h-1 bg-white/10 rounded-full overflow-hidden mt-3 ml-12">
-                              <motion.div
-                                className="h-full rounded-full"
-                                style={{ width: `${progress}%`, background: "rgba(255, 255, 255, 0.5)" }}
-                              />
+                      {/* Expanded content for active step — uses grid row trick for smooth height without layout shift */}
+                      <div
+                        className="grid transition-[grid-template-rows] duration-300 ease-in-out"
+                        style={{ gridTemplateRows: isActive ? "1fr" : "0fr" }}
+                      >
+                        <div className="overflow-hidden">
+                          <div className="px-4 pb-3.5">
+                            <p className="text-[12px] text-white/60 leading-relaxed mt-1.5 pl-12" style={{ fontFamily: "var(--font-body)" }}>
+                              {s.description}
+                            </p>
+                            <div className="flex flex-wrap gap-1.5 mt-2.5 pl-12">
+                              {s.highlights.map((h) => (
+                                <span
+                                  key={h}
+                                  className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium text-white/70 border border-white/15 bg-white/[0.08]"
+                                >
+                                  <CheckCircle2 className="w-2.5 h-2.5 text-accent/70" />
+                                  {h}
+                                </span>
+                              ))}
                             </div>
-                          )}
-                        </motion.div>
-                      )}
+                            {isActive && !isPaused && (
+                              <div className="h-1 bg-white/10 rounded-full overflow-hidden mt-3 ml-12">
+                                <motion.div
+                                  className="h-full rounded-full"
+                                  style={{ width: `${progress}%`, background: "rgba(255, 255, 255, 0.5)" }}
+                                />
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
                     </button>
                   );
                 })}
               </div>
 
-              <div className="pt-6 space-y-2.5">
+              <div className="pt-6 space-y-2.5 mt-auto">
                 <a
                   href="https://app.callengo.com/auth/signup"
                   className="btn w-full rounded-xl justify-center text-sm py-3.5 hover:-translate-y-0.5 transition-all text-electric font-semibold"

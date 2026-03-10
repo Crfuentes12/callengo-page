@@ -1046,7 +1046,7 @@ export default function HowItWorks() {
   const ActiveMockup = step.Mockup;
 
   return (
-    <section className="relative overflow-hidden" id="how-it-works">
+    <section className="relative overflow-hidden section-dark" id="how-it-works">
       {/* Gradient background */}
       <div className="absolute inset-0 gradient-bg" />
 
@@ -1190,8 +1190,8 @@ export default function HowItWorks() {
                       onClick={() => handleStepClick(index)}
                       className={`w-full text-left rounded-xl border transition-all duration-300 cursor-pointer group ${
                         isActive
-                          ? "border-white/20 bg-white/10"
-                          : "border-transparent bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/10"
+                          ? "border-white/25 bg-white/15 backdrop-blur-sm"
+                          : "border-white/8 bg-white/[0.06] hover:bg-white/[0.10] hover:border-white/15 backdrop-blur-sm"
                       }`}
                     >
                       <div className="px-4 py-3">
@@ -1200,23 +1200,23 @@ export default function HowItWorks() {
                             className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-all ${
                               isActive
                                 ? "bg-white text-electric shadow-lg"
-                                : "bg-white/10 group-hover:bg-white/15"
+                                : "bg-white/15 group-hover:bg-white/20"
                             }`}
                             style={isActive ? { boxShadow: "0 4px 16px rgba(79, 95, 232, 0.3)" } : {}}
                           >
-                            <Icon className={`w-4.5 h-4.5 ${isActive ? "text-electric" : "text-white/50"}`} />
+                            <Icon className={`w-4.5 h-4.5 ${isActive ? "text-electric" : "text-white/60"}`} />
                           </div>
 
                           <div className="flex-1 min-w-0 flex items-center gap-2">
-                            <span className={`text-[11px] font-bold tabular-nums ${isActive ? "text-white/80" : "text-white/25"}`}>
+                            <span className={`text-[11px] font-bold tabular-nums ${isActive ? "text-white/90" : "text-white/40"}`}>
                               {s.number}
                             </span>
-                            <span className={`text-sm font-semibold leading-tight ${isActive ? "text-white" : "text-white/50 group-hover:text-white/60"}`}>
+                            <span className={`text-sm font-semibold leading-tight ${isActive ? "text-white" : "text-white/65 group-hover:text-white/75"}`}>
                               {s.title}
                             </span>
                           </div>
 
-                          <ChevronRight className={`w-4 h-4 shrink-0 transition-all ${isActive ? "text-white/60 rotate-90" : "text-white/25 group-hover:text-white/40"}`} />
+                          <ChevronRight className={`w-4 h-4 shrink-0 transition-all ${isActive ? "text-white/70 rotate-90" : "text-white/35 group-hover:text-white/50"}`} />
                         </div>
                       </div>
                     </button>
@@ -1225,7 +1225,7 @@ export default function HowItWorks() {
               </div>
 
               {/* Active step details — fixed-height container, no layout shift */}
-              <div className="mt-4 rounded-xl border border-white/15 bg-white/[0.06] px-5 py-4" style={{ minHeight: "160px" }}>
+              <div className="mt-4 rounded-xl border border-white/20 bg-white/[0.10] backdrop-blur-sm px-5 py-4" style={{ minHeight: "160px" }}>
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeStep}
@@ -1234,13 +1234,13 @@ export default function HowItWorks() {
                     exit={{ opacity: 0, y: -6 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <p className="text-[13px] text-white/60 leading-relaxed mb-3" style={{ fontFamily: "var(--font-body)" }}>
+                    <p className="text-[13px] text-white/75 leading-relaxed mb-3" style={{ fontFamily: "var(--font-body)" }}>
                       {step.description}
                     </p>
                     <div className="flex flex-wrap gap-2 mb-3">
                       {step.highlights.map((h) => (
-                        <span key={h} className="inline-flex items-center gap-1 text-[11px] px-2.5 py-1 rounded-full bg-white/10 text-white/70 border border-white/10">
-                          <CheckCircle2 className="w-3 h-3 text-white/50" />
+                        <span key={h} className="inline-flex items-center gap-1 text-[11px] px-2.5 py-1 rounded-full bg-white/15 text-white/80 border border-white/15">
+                          <CheckCircle2 className="w-3 h-3 text-white/60" />
                           {h}
                         </span>
                       ))}

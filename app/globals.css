@@ -144,6 +144,15 @@
     background: rgba(255, 255, 255, 0.25);
     color: #FFFFFF;
   }
+
+  /* Fix selection on white buttons inside dark sections */
+  .gradient-bg .btn-cta-white::selection,
+  .gradient-bg .btn-cta-white *::selection,
+  .section-dark .btn-cta-white::selection,
+  .section-dark .btn-cta-white *::selection {
+    background: rgba(79, 95, 232, 0.3);
+    color: var(--color-primary-dark);
+  }
 }
 
 /* ============================================================

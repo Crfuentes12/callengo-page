@@ -1,62 +1,100 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  Target,
+  Eye,
+  Lightbulb,
+  Shield,
+  TrendingUp,
+  Users,
+  Zap,
+  CheckCircle2,
+  Phone,
+  Database,
+  Calendar,
+  BarChart3,
+} from "lucide-react";
 import AnimatedBlobs from "../components/AnimatedBlobs";
 
-const stats = [
-  { label: "Revenue Recovered", value: "$50M+" },
-  { label: "Hours Saved", value: "500K+" },
-  { label: "Happy Customers", value: "1,000+" },
-  { label: "Countries", value: "25+" },
+/* ─── Quality Framework Pillars ─── */
+const qualityPillars = [
+  {
+    title: "Customer Focus",
+    description:
+      "Every feature, every call script, every integration is designed starting from the customer's real pain points. We listen first, then build.",
+    icon: Target,
+  },
+  {
+    title: "Continuous Improvement",
+    description:
+      "We measure, analyze, and iterate relentlessly. Every call generates data that makes the next one better. Kaizen is not a buzzword — it's how we ship.",
+    icon: TrendingUp,
+  },
+  {
+    title: "Process Excellence",
+    description:
+      "Reliable outcomes come from reliable processes. Our AI agents follow structured, tested workflows — not guesswork. Consistency at scale.",
+    icon: Zap,
+  },
+  {
+    title: "Evidence-Based Decisions",
+    description:
+      "We don't assume — we verify. Call analytics, conversion rates, and quality scores drive every product decision and every campaign optimization.",
+    icon: BarChart3,
+  },
 ];
 
+/* ─── Core Values ─── */
 const values = [
   {
-    title: "Customer Obsession",
+    title: "Transparency",
     description:
-      "Every decision starts with: 'How does this help our customers succeed?'",
+      "We tell you exactly what our AI can and can't do. No inflated metrics, no hidden fees, no black boxes.",
+    icon: Eye,
   },
   {
-    title: "Results First",
+    title: "Impact Over Features",
     description:
-      "We measure success by the revenue we help you recover, not features shipped.",
+      "We measure success by the hours you save and the revenue you recover — not by the features we ship.",
+    icon: Target,
   },
   {
-    title: "Simplicity",
+    title: "Simplicity by Design",
     description:
-      "Complex problems deserve simple solutions. We keep it straightforward.",
+      "Complex technology should feel simple to use. Setup in minutes, results in hours, no technical expertise required.",
+    icon: Lightbulb,
   },
   {
-    title: "Trust",
+    title: "Trust & Compliance",
     description:
-      "We're upfront about what our technology can and can't do. No surprises.",
+      "Every call respects DNC lists, TCPA regulations, and your brand reputation. We handle compliance so you don't have to worry.",
+    icon: Shield,
   },
 ];
 
-const team = [
+/* ─── What We Solve ─── */
+const problems = [
   {
-    name: "Alex Chen",
-    role: "CEO & Co-founder",
-    bio: "Former head of AI at a Fortune 500 company.",
+    pain: "No-shows drain revenue",
+    solution: "AI agents confirm appointments 24-48h ahead, reschedule on the spot, and retry no-shows automatically.",
+    icon: Calendar,
+    metric: "Up to 60% fewer no-shows",
   },
   {
-    name: "Maria Santos",
-    role: "CTO & Co-founder",
-    bio: "PhD in NLP from MIT. Built voice systems for millions.",
+    pain: "CRM data decays fast",
+    solution: "Contacts change jobs, numbers, and emails. Our Data Validation Agent calls to verify and update records at scale.",
+    icon: Database,
+    metric: "Clean data, every quarter",
   },
   {
-    name: "James Wilson",
-    role: "VP of Engineering",
-    bio: "15 years building scalable systems at Google and Amazon.",
-  },
-  {
-    name: "Sarah Kim",
-    role: "VP of Product",
-    bio: "Former product lead at Salesforce.",
+    pain: "Reps waste time on cold leads",
+    solution: "The Lead Qualification Agent scores leads using BANT before your sales team ever picks up the phone.",
+    icon: Phone,
+    metric: "Only talk to qualified prospects",
   },
 ];
 
@@ -66,185 +104,427 @@ export default function AboutPage() {
       <Header />
       <main className="pt-24 relative overflow-hidden">
         <AnimatedBlobs />
-        {/* Hero Section */}
+
+        {/* ─── Hero Section ─── */}
         <section className="section relative z-10">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="max-w-3xl">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border border-electric/20 text-electric bg-electric/5 mb-6">
+                  About Callengo
+                </span>
                 <h1 className="text-display-sm mb-6">
-                  We help businesses stop losing money
+                  Your team should close deals,
+                  <br />
+                  <span className="gradient-text">not chase phone calls.</span>
                 </h1>
-                <p className="text-xl text-foreground-secondary leading-relaxed">
-                  Every no-show, every outdated contact, every unqualified lead
-                  is revenue walking out the door. We built Callengo to plug those leaks.
+                <p
+                  className="text-xl text-foreground-secondary leading-relaxed max-w-2xl"
+                  style={{ fontFamily: "var(--font-body)" }}
+                >
+                  Callengo is an AI-powered phone automation platform that handles
+                  the repetitive calls your team shouldn&apos;t be making — verifying data,
+                  confirming appointments, and qualifying leads — so your people can
+                  focus on what actually drives revenue.
                 </p>
               </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="relative"
-              >
-                <div className="aspect-square rounded-3xl bg-background-tertiary flex items-center justify-center">
-                  <span className="text-foreground-tertiary">Team photo placeholder</span>
-                </div>
-                <div className="absolute -z-10 -bottom-4 -right-4 w-full h-full bg-border rounded-3xl" />
-              </motion.div>
             </div>
           </div>
         </section>
 
-        {/* Stats Section */}
-        <section className="section gradient-bg text-white relative overflow-hidden">
-          <div className="absolute inset-0 opacity-20">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-          </div>
+        {/* ─── The Problem We Solve ─── */}
+        <section className="section relative z-10 bg-background-secondary">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-              {stats.map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="text-center"
-                >
-                  <div className="text-4xl md:text-5xl font-bold mb-2">
-                    {stat.value}
-                  </div>
-                  <div className="text-white/50" style={{ fontFamily: "var(--font-body)" }}>{stat.label}</div>
-                </motion.div>
-              ))}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="max-w-2xl mb-16"
+            >
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border border-electric/20 text-electric bg-electric/5 mb-5">
+                The Problem
+              </span>
+              <h2 className="text-3xl md:text-4xl font-semibold mb-4">
+                Businesses lose thousands every month to calls nobody wants to make
+              </h2>
+              <p
+                className="text-lg text-foreground-secondary leading-relaxed"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                Sales teams spend hours on repetitive outreach. Clinics lose revenue
+                to patients who forget appointments. Marketing wastes budgets on
+                outdated contact databases. These are solvable problems — with the
+                right automation.
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              {problems.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <motion.div
+                    key={item.pain}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    className="bg-white rounded-2xl border border-border p-8 relative overflow-hidden group hover:border-electric/20 transition-colors"
+                  >
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-electric/[0.03] rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:bg-electric/[0.06] transition-colors" />
+                    <div className="relative z-10">
+                      <div className="w-12 h-12 rounded-xl bg-electric/10 flex items-center justify-center mb-5">
+                        <Icon className="w-6 h-6 text-electric" />
+                      </div>
+                      <h3 className="text-lg font-semibold mb-2">{item.pain}</h3>
+                      <p
+                        className="text-foreground-secondary text-sm leading-relaxed mb-4"
+                        style={{ fontFamily: "var(--font-body)" }}
+                      >
+                        {item.solution}
+                      </p>
+                      <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent">
+                        <CheckCircle2 className="w-3.5 h-3.5" />
+                        {item.metric}
+                      </span>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </section>
-        {/* close extra wrappers from background divs */}
 
-        {/* Mission Section */}
+        {/* ─── Mission & Vision ─── */}
         <section className="section relative z-10">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Mission */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="order-2 lg:order-1"
+                className="relative overflow-hidden rounded-2xl border border-border bg-white p-10"
               >
-                <div className="aspect-4-3 rounded-3xl bg-background-tertiary flex items-center justify-center">
-                  <span className="text-foreground-tertiary">Office image placeholder</span>
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-electric via-electric/60 to-transparent" />
+                <div className="absolute bottom-0 right-0 w-40 h-40 bg-electric/[0.04] rounded-full blur-3xl" />
+                <div className="relative z-10">
+                  <div className="w-12 h-12 rounded-xl bg-electric/10 flex items-center justify-center mb-6">
+                    <Target className="w-6 h-6 text-electric" />
+                  </div>
+                  <h3 className="text-2xl font-semibold mb-4">Our Mission</h3>
+                  <p
+                    className="text-foreground-secondary text-base leading-relaxed"
+                    style={{ fontFamily: "var(--font-body)" }}
+                  >
+                    To free businesses from repetitive phone calls that drain time
+                    and revenue, replacing them with intelligent AI agents that
+                    verify data, confirm appointments, and qualify leads —
+                    automatically, accurately, and at scale.
+                  </p>
                 </div>
               </motion.div>
 
+              {/* Vision */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="order-1 lg:order-2"
+                className="relative overflow-hidden rounded-2xl border border-border bg-white p-10"
               >
-                <h2 className="text-3xl md:text-4xl font-semibold mb-6">
-                  Your team should sell, not chase
-                </h2>
-                <p className="text-lg text-foreground-secondary mb-6 leading-relaxed">
-                  Sales teams spend hours on repetitive calls that never close.
-                  Clinics lose thousands to patients who forget appointments.
-                  Marketing wastes budgets on outdated contact lists.
-                </p>
-                <p className="text-lg text-foreground-secondary leading-relaxed">
-                  We handle the routine calls so your team can focus on what
-                  actually drives revenue: building relationships, solving
-                  problems, and closing deals.
-                </p>
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent via-accent/60 to-transparent" />
+                <div className="absolute bottom-0 right-0 w-40 h-40 bg-accent/[0.04] rounded-full blur-3xl" />
+                <div className="relative z-10">
+                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6">
+                    <Eye className="w-6 h-6 text-accent" />
+                  </div>
+                  <h3 className="text-2xl font-semibold mb-4">Our Vision</h3>
+                  <p
+                    className="text-foreground-secondary text-base leading-relaxed"
+                    style={{ fontFamily: "var(--font-body)" }}
+                  >
+                    A world where every business — regardless of size — has access
+                    to enterprise-grade phone automation. Where no revenue is lost
+                    to a missed call, outdated record, or unqualified lead. Where
+                    human teams focus exclusively on high-value work.
+                  </p>
+                </div>
               </motion.div>
             </div>
           </div>
         </section>
 
-        {/* Values Section */}
-        <section className="section relative z-10">
+        {/* ─── Quality Framework ─── */}
+        <section className="section relative z-10 bg-background-secondary">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="max-w-2xl mb-16"
+              className="max-w-3xl mb-16"
             >
-              <h2 className="text-3xl md:text-4xl font-semibold">
-                The principles that guide us
-              </h2>
-            </motion.div>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              {values.map((value, index) => (
-                <motion.div
-                  key={value.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="bg-white rounded-2xl border border-border p-8"
-                >
-                  <div className="text-5xl font-bold text-border mb-4">
-                    0{index + 1}
-                  </div>
-                  <h3 className="text-xl font-semibold mb-3">{value.title}</h3>
-                  <p className="text-foreground-secondary">{value.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Team Section */}
-        <section className="section relative z-10">
-          <div className="max-w-7xl mx-auto px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="max-w-2xl mb-16"
-            >
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border border-electric/20 text-electric bg-electric/5 mb-5">
+                Our Framework
+              </span>
               <h2 className="text-3xl md:text-4xl font-semibold mb-4">
-                The people behind Callengo
+                Built on total quality fundamentals
               </h2>
-              <p className="text-lg text-foreground-secondary">
-                Engineers, product builders, and AI researchers united by a
-                shared vision.
+              <p
+                className="text-lg text-foreground-secondary leading-relaxed"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                Callengo is built around the principles of Total Quality Management —
+                customer focus, continuous improvement, process excellence, and
+                evidence-based decision making. Inspired by the quality-first mindset
+                championed at Lanzadera, we believe that sustainable growth comes from
+                doing things right, not just fast.
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {team.map((member, index) => (
-                <motion.div
-                  key={member.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                >
-                  <div className="aspect-square rounded-2xl bg-background-tertiary mb-4 flex items-center justify-center">
-                    <span className="text-4xl font-bold text-foreground-tertiary">
-                      {member.name
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")}
-                    </span>
-                  </div>
-                  <h3 className="font-semibold">{member.name}</h3>
-                  <div className="text-sm text-foreground-tertiary mb-2">{member.role}</div>
-                  <p className="text-sm text-foreground-secondary">{member.bio}</p>
-                </motion.div>
-              ))}
+            <div className="grid md:grid-cols-2 gap-6">
+              {qualityPillars.map((pillar, index) => {
+                const Icon = pillar.icon;
+                return (
+                  <motion.div
+                    key={pillar.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    className="bg-white rounded-2xl border border-border p-8 relative overflow-hidden"
+                  >
+                    <div className="flex items-start gap-5">
+                      <div className="w-12 h-12 rounded-xl bg-electric/10 flex items-center justify-center shrink-0">
+                        <Icon className="w-6 h-6 text-electric" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-electric/60 mb-1" style={{ fontFamily: "var(--font-body)" }}>
+                          0{index + 1}
+                        </div>
+                        <h3 className="text-lg font-semibold mb-2">{pillar.title}</h3>
+                        <p
+                          className="text-foreground-secondary text-sm leading-relaxed"
+                          style={{ fontFamily: "var(--font-body)" }}
+                        >
+                          {pillar.description}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </section>
 
-        {/* CTA Section */}
+        {/* ─── Values ─── */}
+        <section className="section relative z-10">
+          <div className="max-w-7xl mx-auto px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center max-w-2xl mx-auto mb-16"
+            >
+              <h2 className="text-3xl md:text-4xl font-semibold mb-4">
+                The principles that guide us
+              </h2>
+              <p
+                className="text-lg text-foreground-secondary"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                Simple values, applied consistently.
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {values.map((value, index) => {
+                const Icon = value.icon;
+                return (
+                  <motion.div
+                    key={value.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: index * 0.08 }}
+                    className="bg-white rounded-2xl border border-border p-6 text-center hover:border-electric/20 transition-colors"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-electric/10 flex items-center justify-center mx-auto mb-4">
+                      <Icon className="w-6 h-6 text-electric" />
+                    </div>
+                    <h3 className="text-base font-semibold mb-2">{value.title}</h3>
+                    <p
+                      className="text-foreground-secondary text-sm leading-relaxed"
+                      style={{ fontFamily: "var(--font-body)" }}
+                    >
+                      {value.description}
+                    </p>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* ─── Founder & Team ─── */}
+        <section className="section relative z-10 bg-background-secondary">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              {/* Founder Card */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="relative"
+              >
+                <div className="bg-white rounded-2xl border border-border p-10 relative overflow-hidden">
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-deep-indigo via-electric to-accent" />
+
+                  {/* Founder avatar */}
+                  <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-deep-indigo to-electric flex items-center justify-center mb-6">
+                    <span className="text-3xl font-bold text-white">CF</span>
+                  </div>
+
+                  <h3 className="text-2xl font-semibold mb-1">Christopher Fuentes</h3>
+                  <p className="text-electric font-medium text-sm mb-4" style={{ fontFamily: "var(--font-body)" }}>
+                    CEO & Founder
+                  </p>
+
+                  <p
+                    className="text-foreground-secondary leading-relaxed mb-6"
+                    style={{ fontFamily: "var(--font-body)" }}
+                  >
+                    Christopher founded Callengo with a clear conviction: businesses
+                    shouldn&apos;t lose money because of calls nobody has time to make.
+                    With a multidisciplinary background spanning technology, business
+                    operations, and quality management, he built Callengo to bridge the
+                    gap between enterprise-grade automation and the teams that need it
+                    most.
+                  </p>
+
+                  <a
+                    href="https://linkedin.com/in/christopherfuentes"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-electric hover:text-electric/80 transition-colors"
+                  >
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z" />
+                    </svg>
+                    Connect on LinkedIn
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </motion.div>
+
+              {/* Team description */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.15 }}
+              >
+                <div className="w-12 h-12 rounded-xl bg-electric/10 flex items-center justify-center mb-6">
+                  <Users className="w-6 h-6 text-electric" />
+                </div>
+                <h2 className="text-3xl md:text-4xl font-semibold mb-6">
+                  A team of multidisciplinary collaborators
+                </h2>
+                <p
+                  className="text-lg text-foreground-secondary leading-relaxed mb-6"
+                  style={{ fontFamily: "var(--font-body)" }}
+                >
+                  Callengo isn&apos;t built by a single discipline. We&apos;re a
+                  collaborative team of engineers, product designers, AI specialists,
+                  and business strategists — each bringing a different lens to the
+                  same problem: how to make outbound calling intelligent, reliable,
+                  and effortless.
+                </p>
+                <p
+                  className="text-lg text-foreground-secondary leading-relaxed mb-8"
+                  style={{ fontFamily: "var(--font-body)" }}
+                >
+                  We work with a flat, agile structure where ideas move fast and
+                  quality is everyone&apos;s responsibility. Whether it&apos;s voice AI
+                  optimization, CRM integration architecture, or call script
+                  design — we bring the same rigor and attention to detail.
+                </p>
+
+                <div className="grid grid-cols-2 gap-4">
+                  {[
+                    { label: "AI & Voice Engineering", desc: "Natural language understanding, voice synthesis, conversation design" },
+                    { label: "Product & UX", desc: "Intuitive interfaces, seamless workflows, user-first design" },
+                    { label: "Integrations", desc: "Deep CRM connections, calendar sync, webhook automation" },
+                    { label: "Quality & Compliance", desc: "Call quality scoring, regulatory compliance, data security" },
+                  ].map((area) => (
+                    <div
+                      key={area.label}
+                      className="bg-white rounded-xl border border-border p-4"
+                    >
+                      <h4 className="text-sm font-semibold mb-1">{area.label}</h4>
+                      <p
+                        className="text-xs text-foreground-tertiary leading-relaxed"
+                        style={{ fontFamily: "var(--font-body)" }}
+                      >
+                        {area.desc}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── The Callengo Idea ─── */}
+        <section className="section relative z-10">
+          <div className="max-w-7xl mx-auto px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="max-w-3xl mx-auto text-center"
+            >
+              <h2 className="text-3xl md:text-4xl font-semibold mb-6">
+                Why Callengo exists
+              </h2>
+              <p
+                className="text-lg text-foreground-secondary leading-relaxed mb-6"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                Every business with a contact list faces the same problem: there are
+                calls that need to happen — confirmations, verifications, follow-ups —
+                but nobody has the time or bandwidth to make them consistently. The
+                result? No-shows pile up, CRM data decays, and sales teams waste
+                hours on leads that were never going to convert.
+              </p>
+              <p
+                className="text-lg text-foreground-secondary leading-relaxed mb-6"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                Callengo exists because we believe AI voice agents can solve this at
+                scale — not by replacing human connection, but by handling the
+                repetitive calls that don&apos;t require it. Three purpose-built agents,
+                deep CRM integration, and a setup flow that takes minutes instead of
+                weeks.
+              </p>
+              <p
+                className="text-lg text-foreground-secondary leading-relaxed"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                We&apos;re not building a generic voice bot platform. We&apos;re building
+                specialized AI agents that do three things extraordinarily well:
+                validate data, confirm appointments, and qualify leads. Focused
+                scope, exceptional results.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ─── CTA Section ─── */}
         <section className="section relative z-10">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
@@ -263,17 +543,23 @@ export default function AboutPage() {
               {/* Content */}
               <div className="relative z-10 max-w-3xl">
                 <h2 className="text-4xl md:text-5xl font-semibold text-white mb-6 leading-tight">
-                  Ready to join our mission?
+                  Ready to stop losing
+                  <br />
+                  revenue to missed calls?
                 </h2>
-                <p className="text-xl text-white/70 mb-10 max-w-xl">
-                  Help businesses recover lost revenue from no-shows, bad data, and unqualified leads.
+                <p
+                  className="text-xl text-white/70 mb-10 max-w-xl"
+                  style={{ fontFamily: "var(--font-body)" }}
+                >
+                  Start with 15 free minutes. No credit card, no commitment.
+                  See what AI phone agents can do for your business.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <a
                     href="https://app.callengo.com/auth/signup"
-                    className="btn bg-white text-primary hover:bg-white/90 px-8 py-4 font-semibold rounded-xl"
+                    className="btn btn-cta-white bg-white text-primary hover:bg-white/90 px-8 py-4 font-semibold rounded-xl"
                   >
-                    Start free trial
+                    Get started free
                     <ArrowRight className="w-5 h-5" />
                   </a>
                   <a

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { ArrowRight, Mail } from "lucide-react";
 
 const footerLinks = {
   Product: [
@@ -15,7 +16,7 @@ const footerLinks = {
     { name: "Documentation", href: "/docs" },
     { name: "Quick Start Guide", href: "/help/quick-start" },
     { name: "Help Center", href: "/help" },
-    { name: "Blog", href: "/blog" },
+    { name: "Blog & Articles", href: "/blog" },
     { name: "Free Tools", href: "/free-tools" },
   ],
   Company: [
@@ -81,34 +82,44 @@ export default function Footer() {
       `}</style>
       <div className="max-w-7xl mx-auto px-6 relative z-10">
 
-        {/* Top: Newsletter centered */}
-        <div className="pt-16 pb-10 flex justify-center border-b border-white/10">
-          <div className="w-full max-w-md text-center">
-            <h4 className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-3">Stay Updated</h4>
-            {subscribed ? (
-              <p className="text-sm text-accent" style={{ fontFamily: "var(--font-body)" }}>
-                Thanks for subscribing!
+        {/* Top: Newsletter */}
+        <div className="pt-16 pb-10 border-b border-white/10">
+          <div className="max-w-xl mx-auto">
+            <div className="relative rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm p-6 md:p-8 overflow-hidden">
+              <div className="absolute top-3 right-3 w-10 h-10 rounded-xl bg-electric/15 flex items-center justify-center">
+                <Mail className="w-5 h-5 text-electric" />
+              </div>
+              <h4 className="text-lg font-semibold text-white mb-1" style={{ fontFamily: "var(--font-display)" }}>Stay in the loop</h4>
+              <p className="text-sm text-white/50 mb-5" style={{ fontFamily: "var(--font-body)" }}>
+                Get product updates, AI calling tips, and growth strategies — no spam.
               </p>
-            ) : (
-              <form onSubmit={handleSubscribe} className="flex gap-2">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your@email.com"
-                  required
-                  className="flex-1 px-3 py-2 rounded-lg bg-white/8 border border-white/10 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-white/25 transition-colors"
-                  style={{ fontFamily: "var(--font-body)" }}
-                />
-                <button
-                  type="submit"
-                  className="px-4 py-2 rounded-lg bg-electric text-white text-sm font-medium hover:bg-electric/90 transition-colors cursor-pointer"
-                  style={{ fontFamily: "var(--font-display)" }}
-                >
-                  Subscribe
-                </button>
-              </form>
-            )}
+              {subscribed ? (
+                <div className="flex items-center gap-2 text-accent">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                  <span className="text-sm font-medium">You&apos;re subscribed! Check your inbox.</span>
+                </div>
+              ) : (
+                <form onSubmit={handleSubscribe} className="flex gap-2">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="your@email.com"
+                    required
+                    className="flex-1 px-4 py-2.5 rounded-xl bg-white/8 border border-white/15 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-electric/50 focus:ring-1 focus:ring-electric/30 transition-all"
+                    style={{ fontFamily: "var(--font-body)" }}
+                  />
+                  <button
+                    type="submit"
+                    className="px-5 py-2.5 rounded-xl bg-electric text-white text-sm font-semibold hover:bg-electric/90 transition-colors cursor-pointer flex items-center gap-1.5"
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
+                    Subscribe
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </form>
+              )}
+            </div>
           </div>
         </div>
 
@@ -178,12 +189,13 @@ export default function Footer() {
 
         {/* Giant brand name */}
         <div className="border-t border-white/10 pt-10 pb-4">
-          <div
-            className="text-[clamp(4rem,14vw,12rem)] font-normal leading-none tracking-tighter text-white/[0.12] select-none"
+          <Link
+            href="/"
+            className="block text-[clamp(4rem,14vw,12rem)] font-normal leading-none tracking-tighter text-white/[0.12] hover:text-white/[0.18] transition-colors"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Callengo
-          </div>
+          </Link>
         </div>
 
         {/* Bottom bar */}

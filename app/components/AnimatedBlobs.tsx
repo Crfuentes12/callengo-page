@@ -31,8 +31,12 @@ export default function AnimatedBlobs({ className = "" }: AnimatedBlobsProps) {
       {/* Blob 7 — bottom-mid: indigo + slate */}
       <div className="absolute bottom-[20%] left-1/3 w-3/5 h-3/5 bg-gradient-to-br from-[#1E2D6B]/55 via-[#8B96C8]/45 to-[#4F5FE8]/50 rounded-full blur-2xl animate-lava-7" />
 
-      {/* Readability veil */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-white/20" />
+      {/* White zone patches */}
+      <div className="absolute top-[45%] left-[15%] w-[30%] h-[20%] bg-white/60 rounded-full blur-3xl" />
+      <div className="absolute top-[65%] right-[10%] w-[25%] h-[15%] bg-white/50 rounded-full blur-3xl" />
+
+      {/* Fade-out veil — strong fade toward bottom */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent via-40% to-white" />
 
       <style jsx>{`
         .animate-lava-1 { animation: lava-flow-1 45s ease-in-out infinite; }

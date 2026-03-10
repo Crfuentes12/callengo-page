@@ -2,7 +2,7 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { Star } from "lucide-react";
 
 const testimonials = [
   {
@@ -52,18 +52,9 @@ const testimonials = [
   },
 ];
 
-function TestimonialCard({ t, highlighted }: { t: typeof testimonials[0]; highlighted?: boolean }) {
+function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
   return (
-    <div
-      className={`rounded-2xl border p-7 flex flex-col h-full transition-all ${
-        highlighted
-          ? "border-electric/20 bg-white shadow-lg"
-          : "border-border bg-background-secondary opacity-60"
-      }`}
-      style={highlighted ? {
-        boxShadow: "0 8px 40px rgba(79, 95, 232, 0.10), 0 2px 12px rgba(0,0,0,0.04)",
-      } : {}}
-    >
+    <div className="rounded-2xl border border-border bg-white p-7 flex flex-col h-full shadow-sm">
       <div className="flex gap-0.5 mb-4">
         {[...Array(5)].map((_, i) => (
           <Star key={i} className="w-3.5 h-3.5 fill-electric text-electric" />
@@ -94,59 +85,15 @@ function TestimonialCard({ t, highlighted }: { t: typeof testimonials[0]; highli
   );
 }
 
-const VISIBLE = 3;
-
 export default function Testimonials() {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
-  // Triple the array: [...testimonials, ...testimonials, ...testimonials]
-  // Start at the middle copy so we can scroll both directions infinitely
-  const tripled = [...testimonials, ...testimonials, ...testimonials];
-  const len = testimonials.length;
-
-  // Initialize offset to the start of the middle copy
-  const [offset, setOffset] = useState(len);
-
-  const goNext = useCallback(() => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setOffset((prev) => prev + 1);
-  }, [isTransitioning]);
-
-  const goPrev = useCallback(() => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setOffset((prev) => prev - 1);
-  }, [isTransitioning]);
-
-  // After transition ends, silently reset to the middle copy if needed
-  const handleTransitionEnd = useCallback(() => {
-    setIsTransitioning(false);
-    setOffset((prev) => {
-      if (prev >= len * 2) return prev - len;
-      if (prev < len) return prev + len;
-      return prev;
-    });
-  }, [len]);
-
-  // Derive the "logical" index for highlighting and dots
-  const logicalIndex = ((offset % len) + len) % len;
-
-  // Determine if we need to skip transition for the reset jump
-  const [skipTransition, setSkipTransition] = useState(false);
-  useEffect(() => {
-    // When offset is silently reset, skip transition for one frame
-    if (offset >= len && offset < len * 2) {
-      setSkipTransition(false);
-    }
-  }, [offset, len]);
-
-  const slideWidth = 100 / VISIBLE + 1.2; // percentage per slide
+  // Double the array for seamless infinite scroll
+  const doubled = [...testimonials, ...testimonials];
 
   return (
-    <section className="section bg-background" id="testimonials">
+    <section className="section bg-background overflow-hidden" id="testimonials">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <motion.div
@@ -165,67 +112,52 @@ export default function Testimonials() {
             Join thousands of sales professionals who are prospecting smarter with Callengo.
           </p>
         </motion.div>
+      </div>
 
-        {/* Carousel with side arrows */}
-        <div className="relative flex items-center gap-4 md:gap-6">
-          {/* Left arrow */}
-          <button
-            onClick={goPrev}
-            className="w-11 h-11 rounded-full border border-border hover:border-electric/30 hover:bg-electric/5 flex items-center justify-center transition-all cursor-pointer shrink-0"
-          >
-            <ChevronLeft className="w-5 h-5 text-foreground-secondary" />
-          </button>
+      {/* Infinite auto-scroll carousel with fade edges */}
+      <div className="relative">
+        {/* Left fade */}
+        <div className="absolute left-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+        {/* Right fade */}
+        <div className="absolute right-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
-          {/* Sliding track */}
-          <div className="flex-1 overflow-hidden">
-            <div
-              ref={trackRef}
-              className="flex gap-5"
-              style={{
-                transform: `translateX(-${offset * slideWidth}%)`,
-                transition: isTransitioning ? "transform 500ms ease-out" : "none",
-              }}
-              onTransitionEnd={handleTransitionEnd}
-            >
-              {tripled.map((t, idx) => (
-                <div key={`${t.id}-${idx}`} className="w-full md:w-[calc(33.333%-14px)] shrink-0">
-                  <TestimonialCard
-                    t={t}
-                    highlighted={idx === offset + 1}
-                  />
-                </div>
-              ))}
+        <div
+          ref={trackRef}
+          className="flex gap-5 testimonial-track"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          style={{
+            animationPlayState: isPaused ? "paused" : "running",
+          }}
+        >
+          {doubled.map((t, idx) => (
+            <div key={`${t.id}-${idx}`} className="w-[340px] md:w-[380px] shrink-0">
+              <TestimonialCard t={t} />
             </div>
-          </div>
-
-          {/* Right arrow */}
-          <button
-            onClick={goNext}
-            className="w-11 h-11 rounded-full border border-border hover:border-electric/30 hover:bg-electric/5 flex items-center justify-center transition-all cursor-pointer shrink-0"
-          >
-            <ChevronRight className="w-5 h-5 text-foreground-secondary" />
-          </button>
-        </div>
-
-        {/* Dots */}
-        <div className="flex items-center justify-center gap-2 mt-8">
-          {testimonials.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => {
-                if (isTransitioning) return;
-                setIsTransitioning(true);
-                setOffset(len + i);
-              }}
-              className={`rounded-full transition-all duration-300 cursor-pointer ${
-                i === logicalIndex
-                  ? "w-6 h-2 bg-electric"
-                  : "w-2 h-2 bg-border hover:bg-foreground-tertiary"
-              }`}
-            />
           ))}
         </div>
       </div>
+
+      {/* Dots indicator */}
+      <div className="flex items-center justify-center gap-2 mt-8">
+        {testimonials.map((_, i) => (
+          <div
+            key={i}
+            className="w-2 h-2 rounded-full bg-border"
+          />
+        ))}
+      </div>
+
+      <style jsx>{`
+        @keyframes testimonialScroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .testimonial-track {
+          animation: testimonialScroll 40s linear infinite;
+          width: max-content;
+        }
+      `}</style>
     </section>
   );
 }

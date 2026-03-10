@@ -12,6 +12,11 @@ import {
   Calendar,
   Users,
   ArrowRight,
+  BookOpen,
+  HelpCircle,
+  Lightbulb,
+  FileText,
+  Wrench,
 } from "lucide-react";
 
 const agents = [
@@ -38,16 +43,49 @@ const agents = [
 const headerIntegrations = [
   { name: "HubSpot", logo: "/integrations/hubspot.png", href: "/integrations/hubspot" },
   { name: "Salesforce", logo: "/integrations/salesforce.png", href: "/integrations/salesforce" },
-  { name: "Google Calendar", logo: "/integrations/calendar.png", href: "/integrations/google-calendar" },
-  { name: "Zoom", logo: "/integrations/zoom.png", href: "/integrations/zoom" },
-  { name: "Slack", logo: "/integrations/slack.png", href: "/integrations/slack" },
-  { name: "Stripe", logo: "/integrations/stripe.png", href: "/integrations/stripe" },
   { name: "Pipedrive", logo: "/integrations/pipedrive.png", href: "/integrations/pipedrive" },
-  { name: "Google Sheets", logo: "/integrations/sheets.png", href: "/integrations/google-sheets" },
+  { name: "Zoho CRM", logo: "/integrations/zoho.png", href: "/integrations/zoho-crm" },
+  { name: "Outlook", logo: "/integrations/outlook.png", href: "/integrations/outlook-calendar" },
+  { name: "Google Calendar", logo: "/integrations/calendar.png", href: "/integrations/google-calendar" },
+];
+
+const resourceLinks = [
+  {
+    name: "Documentation",
+    description: "Setup guides, API reference & tutorials",
+    href: "/docs",
+    icon: BookOpen,
+    featured: true,
+  },
+  {
+    name: "Help Center",
+    description: "FAQs and troubleshooting guides",
+    href: "/help",
+    icon: HelpCircle,
+  },
+  {
+    name: "Quick Start",
+    description: "Get up and running in 5 minutes",
+    href: "/help/quick-start",
+    icon: Lightbulb,
+  },
+  {
+    name: "Blog & Articles",
+    description: "Industry insights and product updates",
+    href: "/blog",
+    icon: FileText,
+  },
+  {
+    name: "Free Tools",
+    description: "Phone validator, ROI calculator & more",
+    href: "/free-tools",
+    icon: Wrench,
+  },
 ];
 
 export default function Header() {
   const [isAgentsOpen, setIsAgentsOpen] = useState(false);
+  const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showFloatingCta, setShowFloatingCta] = useState(false);
 
@@ -109,15 +147,15 @@ export default function Header() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 6, scale: 0.98 }}
                       transition={{ duration: 0.15, ease: "easeOut" }}
-                      className="absolute top-full left-0 pt-2 w-[620px]"
+                      className="absolute top-full left-0 pt-2 w-[640px]"
                     >
                       <div
                         className="bg-white rounded-xl border border-border overflow-hidden"
                         style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)" }}
                       >
-                        <div className="flex">
+                        <div className="grid grid-cols-2">
                           {/* Left: Agents */}
-                          <div className="flex-1 p-3 border-r border-border">
+                          <div className="p-3 border-r border-border">
                             <div className="px-3 py-2 text-[10px] font-semibold text-foreground-tertiary uppercase tracking-wider">
                               AI Agents
                             </div>
@@ -147,22 +185,22 @@ export default function Header() {
                           </div>
 
                           {/* Right: Integrations */}
-                          <div className="w-[240px] p-3 bg-background-secondary/50">
+                          <div className="p-3 bg-background-secondary/30">
                             <div className="px-3 py-2 text-[10px] font-semibold text-foreground-tertiary uppercase tracking-wider">
-                              Integrations
+                              Top Integrations
                             </div>
-                            <div className="grid grid-cols-4 gap-2 px-2 py-2">
+                            <div className="grid grid-cols-3 gap-2 px-2 py-2">
                               {headerIntegrations.map((intg) => (
                                 <Link
                                   key={intg.name}
                                   href={intg.href}
-                                  className="group flex flex-col items-center gap-1.5 p-2 rounded-lg hover:bg-white transition-colors"
+                                  className="group flex flex-col items-center gap-1.5 p-2.5 rounded-lg hover:bg-white transition-colors"
                                   title={intg.name}
                                 >
-                                  <div className="w-9 h-9 rounded-lg bg-white border border-border/50 flex items-center justify-center group-hover:shadow-sm transition-shadow overflow-hidden">
-                                    <Image src={intg.logo} alt={intg.name} width={28} height={28} className="object-contain" />
+                                  <div className="w-10 h-10 rounded-lg bg-white border border-border/50 flex items-center justify-center group-hover:shadow-sm transition-shadow overflow-hidden">
+                                    <Image src={intg.logo} alt={intg.name} width={30} height={30} className="object-contain" />
                                   </div>
-                                  <span className="text-[9px] text-foreground-tertiary text-center leading-tight truncate w-full group-hover:text-foreground transition-colors">
+                                  <span className="text-[10px] text-foreground-tertiary text-center leading-tight group-hover:text-foreground transition-colors">
                                     {intg.name}
                                   </span>
                                 </Link>
@@ -170,7 +208,7 @@ export default function Header() {
                             </div>
                             <Link
                               href="/integrations"
-                              className="flex items-center justify-center gap-1.5 mx-2 mt-1 px-3 py-2 rounded-lg text-xs font-medium text-electric hover:bg-white transition-colors"
+                              className="flex items-center justify-center gap-1.5 mx-2 mt-2 px-3 py-2 rounded-lg text-xs font-medium text-electric hover:bg-white transition-colors"
                             >
                               View all 16+ integrations
                               <ArrowRight className="w-3.5 h-3.5" />
@@ -189,6 +227,72 @@ export default function Header() {
               >
                 Pricing
               </Link>
+
+              {/* Resources Dropdown */}
+              <div
+                className="relative"
+                onMouseEnter={() => setIsResourcesOpen(true)}
+                onMouseLeave={() => setIsResourcesOpen(false)}
+              >
+                <button
+                  className="flex items-center gap-1 text-foreground-secondary hover:text-foreground transition-colors text-sm font-medium px-4 py-2 rounded-lg hover:bg-background-secondary"
+                  onClick={() => setIsResourcesOpen(!isResourcesOpen)}
+                >
+                  Resources
+                  <ChevronDown
+                    className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                      isResourcesOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                <AnimatePresence>
+                  {isResourcesOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 6, scale: 0.98 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 6, scale: 0.98 }}
+                      transition={{ duration: 0.15, ease: "easeOut" }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-[340px]"
+                    >
+                      <div
+                        className="bg-white rounded-xl border border-border overflow-hidden p-2"
+                        style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)" }}
+                      >
+                        {resourceLinks.map((item) => {
+                          const Icon = item.icon;
+                          return (
+                            <Link
+                              key={item.name}
+                              href={item.href}
+                              className={`flex items-start gap-3 p-3 rounded-lg hover:bg-background-secondary transition-all group ${
+                                item.featured ? "bg-electric/[0.03] border border-electric/10 mb-1" : ""
+                              }`}
+                            >
+                              <div className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                                item.featured
+                                  ? "bg-electric/10 group-hover:bg-electric/15"
+                                  : "bg-background-secondary group-hover:bg-background-tertiary"
+                              }`}>
+                                <Icon className={`w-4.5 h-4.5 ${item.featured ? "text-electric" : "text-secondary"}`} />
+                              </div>
+                              <div>
+                                <div className={`font-semibold text-sm ${item.featured ? "text-electric" : "text-foreground"}`}>
+                                  {item.name}
+                                  {item.featured && <Lightbulb className="w-3.5 h-3.5 text-electric inline ml-1.5 -mt-0.5" />}
+                                </div>
+                                <div className="text-xs text-foreground-tertiary mt-0.5 leading-relaxed">
+                                  {item.description}
+                                </div>
+                              </div>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
 
               <Link
                 href="/about"
@@ -294,6 +398,33 @@ export default function Header() {
                   >
                     View all integrations →
                   </Link>
+
+                  <div className="h-px bg-border my-2" />
+
+                  <div className="px-4 py-2 text-xs font-semibold text-foreground-tertiary uppercase tracking-wider">
+                    Resources
+                  </div>
+                  {resourceLinks.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        className="flex items-center gap-3 px-4 py-2.5 text-foreground hover:bg-background-secondary rounded-lg"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${
+                          item.featured ? "bg-electric/10" : "bg-background-secondary"
+                        }`}>
+                          <Icon className={`w-4 h-4 ${item.featured ? "text-electric" : "text-secondary"}`} />
+                        </div>
+                        <div>
+                          <div className={`font-medium text-sm ${item.featured ? "text-electric" : ""}`}>{item.name}</div>
+                          <div className="text-[11px] text-foreground-tertiary">{item.description}</div>
+                        </div>
+                      </Link>
+                    );
+                  })}
 
                   <div className="h-px bg-border my-2" />
 

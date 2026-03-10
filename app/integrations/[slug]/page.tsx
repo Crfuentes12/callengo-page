@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import {
@@ -14,11 +15,14 @@ import {
   Zap,
   AlertTriangle,
   CreditCard,
+  HelpCircle,
 } from "lucide-react";
 
 /* ═══════════════════════════════════════════════════════════════════
    INTEGRATION DATA — FULL & COMPLETE
    ═══════════════════════════════════════════════════════════════════ */
+
+type FAQ = { question: string; answer: string };
 
 type IntegrationDetail = {
   name: string;
@@ -34,6 +38,9 @@ type IntegrationDetail = {
   syncedData: string[];
   useCases: string[];
   limitations: string[];
+  seoTitle: string;
+  seoDescription: string;
+  faqs: FAQ[];
 };
 
 const integrations: IntegrationDetail[] = [

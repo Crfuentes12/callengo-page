@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { Check, X, ArrowRight, Plus, Building2, Sparkles } from "lucide-react";
+import { Check, X, ArrowRight, Building2, Sparkles, Phone, Archive, Zap } from "lucide-react";
 import AnimatedBlobs from "../components/AnimatedBlobs";
 
 const plans = [
@@ -172,18 +172,30 @@ const comparisonFeatures = [
 const addOns = [
   {
     name: "Dedicated Number",
-    price: "$15/mo",
-    description: "Your own dedicated phone number for brand consistency",
+    price: "$15",
+    period: "/mo",
+    description: "Own dedicated outbound phone number (transferred via Bland sub-account)",
+    icon: Phone,
+    color: "var(--color-electric)",
+    bgColor: "rgba(99, 102, 241, 0.08)",
   },
   {
     name: "Recording Vault",
-    price: "$12/mo",
-    description: "Unlimited call recording storage with full transcription",
+    price: "$12",
+    period: "/mo",
+    description: "Extends call recording retention from 30 days → 12 months",
+    icon: Archive,
+    color: "var(--color-accent-dark)",
+    bgColor: "rgba(16, 185, 129, 0.08)",
   },
   {
     name: "Calls Booster",
-    price: "$35/500 min",
-    description: "Extra minutes when you need them, no plan upgrade required",
+    price: "$35",
+    period: "/mo",
+    description: "+150 calls (~+225 min) per month. Stackable.",
+    icon: Zap,
+    color: "var(--color-secondary)",
+    bgColor: "rgba(139, 92, 246, 0.08)",
   },
 ];
 
@@ -509,26 +521,38 @@ export default function PricingPage() {
                 <h3 className="text-2xl font-semibold text-foreground mb-2">
                   Enhance any plan with add-ons
                 </h3>
-                <p className="text-foreground-secondary">
+                <p className="text-foreground-secondary text-sm">
                   Available on all paid plans
                 </p>
               </div>
-              <div className="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto">
-                {addOns.map((addon) => (
-                  <div
-                    key={addon.name}
-                    className="bg-background border border-border rounded-xl p-5 flex items-start gap-3"
-                  >
-                    <div className="w-8 h-8 rounded-lg bg-secondary/8 flex items-center justify-center shrink-0">
-                      <Plus className="w-4 h-4 text-secondary" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground text-sm">{addon.name}</div>
-                      <div className="text-secondary font-bold text-sm mt-0.5">{addon.price}</div>
-                      <div className="text-foreground-tertiary text-xs mt-1">{addon.description}</div>
-                    </div>
-                  </div>
-                ))}
+              <div className="grid md:grid-cols-3 gap-5">
+                {addOns.map((addon, i) => {
+                  const Icon = addon.icon;
+                  return (
+                    <motion.div
+                      key={addon.name}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.08 }}
+                      className="group relative bg-background border border-border rounded-2xl p-6 hover:border-electric/30 transition-all duration-300"
+                      style={{ boxShadow: "var(--shadow-sm)" }}
+                    >
+                      <div
+                        className="w-11 h-11 rounded-xl flex items-center justify-center mb-4"
+                        style={{ backgroundColor: addon.bgColor }}
+                      >
+                        <Icon className="w-5 h-5" style={{ color: addon.color }} />
+                      </div>
+                      <div className="font-semibold text-foreground text-base mb-1">{addon.name}</div>
+                      <div className="flex items-baseline gap-0.5 mb-3">
+                        <span className="text-2xl font-bold text-foreground">{addon.price}</span>
+                        <span className="text-foreground-tertiary text-sm">{addon.period}</span>
+                      </div>
+                      <div className="text-foreground-secondary text-sm leading-relaxed">{addon.description}</div>
+                    </motion.div>
+                  );
+                })}
               </div>
             </motion.div>
           </div>

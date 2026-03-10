@@ -23,7 +23,7 @@ const faqs = [
   {
     question: "How many minutes do I get per month?",
     answer:
-      "Plans range from 15 one-time minutes (Free) to 3,000 monthly minutes (Teams). Need more? Add the Calls Booster add-on for $35 per 500 additional minutes. Enterprise plans offer custom volumes.",
+      "Plans range from 15 one-time minutes (Free) to 3,000 monthly minutes (Teams). Need more? Add the Calls Booster add-on for $35/mo (+150 calls, ~225 min). Stackable. Enterprise plans offer custom volumes.",
   },
   {
     question: "Is there a free trial?",

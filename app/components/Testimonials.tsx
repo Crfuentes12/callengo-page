@@ -117,9 +117,9 @@ export default function Testimonials() {
       {/* Infinite auto-scroll carousel with fade edges */}
       <div className="relative">
         {/* Left fade */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-40 md:w-72 bg-gradient-to-r from-background via-background/60 to-transparent z-10 pointer-events-none" />
         {/* Right fade */}
-        <div className="absolute right-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-40 md:w-72 bg-gradient-to-l from-background via-background/60 to-transparent z-10 pointer-events-none" />
 
         <div
           ref={trackRef}
@@ -138,23 +138,13 @@ export default function Testimonials() {
         </div>
       </div>
 
-      {/* Dots indicator */}
-      <div className="flex items-center justify-center gap-2 mt-8">
-        {testimonials.map((_, i) => (
-          <div
-            key={i}
-            className="w-2 h-2 rounded-full bg-border"
-          />
-        ))}
-      </div>
-
       <style jsx>{`
         @keyframes testimonialScroll {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
         .testimonial-track {
-          animation: testimonialScroll 40s linear infinite;
+          animation: testimonialScroll 60s linear infinite;
           width: max-content;
         }
       `}</style>

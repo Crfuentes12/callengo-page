@@ -25,7 +25,7 @@ const plans = [
       "3 min max per call",
       "Basic analytics",
       "CSV import",
-      "Google Calendar + Zoom",
+      "Calendar, Meet, Zoom, Stripe, Sheets",
     ],
   },
   {
@@ -44,8 +44,8 @@ const plans = [
       "5 min max per call",
       "Full analytics",
       "All import formats",
-      "Google Calendar + Meet + Zoom",
-      "Slack + Webhooks",
+      "Slack + SimplyBook.me",
+      "Webhooks (Zapier/Make/n8n)",
       "Basic support",
     ],
   },
@@ -65,8 +65,8 @@ const plans = [
       "7 min max per call",
       "Advanced analytics",
       "Automatic follow-ups",
-      "Outlook + SimplyBook.me",
-      "Microsoft Teams",
+      "All Free + Starter integrations",
+      "Automatic follow-ups",
       "Email support",
     ],
   },
@@ -84,9 +84,9 @@ const plans = [
       "Unlimited agents",
       "3 users",
       "10 min max per call",
+      "Outlook + Microsoft Teams",
       "HubSpot + Pipedrive CRM",
       "Smart voicemail",
-      "Stripe + Clio",
       "All calendar integrations",
       "Priority support",
     ],
@@ -106,9 +106,9 @@ const plans = [
       "5 users ($79/extra)",
       "15 min max per call",
       "Salesforce + Zoho + Dynamics",
+      "Clio (legal)",
       "User permissions",
       "Advanced retry logic",
-      "Google Sheets",
       "Priority support",
     ],
   },
@@ -125,21 +125,21 @@ function getRecommendedPlan(contacts: number): number {
 
 const integrationLogos = [
   { name: "Google Calendar", logo: "/integrations/calendar.png", minPlan: 0 },
+  { name: "Google Meet", logo: "/integrations/meets.png", minPlan: 0 },
   { name: "Zoom", logo: "/integrations/zoom.png", minPlan: 0 },
-  { name: "Google Meet", logo: "/integrations/meets.png", minPlan: 1 },
+  { name: "Stripe", logo: "/integrations/stripe.png", minPlan: 0 },
+  { name: "Google Sheets", logo: "/integrations/sheets.png", minPlan: 0 },
   { name: "Slack", logo: "/integrations/slack.png", minPlan: 1 },
+  { name: "SimplyBook.me", logo: "/integrations/simplybook.png", minPlan: 1 },
   { name: "Webhooks", logo: "/integrations/webhooks.png", minPlan: 1 },
-  { name: "Outlook", logo: "/integrations/outlook.png", minPlan: 2 },
-  { name: "SimplyBook.me", logo: "/integrations/simplybook.png", minPlan: 2 },
-  { name: "Microsoft Teams", logo: "/integrations/teams.png", minPlan: 2 },
+  { name: "Outlook", logo: "/integrations/outlook.png", minPlan: 3 },
+  { name: "Microsoft Teams", logo: "/integrations/teams.png", minPlan: 3 },
   { name: "HubSpot", logo: "/integrations/hubspot.png", minPlan: 3 },
   { name: "Pipedrive", logo: "/integrations/pipedrive.png", minPlan: 3 },
-  { name: "Stripe", logo: "/integrations/stripe.png", minPlan: 3 },
-  { name: "Clio", logo: "/integrations/clio.png", minPlan: 3 },
-  { name: "Salesforce", logo: "/integrations/salesforce.png", minPlan: 4 },
   { name: "Zoho CRM", logo: "/integrations/zoho.png", minPlan: 4 },
+  { name: "Clio", logo: "/integrations/clio.png", minPlan: 4 },
+  { name: "Salesforce", logo: "/integrations/salesforce.png", minPlan: 4 },
   { name: "Dynamics 365", logo: "/integrations/dynamics.png", minPlan: 4 },
-  { name: "Google Sheets", logo: "/integrations/sheets.png", minPlan: 4 },
 ];
 
 const comparisonFeatures = [
@@ -151,22 +151,21 @@ const comparisonFeatures = [
   { name: "Analytics", free: "Basic", starter: "Full", growth: "Advanced", business: "Advanced", teams: "Full suite", enterprise: "Full suite" },
   { name: "Follow-ups", free: "-", starter: "-", growth: "Yes", business: "Yes", teams: "Yes", enterprise: "Yes" },
   { name: "Voicemail handling", free: "-", starter: "-", growth: "-", business: "Yes", teams: "Yes", enterprise: "Yes" },
-  { name: "Google Calendar", free: "Yes", starter: "Yes", growth: "Yes", business: "Yes", teams: "Yes", enterprise: "Yes" },
-  { name: "Outlook Calendar", free: "-", starter: "-", growth: "Yes", business: "Yes", teams: "Yes", enterprise: "Yes" },
-  { name: "Google Meet", free: "-", starter: "Yes", growth: "Yes", business: "Yes", teams: "Yes", enterprise: "Yes" },
+  { name: "Google Calendar + Meet", free: "Yes", starter: "Yes", growth: "Yes", business: "Yes", teams: "Yes", enterprise: "Yes" },
   { name: "Zoom", free: "Yes", starter: "Yes", growth: "Yes", business: "Yes", teams: "Yes", enterprise: "Yes" },
-  { name: "Microsoft Teams", free: "-", starter: "-", growth: "Yes", business: "Yes", teams: "Yes", enterprise: "Yes" },
+  { name: "Stripe", free: "Yes", starter: "Yes", growth: "Yes", business: "Yes", teams: "Yes", enterprise: "Yes" },
+  { name: "Google Sheets", free: "Yes", starter: "Yes", growth: "Yes", business: "Yes", teams: "Yes", enterprise: "Yes" },
   { name: "Slack", free: "-", starter: "Yes", growth: "Yes", business: "Yes", teams: "Yes", enterprise: "Yes" },
-  { name: "SimplyBook.me", free: "-", starter: "-", growth: "Yes", business: "Yes", teams: "Yes", enterprise: "Yes" },
-  { name: "Webhooks", free: "-", starter: "Yes", growth: "Yes", business: "Yes", teams: "Yes", enterprise: "Yes" },
-  { name: "HubSpot", free: "-", starter: "-", growth: "-", business: "Yes", teams: "Yes", enterprise: "Yes" },
-  { name: "Salesforce", free: "-", starter: "-", growth: "-", business: "-", teams: "Yes", enterprise: "Yes" },
-  { name: "Pipedrive", free: "-", starter: "-", growth: "-", business: "Yes", teams: "Yes", enterprise: "Yes" },
+  { name: "SimplyBook.me", free: "-", starter: "Yes", growth: "Yes", business: "Yes", teams: "Yes", enterprise: "Yes" },
+  { name: "Webhooks (Zapier/Make/n8n)", free: "-", starter: "Yes", growth: "Yes", business: "Yes", teams: "Yes", enterprise: "Yes" },
+  { name: "Microsoft Outlook", free: "-", starter: "-", growth: "-", business: "Yes", teams: "Yes", enterprise: "Yes" },
+  { name: "Microsoft Teams", free: "-", starter: "-", growth: "-", business: "Yes", teams: "Yes", enterprise: "Yes" },
+  { name: "HubSpot CRM", free: "-", starter: "-", growth: "-", business: "Yes", teams: "Yes", enterprise: "Yes" },
+  { name: "Pipedrive CRM", free: "-", starter: "-", growth: "-", business: "Yes", teams: "Yes", enterprise: "Yes" },
   { name: "Zoho CRM", free: "-", starter: "-", growth: "-", business: "-", teams: "Yes", enterprise: "Yes" },
+  { name: "Clio (legal)", free: "-", starter: "-", growth: "-", business: "-", teams: "Yes", enterprise: "Yes" },
+  { name: "Salesforce CRM", free: "-", starter: "-", growth: "-", business: "-", teams: "Yes", enterprise: "Yes" },
   { name: "Microsoft Dynamics 365", free: "-", starter: "-", growth: "-", business: "-", teams: "Yes", enterprise: "Yes" },
-  { name: "Google Sheets", free: "-", starter: "-", growth: "-", business: "-", teams: "Yes", enterprise: "Yes" },
-  { name: "Stripe", free: "-", starter: "-", growth: "-", business: "Yes", teams: "Yes", enterprise: "Yes" },
-  { name: "Clio", free: "-", starter: "-", growth: "-", business: "Yes", teams: "Yes", enterprise: "Yes" },
   { name: "Support", free: "Email", starter: "Email", growth: "Email", business: "Priority", teams: "Priority", enterprise: "Dedicated" },
 ];
 
@@ -188,10 +187,42 @@ const addOns = [
   },
 ];
 
+// Non-linear slider: each plan gets ~equal visual space
+const sliderStops = [
+  { slider: 0, contacts: 5 },
+  { slider: 16, contacts: 10 },
+  { slider: 33, contacts: 167 },
+  { slider: 50, contacts: 333 },
+  { slider: 67, contacts: 667 },
+  { slider: 84, contacts: 2000 },
+  { slider: 100, contacts: 2500 },
+];
+
+function sliderToContacts(val: number): number {
+  for (let i = 0; i < sliderStops.length - 1; i++) {
+    if (val <= sliderStops[i + 1].slider) {
+      const t = (val - sliderStops[i].slider) / (sliderStops[i + 1].slider - sliderStops[i].slider);
+      return Math.round(sliderStops[i].contacts + t * (sliderStops[i + 1].contacts - sliderStops[i].contacts));
+    }
+  }
+  return 2500;
+}
+
+function contactsToSlider(contacts: number): number {
+  for (let i = 0; i < sliderStops.length - 1; i++) {
+    if (contacts <= sliderStops[i + 1].contacts) {
+      const t = (contacts - sliderStops[i].contacts) / (sliderStops[i + 1].contacts - sliderStops[i].contacts);
+      return Math.round(sliderStops[i].slider + t * (sliderStops[i + 1].slider - sliderStops[i].slider));
+    }
+  }
+  return 100;
+}
+
 export default function PricingPage() {
   const [isAnnual, setIsAnnual] = useState(true);
-  const [contacts, setContacts] = useState(667);
+  const [sliderValue, setSliderValue] = useState(() => contactsToSlider(667));
 
+  const contacts = sliderToContacts(sliderValue);
   const recommendedPlanIndex = getRecommendedPlan(contacts);
   const isEnterprise = recommendedPlanIndex === 5;
 
@@ -292,45 +323,23 @@ export default function PricingPage() {
 
                 <input
                   type="range"
-                  min={5}
-                  max={2500}
-                  step={5}
-                  value={contacts}
-                  onChange={(e) => setContacts(Number(e.target.value))}
+                  min={0}
+                  max={100}
+                  step={1}
+                  value={sliderValue}
+                  onChange={(e) => setSliderValue(Number(e.target.value))}
                   className="w-full h-3 rounded-full appearance-none cursor-pointer slider-thick"
                   style={{
-                    background: `linear-gradient(to right, var(--color-electric) ${((contacts - 5) / 2495) * 100}%, #e5e7eb ${((contacts - 5) / 2495) * 100}%)`,
+                    background: `linear-gradient(to right, var(--color-electric) ${sliderValue}%, #e5e7eb ${sliderValue}%)`,
                   }}
                 />
                 <div className="flex justify-between mt-1.5 text-[10px] text-foreground-tertiary font-medium">
-                  <span>5</span>
-                  <span>500</span>
-                  <span>1,000</span>
-                  <span>2,000</span>
-                  <span>2,500+</span>
-                </div>
-
-                {/* Integration logos that unlock */}
-                <div className="mt-4 pt-4 border-t border-border">
-                  <div className="flex flex-wrap gap-1.5">
-                    {integrationLogos.map((intg) => {
-                      const unlocked = isEnterprise || intg.minPlan <= recommendedPlanIndex;
-                      return (
-                        <div
-                          key={intg.name}
-                          className={`flex items-center gap-1 px-2 py-1 rounded-md border text-[11px] font-medium transition-all duration-300 ${
-                            unlocked
-                              ? "border-electric/20 bg-electric/5 text-foreground"
-                              : "border-border bg-background-secondary text-foreground-tertiary opacity-40"
-                          }`}
-                          title={intg.name}
-                        >
-                          <Image src={intg.logo} alt={intg.name} width={14} height={14} className={`object-contain ${unlocked ? "" : "grayscale"}`} />
-                          <span className="hidden sm:inline">{intg.name}</span>
-                        </div>
-                      );
-                    })}
-                  </div>
+                  <span>Free</span>
+                  <span>Starter</span>
+                  <span>Growth</span>
+                  <span>Business</span>
+                  <span>Teams</span>
+                  <span>Enterprise</span>
                 </div>
               </div>
             </motion.div>
@@ -400,6 +409,23 @@ export default function PricingPage() {
                             <span className="text-foreground">{feature}</span>
                           </div>
                         ))}
+                      </div>
+
+                      {/* Integration icons for this plan tier */}
+                      <div className="mt-5 pt-4 border-t border-border">
+                        <div className="flex flex-wrap gap-1.5">
+                          {integrationLogos
+                            .filter((intg) => intg.minPlan <= index)
+                            .map((intg) => (
+                              <div
+                                key={intg.name}
+                                className="w-7 h-7 rounded-md bg-background-secondary border border-border/50 flex items-center justify-center"
+                                title={intg.name}
+                              >
+                                <Image src={intg.logo} alt={intg.name} width={16} height={16} className="object-contain" />
+                              </div>
+                            ))}
+                        </div>
                       </div>
                     </div>
                   </motion.div>

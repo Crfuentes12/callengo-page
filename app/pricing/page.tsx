@@ -298,7 +298,7 @@ export default function PricingPage() {
               </div>
             </motion.div>
 
-            {/* Contact Slider — compact */}
+            {/* Contact Slider - compact */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

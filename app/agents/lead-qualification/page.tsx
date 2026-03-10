@@ -158,7 +158,7 @@ const faqItems = [
   },
   {
     question: "What happens to low-scoring leads?",
-    answer: "You decide. Options include: auto-assign to nurture campaigns, mark for future follow-up, or deprioritize directly in your CRM via our native integrations. No lead data is lost—they're just ranked lower so your team focuses on buyers first.",
+    answer: "You decide. Options include: auto-assign to nurture campaigns, mark for future follow-up, or deprioritize directly in your CRM via our native integrations. No lead data is lost. They are just ranked lower so your team focuses on buyers first.",
   },
   {
     question: "How quickly are leads qualified?",
@@ -166,7 +166,7 @@ const faqItems = [
   },
   {
     question: "How do I get the qualified leads back?",
-    answer: "Export your scored leads as CSV or Excel with all qualification data, scores, and call transcripts — or push qualified leads directly to your CRM pipeline. Native integrations are live for HubSpot and Pipedrive on Business+ plans, and Salesforce, Zoho, and Dynamics 365 on Teams+ plans.",
+    answer: "Export your scored leads as CSV or Excel with all qualification data, scores, and call transcripts, or push qualified leads directly to your CRM pipeline. Native integrations are live for HubSpot and Pipedrive on Business+ plans, and Salesforce, Zoho, and Dynamics 365 on Teams+ plans.",
   },
   {
     question: "What if a lead wants to speak to a human during qualification?",
@@ -248,7 +248,7 @@ export default function LeadQualificationPage() {
                     <div className="flex items-center gap-4 p-3 rounded-xl bg-accent/10 border border-accent/20">
                       <div className="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-sm">92</div>
                       <div className="flex-1">
-                        <div className="font-medium text-accent-dark">Sarah M. — Hot Lead</div>
+                        <div className="font-medium text-accent-dark">Sarah M. · Hot Lead</div>
                         <div className="text-sm text-accent-dark/80">Budget confirmed, decision maker, needs solution now</div>
                       </div>
                       <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
@@ -256,14 +256,14 @@ export default function LeadQualificationPage() {
                     <div className="flex items-center gap-4 p-3 rounded-xl bg-yellow-50 border border-yellow-200">
                       <div className="w-10 h-10 rounded-full bg-yellow-500 flex items-center justify-center text-white font-bold text-sm">67</div>
                       <div className="flex-1">
-                        <div className="font-medium text-yellow-800">James K. — Warm Lead</div>
+                        <div className="font-medium text-yellow-800">James K. · Warm Lead</div>
                         <div className="text-sm text-yellow-600">Budget TBD, evaluating in Q2</div>
                       </div>
                     </div>
                     <div className="flex items-center gap-4 p-3 rounded-xl bg-background-secondary border border-border">
                       <div className="w-10 h-10 rounded-full bg-foreground-tertiary flex items-center justify-center text-white font-bold text-sm">23</div>
                       <div className="flex-1">
-                        <div className="font-medium text-foreground-secondary">Mike T. — Cold Lead</div>
+                        <div className="font-medium text-foreground-secondary">Mike T. · Cold Lead</div>
                         <div className="text-sm text-foreground-tertiary">No budget, just researching</div>
                       </div>
                     </div>
@@ -374,7 +374,7 @@ export default function LeadQualificationPage() {
                 BANT Scoring, Automated
               </h2>
               <p className="text-lg text-white/70">
-                The proven framework for qualifying leads—applied automatically to every conversation.
+                The proven framework for qualifying leads, applied automatically to every conversation.
               </p>
             </motion.div>
 
@@ -572,7 +572,7 @@ export default function LeadQualificationPage() {
                   <p className="text-foreground-secondary mb-6">
                     Your SDRs cost $4,000+/month and spend half their time on leads
                     that never buy. Callengo qualifies every lead for a fraction of
-                    that cost — so your reps only call buyers who are ready to close.
+                    that cost, so your reps only call buyers who are ready to close.
                   </p>
                   <div className="flex items-baseline gap-2 mb-2">
                     <span className="text-4xl font-bold">~$1.20</span>
@@ -599,7 +599,7 @@ export default function LeadQualificationPage() {
                   </div>
                   <div className="flex items-center gap-3 pt-2">
                     <Check className="w-5 h-5 text-accent-dark" />
-                    <span className="text-sm">15 free minutes to start — no credit card</span>
+                    <span className="text-sm">15 free minutes to start, no credit card</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-accent-dark" />

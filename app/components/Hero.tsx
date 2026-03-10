@@ -262,14 +262,15 @@ export default function Hero() {
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50/60 to-slate-50" />
 
-        <div className="absolute inset-0 opacity-50">
-          <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-to-br from-[#7C3AED]/30 via-[#4F5FE8]/35 to-[#06B6D4]/20 rounded-full blur-3xl animate-[hero-lava-1_45s_ease-in-out_infinite]" />
-          <div className="absolute -top-1/4 -right-1/3 w-4/5 h-4/5 bg-gradient-to-br from-[#1E2D6B]/40 via-[#EC4899]/20 to-[#3347D4]/30 rounded-full blur-3xl animate-[hero-lava-2_55s_ease-in-out_infinite_-8s]" />
-          <div className="absolute top-1/4 -left-1/4 w-3/4 h-3/4 bg-gradient-to-br from-[#06B6D4]/25 via-[#4F5FE8]/35 to-[#1DB87A]/20 rounded-full blur-3xl animate-[hero-lava-3_60s_ease-in-out_infinite_-15s]" />
-          <div className="absolute -bottom-1/3 right-1/4 w-full h-3/4 bg-gradient-to-br from-[#8B5CF6]/30 via-[#1E2D6B]/45 to-[#4F5FE8]/30 rounded-full blur-3xl animate-[hero-lava-4_50s_ease-in-out_infinite_-22s]" />
-          <div className="absolute bottom-1/4 -left-1/3 w-4/5 h-4/5 bg-gradient-to-br from-[#4F5FE8]/30 via-[#EC4899]/15 to-[#7C3AED]/25 rounded-full blur-3xl animate-[hero-lava-5_58s_ease-in-out_infinite_-30s]" />
-          <div className="absolute top-1/3 right-[20%] w-1/2 h-1/2 bg-gradient-to-br from-[#1DB87A]/20 via-[#06B6D4]/30 to-[#3347D4]/35 rounded-full blur-2xl animate-[hero-lava-6_48s_ease-in-out_infinite_-12s]" />
-          <div className="absolute bottom-[20%] left-1/3 w-3/5 h-3/5 bg-gradient-to-br from-[#1E2D6B]/35 via-[#8B5CF6]/25 to-[#4F5FE8]/40 rounded-full blur-2xl animate-[hero-lava-7_52s_ease-in-out_infinite_-18s]" />
+        <div className="absolute inset-0 opacity-30">
+          {/* Smaller, more spaced-out blobs for visible white gaps */}
+          <div className="absolute -top-[30%] -left-[20%] w-[55%] h-[55%] bg-gradient-to-br from-[#7C3AED]/40 via-[#4F5FE8]/45 to-[#06B6D4]/30 rounded-full blur-3xl animate-[hero-lava-1_30s_ease-in-out_infinite]" />
+          <div className="absolute -top-[10%] -right-[15%] w-[50%] h-[50%] bg-gradient-to-br from-[#1E2D6B]/50 via-[#EC4899]/30 to-[#3347D4]/40 rounded-full blur-3xl animate-[hero-lava-2_35s_ease-in-out_infinite_-8s]" />
+          <div className="absolute top-[35%] -left-[10%] w-[45%] h-[45%] bg-gradient-to-br from-[#06B6D4]/35 via-[#4F5FE8]/45 to-[#1DB87A]/30 rounded-full blur-3xl animate-[hero-lava-3_38s_ease-in-out_infinite_-15s]" />
+          <div className="absolute bottom-[5%] right-[10%] w-[50%] h-[45%] bg-gradient-to-br from-[#8B5CF6]/40 via-[#1E2D6B]/55 to-[#4F5FE8]/40 rounded-full blur-3xl animate-[hero-lava-4_32s_ease-in-out_infinite_-22s]" />
+          <div className="absolute bottom-[20%] -left-[15%] w-[45%] h-[45%] bg-gradient-to-br from-[#4F5FE8]/40 via-[#EC4899]/25 to-[#7C3AED]/35 rounded-full blur-3xl animate-[hero-lava-5_36s_ease-in-out_infinite_-30s]" />
+          <div className="absolute top-[15%] right-[25%] w-[35%] h-[35%] bg-gradient-to-br from-[#1DB87A]/30 via-[#06B6D4]/40 to-[#3347D4]/45 rounded-full blur-2xl animate-[hero-lava-6_28s_ease-in-out_infinite_-12s]" />
+          <div className="absolute bottom-[35%] left-[30%] w-[30%] h-[30%] bg-gradient-to-br from-[#1E2D6B]/45 via-[#8B5CF6]/35 to-[#4F5FE8]/50 rounded-full blur-2xl animate-[hero-lava-7_33s_ease-in-out_infinite_-18s]" />
         </div>
 
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white/30" />
@@ -279,38 +280,45 @@ export default function Hero() {
       <style jsx>{`
         @keyframes hero-lava-1 {
           0%, 100% { transform: translate(0, 0) scale(1); }
-          33% { transform: translate(60px, -80px) scale(1.06); }
-          66% { transform: translate(-40px, 50px) scale(0.95); }
+          20% { transform: translate(160px, -120px) scale(1.12); }
+          50% { transform: translate(-100px, 80px) scale(0.88); }
+          75% { transform: translate(80px, -40px) scale(1.06); }
         }
         @keyframes hero-lava-2 {
           0%, 100% { transform: translate(0, 0) scale(1); }
-          25% { transform: translate(-70px, 50px) scale(1.08); }
-          50% { transform: translate(50px, 80px) scale(0.92); }
-          75% { transform: translate(80px, -40px) scale(1.04); }
+          25% { transform: translate(-180px, 100px) scale(1.15); }
+          50% { transform: translate(120px, 160px) scale(0.85); }
+          75% { transform: translate(140px, -80px) scale(1.08); }
         }
         @keyframes hero-lava-3 {
           0%, 100% { transform: translate(0, 0) scale(1); }
-          30% { transform: translate(50px, 60px) scale(0.94); }
-          60% { transform: translate(-60px, -40px) scale(1.1); }
+          30% { transform: translate(140px, 120px) scale(0.88); }
+          60% { transform: translate(-160px, -100px) scale(1.15); }
+          85% { transform: translate(60px, 60px) scale(0.95); }
         }
         @keyframes hero-lava-4 {
           0%, 100% { transform: translate(0, 0) scale(1); }
-          40% { transform: translate(-80px, -50px) scale(1.05); }
-          70% { transform: translate(60px, 40px) scale(0.93); }
+          20% { transform: translate(-140px, -120px) scale(1.12); }
+          45% { transform: translate(100px, 80px) scale(0.87); }
+          70% { transform: translate(-60px, 140px) scale(1.1); }
         }
         @keyframes hero-lava-5 {
           0%, 100% { transform: translate(0, 0) scale(1); }
-          35% { transform: translate(70px, -60px) scale(0.92); }
-          65% { transform: translate(-50px, 50px) scale(1.08); }
+          30% { transform: translate(180px, -140px) scale(0.86); }
+          55% { transform: translate(-120px, 100px) scale(1.14); }
+          80% { transform: translate(60px, -60px) scale(0.94); }
         }
         @keyframes hero-lava-6 {
           0%, 100% { transform: translate(0, 0) scale(1); }
-          50% { transform: translate(-40px, 50px) scale(1.04); }
+          25% { transform: translate(-100px, 120px) scale(1.1); }
+          50% { transform: translate(140px, -80px) scale(0.9); }
+          75% { transform: translate(-60px, -100px) scale(1.05); }
         }
         @keyframes hero-lava-7 {
           0%, 100% { transform: translate(0, 0) scale(1); }
-          33% { transform: translate(50px, 30px) scale(0.96); }
-          66% { transform: translate(-30px, -50px) scale(1.05); }
+          20% { transform: translate(120px, 80px) scale(0.9); }
+          50% { transform: translate(-80px, -120px) scale(1.12); }
+          80% { transform: translate(100px, 40px) scale(0.92); }
         }
       `}</style>
 

@@ -69,7 +69,7 @@ const integrationMeta: Record<string, { title: string; description: string }> = 
   clio: {
     title: "Clio Integration",
     description:
-      "Legal practice management integration — sync Callengo call outcomes with Clio Contacts, Matters, and Communications.",
+      "Legal practice management integration. Sync Callengo call outcomes with Clio Contacts, Matters, and Communications.",
   },
   stripe: {
     title: "Stripe Integration",
@@ -101,13 +101,13 @@ export function generateMetadata({
     title: `${meta.title} | Callengo Documentation`,
     description: meta.description,
     openGraph: {
-      title: `${meta.title} — Callengo`,
+      title: `${meta.title} | Callengo`,
       description: meta.description,
       type: "article",
     },
     twitter: {
       card: "summary_large_image",
-      title: `${meta.title} — Callengo`,
+      title: `${meta.title} | Callengo`,
       description: meta.description,
     },
   };

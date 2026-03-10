@@ -137,7 +137,7 @@ const voiceCategories = [
 /* ─────────────────────────── Data formats ────────────────────────── */
 
 const dataFormats = [
-  { format: "CSV", extension: ".csv", description: "Comma-separated values — most common format" },
+  { format: "CSV", extension: ".csv", description: "Comma-separated values, the most common format" },
   { format: "Excel", extension: ".xlsx, .xls", description: "Microsoft Excel spreadsheets" },
   { format: "JSON", extension: ".json", description: "JavaScript Object Notation" },
   { format: "XML", extension: ".xml", description: "Extensible Markup Language" },
@@ -181,7 +181,7 @@ const integrations: Integration[] = [
   { name: "Zoho CRM", description: "Sync call data and lead status with Zoho CRM", category: "CRM", minPlan: "Business", logo: "/integrations/zoho.png" },
   { name: "Salesforce", description: "Enterprise-grade Salesforce integration with custom field mapping", category: "CRM", minPlan: "Teams", logo: "/integrations/salesforce.png" },
   { name: "Microsoft Dynamics 365", description: "Bi-directional sync with Dynamics 365 entities", category: "CRM", minPlan: "Teams", logo: "/integrations/dynamics.png" },
-  { name: "Clio", description: "Legal practice management — sync client and matter data", category: "CRM", minPlan: "Teams", logo: "/integrations/clio.png" },
+  { name: "Clio", description: "Legal practice management. Sync client and matter data", category: "CRM", minPlan: "Teams", logo: "/integrations/clio.png" },
   // Communication
   { name: "Slack", description: "Get real-time call notifications and summaries in Slack channels", category: "Communication", minPlan: "Starter", logo: "/integrations/slack.png" },
   // Productivity
@@ -640,7 +640,7 @@ export default function DocsPage() {
                 <h2 className="text-3xl font-bold mb-4">Integrations</h2>
                 <p className="text-foreground-secondary text-lg mb-8 max-w-2xl">
                   Connect Callengo to the tools you already use. All 16
-                  integrations are configured directly from your dashboard —
+                  integrations are configured directly from your dashboard,
                   no coding required.{" "}
                   <Link href="/integrations" className="text-electric hover:underline font-medium">
                     Explore all integrations &rarr;
@@ -939,7 +939,7 @@ export default function DocsPage() {
                   },
                   {
                     title: "Outcome Breakdown",
-                    text: "Visualize how calls resolved — verified, rescheduled, no answer, hot leads, and more — with filterable charts.",
+                    text: "Visualize how calls resolved: verified, rescheduled, no answer, hot leads, and more, with filterable charts.",
                   },
                   {
                     title: "Time & Cost Analysis",
@@ -951,7 +951,7 @@ export default function DocsPage() {
                   },
                   {
                     title: "AI Insights",
-                    text: "Callengo surfaces patterns across calls — common objections, optimal call times, and script performance comparisons.",
+                    text: "Callengo surfaces patterns across calls: common objections, optimal call times, and script performance comparisons.",
                   },
                 ].map((item, idx) => (
                   <motion.div

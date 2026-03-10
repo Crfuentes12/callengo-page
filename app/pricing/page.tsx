@@ -291,7 +291,7 @@ export default function PricingPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="max-w-2xl mx-auto mb-10"
+              className="mb-10"
             >
               <div className="bg-white border border-border rounded-2xl px-6 py-5" style={{ boxShadow: "var(--shadow-sm)" }}>
                 <div className="flex items-center justify-between mb-4">
@@ -334,12 +334,11 @@ export default function PricingPage() {
                   }}
                 />
                 <div className="flex justify-between mt-1.5 text-[10px] text-foreground-tertiary font-medium">
-                  <span>Free</span>
-                  <span>Starter</span>
-                  <span>Growth</span>
-                  <span>Business</span>
-                  <span>Teams</span>
-                  <span>Enterprise</span>
+                  <span>5</span>
+                  <span>500</span>
+                  <span>1,000</span>
+                  <span>2,000</span>
+                  <span>2,500+</span>
                 </div>
               </div>
             </motion.div>
@@ -387,8 +386,8 @@ export default function PricingPage() {
                             <span className="text-foreground-tertiary text-sm">/mo</span>
                           )}
                         </div>
-                        <div className="text-xs text-foreground-tertiary mt-1">{plan.minutesLabel}</div>
-                        <div className="text-xs text-electric font-medium mt-0.5">~{plan.maxContacts.toLocaleString()} contacts</div>
+                        <div className="text-xs text-electric font-medium mt-1">~{plan.maxContacts.toLocaleString()} contacts</div>
+                        <div className="text-xs text-foreground-tertiary mt-0.5">{plan.minutesLabel}</div>
                       </div>
 
                       <a
@@ -411,22 +410,26 @@ export default function PricingPage() {
                         ))}
                       </div>
 
-                      {/* Integration icons for this plan tier */}
-                      <div className="mt-5 pt-4 border-t border-border">
-                        <div className="flex flex-wrap gap-1.5">
-                          {integrationLogos
-                            .filter((intg) => intg.minPlan <= index)
-                            .map((intg) => (
-                              <div
-                                key={intg.name}
-                                className="w-7 h-7 rounded-md bg-background-secondary border border-border/50 flex items-center justify-center"
-                                title={intg.name}
-                              >
-                                <Image src={intg.logo} alt={intg.name} width={16} height={16} className="object-contain" />
-                              </div>
-                            ))}
+                      {/* Integration icons unlocked at this tier */}
+                      {integrationLogos.filter((intg) => intg.minPlan === index).length > 0 && (
+                        <div className="mt-5 pt-4 border-t border-border">
+                          <div className="flex flex-wrap gap-1.5">
+                            {integrationLogos
+                              .filter((intg) => intg.minPlan === index)
+                              .map((intg) => (
+                                <div
+                                  key={intg.name}
+                                  className="group/icon relative w-7 h-7 rounded-md bg-background-secondary border border-border/50 flex items-center justify-center hover:border-electric/30 hover:bg-electric/5 transition-colors cursor-default"
+                                >
+                                  <Image src={intg.logo} alt={intg.name} width={16} height={16} className="object-contain" />
+                                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 rounded-md bg-foreground text-white text-[10px] font-medium whitespace-nowrap opacity-0 group-hover/icon:opacity-100 transition-opacity pointer-events-none z-20">
+                                    {intg.name}
+                                  </div>
+                                </div>
+                              ))}
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
                   </motion.div>
                 );

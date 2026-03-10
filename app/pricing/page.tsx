@@ -25,7 +25,7 @@ const plans = [
       "3 min max per call",
       "Basic analytics",
       "CSV import",
-      "Google Calendar",
+      "Google Calendar + Zoom",
     ],
   },
   {
@@ -44,8 +44,8 @@ const plans = [
       "5 min max per call",
       "Full analytics",
       "All import formats",
-      "Google Calendar + Meet",
-      "Slack notifications",
+      "Google Calendar + Meet + Zoom",
+      "Slack + Webhooks",
       "Basic support",
     ],
   },
@@ -65,8 +65,8 @@ const plans = [
       "7 min max per call",
       "Advanced analytics",
       "Automatic follow-ups",
-      "Zoom + Outlook Calendar",
-      "Slack notifications",
+      "Outlook + SimplyBook.me",
+      "Microsoft Teams",
       "Email support",
     ],
   },
@@ -86,8 +86,8 @@ const plans = [
       "10 min max per call",
       "HubSpot + Pipedrive CRM",
       "Smart voicemail",
+      "Stripe + Clio",
       "All calendar integrations",
-      "Webhooks + Stripe",
       "Priority support",
     ],
   },
@@ -105,44 +105,41 @@ const plans = [
       "Unlimited agents",
       "5 users ($79/extra)",
       "15 min max per call",
-      "All CRM integrations",
+      "Salesforce + Zoho + Dynamics",
       "User permissions",
       "Advanced retry logic",
-      "Google Sheets + Clio",
+      "Google Sheets",
       "Priority support",
     ],
   },
 ];
 
-const sliderStops = [
-  { contacts: 10, planIndex: 0, label: "10" },
-  { contacts: 50, planIndex: 1, label: "50" },
-  { contacts: 167, planIndex: 1, label: "167" },
-  { contacts: 333, planIndex: 2, label: "333" },
-  { contacts: 500, planIndex: 3, label: "500" },
-  { contacts: 667, planIndex: 3, label: "667" },
-  { contacts: 1000, planIndex: 4, label: "1K" },
-  { contacts: 2000, planIndex: 4, label: "2K" },
-  { contacts: 2500, planIndex: 5, label: "2.5K+" },
-];
+function getRecommendedPlan(contacts: number): number {
+  if (contacts <= 10) return 0;
+  if (contacts <= 167) return 1;
+  if (contacts <= 333) return 2;
+  if (contacts <= 667) return 3;
+  if (contacts <= 2000) return 4;
+  return 5;
+}
 
 const integrationLogos = [
   { name: "Google Calendar", logo: "/integrations/calendar.png", minPlan: 0 },
+  { name: "Zoom", logo: "/integrations/zoom.png", minPlan: 0 },
   { name: "Google Meet", logo: "/integrations/meets.png", minPlan: 1 },
   { name: "Slack", logo: "/integrations/slack.png", minPlan: 1 },
+  { name: "Webhooks", logo: "/integrations/webhooks.png", minPlan: 1 },
   { name: "Outlook", logo: "/integrations/outlook.png", minPlan: 2 },
-  { name: "Zoom", logo: "/integrations/zoom.png", minPlan: 2 },
+  { name: "SimplyBook.me", logo: "/integrations/simplybook.png", minPlan: 2 },
+  { name: "Microsoft Teams", logo: "/integrations/teams.png", minPlan: 2 },
   { name: "HubSpot", logo: "/integrations/hubspot.png", minPlan: 3 },
   { name: "Pipedrive", logo: "/integrations/pipedrive.png", minPlan: 3 },
-  { name: "Webhooks", logo: "/integrations/webhooks.png", minPlan: 3 },
   { name: "Stripe", logo: "/integrations/stripe.png", minPlan: 3 },
-  { name: "SimplyBook.me", logo: "/integrations/simplybook.png", minPlan: 3 },
+  { name: "Clio", logo: "/integrations/clio.png", minPlan: 3 },
   { name: "Salesforce", logo: "/integrations/salesforce.png", minPlan: 4 },
   { name: "Zoho CRM", logo: "/integrations/zoho.png", minPlan: 4 },
   { name: "Dynamics 365", logo: "/integrations/dynamics.png", minPlan: 4 },
   { name: "Google Sheets", logo: "/integrations/sheets.png", minPlan: 4 },
-  { name: "Microsoft Teams", logo: "/integrations/teams.png", minPlan: 3 },
-  { name: "Clio", logo: "/integrations/clio.png", minPlan: 4 },
 ];
 
 const comparisonFeatures = [
@@ -157,11 +154,11 @@ const comparisonFeatures = [
   { name: "Google Calendar", free: "Yes", starter: "Yes", growth: "Yes", business: "Yes", teams: "Yes", enterprise: "Yes" },
   { name: "Outlook Calendar", free: "-", starter: "-", growth: "Yes", business: "Yes", teams: "Yes", enterprise: "Yes" },
   { name: "Google Meet", free: "-", starter: "Yes", growth: "Yes", business: "Yes", teams: "Yes", enterprise: "Yes" },
-  { name: "Zoom", free: "-", starter: "-", growth: "Yes", business: "Yes", teams: "Yes", enterprise: "Yes" },
-  { name: "Microsoft Teams", free: "-", starter: "-", growth: "-", business: "Yes", teams: "Yes", enterprise: "Yes" },
+  { name: "Zoom", free: "Yes", starter: "Yes", growth: "Yes", business: "Yes", teams: "Yes", enterprise: "Yes" },
+  { name: "Microsoft Teams", free: "-", starter: "-", growth: "Yes", business: "Yes", teams: "Yes", enterprise: "Yes" },
   { name: "Slack", free: "-", starter: "Yes", growth: "Yes", business: "Yes", teams: "Yes", enterprise: "Yes" },
-  { name: "SimplyBook.me", free: "-", starter: "-", growth: "-", business: "Yes", teams: "Yes", enterprise: "Yes" },
-  { name: "Webhooks", free: "-", starter: "-", growth: "-", business: "Yes", teams: "Yes", enterprise: "Yes" },
+  { name: "SimplyBook.me", free: "-", starter: "-", growth: "Yes", business: "Yes", teams: "Yes", enterprise: "Yes" },
+  { name: "Webhooks", free: "-", starter: "Yes", growth: "Yes", business: "Yes", teams: "Yes", enterprise: "Yes" },
   { name: "HubSpot", free: "-", starter: "-", growth: "-", business: "Yes", teams: "Yes", enterprise: "Yes" },
   { name: "Salesforce", free: "-", starter: "-", growth: "-", business: "-", teams: "Yes", enterprise: "Yes" },
   { name: "Pipedrive", free: "-", starter: "-", growth: "-", business: "Yes", teams: "Yes", enterprise: "Yes" },
@@ -169,7 +166,7 @@ const comparisonFeatures = [
   { name: "Microsoft Dynamics 365", free: "-", starter: "-", growth: "-", business: "-", teams: "Yes", enterprise: "Yes" },
   { name: "Google Sheets", free: "-", starter: "-", growth: "-", business: "-", teams: "Yes", enterprise: "Yes" },
   { name: "Stripe", free: "-", starter: "-", growth: "-", business: "Yes", teams: "Yes", enterprise: "Yes" },
-  { name: "Clio", free: "-", starter: "-", growth: "-", business: "-", teams: "Yes", enterprise: "Yes" },
+  { name: "Clio", free: "-", starter: "-", growth: "-", business: "Yes", teams: "Yes", enterprise: "Yes" },
   { name: "Support", free: "Email", starter: "Email", growth: "Email", business: "Priority", teams: "Priority", enterprise: "Dedicated" },
 ];
 
@@ -193,20 +190,15 @@ const addOns = [
 
 export default function PricingPage() {
   const [isAnnual, setIsAnnual] = useState(true);
-  const [sliderValue, setSliderValue] = useState(3);
+  const [contacts, setContacts] = useState(667);
 
-  const currentStop = sliderStops[sliderValue];
-  const recommendedPlanIndex = currentStop.planIndex;
+  const recommendedPlanIndex = getRecommendedPlan(contacts);
   const isEnterprise = recommendedPlanIndex === 5;
 
   const contactsDisplay = useMemo(() => {
-    if (currentStop.contacts >= 1000) {
-      return currentStop.contacts >= 2500
-        ? "2,500+"
-        : currentStop.contacts.toLocaleString();
-    }
-    return currentStop.contacts.toLocaleString();
-  }, [currentStop]);
+    if (contacts >= 2500) return "2,500+";
+    return contacts.toLocaleString();
+  }, [contacts]);
 
   const recommendedPlan = isEnterprise ? null : plans[recommendedPlanIndex];
 
@@ -263,111 +255,77 @@ export default function PricingPage() {
               </div>
             </motion.div>
 
-            {/* Contact Slider */}
+            {/* Contact Slider — compact */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="max-w-3xl mx-auto mb-16"
+              className="max-w-2xl mx-auto mb-10"
             >
-              <div className="bg-white border border-border rounded-2xl p-8" style={{ boxShadow: "var(--shadow-sm)" }}>
-                <div className="text-center mb-6">
-                  <p className="text-sm text-foreground-tertiary mb-1">How many contacts do you need to call per month?</p>
-                  <div className="flex items-baseline justify-center gap-2">
-                    <span className="text-5xl font-bold text-foreground" style={{ fontFamily: "var(--font-display)" }}>
-                      {contactsDisplay}
-                    </span>
-                    <span className="text-lg text-foreground-secondary">contacts</span>
-                  </div>
-                  {recommendedPlan && (
-                    <p className="text-sm text-electric font-medium mt-2">
-                      ~{Math.round(currentStop.contacts * 1.5).toLocaleString()} calling minutes
-                    </p>
-                  )}
-                </div>
-
-                {/* Slider */}
-                <div className="relative px-2">
-                  <input
-                    type="range"
-                    min={0}
-                    max={sliderStops.length - 1}
-                    value={sliderValue}
-                    onChange={(e) => setSliderValue(Number(e.target.value))}
-                    className="w-full h-3 rounded-full appearance-none cursor-pointer slider-thick"
-                    style={{
-                      background: `linear-gradient(to right, var(--color-electric) ${(sliderValue / (sliderStops.length - 1)) * 100}%, #e5e7eb ${(sliderValue / (sliderStops.length - 1)) * 100}%)`,
-                    }}
-                  />
-                  <div className="flex justify-between mt-3 px-0.5">
-                    {sliderStops.map((stop, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setSliderValue(i)}
-                        className={`text-[10px] font-medium transition-colors ${
-                          i === sliderValue ? "text-electric" : "text-foreground-tertiary"
-                        }`}
-                      >
-                        {stop.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Recommendation */}
-                <div className="mt-6 pt-6 border-t border-border">
-                  {isEnterprise ? (
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-semibold text-foreground">Enterprise</p>
-                        <p className="text-sm text-foreground-secondary">Custom solution for your scale</p>
-                      </div>
-                      <a
-                        href="mailto:sales@callengo.com"
-                        className="btn btn-primary text-sm px-5 py-2.5 rounded-lg"
-                      >
-                        Contact Sales
-                      </a>
+              <div className="bg-white border border-border rounded-2xl px-6 py-5" style={{ boxShadow: "var(--shadow-sm)" }}>
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <p className="text-xs text-foreground-tertiary">Estimated contacts/month</p>
+                    <div className="flex items-baseline gap-1.5 mt-0.5">
+                      <span className="text-3xl font-bold text-foreground" style={{ fontFamily: "var(--font-display)" }}>
+                        {contactsDisplay}
+                      </span>
+                      <span className="text-sm text-foreground-secondary">contacts</span>
                     </div>
+                  </div>
+                  {isEnterprise ? (
+                    <a href="mailto:sales@callengo.com" className="btn btn-primary text-sm px-4 py-2 rounded-lg">
+                      Contact Sales
+                    </a>
                   ) : recommendedPlan ? (
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm text-foreground-secondary">Recommended plan</p>
-                        <p className="font-semibold text-foreground text-lg">
-                          {recommendedPlan.name}{" "}
-                          <span className="text-electric font-bold">
-                            ${isAnnual ? recommendedPlan.annualPrice : recommendedPlan.monthlyPrice}/mo
-                          </span>
-                        </p>
-                      </div>
-                      <a
-                        href="https://app.callengo.com/auth/signup"
-                        className="btn btn-primary text-sm px-5 py-2.5 rounded-lg"
-                      >
-                        {recommendedPlan.cta}
-                        <ArrowRight className="w-4 h-4" />
-                      </a>
+                    <div className="text-right">
+                      <p className="text-[10px] text-foreground-tertiary uppercase tracking-wider">Recommended</p>
+                      <p className="font-semibold text-foreground">
+                        {recommendedPlan.name}{" "}
+                        <span className="text-electric">
+                          ${isAnnual ? recommendedPlan.annualPrice : recommendedPlan.monthlyPrice}/mo
+                        </span>
+                      </p>
                     </div>
                   ) : null}
                 </div>
 
+                <input
+                  type="range"
+                  min={5}
+                  max={2500}
+                  step={5}
+                  value={contacts}
+                  onChange={(e) => setContacts(Number(e.target.value))}
+                  className="w-full h-3 rounded-full appearance-none cursor-pointer slider-thick"
+                  style={{
+                    background: `linear-gradient(to right, var(--color-electric) ${((contacts - 5) / 2495) * 100}%, #e5e7eb ${((contacts - 5) / 2495) * 100}%)`,
+                  }}
+                />
+                <div className="flex justify-between mt-1.5 text-[10px] text-foreground-tertiary font-medium">
+                  <span>5</span>
+                  <span>500</span>
+                  <span>1,000</span>
+                  <span>2,000</span>
+                  <span>2,500+</span>
+                </div>
+
                 {/* Integration logos that unlock */}
-                <div className="mt-6 pt-6 border-t border-border">
-                  <p className="text-xs text-foreground-tertiary mb-3 font-medium uppercase tracking-wider">Available integrations</p>
-                  <div className="flex flex-wrap gap-2">
+                <div className="mt-4 pt-4 border-t border-border">
+                  <div className="flex flex-wrap gap-1.5">
                     {integrationLogos.map((intg) => {
-                      const unlocked = !isEnterprise && intg.minPlan <= recommendedPlanIndex;
+                      const unlocked = isEnterprise || intg.minPlan <= recommendedPlanIndex;
                       return (
                         <div
                           key={intg.name}
-                          className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-medium transition-all duration-300 ${
+                          className={`flex items-center gap-1 px-2 py-1 rounded-md border text-[11px] font-medium transition-all duration-300 ${
                             unlocked
                               ? "border-electric/20 bg-electric/5 text-foreground"
                               : "border-border bg-background-secondary text-foreground-tertiary opacity-40"
                           }`}
                           title={intg.name}
                         >
-                          <Image src={intg.logo} alt={intg.name} width={16} height={16} className={`object-contain ${unlocked ? "" : "grayscale"}`} />
+                          <Image src={intg.logo} alt={intg.name} width={14} height={14} className={`object-contain ${unlocked ? "" : "grayscale"}`} />
                           <span className="hidden sm:inline">{intg.name}</span>
                         </div>
                       );

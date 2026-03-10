@@ -155,7 +155,7 @@ export default function Header() {
                       >
                         <div className="grid grid-cols-2">
                           {/* Left: Agents */}
-                          <div className="p-3 border-r border-border">
+                          <div className="p-3">
                             <div className="px-3 py-2 text-[10px] font-semibold text-foreground-tertiary uppercase tracking-wider">
                               AI Agents
                             </div>

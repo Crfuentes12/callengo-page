@@ -292,9 +292,9 @@ export default function DocsPage() {
   return (
     <>
       <Header />
-      <main className="relative overflow-x-hidden" style={{ fontFamily: "var(--font-body)" }}>
+      <main className="relative" style={{ fontFamily: "var(--font-body)" }}>
         {/* ────────── Hero ────────── */}
-        <section className="pt-32 pb-16 relative">
+        <section className="pt-32 pb-16 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

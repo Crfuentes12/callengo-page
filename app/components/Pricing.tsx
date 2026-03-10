@@ -107,17 +107,17 @@ const addOns = [
   {
     name: "Dedicated Number",
     price: "$15/mo",
-    description: "Your own dedicated phone number for brand consistency",
+    description: "Own dedicated outbound phone number (transferred via Bland sub-account)",
   },
   {
     name: "Recording Vault",
     price: "$12/mo",
-    description: "Unlimited call recording storage with transcription",
+    description: "Extends call recording retention from 30 days → 12 months",
   },
   {
     name: "Calls Booster",
-    price: "$35/500 min",
-    description: "Extra minutes when you need them, no plan upgrade required",
+    price: "$35/mo",
+    description: "+150 calls (~+225 min) per month. Stackable.",
   },
 ];
 

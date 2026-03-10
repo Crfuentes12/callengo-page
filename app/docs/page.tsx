@@ -222,9 +222,9 @@ const plans = [
 ];
 
 const addOns = [
-  { name: "Dedicated Number", price: "$15/mo", description: "Your own dedicated phone number for caller ID consistency" },
-  { name: "Recording Vault", price: "$12/mo", description: "Extended call recording storage with search and playback" },
-  { name: "Calls Booster", price: "$35 / 500 min", description: "Top up calling minutes anytime without changing your plan" },
+  { name: "Dedicated Number", price: "$15/mo", description: "Own dedicated outbound phone number (transferred via Bland sub-account)" },
+  { name: "Recording Vault", price: "$12/mo", description: "Extends call recording retention from 30 days → 12 months" },
+  { name: "Calls Booster", price: "$35/mo", description: "+150 calls (~+225 min) per month. Stackable." },
 ];
 
 /* ─────────────────────────── Webhook sample ──────────────────────── */
@@ -292,7 +292,7 @@ export default function DocsPage() {
   return (
     <>
       <Header />
-      <main className="relative overflow-hidden" style={{ fontFamily: "var(--font-body)" }}>
+      <main className="relative overflow-x-hidden" style={{ fontFamily: "var(--font-body)" }}>
         {/* ────────── Hero ────────── */}
         <section className="pt-32 pb-16 relative">
           <div className="max-w-7xl mx-auto px-6 relative z-10">

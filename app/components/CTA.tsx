@@ -43,7 +43,7 @@ export default function CTA() {
             <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href="https://app.callengo.com/auth/signup"
-                className="btn bg-white text-primary hover:bg-white/90 px-8 py-4 font-semibold rounded-xl"
+                className="btn btn-cta-white bg-white text-primary hover:bg-white/90 px-8 py-4 font-semibold rounded-xl"
               >
                 Get started free
                 <ArrowRight className="w-5 h-5" />

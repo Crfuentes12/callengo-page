@@ -377,21 +377,21 @@ export default function Hero() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="relative flex items-center justify-center"
+            className="relative flex items-start justify-center lg:-mt-8"
           >
-            <div className="relative w-full max-w-sm">
+            <div className="relative w-full max-w-md">
               <div
                 className="rounded-2xl overflow-hidden"
                 style={{
-                  background: "rgba(255, 255, 255, 0.12)",
+                  background: "rgba(255, 255, 255, 0.95)",
                   backdropFilter: "blur(40px)",
                   WebkitBackdropFilter: "blur(40px)",
-                  border: "1px solid rgba(255, 255, 255, 0.18)",
-                  boxShadow: "0 8px 32px rgba(30, 45, 107, 0.08), inset 0 1px 0 rgba(255,255,255,0.2)",
+                  border: "1px solid rgba(221, 224, 238, 0.6)",
+                  boxShadow: "0 12px 40px rgba(30, 45, 107, 0.12), 0 4px 12px rgba(30, 45, 107, 0.06)",
                 }}
               >
                 {/* ── Transcript area ── */}
-                <div className="h-36 flex flex-col min-h-0 relative">
+                <div className="h-48 flex flex-col min-h-0 relative">
                   {!hasStartedPlaying ? (
                     <div className="flex-1 flex flex-col items-center justify-center px-5">
                       <p className="text-sm font-medium text-foreground mb-3 text-center" style={{ fontFamily: "var(--font-display)" }}>

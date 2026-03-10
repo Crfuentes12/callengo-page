@@ -185,7 +185,7 @@ export default function Header() {
                           </div>
 
                           {/* Right: Integrations featured card */}
-                          <div className="p-3 bg-background-secondary/30">
+                          <div className="p-3">
                             <Link
                               href="/integrations"
                               className="group block h-full rounded-xl bg-electric/[0.06] border border-electric/15 p-5 relative overflow-hidden hover:bg-electric/[0.1] transition-colors"
@@ -292,7 +292,7 @@ export default function Header() {
                           </div>
 
                           {/* Right: Documentation featured card */}
-                          <div className="p-3 bg-background-secondary/30">
+                          <div className="p-3">
                             <Link
                               href="/docs"
                               className="group block h-full rounded-xl bg-electric/[0.06] border border-electric/15 p-5 relative overflow-hidden hover:bg-electric/[0.1] transition-colors"

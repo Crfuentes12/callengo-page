@@ -58,11 +58,12 @@ export default function Footer() {
 
   return (
     <footer className="bg-deep-indigo text-white relative overflow-hidden">
-      {/* Subtle lava lamp background */}
-      <div className="absolute inset-0 overflow-hidden opacity-15 pointer-events-none">
-        <div className="absolute -top-1/3 right-[-15%] w-1/2 h-[80%] bg-gradient-to-br from-[#4F5FE8]/40 via-[#8B96C8]/25 to-transparent rounded-full blur-3xl animate-[footerLava1_50s_ease-in-out_infinite]" />
-        <div className="absolute -bottom-1/4 left-[-10%] w-2/5 h-[70%] bg-gradient-to-br from-[#8B96C8]/35 via-[#6070E0]/20 to-transparent rounded-full blur-3xl animate-[footerLava2_60s_ease-in-out_infinite]" />
-        <div className="absolute top-[20%] left-[40%] w-1/3 h-[60%] bg-gradient-to-br from-[#1DB87A]/15 via-[#4F5FE8]/20 to-transparent rounded-full blur-3xl animate-[footerLava3_55s_ease-in-out_infinite]" />
+      {/* Lava lamp background - enhanced visibility */}
+      <div className="absolute inset-0 overflow-hidden opacity-35 pointer-events-none">
+        <div className="absolute -top-1/3 right-[-15%] w-3/5 h-[90%] bg-gradient-to-br from-[#4F5FE8]/50 via-[#8B96C8]/35 to-transparent rounded-full blur-3xl animate-[footerLava1_50s_ease-in-out_infinite]" />
+        <div className="absolute -bottom-1/4 left-[-10%] w-1/2 h-[80%] bg-gradient-to-br from-[#8B96C8]/45 via-[#6070E0]/30 to-transparent rounded-full blur-3xl animate-[footerLava2_60s_ease-in-out_infinite]" />
+        <div className="absolute top-[20%] left-[40%] w-2/5 h-[70%] bg-gradient-to-br from-[#1DB87A]/25 via-[#4F5FE8]/30 to-transparent rounded-full blur-3xl animate-[footerLava3_55s_ease-in-out_infinite]" />
+        <div className="absolute top-[50%] right-[20%] w-1/3 h-[60%] bg-gradient-to-br from-[#4F5FE8]/35 via-[#3347D4]/25 to-transparent rounded-full blur-3xl animate-[footerLava1_45s_ease-in-out_infinite_-20s]" />
       </div>
       <style jsx>{`
         @keyframes footerLava1 {

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { Check, X, ArrowRight, Building2, Sparkles, Phone, Archive, Zap } from "lucide-react";
+import { Check, X, ArrowRight, Building2, Sparkles, Phone, Archive, Zap, Plus, Minus, HelpCircle } from "lucide-react";
 import AnimatedBlobs from "../components/AnimatedBlobs";
 
 const plans = [
@@ -617,6 +617,9 @@ export default function PricingPage() {
           </div>
         </section>
 
+        {/* Pricing FAQ Section */}
+        <PricingFAQ />
+
         {/* CTA Section */}
         <section className="section relative z-10">
           <div className="max-w-7xl mx-auto px-6">
@@ -715,5 +718,119 @@ export default function PricingPage() {
       </main>
       <Footer />
     </>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   PRICING FAQ
+   ═══════════════════════════════════════════════════════════════════ */
+
+const pricingFaqs = [
+  {
+    q: "How does the free plan work?",
+    a: "You get 15 one-time minutes to test Callengo with no credit card required. This includes full access to 1 AI agent, basic analytics, CSV import, and core integrations (Google Calendar, Meet, Zoom, Stripe, Sheets). It's enough to run approximately 10 test calls and experience the platform before committing.",
+  },
+  {
+    q: "What counts as a call minute?",
+    a: "Only the actual connected call duration counts toward your minutes. Failed connections, busy signals, and voicemails under 30 seconds are not billed. On average, calls last about 1.5 minutes when you factor in no-answers (~0.5 min), voicemails (~1.5 min), and connected calls (~2.5 min).",
+  },
+  {
+    q: "Can I upgrade or downgrade my plan anytime?",
+    a: "Yes, you can change your plan at any time from your billing dashboard. Upgrades take effect immediately with prorated billing. Downgrades take effect at the end of your current billing cycle so you don't lose any remaining minutes.",
+  },
+  {
+    q: "What happens if I exceed my monthly minutes?",
+    a: "You'll be charged the per-minute overage rate for your plan: $0.29/min on Starter, $0.26/min on Growth, $0.23/min on Business, $0.20/min on Teams, and $0.17/min on Enterprise. You can also add a Calls Booster ($35/mo for +225 min) to avoid overage charges.",
+  },
+  {
+    q: "Do you offer annual billing discounts?",
+    a: "Yes! Annual billing saves you 12%, which is equivalent to getting 2 months free. For example, the Business plan goes from $299/mo to $263/mo when billed annually. You can switch between monthly and annual billing at any time.",
+  },
+  {
+    q: "How many AI agents can I use?",
+    a: "The Free plan includes 1 locked agent. Starter gives you 1 switchable agent. Growth unlocks all 3 agents (Data Validation, Appointment Confirmation, Lead Qualification). Business, Teams, and Enterprise plans include unlimited agent access.",
+  },
+  {
+    q: "Which CRM integrations are included?",
+    a: "Core integrations (Google Calendar, Meet, Zoom, Stripe, Sheets) are included on all plans. Slack, SimplyBook.me, and Webhooks are available from Starter. HubSpot, Pipedrive, Outlook, and Teams unlock on Business. Salesforce, Zoho, Dynamics 365, and Clio are available on Teams and Enterprise.",
+  },
+  {
+    q: "Is there a contract or commitment?",
+    a: "No long-term contracts. Monthly plans are billed month-to-month and you can cancel anytime. Annual plans are billed yearly with the 12% discount but can be cancelled at renewal. Enterprise plans may have custom terms based on your needs.",
+  },
+  {
+    q: "Can I add extra users to my plan?",
+    a: "Business and Teams plans support multiple users (3 and 5 respectively). Additional seats can be added for $79/seat/month. Enterprise plans include unlimited users. Free, Starter, and Growth plans support 1 user.",
+  },
+  {
+    q: "Do you offer discounts for startups or nonprofits?",
+    a: "Yes! We offer special pricing for qualifying startups, nonprofits, and educational institutions. Contact our sales team at sales@callengo.com with details about your organization to learn about available discounts.",
+  },
+];
+
+function PricingFAQ() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  return (
+    <section className="section relative z-10">
+      <div className="max-w-4xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-electric/10 border border-electric/20 text-electric text-xs font-medium mb-4">
+            <HelpCircle className="w-3.5 h-3.5" />
+            Pricing FAQ
+          </div>
+          <h2 className="text-3xl font-bold mb-4" style={{ fontFamily: "var(--font-display)" }}>
+            Frequently asked questions
+          </h2>
+          <p className="text-foreground-secondary">
+            Everything you need to know about Callengo pricing, billing, and plans.
+          </p>
+        </motion.div>
+
+        <div className="space-y-3">
+          {pricingFaqs.map((faq, i) => {
+            const isOpen = openIndex === i;
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.03 }}
+                className="border border-border rounded-xl overflow-hidden bg-white"
+                style={{ boxShadow: isOpen ? "var(--shadow-sm)" : "none" }}
+              >
+                <button
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                  className="w-full flex items-center justify-between gap-4 px-6 py-4 text-left cursor-pointer"
+                >
+                  <span className="text-sm font-semibold text-foreground" style={{ fontFamily: "var(--font-display)" }}>
+                    {faq.q}
+                  </span>
+                  <span className="shrink-0 w-6 h-6 rounded-full bg-background-secondary flex items-center justify-center">
+                    {isOpen ? <Minus className="w-3.5 h-3.5 text-electric" /> : <Plus className="w-3.5 h-3.5 text-foreground-tertiary" />}
+                  </span>
+                </button>
+                <div
+                  className="grid transition-[grid-template-rows] duration-300 ease-in-out"
+                  style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
+                >
+                  <div className="overflow-hidden">
+                    <p className="px-6 pb-5 text-sm text-foreground-secondary leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>
+                      {faq.a}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
   );
 }

@@ -88,6 +88,36 @@ const jsonLd = {
         { "@type": "ListItem", position: 16, name: "Microsoft Dynamics 365", url: "https://callengo.com/integrations/microsoft-dynamics-365" },
       ],
     },
+    {
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "How do Callengo integrations work?",
+          acceptedAnswer: { "@type": "Answer", text: "Callengo connects to your tools through OAuth or API key authentication. Data flows automatically between Callengo and your CRM, calendar, or communication tools when calls complete." },
+        },
+        {
+          "@type": "Question",
+          name: "Can I integrate Callengo with my CRM?",
+          acceptedAnswer: { "@type": "Answer", text: "Yes! Callengo integrates natively with HubSpot, Pipedrive (Business+), Salesforce, Zoho CRM, Dynamics 365 (Teams+), and Clio (Enterprise). Webhooks support Zapier, Make, and n8n for other systems." },
+        },
+        {
+          "@type": "Question",
+          name: "Which integrations are available on the free plan?",
+          acceptedAnswer: { "@type": "Answer", text: "The free plan includes Google Calendar, Google Meet, Zoom, Stripe, and Google Sheets." },
+        },
+        {
+          "@type": "Question",
+          name: "Does Callengo support webhooks?",
+          acceptedAnswer: { "@type": "Answer", text: "Yes, webhooks are available on Starter+ plans. Callengo sends POST requests to any URL when events occur, compatible with Zapier, Make, and n8n." },
+        },
+        {
+          "@type": "Question",
+          name: "Can Callengo sync with Google Calendar and Outlook?",
+          acceptedAnswer: { "@type": "Answer", text: "Yes. Google Calendar is on all plans, Outlook on Business+. Both support two-way sync with real-time availability checking." },
+        },
+      ],
+    },
   ],
 };
 

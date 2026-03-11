@@ -2,30 +2,31 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import AnimatedBlobs from "../components/AnimatedBlobs";
-import { ArrowRight, CheckCircle2, Zap } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 const comparisons = [
   {
     slug: "bland-ai",
     name: "Bland AI",
+    logo: "/logos/bland-ai.png",
     category: "AI Voice Infrastructure",
-    tagline: "Developer-first voice API vs. ready-to-deploy business agents",
+    tagline: "Developer API vs. ready-to-deploy business agents",
     description:
-      "Bland AI is a raw voice infrastructure layer built for developers. Callengo is a complete outbound automation platform built for sales, ops, and clinical teams. See how the two approaches compare on pricing, setup complexity, and real-world outcomes.",
+      "Bland AI is a voice infrastructure layer built for developers. Callengo is a complete outbound automation platform built for sales, ops, and clinical teams. Compare pricing, setup complexity, and real-world outcomes.",
     highlights: [
-      "Callengo needs 0 developers to deploy",
+      "Callengo needs zero developers to deploy",
       "No surprise per-call or per-SMS fees",
       "3 pre-built agents vs. build-from-scratch",
     ],
-    badge: "Most searched",
-    badgeColor: "electric",
   },
   {
     slug: "vapi",
     name: "Vapi",
+    logo: "/logos/vapi.png",
     category: "AI Voice Infrastructure",
     tagline: "API-first voice stack vs. vertical-focused automation platform",
     description:
@@ -35,128 +36,141 @@ const comparisons = [
       "Predictable monthly pricing",
       "Full CRM sync included",
     ],
-    badge: null,
-    badgeColor: null,
   },
   {
     slug: "retell-ai",
     name: "Retell AI",
+    logo: "/logos/retell-ai.png",
     category: "AI Voice Infrastructure",
     tagline: "Low-latency voice SDK vs. turnkey outbound call platform",
     description:
-      "Retell AI focuses on ultra-low-latency voice for developers building real-time applications. Callengo focuses on outbound business outcomes — qualified leads, confirmed appointments, and clean CRM data — without writing a single line of code.",
+      "Retell AI focuses on ultra-low-latency voice for developers building real-time applications. Callengo focuses on outbound business outcomes: qualified leads, confirmed appointments, and clean CRM data, without writing a single line of code.",
     highlights: [
       "Business-ready templates on day one",
       "Follow-up automation built in",
       "Native HubSpot, Salesforce, Pipedrive sync",
     ],
-    badge: null,
-    badgeColor: null,
   },
   {
     slug: "synthflow",
     name: "Synthflow",
+    logo: "/logos/synthflow.png",
     category: "No-Code Voice AI",
     tagline: "Generic no-code voice builder vs. specialized outbound agents",
     description:
-      "Synthflow offers a drag-and-drop voice agent builder for general use cases. Callengo goes deeper with pre-optimized agents for three specific workflows — each with proven scripts, smart follow-up logic, and deep CRM integration built in.",
+      "Synthflow offers a drag-and-drop voice agent builder for general use cases. Callengo goes deeper with three vertical agents, each with proven scripts, smart follow-up logic, and deep CRM integration built in.",
     highlights: [
       "Vertical-specific call logic",
       "Smart voicemail and retry rules",
-      "Calendar + scheduling sync",
+      "Calendar and scheduling sync",
     ],
-    badge: null,
-    badgeColor: null,
   },
   {
     slug: "air-ai",
     name: "Air AI",
+    logo: "/logos/air-ai.png",
     category: "Conversational AI Sales",
     tagline: "Long-form conversation AI vs. outcome-focused call automation",
     description:
-      "Air AI positions itself around long, human-like conversations designed to replace SDRs entirely. Callengo takes a more surgical approach: structured, goal-oriented calls that complete a specific task — validation, confirmation, or qualification — and write the result directly back to your CRM.",
+      "Air AI is built around long, human-like conversations designed to replace SDRs entirely. Callengo takes a more focused approach: structured, goal-oriented calls that complete a specific task and write the result directly back to your CRM.",
     highlights: [
       "Structured task-completion agents",
       "Transparent per-minute billing",
       "Results written directly to CRM",
     ],
-    badge: null,
-    badgeColor: null,
   },
   {
     slug: "thoughtly",
     name: "Thoughtly",
+    logo: "/logos/thoughtly.png",
     category: "AI Call Center",
     tagline: "AI call center platform vs. targeted outbound automation",
     description:
-      "Thoughtly is designed for inbound and blended call center operations. Callengo is purpose-built for outbound: proactively reaching contacts to qualify leads, confirm appointments, and verify CRM data — with smart follow-up sequences and calendar integration included.",
+      "Thoughtly is designed for inbound and blended call center operations. Callengo is built for outbound: proactively reaching contacts to qualify leads, confirm appointments, and verify CRM data, with smart follow-up sequences and calendar integration included.",
     highlights: [
       "Built for proactive outbound",
       "No-show retry logic included",
       "BANT-based lead scoring",
     ],
-    badge: null,
-    badgeColor: null,
   },
   {
     slug: "aircall",
     name: "Aircall",
+    logo: "/logos/aircall.png",
     category: "Cloud Phone System",
     tagline: "Human-agent cloud phone vs. AI-powered call automation",
     description:
-      "Aircall is a cloud phone system that empowers human sales and support teams. Callengo replaces the repetitive, low-value calls those teams are forced to make — confirmation calls, verification calls, qualification calls — freeing reps for conversations that actually require a human.",
+      "Aircall is a cloud phone system for human sales and support teams. Callengo replaces the repetitive calls those teams are forced to make: confirmation calls, verification calls, qualification calls, freeing reps for conversations that actually require a human.",
     highlights: [
       "No human agents needed for repetitive calls",
       "24/7 availability, no shift coverage",
       "Scales without headcount",
     ],
-    badge: null,
-    badgeColor: null,
   },
   {
     slug: "dialpad",
     name: "Dialpad AI",
+    logo: "/logos/dialpad.png",
     category: "AI-Powered Cloud Comms",
     tagline: "AI conversation intelligence vs. autonomous outbound execution",
     description:
-      "Dialpad AI enhances human agent productivity with real-time transcription and coaching. Callengo removes the human from repetitive outbound workflows entirely, automating the call, the follow-up, the CRM update, and the calendar event from a single campaign setup.",
+      "Dialpad AI enhances human agent productivity with real-time transcription and coaching. Callengo removes the human from repetitive outbound workflows entirely, automating the call, the follow-up, the CRM update, and the calendar event from a single campaign.",
     highlights: [
       "Full call lifecycle automation",
       "No per-seat pricing for outbound",
       "Integrated follow-up sequences",
     ],
-    badge: null,
-    badgeColor: null,
   },
   {
     slug: "justcall",
     name: "JustCall",
+    logo: "/logos/justcall.png",
     category: "AI Sales Dialer",
     tagline: "AI power dialer vs. autonomous AI calling agents",
     description:
-      "JustCall provides AI-enhanced power dialers and conversation intelligence for sales teams. Callengo goes a step further: the AI itself makes the calls, conducts the conversation, and logs the outcome — no rep needed for qualifying, confirming, or verifying contacts.",
+      "JustCall provides AI-enhanced power dialers and conversation intelligence for sales teams. Callengo goes a step further: the AI makes the calls, conducts the conversation, and logs the outcome without a rep needed for qualifying, confirming, or verifying contacts.",
     highlights: [
       "Fully autonomous call execution",
       "AI conducts the conversation",
       "Outcomes written to CRM automatically",
     ],
-    badge: null,
-    badgeColor: null,
   },
   {
     slug: "play-ai",
     name: "PlayAI",
+    logo: "/logos/play-ai.png",
     category: "Text-to-Speech & Voice AI",
     tagline: "Voice synthesis platform vs. complete outbound call solution",
     description:
-      "PlayAI is a text-to-speech and voice AI platform for building custom voice experiences. Callengo uses advanced voice synthesis as one component of a complete outbound automation solution — combining natural conversation, CRM integration, calendar sync, and multi-step follow-up logic.",
+      "PlayAI is a text-to-speech and voice AI platform for building custom voice experiences. Callengo uses advanced voice synthesis as one component of a complete outbound automation solution, combining natural conversation, CRM integration, calendar sync, and multi-step follow-up logic.",
     highlights: [
       "Complete campaign management included",
       "Multi-step follow-up automation",
       "Business outcomes, not just voice quality",
     ],
-    badge: null,
-    badgeColor: null,
+  },
+];
+
+const faqs = [
+  {
+    q: "Why compare Callengo with these platforms?",
+    a: "These are the tools that sales ops managers, clinic administrators, and business owners most often evaluate alongside Callengo. Some are raw infrastructure APIs built for developers. Others are generic dialers or cloud phone systems. Callengo sits in a different category: a no-code outbound automation platform with three purpose-built agents, deep CRM integration, and all the follow-up logic included. These comparisons help you understand what that difference actually means in practice.",
+  },
+  {
+    q: "Is Callengo just a reseller of one of these platforms?",
+    a: "No. Callengo is an independent SaaS platform with its own product, infrastructure, pricing, and support. It is not a white-label or reseller of any of the platforms listed on this page.",
+  },
+  {
+    q: "Which platform is best for appointment confirmation?",
+    a: "Callengo has a dedicated Appointment Confirmation Agent with built-in logic for confirmations, reschedules, no-show retry, and calendar sync across Google Calendar, Outlook, and SimplyBook.me. Most of the platforms listed here either require custom development to build this workflow or do not support it at all.",
+  },
+  {
+    q: "What makes Callengo different from a voice infrastructure API?",
+    a: "Voice infrastructure APIs like Bland AI and Vapi give developers the building blocks to create voice applications from scratch. Callengo gives business teams a finished product: three pre-built agents that are ready to run campaigns on day one, with CRM integrations, follow-up automation, voicemail handling, and calendar sync included. No code required.",
+  },
+  {
+    q: "Can I switch to Callengo from one of these platforms?",
+    a: "Yes. If you are using any of the platforms listed here and want to migrate to Callengo, the process typically involves connecting your CRM via OAuth, importing or syncing your contact list, selecting the relevant agent, and launching your first campaign. The Callengo team helps Business and Teams plan customers through onboarding.",
   },
 ];
 
@@ -169,7 +183,7 @@ export default function ComparePage() {
 
         {/* Hero */}
         <section className="section relative z-10">
-          <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-6xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -179,21 +193,18 @@ export default function ComparePage() {
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border border-electric/20 text-electric bg-electric/5 mb-6">
                 Comparisons
               </span>
-              <h1 className="text-display-sm mb-6">
+              <h1 className="text-display-sm mb-5">
                 How does Callengo compare
                 <br />
                 <span className="gradient-text">to the alternatives?</span>
               </h1>
               <p
-                className="text-xl text-foreground-secondary leading-relaxed max-w-2xl"
+                className="text-xl text-foreground-secondary leading-relaxed"
                 style={{ fontFamily: "var(--font-body)" }}
               >
-                The AI voice automation market is crowded with developer APIs,
-                generic dialers, and conversation platforms. Callengo is
-                different: three purpose-built agents for lead qualification,
-                appointment confirmation, and data validation — no coding
-                required, full CRM integration included. See how we stack up
-                against the tools your team is already evaluating.
+                The AI voice automation market is crowded with developer APIs, generic dialers, and conversation platforms.
+                Callengo is different: three purpose-built agents for lead qualification, appointment confirmation, and data validation.
+                No coding required, full CRM integration included.
               </p>
             </motion.div>
           </div>
@@ -201,7 +212,7 @@ export default function ComparePage() {
 
         {/* Comparison cards grid */}
         <section className="section relative z-10 bg-background-secondary">
-          <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-6xl mx-auto px-6">
             <div className="grid md:grid-cols-2 gap-6">
               {comparisons.map((comp, index) => (
                 <motion.div
@@ -213,26 +224,32 @@ export default function ComparePage() {
                 >
                   <Link
                     href={`/compare/${comp.slug}`}
-                    className="block bg-white rounded-2xl border border-border p-8 hover:border-electric/30 hover:shadow-lg transition-all group relative overflow-hidden"
+                    className="block bg-white rounded-2xl border border-border p-7 hover:border-electric/30 hover:shadow-lg transition-all group relative overflow-hidden h-full"
                   >
                     <div className="absolute top-0 right-0 w-32 h-32 bg-electric/[0.03] rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:bg-electric/[0.06] transition-colors" />
 
                     <div className="relative z-10">
-                      {comp.badge && (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-electric/10 text-electric mb-4">
-                          <Zap className="w-3 h-3" />
-                          {comp.badge}
-                        </span>
-                      )}
-
-                      <div className="flex items-start justify-between mb-4">
-                        <div>
-                          <p className="text-xs font-medium text-foreground-tertiary uppercase tracking-wider mb-1" style={{ fontFamily: "var(--font-body)" }}>
-                            Callengo vs.
-                          </p>
-                          <h2 className="text-2xl font-bold">{comp.name}</h2>
+                      {/* Logo + name row */}
+                      <div className="flex items-center justify-between mb-5">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-xl bg-background-secondary border border-border flex items-center justify-center overflow-hidden shrink-0">
+                            <img
+                              src={comp.logo}
+                              alt={comp.name}
+                              className="w-7 h-7 object-contain"
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).style.display = "none";
+                              }}
+                            />
+                          </div>
+                          <div>
+                            <p className="text-xs font-medium text-foreground-tertiary uppercase tracking-wider" style={{ fontFamily: "var(--font-body)" }}>
+                              Callengo vs.
+                            </p>
+                            <h2 className="text-xl font-bold">{comp.name}</h2>
+                          </div>
                         </div>
-                        <span className="text-xs text-foreground-tertiary bg-background-secondary px-2.5 py-1 rounded-full border border-border shrink-0 mt-1" style={{ fontFamily: "var(--font-body)" }}>
+                        <span className="text-xs text-foreground-tertiary bg-background-secondary px-2.5 py-1 rounded-full border border-border shrink-0" style={{ fontFamily: "var(--font-body)" }}>
                           {comp.category}
                         </span>
                       </div>
@@ -242,13 +259,13 @@ export default function ComparePage() {
                       </p>
 
                       <p
-                        className="text-foreground-secondary text-sm leading-relaxed mb-6"
+                        className="text-foreground-secondary text-sm leading-relaxed mb-5"
                         style={{ fontFamily: "var(--font-body)" }}
                       >
                         {comp.description}
                       </p>
 
-                      <ul className="space-y-2 mb-6">
+                      <ul className="space-y-2 mb-5">
                         {comp.highlights.map((h) => (
                           <li
                             key={h}
@@ -273,9 +290,43 @@ export default function ComparePage() {
           </div>
         </section>
 
-        {/* Bottom CTA */}
+        {/* FAQ */}
         <section className="section relative z-10">
-          <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-6xl mx-auto px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mb-10"
+            >
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border border-electric/20 text-electric bg-electric/5 mb-5">
+                FAQ
+              </span>
+              <h2 className="text-3xl font-semibold">Common questions about comparing AI calling platforms</h2>
+            </motion.div>
+            <div className="grid md:grid-cols-2 gap-5">
+              {faqs.map((faq, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.06 }}
+                  className="bg-white rounded-2xl border border-border p-7"
+                >
+                  <h3 className="font-semibold text-base mb-3">{faq.q}</h3>
+                  <p className="text-foreground-secondary text-sm leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>
+                    {faq.a}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Bottom CTA */}
+        <section className="section relative z-10 bg-background-secondary">
+          <div className="max-w-6xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -299,14 +350,14 @@ export default function ComparePage() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <a
                     href="https://app.callengo.com/auth/signup"
-                    className="btn btn-cta-white bg-white text-deep-indigo hover:bg-white/90 px-8 py-4 font-semibold rounded-xl inline-flex items-center gap-2"
+                    className="bg-white text-deep-indigo hover:bg-white/90 px-8 py-4 font-semibold rounded-xl inline-flex items-center justify-center gap-2 transition-colors"
                   >
                     Start free trial
                     <ArrowRight className="w-5 h-5" />
                   </a>
                   <a
                     href="mailto:sales@callengo.com"
-                    className="btn border border-white/30 text-white hover:bg-white/10 px-8 py-4 rounded-xl inline-flex items-center gap-2"
+                    className="border border-white/30 text-white hover:bg-white/10 px-8 py-4 rounded-xl inline-flex items-center justify-center gap-2 transition-colors"
                   >
                     Talk to sales
                   </a>

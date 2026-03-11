@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { trackFreeTrialClick, trackTalkToSalesClick } from "@/app/lib/analytics";
 
 export default function CTA() {
   return (
@@ -44,6 +45,7 @@ export default function CTA() {
               <a
                 href="https://app.callengo.com/auth/signup"
                 className="btn btn-cta-white bg-white text-primary hover:bg-white/90 px-8 py-4 font-semibold rounded-xl"
+                onClick={() => trackFreeTrialClick("cta_section")}
               >
                 Get started free
                 <ArrowRight className="w-5 h-5" />
@@ -51,6 +53,7 @@ export default function CTA() {
               <a
                 href="mailto:sales@callengo.com"
                 className="btn border border-white/30 text-white hover:bg-white/10 px-8 py-4 rounded-xl"
+                onClick={() => trackTalkToSalesClick("cta_section")}
               >
                 Talk to sales
               </a>

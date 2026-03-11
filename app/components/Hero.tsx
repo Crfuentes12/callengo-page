@@ -15,6 +15,13 @@ import {
   Zap,
   SkipForward,
 } from "lucide-react";
+import {
+  trackDemoPlay,
+  trackDemoPause,
+  trackScenarioChange,
+  trackFreeTrialClick,
+  trackTalkToSalesClick,
+} from "@/app/lib/analytics";
 
 /* ──────────────────────────────────────────
    SCENARIO DATA
@@ -219,6 +226,7 @@ export default function Hero() {
     if (isPlaying) {
       if (audioAvailable && audioRef.current) audioRef.current.pause();
       setIsPlaying(false);
+      trackDemoPause(scenario.id, (currentTime / scenario.duration) * 100);
     } else {
       if (!hasStartedPlaying) setHasStartedPlaying(true);
       if (currentTime >= scenario.duration - 0.5) {
@@ -227,8 +235,9 @@ export default function Hero() {
       }
       if (audioAvailable && audioRef.current) { audioRef.current.play().catch(() => {}); }
       setIsPlaying(true);
+      trackDemoPlay(scenario.id);
     }
-  }, [isPlaying, currentTime, scenario.duration, audioAvailable, hasStartedPlaying]);
+  }, [isPlaying, currentTime, scenario.duration, scenario.id, audioAvailable, hasStartedPlaying]);
 
   const handleScenarioChange = useCallback((index: number) => {
     if (index === activeScenario) return;
@@ -237,6 +246,7 @@ export default function Hero() {
     if (audio) { audio.pause(); audio.currentTime = 0; }
     setActiveScenario(index); setIsPlaying(false); setCurrentTime(0);
     setRevealedFields([]); setHasStartedPlaying(false);
+    trackScenarioChange(scenarios[index].id);
   }, [activeScenario]);
 
   const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -329,6 +339,7 @@ export default function Hero() {
               <a
                 href="https://app.callengo.com/auth/signup"
                 className="btn btn-primary text-sm px-7 py-3.5 rounded-xl"
+                onClick={() => trackFreeTrialClick("hero")}
               >
                 Get started free
                 <ArrowRight className="w-4 h-4" />
@@ -342,6 +353,7 @@ export default function Hero() {
                   border: "1px solid rgba(221, 224, 238, 0.8)",
                   boxShadow: "0 2px 8px rgba(26, 27, 46, 0.08)",
                 }}
+                onClick={() => trackTalkToSalesClick("hero")}
               >
                 Talk to sales
               </a>

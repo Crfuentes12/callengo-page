@@ -176,6 +176,16 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Callengo. All rights reserved. &middot; US-based company
           </p>
           <div className="flex items-center gap-4 text-xs text-white/25" style={{ fontFamily: "var(--font-body)" }}>
+            <button
+              onClick={() => {
+                if (typeof window !== "undefined" && (window as unknown as { UC_UI?: { showSecondLayer: () => void } }).UC_UI) {
+                  (window as unknown as { UC_UI: { showSecondLayer: () => void } }).UC_UI.showSecondLayer();
+                }
+              }}
+              className="hover:text-white/50 transition-colors cursor-pointer"
+            >
+              Cookie settings
+            </button>
             <a
               href="https://linkedin.com/company/callengo"
               target="_blank"

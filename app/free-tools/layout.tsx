@@ -20,12 +20,24 @@ export const metadata: Metadata = {
     description:
       "Free resources to optimize outbound calls, qualify leads faster, and stay TCPA compliant. No account required.",
     type: "website",
+  
+    locale: "en_US",
+    siteName: "Callengo",
+    images: [
+      {
+        url: "/callengo-logo.png",
+        width: 512,
+        height: 512,
+        alt: "Callengo — AI Phone Agents for Business",
+      },
+    ],
   },
   twitter: {
     card: "summary",
     title: "Free Tools by Callengo",
     description:
       "Free ROI calculator, call scripts, lead scoring templates, and compliance checklists.",
+        images: ["/callengo-logo.png"],
   },
   alternates: {
     canonical: "https://callengo.com/free-tools",

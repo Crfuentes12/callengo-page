@@ -19,12 +19,24 @@ export const metadata: Metadata = {
     description:
       "Have questions about AI phone agents? Contact our team for demos, custom plans, or technical support.",
     type: "website",
+  
+    locale: "en_US",
+    siteName: "Callengo",
+    images: [
+      {
+        url: "/callengo-logo.png",
+        width: 512,
+        height: 512,
+        alt: "Callengo — AI Phone Agents for Business",
+      },
+    ],
   },
   twitter: {
     card: "summary",
     title: "Contact Callengo",
     description:
       "Get in touch with the Callengo team for demos, support, and partnerships.",
+        images: ["/callengo-logo.png"],
   },
   alternates: {
     canonical: "https://callengo.com/contact",

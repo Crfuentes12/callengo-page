@@ -21,12 +21,24 @@ export const metadata: Metadata = {
     description:
       "Learn how Callengo helps businesses recover lost revenue with AI phone agents for appointment confirmations, data validation, and lead qualification.",
     type: "website",
+  
+    locale: "en_US",
+    siteName: "Callengo",
+    images: [
+      {
+        url: "/callengo-logo.png",
+        width: 512,
+        height: 512,
+        alt: "Callengo — AI Phone Agents for Business",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "About Callengo - AI Phone Automation Company",
     description:
       "Learn how Callengo helps businesses recover lost revenue with AI phone agents.",
+        images: ["/callengo-logo.png"],
   },
   alternates: {
     canonical: "https://callengo.com/about",

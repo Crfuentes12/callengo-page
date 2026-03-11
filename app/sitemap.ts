@@ -46,6 +46,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
+  // Comparison pages — high commercial intent
+  const comparePages: MetadataRoute.Sitemap = [
+    { url: `${BASE_URL}/compare`, priority: 0.85 },
+    { url: `${BASE_URL}/compare/bland-ai`, priority: 0.85 },
+    { url: `${BASE_URL}/compare/vapi`, priority: 0.85 },
+    { url: `${BASE_URL}/compare/retell-ai`, priority: 0.85 },
+    { url: `${BASE_URL}/compare/synthflow`, priority: 0.85 },
+    { url: `${BASE_URL}/compare/dialpad`, priority: 0.85 },
+  ].map((page) => ({
+    ...page,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+  }));
+
   // Product pages — agent detail pages
   const agentPages: MetadataRoute.Sitemap = [
     "data-validation",
@@ -106,6 +120,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...corePages,
+    ...comparePages,
     ...agentPages,
     ...integrationPages,
     ...resourcePages,

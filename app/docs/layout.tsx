@@ -21,12 +21,24 @@ export const metadata: Metadata = {
     description:
       "Everything you need to get started with Callengo. Guides for AI agents, integrations, campaigns, and analytics.",
     type: "website",
+  
+    locale: "en_US",
+    siteName: "Callengo",
+    images: [
+      {
+        url: "/callengo-logo.png",
+        width: 512,
+        height: 512,
+        alt: "Callengo — AI Phone Agents for Business",
+      },
+    ],
   },
   twitter: {
     card: "summary",
     title: "Callengo Documentation",
     description:
       "Complete documentation for setting up and using Callengo AI phone agents.",
+        images: ["/callengo-logo.png"],
   },
   alternates: {
     canonical: "https://callengo.com/docs",

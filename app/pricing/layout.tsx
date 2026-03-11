@@ -22,12 +22,24 @@ export const metadata: Metadata = {
     description:
       "Simple, transparent pricing for AI phone agents. Start free with 15 minutes, upgrade when you see ROI. Plans from $99 to enterprise.",
     type: "website",
+  
+    locale: "en_US",
+    siteName: "Callengo",
+    images: [
+      {
+        url: "/callengo-logo.png",
+        width: 512,
+        height: 512,
+        alt: "Callengo — AI Phone Agents for Business",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Callengo Pricing - Plans Starting at $0/month",
     description:
       "Simple, transparent pricing for AI phone agents. Start free, upgrade when you see ROI.",
+        images: ["/callengo-logo.png"],
   },
   alternates: {
     canonical: "https://callengo.com/pricing",

@@ -23,12 +23,24 @@ export const metadata: Metadata = {
     description:
       "Stop wasting time on outdated contacts. Callengo validates phone numbers, emails, and addresses so your CRM stays accurate and your team stays productive.",
     type: "website",
+  
+    locale: "en_US",
+    siteName: "Callengo",
+    images: [
+      {
+        url: "/callengo-logo.png",
+        width: 512,
+        height: 512,
+        alt: "Callengo — AI Phone Agents for Business",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "AI Data Validation Agent by Callengo",
     description:
       "Automatically verify and update CRM contacts with AI phone calls. Reduce data decay by 90%.",
+        images: ["/callengo-logo.png"],
   },
   alternates: {
     canonical: "https://callengo.com/agents/data-validation",

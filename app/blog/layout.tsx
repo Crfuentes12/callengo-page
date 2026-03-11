@@ -21,12 +21,24 @@ export const metadata: Metadata = {
     description:
       "Expert insights on appointment confirmation, data validation, and lead qualification. Strategies that help businesses recover revenue.",
     type: "website",
+  
+    locale: "en_US",
+    siteName: "Callengo",
+    images: [
+      {
+        url: "/callengo-logo.png",
+        width: 512,
+        height: 512,
+        alt: "Callengo — AI Phone Agents for Business",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Callengo Blog - AI Phone Automation Insights",
     description:
       "Expert insights on appointment confirmation, data validation, and lead qualification.",
+        images: ["/callengo-logo.png"],
   },
   alternates: {
     canonical: "https://callengo.com/blog",

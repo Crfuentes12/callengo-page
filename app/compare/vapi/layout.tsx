@@ -30,12 +30,28 @@ export const metadata: Metadata = {
     publishedTime: "2026-03-01",
     modifiedTime: "2026-03-11",
     authors: ["Callengo"],
+    images: [
+      {
+        url: "/callengo-logo.png",
+        width: 512,
+        height: 512,
+        alt: "Callengo — AI Phone Agents for Business",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Callengo vs Vapi: Full Comparison 2026",
     description:
       "Real pricing, features, integrations, and setup time compared. Which AI voice platform is right for your business team?",
+        images: ["/callengo-logo.png"],
+  },
+  other: {
+    "article:published_time": "2026-03-01",
+    "article:modified_time": "2026-03-11",
+    "article:author": "Callengo",
+    "article:section": "Product Comparisons",
+    "article:tag": "Vapi, AI Voice Agents, Comparison, Pricing, Features",
   },
   alternates: {
     canonical: "https://callengo.com/compare/vapi",

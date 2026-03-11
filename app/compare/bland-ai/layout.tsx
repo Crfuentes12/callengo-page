@@ -31,12 +31,21 @@ export const metadata: Metadata = {
     publishedTime: "2026-03-01",
     modifiedTime: "2026-03-11",
     authors: ["Callengo"],
+    images: [
+      {
+        url: "/callengo-logo.png",
+        width: 512,
+        height: 512,
+        alt: "Callengo — AI Phone Agents for Business",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Callengo vs Bland AI — Full Comparison 2026",
     description:
       "Detailed pricing, features, integrations, and setup comparison. Which AI voice platform is right for your business?",
+        images: ["/callengo-logo.png"],
   },
   alternates: {
     canonical: "https://callengo.com/compare/bland-ai",

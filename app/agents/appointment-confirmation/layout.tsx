@@ -24,12 +24,24 @@ export const metadata: Metadata = {
     description:
       "Stop losing revenue to no-shows. Callengo confirms appointments automatically, reschedules when needed, and fills your calendar with people who actually show up.",
     type: "website",
+  
+    locale: "en_US",
+    siteName: "Callengo",
+    images: [
+      {
+        url: "/callengo-logo.png",
+        width: 512,
+        height: 512,
+        alt: "Callengo — AI Phone Agents for Business",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "AI Appointment Confirmation Agent by Callengo",
     description:
       "Reduce no-shows by 60% with automated confirmation calls. AI that confirms, reschedules, and retries.",
+        images: ["/callengo-logo.png"],
   },
   alternates: {
     canonical: "https://callengo.com/agents/appointment-confirmation",

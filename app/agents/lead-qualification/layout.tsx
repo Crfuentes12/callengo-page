@@ -23,12 +23,24 @@ export const metadata: Metadata = {
     description:
       "Respond to leads in minutes, not hours. Callengo qualifies leads using BANT, scores them automatically, and routes hot prospects to your sales team.",
     type: "website",
+  
+    locale: "en_US",
+    siteName: "Callengo",
+    images: [
+      {
+        url: "/callengo-logo.png",
+        width: 512,
+        height: 512,
+        alt: "Callengo — AI Phone Agents for Business",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "AI Lead Qualification Agent by Callengo",
     description:
       "Qualify leads in minutes with AI. BANT scoring, automated routing, and CRM sync.",
+        images: ["/callengo-logo.png"],
   },
   alternates: {
     canonical: "https://callengo.com/agents/lead-qualification",

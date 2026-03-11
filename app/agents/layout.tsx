@@ -22,12 +22,24 @@ export const metadata: Metadata = {
     description:
       "Three purpose-built AI agents that call your contacts, qualify leads, verify data, and confirm appointments.",
     type: "website",
+  
+    locale: "en_US",
+    siteName: "Callengo",
+    images: [
+      {
+        url: "/callengo-logo.png",
+        width: 512,
+        height: 512,
+        alt: "Callengo — AI Phone Agents for Business",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Callengo AI Phone Agents",
     description:
       "Three purpose-built AI agents for appointment confirmations, data validation, and lead qualification.",
+        images: ["/callengo-logo.png"],
   },
   alternates: {
     canonical: "https://callengo.com/agents",

@@ -20,11 +20,23 @@ export const metadata: Metadata = {
     description:
       "From signup to your first AI phone campaign in 5 minutes. Step-by-step onboarding guide.",
     type: "article",
+  
+    locale: "en_US",
+    siteName: "Callengo",
+    images: [
+      {
+        url: "/callengo-logo.png",
+        width: 512,
+        height: 512,
+        alt: "Callengo — AI Phone Agents for Business",
+      },
+    ],
   },
   twitter: {
     card: "summary",
     title: "Callengo Quick Start Guide",
     description: "Set up your first AI phone campaign in 5 minutes.",
+        images: ["/callengo-logo.png"],
   },
   alternates: {
     canonical: "https://callengo.com/help/quick-start",

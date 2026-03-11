@@ -30,12 +30,21 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: "Callengo",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Callengo - AI-Powered Phone Agents for Business",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Callengo - AI-Powered Phone Agents for Business",
     description:
       "AI phone agents that handle appointment confirmations, data validation, and lead qualification.",
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,

@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import AnimatedBlobs from "../components/AnimatedBlobs";
@@ -56,97 +55,27 @@ const comparisons = [
     name: "Synthflow",
     logo: "/logos/synthflow.png",
     category: "No-Code Voice AI",
-    tagline: "Generic no-code voice builder vs. specialized outbound agents",
+    tagline: "General-purpose voice builder vs. specialized outbound agents",
     description:
-      "Synthflow offers a drag-and-drop voice agent builder for general use cases. Callengo goes deeper with three vertical agents, each with proven scripts, smart follow-up logic, and deep CRM integration built in.",
+      "Synthflow offers a drag-and-drop voice agent builder for inbound and outbound calls. Callengo goes deeper with three vertical agents, each with tested scripts, smart follow-up logic, and deep CRM integration built in from the start.",
     highlights: [
-      "Vertical-specific call logic",
-      "Smart voicemail and retry rules",
-      "Calendar and scheduling sync",
-    ],
-  },
-  {
-    slug: "air-ai",
-    name: "Air AI",
-    logo: "/logos/air-ai.png",
-    category: "Conversational AI Sales",
-    tagline: "Long-form conversation AI vs. outcome-focused call automation",
-    description:
-      "Air AI is built around long, human-like conversations designed to replace SDRs entirely. Callengo takes a more focused approach: structured, goal-oriented calls that complete a specific task and write the result directly back to your CRM.",
-    highlights: [
-      "Structured task-completion agents",
-      "Transparent per-minute billing",
-      "Results written directly to CRM",
-    ],
-  },
-  {
-    slug: "thoughtly",
-    name: "Thoughtly",
-    logo: "/logos/thoughtly.png",
-    category: "AI Call Center",
-    tagline: "AI call center platform vs. targeted outbound automation",
-    description:
-      "Thoughtly is designed for inbound and blended call center operations. Callengo is built for outbound: proactively reaching contacts to qualify leads, confirm appointments, and verify CRM data, with smart follow-up sequences and calendar integration included.",
-    highlights: [
-      "Built for proactive outbound",
-      "No-show retry logic included",
-      "BANT-based lead scoring",
-    ],
-  },
-  {
-    slug: "aircall",
-    name: "Aircall",
-    logo: "/logos/aircall.png",
-    category: "Cloud Phone System",
-    tagline: "Human-agent cloud phone vs. AI-powered call automation",
-    description:
-      "Aircall is a cloud phone system for human sales and support teams. Callengo replaces the repetitive calls those teams are forced to make: confirmation calls, verification calls, qualification calls, freeing reps for conversations that actually require a human.",
-    highlights: [
-      "No human agents needed for repetitive calls",
-      "24/7 availability, no shift coverage",
-      "Scales without headcount",
+      "Vertical-specific call logic out of the box",
+      "Smart voicemail and retry rules included",
+      "Calendar and scheduling sync built in",
     ],
   },
   {
     slug: "dialpad",
-    name: "Dialpad AI",
+    name: "Dialpad",
     logo: "/logos/dialpad.png",
-    category: "AI-Powered Cloud Comms",
-    tagline: "AI conversation intelligence vs. autonomous outbound execution",
+    category: "Cloud Phone System",
+    tagline: "AI-assisted human calls vs. autonomous outbound execution",
     description:
-      "Dialpad AI enhances human agent productivity with real-time transcription and coaching. Callengo removes the human from repetitive outbound workflows entirely, automating the call, the follow-up, the CRM update, and the calendar event from a single campaign.",
+      "Dialpad is a cloud phone system that helps human reps communicate with real-time transcription and coaching. Callengo removes the human from repetitive outbound workflows entirely, running lead qualification, appointment confirmation, and data validation without a rep on the call.",
     highlights: [
-      "Full call lifecycle automation",
-      "No per-seat pricing for outbound",
-      "Integrated follow-up sequences",
-    ],
-  },
-  {
-    slug: "justcall",
-    name: "JustCall",
-    logo: "/logos/justcall.png",
-    category: "AI Sales Dialer",
-    tagline: "AI power dialer vs. autonomous AI calling agents",
-    description:
-      "JustCall provides AI-enhanced power dialers and conversation intelligence for sales teams. Callengo goes a step further: the AI makes the calls, conducts the conversation, and logs the outcome without a rep needed for qualifying, confirming, or verifying contacts.",
-    highlights: [
-      "Fully autonomous call execution",
-      "AI conducts the conversation",
-      "Outcomes written to CRM automatically",
-    ],
-  },
-  {
-    slug: "play-ai",
-    name: "PlayAI",
-    logo: "/logos/play-ai.png",
-    category: "Text-to-Speech & Voice AI",
-    tagline: "Voice synthesis platform vs. complete outbound call solution",
-    description:
-      "PlayAI is a text-to-speech and voice AI platform for building custom voice experiences. Callengo uses advanced voice synthesis as one component of a complete outbound automation solution, combining natural conversation, CRM integration, calendar sync, and multi-step follow-up logic.",
-    highlights: [
-      "Complete campaign management included",
-      "Multi-step follow-up automation",
-      "Business outcomes, not just voice quality",
+      "No per-seat pricing for outbound campaigns",
+      "Full call lifecycle automation without a rep",
+      "Integrated follow-up and CRM sync",
     ],
   },
 ];

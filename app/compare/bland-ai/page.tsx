@@ -194,14 +194,10 @@ const callengoAdvantages = [
 ];
 
 const crossLinks = [
-  { name: "Vapi", slug: "vapi", logo: "/logos/vapi.png", desc: "AI voice infrastructure API" },
+  { name: "Vapi", slug: "vapi", logo: "/logos/vapi.png", desc: "Developer-first voice API" },
   { name: "Retell AI", slug: "retell-ai", logo: "/logos/retell-ai.png", desc: "Low-latency voice SDK" },
   { name: "Synthflow", slug: "synthflow", logo: "/logos/synthflow.png", desc: "No-code voice builder" },
-  { name: "Air AI", slug: "air-ai", logo: "/logos/air-ai.png", desc: "Conversational AI sales" },
-  { name: "Thoughtly", slug: "thoughtly", logo: "/logos/thoughtly.png", desc: "AI call center platform" },
-  { name: "Aircall", slug: "aircall", logo: "/logos/aircall.png", desc: "Cloud phone system" },
-  { name: "Dialpad AI", slug: "dialpad", logo: "/logos/dialpad.png", desc: "AI-powered cloud comms" },
-  { name: "JustCall", slug: "justcall", logo: "/logos/justcall.png", desc: "AI sales dialer" },
+  { name: "Dialpad", slug: "dialpad", logo: "/logos/dialpad.png", desc: "Cloud phone system with AI" },
 ];
 
 /* ─── Inline CTA component ─── */

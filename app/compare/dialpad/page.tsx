@@ -192,10 +192,10 @@ const callengoAdvantages = [
 ];
 
 const crossLinks = [
-  { name: "Bland AI", slug: "bland-ai", logo: "/logos/bland-ai.png", desc: "AI voice infrastructure" },
-  { name: "Vapi", slug: "vapi", logo: "/logos/vapi.png", desc: "Developer-first voice API" },
-  { name: "Retell AI", slug: "retell-ai", logo: "/logos/retell-ai.png", desc: "Low-latency voice SDK" },
-  { name: "Synthflow", slug: "synthflow", logo: "/logos/synthflow.png", desc: "No-code voice builder" },
+  { name: "Bland AI", slug: "bland-ai", logo: "/bland.png", desc: "AI voice infrastructure" },
+  { name: "Vapi", slug: "vapi", logo: "/vapi.svg", desc: "Developer-first voice API" },
+  { name: "Retell AI", slug: "retell-ai", logo: "/retell.svg", desc: "Low-latency voice SDK" },
+  { name: "Synthflow", slug: "synthflow", logo: "/synthflow.svg", desc: "No-code voice builder" },
 ];
 
 function InlineCTA({ text, cta }: { text: string; cta: string }) {
@@ -272,7 +272,7 @@ export default function CallengoVsDialpad() {
                     <span className="text-3xl font-bold text-foreground-tertiary">vs</span>
                     <div className="flex flex-col items-center gap-3">
                       <div className="w-20 h-20 rounded-2xl bg-background-secondary border border-border flex items-center justify-center overflow-hidden">
-                        <img src="/logos/dialpad.png" alt="Dialpad" className="w-14 h-14 object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+                        <img src="/dialpad.svg" alt="Dialpad" className="w-14 h-14 object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
                       </div>
                       <span className="text-sm font-semibold">Dialpad</span>
                     </div>

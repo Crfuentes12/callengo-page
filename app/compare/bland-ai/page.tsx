@@ -194,10 +194,10 @@ const callengoAdvantages = [
 ];
 
 const crossLinks = [
-  { name: "Vapi", slug: "vapi", logo: "/logos/vapi.png", desc: "Developer-first voice API" },
-  { name: "Retell AI", slug: "retell-ai", logo: "/logos/retell-ai.png", desc: "Low-latency voice SDK" },
-  { name: "Synthflow", slug: "synthflow", logo: "/logos/synthflow.png", desc: "No-code voice builder" },
-  { name: "Dialpad", slug: "dialpad", logo: "/logos/dialpad.png", desc: "Cloud phone system with AI" },
+  { name: "Vapi", slug: "vapi", logo: "/vapi.svg", desc: "Developer-first voice API" },
+  { name: "Retell AI", slug: "retell-ai", logo: "/retell.svg", desc: "Low-latency voice SDK" },
+  { name: "Synthflow", slug: "synthflow", logo: "/synthflow.svg", desc: "No-code voice builder" },
+  { name: "Dialpad", slug: "dialpad", logo: "/dialpad.svg", desc: "Cloud phone system with AI" },
 ];
 
 /* ─── Inline CTA component ─── */
@@ -312,7 +312,7 @@ export default function CallengoVsBlandAI() {
                     <div className="flex flex-col items-center gap-3">
                       <div className="w-20 h-20 rounded-2xl bg-background-secondary border border-border flex items-center justify-center overflow-hidden">
                         <img
-                          src="/logos/bland-ai.png"
+                          src="/bland.png"
                           alt="Bland AI"
                           className="w-14 h-14 object-contain"
                           onError={(e) => {

@@ -193,10 +193,10 @@ const callengoAdvantages = [
 ];
 
 const crossLinks = [
-  { name: "Bland AI", slug: "bland-ai", logo: "/logos/bland-ai.png", desc: "AI voice infrastructure" },
-  { name: "Retell AI", slug: "retell-ai", logo: "/logos/retell-ai.png", desc: "Low-latency voice SDK" },
-  { name: "Synthflow", slug: "synthflow", logo: "/logos/synthflow.png", desc: "No-code voice builder" },
-  { name: "Dialpad", slug: "dialpad", logo: "/logos/dialpad.png", desc: "Cloud phone system with AI" },
+  { name: "Bland AI", slug: "bland-ai", logo: "/bland.png", desc: "AI voice infrastructure" },
+  { name: "Retell AI", slug: "retell-ai", logo: "/retell.svg", desc: "Low-latency voice SDK" },
+  { name: "Synthflow", slug: "synthflow", logo: "/synthflow.svg", desc: "No-code voice builder" },
+  { name: "Dialpad", slug: "dialpad", logo: "/dialpad.svg", desc: "Cloud phone system with AI" },
 ];
 
 function InlineCTA({ text, cta }: { text: string; cta: string }) {
@@ -291,7 +291,7 @@ export default function CallengoVsVapi() {
                     <div className="flex flex-col items-center gap-3">
                       <div className="w-20 h-20 rounded-2xl bg-background-secondary border border-border flex items-center justify-center overflow-hidden">
                         <img
-                          src="/logos/vapi.png"
+                          src="/vapi.svg"
                           alt="Vapi"
                           className="w-14 h-14 object-contain"
                           onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}

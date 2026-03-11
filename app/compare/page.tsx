@@ -11,7 +11,7 @@ const comparisons = [
   {
     slug: "bland-ai",
     name: "Bland AI",
-    logo: "/logos/bland-ai.png",
+    logo: "/bland.png",
     category: "AI Voice Infrastructure",
     tagline: "Developer API vs. ready-to-deploy business agents",
     description:
@@ -25,7 +25,7 @@ const comparisons = [
   {
     slug: "vapi",
     name: "Vapi",
-    logo: "/logos/vapi.png",
+    logo: "/vapi.svg",
     category: "AI Voice Infrastructure",
     tagline: "API-first voice stack vs. vertical-focused automation platform",
     description:
@@ -39,7 +39,7 @@ const comparisons = [
   {
     slug: "retell-ai",
     name: "Retell AI",
-    logo: "/logos/retell-ai.png",
+    logo: "/retell.svg",
     category: "AI Voice Infrastructure",
     tagline: "Low-latency voice SDK vs. turnkey outbound call platform",
     description:
@@ -53,7 +53,7 @@ const comparisons = [
   {
     slug: "synthflow",
     name: "Synthflow",
-    logo: "/logos/synthflow.png",
+    logo: "/synthflow.svg",
     category: "No-Code Voice AI",
     tagline: "General-purpose voice builder vs. specialized outbound agents",
     description:
@@ -67,7 +67,7 @@ const comparisons = [
   {
     slug: "dialpad",
     name: "Dialpad",
-    logo: "/logos/dialpad.png",
+    logo: "/dialpad.svg",
     category: "Cloud Phone System",
     tagline: "AI-assisted human calls vs. autonomous outbound execution",
     description:

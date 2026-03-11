@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { trackFreeTrialClick } from "@/app/lib/analytics";
 import Link from "next/link";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -207,7 +208,7 @@ export default function LeadQualificationPage() {
                 </p>
 
                 <div className="flex flex-wrap gap-4 mb-8">
-                  <Link href="https://app.callengo.com/auth/signup" className="btn btn-primary">
+                  <Link href="https://app.callengo.com/auth/signup" onClick={() => trackFreeTrialClick("agent_lead_qualification")} className="btn btn-primary">
                     Start Free Trial
                     <ArrowRight className="w-5 h-5" />
                   </Link>
@@ -702,6 +703,7 @@ export default function LeadQualificationPage() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link
                     href="https://app.callengo.com/auth/signup"
+                    onClick={() => trackFreeTrialClick("agent_lead_qualification")}
                     className="btn bg-white text-primary hover:bg-white/90 px-8 py-4 font-semibold"
                   >
                     Start free trial

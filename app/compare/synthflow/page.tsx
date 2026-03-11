@@ -5,6 +5,7 @@ import Link from "next/link";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import AnimatedBlobs from "../../components/AnimatedBlobs";
+import { trackFreeTrialClick } from "@/app/lib/analytics";
 import {
   CheckCircle2,
   XCircle,
@@ -213,7 +214,7 @@ function InlineCTA({ text, cta }: { text: string; cta: string }) {
       <div className="max-w-6xl mx-auto px-6">
         <div className="bg-electric/5 border border-electric/20 rounded-2xl px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-foreground-secondary text-sm font-medium" style={{ fontFamily: "var(--font-body)" }}>{text}</p>
-          <a href="https://app.callengo.com/auth/signup" className="shrink-0 inline-flex items-center gap-2 bg-electric text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-electric/90 transition-colors">
+          <a href="https://app.callengo.com/auth/signup" onClick={() => trackFreeTrialClick("compare_synthflow")} className="shrink-0 inline-flex items-center gap-2 bg-electric text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-electric/90 transition-colors">
             {cta} <ArrowRight className="w-4 h-4" />
           </a>
         </div>
@@ -742,7 +743,7 @@ export default function CallengoVsSynthflow() {
                   15 free minutes, no credit card, no builders, no components to configure. Your first outbound campaign running in under 15 minutes.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <a href="https://app.callengo.com/auth/signup" className="inline-flex items-center justify-center gap-2 bg-white text-deep-indigo hover:bg-white/90 px-8 py-4 rounded-xl font-semibold transition-colors">
+                  <a href="https://app.callengo.com/auth/signup" onClick={() => trackFreeTrialClick("compare_synthflow")} className="inline-flex items-center justify-center gap-2 bg-white text-deep-indigo hover:bg-white/90 px-8 py-4 rounded-xl font-semibold transition-colors">
                     Start free — 15 min included <ArrowRight className="w-5 h-5" />
                   </a>
                   <a href="/pricing" className="inline-flex items-center justify-center gap-2 border border-white/30 text-white hover:bg-white/10 px-8 py-4 rounded-xl transition-colors">

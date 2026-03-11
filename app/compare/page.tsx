@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import AnimatedBlobs from "../components/AnimatedBlobs";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { trackFreeTrialClick } from "@/app/lib/analytics";
 
 const comparisons = [
   {
@@ -279,6 +280,7 @@ export default function ComparePage() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <a
                     href="https://app.callengo.com/auth/signup"
+                    onClick={() => trackFreeTrialClick("compare_index")}
                     className="bg-white text-deep-indigo hover:bg-white/90 px-8 py-4 font-semibold rounded-xl inline-flex items-center justify-center gap-2 transition-colors"
                   >
                     Start free trial

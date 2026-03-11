@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Mail, Send, CheckCircle, ArrowRight } from "lucide-react";
+import { trackFreeTrialClick, trackContactFormSubmit } from "@/app/lib/analytics";
 import AnimatedBlobs from "../components/AnimatedBlobs";
 
 export default function ContactPage() {
@@ -24,6 +25,7 @@ export default function ContactPage() {
     await new Promise((resolve) => setTimeout(resolve, 1500));
     setIsSubmitting(false);
     setIsSubmitted(true);
+    trackContactFormSubmit();
   };
 
   const handleChange = (
@@ -252,6 +254,7 @@ export default function ContactPage() {
                     </p>
                     <a
                       href="https://app.callengo.com/auth/signup"
+                      onClick={() => trackFreeTrialClick("contact_page")}
                       className="inline-flex items-center gap-1.5 text-sm font-medium text-white hover:text-white/80 transition-colors"
                     >
                       Get started free

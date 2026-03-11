@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import { TrackedLink } from "@/app/components/TrackedLink";
 import {
   ArrowLeft,
   ArrowRight,
@@ -1384,15 +1385,15 @@ export default async function IntegrationDetailPage({
                   minutes. No coding required.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <a
+                  <TrackedLink
                     href="https://app.callengo.com/auth/signup"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    event="integration_cta_clicked"
+                    params={{ integration: slug }}
                     className="btn bg-white text-primary hover:bg-white/90 px-8 py-4 font-semibold rounded-xl"
                   >
                     Get Started Free
                     <ArrowRight className="w-4 h-4 ml-2" />
-                  </a>
+                  </TrackedLink>
                   <Link
                     href="/integrations"
                     className="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold border border-white/30 text-white rounded-lg hover:bg-white/10 transition-colors"

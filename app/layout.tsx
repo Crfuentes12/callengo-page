@@ -60,6 +60,19 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+        {/* Consent Mode v2 — defaults MUST run before GTM and Usercentrics */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});`,
+          }}
+        />
+        {/* Usercentrics CMP — must load before GTM */}
+        <script
+          id="usercentrics-cmp"
+          src="https://app.usercentrics.eu/browser-ui/latest/loader.js"
+          data-settings-id="yQ0u7kXv9rUwXL"
+          async
+        />
         {/* Google Tag Manager */}
         <script
           dangerouslySetInnerHTML={{

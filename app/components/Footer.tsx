@@ -28,20 +28,12 @@ const footerLinks = {
   ],
 };
 
-const comparisons1 = [
+const comparisons = [
   { name: "Callengo vs Bland AI", href: "/compare/bland-ai" },
   { name: "Callengo vs Vapi", href: "/compare/vapi" },
-  { name: "Callengo vs Aircall", href: "/compare/aircall" },
-  { name: "Callengo vs Dialpad AI", href: "/compare/dialpad" },
-  { name: "Callengo vs JustCall", href: "/compare/justcall" },
-];
-
-const comparisons2 = [
-  { name: "Callengo vs Synthflow", href: "/compare/synthflow" },
   { name: "Callengo vs Retell AI", href: "/compare/retell-ai" },
-  { name: "Callengo vs Air AI", href: "/compare/air-ai" },
-  { name: "Callengo vs Thoughtly", href: "/compare/thoughtly" },
-  { name: "Callengo vs PlayAI", href: "/compare/play-ai" },
+  { name: "Callengo vs Synthflow", href: "/compare/synthflow" },
+  { name: "Callengo vs Dialpad", href: "/compare/dialpad" },
 ];
 
 export default function Footer() {
@@ -124,7 +116,7 @@ export default function Footer() {
         </div>
 
         {/* Link columns */}
-        <div className="py-12 grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12">
+        <div className="py-12 grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
               <h4 className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-5">
@@ -146,33 +138,13 @@ export default function Footer() {
             </div>
           ))}
 
-          {/* Comparisons Column 1 */}
+          {/* Comparisons */}
           <div>
             <h4 className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-5">
               Comparisons
             </h4>
             <ul className="space-y-2.5">
-              {comparisons1.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-white/40 hover:text-white/80 transition-colors"
-                    style={{ fontFamily: "var(--font-body)" }}
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Comparisons Column 2 */}
-          <div>
-            <h4 className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-5 md:invisible">
-              Comparisons
-            </h4>
-            <ul className="space-y-2.5">
-              {comparisons2.map((link) => (
+              {comparisons.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus, Mail } from "lucide-react";
+import { trackFreeTrialClick, trackTalkToSalesClick } from "@/app/lib/analytics";
 
 const faqs = [
   {
@@ -90,6 +91,7 @@ export default function FAQ() {
                 <a
                   href="mailto:sales@callengo.com"
                   className="text-sm font-medium text-secondary hover:underline"
+                  onClick={() => trackTalkToSalesClick("faq")}
                 >
                   sales@callengo.com
                 </a>

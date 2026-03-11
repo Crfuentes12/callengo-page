@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Check, X, Sparkles, Building2, Plus } from "lucide-react";
+import { trackFreeTrialClick, trackTalkToSalesClick, trackPricingPlanClick } from "@/app/lib/analytics";
 
 const plans = [
   {
@@ -241,6 +242,7 @@ export default function Pricing() {
                 {/* CTA */}
                 <Link
                   href="https://app.callengo.com/auth/signup"
+                  onClick={() => trackPricingPlanClick(plan.name)}
                   className={`btn w-full justify-center mb-5 text-sm py-2.5 ${
                     plan.popular
                       ? "btn-primary"
@@ -346,6 +348,7 @@ export default function Pricing() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="/contact"
+                onClick={() => trackTalkToSalesClick("pricing")}
                 className="btn bg-white text-primary hover:bg-white/90 px-8 py-4"
               >
                 Contact Sales

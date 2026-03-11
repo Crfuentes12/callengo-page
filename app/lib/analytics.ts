@@ -7,7 +7,7 @@ declare global {
   }
 }
 
-function pushEvent(name: string, params?: Record<string, string | number | boolean>) {
+export function pushEvent(name: string, params?: Record<string, string | number | boolean>) {
   if (typeof window === "undefined") return;
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ event: name, ...params });
@@ -41,4 +41,12 @@ export function trackTalkToSalesClick(source: string) {
 
 export function trackPricingPlanClick(plan: string) {
   pushEvent("pricing_plan_clicked", { plan_name: plan });
+}
+
+export function trackIntegrationCTAClick(slug: string) {
+  pushEvent("integration_cta_clicked", { integration: slug });
+}
+
+export function trackContactFormSubmit() {
+  pushEvent("contact_form_submitted");
 }

@@ -5,6 +5,7 @@ import Link from "next/link";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import AnimatedBlobs from "../../components/AnimatedBlobs";
+import { trackFreeTrialClick } from "@/app/lib/analytics";
 import {
   CheckCircle2,
   XCircle,
@@ -216,6 +217,7 @@ function InlineCTA({ text, cta }: { text: string; cta: string }) {
           </p>
           <a
             href="https://app.callengo.com/auth/signup"
+            onClick={() => trackFreeTrialClick("compare_bland_ai")}
             className="shrink-0 inline-flex items-center gap-2 bg-electric text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-electric/90 transition-colors"
           >
             {cta}
@@ -1021,6 +1023,7 @@ export default function CallengoVsBlandAI() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <a
                     href="https://app.callengo.com/auth/signup"
+                    onClick={() => trackFreeTrialClick("compare_bland_ai")}
                     className="inline-flex items-center justify-center gap-2 bg-white text-deep-indigo hover:bg-white/90 px-8 py-4 rounded-xl font-semibold transition-colors"
                   >
                     Start free — 15 min included

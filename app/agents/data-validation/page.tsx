@@ -6,6 +6,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { Check, ArrowRight, Database, TrendingDown, Building2, ShoppingBag, Briefcase, HeartPulse, Plus, Minus, Phone, Mail, MapPin, UserCheck, RefreshCw, LucideIcon } from "lucide-react";
 import { useState } from "react";
+import { trackFreeTrialClick } from "@/app/lib/analytics";
 
 const painStats = [
   {
@@ -188,7 +189,7 @@ export default function DataValidationPage() {
                 </p>
 
                 <div className="flex flex-wrap gap-4 mb-10">
-                  <Link href="https://app.callengo.com/auth/signup" className="btn btn-primary">
+                  <Link href="https://app.callengo.com/auth/signup" onClick={() => trackFreeTrialClick("agent_data_validation")} className="btn btn-primary">
                     Start Free Trial
                     <ArrowRight className="w-5 h-5" />
                   </Link>
@@ -626,6 +627,7 @@ export default function DataValidationPage() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link
                     href="https://app.callengo.com/auth/signup"
+                    onClick={() => trackFreeTrialClick("agent_data_validation")}
                     className="btn bg-white text-primary hover:bg-white/90 px-8 py-4 font-semibold"
                   >
                     Start free trial

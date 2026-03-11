@@ -18,6 +18,7 @@ import {
   FileText,
   Wrench,
 } from "lucide-react";
+import { trackFreeTrialClick } from "@/app/lib/analytics";
 
 const agents = [
   {
@@ -347,6 +348,7 @@ export default function Header() {
               <a
                 href="https://app.callengo.com/auth/signup"
                 className="btn btn-primary text-sm px-5 py-2.5 rounded-lg"
+                onClick={() => trackFreeTrialClick("header_nav")}
               >
                 Get Started Free
                 <ArrowRight className="w-4 h-4" />
@@ -490,7 +492,7 @@ export default function Header() {
                     <a
                       href="https://app.callengo.com/auth/signup"
                       className="block w-full text-center py-2.5 text-white font-semibold text-sm rounded-lg btn-primary"
-                      onClick={() => setIsMobileMenuOpen(false)}
+                      onClick={() => { setIsMobileMenuOpen(false); trackFreeTrialClick("header_mobile"); }}
                     >
                       Get Started Free
                     </a>
@@ -518,6 +520,7 @@ export default function Header() {
               style={{
                 boxShadow: "0 8px 32px rgba(79, 95, 232, 0.3), 0 2px 8px rgba(0, 0, 0, 0.1)",
               }}
+              onClick={() => trackFreeTrialClick("header_floating")}
             >
               Get Started Free
               <ArrowRight className="w-4 h-4" />

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { trackFreeTrialClick } from "@/app/lib/analytics";
 import {
   LayoutDashboard,
   Upload,
@@ -1310,6 +1311,7 @@ export default function HowItWorks() {
                 <a
                   href="https://app.callengo.com/auth/signup"
                   className="btn w-full rounded-xl justify-center text-sm py-3.5 hover:-translate-y-0.5 transition-all text-electric font-semibold"
+                  onClick={() => trackFreeTrialClick("how_it_works")}
                   style={{
                     background: "rgba(255, 255, 255, 0.95)",
                     boxShadow: "0 4px 20px rgba(0, 0, 0, 0.2), 0 0 15px rgba(79, 95, 232, 0.2)",

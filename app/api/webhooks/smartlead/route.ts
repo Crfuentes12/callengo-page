@@ -17,6 +17,28 @@ const HUBSPOT_TOKEN = process.env.HUBSPOT_PRIVATE_APP_TOKEN
 const WEBHOOK_KEY = process.env.SMARTLEAD_WEBHOOK_KEY
 
 // ---------------------------------------------------------------------------
+// HubSpot Pipeline — "Callengo Sales"
+// Stage IDs confirmed by user (HubSpot account 147914572)
+// ---------------------------------------------------------------------------
+
+// ⚠️  TODO: Replace CALLENGO_SALES_PIPELINE_ID with the internal pipeline ID
+// for "Callengo Sales". Get it via:
+//   GET https://api.hubapi.com/crm/v3/pipelines/deals
+//   Authorization: Bearer <HUBSPOT_PRIVATE_APP_TOKEN>
+// Look for the pipeline whose label is "Callengo Sales" and copy its "id" field.
+const CALLENGO_SALES_PIPELINE_ID = process.env.HUBSPOT_CALLENGO_PIPELINE_ID ?? '3650683104'
+
+const DEAL_STAGE = {
+  MQL:        '5022907627', // MQL — Marketing Qualified (10%)
+  SQL:        '5022907628', // SQL — Sales Qualified     (45%)
+  DEMO:       '5022907629', // Demo Scheduled            (40%)
+  TRIAL:      '5022907630', // Trial Active              (60%)
+  PROPOSAL:   '5022907631', // Proposal Sent             (75%)
+  CLOSED_WON: '5022907632', // Closed Won               (100%)
+  CLOSED_LOST:'5022907633', // Closed Lost                (0%)
+} as const
+
+// ---------------------------------------------------------------------------
 // Types
 // ---------------------------------------------------------------------------
 
@@ -138,21 +160,12 @@ async function createDealForContact(
   campaignName: string,
   note: string
 ): Promise<string | null> {
-  // Create the deal in "MQL — Marketing Qualified" stage
-  // (the internal stage ID depends on your pipeline setup in HubSpot)
-  // We'll use the stage label lookup approach via pipeline API.
-  // For now, use dealstage name — HubSpot will accept internal IDs.
-  // You'll need to replace this with your actual stage internal ID.
-  // Find it: HubSpot → Settings → Deals → Pipelines → click stage name
+  // Smartlead email reply = prospect is engaged = SQL — Sales Qualified
   const { ok, data } = await hubspotRequest('/crm/v3/objects/deals', 'POST', {
     properties: {
       dealname: dealName,
-      // Use the pipeline internal ID for "Callengo Sales"
-      // You can get this from HubSpot Settings → CRM → Deals → Pipelines
-      pipeline: 'default',
-      // "SQL — Sales Qualified" stage in your Callengo Sales pipeline
-      // Replace 'appointmentscheduled' with your actual stage ID if needed
-      dealstage: 'appointmentscheduled',
+      pipeline: CALLENGO_SALES_PIPELINE_ID,
+      dealstage: DEAL_STAGE.SQL, // SQL — Sales Qualified (5022907628)
     },
   })
 

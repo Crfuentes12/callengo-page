@@ -47,6 +47,12 @@ export function trackIntegrationCTAClick(slug: string) {
   pushEvent("integration_cta_clicked", { integration: slug });
 }
 
-export function trackContactFormSubmit() {
-  pushEvent("contact_form_submitted");
+export function trackContactFormSubmit(subject?: string) {
+  pushEvent("contact_form_submitted", subject ? { subject } : undefined);
+}
+
+// --- Newsletter ---
+
+export function trackNewsletterSubscribe(source: string) {
+  pushEvent("newsletter_subscribed", { source_section: source });
 }

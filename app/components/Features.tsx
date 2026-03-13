@@ -4,6 +4,7 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, Check, AlertTriangle, X, Phone, Mail, User, Clock, CalendarCheck, RefreshCw, Flame, TrendingUp, Snowflake, Send } from "lucide-react";
+import { trackFeatureLearnMoreClick } from "@/app/lib/analytics";
 
 /* ================================================================
    FEATURE 1 — CRM Data Verification Table
@@ -691,6 +692,7 @@ function FeatureCard({ feature, index }: { feature: typeof features[0]; index: n
 
         <Link
           href={feature.link}
+          onClick={() => trackFeatureLearnMoreClick(feature.link.split("/").pop() ?? feature.link)}
           className="inline-flex items-center gap-2 text-foreground font-medium hover:gap-3 transition-all group text-sm"
         >
           Learn more

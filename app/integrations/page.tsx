@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { trackIntegrationCardClick } from "@/app/lib/analytics";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
@@ -363,6 +364,7 @@ export default function IntegrationsPage() {
                 ) : (
                   <Link
                     href={`/integrations/${intg.slug}`}
+                    onClick={() => trackIntegrationCardClick(intg.slug)}
                     className="group bg-white border border-border rounded-xl p-6 h-full flex flex-col hover:shadow-lg hover:border-electric/30 transition-all duration-200"
                   >
                     <div className="flex items-start justify-between mb-3">

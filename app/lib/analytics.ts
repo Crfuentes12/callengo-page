@@ -56,3 +56,21 @@ export function trackContactFormSubmit(subject?: string) {
 export function trackNewsletterSubscribe(source: string) {
   pushEvent("newsletter_subscribed", { source_section: source });
 }
+
+// --- Features section ---
+
+export function trackFeatureLearnMoreClick(featureSlug: string) {
+  pushEvent("feature_learn_more_clicked", { feature: featureSlug });
+}
+
+// --- Integrations ---
+
+export function trackIntegrationCardClick(slug: string) {
+  pushEvent("integration_card_clicked", { integration: slug });
+}
+
+// --- Pricing ---
+
+export function trackBillingCycleToggle(cycle: "monthly" | "annual") {
+  pushEvent("billing_cycle_toggled", { cycle });
+}

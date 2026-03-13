@@ -18,9 +18,10 @@ interface HubSpotCallbackEvent {
 
 export default function ContactPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [formReady, setFormReady] = useState(false);
 
   useEffect(() => {
-    // Inject the HubSpot Forms embed script (new hs-form-frame approach)
+    // Inject the HubSpot Forms embed script (hs-form-frame approach).
     // The script scans the DOM for elements with class "hs-form-frame" and
     // converts them into the interactive form iframe.
     const SCRIPT_SRC = "https://js-eu1.hsforms.net/forms/embed/147914572.js";
@@ -34,24 +35,36 @@ export default function ContactPage() {
     }
 
     // Listen for HubSpot form events sent from the iframe via postMessage.
-    // HubSpot fires 'hsFormCallback' with eventName 'onFormSubmitted' when the
-    // user successfully submits the form.
     const handleMessage = (event: MessageEvent<HubSpotCallbackEvent>) => {
       if (!event.data || typeof event.data !== "object") return;
       const { type, eventName } = event.data;
-      if (type === "hsFormCallback" && eventName === "onFormSubmitted") {
-        setIsSubmitted(true);
-        trackContactFormSubmit();
-        // Push to GTM dataLayer for GA4 goal tracking
-        if (typeof window !== "undefined") {
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({ event: "hs_contact_form_submitted" });
+
+      if (type === "hsFormCallback") {
+        // Form is ready to display (iframe loaded)
+        if (eventName === "onFormReady") {
+          setFormReady(true);
+        }
+        // Form successfully submitted
+        if (eventName === "onFormSubmitted") {
+          setIsSubmitted(true);
+          trackContactFormSubmit();
+          if (typeof window !== "undefined") {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ event: "hs_contact_form_submitted" });
+          }
         }
       }
     };
 
     window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
+
+    // Fallback: show form container after 2s even if onFormReady didn't fire
+    const fallback = setTimeout(() => setFormReady(true), 2000);
+
+    return () => {
+      window.removeEventListener("message", handleMessage);
+      clearTimeout(fallback);
+    };
   }, []);
 
   return (
@@ -60,19 +73,19 @@ export default function ContactPage() {
       <main className="pt-24 relative overflow-hidden">
         <AnimatedBlobs />
 
-        {/* Hero */}
-        <section className="relative overflow-hidden bg-transparent py-16 md:py-20 z-10">
-          <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
+        {/* Hero — compact */}
+        <section className="relative bg-transparent pt-12 pb-8 md:pt-14 md:pb-10 z-10">
+          <div className="max-w-2xl mx-auto px-6 text-center relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-display-sm text-foreground mb-5">
+              <h1 className="text-display-sm text-foreground mb-4">
                 Get in touch
               </h1>
               <p
-                className="text-lg text-foreground-secondary max-w-xl mx-auto"
+                className="text-base text-foreground-secondary max-w-lg mx-auto leading-relaxed"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 Have a question, need a demo, or want to discuss a custom plan?
@@ -82,12 +95,12 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* Contact form + info */}
-        <section className="section relative z-10">
-          <div className="max-w-4xl mx-auto px-6">
-            <div className="grid md:grid-cols-5 gap-12">
+        {/* Form + sidebar */}
+        <section className="relative z-10 pb-24">
+          <div className="max-w-5xl mx-auto px-6">
+            <div className="grid md:grid-cols-5 gap-8 lg:gap-12 items-start">
 
-              {/* HubSpot Form — col-span-3 */}
+              {/* HubSpot Form card — col-span-3 */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -98,9 +111,9 @@ export default function ContactPage() {
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="rounded-2xl border border-accent/20 bg-accent/5 p-10 text-center"
+                    className="rounded-2xl border border-accent/20 bg-accent/5 p-12 text-center"
                   >
-                    <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                    <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-5">
                       <CheckCircle className="w-7 h-7 text-accent-dark" />
                     </div>
                     <h3 className="text-xl font-semibold text-foreground mb-2">
@@ -115,21 +128,67 @@ export default function ContactPage() {
                     </p>
                   </motion.div>
                 ) : (
-                  /*
-                   * HubSpot native embed (hs-form-frame).
-                   * The script loaded in useEffect() detects this div by its
-                   * class and portal/form data attributes, then renders the
-                   * form inside an iframe automatically.
-                   *
-                   * Form ID: 8c4f988d-d40a-4d4f-8a48-a22010d973e0
-                   * Portal:  147914572  (eu1 region)
-                   */
-                  <div
-                    className="hs-form-frame"
-                    data-region="eu1"
-                    data-form-id="8c4f988d-d40a-4d4f-8a48-a22010d973e0"
-                    data-portal-id="147914572"
-                  />
+                  /* Card wrapper that visually contains the HubSpot iframe */
+                  <div className="rounded-2xl border border-border bg-background shadow-sm overflow-hidden">
+                    {/* Loading skeleton — visible until HubSpot iframe fires onFormReady */}
+                    {!formReady && (
+                      <div className="p-8 space-y-5 animate-pulse">
+                        {/* Row 1: two fields */}
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="space-y-1.5">
+                            <div className="h-3.5 w-12 bg-border rounded" />
+                            <div className="h-10 bg-border/60 rounded-lg" />
+                          </div>
+                          <div className="space-y-1.5">
+                            <div className="h-3.5 w-10 bg-border rounded" />
+                            <div className="h-10 bg-border/60 rounded-lg" />
+                          </div>
+                        </div>
+                        {/* Row 2: two fields */}
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="space-y-1.5">
+                            <div className="h-3.5 w-20 bg-border rounded" />
+                            <div className="h-10 bg-border/60 rounded-lg" />
+                          </div>
+                          <div className="space-y-1.5">
+                            <div className="h-3.5 w-16 bg-border rounded" />
+                            <div className="h-10 bg-border/60 rounded-lg" />
+                          </div>
+                        </div>
+                        {/* Row 3: full-width select */}
+                        <div className="space-y-1.5">
+                          <div className="h-3.5 w-14 bg-border rounded" />
+                          <div className="h-10 bg-border/60 rounded-lg" />
+                        </div>
+                        {/* Row 4: textarea */}
+                        <div className="space-y-1.5">
+                          <div className="h-3.5 w-16 bg-border rounded" />
+                          <div className="h-28 bg-border/60 rounded-lg" />
+                        </div>
+                        {/* Checkbox + button row */}
+                        <div className="flex items-center gap-3">
+                          <div className="h-4 w-4 bg-border rounded" />
+                          <div className="h-3.5 w-48 bg-border rounded" />
+                        </div>
+                        <div className="flex justify-end">
+                          <div className="h-10 w-28 bg-border/60 rounded-lg" />
+                        </div>
+                      </div>
+                    )}
+
+                    {/*
+                     * HubSpot native embed (hs-form-frame).
+                     * Portal: 147914572 — Form: 8c4f988d-d40a-4d4f-8a48-a22010d973e0
+                     * The script loaded above detects this element and renders
+                     * the form iframe inside it automatically.
+                     */}
+                    <div
+                      className={`hs-form-frame transition-opacity duration-300 ${formReady ? "opacity-100" : "opacity-0 absolute pointer-events-none"}`}
+                      data-region="eu1"
+                      data-form-id="8c4f988d-d40a-4d4f-8a48-a22010d973e0"
+                      data-portal-id="147914572"
+                    />
+                  </div>
                 )}
               </motion.div>
 
@@ -138,7 +197,7 @@ export default function ContactPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="md:col-span-2 space-y-6"
+                className="md:col-span-2 space-y-5 md:pt-0"
               >
                 {/* What to expect */}
                 <div className="p-5 rounded-xl border border-border bg-background-secondary">
@@ -164,8 +223,7 @@ export default function ContactPage() {
                           className="text-xs text-foreground-tertiary mt-0.5 leading-relaxed"
                           style={{ fontFamily: "var(--font-body)" }}
                         >
-                          Delivered directly to the right team based on your
-                          subject.
+                          Routed to the right team based on your subject.
                         </p>
                       </div>
                     </li>
@@ -184,8 +242,8 @@ export default function ContactPage() {
                           className="text-xs text-foreground-tertiary mt-0.5 leading-relaxed"
                           style={{ fontFamily: "var(--font-body)" }}
                         >
-                          Sales and technical inquiries are typically answered
-                          the same business day.
+                          Sales & technical inquiries are typically answered
+                          same business day.
                         </p>
                       </div>
                     </li>
@@ -204,8 +262,8 @@ export default function ContactPage() {
                           className="text-xs text-foreground-tertiary mt-0.5 leading-relaxed"
                           style={{ fontFamily: "var(--font-body)" }}
                         >
-                          No bots, no templates. A human from the Callengo team
-                          will reply.
+                          No bots, no templates. A human from the Callengo
+                          team will reply.
                         </p>
                       </div>
                     </li>
@@ -225,7 +283,8 @@ export default function ContactPage() {
                       className="text-white/60 text-xs mb-4 leading-relaxed"
                       style={{ fontFamily: "var(--font-body)" }}
                     >
-                      Get started with 15 free minutes. No credit card required.
+                      Get started with 15 free minutes. No credit card
+                      required.
                     </p>
                     <a
                       href="https://app.callengo.com/auth/signup"

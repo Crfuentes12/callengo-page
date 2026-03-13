@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { trackBillingCycleToggle } from "@/app/lib/analytics";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Header from "../components/Header";
@@ -269,7 +270,7 @@ export default function PricingPage() {
               {/* Billing Toggle */}
               <div className="inline-flex items-center gap-4 p-1.5 bg-background-secondary rounded-full border border-border">
                 <button
-                  onClick={() => setIsAnnual(false)}
+                  onClick={() => { setIsAnnual(false); trackBillingCycleToggle("monthly"); }}
                   className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all ${
                     !isAnnual
                       ? "bg-secondary text-white"
@@ -279,7 +280,7 @@ export default function PricingPage() {
                   Monthly
                 </button>
                 <button
-                  onClick={() => setIsAnnual(true)}
+                  onClick={() => { setIsAnnual(true); trackBillingCycleToggle("annual"); }}
                   className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
                     isAnnual
                       ? "bg-secondary text-white"

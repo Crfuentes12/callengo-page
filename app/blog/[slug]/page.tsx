@@ -10,7 +10,7 @@ import { ArrowLeft, Calendar, Clock, Tag } from "lucide-react";
 import { blogPostsBySlug } from "../data";
 import ReduceNoShowsContent from "../data/reduce-no-shows";
 import TrueCostBadDataContent from "../data/true-cost-bad-data-crm";
-import LeadResponseTimeContent from "../data/lead-response-time-killing-sales";
+import LeadResponseTimeContent from "../data/human-sdr-vs-ai-lead-qualification";
 import type { ReactNode } from "react";
 
 const blogContentComponents: Record<string, () => ReactNode> = {

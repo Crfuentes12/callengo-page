@@ -10,6 +10,7 @@ export interface BlogMeta {
   excerpt: string;
   featureImage: string;
   featureImageAlt: string;
+  lastModified: string;
 }
 
 export const reduceNoShowsMeta: BlogMeta = {
@@ -27,6 +28,7 @@ export const reduceNoShowsMeta: BlogMeta = {
   featureImage: "/blog/reduce-no-shows.jpeg",
   featureImageAlt:
     "Dashboard showing reduced no-show rates with AI appointment confirmation",
+  lastModified: "2026-01-28T00:00:00.000Z",
 };
 
 export const trueCostBadDataMeta: BlogMeta = {
@@ -44,6 +46,7 @@ export const trueCostBadDataMeta: BlogMeta = {
   featureImage: "/blog/true-cost-bad-data-crm.jpeg",
   featureImageAlt:
     "CRM data quality dashboard showing verified vs unverified contact records",
+  lastModified: "2026-01-28T00:00:00.000Z",
 };
 
 export const leadResponseTimeMeta: BlogMeta = {
@@ -58,9 +61,10 @@ export const leadResponseTimeMeta: BlogMeta = {
   featured: false,
   excerpt:
     "Speed matters in sales. Research shows leads contacted within 5 minutes are 9x more likely to convert. Here is what AI SDRs change.",
-  featureImage: "/blog/lead-response-time-killing-sales.jpeg",
+  featureImage: "/blog/human-sdr-vs-ai-lead-qualification.jpeg",
   featureImageAlt:
     "AI lead qualification pipeline showing hot, warm, and cold lead scoring",
+  lastModified: "2026-01-28T00:00:00.000Z",
 };
 
 export const blogPosts: BlogMeta[] = [

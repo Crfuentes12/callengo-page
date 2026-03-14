@@ -1,3 +1,4 @@
+//callengo-page/app/blog/data/reduce-no-shows.tsx
 "use client";
 
 import {
@@ -11,33 +12,19 @@ import {
   SourceCallout,
   DashboardPreview,
 } from "../components";
+import { reduceNoShowsMeta as meta } from "./posts";
 
-export const meta = {
-  title: "How to Reduce Patient No-Shows: Proven Strategies for Healthcare Practices in 2026",
-  metaDescription:
-    "Patient no-shows cost practices $150K/year per provider. Learn 7 proven strategies to reduce no-shows in 2026, from automated reminders to AI phone agents.",
-  category: "Best Practices",
-  date: "January 28, 2026",
-  readTime: "12 min read",
-  slug: "reduce-no-shows-automated-confirmations",
-  featured: true,
-  excerpt:
-    "Learn proven strategies for appointment confirmation that actually work. Discover how businesses are recovering thousands in lost revenue.",
-  featureImage: "/blog/reduce-no-shows.jpeg",
-  featureImageAlt: "Dashboard showing reduced no-show rates with AI appointment confirmation",
-};
+export { meta };
 
 export default function ReduceNoShowsContent() {
   return (
     <>
-      {/* Feature Image */}
       <FeatureImage
         src={meta.featureImage}
         alt={meta.featureImageAlt}
         caption="Callengo's appointment confirmation dashboard tracking no-show reduction"
       />
 
-      {/* Intro */}
       <p className="text-foreground-secondary leading-relaxed mb-4">
         If you run a healthcare practice, you already know the pain of empty appointment slots. A patient books a visit, your staff prepares, the provider clears time, and the patient simply doesn&apos;t show up. No call, no text, no warning.
       </p>
@@ -65,7 +52,6 @@ export default function ReduceNoShowsContent() {
         variant="warning"
       />
 
-      {/* Section: Why patients don't show */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         Why Patients Don&apos;t Show Up
       </h2>
@@ -87,7 +73,6 @@ export default function ReduceNoShowsContent() {
         caption="Common no-show reasons by specialty (NLM, MGMA 2025)"
       />
 
-      {/* Strategy 1 */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         Strategy 1: Implement Multi-Channel Automated Reminders
       </h2>
@@ -108,7 +93,6 @@ export default function ReduceNoShowsContent() {
         tip="Combine SMS + email + phone for maximum reach. 95% of texts are read within 3 minutes, but phone calls achieve higher confirmation rates because they demand an active response."
       />
 
-      {/* Strategy 2 */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         Strategy 2: Use AI Phone Agents for Confirmation Calls
       </h2>
@@ -145,7 +129,6 @@ export default function ReduceNoShowsContent() {
         description="See confirmed, rescheduled, and canceled appointments at a glance. Callengo syncs with your calendar automatically."
       />
 
-      {/* Strategy 3 */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         Strategy 3: Charge No-Show Fees (Carefully)
       </h2>
@@ -165,7 +148,6 @@ export default function ReduceNoShowsContent() {
         However, no-show fees come with trade-offs. They can alienate patients, particularly those who missed due to genuine emergencies. They require clear communication at booking time. And they create additional administrative overhead for billing and collections.
       </p>
 
-      {/* Strategy 4 */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         Strategy 4: Offer Same-Day and Online Scheduling Flexibility
       </h2>
@@ -184,7 +166,6 @@ export default function ReduceNoShowsContent() {
         linkLabel="See all scheduling integrations"
       />
 
-      {/* Strategy 5 */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         Strategy 5: Implement a Waitlist to Fill Canceled Slots
       </h2>
@@ -200,7 +181,6 @@ export default function ReduceNoShowsContent() {
         source="Healthcare appointment management research, NexHealth 2025"
       />
 
-      {/* Strategy 6 */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         Strategy 6: Address Transportation and Access Barriers
       </h2>
@@ -226,7 +206,6 @@ export default function ReduceNoShowsContent() {
         </li>
       </ul>
 
-      {/* Strategy 7 */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         Strategy 7: Use Data to Predict and Prevent No-Shows
       </h2>
@@ -250,7 +229,6 @@ export default function ReduceNoShowsContent() {
         tip="Once you identify high-risk appointments, apply targeted interventions: additional reminder calls, overbooking those slots, or personal outreach from a care coordinator. This is more efficient than applying the same process to every appointment."
       />
 
-      {/* Summary: Modern Confirmation Stack */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         Putting It All Together: The Modern Confirmation Stack
       </h2>
@@ -272,7 +250,6 @@ export default function ReduceNoShowsContent() {
         caption="The 6-layer confirmation stack for maximum no-show reduction"
       />
 
-      {/* CTA */}
       <CTABanner
         heading="Ready to reduce no-shows at your practice?"
         text="Callengo's AI Appointment Confirmation Agent calls your patients, confirms or reschedules appointments, and updates your calendar automatically. Start with 15 free minutes."
@@ -282,7 +259,6 @@ export default function ReduceNoShowsContent() {
         secondaryHref="/agents/appointment-confirmation"
       />
 
-      {/* Conclusion */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         The Bottom Line
       </h2>

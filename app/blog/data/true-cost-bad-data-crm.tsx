@@ -1,3 +1,4 @@
+//callengo-page/app/blog/data/true-cost-bad-data-crm.tsx
 "use client";
 
 import {
@@ -11,33 +12,19 @@ import {
   SourceCallout,
   DashboardPreview,
 } from "../components";
+import { trueCostBadDataMeta as meta } from "./posts";
 
-export const meta = {
-  title: "The True Cost of Bad CRM Data (And How to Fix It Before It Wrecks Your Pipeline)",
-  metaDescription:
-    "Bad CRM data costs businesses $3.1T/year. Learn how data decay destroys your pipeline and 5 ways to validate and clean your CRM data in 2026.",
-  category: "Data Quality",
-  date: "January 25, 2026",
-  readTime: "10 min read",
-  slug: "true-cost-bad-data-crm",
-  featured: false,
-  excerpt:
-    "Outdated contact information costs businesses more than you think. Here's how to calculate your data quality ROI.",
-  featureImage: "/blog/true-cost-bad-data-crm.jpeg",
-  featureImageAlt: "CRM data quality dashboard showing verified vs unverified contact records",
-};
+export { meta };
 
 export default function TrueCostBadDataContent() {
   return (
     <>
-      {/* Feature Image */}
       <FeatureImage
         src={meta.featureImage}
         alt={meta.featureImageAlt}
         caption="A visual representation of CRM data decay over time"
       />
 
-      {/* Intro */}
       <p className="text-foreground-secondary leading-relaxed mb-4">
         Bad data is not a minor inconvenience. It is a systemic drain on revenue, productivity, and decision-making across every business function.
       </p>
@@ -58,7 +45,6 @@ export default function TrueCostBadDataContent() {
         The problem is especially acute inside CRM systems. A survey by Wave Connect found that 76% of CRM users say less than half their data is accurate. The system your sales team relies on for prospecting, follow-ups, and pipeline management is wrong more often than it is right.
       </p>
 
-      {/* How CRM Data Decays */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         How CRM Data Decays
       </h2>
@@ -88,7 +74,6 @@ export default function TrueCostBadDataContent() {
         variant="warning"
       />
 
-      {/* Wasted Sales Time */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         The Real Cost: Wasted Sales Time
       </h2>
@@ -114,7 +99,6 @@ export default function TrueCostBadDataContent() {
         For a team of 10 reps, that is $320,000 per year in wasted salary. And that does not count the opportunity cost of deals those reps could have been closing.
       </p>
 
-      {/* Lost Revenue */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         Lost Revenue from Bad Data
       </h2>
@@ -140,7 +124,6 @@ export default function TrueCostBadDataContent() {
         </li>
       </ul>
 
-      {/* Duplicate Records */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         Duplicate Records and Integration Chaos
       </h2>
@@ -165,12 +148,10 @@ export default function TrueCostBadDataContent() {
         linkLabel="See all CRM integrations"
       />
 
-      {/* 5 Ways to Fix */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         5 Ways to Fix Your CRM Data in 2026
       </h2>
 
-      {/* Fix 1 */}
       <h3 className="text-xl font-semibold text-foreground mb-3 mt-8">
         1. Establish Data Entry Standards
       </h3>
@@ -182,7 +163,6 @@ export default function TrueCostBadDataContent() {
         tip="Use CRM field validation rules to enforce phone number format, email structure, and required fields at the point of entry. This single step can reduce new bad data by 30 to 40%."
       />
 
-      {/* Fix 2 */}
       <h3 className="text-xl font-semibold text-foreground mb-3 mt-8">
         2. Run Regular Deduplication
       </h3>
@@ -190,7 +170,6 @@ export default function TrueCostBadDataContent() {
         With 45% of CRM records potentially being duplicates, deduplication is non-negotiable. Run deduplication monthly at minimum. Merge duplicates carefully, preserving the most recent and complete data. Set up matching rules on email, phone, or company domain to prevent new duplicates.
       </p>
 
-      {/* Fix 3 */}
       <h3 className="text-xl font-semibold text-foreground mb-3 mt-8">
         3. Implement Automated Enrichment
       </h3>
@@ -204,7 +183,6 @@ export default function TrueCostBadDataContent() {
         variant="info"
       />
 
-      {/* Fix 4 */}
       <h3 className="text-xl font-semibold text-foreground mb-3 mt-8">
         4. Use Phone-Based Verification
       </h3>
@@ -237,7 +215,6 @@ export default function TrueCostBadDataContent() {
         description="Upload your contact list or sync from your CRM. Callengo calls each contact, verifies their details, and pushes validated data back."
       />
 
-      {/* Fix 5 */}
       <h3 className="text-xl font-semibold text-foreground mb-3 mt-8">
         5. Establish a Continuous Validation Cadence
       </h3>
@@ -256,7 +233,6 @@ export default function TrueCostBadDataContent() {
         highlightFirst
       />
 
-      {/* Measuring ROI */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         Measuring Your Data Quality ROI
       </h2>
@@ -282,7 +258,6 @@ export default function TrueCostBadDataContent() {
         label="Where to Start"
       />
 
-      {/* CTA */}
       <CTABanner
         heading="Ready to clean up your CRM data?"
         text="Callengo's AI Data Validation Agent calls your contacts, verifies their information, and updates your CRM automatically. Start with 15 free minutes, no credit card required."
@@ -293,7 +268,6 @@ export default function TrueCostBadDataContent() {
         variant="dark"
       />
 
-      {/* Conclusion */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         The Bottom Line
       </h2>

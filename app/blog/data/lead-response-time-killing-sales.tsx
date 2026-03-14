@@ -1,3 +1,4 @@
+//callengo-page/app/blog/data/lead-response-time-killing-sales.tsx
 "use client";
 
 import {
@@ -11,33 +12,19 @@ import {
   SourceCallout,
   DashboardPreview,
 } from "../components";
+import { leadResponseTimeMeta as meta } from "./posts";
 
-export const meta = {
-  title: "AI SDR vs. Human SDR: How AI Lead Qualification Is Reshaping B2B Sales in 2026",
-  metaDescription:
-    "AI SDRs now automate 60-80% of lead qualification. Compare AI vs. human SDRs and learn how voice AI is changing B2B outbound sales in 2026.",
-  category: "Lead Management",
-  date: "January 22, 2026",
-  readTime: "11 min read",
-  slug: "lead-response-time-killing-sales",
-  featured: false,
-  excerpt:
-    "Speed matters in sales. Research shows leads contacted within 5 minutes are 9x more likely to convert. Here is what AI SDRs change.",
-  featureImage: "/blog/lead-response-time-killing-sales.jpeg",
-  featureImageAlt: "AI lead qualification pipeline showing hot, warm, and cold lead scoring",
-};
+export { meta };
 
 export default function LeadResponseTimeContent() {
   return (
     <>
-      {/* Feature Image */}
       <FeatureImage
         src={meta.featureImage}
         alt={meta.featureImageAlt}
         caption="AI-powered lead qualification pipeline with real-time scoring"
       />
 
-      {/* Intro */}
       <p className="text-foreground-secondary leading-relaxed mb-4">
         The Sales Development Representative has been the engine of B2B sales for two decades. SDRs prospect, qualify, and hand off leads to account executives. It is a straightforward model, and it is increasingly under pressure.
       </p>
@@ -59,7 +46,6 @@ export default function LeadResponseTimeContent() {
         Enter AI SDRs. AI SDR tools now automate 60% to 80% of traditional SDR tasks, from initial outreach and qualification to meeting scheduling and CRM updates. McKinsey research shows 30% to 50% administrative time reduction in B2B sales, with some organizations seeing 150% engagement surges from AI-driven personalization.
       </p>
 
-      {/* What AI SDRs Can Do */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         What AI SDRs Can Do Today
       </h2>
@@ -81,7 +67,6 @@ export default function LeadResponseTimeContent() {
         caption="AI SDR capabilities and measured outcomes (2025–2026)"
       />
 
-      {/* Speed Advantage */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         The Speed Advantage Is Real
       </h2>
@@ -104,7 +89,6 @@ export default function LeadResponseTimeContent() {
         label="Implementation Strategy"
       />
 
-      {/* Where Humans Win */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         Where Human SDRs Still Win
       </h2>
@@ -130,7 +114,6 @@ export default function LeadResponseTimeContent() {
         source="McKinsey B2B Sales Report 2025"
       />
 
-      {/* Voice AI Frontier */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         The Voice AI Frontier
       </h2>
@@ -165,7 +148,6 @@ export default function LeadResponseTimeContent() {
         description="Set up BANT qualification questions, define scoring criteria, and connect your calendar. Your AI agent starts calling immediately."
       />
 
-      {/* Full Comparison */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         Head-to-Head: AI SDR vs. Human SDR
       </h2>
@@ -188,7 +170,6 @@ export default function LeadResponseTimeContent() {
         caption="AI vs. Human SDR comparison across 10 key dimensions"
       />
 
-      {/* Hybrid Model */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         The Hybrid Model: How Top Teams Structure AI + Human SDRs
       </h2>
@@ -226,7 +207,6 @@ export default function LeadResponseTimeContent() {
         linkLabel="See all sales integrations"
       />
 
-      {/* Implementation */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         Getting Started with AI Lead Qualification
       </h2>
@@ -254,7 +234,6 @@ export default function LeadResponseTimeContent() {
         description="Upload your lead list, select your qualification criteria, and let the AI agent start calling. Track results in real-time."
       />
 
-      {/* Market context */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         The Market Is Moving Fast
       </h2>
@@ -268,7 +247,6 @@ export default function LeadResponseTimeContent() {
         variant="highlight"
       />
 
-      {/* CTA */}
       <CTABanner
         heading="Ready to qualify leads faster with AI?"
         text="Callengo's AI Lead Qualification Agent calls your prospects, qualifies them using the BANT framework, scores them hot/warm/cold, and books meetings automatically. Start with 15 free minutes."
@@ -279,7 +257,6 @@ export default function LeadResponseTimeContent() {
         variant="accent"
       />
 
-      {/* Conclusion */}
       <h2 className="text-2xl font-bold text-foreground mb-4 mt-12">
         The Bottom Line
       </h2>

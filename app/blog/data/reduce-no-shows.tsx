@@ -23,7 +23,7 @@ export const meta = {
   featured: true,
   excerpt:
     "Learn proven strategies for appointment confirmation that actually work. Discover how businesses are recovering thousands in lost revenue.",
-  featureImage: "/blog/reduce-no-shows.svg",
+  featureImage: "/blog/reduce-no-shows.jpeg",
   featureImageAlt: "Dashboard showing reduced no-show rates with AI appointment confirmation",
 };
 

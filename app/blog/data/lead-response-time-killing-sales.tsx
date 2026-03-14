@@ -23,7 +23,7 @@ export const meta = {
   featured: false,
   excerpt:
     "Speed matters in sales. Research shows leads contacted within 5 minutes are 9x more likely to convert. Here is what AI SDRs change.",
-  featureImage: "/blog/lead-response-time-killing-sales.svg",
+  featureImage: "/blog/lead-response-time-killing-sales.jpeg",
   featureImageAlt: "AI lead qualification pipeline showing hot, warm, and cold lead scoring",
 };
 

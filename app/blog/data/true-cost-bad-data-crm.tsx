@@ -23,7 +23,7 @@ export const meta = {
   featured: false,
   excerpt:
     "Outdated contact information costs businesses more than you think. Here's how to calculate your data quality ROI.",
-  featureImage: "/blog/true-cost-bad-data-crm.svg",
+  featureImage: "/blog/true-cost-bad-data-crm.jpeg",
   featureImageAlt: "CRM data quality dashboard showing verified vs unverified contact records",
 };
 

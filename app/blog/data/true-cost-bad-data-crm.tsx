@@ -287,7 +287,7 @@ export default function TrueCostBadDataContent() {
         heading="Ready to clean up your CRM data?"
         text="Callengo's AI Data Validation Agent calls your contacts, verifies their information, and updates your CRM automatically. Start with 15 free minutes, no credit card required."
         primaryLabel="Start Free Trial"
-        primaryHref="https://app.callengo.com/sign-up"
+        primaryHref="https://app.callengo.com/auth/signup"
         secondaryLabel="See Data Validation Agent"
         secondaryHref="/agents/data-validation"
         variant="dark"

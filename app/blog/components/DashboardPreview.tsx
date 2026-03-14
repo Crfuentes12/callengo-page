@@ -18,7 +18,7 @@ export default function DashboardPreview({
   alt,
   title,
   description,
-  linkHref = "https://app.callengo.com/sign-up",
+  linkHref = "https://app.callengo.com/auth/signup",
   linkLabel = "Try it free",
 }: DashboardPreviewProps) {
   return (

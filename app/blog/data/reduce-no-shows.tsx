@@ -277,7 +277,7 @@ export default function ReduceNoShowsContent() {
         heading="Ready to reduce no-shows at your practice?"
         text="Callengo's AI Appointment Confirmation Agent calls your patients, confirms or reschedules appointments, and updates your calendar automatically. Start with 15 free minutes."
         primaryLabel="Start Free Trial"
-        primaryHref="https://app.callengo.com/sign-up"
+        primaryHref="https://app.callengo.com/auth/signup"
         secondaryLabel="See how it works"
         secondaryHref="/agents/appointment-confirmation"
       />

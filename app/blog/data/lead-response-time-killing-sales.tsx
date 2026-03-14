@@ -273,7 +273,7 @@ export default function LeadResponseTimeContent() {
         heading="Ready to qualify leads faster with AI?"
         text="Callengo's AI Lead Qualification Agent calls your prospects, qualifies them using the BANT framework, scores them hot/warm/cold, and books meetings automatically. Start with 15 free minutes."
         primaryLabel="Start Free Trial"
-        primaryHref="https://app.callengo.com/sign-up"
+        primaryHref="https://app.callengo.com/auth/signup"
         secondaryLabel="See Lead Qualification Agent"
         secondaryHref="/agents/lead-qualification"
         variant="accent"

@@ -17,7 +17,7 @@ export default function CTABanner({
   heading,
   text,
   primaryLabel = "Start Free Trial",
-  primaryHref = "https://app.callengo.com/sign-up",
+  primaryHref = "https://app.callengo.com/auth/signup",
   secondaryLabel,
   secondaryHref,
   variant = "electric",

@@ -84,7 +84,7 @@ function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
         ) : (
           <div
             className="w-9 h-9 rounded-full flex items-center justify-center text-white font-semibold text-xs shrink-0"
-            style={{ background: "linear-gradient(135deg, #4F5FE8 0%, #1E2D6B 100%)" }}
+            style={{ background: "linear-gradient(135deg, #4F5FE8 0%, #3347D4 100%)" }}
           >
             {t.author.split(" ").map((n) => n[0]).join("")}
           </div>

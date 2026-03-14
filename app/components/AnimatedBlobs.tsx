@@ -11,13 +11,13 @@ export default function AnimatedBlobs({ className = "" }: AnimatedBlobsProps) {
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-blue-50/60 to-purple-50/40" />
 
       {/* Blob 1 — top-left: purple + electric */}
-      <div className="absolute -top-[25%] -left-[15%] w-[50%] h-[50%] bg-gradient-to-br from-[#7C3AED]/30 via-[#4F5FE8]/35 to-[#1E2D6B]/25 rounded-full blur-3xl animate-blob-1" />
+      <div className="absolute -top-[25%] -left-[15%] w-[50%] h-[50%] bg-gradient-to-br from-[#7C3AED]/30 via-[#4F5FE8]/35 to-[#3347D4]/25 rounded-full blur-3xl animate-blob-1" />
 
-      {/* Blob 2 — top-right: deep indigo + soft pink */}
-      <div className="absolute -top-[10%] -right-[10%] w-[45%] h-[45%] bg-gradient-to-br from-[#1E2D6B]/40 via-[#EC4899]/15 to-[#3347D4]/30 rounded-full blur-3xl animate-blob-2" />
+      {/* Blob 2 — top-right: electric + soft pink */}
+      <div className="absolute -top-[10%] -right-[10%] w-[45%] h-[45%] bg-gradient-to-br from-[#4F5FE8]/40 via-[#EC4899]/15 to-[#3347D4]/30 rounded-full blur-3xl animate-blob-2" />
 
       {/* Blob 3 — mid-left: electric + indigo (no cyan) */}
-      <div className="absolute top-[30%] -left-[10%] w-[40%] h-[40%] bg-gradient-to-br from-[#4F5FE8]/25 via-[#1E2D6B]/30 to-[#7C3AED]/20 rounded-full blur-3xl animate-blob-3" />
+      <div className="absolute top-[30%] -left-[10%] w-[40%] h-[40%] bg-gradient-to-br from-[#4F5FE8]/25 via-[#3347D4]/30 to-[#7C3AED]/20 rounded-full blur-3xl animate-blob-3" />
 
       {/* White zone patches for breathing room */}
       <div className="absolute top-[35%] left-[20%] w-[30%] h-[25%] bg-white/80 rounded-full blur-3xl" />

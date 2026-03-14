@@ -23,7 +23,7 @@ export default function CTA() {
           </div>
 
           {/* Dark gradient overlay protecting text on the left */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1E2D6B]/40 via-[#1E2D6B]/15 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#3347D4]/40 via-[#3347D4]/15 to-transparent" />
 
           {/* Content */}
           <div className="relative z-10 max-w-3xl">

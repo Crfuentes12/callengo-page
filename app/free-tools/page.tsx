@@ -97,7 +97,7 @@ export default function FreeToolsPage() {
                 <div className="absolute top-[10%] left-[30%] w-2/5 h-4/5 bg-gradient-to-br from-white/30 via-[#1DB87A]/18 to-[#8B96C8]/20 rounded-full blur-2xl animate-[ctaLava3_38s_ease-in-out_infinite]" />
                 <div className="absolute top-[-15%] left-[50%] w-1/3 h-[90%] bg-gradient-to-br from-[#6070E0]/30 via-white/20 to-[#8B96C8]/25 rounded-full blur-2xl animate-[ctaLava4_48s_ease-in-out_infinite]" />
               </div>
-              <div className="absolute inset-0 bg-gradient-to-r from-[#1E2D6B]/40 via-[#1E2D6B]/15 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#3347D4]/40 via-[#3347D4]/15 to-transparent" />
               <div className="relative z-10 max-w-3xl">
                 <h3 className="text-2xl md:text-3xl font-semibold mb-4 text-white">
                   Get notified when these tools launch

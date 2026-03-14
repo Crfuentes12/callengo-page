@@ -1,4 +1,6 @@
+//callengo-page/app/sitemap.ts
 import type { MetadataRoute } from "next";
+import { blogPosts } from "./blog/data";
 
 const BASE_URL = "https://callengo.com";
 
@@ -24,7 +26,6 @@ const integrationSlugs = [
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date().toISOString();
 
-  // Core pages — high priority
   const corePages: MetadataRoute.Sitemap = [
     {
       url: BASE_URL,
@@ -46,7 +47,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // Product pages — agent detail pages
   const agentPages: MetadataRoute.Sitemap = [
     "data-validation",
     "appointment-confirmation",
@@ -58,7 +58,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
-  // Integration detail pages
   const integrationPages: MetadataRoute.Sitemap = integrationSlugs.map(
     (slug) => ({
       url: `${BASE_URL}/integrations/${slug}`,
@@ -68,47 +67,94 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
-  // Resource pages
   const resourcePages: MetadataRoute.Sitemap = [
-    { url: `${BASE_URL}/docs`, priority: 0.7 },
-    { url: `${BASE_URL}/help`, priority: 0.7 },
-    { url: `${BASE_URL}/help/quick-start`, priority: 0.7 },
-    { url: `${BASE_URL}/blog`, priority: 0.7 },
-    { url: `${BASE_URL}/free-tools`, priority: 0.6 },
-  ].map((page) => ({
-    ...page,
-    lastModified: now,
-    changeFrequency: "weekly" as const,
-  }));
+    {
+      url: `${BASE_URL}/docs`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/help`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/help/quick-start`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/blog`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/free-tools`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
+  ];
 
-  // Company pages
-  const companyPages: MetadataRoute.Sitemap = [
-    { url: `${BASE_URL}/about`, priority: 0.6 },
-    { url: `${BASE_URL}/contact`, priority: 0.6 },
-  ].map((page) => ({
-    ...page,
+  const blogPostPages: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+    url: `${BASE_URL}/blog/${post.slug}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
+    priority: post.featured ? 0.85 : 0.75,
   }));
 
-  // Legal pages — lower priority
+  const companyPages: MetadataRoute.Sitemap = [
+    {
+      url: `${BASE_URL}/about`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${BASE_URL}/contact`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+  ];
+
   const legalPages: MetadataRoute.Sitemap = [
-    { url: `${BASE_URL}/legal` },
-    { url: `${BASE_URL}/privacy` },
-    { url: `${BASE_URL}/terms` },
-    { url: `${BASE_URL}/compliance` },
-  ].map((page) => ({
-    ...page,
-    lastModified: now,
-    changeFrequency: "yearly" as const,
-    priority: 0.3,
-  }));
+    {
+      url: `${BASE_URL}/legal`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${BASE_URL}/privacy`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${BASE_URL}/terms`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${BASE_URL}/compliance`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+  ];
 
   return [
     ...corePages,
     ...agentPages,
     ...integrationPages,
     ...resourcePages,
+    ...blogPostPages,
     ...companyPages,
     ...legalPages,
   ];

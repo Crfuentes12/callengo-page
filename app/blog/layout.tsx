@@ -1,3 +1,4 @@
+//callengo-page/app/blog/layout.tsx
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

@@ -274,10 +274,10 @@ export default function Hero() {
 
         <div className="absolute inset-0 opacity-18">
           {/* Fewer, slower blobs — indigo/purple palette only, no cyan */}
-          <div className="absolute -top-[30%] -left-[20%] w-[55%] h-[55%] bg-gradient-to-br from-[#7C3AED]/30 via-[#4F5FE8]/35 to-[#1E2D6B]/25 rounded-full blur-3xl animate-[hero-lava-1_50s_ease-in-out_infinite]" />
-          <div className="absolute -top-[10%] -right-[15%] w-[50%] h-[50%] bg-gradient-to-br from-[#1E2D6B]/40 via-[#EC4899]/15 to-[#3347D4]/30 rounded-full blur-3xl animate-[hero-lava-2_60s_ease-in-out_infinite_-10s]" />
-          <div className="absolute top-[35%] -left-[10%] w-[45%] h-[45%] bg-gradient-to-br from-[#4F5FE8]/25 via-[#1E2D6B]/35 to-[#7C3AED]/20 rounded-full blur-3xl animate-[hero-lava-3_55s_ease-in-out_infinite_-20s]" />
-          <div className="absolute bottom-[5%] right-[10%] w-[50%] h-[45%] bg-gradient-to-br from-[#8B5CF6]/30 via-[#1E2D6B]/40 to-[#4F5FE8]/30 rounded-full blur-3xl animate-[hero-lava-4_58s_ease-in-out_infinite_-30s]" />
+          <div className="absolute -top-[30%] -left-[20%] w-[55%] h-[55%] bg-gradient-to-br from-[#7C3AED]/30 via-[#4F5FE8]/35 to-[#3347D4]/25 rounded-full blur-3xl animate-[hero-lava-1_50s_ease-in-out_infinite]" />
+          <div className="absolute -top-[10%] -right-[15%] w-[50%] h-[50%] bg-gradient-to-br from-[#4F5FE8]/40 via-[#EC4899]/15 to-[#3347D4]/30 rounded-full blur-3xl animate-[hero-lava-2_60s_ease-in-out_infinite_-10s]" />
+          <div className="absolute top-[35%] -left-[10%] w-[45%] h-[45%] bg-gradient-to-br from-[#4F5FE8]/25 via-[#3347D4]/35 to-[#7C3AED]/20 rounded-full blur-3xl animate-[hero-lava-3_55s_ease-in-out_infinite_-20s]" />
+          <div className="absolute bottom-[5%] right-[10%] w-[50%] h-[45%] bg-gradient-to-br from-[#8B5CF6]/30 via-[#4F5FE8]/40 to-[#A8B3F0]/30 rounded-full blur-3xl animate-[hero-lava-4_58s_ease-in-out_infinite_-30s]" />
         </div>
 
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white/30" />

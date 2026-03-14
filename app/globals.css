@@ -1,36 +1,36 @@
 @import "tailwindcss";
 
 /* ============================================================
-   CALLENGO — GLOBAL DESIGN SYSTEM v2.0
-   Brand: Deep Indigo / Slate Indigo / Electric
+   CALLENGO — GLOBAL DESIGN SYSTEM v2.1
+   Brand: Electric Indigo primary / Deep Indigo backgrounds
    Typography: Inter (cv02, cv03) + Poppins display + JetBrains Mono
    ============================================================ */
 
 @theme {
   /* ─── Brand Core ─── */
   --color-deep-indigo: #1E2D6B;
-  --color-slate-indigo: #8B96C8;
+  --color-slate-indigo: #A8B3F0;
   --color-electric: #4F5FE8;
   --color-void: #0D1117;
   --color-arctic: #F4F5FA;
   --color-ink: #1A1B2E;
 
-  /* ─── Primary Scale ─── */
+  /* ─── Primary Scale (Electric Indigo) ─── */
   --color-primary: #4F5FE8;
-  --color-primary-dark: #1E2D6B;
-  --color-primary-light: #8B96C8;
+  --color-primary-dark: #3347D4;
+  --color-primary-light: #6070E0;
 
-  /* ─── Secondary (action color) ─── */
-  --color-secondary: #4F5FE8;
-  --color-secondary-dark: #3347D4;
-  --color-secondary-light: #6070E0;
+  /* ─── Secondary (Soft Indigo) ─── */
+  --color-secondary: #A8B3F0;
+  --color-secondary-dark: #8B96C8;
+  --color-secondary-light: #C4CBF5;
 
   /* ─── Accent / Success ─── */
   --color-accent: #1DB87A;
   --color-accent-dark: #128055;
   --color-accent-light: #3DCB91;
 
-  /* ─── Navy / Dark surfaces ─── */
+  /* ─── Navy / Dark surfaces (background role) ─── */
   --color-navy: #1E2D6B;
   --color-navy-light: #2538B8;
   --color-dark: #0D1117;
@@ -72,7 +72,7 @@
   --shadow-2xl: 0 32px 64px rgba(26, 27, 46, 0.14), 0 16px 32px rgba(26, 27, 46, 0.08);
   --shadow-electric: 0 4px 16px rgba(79, 95, 232, 0.30), 0 2px 6px rgba(79, 95, 232, 0.15);
   --shadow-electric-lg: 0 8px 32px rgba(79, 95, 232, 0.35), 0 4px 12px rgba(79, 95, 232, 0.20);
-  --shadow-premium: 0 8px 32px rgba(30, 45, 107, 0.20), 0 2px 8px rgba(30, 45, 107, 0.10);
+  --shadow-premium: 0 8px 32px rgba(79, 95, 232, 0.20), 0 2px 8px rgba(79, 95, 232, 0.10);
 
   /* ─── Border Radius ─── */
   --radius-xs: 4px;
@@ -243,7 +243,7 @@
 
   .btn-premium {
     @apply text-white px-7 py-3.5;
-    background: linear-gradient(135deg, #1E2D6B 0%, #3347D4 50%, #4F5FE8 100%);
+    background: linear-gradient(135deg, #3347D4 0%, #4F5FE8 50%, #6070E0 100%);
     box-shadow: var(--shadow-electric);
   }
 
@@ -276,7 +276,7 @@
 
   .badge-gradient {
     @apply text-white;
-    background: linear-gradient(135deg, #1E2D6B 0%, #4F5FE8 100%);
+    background: linear-gradient(135deg, #3347D4 0%, #4F5FE8 100%);
   }
 
   /* ── Typography Display ── */
@@ -352,21 +352,21 @@
 @layer utilities {
   /* ── Gradient Text — Brand gradient ── */
   .gradient-text {
-    background: linear-gradient(135deg, #1E2D6B 0%, #3347D4 50%, #4F5FE8 100%);
+    background: linear-gradient(135deg, #3347D4 0%, #4F5FE8 50%, #6070E0 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .gradient-text-electric {
-    background: linear-gradient(135deg, #4F5FE8 0%, #6070E0 50%, #8B96C8 100%);
+    background: linear-gradient(135deg, #4F5FE8 0%, #6070E0 50%, #A8B3F0 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .gradient-text-premium {
-    background: linear-gradient(135deg, #8B96C8 0%, #FFFFFF 50%, #8B96C8 100%);
+    background: linear-gradient(135deg, #A8B3F0 0%, #FFFFFF 50%, #A8B3F0 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -374,15 +374,15 @@
 
   /* ── Gradient Backgrounds ── */
   .gradient-bg {
-    background: linear-gradient(135deg, #1E2D6B 0%, #3347D4 50%, #4F5FE8 100%);
+    background: linear-gradient(135deg, #3347D4 0%, #4F5FE8 50%, #6070E0 100%);
   }
 
   .gradient-bg-subtle {
-    background: linear-gradient(135deg, rgba(30, 45, 107, 0.04) 0%, rgba(79, 95, 232, 0.07) 100%);
+    background: linear-gradient(135deg, rgba(79, 95, 232, 0.04) 0%, rgba(96, 112, 224, 0.07) 100%);
   }
 
   .gradient-bg-premium {
-    background: linear-gradient(135deg, #0D1117 0%, #1E2D6B 40%, #3347D4 100%);
+    background: linear-gradient(135deg, #1E2D6B 0%, #3347D4 40%, #4F5FE8 100%);
   }
 
   .gradient-bg-radial {
@@ -392,8 +392,8 @@
   .gradient-bg-mesh {
     background:
       radial-gradient(at 27% 37%, rgba(79, 95, 232, 0.06) 0px, transparent 50%),
-      radial-gradient(at 97% 21%, rgba(30, 45, 107, 0.05) 0px, transparent 50%),
-      radial-gradient(at 52% 99%, rgba(139, 150, 200, 0.04) 0px, transparent 50%);
+      radial-gradient(at 97% 21%, rgba(51, 71, 212, 0.05) 0px, transparent 50%),
+      radial-gradient(at 52% 99%, rgba(168, 179, 240, 0.04) 0px, transparent 50%);
   }
 
   /* ── Gradient Border ── */
@@ -405,7 +405,7 @@
     content: '';
     @apply absolute inset-0 rounded-[inherit] pointer-events-none;
     padding: 1px;
-    background: linear-gradient(135deg, #1E2D6B 0%, #4F5FE8 100%);
+    background: linear-gradient(135deg, #3347D4 0%, #4F5FE8 100%);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
@@ -416,7 +416,7 @@
   .stat-number {
     font-family: var(--font-display);
     font-weight: 700;
-    background: linear-gradient(135deg, #1E2D6B 0%, #4F5FE8 100%);
+    background: linear-gradient(135deg, #3347D4 0%, #4F5FE8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -443,7 +443,7 @@
 
   .accent-line {
     @apply h-px w-16 rounded;
-    background: linear-gradient(90deg, #1E2D6B 0%, #4F5FE8 100%);
+    background: linear-gradient(90deg, #3347D4 0%, #4F5FE8 100%);
   }
 
   .accent-glow {
@@ -469,7 +469,7 @@
     left: 0;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, #1E2D6B, #4F5FE8);
+    background: linear-gradient(90deg, #3347D4, #4F5FE8);
     border-radius: 2px;
   }
 

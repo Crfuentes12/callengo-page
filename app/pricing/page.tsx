@@ -462,7 +462,7 @@ export default function PricingPage() {
                 <div className="absolute top-[10%] left-[30%] w-2/5 h-4/5 bg-gradient-to-br from-white/30 via-[#1DB87A]/18 to-[#8B96C8]/20 rounded-full blur-2xl animate-[priceCta3_25s_ease-in-out_infinite]" />
                 <div className="absolute top-[-15%] left-[50%] w-1/3 h-[90%] bg-gradient-to-br from-[#6070E0]/30 via-white/20 to-[#8B96C8]/25 rounded-full blur-2xl animate-[priceCta4_30s_ease-in-out_infinite]" />
               </div>
-              <div className="absolute inset-0 bg-gradient-to-r from-[#1E2D6B]/40 via-[#1E2D6B]/15 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#3347D4]/40 via-[#3347D4]/15 to-transparent" />
               <style jsx>{`
                 @keyframes priceCta1 {
                   0%, 100% { transform: translate(0, 0) scale(1); }
@@ -636,7 +636,7 @@ export default function PricingPage() {
                 <div className="absolute top-[10%] left-[30%] w-2/5 h-4/5 bg-gradient-to-br from-white/30 via-[#1DB87A]/18 to-[#8B96C8]/20 rounded-full blur-2xl animate-[priceBotCta3_25s_ease-in-out_infinite]" />
                 <div className="absolute top-[-15%] left-[50%] w-1/3 h-[90%] bg-gradient-to-br from-[#6070E0]/30 via-white/20 to-[#8B96C8]/25 rounded-full blur-2xl animate-[priceBotCta4_30s_ease-in-out_infinite]" />
               </div>
-              <div className="absolute inset-0 bg-gradient-to-r from-[#1E2D6B]/40 via-[#1E2D6B]/15 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#3347D4]/40 via-[#3347D4]/15 to-transparent" />
               <style jsx>{`
                 @keyframes priceBotCta1 {
                   0%, 100% { transform: translate(0, 0) scale(1); }
